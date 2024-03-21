@@ -3,78 +3,115 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/globals.css' %}" />
     <link rel="stylesheet" href="{% static 'css/styleguide.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   </head>
+  </head>
+
   <body>
     <div class="about-us">
       <div class="div">
-        <footer class="footer">
-          <div class="content">
-            <div class="logo-ut">
-              <img class="logo-flag-ut" src="{% static 'img/logo-flag-ut-2.png' %}" />
-              <div class="logo-text-ut">
-                <div class="group">
-                  <div class="div-wrapper"><div class="text-wrapper">UNITE</div></div>
-                  <div class="group-2"><div class="text-wrapper-2">TOGETHER</div></div>
-                </div>
+        <div class="navbar">
+          <img class="line-header" src="{% static 'img/line-header.svg' %}" />
+          <div class="button-login">
+            <img class="icon-user" src="{% static 'img/icon-user.png' %}" />
+            <div class="text-wrapper-9">Login/Register</div>
+          </div>
+          <div class="button-donate"><div class="text-wrapper-9">Donate</div></div>
+          <div class="menu-culumn-2">
+            <div class="menu-item"><div class="text-wrapper-3">About us</div></div>
+            <div class="menu-item-2"><div class="text-wrapper-3">News</div></div>
+            <div class="menu-item-2"><div class="text-wrapper-3">Events</div></div>
+            <div class="menu-item-2"><div class="text-wrapper-3">Projects</div></div>
+            <div class="menu-item-2"><div class="text-wrapper-3">Partners</div></div>
+            <div class="menu-item-2"><div class="news">Documents</div></div>
+            <div class="menu-item-2"><div class="text-wrapper-3">Contact</div></div>
+          </div>
+          <div class="logo-ut-2">
+            <img class="logo-flag-ut" src="{% static 'img/logo-flag-ut.png' %}" />
+            <div class="logo-text-ut">
+              <div class="group">
+                <div class="div-wrapper"><div class="text-wrapper">UNITE</div></div>
+                <div class="group-2"><div class="text-wrapper-2">TOGETHER</div></div>
               </div>
-            </div>
-            <div class="menu-culumn">
-              <div class="menu-item"><div class="text-wrapper-3">About us</div></div>
-              <div class="menu-item-2"><div class="text-wrapper-3">News</div></div>
-              <div class="menu-item-2"><div class="text-wrapper-3">Events</div></div>
-              <div class="menu-item-2"><div class="text-wrapper-3">Projects</div></div>
-              <div class="menu-item-2"><div class="text-wrapper-3">Partners</div></div>
-              <div class="menu-item-2"><div class="news">Documents</div></div>
-              <div class="menu-item-2"><div class="text-wrapper-3">Contact</div></div>
-            </div>
-            <img class="soc-icon" src="{% static 'img/soc-icon.png' %}" />
-          </div>
-          <div class="divider"></div>
-          <div class="div-2">
-            <p class="element-all-rights">© 2023 Unite Together. All rights reserved.</p>
-            <div class="div-2">
-              <div class="text-wrapper-4">Privacy Policy</div>
-              <div class="text-wrapper-4">Terms and Conditions</div>
-              <div class="text-wrapper-4">Cookie Policy</div>
-            </div>
-          </div>
-        </footer>
-        <div class="sect-achievements">
-          <div class="left">
-            <div class="title-text">
-              <div class="heading">Significant successes and achievements</div>
-              <div class="subheading">Empowering</div>
-            </div>
-            <img class="placeholder-image" src="{% static 'img/placeholder-image-1.png' %}" />
-          </div>
-          <div class="frame">
-            <div class="item">
-              <p class="text">Organization of large-scale support and development programs.</p>
-              <img class="icon" src="{% static 'img/icon-1.png' %}" />
-            </div>
-            <div class="item-2">
-              <p class="p">Creation of an extensive database of Ukrainians living in Georgia.</p>
-              <img class="img" src="{% static 'img/icon-2.png' %}" />
-            </div>
-            <div class="item-3">
-              <p class="text-2">
-                Systematic research into the needs of Ukrainians for more effective planning and implementation of
-                programs.
-              </p>
-              <img class="group-3" src="{% static 'img/group.png' %}" />
-            </div>
-            <div class="item-4">
-              <p class="text-3">
-                Opening representative offices of the organization in various regions of Georgia to expand coverage and
-                strengthen ties with the Ukrainian diaspora.
-              </p>
-              <img class="icon-2" src="{% static 'img/icon-4.png' %}" />
             </div>
           </div>
         </div>
+
+        <!--Section 1 header-->
+          <header class="header">
+          <div class="text-wrapper-7">Empowering Ukranian Communities</div>
+          <p class="text-wrapper-8">
+            Unite Together is dedicated to supporting and uplifting Ukrainian communities in Georgia through sustainable
+            projects and programs.
+          </p>
+        </header>
+        <!--End Section 1-->
+
+        <!--Section 2 mission-->
+        <div class="sect-mission">
+          <div class="content-2">
+            <div class="text-16">
+              <p class="text-wrapper-6">
+                Empowering Ukrainians in Georgia affected by war through sustainable systemic changes.
+              </p>
+              <p class="text-17">
+                Unite Together was founded with the aim of providing support and development opportunities to Ukrainians
+                in Georgia impacted by the war. Since our inception, we have been dedicated to creating projects and
+                implementing programs for financial assistance, informal education, sports, and counseling. Our mission
+                is to make a positive and lasting impact on the lives of those affected by the war.
+              </p>
+            </div>
+            <img class="line-dec" src="{% static 'img/line-dec.svg' %}" />
+          </div>
+          <img class="placeholder-image-2" src="{% static 'img/placeholder-image.png' %}" />
+        </div>
+        <!--End Section 2-->
+
+        <!--Section 3 stats-->
+        <div class="sect-stats">
+          <div class="title-subtitle-2">
+            <p class="heading">Making a Difference in the Lives of Ukrainians</p>
+            <div class="subheading-3">Empowering</div>
+          </div>
+          <div class="mission-button">
+            <p class="text-9">
+              Unite Together is dedicated to creating sustainable systemic changes in the lives of Ukrainians in Georgia
+              affected by the war. Through our programs and projects, we provide financial assistance, informal
+              education, sports, and counseling to empower individuals and strengthen the community. Together, we can
+              make a difference.
+            </p>
+            <button class="button"><div class="text-5">Learn more</div></button>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <div class="text-10">12 000</div>
+              <div class="text-11">People Helped</div>
+              <img class="line-2" src="{% static 'img/line-8.svg' %}" />
+            </div>
+            <div class="stat">
+              <div class="text-10">1 400</div>
+              <div class="text-11">People Helped</div>
+              <img class="line-2" src="{% static 'img/line-8.svg' %}" />
+            </div>
+            <div class="stat-2">
+              <div class="text-12">2 000</div>
+              <div class="text-13">People Helped</div>
+              <img class="line-2" src="{% static 'img/line-8.svg' %}" />
+            </div>
+            <div class="stat-3">
+              <div class="text-14">10 000</div>
+              <div class="text-15">People Helped</div>
+              <img class="line-2" src="{% static 'img/line-8.svg' %}" />
+            </div>
+          </div>
+        </div>
+        <!--End Section 3-->
+
+        <!--Section 4 history-->
         <div class="sect-history">
           <div class="history-left">
             <div class="text-more">
@@ -162,94 +199,112 @@
             </div>
           </div>
         </div>
-        <div class="sect-stats">
-          <div class="title-subtitle-2">
-            <p class="heading">Making a Difference in the Lives of Ukrainians</p>
-            <div class="subheading-3">Empowering</div>
+        <!--End Section 4-->
+
+        <!--Section 5 achievements-->
+        <div class="sect-achievements">
+          <div class="left">
+            <div class="title-text">
+              <div class="heading">Significant successes and achievements</div>
+              <div class="subheading">Empowering</div>
+            </div>
+            <img class="placeholder-image" src="{% static 'img/placeholder-image-1.png' %}" />
           </div>
-          <div class="mission-button">
-            <p class="text-9">
-              Unite Together is dedicated to creating sustainable systemic changes in the lives of Ukrainians in Georgia
-              affected by the war. Through our programs and projects, we provide financial assistance, informal
-              education, sports, and counseling to empower individuals and strengthen the community. Together, we can
-              make a difference.
-            </p>
-            <button class="button"><div class="text-5">Learn more</div></button>
-          </div>
-          <div class="stats">
-            <div class="stat">
-              <div class="text-10">12 000</div>
-              <div class="text-11">People Helped</div>
-              <img class="line-2" src="{% static 'img/line-8.svg' %}" />
+          <div class="frame">
+            <div class="item">
+              <p class="text">Organization of large-scale support and development programs.</p>
+              <img class="icon" src="{% static 'img/icon-1.png' %}" />
             </div>
-            <div class="stat">
-              <div class="text-10">1 400</div>
-              <div class="text-11">People Helped</div>
-              <img class="line-2" src="{% static 'img/line-8.svg' %}" />
+            <div class="item-2">
+              <p class="p">Creation of an extensive database of Ukrainians living in Georgia.</p>
+              <img class="img" src="{% static 'img/icon-2.png' %}" />
             </div>
-            <div class="stat-2">
-              <div class="text-12">2 000</div>
-              <div class="text-13">People Helped</div>
-              <img class="line-2" src="{% static 'img/line-8.svg' %}" />
+            <div class="item-3">
+              <p class="text-2">
+                Systematic research into the needs of Ukrainians for more effective planning and implementation of
+                programs.
+              </p>
+              <img class="group-3" src="{% static 'img/group.png' %}" />
             </div>
-            <div class="stat-3">
-              <div class="text-14">10 000</div>
-              <div class="text-15">People Helped</div>
-              <img class="line-2" src="{% static 'img/line-8.svg' %}" />
+            <div class="item-4">
+              <p class="text-3">
+                Opening representative offices of the organization in various regions of Georgia to expand coverage and
+                strengthen ties with the Ukrainian diaspora.
+              </p>
+              <img class="icon-2" src="{% static 'img/icon-4.png' %}" />
             </div>
           </div>
         </div>
-        <div class="sect-mission">
-          <div class="content-2">
-            <div class="text-16">
-              <p class="text-wrapper-6">
-                Empowering Ukrainians in Georgia affected by war through sustainable systemic changes.
-              </p>
-              <p class="text-17">
-                Unite Together was founded with the aim of providing support and development opportunities to Ukrainians
-                in Georgia impacted by the war. Since our inception, we have been dedicated to creating projects and
-                implementing programs for financial assistance, informal education, sports, and counseling. Our mission
-                is to make a positive and lasting impact on the lives of those affected by the war.
-              </p>
-            </div>
-            <img class="line-dec" src="{% static 'img/line-dec.svg' %}" />
-          </div>
-          <img class="placeholder-image-2" src="{% static 'img/placeholder-image.png' %}" />
-        </div>
-        <header class="header">
-          <div class="text-wrapper-7">Empowering Ukranian Communities</div>
-          <p class="text-wrapper-8">
-            Unite Together is dedicated to supporting and uplifting Ukrainian communities in Georgia through sustainable
-            projects and programs.
-          </p>
-        </header>
-        <div class="navbar">
-          <img class="line-header" src="{% static 'img/line-header.svg' %}" />
-          <div class="button-login">
-            <img class="icon-user" src="{% static 'img/icon-user.png' %}" />
-            <div class="text-wrapper-9">Login/Register</div>
-          </div>
-          <div class="button-donate"><div class="text-wrapper-9">Donate</div></div>
-          <div class="menu-culumn-2">
-            <div class="menu-item"><div class="text-wrapper-3">About us</div></div>
-            <div class="menu-item-2"><div class="text-wrapper-3">News</div></div>
-            <div class="menu-item-2"><div class="text-wrapper-3">Events</div></div>
-            <div class="menu-item-2"><div class="text-wrapper-3">Projects</div></div>
-            <div class="menu-item-2"><div class="text-wrapper-3">Partners</div></div>
-            <div class="menu-item-2"><div class="news">Documents</div></div>
-            <div class="menu-item-2"><div class="text-wrapper-3">Contact</div></div>
-          </div>
-          <div class="logo-ut-2">
-            <img class="logo-flag-ut" src="{% static 'img/logo-flag-ut.png' %}" />
-            <div class="logo-text-ut">
-              <div class="group">
-                <div class="div-wrapper"><div class="text-wrapper">UNITE</div></div>
-                <div class="group-2"><div class="text-wrapper-2">TOGETHER</div></div>
+        <!--End Section 5-->
+
+        <footer class="footer">
+          <div class="content">
+            <div class="logo-ut">
+              <img class="logo-flag-ut" src="{% static 'img/logo-flag-ut-2.png' %}" />
+              <div class="logo-text-ut">
+                <div class="group">
+                  <div class="div-wrapper"><div class="text-wrapper">UNITE</div></div>
+                  <div class="group-2"><div class="text-wrapper-2">TOGETHER</div></div>
+                </div>
               </div>
             </div>
+            <div class="menu-culumn">
+              <div class="menu-item"><div class="text-wrapper-3">About us</div></div>
+              <div class="menu-item-2"><div class="text-wrapper-3">News</div></div>
+              <div class="menu-item-2"><div class="text-wrapper-3">Events</div></div>
+              <div class="menu-item-2"><div class="text-wrapper-3">Projects</div></div>
+              <div class="menu-item-2"><div class="text-wrapper-3">Partners</div></div>
+              <div class="menu-item-2"><div class="news">Documents</div></div>
+              <div class="menu-item-2"><div class="text-wrapper-3">Contact</div></div>
+            </div>
+            <img class="soc-icon" src="{% static 'img/soc-icon.png' %}" />
           </div>
-        </div>
+          <div class="divider"></div>
+          <div class="div-2">
+            <p class="element-all-rights">© 2023 Unite Together. All rights reserved.</p>
+            <div class="div-2">
+              <div class="text-wrapper-4">Privacy Policy</div>
+              <div class="text-wrapper-4">Terms and Conditions</div>
+              <div class="text-wrapper-4">Cookie Policy</div>
+            </div>
+          </div>
+        </footer>
+
       </div>
     </div>
+   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   </body>
 </html>
+
+
+<!--            Carousel-->
+<!--            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="{% static 'img/baner1.png' %}" class="d-block w-100" alt="..." width="500" height="600">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'img/baner2.png' %}" class="d-block w-100" alt="..." width="500" height="600">
+                </div>
+                <div class="carousel-item">
+                  <img src="{% static 'img/baner3.png' %}" class="d-block w-100" alt="..." width="500" height="600">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>-->
+<!--            Carousel END-->
+
+<!--    <div class="container">-->
+<!--      <div class="row">-->
+<!--        <div class="col">1</div>-->
+<!--        <div class="col">2</div>-->
+<!--        <div class="col">3</div>-->
+<!--      </div>-->
+<!--    </div>-->
