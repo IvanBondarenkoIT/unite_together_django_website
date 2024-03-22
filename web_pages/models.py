@@ -20,6 +20,19 @@ class WebContentObject(models.Model):
         return f"{self.name} - {self.title} - {self.text}"
 
 
+class WebContentSubordinateObject(models.Model):
+    name = models.CharField(max_length=250)
+    title = models.CharField(max_length=250)
+    text = models.TextField()
+    image = models.ImageField(upload_to='img/pages_content_sub', blank=True)
+
+    content = models.ForeignKey(WebContentObject, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.title} - {self.text}"
+
+
 class WebPage(models.Model):
     name = models.CharField(max_length=250)
 
