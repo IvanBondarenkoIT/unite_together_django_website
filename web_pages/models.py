@@ -19,7 +19,7 @@ class WebContentObject(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    web_page_owner = models.ForeignKey(WebPage, on_delete=models.CASCADE, blank=True, null=True)
+    web_page_owner = models.ForeignKey(WebPage, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
         return f"{self.name} - {self.title}"
