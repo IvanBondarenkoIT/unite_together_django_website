@@ -1,16 +1,10 @@
 from django.contrib import admin
-from web_pages.models import WebPage, WebPageSection, WebContentObject, WebContentSubordinateObject
+from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject
 
 
 # Register your models here.
 class WebPageAdmin(admin.ModelAdmin):
     list_display = ('name',)
-
-
-class WebPageSectionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'page', 'content',)
-    # list_editable = ('is_active', )
-    # list_filter = ('product', 'variation_category', 'variation_value')
 
 
 class WebContentObjectAdmin(admin.ModelAdmin):
@@ -25,6 +19,5 @@ class WebContentSubordinateObjectAdmin(admin.ModelAdmin):
 
 
 admin.site.register(WebPage, WebPageAdmin)
-admin.site.register(WebPageSection, WebPageSectionAdmin)
 admin.site.register(WebContentObject, WebContentObjectAdmin)
 admin.site.register(WebContentSubordinateObject, WebContentSubordinateObjectAdmin)
