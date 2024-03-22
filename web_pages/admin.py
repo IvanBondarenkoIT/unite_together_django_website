@@ -1,5 +1,5 @@
 from django.contrib import admin
-from web_pages.models import WebPage, WebPageSection, WebContentObject
+from web_pages.models import WebPage, WebPageSection, WebContentObject, WebContentSubordinateObject
 
 
 # Register your models here.
@@ -19,6 +19,12 @@ class WebContentObjectAdmin(admin.ModelAdmin):
     # prepopulated_fields = {'slug': ('product_name',)}
 
 
+class WebContentSubordinateObjectAdmin(admin.ModelAdmin):
+    list_display = ('name', 'title', 'text', 'image', 'is_active',)
+    list_editable = ('is_active', )
+
+
 admin.site.register(WebPage, WebPageAdmin)
 admin.site.register(WebPageSection, WebPageSectionAdmin)
 admin.site.register(WebContentObject, WebContentObjectAdmin)
+admin.site.register(WebContentSubordinateObject, WebContentSubordinateObjectAdmin)
