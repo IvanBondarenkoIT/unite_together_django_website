@@ -20,7 +20,7 @@ class WebContentObjectAdmin(admin.ModelAdmin):
 
 
 class WebContentSubordinateObjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'title', 'text', 'image', 'is_active',)
+    list_display = ('name', 'title', 'text', 'image', 'is_active', 'content_master_object',)
     list_editable = ('is_active', )
 
 

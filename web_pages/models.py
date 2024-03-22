@@ -26,7 +26,7 @@ class WebContentSubordinateObject(models.Model):
     text = models.TextField()
     image = models.ImageField(upload_to='img/pages_content_sub', blank=True)
 
-    content = models.ForeignKey(WebContentObject, on_delete=models.CASCADE)
+    content_master_object = models.ForeignKey(WebContentObject, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
