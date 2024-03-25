@@ -7,6 +7,7 @@ from web_pages import views
 
 urlpatterns = [
 
-    path("AboutUs/", views.about_us, name="about_us"),
+    path("aboutus/", views.about_us, name="about_us"),
+    path("accounts/", include("accounts.urls")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
