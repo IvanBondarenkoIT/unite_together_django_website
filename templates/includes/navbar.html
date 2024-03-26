@@ -17,14 +17,14 @@
             <img class="line-header" src="{% static 'img/line-header.svg' %}"/>
             <div class="button-login">
                 <img class="icon-user" src="{% static 'img/icon-user.png' %}"/>
-                <div class="text-wrapper-9"><a href="">Login</a> / <a href="">Register</a></div>
+                <div class="text-wrapper-9"><a href="{% url 'login' %}">Login</a> / <a href="{% url 'register' %}">Register</a></div>
             </div>
             <div class="button-donate">
                 <div class="text-wrapper-9">Donate</div>
             </div>
             <div class="menu-culumn-2">
                 <div class="menu-item">
-                    <div class="text-wrapper-3">About us</div>
+                    <div class="text-wrapper-3"><a href="{% url 'about_us' %}">About us</a></div>
                 </div>
                 <div class="menu-item-2">
                     <div class="text-wrapper-3">News</div>
