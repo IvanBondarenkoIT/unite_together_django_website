@@ -1,12 +1,12 @@
-{#{% extends 'base.html' %}#}
+{% extends 'base.html' %}
 {##}
-{#{% block content %}#}
+{% block content %}
 
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y">
+<section class="section-content padding-y" style="min-height:64vh">
 
 <!-- ============================ COMPONENT REGISTER   ================================= -->
-	<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+	<div class="card mx-auto" style="max-width:520px; margin-top:80px;">
       <article class="card-body">
         {% include 'includes/alerts.html' %}
 		<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
@@ -62,4 +62,4 @@
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
 
-{#{% endblock %}#}
+{% endblock %}

@@ -1,94 +1,61 @@
 {% load static %}
 
-<header class="section-header">
-<nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
-<div class="container">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarTop4">
-    <ul class="navbar-nav mr-auto">
-    	<li class="nav-item dropdown">
-		 	<a href="#" class="nav-link">   English </a>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/globals.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/styleguide.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+</head>
 
-		</li>
-		<li class="nav-item dropdown">
-			<a href="#" class="nav-link"> USD </a>
-		</li>
-    </ul>
-    <ul class="navbar-nav">
-		<li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
-		<li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
-	</ul> <!-- list-inline //  -->
-  </div> <!-- navbar-collapse .// -->
-</div> <!-- container //  -->
-</nav>
-
-<section class="header-main border-bottom">
-	<div class="container">
-<div class="row align-items-center">
-	<div class="col-lg-2 col-md-3 col-6">
-		<a href="{% url 'home' %}" class="brand-wrap">
-			<img class="logo" src="{% static "./images/logo.png" %}">
-		</a> <!-- brand-wrap.// -->
-	</div>
-	<div class="col-lg col-sm col-md col-6 flex-grow-0">
-		<div class="category-wrap dropdown d-inline-block float-right">
-			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-				<i class="fa fa-bars"></i> All category
-			</button>
-			<div class="dropdown-menu">
-                <a class="dropdown-item" href="{% url 'store' %}">All products</a>
-                {% for category in links %}
-                    <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>	
-                {% endfor %}
-			</div>
-		</div>  <!-- category-wrap.// -->
-	</div> <!-- col.// -->
-	<a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a>
-	<div class="col-lg  col-md-6 col-sm-12 col">
-		<form action="{% url 'search' %}" class="search" method="GET">
-			<div class="input-group w-100">
-			    <input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword">
-
-			    <div class="input-group-append">
-			      <button class="btn btn-primary" type="submit">
-			        <i class="fa fa-search"></i>
-			      </button>
-			    </div>
-		    </div>
-		</form> <!-- search-wrap .end// -->
-	</div> <!-- col.// -->
-	<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
-				<div class="d-flex justify-content-end mb-3 mb-lg-0">
-                    {% if user.id is None %}
-                        <div class="widget-header">
-                            <small class="title text-muted">Welcome guest!</small>
-                            <div>
-                                <a href="{% url 'login' %}">Sign in</a> <span class="dark-transp"> | </span>
-                                <a href="{% url 'register' %}"> Register</a>
-                            </div>
+<body>
+<div class="about-us">
+    <div class="container" >
+        <div class="navbar">
+            <img class="line-header" src="{% static 'img/line-header.svg' %}"/>
+            <div class="button-login">
+                <img class="icon-user" src="{% static 'img/icon-user.png' %}"/>
+                <div class="text-wrapper-9"><a href="{% url 'login' %}">Login</a> / <a href="{% url 'register' %}">Register</a></div>
+            </div>
+            <div class="button-donate">
+                <div class="text-wrapper-9">Donate</div>
+            </div>
+            <div class="menu-culumn-2">
+                <div class="menu-item">
+                    <div class="text-wrapper-3"><a href="{% url 'about_us' %}">About us</a></div>
+                </div>
+                <div class="menu-item-2">
+                    <div class="text-wrapper-3">News</div>
+                </div>
+                <div class="menu-item-2">
+                    <div class="text-wrapper-3">Events</div>
+                </div>
+                <div class="menu-item-2">
+                    <div class="text-wrapper-3">Projects</div>
+                </div>
+                <div class="menu-item-2">
+                    <div class="text-wrapper-3">Partners</div>
+                </div>
+                <div class="menu-item-2">
+                    <div class="news">Documents</div>
+                </div>
+                <div class="menu-item-2">
+                    <div class="text-wrapper-3">Contact</div>
+                </div>
+            </div>
+            <div class="logo-ut-2">
+                <img class="logo-flag-ut" src="{% static 'img/logo-flag-ut.png' %}"/>
+                <div class="logo-text-ut">
+                    <div class="group">
+                        <div class="div-wrapper">
+                            <div class="text-wrapper">UNITE</div>
                         </div>
-                    {% else %}
-                        <div class="widget-header">
-                            <small class="title text-muted">Welcome {{ user.first_name }}!</small>
-                            <div>
-                                <a href="#">Dashboard</a> <span class="dark-transp"> | </span>
-                                <a href="{% url 'logout' %}"> Logout</a>
-                            </div>
+                        <div class="group-2">
+                            <div class="text-wrapper-2">TOGETHER</div>
                         </div>
-                    {% endif %}
-					<a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
-						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
-						<span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
-					</a>
-				</div> <!-- widgets-wrap.// -->
-			</div> <!-- col.// -->
-</div> <!-- row.// -->
-	</div> <!-- container.// -->
-</section> <!-- header-main .// -->
-
-
-
-
-</header> <!-- section-header.// -->
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -28,6 +28,7 @@ def register(request):
 
             user.phone_number = phone_number
             user.save()
+
             messages.success(request, "Registration Successful")
             return redirect("register")
 
@@ -50,7 +51,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, "Login Successful")
-            return redirect("home")
+            return redirect("about_us")
         else:
             messages.error(request, "Invalid Login Credentials")
             return redirect("login")
