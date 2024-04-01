@@ -8,6 +8,6 @@ from web_pages import views
 urlpatterns = [
 
     path("aboutus/", views.about_us, name="about_us"),
-    path("accounts/", include("accounts.urls")),
+    path("", views.home, name="home"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

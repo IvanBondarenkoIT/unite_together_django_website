@@ -3,7 +3,10 @@ from django.shortcuts import render
 from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject
 
 
-# Create your views here.
+def home(request):
+    return render(request, "index_bootstrap.html")
+
+
 def about_us(request):
     try:
         stats_section = WebContentObject.objects.get(name="about_us_stats")

@@ -25,4 +25,5 @@ from unite_together_django_website import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("web_pages.urls")),
+    path("accounts/", include("accounts.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
