@@ -6,8 +6,9 @@ from unite_together_django_website import settings
 from web_pages import views
 
 urlpatterns = [
-
+    path("", views.home, name="home"),
     path("aboutus/", views.about_us, name="about_us"),
-    path("accounts/", include("accounts.urls")),
+    path("donate/", views.donate, name="donate")
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
