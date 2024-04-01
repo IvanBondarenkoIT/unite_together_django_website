@@ -28,3 +28,7 @@ def about_us(request):
         context = {}
 
     return render(request, 'about_us.html', context=context)
+
+
+def donate(request):
+    return render(request, "donate/donate_paypal.html")
