@@ -8,7 +8,8 @@ from web_pages import views
 urlpatterns = [
     path("", views.home, name="home"),
     path("aboutus/", views.about_us, name="about_us"),
-    path("donate/", views.donate, name="donate")
+    path("donate/", views.donate, name="donate"),
+    path("", include("paypal.standard.ipn.urls")),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
