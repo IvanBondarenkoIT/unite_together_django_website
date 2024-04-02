@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    "paypal.standard.ipn",
+
     "web_pages",
     "accounts",
 ]
@@ -143,3 +145,7 @@ EMAIL_PORT = config("EMAIL_PORT")
 EMAIL_HOST_USER = config("EMAIL_ADMIN")
 EMAIL_HOST_PASSWORD = config("EMAIL_PASSWORD")
 EMAIL_USE_TLS = True
+
+# PayPal configuration
+PAYPAL_RECEIVER_EMAIL = config("PAYPAL_RECEIVER_EMAIL")  # where cash is paid into
+PAYPAL_TEST = config("PAYPAL_TEST")

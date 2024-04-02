@@ -32,3 +32,21 @@ def about_us(request):
 
 def donate(request):
     return render(request, "donate/donate_paypal.html")
+
+
+# PapPal donate
+
+def check_out(request, product_id):
+    context = {
+
+    }
+
+    return render(request, "donate/check_out.html", context=context)
+
+
+def payment_success(request):
+    return render(request, "donate/payment_success.html")
+
+
+def payment_error(request):
+    return render(request, "donate/payment_error.html")
