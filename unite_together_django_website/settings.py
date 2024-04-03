@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     "web_pages",
     "accounts",
+    "donate",
 ]
 
 MIDDLEWARE = [
