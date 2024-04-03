@@ -148,5 +148,11 @@ EMAIL_HOST_PASSWORD = config("EMAIL_PASSWORD")
 EMAIL_USE_TLS = True
 
 # PayPal configuration
-PAYPAL_RECEIVER_EMAIL = config("PAYPAL_RECEIVER_EMAIL")  # where cash is paid into
-PAYPAL_TEST = config("PAYPAL_TEST")
+
+PAYPAL_RECEIVER_EMAIL = 'sb-3so3020154368@business.example.com' # where cash is paid into
+PAYPAL_TEST = True
+PRODUCT_ID = "Unite together DONATE"
+PRODUCT_PRICE = 10
+
+# PAYPAL_RECEIVER_EMAIL = config("PAYPAL_RECEIVER_EMAIL")  # where cash is paid into
+# PAYPAL_TEST = config("PAYPAL_TEST")
