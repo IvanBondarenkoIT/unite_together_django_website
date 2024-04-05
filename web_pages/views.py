@@ -32,21 +32,30 @@ def about_us(request):
 
 def events(request):
     try:
-        stats_section = WebContentObject.objects.get(name="about_us_stats")
-        stats_section_subs = WebContentSubordinateObject.objects.all().filter(content_master_object=stats_section)
+        # stats_section = WebContentObject.objects.get(name="about_us_stats")
+        # stats_section_subs = WebContentSubordinateObject.objects.all().filter(content_master_object=stats_section)
+        #
+        #
+        #
+        #
+        # context = {
+        #     "header": WebContentObject.objects.get(name="about_us_header"),
+        #     "mission": WebContentObject.objects.get(name="about_us_mission"),
+        #     "stats": stats_section,
+        #     "stats_subs": stats_section_subs,
+        #     "history": stats_section,
+        #     "history_subs": stats_section_subs,
+        #     "achievements": stats_section,
+        #     "achievements_subs": stats_section_subs,
+        #
+        # }
 
-
+        all_objects = WebContentObject.objects.all()
+        print(f"all_objects {list(all_objects)}")
         context = {
-            "header": WebContentObject.objects.get(name="about_us_header"),
-            "mission": WebContentObject.objects.get(name="about_us_mission"),
-            "stats": stats_section,
-            "stats_subs": stats_section_subs,
-            "history": stats_section,
-            "history_subs": stats_section_subs,
-            "achievements": stats_section,
-            "achievements_subs": stats_section_subs,
-
+            "all_objects": all_objects,
         }
+
     except WebContentObject:
         context = {}
 

@@ -134,7 +134,55 @@
         <div class="poster">
           <div class="content">
             <div class="items">
-              <div class="card-1">
+                {% for object in all_objects %}
+                    <div class="card-1">
+                        <div class="top-part-item">
+                            <img    class="placeholder-image-icon"
+                                    alt=""
+                                    src="{{ object.image.url }}"
+                            />
+
+                            <div class="tag-age">
+                                <div class="age">Age: 9-10</div>
+                            </div>
+                            <div class="tag-date">
+                                <div class="date-bg"></div>
+                                <div class="date">
+                                    <div class="div">28</div>
+                                    <div class="year">Feb 2024</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-part-item">
+                            <div class="bg-item"></div>
+                            <div class="content1">
+                                <div class="events-details">
+                                    <div class="tag">
+                                        <div class="age">Non-formal education</div>
+                                    </div>
+                                    <b class="heading">{{ object.title }}</b>
+                                    <div class="location">
+                                        <div class="text">Batumi</div>
+                                        <img
+                                                class="icon-location"
+                                                alt=""
+                                                src="./public/iconlocation.svg"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="button-register">
+                                    <div class="register">Register</div>
+                                    <img
+                                            class="button-register-child"
+                                            alt=""
+                                            src="./public/arrow-8.svg"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            <div class="card-1">
                 <div class="top-part-item">
                   <img
                           class="placeholder-image-icon"
@@ -180,242 +228,11 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="card-1">
-                <div class="top-part-item">
-                  <img
-                          class="placeholder-image-icon"
-                          alt=""
-                          src="./public/placeholder-image@2x.png"
-                  />
+            </div>
 
-                  <div class="tag-age">
-                    <div class="age">Age: 9-10</div>
-                  </div>
-                  <div class="tag-date">
-                    <div class="date-bg"></div>
-                    <div class="date">
-                      <div class="div">28</div>
-                      <div class="year">Feb 2024</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="bottom-part-item">
-                  <div class="bg-item"></div>
-                  <div class="content1">
-                    <div class="events-details">
-                      <div class="tag">
-                        <div class="age">Non-formal education</div>
-                      </div>
-                      <b class="heading">Football for kid’s</b>
-                      <div class="location">
-                        <div class="text">Batumi</div>
-                        <img
-                                class="icon-location"
-                                alt=""
-                                src="./public/iconlocation.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="button-register">
-                      <div class="register">Register</div>
-                      <img
-                              class="button-register-child"
-                              alt=""
-                              src="./public/arrow-8.svg"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-1">
-                <div class="top-part-item">
-                  <img
-                          class="placeholder-image-icon"
-                          alt=""
-                          src="./public/placeholder-image@2x.png"
-                  />
 
-                  <div class="tag-age">
-                    <div class="age">Age: 9-10</div>
-                  </div>
-                  <div class="tag-date">
-                    <div class="date-bg"></div>
-                    <div class="date">
-                      <div class="div">28</div>
-                      <div class="year">Feb 2024</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="bottom-part-item">
-                  <div class="bg-item"></div>
-                  <div class="content1">
-                    <div class="events-details">
-                      <div class="tag">
-                        <div class="age">Non-formal education</div>
-                      </div>
-                      <b class="heading">Football for kid’s</b>
-                      <div class="location">
-                        <div class="text">Batumi</div>
-                        <img
-                                class="icon-location"
-                                alt=""
-                                src="./public/iconlocation.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="button-register">
-                      <div class="register">Register</div>
-                      <img
-                              class="button-register-child"
-                              alt=""
-                              src="./public/arrow-8.svg"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-1">
-                <div class="top-part-item">
-                  <img
-                          class="placeholder-image-icon"
-                          alt=""
-                          src="./public/placeholder-image@2x.png"
-                  />
 
-                  <div class="tag-age">
-                    <div class="age">Age: 9-10</div>
-                  </div>
-                  <div class="tag-date">
-                    <div class="date-bg"></div>
-                    <div class="date">
-                      <div class="div">28</div>
-                      <div class="year">Feb 2024</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="bottom-part-item">
-                  <div class="bg-item"></div>
-                  <div class="content1">
-                    <div class="events-details">
-                      <div class="tag">
-                        <div class="age">Non-formal education</div>
-                      </div>
-                      <b class="heading">Football for kid’s</b>
-                      <div class="location">
-                        <div class="text">Batumi</div>
-                        <img
-                                class="icon-location"
-                                alt=""
-                                src="./public/iconlocation.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="button-register">
-                      <div class="register">Register</div>
-                      <img
-                              class="button-register-child"
-                              alt=""
-                              src="./public/arrow-8.svg"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-1">
-                <div class="top-part-item">
-                  <img
-                          class="placeholder-image-icon"
-                          alt=""
-                          src="./public/placeholder-image@2x.png"
-                  />
 
-                  <div class="tag-age">
-                    <div class="age">Age: 9-10</div>
-                  </div>
-                  <div class="tag-date">
-                    <div class="date-bg"></div>
-                    <div class="date">
-                      <div class="div">28</div>
-                      <div class="year">Feb 2024</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="bottom-part-item">
-                  <div class="bg-item"></div>
-                  <div class="content1">
-                    <div class="events-details">
-                      <div class="tag">
-                        <div class="age">Non-formal education</div>
-                      </div>
-                      <b class="heading">Football for kid’s</b>
-                      <div class="location">
-                        <div class="text">Batumi</div>
-                        <img
-                                class="icon-location"
-                                alt=""
-                                src="./public/iconlocation.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="button-register">
-                      <div class="register">Register</div>
-                      <img
-                              class="button-register-child"
-                              alt=""
-                              src="./public/arrow-8.svg"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-1">
-                <div class="top-part-item">
-                  <img
-                          class="placeholder-image-icon"
-                          alt=""
-                          src="./public/placeholder-image@2x.png"
-                  />
-
-                  <div class="tag-age">
-                    <div class="age">Age: 9-10</div>
-                  </div>
-                  <div class="tag-date">
-                    <div class="date-bg"></div>
-                    <div class="date">
-                      <div class="div">28</div>
-                      <div class="year">Feb 2024</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="bottom-part-item">
-                  <div class="bg-item"></div>
-                  <div class="content1">
-                    <div class="events-details">
-                      <div class="tag">
-                        <div class="age">Non-formal education</div>
-                      </div>
-                      <b class="heading">Football for kid’s</b>
-                      <div class="location">
-                        <div class="text">Batumi</div>
-                        <img
-                                class="icon-location"
-                                alt=""
-                                src="./public/iconlocation.svg"
-                        />
-                      </div>
-                    </div>
-                    <div class="button-register">
-                      <div class="register">Register</div>
-                      <img
-                              class="button-register-child"
-                              alt=""
-                              src="./public/arrow-8.svg"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="left-side">
               <div class="filter-menu">
