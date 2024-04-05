@@ -4,7 +4,7 @@ from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObj
 
 
 def home(request):
-    return render(request, "index_bootstrap.html")
+    return render(request, "events/events_index.html")
 
 
 def about_us(request):
@@ -30,23 +30,24 @@ def about_us(request):
     return render(request, 'about_us.html', context=context)
 
 
-def donate(request):
-    return render(request, "donate/donate_paypal.html")
+def events(request):
+    try:
+        stats_section = WebContentObject.objects.get(name="about_us_stats")
+        stats_section_subs = WebContentSubordinateObject.objects.all().filter(content_master_object=stats_section)
 
 
-# PapPal donate
+        context = {
+            "header": WebContentObject.objects.get(name="about_us_header"),
+            "mission": WebContentObject.objects.get(name="about_us_mission"),
+            "stats": stats_section,
+            "stats_subs": stats_section_subs,
+            "history": stats_section,
+            "history_subs": stats_section_subs,
+            "achievements": stats_section,
+            "achievements_subs": stats_section_subs,
 
-def check_out(request, product_id):
-    context = {
+        }
+    except WebContentObject:
+        context = {}
 
-    }
-
-    return render(request, "donate/check_out.html", context=context)
-
-
-def payment_success(request):
-    return render(request, "donate/payment_success.html")
-
-
-def payment_error(request):
-    return render(request, "donate/payment_error.html")
+    return render(request, 'events/events_index.html', context=context)
