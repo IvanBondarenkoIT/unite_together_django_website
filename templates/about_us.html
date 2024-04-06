@@ -3,213 +3,126 @@
 {% load static %}
 
 {% block content %}
-  <body>
-{#    <div class="about-us">#}
-{#      <div class="div">#}
-{#        <div class="navbar">#}
-{#          <img class="line-header" src="{% static 'img/line-header.svg' %}" />#}
-{#          <div class="button-login">#}
-{#            <img class="icon-user" src="{% static 'img/icon-user.png' %}" />#}
-{#            <div class="text-wrapper-9">Login/Register</div>#}
-{#          </div>#}
-{#          <div class="button-donate"><div class="text-wrapper-9">Donate</div></div>#}
-{#          <div class="menu-culumn-2">#}
-{#            <div class="menu-item"><div class="text-wrapper-3">About us</div></div>#}
-{#            <div class="menu-item-2"><div class="text-wrapper-3">News</div></div>#}
-{#            <div class="menu-item-2"><div class="text-wrapper-3">Events</div></div>#}
-{#            <div class="menu-item-2"><div class="text-wrapper-3">Projects</div></div>#}
-{#            <div class="menu-item-2"><div class="text-wrapper-3">Partners</div></div>#}
-{#            <div class="menu-item-2"><div class="news">Documents</div></div>#}
-{#            <div class="menu-item-2"><div class="text-wrapper-3">Contact</div></div>#}
-{#          </div>#}
-{#          <div class="logo-ut-2">#}
-{#            <img class="logo-flag-ut" src="{% static 'img/logo-flag-ut.png' %}" />#}
-{#            <div class="logo-text-ut">#}
-{#              <div class="group">#}
-{#                <div class="div-wrapper"><div class="text-wrapper">UNITE</div></div>#}
-{#                <div class="group-2"><div class="text-wrapper-2">TOGETHER</div></div>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-
-<section class="section-conten padding-y" style="min-height:450vh">
-        <!--Section 1 header-->
-        <header class="header">
-          <div class="text-wrapper-7">{{ header.title }}</div>
-          <p class="text-wrapper-8">
-            {{ header.text }}
-          </p>
-        </header>
-        <!--End Section 1-->
-
-        <!--Section 2 mission-->
-        <div class="sect-mission">
-          <div class="content-2">
-            <div class="text-16">
-              <p class="text-wrapper-6">
-                  {{ mission.title }}
-              </p>
-              <p class="text-17">
-                {{ mission.text }}
-              </p>
+    <body>
+    <div class="container-fluid">
+        <section class="section-conten padding-y" style="min-height:450vh">
+            <div class="row">
+                <!--Section 1 header-->
+                <header class="header">
+                    <div class="col-6">{{ header.title }}</div>
+                    <p class="col-6">
+                        {{ header.text }}
+                    </p>
+                </header>
+                <!--End Section 1-->
             </div>
-{#            <img class="line-dec" src="{% static 'img/line-dec.svg' %}" />#}
-          </div>
-          <img class="placeholder-image-2" src="{{ mission.image.url }}" />
-        </div>
-        <!--End Section 2-->
-
-        <!--Section 3 stats-->
-        <div class="sect-stats">
-          <div class="title-subtitle-2">
-            <p class="heading">{{ stats.title }}</p>
-            <div class="subheading-3">Empowering</div>
-          </div>
-          <div class="mission-button">
-            <p class="text-9">
-              {{ stats.text }}
-            </p>
-            <button class="button"><div class="text-5">Learn more</div></button>
-          </div>
-          <div class="stats">
-              {% for stats_sub in stats_subs %}
-                <div class="stat">
-                <div class="text-10">{{ stats_sub.title }}</div>
-                <div class="text-11">{{ stats_sub.text }}</div>
-                    <img class="line-2" src="{% static 'img/line-8.svg' %}" />
+            <div class="row">
+                <!--Section 2 mission-->
+                <div class="sect-mission">
+                    <div class="col-6">
+                        <div class="text-16">
+                            <p class="text-wrapper-6">
+                                {{ mission.title }}
+                            </p>
+                            <p class="text-17">
+                                {{ mission.text }}
+                            </p>
+                        </div>
+                        {#            <img class="line-dec" src="{% static 'img/line-dec.svg' %}" />#}
+                    </div>
+                    <div class="col-6">
+                        <img class="placeholder-image-2" src="{{ mission.image.url }}"/>
+                    </div>
                 </div>
-              {% endfor %}
-          </div>
-        </div>
-        <!--End Section 3-->
-
-        <!--Section 4 history-->
-        <div class="sect-history">
-          <div class="history-left">
-            <div class="text-more">
-              <p class="text-4">
-                {{ history.text }}
-              </p>
-              <button class="button-more"><div class="text-5">Learn more</div></button>
+                <!--End Section 2-->
             </div>
-            <div class="title-subtitle">
-              <p class="heading">{{ history.title }}</p>
-              <div class="subheading-2">Empowering</div>
+            <div class="row">
+                <!--Section 3 stats-->
+                <div class="sect-stats">
+                    <div class="title-subtitle-2">
+                        <p class="heading">{{ stats.title }}</p>
+                        <div class="subheading-3">Empowering</div>
+                    </div>
+                    <div class="mission-button">
+                        <p class="text-9">
+                            {{ stats.text }}
+                        </p>
+                        <button class="button">
+                            <div class="text-5">Learn more</div>
+                        </button>
+                    </div>
+                    <div class="stats">
+                        {% for stats_sub in stats_subs %}
+                            <div class="stat">
+                                <div class="text-10">{{ stats_sub.title }}</div>
+                                <div class="text-11">{{ stats_sub.text }}</div>
+                                <img class="line-2" src="{% static 'img/line-8.svg' %}"/>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!--End Section 3-->
             </div>
-          </div>
-          <div class="frame-2">
-              {% for history_sub in history_subs %}
-              <div class="timeline-item">
-                  <div class="text-6">
-                      <p class="text-7">
-                          <span class="span">{{ history_sub.text }}</span>
-                      </p>
-                      <div class="heading-2">{{ history_sub.title }}</div>
-                  </div>
-                  <div class="dec-line-elipse">
-                      <div class="ellipse"></div>
-                      <img class="line" src="{% static 'img/line-16.svg' %}"/>
-                  </div>
-              </div>
-              {% endfor %}
+            <div class="row">
+                <!--Section 4 history-->
+                <div class="sect-history">
+                    <div class="history-left">
+                        <div class="text-more">
+                            <p class="text-4">
+                                {{ history.text }}
+                            </p>
+                            <button class="button-more">
+                                <div class="text-5">Learn more</div>
+                            </button>
+                        </div>
+                        <div class="title-subtitle">
+                            <p class="heading">{{ history.title }}</p>
+                            <div class="subheading-2">Empowering</div>
+                        </div>
+                    </div>
+                    <div class="frame-2">
+                        {% for history_sub in history_subs %}
+                            <div class="timeline-item">
+                                <div class="text-6">
+                                    <p class="text-7">
+                                        <span class="span">{{ history_sub.text }}</span>
+                                    </p>
+                                    <div class="heading-2">{{ history_sub.title }}</div>
+                                </div>
+                                <div class="dec-line-elipse">
+                                    <div class="ellipse"></div>
+                                    <img class="line" src="{% static 'img/line-16.svg' %}"/>
+                                </div>
+                            </div>
+                        {% endfor %}
 
-          </div>
-        </div>
-        <!--End Section 4-->
-
-        <!--Section 5 achievements-->
-        <div class="sect-achievements">
-          <div class="left">
-            <div class="title-text">
-              <div class="heading">{{ achievements.title }}</div>
-              <div class="subheading">Empowering</div>
+                    </div>
+                </div>
+                <!--End Section 4-->
             </div>
-            <img class="placeholder-image" src="{{ achievements.image.url }}" />
-          </div>
-          <div class="frame">
-              {% for achievements_sub in achievements_subs %}
-                  <div class="item">
-                      <p class="text">{{ achievements_sub.text }}</p>
-                      <img class="icon" src="{{ achievements_sub.image.url }}"/>
-                  </div>
-              {% endfor %}
-          </div>
-        </div>
-        <!--End Section 5-->
+            <div class="row">
+                <!--Section 5 achievements-->
+                <div class="sect-achievements">
+                    <div class="left">
+                        <div class="title-text">
+                            <div class="heading">{{ achievements.title }}</div>
+                            <div class="subheading">Empowering</div>
+                        </div>
+                        <img class="placeholder-image" src="{{ achievements.image.url }}"/>
+                    </div>
+                    <div class="frame">
+                        {% for achievements_sub in achievements_subs %}
+                            <div class="item">
+                                <p class="text">{{ achievements_sub.text }}</p>
+                                <img class="icon" src="{{ achievements_sub.image.url }}"/>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!--End Section 5-->
+            </div>
 
-</section>
-
-
-
-{#        <footer class="footer">#}
-{#          <div class="content">#}
-{#            <div class="logo-ut">#}
-{#              <img class="logo-flag-ut" src="{% static 'img/logo-flag-ut-2.png' %}" />#}
-{#              <div class="logo-text-ut">#}
-{#                <div class="group">#}
-{#                  <div class="div-wrapper"><div class="text-wrapper">UNITE</div></div>#}
-{#                  <div class="group-2"><div class="text-wrapper-2">TOGETHER</div></div>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#            <div class="menu-culumn">#}
-{#              <div class="menu-item"><div class="text-wrapper-3">About us</div></div>#}
-{#              <div class="menu-item-2"><div class="text-wrapper-3">News</div></div>#}
-{#              <div class="menu-item-2"><div class="text-wrapper-3">Events</div></div>#}
-{#              <div class="menu-item-2"><div class="text-wrapper-3">Projects</div></div>#}
-{#              <div class="menu-item-2"><div class="text-wrapper-3">Partners</div></div>#}
-{#              <div class="menu-item-2"><div class="news">Documents</div></div>#}
-{#              <div class="menu-item-2"><div class="text-wrapper-3">Contact</div></div>#}
-{#            </div>#}
-{#            <img class="soc-icon" src="{% static 'img/soc-icon.png' %}" />#}
-{#          </div>#}
-{#          <div class="divider"></div>#}
-{#          <div class="div-2">#}
-{#            <p class="element-all-rights">© 2023 Unite Together. All rights reserved.</p>#}
-{#            <div class="div-2">#}
-{#              <div class="text-wrapper-4">Privacy Policy</div>#}
-{#              <div class="text-wrapper-4">Terms and Conditions</div>#}
-{#              <div class="text-wrapper-4">Cookie Policy</div>#}
-{#            </div>#}
-{#          </div>#}
-{#        </footer>#}
-{##}
-{#      </div>#}
-{#    </div>#}
-{#   <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>#}
-{#  </body>#}
+        </section>
+    </div>
 
 {% endblock %}
-
-<!--            Carousel-->
-<!--            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="{% static 'img/baner1.png' %}" class="d-block w-100" alt="..." width="500" height="600">
-                </div>
-                <div class="carousel-item">
-                  <img src="{% static 'img/baner2.png' %}" class="d-block w-100" alt="..." width="500" height="600">
-                </div>
-                <div class="carousel-item">
-                  <img src="{% static 'img/baner3.png' %}" class="d-block w-100" alt="..." width="500" height="600">
-                </div>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>-->
-<!--            Carousel END-->
-
-<!--    <div class="container">-->
-<!--      <div class="row">-->
-<!--        <div class="col">1</div>-->
-<!--        <div class="col">2</div>-->
-<!--        <div class="col">3</div>-->
-<!--      </div>-->
-<!--    </div>-->

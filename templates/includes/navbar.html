@@ -20,7 +20,7 @@
                 <div class="text-wrapper-9"><a href="{% url 'login' %}">Login</a> / <a href="{% url 'register' %}">Register</a></div>
             </div>
             <div class="button-donate">
-                <div class="text-wrapper-9"><a href="{% url 'donate' %}">Donate</a></div>
+                <div class="text-wrapper-9"><a href="{% url 'donate-paypal' %}">Donate</a></div>
             </div>
             <div class="menu-culumn-2">
                 <div class="menu-item">
@@ -30,20 +30,20 @@
                     <div class="text-wrapper-3">News</div>
                 </div>
                 <div class="menu-item-2">
-                    <div class="text-wrapper-3">Events</div>
+                    <div class="text-wrapper-3"><a href="{% url 'events' %}">Events</a></div>
                 </div>
                 <div class="menu-item-2">
                     <div class="text-wrapper-3">Projects</div>
                 </div>
-                <div class="menu-item-2">
-                    <div class="text-wrapper-3">Partners</div>
-                </div>
-                <div class="menu-item-2">
-                    <div class="news">Documents</div>
-                </div>
-                <div class="menu-item-2">
-                    <div class="text-wrapper-3">Contact</div>
-                </div>
+{#                <div class="menu-item-2">#}
+{#                    <div class="text-wrapper-3">Partners</div>#}
+{#                </div>#}
+{#                <div class="menu-item-2">#}
+{#                    <div class="news">Documents</div>#}
+{#                </div>#}
+{#                <div class="menu-item-2">#}
+{#                    <div class="text-wrapper-3">Contact</div>#}
+{#                </div>#}
             </div>
             <div class="logo-ut-2">
                 <img class="logo-flag-ut" src="{% static 'img/logo-flag-ut.png' %}"/>

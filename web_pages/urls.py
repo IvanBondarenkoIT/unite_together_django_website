@@ -7,8 +7,10 @@ from web_pages import views
 
 urlpatterns = [
     path("", views.home, name="home"),
-    path("aboutus/", views.about_us, name="about_us"),
-    path("donate/", views.donate, name="donate"),
+    path("events/", views.events, name="events"),
+    path("about-us/", views.about_us, name="about-us"),
+
+
     path("", include("paypal.standard.ipn.urls")),
 
 
