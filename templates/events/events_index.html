@@ -1,529 +1,371 @@
+{% extends "base.html" %}
+
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
+{% block content %}
 
-
-    <link rel="stylesheet" href="{% static 'css/events/new/global.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/events/new/index.css'%}" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap"
-    />
-    <link rel="stylesheet" href="global.css">
-  </head>
-  <body>
-    <a class="xxl-1400px-container-1320px" data-animate-on-scroll>
-      <div class="fotter">
-        <div class="footer">
-          <div class="content">
-            <div class="logo-ut">
-              <img
-                class="logo-flag-ut-icon"
-                alt=""
-                src="{% static 'img/events/logoflagut.svg' %}"
-              />
-
-              <div class="logo-text-ut">
-                <div class="group">
-                  <div class="group1">
-                    <b class="unite">UNITE</b>
-                  </div>
-                  <div class="group2">
-                    <b class="together">TOGETHER</b>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="about-us-parent">
-              <div class="about-us">About us</div>
-              <div class="about-us">News</div>
-              <div class="about-us">Events</div>
-              <div class="about-us">Projects</div>
-              <div class="about-us">Partners</div>
-              <div class="about-us">Documents</div>
-              <div class="about-us">Contacts</div>
-            </div>
-            <div class="soc-icons">
-              <img class="icon-inst" alt="" src="{% static 'img/events/iconinst.svg' %}" />
-
-              <img class="icon-inst" alt="" src="{% static 'img/events/iconfb.svg' %}" />
-
-              <img class="icon-tg" alt="" src="{% static 'img/events/icontg.svg' %}" />
-            </div>
-          </div>
-          <div class="credits">
-            <div class="divider"></div>
-            <div class="row">
-              <div class="relume-all-rights">
-                © 2023 Unite Together. All rights reserved.
-              </div>
-              <div class="row">
-                <div class="relume-all-rights">Privacy Policy</div>
-                <div class="relume-all-rights">Terms and Conditions</div>
-                <div class="relume-all-rights">Cookie Policy</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="sec-poster">
+    <div class="sec-poster">
         <div class="poster">
-          <div class="content1">
-            <div class="items">
-              <div class="card-1">
-                <div class="top-part-item">
-                  <img
-                    class="placeholder-image-icon"
-                    alt=""
-                    src="{% static 'img/events/placeholder-image@2x.png' %}"
-                  />
+            <div class="content1">
+                <div class="items">
+                    <div class="card-1">
+                        <div class="top-part-item">
+                            <img
+                                    class="placeholder-image-icon"
+                                    alt=""
+                                    src="{% static 'img/events/placeholder-image@2x.png' %}"
+                            />
 
-                  <div class="tag-age">
-                    <div class="age">Age: 9-10</div>
-                  </div>
-                  <div class="tag-date">
-                    <div class="date-bg"></div>
-                    <div class="date">
-                      <div class="div">28</div>
-                      <div class="year">Feb 2024</div>
+                            <div class="tag-age">
+                                <div class="age">Age: 9-10</div>
+                            </div>
+                            <div class="tag-date">
+                                <div class="date-bg"></div>
+                                <div class="date">
+                                    <div class="div">28</div>
+                                    <div class="year">Feb 2024</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-part-item">
+                            <div class="bg-item"></div>
+                            <div class="content2">
+                                <div class="events-details">
+                                    <div class="tag">
+                                        <div class="age">Non-formal education</div>
+                                    </div>
+                                    <b class="heading">Football for kid’s</b>
+                                    <div class="location">
+                                        <div class="text">Batumi</div>
+                                        <img
+                                                class="icon-location"
+                                                alt=""
+                                                src="{% static 'img/events/iconlocation.svg' %}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="button-register">
+                                    <div class="free">Free</div>
+                                    <img
+                                            class="button-register-child"
+                                            alt=""
+                                            src="{% static 'img/events/arrow-8.svg' %}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div class="bottom-part-item">
-                  <div class="bg-item"></div>
-                  <div class="content2">
-                    <div class="events-details">
-                      <div class="tag">
-                        <div class="age">Non-formal education</div>
-                      </div>
-                      <b class="heading">Football for kid’s</b>
-                      <div class="location">
-                        <div class="text">Batumi</div>
-                        <img
-                          class="icon-location"
-                          alt=""
-                          src="{% static 'img/events/iconlocation.svg' %}"
-                        />
-                      </div>
-                    </div>
-                    <div class="button-register">
-                      <div class="free">Free</div>
-                      <img
-                        class="button-register-child"
-                        alt=""
-                        src="{% static 'img/events/arrow-8.svg' %}"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-1">
-                <div class="top-part-item">
-                  <img
-                    class="placeholder-image-icon"
-                    alt=""
-                    src="{% static 'img/events/placeholder-image@2x.png' %}"
-                  />
+                    <div class="card-1">
+                        <div class="top-part-item">
+                            <img
+                                    class="placeholder-image-icon"
+                                    alt=""
+                                    src="{% static 'img/events/placeholder-image@2x.png' %}"
+                            />
 
-                  <div class="tag-age">
-                    <div class="age">Age: 9-10</div>
-                  </div>
-                  <div class="tag-date">
-                    <div class="date-bg"></div>
-                    <div class="date">
-                      <div class="div">28</div>
-                      <div class="year">Feb 2024</div>
+                            <div class="tag-age">
+                                <div class="age">Age: 9-10</div>
+                            </div>
+                            <div class="tag-date">
+                                <div class="date-bg"></div>
+                                <div class="date">
+                                    <div class="div">28</div>
+                                    <div class="year">Feb 2024</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-part-item">
+                            <div class="bg-item"></div>
+                            <div class="content2">
+                                <div class="events-details">
+                                    <div class="tag">
+                                        <div class="age">Non-formal education</div>
+                                    </div>
+                                    <b class="heading">Football for kid’s</b>
+                                    <div class="location">
+                                        <div class="text">Batumi</div>
+                                        <img
+                                                class="icon-location"
+                                                alt=""
+                                                src="{% static 'img/events/iconlocation.svg' %}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="button-register">
+                                    <div class="free">Free</div>
+                                    <img
+                                            class="button-register-child"
+                                            alt=""
+                                            src="{% static 'img/events/arrow-8.svg' %}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div class="bottom-part-item">
-                  <div class="bg-item"></div>
-                  <div class="content2">
-                    <div class="events-details">
-                      <div class="tag">
-                        <div class="age">Non-formal education</div>
-                      </div>
-                      <b class="heading">Football for kid’s</b>
-                      <div class="location">
-                        <div class="text">Batumi</div>
-                        <img
-                          class="icon-location"
-                          alt=""
-                          src="{% static 'img/events/iconlocation.svg' %}"
-                        />
-                      </div>
-                    </div>
-                    <div class="button-register">
-                      <div class="free">Free</div>
-                      <img
-                        class="button-register-child"
-                        alt=""
-                        src="{% static 'img/events/arrow-8.svg' %}"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-1">
-                <div class="top-part-item">
-                  <img
-                    class="placeholder-image-icon"
-                    alt=""
-                    src="{% static 'img/events/placeholder-image@2x.png' %}"
-                  />
+                    <div class="card-1">
+                        <div class="top-part-item">
+                            <img
+                                    class="placeholder-image-icon"
+                                    alt=""
+                                    src="{% static 'img/events/placeholder-image@2x.png' %}"
+                            />
 
-                  <div class="tag-age">
-                    <div class="age">Age: 9-10</div>
-                  </div>
-                  <div class="tag-date">
-                    <div class="date-bg"></div>
-                    <div class="date">
-                      <div class="div">28</div>
-                      <div class="year">Feb 2024</div>
+                            <div class="tag-age">
+                                <div class="age">Age: 9-10</div>
+                            </div>
+                            <div class="tag-date">
+                                <div class="date-bg"></div>
+                                <div class="date">
+                                    <div class="div">28</div>
+                                    <div class="year">Feb 2024</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-part-item">
+                            <div class="bg-item"></div>
+                            <div class="content2">
+                                <div class="events-details">
+                                    <div class="tag">
+                                        <div class="age">Non-formal education</div>
+                                    </div>
+                                    <b class="heading">Football for kid’s</b>
+                                    <div class="location">
+                                        <div class="text">Batumi</div>
+                                        <img
+                                                class="icon-location"
+                                                alt=""
+                                                src="{% static 'img/events/iconlocation.svg' %}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="button-register">
+                                    <div class="free">Free</div>
+                                    <img
+                                            class="button-register-child"
+                                            alt=""
+                                            src="{% static 'img/events/arrow-8.svg' %}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div class="bottom-part-item">
-                  <div class="bg-item"></div>
-                  <div class="content2">
-                    <div class="events-details">
-                      <div class="tag">
-                        <div class="age">Non-formal education</div>
-                      </div>
-                      <b class="heading">Football for kid’s</b>
-                      <div class="location">
-                        <div class="text">Batumi</div>
-                        <img
-                          class="icon-location"
-                          alt=""
-                          src="{% static 'img/events/iconlocation.svg' %}"
-                        />
-                      </div>
-                    </div>
-                    <div class="button-register">
-                      <div class="free">Free</div>
-                      <img
-                        class="button-register-child"
-                        alt=""
-                        src="{% static 'img/events/arrow-8.svg' %}"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-1">
-                <div class="top-part-item">
-                  <img
-                    class="placeholder-image-icon"
-                    alt=""
-                    src="{% static 'img/events/placeholder-image@2x.png' %}"
-                  />
+                    <div class="card-1">
+                        <div class="top-part-item">
+                            <img
+                                    class="placeholder-image-icon"
+                                    alt=""
+                                    src="{% static 'img/events/placeholder-image@2x.png' %}"
+                            />
 
-                  <div class="tag-age">
-                    <div class="age">Age: 9-10</div>
-                  </div>
-                  <div class="tag-date">
-                    <div class="date-bg"></div>
-                    <div class="date">
-                      <div class="div">28</div>
-                      <div class="year">Feb 2024</div>
+                            <div class="tag-age">
+                                <div class="age">Age: 9-10</div>
+                            </div>
+                            <div class="tag-date">
+                                <div class="date-bg"></div>
+                                <div class="date">
+                                    <div class="div">28</div>
+                                    <div class="year">Feb 2024</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-part-item">
+                            <div class="bg-item"></div>
+                            <div class="content2">
+                                <div class="events-details">
+                                    <div class="tag">
+                                        <div class="age">Non-formal education</div>
+                                    </div>
+                                    <b class="heading">Football for kid’s</b>
+                                    <div class="location">
+                                        <div class="text">Batumi</div>
+                                        <img
+                                                class="icon-location"
+                                                alt=""
+                                                src="{% static 'img/events/iconlocation.svg' %}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="button-register">
+                                    <div class="free">Free</div>
+                                    <img
+                                            class="button-register-child"
+                                            alt=""
+                                            src="{% static 'img/events/arrow-8.svg' %}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div class="bottom-part-item">
-                  <div class="bg-item"></div>
-                  <div class="content2">
-                    <div class="events-details">
-                      <div class="tag">
-                        <div class="age">Non-formal education</div>
-                      </div>
-                      <b class="heading">Football for kid’s</b>
-                      <div class="location">
-                        <div class="text">Batumi</div>
-                        <img
-                          class="icon-location"
-                          alt=""
-                          src="{% static 'img/events/iconlocation.svg' %}"
-                        />
-                      </div>
-                    </div>
-                    <div class="button-register">
-                      <div class="free">Free</div>
-                      <img
-                        class="button-register-child"
-                        alt=""
-                        src="{% static 'img/events/arrow-8.svg' %}"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-1">
-                <div class="top-part-item">
-                  <img
-                    class="placeholder-image-icon"
-                    alt=""
-                    src="{% static 'img/events/placeholder-image@2x.png' %}"
-                  />
+                    <div class="card-1">
+                        <div class="top-part-item">
+                            <img
+                                    class="placeholder-image-icon"
+                                    alt=""
+                                    src="{% static 'img/events/placeholder-image@2x.png' %}"
+                            />
 
-                  <div class="tag-age">
-                    <div class="age">Age: 9-10</div>
-                  </div>
-                  <div class="tag-date">
-                    <div class="date-bg"></div>
-                    <div class="date">
-                      <div class="div">28</div>
-                      <div class="year">Feb 2024</div>
+                            <div class="tag-age">
+                                <div class="age">Age: 9-10</div>
+                            </div>
+                            <div class="tag-date">
+                                <div class="date-bg"></div>
+                                <div class="date">
+                                    <div class="div">28</div>
+                                    <div class="year">Feb 2024</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-part-item">
+                            <div class="bg-item"></div>
+                            <div class="content2">
+                                <div class="events-details">
+                                    <div class="tag">
+                                        <div class="age">Non-formal education</div>
+                                    </div>
+                                    <b class="heading">Football for kid’s</b>
+                                    <div class="location">
+                                        <div class="text">Batumi</div>
+                                        <img
+                                                class="icon-location"
+                                                alt=""
+                                                src="{% static 'img/events/iconlocation.svg' %}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="button-register">
+                                    <div class="free">Free</div>
+                                    <img
+                                            class="button-register-child"
+                                            alt=""
+                                            src="{% static 'img/events/arrow-8.svg' %}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </div>
-                <div class="bottom-part-item">
-                  <div class="bg-item"></div>
-                  <div class="content2">
-                    <div class="events-details">
-                      <div class="tag">
-                        <div class="age">Non-formal education</div>
-                      </div>
-                      <b class="heading">Football for kid’s</b>
-                      <div class="location">
-                        <div class="text">Batumi</div>
-                        <img
-                          class="icon-location"
-                          alt=""
-                          src="{% static 'img/events/iconlocation.svg' %}"
-                        />
-                      </div>
-                    </div>
-                    <div class="button-register">
-                      <div class="free">Free</div>
-                      <img
-                        class="button-register-child"
-                        alt=""
-                        src="{% static 'img/events/arrow-8.svg' %}"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-1">
-                <div class="top-part-item">
-                  <img
-                    class="placeholder-image-icon"
-                    alt=""
-                    src="{% static 'img/events/placeholder-image@2x.png' %}"
-                  />
+                    <div class="card-1">
+                        <div class="top-part-item">
+                            <img
+                                    class="placeholder-image-icon"
+                                    alt=""
+                                    src="{% static 'img/events/placeholder-image@2x.png' %}"
+                            />
 
-                  <div class="tag-age">
-                    <div class="age">Age: 9-10</div>
-                  </div>
-                  <div class="tag-date">
-                    <div class="date-bg"></div>
-                    <div class="date">
-                      <div class="div">28</div>
-                      <div class="year">Feb 2024</div>
+                            <div class="tag-age">
+                                <div class="age">Age: 9-10</div>
+                            </div>
+                            <div class="tag-date">
+                                <div class="date-bg"></div>
+                                <div class="date">
+                                    <div class="div">28</div>
+                                    <div class="year">Feb 2024</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-part-item">
+                            <div class="bg-item"></div>
+                            <div class="content2">
+                                <div class="events-details">
+                                    <div class="tag">
+                                        <div class="age">Non-formal education</div>
+                                    </div>
+                                    <b class="heading">Football for kid’s</b>
+                                    <div class="location">
+                                        <div class="text">Batumi</div>
+                                        <img
+                                                class="icon-location"
+                                                alt=""
+                                                src="{% static 'img/events/iconlocation.svg' %}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="button-register">
+                                    <div class="free">Free</div>
+                                    <img
+                                            class="button-register-child"
+                                            alt=""
+                                            src="{% static 'img/events/arrow-8.svg' %}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                <div class="bottom-part-item">
-                  <div class="bg-item"></div>
-                  <div class="content2">
-                    <div class="events-details">
-                      <div class="tag">
-                        <div class="age">Non-formal education</div>
-                      </div>
-                      <b class="heading">Football for kid’s</b>
-                      <div class="location">
-                        <div class="text">Batumi</div>
-                        <img
-                          class="icon-location"
-                          alt=""
-                          src="{% static 'img/events/iconlocation.svg' %}"
-                        />
-                      </div>
+                <div class="left-side">
+                    <div class="filter-menu">
+                        <div class="rectangle-bg"></div>
+                        <div class="items1">
+                            <div class="activ-item">
+                                <div class="activ-item-child"></div>
+                                <div class="all">All</div>
+                            </div>
+                            <div class="sport">Sport</div>
+                            <div class="events-and-master">Events and master classes</div>
+                            <div class="non-formal-education">Non-formal education</div>
+                        </div>
                     </div>
-                    <div class="button-register">
-                      <div class="free">Free</div>
-                      <img
-                        class="button-register-child"
-                        alt=""
-                        src="{% static 'img/events/arrow-8.svg' %}"
-                      />
+                    <div class="left-side-inner">
+                        <div class="arrow-parent">
+                            <img class="arrow-icon1" alt="" src="{% static 'img/events/arrow.svg' %}"/>
+
+                            <div class="city">Age</div>
+                        </div>
                     </div>
-                  </div>
+                    <div class="left-side-inner">
+                        <div class="arrow-parent">
+                            <img class="arrow-icon1" alt="" src="{% static 'img/events/arrow.svg' %}"/>
+
+                            <div class="city">City</div>
+                        </div>
+                    </div>
+                    <div class="check-button">
+                        <div class="icon-check">
+                            <div class="icon-check-child"></div>
+                            <img
+                                    class="icon-check-item"
+                                    alt=""
+                                    src="{% static 'img/events/vector-1.svg' %}"
+                            />
+                        </div>
+                        <div class="vacant-seats">Vacant seats</div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="left-side">
-              <div class="filter-menu">
-                <div class="rectangle-bg"></div>
-                <div class="items1">
-                  <div class="activ-item">
-                    <div class="activ-item-child"></div>
-                    <div class="all">All</div>
-                  </div>
-                  <div class="sport">Sport</div>
-                  <div class="events-and-master">Events and master classes</div>
-                  <div class="non-formal-education">Non-formal education</div>
-                </div>
-              </div>
-              <div class="left-side-inner">
-                <div class="arrow-parent">
-                  <img class="arrow-icon1" alt="" src="{% static 'img/events/arrow.svg' %}" />
+            <div class="bottom-part">
+                <div class="pages">
+                    <img class="pages-child" alt="" src="{% static 'img/events/vector-6.svg' %}"/>
 
-                  <div class="city">Age</div>
-                </div>
-              </div>
-              <div class="left-side-inner">
-                <div class="arrow-parent">
-                  <img class="arrow-icon1" alt="" src="{% static 'img/events/arrow.svg' %}" />
+                    <img class="pages-item" alt="" src="{% static 'img/events/vector-7.svg' %}"/>
 
-                  <div class="city">City</div>
+                    <div class="div6">1</div>
+                    <div class="div7">2</div>
+                    <div class="div8">3</div>
                 </div>
-              </div>
-              <div class="check-button">
-                <div class="icon-check">
-                  <div class="icon-check-child"></div>
-                  <img
-                    class="icon-check-item"
-                    alt=""
-                    src="{% static 'img/events/vector-1.svg' %}"
-                  />
+                <div class="button-view-all">
+                    <div class="view-all">View all</div>
                 </div>
-                <div class="vacant-seats">Vacant seats</div>
-              </div>
             </div>
-          </div>
-          <div class="bottom-part">
-            <div class="pages">
-              <img class="pages-child" alt="" src="{% static 'img/events/vector-6.svg' %}" />
-
-              <img class="pages-item" alt="" src="{% static 'img/events/vector-7.svg' %}" />
-
-              <div class="div6">1</div>
-              <div class="div7">2</div>
-              <div class="div8">3</div>
-            </div>
-            <div class="button-view-all">
-              <div class="view-all">View all</div>
-            </div>
-          </div>
         </div>
-      </div>
-      <div class="header-events">
+    </div>
+    <div class="header-events">
         <div class="header">
-          <img
-            class="placeholder-image-icon6"
-            alt=""
-            src="{% static 'img/events/placeholderimage@2x.png' %}"
-          />
-
-          <div class="sec-title">
-            <div class="sublitle">Subtitle</div>
-            <div class="content8">
-              <b class="events1">Events</b>
-              <div class="discover-the-diverse">
-                Discover the diverse range of events and activities we offer to
-                support the Ukrainian community in Georgia.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="navbar">
-        <div class="logomenu">
-          <div class="logo-ut">
             <img
-              class="logo-flag-ut-icon"
-              alt=""
-              src="{% static 'img/events/logoflagut.svg' %}"
+                    class="placeholder-image-icon6"
+                    alt=""
+                    src="{% static 'img/events/placeholderimage@2x.png' %}"
             />
 
-            <div class="logo-text-ut">
-              <div class="group">
-                <div class="group1">
-                  <b class="unite">UNITE</b>
+            <div class="sec-title">
+                <div class="sublitle">Subtitle</div>
+                <div class="content8">
+                    <b class="events1">Events</b>
+                    <div class="discover-the-diverse">
+                        Discover the diverse range of events and activities we offer to
+                        support the Ukrainian community in Georgia.
+                    </div>
                 </div>
-                <div class="group2">
-                  <b class="together">TOGETHER</b>
-                </div>
-              </div>
             </div>
-          </div>
-          <div class="menu">
-            <div class="donate">About us</div>
-            <div class="active">
-              <div class="events2">Events</div>
-              <img
-                class="line-active-menu-icon"
-                alt=""
-                src="{% static 'img/events/lineactivemenu.svg' %}"
-              />
-            </div>
-            <div class="donate">Projects</div>
-          </div>
         </div>
-        <div class="right-part">
-          <div class="languages">
-            <div class="flag-ua">
-              <div class="yellow-rectangle"></div>
-              <div class="blue-rectangle"></div>
-            </div>
-            <div class="about-us">UA</div>
-            <img class="arrow-icon3" alt="" src="{% static 'img/events/arrow.svg' %}" />
-          </div>
-          <img
-            class="dividing-line-icon"
-            alt=""
-            src="{% static 'img/events/dividingline.svg' %}"
-          />
+    </div>
 
-          <div class="button-register6">
-            <div class="user-icon-parent">
-              <img class="user-icon" alt="" src="{% static 'img/events/usericon.svg' %}" />
-
-              <div class="loginsign-up">Login/Sign Up</div>
-            </div>
-          </div>
-          <div class="button-donate">
-            <div class="donate">Donate</div>
-            <img class="donate-icon" alt="" src="{% static 'img/events/donateicon.svg' %}" />
-          </div>
-        </div>
-      </div>
-    </a>
-
-    <script>
-      var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
-      var observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting || entry.intersectionRatio > 0) {
-              const targetElement = entry.target;
-              targetElement.classList.add("animate");
-              observer.unobserve(targetElement);
-            }
-          }
-        },
-        {
-          threshold: 0.15,
-        }
-      );
-      
-      for (let i = 0; i < scrollAnimElements.length; i++) {
-        observer.observe(scrollAnimElements[i]);
-      }
-      </script>
-  </body>
-</html>
+{% endblock %}

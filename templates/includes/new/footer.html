@@ -1,0 +1,81 @@
+{% load static %}
+
+      <div class="fotter">
+        <div class="footer">
+          <div class="content">
+            <div class="logo-ut">
+              <img
+                class="logo-flag-ut-icon"
+                alt=""
+                src="{% static 'img/events/logoflagut.svg' %}"
+              />
+
+              <div class="logo-text-ut">
+                <div class="group">
+                  <div class="group1">
+                    <b class="unite">UNITE</b>
+                  </div>
+                  <div class="group2">
+                    <b class="together">TOGETHER</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="about-us-parent">
+              <div class="about-us">About us</div>
+              <div class="about-us">News</div>
+              <div class="about-us">Events</div>
+              <div class="about-us">Projects</div>
+              <div class="about-us">Partners</div>
+              <div class="about-us">Documents</div>
+              <div class="about-us">Contacts</div>
+            </div>
+            <div class="soc-icons">
+              <img class="icon-inst" alt="" src="{% static 'img/events/iconinst.svg' %}" />
+
+              <img class="icon-inst" alt="" src="{% static 'img/events/iconfb.svg' %}" />
+
+              <img class="icon-tg" alt="" src="{% static 'img/events/icontg.svg' %}" />
+            </div>
+          </div>
+          <div class="credits">
+            <div class="divider"></div>
+            <div class="row">
+              <div class="relume-all-rights">
+                © 2023 Unite Together. All rights reserved.
+              </div>
+              <div class="row">
+                <div class="relume-all-rights">Privacy Policy</div>
+                <div class="relume-all-rights">Terms and Conditions</div>
+                <div class="relume-all-rights">Cookie Policy</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </a>
+
+    <script>
+      var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
+      var observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting || entry.intersectionRatio > 0) {
+              const targetElement = entry.target;
+              targetElement.classList.add("animate");
+              observer.unobserve(targetElement);
+            }
+          }
+        },
+        {
+          threshold: 0.15,
+        }
+      );
+
+      for (let i = 0; i < scrollAnimElements.length; i++) {
+        observer.observe(scrollAnimElements[i]);
+      }
+      </script>
+  </body>
+</html>
