@@ -8,7 +8,7 @@ from web_pages import views
 urlpatterns = [
     path("", views.home, name="home"),
     path("events/", views.events, name="events"),
-    path("aboutus/", views.about_us, name="about_us"),
+    path("about-us/", views.about_us, name="about-us"),
 
 
     path("", include("paypal.standard.ipn.urls")),

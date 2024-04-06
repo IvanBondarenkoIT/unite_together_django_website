@@ -2,38 +2,31 @@
 
 
   <body>
-    <a class="xxl-1400px-container-1320px" data-animate-on-scroll>
+    <div class="xxl-1400px-container-1320px" data-animate-on-scroll>
       <div class="navbar">
         <div class="logomenu">
-          <div class="logo-ut">
-            <img
-              class="logo-flag-ut-icon"
-              alt=""
-              src="{% static 'img/events/logoflagut.svg' %}"
-            />
 
-            <div class="logo-text-ut">
-              <div class="group">
-                <div class="group1">
-                  <b class="unite">UNITE</b>
+                <div class="logo-ut">
+                    <img class="logo-flag-ut-icon" alt="" src="{% static 'img/events/logoflagut.svg' %}"/>
+
+                    <div class="logo-text-ut">
+                        <div class="group">
+                            <div class="group1">
+                                <b class="unite">UNITE</b>
+                            </div>
+                            <div class="group2">
+                                <b class="together">TOGETHER</b>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="group2">
-                  <b class="together">TOGETHER</b>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div class="menu">
-            <div class="donate">About us</div>
+            <div class="donate"><a href="{% url "about-us" %}">About us</a></div>
             <div class="active">
-              <div class="events2">Events</div>
-              <img
-                class="line-active-menu-icon"
-                alt=""
-                src="{% static 'img/events/lineactivemenu.svg' %}"
-              />
+              <div class="events2"><a href="{% url "events" %}">Events</a></div>
             </div>
-            <div class="donate">Projects</div>
+            <div class="donate"><a href="#">Projects</a></div>
           </div>
         </div>
         <div class="right-part">
@@ -55,11 +48,11 @@
             <div class="user-icon-parent">
               <img class="user-icon" alt="" src="{% static 'img/events/usericon.svg' %}" />
 
-              <div class="loginsign-up">Login/Sign Up</div>
+              <div class="loginsign-up"><a href="{% url 'login' %}">Login</a> / <a href="{% url 'register' %}">Sing Up</a></div>
             </div>
           </div>
           <div class="button-donate">
-            <div class="donate">Donate</div>
+            <div class="donate"><a href="{% url 'login' %}">Donate</a></div>
             <img class="donate-icon" alt="" src="{% static 'img/events/donateicon.svg' %}" />
           </div>
         </div>
