@@ -1,12 +1,27 @@
 from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.
 class WebPage(models.Model):
-    name = models.CharField(max_length=250)
+    name = models.CharField(max_length=250)  # Events, Projects, AboutUs
 
     def __str__(self):
         return self.name
+
+
+class ObjectsGroup(models.Model):  # Spotr, non-formal education, Events and master classes, Other
+    name = models.CharField(max_length=250)
+    slug = models.SlugField(max_length=50, blank=True)
+    is_active = models.BooleanField(default=True)
+    page = models.ForeignKey("WebPage", on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.name} {self.page}'
+
+    def get_url(self):
+        return reverse("events_by_group", args=[self.slug])
+
 
 
 class WebContentObject(models.Model):
@@ -15,11 +30,14 @@ class WebContentObject(models.Model):
     text = models.TextField(blank=True)
     image = models.ImageField(upload_to='img/pages_content', blank=True)
 
+    slug = models.SlugField(max_length=200, blank=True)
+
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    web_page_owner = models.ForeignKey(WebPage, on_delete=models.CASCADE, blank=True)
+    group = models.ForeignKey("ObjectsGroup", on_delete=models.CASCADE, blank=True, null=True)
+    # web_page_owner = models.ForeignKey(WebPage, on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
         return f"{self.name} - {self.title}"
@@ -38,6 +56,12 @@ class WebContentSubordinateObject(models.Model):
         return f"{self.name} - {self.title} - {self.text}"
 
 
+class Events(WebContentObject):
+    city = models.CharField(max_length=250)
+    age = models.IntegerField()
+    start_date = models.DateField()
+    end_date = models.DateField()
 
-
+    def __str__(self):
+        return f"Event - {self.name}"
 
