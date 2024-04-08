@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject
+from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup
 
 
 def home(request):
@@ -30,33 +30,17 @@ def about_us(request):
     return render(request, 'about_us.html', context=context)
 
 
-def events(request):
-    try:
-        # stats_section = WebContentObject.objects.get(name="about_us_stats")
-        # stats_section_subs = WebContentSubordinateObject.objects.all().filter(content_master_object=stats_section)
-        #
-        #
-        #
-        #
-        # context = {
-        #     "header": WebContentObject.objects.get(name="about_us_header"),
-        #     "mission": WebContentObject.objects.get(name="about_us_mission"),
-        #     "stats": stats_section,
-        #     "stats_subs": stats_section_subs,
-        #     "history": stats_section,
-        #     "history_subs": stats_section_subs,
-        #     "achievements": stats_section,
-        #     "achievements_subs": stats_section_subs,
-        #
-        # }
+def events(request, group_slug=None):
+    categories = None
+    products = None
+    if group_slug:
+        group = get_object_or_404(ObjectsGroup, slug=group_slug)
+        all_objects = Events.objects.filter(group=group, is_active=True)
+    else:
+        all_objects = Events.objects.all().filter(is_active=True).order_by("id")
 
-        all_objects = WebContentObject.objects.all()
-        print(f"all_objects {list(all_objects)}")
-        context = {
-            "all_objects": all_objects,
-        }
-
-    except WebContentObject:
-        context = {}
+    context = {
+        "all_objects": all_objects,
+    }
 
     return render(request, 'events/events_index.html', context=context)

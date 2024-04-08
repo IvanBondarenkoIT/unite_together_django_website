@@ -295,13 +295,19 @@
                     <div class="filter-menu">
                         <div class="rectangle-bg"></div>
                         <div class="items1">
-                            <div class="activ-item">
-                                <div class="activ-item-child"></div>
-                                <div class="all">All</div>
-                            </div>
-                            <div class="sport">Sport</div>
-                            <div class="events-and-master">Events and master classes</div>
-                            <div class="non-formal-education">Non-formal education</div>
+{#                            <div class="activ-item">#}
+{#                                <div class="activ-item-child"></div>#}
+{#                                <div class="all">All</div>#}
+{#                            </div>#}
+                            <ul class="list-menu">
+                                <li><a href="{% url 'events' %}">All</a></li>
+                                {% for category in links %}
+                                    <li><a href="{{ category.get_url }}">{{ category.name }}  </a></li>
+                                {% endfor %}
+                            </ul>
+{#                            <div class="sport">Sport</div>#}
+{#                            <div class="events-and-master">Events and master classes</div>#}
+{#                            <div class="non-formal-education">Non-formal education</div>#}
                         </div>
                     </div>
                     <div class="left-side-inner">
