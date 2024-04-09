@@ -12,7 +12,6 @@ def about_us(request):
         stats_section = WebContentObject.objects.get(name="about_us_stats")
         stats_section_subs = WebContentSubordinateObject.objects.all().filter(content_master_object=stats_section)
 
-
         context = {
             "header": WebContentObject.objects.get(name="about_us_header"),
             "mission": WebContentObject.objects.get(name="about_us_mission"),

@@ -10,7 +10,7 @@ class WebPageAdmin(admin.ModelAdmin):
 class WebContentObjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'title', 'text', 'image', 'is_active', 'created_at', 'updated_at',)
     list_editable = ('is_active', )
-    prepopulated_fields = {'slug': ('name', 'group')}
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class WebContentSubordinateObjectAdmin(admin.ModelAdmin):

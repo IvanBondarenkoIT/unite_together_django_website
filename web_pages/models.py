@@ -57,11 +57,22 @@ class WebContentSubordinateObject(models.Model):
 
 
 class Events(WebContentObject):
-    city = models.CharField(max_length=250)
-    age = models.IntegerField()
-    start_date = models.DateField()
-    end_date = models.DateField()
+    city = models.CharField(max_length=250, blank=True)
+    start_age = models.IntegerField(blank=True, null=True)
+    end_age = models.IntegerField(blank=True, null=True)
+    start_date = models.DateField(blank=True)
+    end_date = models.DateField(blank=True)
 
     def __str__(self):
         return f"Event - {self.name}"
+    #
+    # def get_date_day(self):
+    #     return self.start_date.
+    #
+    def get_start_date_month(self):
+        return self.start_date.strftime("%B")
+
+    #
+    # def get_date_year(self):
+
 
