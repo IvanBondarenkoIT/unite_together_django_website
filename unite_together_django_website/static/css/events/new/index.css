@@ -225,7 +225,7 @@
 .tag-date {
   top: 0;
   left: 220px;
-  width: 86px;
+  width: 94px;
   height: 70px;
   font-size: var(--font-size-13xl);
 }
@@ -266,7 +266,7 @@
 .heading {
   top: 33px;
   left: 0;
-  font-size: var(--font-size-5xl);
+  font-size: var(--font-size-lg);
   line-height: 140%;
 }
 .text {
@@ -290,7 +290,7 @@
   position: absolute;
   top: 77px;
   left: 0;
-  width: 73px;
+  width: 200px;
   height: 24px;
   font-size: var(--text-regular-semi-bold-size);
 }
