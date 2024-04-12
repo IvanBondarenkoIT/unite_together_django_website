@@ -4,141 +4,508 @@
 
 {% block content %}
 
-    <div class="sec-poster">
-        <div class="poster">
-            <div class="content1">
-                <div class="items">
-                    {% for object in all_objects %}
-                        <div class="card-1">
-                            <div class="top-part-item">
-                                <img
-                                        class="placeholder-image-icon"
-                                        alt=""
-                                        src="{{ object.image.url }}"
-                                />
 
-                                <div class="tag-age">
-                                    <div class="age">Age: {{ object.start_age }}-{{ object.end_age }}</div>
-                                </div>
-                                <div class="tag-date">
-                                    <div class="date-bg"></div>
-                                    <div class="date">
-                                        <div class="div">{{ object.start_date.day }}</div>
-                                        <div class="year">{{ object.get_start_date_month }} {{ object.start_date.year }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bottom-part-item">
-                                <div class="bg-item"></div>
-                                <div class="content2">
-                                    <div class="events-details">
-                                        <div class="tag">
-                                            <div class="age">{{ object.group }}</div>
-                                        </div>
-                                        <b class="heading">{{ object.name }}</b>
-                                        <div class="location">
-                                            <div class="text">{{ object.city }}</div>
-                                            <img
-                                                    class="icon-location"
-                                                    alt=""
-                                                    src="{% static 'img/events/iconlocation.svg' %}"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div class="button-register">
-                                        <div class="free">Free</div>
-                                        <img
-                                                class="button-register-child"
-                                                alt=""
-                                                src="{% static 'img/events/arrow-8.svg' %}"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="left-side">
-                    <div class="filter-menu">
-                        <div class="rectangle-bg"></div>
-                        <div class="items1">
-{#                            <div class="activ-item">#}
-{#                                <div class="activ-item-child"></div>#}
-{#                                <div class="all">All</div>#}
-{#                            </div>#}
-                            <ul class="list-menu">
-                                <li><a href="{% url 'events' %}">All</a></li>
-                                {% for category in links %}
-                                    <li><a href="{{ category.get_url }}">{{ category.name }}  </a></li>
-                                {% endfor %}
-                            </ul>
-{#                            <div class="sport">Sport</div>#}
-{#                            <div class="events-and-master">Events and master classes</div>#}
-{#                            <div class="non-formal-education">Non-formal education</div>#}
-                        </div>
-                    </div>
-                    <div class="left-side-inner">
-                        <div class="arrow-parent">
-                            <img class="arrow-icon1" alt="" src="{% static 'img/events/arrow.svg' %}"/>
+      <section class="page-header">
+        <img class="bg-icon" loading="lazy" alt="" src="./public/bg@2x.png" />
 
-                            <div class="city">Age</div>
-                        </div>
-                    </div>
-                    <div class="left-side-inner">
-                        <div class="arrow-parent">
-                            <img class="arrow-icon1" alt="" src="{% static 'img/events/arrow.svg' %}"/>
-
-                            <div class="city">City</div>
-                        </div>
-                    </div>
-                    <div class="check-button">
-                        <div class="icon-check">
-                            <div class="icon-check-child"></div>
-                            <img
-                                    class="icon-check-item"
-                                    alt=""
-                                    src="{% static 'img/events/vector-1.svg' %}"
-                            />
-                        </div>
-                        <div class="vacant-seats">Vacant seats</div>
-                    </div>
-                </div>
+        <div class="sec-title1">
+          <div class="sublitle1">Subtitle</div>
+          <div class="content9">
+            <h1 class="events6">Events</h1>
+            <div class="discover-the-diverse-range-of-wrapper">
+              <div class="discover-the-diverse1">
+                Discover the diverse range of events and activities we offer to
+                support the Ukrainian community in Georgia.
+              </div>
             </div>
-            <div class="bottom-part">
-                <div class="pages">
-                    <img class="pages-child" alt="" src="{% static 'img/events/vector-6.svg' %}"/>
-
-                    <img class="pages-item" alt="" src="{% static 'img/events/vector-7.svg' %}"/>
-
-                    <div class="div6">1</div>
-                    <div class="div7">2</div>
-                    <div class="div8">3</div>
-                </div>
-                <div class="button-view-all">
-                    <div class="view-all">View all</div>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
-    <div class="header-events">
-        <div class="header">
-            <img
-                    class="placeholder-image-icon6"
+      </section>
+
+      <section class="sect-events">
+        <div class="sect-events-child"></div>
+        <div class="aside-box-parent">
+          <div class="aside-box">
+            <div class="condition-branch"></div>
+            <div class="iterative-processor">
+              <div class="item-active">
+                <div class="output-formatter"></div>
+                <div class="all1">All</div>
+              </div>
+              <div class="database-connection">
+                <div class="error-handler">
+                  <div class="sport1">Sport</div>
+                  <div class="non-formal-education1">Non-formal education</div>
+                  <div class="variable-holder">
+                    <div class="events-and-master1">
+                      Events and master classes
+                    </div>
+                    <div class="function-caller">
+                      <img
+                        class="dec-line-1-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./public/decline1.svg"
+                      />
+                    </div>
+                    <div class="dropdown-city">
+                      <div class="list-processor">
+                        <div class="text-wrap">
+                          <div class="select-your-city">Select your city</div>
+                        </div>
+                      </div>
+                      <img
+                        class="keyboard-arrow-down"
+                        alt=""
+                        src="./public/keyboard-arrow-down.svg"
+                      />
+                    </div>
+                    <div class="function-caller1">
+                      <img
+                        class="dec-line-2-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./public/decline2.svg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="audio-processor">
+              <div class="availability">
+                <div class="availability1">Availability</div>
+                <div class="check-button1">
+                  <input class="icon-check1" checked="{true}" type="checkbox" />
+
+                  <div class="event-dispatcher">
+                    <div class="vacant-seats1">Vacant seats</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="items2">
+            <div class="item-1">
+              <div class="form"></div>
+              <div class="touch-input">
+                <div class="gesture-recognizer">
+                  <div class="date6">
+                    <div class="date7">
+                      <div class="facial-recognition">
+                        <div class="biometric-authentication">28</div>
+                      </div>
+                      <div class="year6">Feb 2024</div>
+                    </div>
+                  </div>
+                  <div class="age7">
+                    <div class="age8">
+                      <span>Age: </span>
+                      <span class="span">9-10</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="gyroscope">
+                <div class="magnetometer">
+                  <button class="city1">
+                    <img class="icon" alt="" src="./public/1-1@2x.png" />
+
+                    <div class="bg-enrollment"></div>
+                    <div class="facial-expression">
+                      <img
+                        class="biometric-verification-icon"
+                        alt=""
+                        src="./public/biometric-verification.svg"
+                      />
+                    </div>
+                    <div class="batumi">Batumi</div>
+                  </button>
+                  <div class="condition-splitter">
+                    <div class="header-item">
+                      <div class="decoration1"></div>
+                      <b class="crafts-for-children">crafts for children</b>
+                    </div>
+                    <div class="iteration-loop">
+                      <div class="lorem-ipsum-is-simply">
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry and typesetting industry and
+                        typesetting industry.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="button-join">
+                  <div class="join-parent">
+                    <div class="join">join</div>
+                    <div class="vector-wrapper">
+                      <img
+                        class="vector-icon"
+                        alt=""
+                        src="./public/vector-11.svg"
+                      />
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div class="item-2">
+              <div class="form1"></div>
+              <div class="item-2-inner">
+                <div class="date-parent">
+                  <div class="date8">
+                    <div class="date9">
+                      <div class="wrapper">
+                        <div class="div10">28</div>
+                      </div>
+                      <div class="year7">Feb 2024</div>
+                    </div>
+                  </div>
+                  <div class="age9">
+                    <div class="age10">
+                      <span>Age: </span>
+                      <span class="span1">9-10</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="frame-parent2">
+                <div class="city-parent">
+                  <button class="city2">
+                    <img class="icon1" alt="" src="./public/1-1@2x.png" />
+
+                    <div class="bg-enrollment1"></div>
+                    <div class="vector-container">
+                      <img
+                        class="vector-icon1"
+                        alt=""
+                        src="./public/biometric-verification.svg"
+                      />
+                    </div>
+                    <div class="batumi1">Batumi</div>
+                  </button>
+                  <div class="header-item-parent">
+                    <div class="header-item1">
+                      <div class="decoration2"></div>
+                      <b class="crafts-for-children1">crafts for children</b>
+                    </div>
+                    <div class="lorem-ipsum-is-simply-dummy-te-wrapper">
+                      <div class="lorem-ipsum-is-simply1">
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry and typesetting industry and
+                        typesetting industry.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="button-join1">
+                  <div class="join-group">
+                    <div class="join1">join</div>
+                    <div class="vector-frame">
+                      <img
+                        class="vector-icon2"
+                        alt=""
+                        src="./public/vector-11.svg"
+                      />
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div class="item-3">
+              <div class="form2"></div>
+              <div class="item-3-inner">
+                <div class="date-group">
+                  <div class="date10">
+                    <div class="date11">
+                      <div class="container">
+                        <div class="div11">28</div>
+                      </div>
+                      <div class="year8">Feb 2024</div>
+                    </div>
+                  </div>
+                  <div class="age11">
+                    <div class="age12">
+                      <span>Age: </span>
+                      <span class="span2">9-10</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="frame-parent3">
+                <div class="city-group">
+                  <button class="city3">
+                    <img class="icon2" alt="" src="./public/2-1@2x.png" />
+
+                    <div class="bg-enrollment2"></div>
+                    <div class="vector-wrapper1">
+                      <img
+                        class="vector-icon3"
+                        alt=""
+                        src="./public/biometric-verification.svg"
+                      />
+                    </div>
+                    <div class="tbilisi">Tbilisi</div>
+                  </button>
+                  <div class="header-item-group">
+                    <div class="header-item2">
+                      <div class="decoration3"></div>
+                      <b class="art-classes-for">Art classes for teenagers</b>
+                    </div>
+                    <div class="lorem-ipsum-is-simply-dummy-te-container">
+                      <div class="lorem-ipsum-is-simply2">
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry and typesetting industry and
+                        typesetting industry.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="button-join2">
+                  <div class="join-container">
+                    <div class="join2">join</div>
+                    <div class="vector-wrapper2">
+                      <img
+                        class="vector-icon4"
+                        alt=""
+                        src="./public/vector-11.svg"
+                      />
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div class="item-4">
+              <div class="form3"></div>
+              <div class="item-4-inner">
+                <div class="date-container">
+                  <div class="date12">
+                    <div class="date13">
+                      <div class="frame">
+                        <div class="div12">28</div>
+                      </div>
+                      <div class="year9">Feb 2024</div>
+                    </div>
+                  </div>
+                  <div class="age13">
+                    <div class="age14">
+                      <span>Age: </span>
+                      <span class="span3">9-10</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="frame-parent4">
+                <div class="city-container">
+                  <button class="city4">
+                    <img class="icon3" alt="" src="./public/1-1@2x.png" />
+
+                    <div class="bg-enrollment3"></div>
+                    <div class="vector-wrapper3">
+                      <img
+                        class="vector-icon5"
+                        alt=""
+                        src="./public/biometric-verification.svg"
+                      />
+                    </div>
+                    <div class="batumi2">Batumi</div>
+                  </button>
+                  <div class="header-item-container">
+                    <div class="header-item3">
+                      <div class="decoration4"></div>
+                      <b class="crafts-for-children2">crafts for children</b>
+                    </div>
+                    <div class="lorem-ipsum-is-simply-dummy-te-frame">
+                      <div class="lorem-ipsum-is-simply3">
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry and typesetting industry and
+                        typesetting industry.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="button-join3">
+                  <div class="join-parent1">
+                    <div class="join3">join</div>
+                    <div class="vector-wrapper4">
+                      <img
+                        class="vector-icon6"
+                        alt=""
+                        src="./public/vector-11.svg"
+                      />
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div class="item-5">
+              <div class="form4"></div>
+              <div class="item-5-inner">
+                <div class="date-parent1">
+                  <div class="date14">
+                    <div class="date15">
+                      <div class="wrapper1">
+                        <div class="div13">28</div>
+                      </div>
+                      <div class="year10">Feb 2024</div>
+                    </div>
+                  </div>
+                  <div class="age15">
+                    <div class="age16">
+                      <span>Age: </span>
+                      <span class="span4">9-10</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="frame-parent5">
+                <div class="city-parent1">
+                  <button class="city5">
+                    <img class="icon4" alt="" src="./public/1-1@2x.png" />
+
+                    <div class="bg-enrollment4"></div>
+                    <div class="vector-wrapper5">
+                      <img
+                        class="vector-icon7"
+                        alt=""
+                        src="./public/biometric-verification.svg"
+                      />
+                    </div>
+                    <div class="batumi3">Batumi</div>
+                  </button>
+                  <div class="header-item-parent1">
+                    <div class="header-item4">
+                      <div class="decoration5"></div>
+                      <b class="crafts-for-children3">crafts for children</b>
+                    </div>
+                    <div class="lorem-ipsum-is-simply-dummy-te-wrapper1">
+                      <div class="lorem-ipsum-is-simply4">
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry and typesetting industry and
+                        typesetting industry.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="button-join4">
+                  <div class="join-parent2">
+                    <div class="join4">join</div>
+                    <div class="vector-wrapper6">
+                      <img
+                        class="vector-icon8"
+                        alt=""
+                        src="./public/vector-11.svg"
+                      />
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+            <div class="item-6">
+              <div class="form5"></div>
+              <div class="item-6-inner">
+                <div class="date-parent2">
+                  <div class="date16">
+                    <div class="date17">
+                      <div class="wrapper2">
+                        <div class="div14">28</div>
+                      </div>
+                      <div class="year11">Feb 2024</div>
+                    </div>
+                  </div>
+                  <div class="age17">
+                    <div class="age18">
+                      <span>Age: </span>
+                      <span class="span5">9-10</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="frame-parent6">
+                <div class="frame-parent7">
+                  <button class="city-wrapper">
+                    <button class="city6">
+                      <img class="icon5" alt="" src="./public/2-1@2x.png" />
+
+                      <div class="bg-enrollment5"></div>
+                      <div class="pressure-sensor">
+                        <img
+                          class="sound-sensor-icon"
+                          alt=""
+                          src="./public/biometric-verification.svg"
+                        />
+                      </div>
+                      <div class="tbilisi1">Tbilisi</div>
+                    </button>
+                  </button>
+                  <div class="header-item5">
+                    <div class="decoration6"></div>
+                    <b class="art-classes-for1">Art classes for teenagers</b>
+                  </div>
+                  <div class="lorem-ipsum-is-simply-dummy-te-wrapper2">
+                    <div class="lorem-ipsum-is-simply5">
+                      Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry and typesetting industry and
+                      typesetting industry.
+                    </div>
+                  </div>
+                </div>
+                <button class="button-join5">
+                  <div class="join-parent3">
+                    <div class="join5">join</div>
+                    <div class="vector-wrapper7">
+                      <img
+                        class="vector-icon9"
+                        alt=""
+                        src="./public/vector-11.svg"
+                      />
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="data-visualizer">
+          <div class="frame-parent8">
+            <div class="frame-wrapper">
+              <div class="frame-parent9">
+                <div class="vector-wrapper8">
+                  <img
+                    class="vector-icon10"
                     alt=""
-                    src="{% static 'img/events/placeholderimage@2x.png' %}"
-            />
-
-            <div class="sec-title">
-                <div class="sublitle">Subtitle</div>
-                <div class="content8">
-                    <b class="events1">Events</b>
-                    <div class="discover-the-diverse">
-                        Discover the diverse range of events and activities we offer to
-                        support the Ukrainian community in Georgia.
-                    </div>
+                    src="./public/vector-12.svg"
+                  />
                 </div>
+                <div class="back">Back</div>
+              </div>
             </div>
+            <div class="active1">
+              <div class="active-child"></div>
+              <div class="div15">1</div>
+            </div>
+            <div class="wrapper3">
+              <div class="div16">2</div>
+            </div>
+            <div class="wrapper4">
+              <div class="div17">3</div>
+            </div>
+            <div class="frame-wrapper1">
+              <div class="forward-parent">
+                <div class="forward">Forward</div>
+                <div class="vector-wrapper9">
+                  <img
+                    class="vector-icon11"
+                    alt=""
+                    src="./public/vector-13.svg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </section>
+
+
 
 {% endblock %}
