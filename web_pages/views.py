@@ -4,7 +4,7 @@ from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObj
 
 
 def home(request):
-    return render(request, "events/events_index.html")
+    return render(request, "base.html")
 
 
 def about_us(request):
@@ -34,9 +34,11 @@ def events(request, group_slug=None):
     products = None
     if group_slug:
         group = get_object_or_404(ObjectsGroup, slug=group_slug)
-        all_objects = Events.objects.filter(group=group, is_active=True)
+        # all_objects = Events.objects.filter(group=group, is_active=True)
+        all_objects = Events.objects.filter(group=group)  # Get all, with non activ also
     else:
-        all_objects = Events.objects.all().filter(is_active=True).order_by("id")
+        # all_objects = Events.objects.all().filter(is_active=True).order_by("id")
+        all_objects = Events.objects.all().filter().order_by("id")
 
     context = {
         "all_objects": all_objects,
