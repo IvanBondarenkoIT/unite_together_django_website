@@ -6,7 +6,7 @@
       <header class="navbar1">
         <div class="bg-menu"></div>
         <div class="connecter">
-          <div class="logo-ut2">
+          <a class="logo-ut2" href="{% url 'home' %}">
             <img
               class="logo-flag-ut-icon3"
               loading="lazy"
@@ -25,20 +25,17 @@
                 </div>
               </div>
             </div>
-          </div>
+          </a>
           <div class="connecter-inner">
             <div class="frame-parent1">
               <div class="about-us-wrapper">
-                <div class="about-us3">About us</div>
+                <a class="about-us3" href="{% url 'about-us' %}">About us</a>
               </div>
               <div class="active-menu">
-                <div class="events5">Events</div>
-                <div class="line-active-menu-wrapper">
-                  <div class="line-active-menu"></div>
-                </div>
+                <a class="about-us3" href="{% url 'events' %}">Events</a>
               </div>
               <div class="projects-wrapper">
-                <div class="projects3">Projects</div>
+                <a class="projects3" href="{% url 'projects' %}">Projects</a>
               </div>
             </div>
           </div>
@@ -72,20 +69,20 @@
                 src="{% static 'img/dividingline.svg' %}"
               />
             </div>
-            <button class="button-register7">
+            <a class="button-register7" href="{% url 'login' %}">
               <div class="group-div">
                 <div class="user-icon-wrapper">
                   <img class="user-icon1" alt="" src="{% static 'img/usericon.svg' %}" />
                 </div>
-                <div class="loginsign-up1">Log In/Sign Up</div>
+                <div class="loginsign-up1">Log In / Sing Up</div>
               </div>
-            </button>
-            <button class="button-donate1">
+            </a>
+            <a class="button-donate1" href="{% url 'donate-paypal' %}">
               <div class="donate-wrapper">
                 <div class="donate1">Donate</div>
               </div>
               <img class="donate-icon1" alt="" src="{% static 'img/donateicon.svg' %}" />
-            </button>
+            </a>
           </div>
         </div>
       </header>
