@@ -23,7 +23,7 @@ from unite_together_django_website import views
 from unite_together_django_website import settings
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("secure/", admin.site.urls),
     path("", include("web_pages.urls")),
     path("accounts/", include("accounts.urls")),
     path("", include("donate.urls")),
