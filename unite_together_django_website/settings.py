@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", cast=bool, default=True)
 
 ALLOWED_HOSTS = []
 
@@ -143,6 +143,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # SMTP configuration
+
 EMAIL_HOST = config("EMAIL_HOST")
 EMAIL_PORT = config("EMAIL_PORT")
 EMAIL_HOST_USER = config("EMAIL_ADMIN")
@@ -151,10 +152,8 @@ EMAIL_USE_TLS = True
 
 # PayPal configuration
 
-PAYPAL_RECEIVER_EMAIL = 'sb-3so3020154368@business.example.com' # where cash is paid into
-PAYPAL_TEST = True
-PRODUCT_ID = "Unite together DONATE"
-PRODUCT_PRICE = 10
+PAYPAL_RECEIVER_EMAIL = config("PAYPAL_RECEIVER_EMAIL") # where cash is paid into
+PAYPAL_TEST = config("PAYPAL_TEST", cast=bool)
+PRODUCT_ID = config("PAYPAL_ITEM_NAME")
+PRODUCT_PRICE = config("PAYPAL_SUM")
 
-# PAYPAL_RECEIVER_EMAIL = config("PAYPAL_RECEIVER_EMAIL")  # where cash is paid into
-# PAYPAL_TEST = config("PAYPAL_TEST")
