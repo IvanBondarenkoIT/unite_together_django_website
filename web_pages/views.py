@@ -43,3 +43,8 @@ def events(request, group_slug=None):
     }
 
     return render(request, 'events/events_index.html', context=context)
+
+
+def projects(request, group_slug=None):
+    context = {}
+    return render(request, 'projects/projects_index.html', context=context)

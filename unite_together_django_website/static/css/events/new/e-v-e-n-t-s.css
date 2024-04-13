@@ -61,6 +61,7 @@
 .logo-text-ut3,
 .logo-ut2 {
   flex-direction: row;
+  text-decoration: none; /* Remove underline */
 }
 .logo-text-ut3 {
   flex-shrink: 0;
@@ -80,6 +81,7 @@
   min-width: 84px;
   white-space: nowrap;
   z-index: 1;
+  text-decoration: none; /* Remove underline */
 }
 .about-us-wrapper {
   display: flex;
@@ -278,6 +280,7 @@
   border-radius: var(--br-3xs);
   overflow: hidden;
   align-items: flex-start;
+  text-decoration: none; /* Remove underline */
 }
 .donate1 {
   position: relative;
