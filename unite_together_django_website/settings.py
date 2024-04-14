@@ -28,6 +28,7 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", cast=bool, default=True)
 
 ALLOWED_HOSTS = ["http://django-unite-together-env.eba-brndinwr.us-west-2.elasticbeanstalk.com/",
+                 "django-unite-together-env.eba-brndinwr.us-west-2.elasticbeanstalk.com",
                  "127.0.0.1",
                  ]
 
