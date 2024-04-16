@@ -1,3 +1,12 @@
+/* temporary fixes for calendar to reapper */
+.to-front {
+  z-index:10
+}
+
+.to-center {
+  text-align: center;
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;
