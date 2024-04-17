@@ -32,11 +32,11 @@
               <div class="database-connection">
                 <div class="error-handler">
                   <a class="sport1" href="{% url 'events' %}">All</a>
-{#                  {% for category in links %}#}
-{#                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>#}
-{##}
-{#                    <div class="sport1">Sport</div>#}
-{#                  {% endfor %}#}
+                  {% for category in links %}
+                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
+
+                    <div class="sport1">Sport</div>
+                  {% endfor %}
                   <div class="variable-holder">
 
                     <div class="function-caller">
