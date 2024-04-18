@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ["http://django-unite-together-env.eba-brndinwr.us-west-2.elasti
                  "django-unite-together-env.eba-brndinwr.us-west-2.elasticbeanstalk.com",
                  "127.0.0.1",
                  "172.31.31.242",
+                 "172.31.14.48",
+                 "44.237.245.141"
                  ]
 
 
