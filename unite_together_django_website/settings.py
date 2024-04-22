@@ -102,23 +102,24 @@ AUTH_USER_MODEL = 'accounts.Account'
 #         }
 #     }
 # else:
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('RDS_DB_NAME'),
+#         'USER': config('RDS_USERNAME'),
+#         'PASSWORD': config('RDS_PASSWORD'),
+#         'HOST': config('RDS_HOSTNAME'),
+#         'PORT': config('RDS_PORT'),
+#     }
+# }
+
+# Sqlit settings
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('RDS_DB_NAME'),
-        'USER': config('RDS_USERNAME'),
-        'PASSWORD': config('RDS_PASSWORD'),
-        'HOST': config('RDS_HOSTNAME'),
-        'PORT': config('RDS_PORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-    # Sqlit settings
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.sqlite3',
-    #         'NAME': BASE_DIR / 'db.sqlite3',
-    #     }
-    # }
 
 
 # Password validation

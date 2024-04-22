@@ -48,6 +48,22 @@ def events(request, group_slug=None):
     return render(request, 'events/events_index.html', context=context)
 
 
+def event_detail(request, group_slug=None, event_slug=None):
+
+    try:
+        single_event = Events.objects.get(group__slug=group_slug, slug=event_slug)
+    except Exception as error:
+        raise error
+
+        # event = get_object_or_404(Events, slug=event_slug)
+
+    context = {
+        "single_event": single_event,
+    }
+
+    return render(request, 'events/index.html', context=context)
+
+
 def projects(request, group_slug=None):
     context = {}
     return render(request, 'projects/projects_index.html', context=context)
