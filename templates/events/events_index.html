@@ -32,11 +32,10 @@
               <div class="database-connection">
                 <div class="error-handler">
                   <a class="sport1" href="{% url 'events' %}">All</a>
-{#                  {% for category in links %}#}
-{#                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>#}
-{##}
-{#                    <div class="sport1">Sport</div>#}
-{#                  {% endfor %}#}
+                  {% for category in links %}
+                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
+
+                  {% endfor %}
                   <div class="variable-holder">
 
                     <div class="function-caller">
@@ -75,7 +74,7 @@
               <div class="availability">
                 <div class="availability1">Availability</div>
                 <div class="check-button1">
-                  <input class="icon-check1" checked="{true}" type="checkbox" />
+                  <input class="icon-check1" type="checkbox" />
 
                   <div class="event-dispatcher">
                     <div class="vacant-seats1">Free spots</div>
@@ -138,7 +137,7 @@
                       </div>
                     </div>
                     {% if object.is_active %}
-                        <div class="button-join5">
+                        <a class="button-join5" href="#">
                           <div class="join-parent3">
                              <div class="join5">Join</div>
                             <div class="vector-wrapper7">
@@ -149,7 +148,7 @@
                               />
                             </div>
                           </div>
-                        </div>
+                        </a>
                     {% else %}
                         <button class="button-join">
                           <div class="join-parent">
