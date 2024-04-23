@@ -61,7 +61,7 @@ def event_detail(request, group_slug=None, event_slug=None):
         "single_event": single_event,
     }
 
-    return render(request, 'events/index.html', context=context)
+    return render(request, 'events/event_detail.html', context=context)
 
 
 def projects(request, group_slug=None):
