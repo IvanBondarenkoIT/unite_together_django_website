@@ -1,163 +1,99 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% load static %}
 
 {% block content %}
 
-
-  <body>
-
-{#      <header class="navbar">#}
-{#        <div class="bg-menu"></div>#}
-{#        <div class="logo-ut-parent">#}
-{#          <div class="logo-ut">#}
-{#            <img#}
-{#              class="logo-flag-ut-icon"#}
-{#              loading="lazy"#}
-{#              alt=""#}
-{#              src="./public/logoflagut3.svg"#}
-{#            />#}
+<!DOCTYPE html>
+<html>
+{#  <head>#}
+{#    <meta charset="utf-8" />#}
+{#    <meta name="viewport" content="initial-scale=1, width=device-width" />#}
 {##}
-{#            <div class="logo-text-ut">#}
-{#              <div class="group">#}
-{#                <div class="group1">#}
-{#                  <b class="unite">UNITE</b>#}
-{#                </div>#}
-{#                <div class="group2">#}
-{#                  <b class="together">TOGETHER</b>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#          <div class="frame-wrapper">#}
-{#            <div class="frame-parent">#}
-{#              <div class="about-us-wrapper">#}
-{#                <div class="about-us">About us</div>#}
-{#              </div>#}
-{#              <div class="active-menu">#}
-{#                <div class="events">Events</div>#}
-{#                <div class="line-active-menu-wrapper">#}
-{#                  <div class="line-active-menu"></div>#}
-{#                </div>#}
-{#              </div>#}
-{#              <div class="projects-wrapper">#}
-{#                <div class="projects">Projects</div>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#        <div class="right-part-wrapper">#}
-{#          <div class="right-part">#}
-{#            <div class="languages-wrapper">#}
-{#              <div class="languages">#}
-{#                <div class="flag-ua-wrapper">#}
-{#                  <div class="flag-ua">#}
-{#                    <div class="yellow-rectangle"></div>#}
-{#                    <div class="blue-rectangle"></div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="language-ua">UA</div>#}
-{#                <div class="arrow-wrapper">#}
-{#                  <img#}
-{#                    class="arrow-icon"#}
-{#                    loading="lazy"#}
-{#                    alt=""#}
-{#                    src="./public/arrow1.svg"#}
-{#                  />#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#            <div class="dividing-line-wrapper">#}
-{#              <img#}
-{#                class="dividing-line-icon"#}
-{#                loading="lazy"#}
-{#                alt=""#}
-{#                src="./public/dividingline.svg"#}
-{#              />#}
-{#            </div>#}
-{#            <button class="button-register">#}
-{#              <div class="frame-group">#}
-{#                <div class="user-icon-wrapper">#}
-{#                  <img class="user-icon" alt="" src="./public/usericon.svg" />#}
-{#                </div>#}
-{#                <div class="loginsign-up">Login/Sign Up</div>#}
-{#              </div>#}
-{#            </button>#}
-{#            <button class="button-donate">#}
-{#              <div class="donate-wrapper">#}
-{#                <div class="donate">Donate</div>#}
-{#              </div>#}
-{#              <img class="donate-icon" alt="" src="./public/donateicon.svg" />#}
-{#            </button>#}
-{#          </div>#}
-{#        </div>#}
-{#      </header>#}
+{#    <link rel="stylesheet" href="{% static 'css/events/global.css'%}" />#}
+{#    <link rel="stylesheet" href="{% static 'css/events/event_detail.css'%}" />#}
+{#    <link#}
+{#      rel="stylesheet"#}
+{#      href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"#}
+{#    />#}
+{#    <link#}
+{#      rel="stylesheet"#}
+{#      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"#}
+{#    />#}
+{#    <link#}
+{#      rel="stylesheet"#}
+{#      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap"#}
+{#    />#}
+{#  </head>#}
+  <body>
+    <div class="events-detail" data-animate-on-scroll>
+
       <section class="sec-detail">
         <div class="bg-detail"></div>
         <div class="aside-box">
-          <div class="rectangle-bg"></div>
-          <div class="all-wrapper">
-            <h3 class="all">All</h3>
-          </div>
-          <div class="frame-container">
-            <div class="sport-wrapper">
-              <h3 class="sport">Sport</h3>
-            </div>
-            <div class="rectangle-parent">
-              <div class="frame-child"></div>
-              <div class="non-formal-education">Non-formal education</div>
-            </div>
-            <div class="events-and-master-classes-wrapper">
-              <h3 class="events-and-master">Events and master classes</h3>
-            </div>
-          </div>
-          <div class="dec-line-1-wrapper">
-            <img
-              class="dec-line-1-icon"
-              loading="lazy"
-              alt=""
-              src="./public/decline1.svg"
-            />
-          </div>
-          <div class="dropdown-city-wrapper">
-            <div class="dropdown-city">
-              <div class="connection-point">
-                <div class="select-your-city">Select your city</div>
-              </div>
-              <img
-                class="keyboard-arrow-down"
-                alt=""
-                src="./public/keyboard-arrow-down.svg"
-              />
-            </div>
-          </div>
-          <div class="dec-line-2-wrapper">
-            <img
-              class="dec-line-2-icon"
-              loading="lazy"
-              alt=""
-              src="./public/decline2.svg"
-            />
-          </div>
-          <div class="output-distributor">
-            <div class="weight-calculator">
-              <div class="availability">Availability</div>
-              <div class="icon-check-parent">
-                <input class="icon-check" checked="{true}" type="checkbox" />
 
-                <div class="if-statement">
-                  <div class="vacant-seats">Vacant seats</div>
+            <div class="iterative-processor">
+
+              <div class="database-connection">
+                <div class="error-handler">
+                  <a class="sport1" href="{% url 'events' %}">All</a>
+                  {% for category in links %}
+                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
+
+                  {% endfor %}
+                  <div class="variable-holder">
+
+                    <div class="function-caller">
+                      <img
+                        class="dec-line-1-icon"
+                        loading="lazy"
+                        alt=""
+                        src="{% static 'img/decline1.svg' %}"
+                      />
+                    </div>
+                    <div class="dropdown-city">
+                      <div class="list-processor">
+                        <div class="text-wrap">
+                          <div class="select-your-city">Select your city</div>
+                        </div>
+                      </div>
+                      <img
+                        class="keyboard-arrow-down"
+                        alt=""
+                        src="{% static 'img/keyboard-arrow-down.svg' %}"
+                      />
+                    </div>
+                    <div class="function-caller1">
+                      <img
+                        class="dec-line-2-icon"
+                        loading="lazy"
+                        alt=""
+                        src="{% static 'img/decline2.svg' %}"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="audio-processor">
+              <div class="availability">
+                <div class="availability1">Availability</div>
+                <div class="check-button1">
+                  <input class="icon-check1" type="checkbox" />
+
+                  <div class="event-dispatcher">
+                    <div class="vacant-seats1">Free spots</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         <div class="while-loop">
           <img
             class="baner-image-icon"
             loading="lazy"
             alt=""
-            src="./public/banerimage@2x.png"
+            src="{% static 'img/banerimage@2x.png' %}"
           />
 
           <div class="about-events">
@@ -193,7 +129,7 @@
               class="dec-line-3-icon"
               loading="lazy"
               alt=""
-              src="./public/decline3.svg"
+              src="{% static 'img/decline3.svg' %}"
             />
 
             <div class="string-op">
@@ -205,7 +141,7 @@
                         class="set-op-child"
                         loading="lazy"
                         alt=""
-                        src="./public/group-679.svg"
+                        src="{% static 'img/group-679.svg' %}"
                       />
                     </div>
                     <div class="weekly-at-1400">Weekly at 14:00</div>
@@ -216,7 +152,7 @@
                         class="vector-icon"
                         loading="lazy"
                         alt=""
-                        src="./public/vector.svg"
+                        src="{% static 'img/vector.svg' %}"
                       />
                     </div>
                     <div class="batumi-127-luka">
@@ -230,7 +166,7 @@
                     <img
                       class="vector-icon1"
                       alt=""
-                      src="./public/vector-1.svg"
+                      src="{% static 'img/vector-1.svg' %}"
                     />
                   </div>
                 </button>
@@ -239,156 +175,31 @@
           </div>
         </div>
       </section>
-{#      <footer class="footer">#}
-{#        <div class="bg-footer"></div>#}
-{#        <div class="footer-inner">#}
-{#          <div class="frame-parent1">#}
-{#            <div class="frame-parent2">#}
-{#              <div class="logo-ut-footer-parent">#}
-{#                <div class="logo-ut-footer">#}
-{#                  <img#}
-{#                    class="logo-flag-ut-icon1"#}
-{#                    alt=""#}
-{#                    src="./public/logoflagut.svg"#}
-{#                  />#}
-{##}
-{#                  <div class="logo-text-ut1">#}
-{#                    <div class="group3">#}
-{#                      <div class="group4">#}
-{#                        <b class="unite1">UNITE</b>#}
-{#                      </div>#}
-{#                      <div class="group5">#}
-{#                        <b class="together1">TOGETHER</b>#}
-{#                      </div>#}
-{#                    </div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="briefly-about-us-parent">#}
-{#                  <b class="briefly-about-us">briefly about us</b>#}
-{#                  <div class="our-organization-unite">#}
-{#                    Our organization "Unite Together" is aimed at creating and#}
-{#                    implementing projects aimed at supporting and developing#}
-{#                    Ukrainians affected by the war. Our main goal is to achieve#}
-{#                    sustainable systemic change in their lives and society.#}
-{#                  </div>#}
-{#                </div>#}
-{#              </div>#}
-{#              <div class="footer-heading-parent">#}
-{#                <div class="footer-heading">#}
-{#                  <b class="menu">MENU</b>#}
-{#                  <div class="line-decoration"></div>#}
-{#                </div>#}
-{#                <div class="about-us-parent">#}
-{#                  <div class="about-us1">About us</div>#}
-{#                  <div class="events1">Events</div>#}
-{#                  <div class="projects1">Projects</div>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#            <div class="frame-parent3">#}
-{#              <div class="footer-heading-group">#}
-{#                <div class="footer-heading1">#}
-{#                  <b class="contact">CONTACT</b>#}
-{#                  <div class="line-decoration1"></div>#}
-{#                </div>#}
-{#                <div class="phone-parent">#}
-{#                  <div class="phone">#}
-{#                    <img#}
-{#                      class="icon-phone"#}
-{#                      loading="lazy"#}
-{#                      alt=""#}
-{#                      src="./public/iconphone.svg"#}
-{#                    />#}
-{##}
-{#                    <div class="div">+995 595 720 449</div>#}
-{#                  </div>#}
-{#                  <div class="e-mail">#}
-{#                    <div class="icon-email-wrapper">#}
-{#                      <img#}
-{#                        class="icon-email"#}
-{#                        loading="lazy"#}
-{#                        alt=""#}
-{#                        src="./public/iconemail.svg"#}
-{#                      />#}
-{#                    </div>#}
-{#                    <div class="uniteforukrainegmailcom">#}
-{#                      uniteforukraine@gmail.com#}
-{#                    </div>#}
-{#                  </div>#}
-{#                  <div class="geolocation">#}
-{#                    <img#}
-{#                      class="icon-geo"#}
-{#                      loading="lazy"#}
-{#                      alt=""#}
-{#                      src="./public/icongeo.svg"#}
-{#                    />#}
-{##}
-{#                    <div class="address">#}
-{#                      <div class="tbilisi-2123-tsotne">#}
-{#                        Tbilisi, 21/23 Tsotne Dadiani St., office 8#}
-{#                      </div>#}
-{#                      <div class="batumi-127-luka-asatiani-st-parent">#}
-{#                        <div class="batumi-127-luka1">#}
-{#                          Batumi, 127 Luka Asatiani St.#}
-{#                        </div>#}
-{#                        <div class="kutaisi-62-agmashenebeli">#}
-{#                          Kutaisi, 62 Agmashenebeli St.#}
-{#                        </div>#}
-{#                      </div>#}
-{#                    </div>#}
-{#                  </div>#}
-{#                </div>#}
-{#              </div>#}
-{#              <div class="footer-heading-container">#}
-{#                <div class="footer-heading2">#}
-{#                  <b class="we-are-on">we are on social media</b>#}
-{#                  <div class="decoration"></div>#}
-{#                </div>#}
-{#                <div class="subscribe-to-us">#}
-{#                  Subscribe to us on social media so you don't miss the release#}
-{#                  of new incredible projects.#}
-{#                </div>#}
-{#                <div class="soc-icons-footer">#}
-{#                  <img#}
-{#                    class="icon-insta"#}
-{#                    loading="lazy"#}
-{#                    alt=""#}
-{#                    src="./public/iconinsta.svg"#}
-{#                  />#}
-{##}
-{#                  <img#}
-{#                    class="icon-fb"#}
-{#                    loading="lazy"#}
-{#                    alt=""#}
-{#                    src="./public/iconfb.svg"#}
-{#                  />#}
-{##}
-{#                  <img#}
-{#                    class="icon-tg"#}
-{#                    loading="lazy"#}
-{#                    alt=""#}
-{#                    src="./public/icontg.svg"#}
-{#                  />#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#        <div class="divider-parent">#}
-{#          <div class="divider"></div>#}
-{#          <div class="row-wrapper">#}
-{#            <div class="row">#}
-{#              <div class="unite-together-all">#}
-{#                © 2023 Unite Together. All rights reserved.#}
-{#              </div>#}
-{#              <div class="privacy-policy">Privacy Policy</div>#}
-{#              <div class="terms-of-service">Terms and Conditions</div>#}
-{#              <div class="cookies-settings">Cookie Policy</div>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </footer>#}
+      
+    </div>
 
+    <script>
+      var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
+      var observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting || entry.intersectionRatio > 0) {
+              const targetElement = entry.target;
+              targetElement.classList.add("animate");
+              observer.unobserve(targetElement);
+            }
+          }
+        },
+        {
+          threshold: 0.15,
+        }
+      );
+      
+      for (let i = 0; i < scrollAnimElements.length; i++) {
+        observer.observe(scrollAnimElements[i]);
+      }
+      </script>
+  </body>
+</html>
 
 {% endblock %}
-
