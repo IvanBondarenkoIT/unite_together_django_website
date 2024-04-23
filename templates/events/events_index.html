@@ -128,7 +128,7 @@
                       </button>
                       <div class="header-item5">
                         <div class="decoration6"></div>
-                        <b class="art-classes-for1">{{ object.name }}</b>
+                        <b class="art-classes-for1">{{ object.title }}</b>
                       </div>
                       <div class="lorem-ipsum-is-simply-dummy-te-wrapper2">
                         <div class="lorem-ipsum-is-simply5">
@@ -137,7 +137,7 @@
                       </div>
                     </div>
                     {% if object.is_active %}
-                        <a class="button-join5" href="#">
+                        <a class="button-join5" href="{{ object.get_url }}">
                           <div class="join-parent3">
                              <div class="join5">Join</div>
                             <div class="vector-wrapper7">

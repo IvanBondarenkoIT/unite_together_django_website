@@ -1,160 +1,173 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% load static %}
 
 {% block content %}
 
+<!DOCTYPE html>
+<html>
 
-    <div class="footer-parent">
-      <section class="footer">
-        <div class="bg-footer"></div>
-        <div class="logo-instance">
-          <div class="frame-parent">
-            <div class="frame-group">
-              <div class="logo-ut-footer-parent">
-                <div class="logo-ut-footer">
-                  <img
-                    class="logo-flag-ut-icon"
-                    loading="lazy"
-                    alt=""
-                    src="./public/logoflagut.svg"
-                  />
+  <body>
+    <div class="events-detail" data-animate-on-scroll>
 
-                  <div class="logo-text-ut">
-                    <div class="group">
-                      <div class="group1">
-                        <b class="unite">UNITE</b>
+      <section class="sec-detail">
+        <div class="bg-detail"></div>
+        <div class="aside-box">
+
+            <div class="iterative-processor">
+
+              <div class="database-connection">
+                <div class="error-handler">
+                  <a class="sport1" href="{% url 'events' %}">All</a>
+                  {% for category in links %}
+                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
+
+                  {% endfor %}
+                  <div class="variable-holder">
+
+                    <div class="function-caller">
+                      <img
+                        class="dec-line-1-icon"
+                        loading="lazy"
+                        alt=""
+                        src="{% static 'img/decline1.svg' %}"
+                      />
+                    </div>
+                    <div class="dropdown-city">
+                      <div class="list-processor">
+                        <div class="text-wrap">
+                          <div class="select-your-city">Select your city</div>
+                        </div>
                       </div>
-                      <div class="group2">
-                        <b class="together">TOGETHER</b>
-                      </div>
+                      <img
+                        class="keyboard-arrow-down"
+                        alt=""
+                        src="{% static 'img/keyboard-arrow-down.svg' %}"
+                      />
+                    </div>
+                    <div class="function-caller1">
+                      <img
+                        class="dec-line-2-icon"
+                        loading="lazy"
+                        alt=""
+                        src="{% static 'img/decline2.svg' %}"
+                      />
                     </div>
                   </div>
-                </div>
-                <div class="briefly-about-us-parent">
-                  <b class="briefly-about-us">briefly about us</b>
-                  <div class="our-organization-unite">
-                    Our organization "Unite Together" is aimed at creating and
-                    implementing projects aimed at supporting and developing
-                    Ukrainians affected by the war. Our main goal is to achieve
-                    sustainable systemic change in their lives and society.
-                  </div>
-                </div>
-              </div>
-              <div class="footer-heading-parent">
-                <div class="footer-heading">
-                  <b class="menu">MENU</b>
-                  <div class="line-decoration"></div>
-                </div>
-                <div class="about-us-parent">
-                  <div class="about-us">About us</div>
-                  <div class="events">Events</div>
-                  <div class="projects">Projects</div>
                 </div>
               </div>
             </div>
-            <div class="frame-container">
-              <div class="frame-div">
-                <div class="footer-heading-wrapper">
-                  <div class="footer-heading1">
-                    <b class="contact">CONTACT</b>
-                    <div class="line-decoration1"></div>
-                  </div>
-                </div>
-                <div class="phone">
-                  <img
-                    class="icon-phone"
-                    loading="lazy"
-                    alt=""
-                    src="./public/iconphone.svg"
-                  />
+            <div class="audio-processor">
+              <div class="availability">
+                <div class="availability1">Availability</div>
+                <div class="check-button1">
+                  <input class="icon-check1" type="checkbox" />
 
-                  <div class="div">+995 595 720 449</div>
-                </div>
-                <div class="e-mail">
-                  <div class="icon-email-wrapper">
-                    <img
-                      class="icon-email"
-                      loading="lazy"
-                      alt=""
-                      src="./public/iconemail.svg"
-                    />
+                  <div class="event-dispatcher">
+                    <div class="vacant-seats1">Free spots</div>
                   </div>
-                  <div class="uniteforukrainegmailcom">
-                    uniteforukraine@gmail.com
-                  </div>
-                </div>
-                <div class="geolocation">
-                  <img
-                    class="icon-geo"
-                    loading="lazy"
-                    alt=""
-                    src="./public/icongeo.svg"
-                  />
-
-                  <div class="address">
-                    <div class="tbilisi-2123-tsotne">
-                      Tbilisi, 21/23 Tsotne Dadiani St., office 8
-                    </div>
-                    <div class="batumi-127-luka-asatiani-st-parent">
-                      <div class="batumi-127-luka">
-                        Batumi, 127 Luka Asatiani St.
-                      </div>
-                      <div class="kutaisi-62-agmashenebeli">
-                        Kutaisi, 62 Agmashenebeli St.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="footer-heading-group">
-                <div class="footer-heading2">
-                  <b class="we-are-on">we are on social media</b>
-                  <div class="decoration"></div>
-                </div>
-                <div class="subscribe-to-us">
-                  Subscribe to us on social media so you don't miss the release
-                  of new incredible projects.
-                </div>
-                <div class="soc-icons-footer">
-                  <img
-                    class="icon-insta"
-                    loading="lazy"
-                    alt=""
-                    src="./public/iconinsta.svg"
-                  />
-
-                  <img
-                    class="icon-fb"
-                    loading="lazy"
-                    alt=""
-                    src="./public/iconfb.svg"
-                  />
-
-                  <img
-                    class="icon-tg"
-                    loading="lazy"
-                    alt=""
-                    src="./public/icontg.svg"
-                  />
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="divider-parent">
-          <div class="divider"></div>
-          <div class="footer-bar">
-            <div class="row">
-              <div class="unite-together-all">
-                © 2023 Unite Together. All rights reserved.
+        <div class="while-loop">
+          <img
+            class="baner-image-icon"
+            loading="lazy"
+            alt=""
+            src="{{ single_event.image.url }}"
+          />
+
+          <div class="about-events">
+            <div class="bg"></div>
+            <div class="variable-holder">
+              <div class="constant-holder">
+                <h1 class="autism-speaks-to">
+                  {{ single_event.title }}
+                </h1>
+                <div class="age-3-16-parent">
+                  <div class="age-3-16">
+                    <b>Age</b>
+                    <span class="span">: {{ single_event.start_age }}-{{ single_event.end_age }}</span>
+                  </div>
+                  <div class="free-classes-of-container">
+                    <p class="free-classes-of">
+                      {{ single_event.text }}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div class="privacy-policy">Privacy Policy</div>
-              <div class="terms-of-service">Terms and Conditions</div>
-              <div class="cookies-settings">Cookie Policy</div>
+            </div>
+            <img
+              class="dec-line-3-icon"
+              loading="lazy"
+              alt=""
+              src="{% static 'img/decline3.svg' %}"
+            />
+
+            <div class="string-op">
+              <div class="array-op">
+                <div class="list-op">
+                  <div class="dictionary-op">
+                    <div class="set-op">
+                      <img
+                        class="set-op-child"
+                        loading="lazy"
+                        alt=""
+                        src="{% static 'img/group-679.svg' %}"
+                      />
+                    </div>
+                    <div class="weekly-at-1400">Weekly at 14:00</div>
+                  </div>
+                  <div class="frame-div">
+                    <div class="vector-wrapper">
+                      <img
+                        class="vector-icon"
+                        loading="lazy"
+                        alt=""
+                        src="{% static 'img/vector.svg' %}"
+                      />
+                    </div>
+                    <div class="batumi-127-luka">
+                        {{ single_event.city }} {{ single_event.address }}
+                    </div>
+                  </div>
+                </div>
+                {% if single_event.is_active %}
+                    <button class="button-registration">
+                      <div class="registration">Registration</div>
+                      <div class="vector-container">
+                        <img
+                          class="vector-icon1"
+                          alt=""
+                          src="{% static 'img/vector-1.svg' %}"
+                        />
+                      </div>
+                    </button>
+                {% else %}
+                    <button class="button-join">
+                    <div class="join-parent">
+                      <div class="join">Closed</div>
+                      <div class="vector-container">
+                        <img
+                          class="vector-icon1"
+                          alt=""
+                          src="{% static 'img/vector-1.svg' %}"
+                        />
+                      </div>
+                    </div>
+                    </button>
+                {% endif %}
+              </div>
             </div>
           </div>
         </div>
       </section>
+      
     </div>
 
+
+  </body>
+</html>
 
 {% endblock %}
