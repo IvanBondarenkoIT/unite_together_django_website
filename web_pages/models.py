@@ -43,6 +43,7 @@ class WebContentObject(models.Model):
         return f"{self.name} - {self.title}"
 
 
+
 class WebContentSubordinateObject(models.Model):
     name = models.CharField(max_length=250)
     title = models.CharField(max_length=250)
@@ -65,12 +66,12 @@ class Events(WebContentObject):
 
     def __str__(self):
         return f"Event - {self.name}"
-    #
-    # def get_date_day(self):
-    #     return self.start_date.
-    #
+
     def get_start_date_month(self):
         return self.start_date.strftime("%B")
+
+    def get_url(self):
+        return reverse("event_detail", args=[self.group.slug, self.slug])
 
     #
     # def get_date_year(self):
