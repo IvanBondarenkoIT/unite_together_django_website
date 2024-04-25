@@ -453,9 +453,11 @@
   font-family: var(--font-montserrat);
 }
 .sect-events-child {
+  align-self: stretch;
   width: 1440px;
   height: 1378px;
   position: relative;
+  box-sizing: border-box;
   background-color: var(--color-gray-100);
   display: none;
   max-width: 100%;
@@ -2596,7 +2598,7 @@
   background-color: var(--color-gray-100);
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: flex-start;
   padding: var(--padding-93xl) var(--padding-53xl);
   box-sizing: border-box;
