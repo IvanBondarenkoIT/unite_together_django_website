@@ -2318,6 +2318,14 @@
   z-index: 1;
 }
 
+.frame-parent7,
+.lorem-ipsum-is-simply-dummy-te-wrapper2 {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
 .lorem-ipsum-is-simply5 {
   max-width: 300px; /* Set the maximum width of the div */
   overflow: hidden; /* Hide any overflowing text */
@@ -2328,13 +2336,7 @@
   line-height: 125%;
   z-index: 1;
 }
-.frame-parent7,
-.lorem-ipsum-is-simply-dummy-te-wrapper2 {
-  align-self: stretch;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
+
 .lorem-ipsum-is-simply-dummy-te-wrapper2 {
   flex-direction: row;
   padding: 0 0 0 var(--padding-smi);
