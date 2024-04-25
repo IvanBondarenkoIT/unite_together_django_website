@@ -27,10 +27,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool, default=True)
 
-ALLOWED_HOSTS = ["http://django-unite-together-env.eba-brndinwr.us-west-2.elasticbeanstalk.com/",
-                 "django-unite-together-env.eba-brndinwr.us-west-2.elasticbeanstalk.com",
-                 "127.0.0.1",
-                 "*",
+ALLOWED_HOSTS = [ "*",
                  ]
 
 # CSRF_TRUSTED_ORIGINS = [""]
@@ -90,36 +87,36 @@ AUTH_USER_MODEL = 'accounts.Account'
 # Database Configuration
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# if 'RDS_DB_NAME' in os.environ:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': os.environ['RDS_DB_NAME'],
-#             'USER': os.environ['RDS_USERNAME'],
-#             'PASSWORD': os.environ['RDS_PASSWORD'],
-#             'HOST': os.environ['RDS_HOSTNAME'],
-#             'PORT': os.environ['RDS_PORT'],
-#         }
-#     }
-# else:
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('RDS_DB_NAME'),
-#         'USER': config('RDS_USERNAME'),
-#         'PASSWORD': config('RDS_PASSWORD'),
-#         'HOST': config('RDS_HOSTNAME'),
-#         'PORT': config('RDS_PORT'),
-#     }
-# }
-
-# Sqlit settings
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.postgresql',
+    #         'NAME': config('RDS_DB_NAME'),
+    #         'USER': config('RDS_USERNAME'),
+    #         'PASSWORD': config('RDS_PASSWORD'),
+    #         'HOST': config('RDS_HOSTNAME'),
+    #         'PORT': config('RDS_PORT'),
+    #     }
+    # }
+
+    # Sqlit settings
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation

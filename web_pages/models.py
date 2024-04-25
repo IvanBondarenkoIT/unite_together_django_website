@@ -43,7 +43,6 @@ class WebContentObject(models.Model):
         return f"{self.name} - {self.title}"
 
 
-
 class WebContentSubordinateObject(models.Model):
     name = models.CharField(max_length=250)
     title = models.CharField(max_length=250) #  must be max=27
