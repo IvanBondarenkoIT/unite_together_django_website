@@ -1,4 +1,10 @@
 /* temporary fixes for calendar to reapper */
+.nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
 .to-front {
   z-index:10
 }
