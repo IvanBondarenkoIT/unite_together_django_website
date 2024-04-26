@@ -149,7 +149,7 @@
           </div>
         </div>
       </footer>
-    </div>
+{#    </div>#}
 
     <script>
       var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
@@ -172,5 +172,22 @@
         observer.observe(scrollAnimElements[i]);
       }
       </script>
+
+    <script>
+
+      window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('nav');
+        const sticky = navbar.offsetTop;
+
+        if (window.pageYOffset > sticky) {
+            navbar.classList.add('sticky');
+        } else {
+            navbar.classList.remove('sticky');
+        }
+    });
+
+
+    </script>
+
   </body>
 </html>

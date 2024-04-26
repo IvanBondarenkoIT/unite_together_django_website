@@ -46,18 +46,18 @@
                         src="{% static 'img/decline1.svg' %}"
                       />
                     </div>
-                    <div class="dropdown-city">
-                      <div class="list-processor">
-                        <div class="text-wrap">
-                          <div class="select-your-city">Select your city</div>
-                        </div>
-                      </div>
-                      <img
-                        class="keyboard-arrow-down"
-                        alt=""
-                        src="{% static 'img/keyboard-arrow-down.svg' %}"
-                      />
-                    </div>
+{#                    <div class="dropdown-city">#}
+{#                      <div class="list-processor">#}
+{#                        <div class="text-wrap">#}
+{#                          <div class="select-your-city">Select your city</div>#}
+{#                        </div>#}
+{#                      </div>#}
+{#                      <img#}
+{#                        class="keyboard-arrow-down"#}
+{#                        alt=""#}
+{#                        src="{% static 'img/keyboard-arrow-down.svg' %}"#}
+{#                      />#}
+{#                    </div>#}
                     <div class="function-caller1">
                       <img
                         class="dec-line-2-icon"
@@ -85,86 +85,82 @@
           </div>
           <div class="items2">
 
+
+
             {% for object in all_objects %}
-                <div class="item-6">
-                    {#                  <div class="form5"></div>#}
-                    <div class="item-6-inner">
-                        <div class="item-2-inner to-front">
-                            <div class="date-parent2">
-                                <div class="date16">
-                                    <div class="date17">
-                                        <div class="wrapper2">
-                                            <div class="div14">28</div>
-                                        </div>
-                                        <div class="year11">Feb 2024</div>
+
+                <div class="item-1">
+                    <div class="touch-input to-front">
+                        <div class="gesture-recognizer">
+                            <div class="date6">
+                                <div class="date7">
+                                    <div class="facial-recognition">
+                                        <div class="biometric-authentication to-center">{{ object.get_start_date_day }}</div>
                                     </div>
+                                    <div class="year6">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
                                 </div>
-                                <div class="age17">
-                                    <div class="age18">
-                                        <span>Age: </span>
-                                        <span class="span5">9-10</span>
-                                    </div>
+                            </div>
+                            <div class="age7">
+                                <div class="age8">
+                                    <span>Age: </span>
+                                    <span class="span">{{ object.start_age }}-{{ object.end_age }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="frame-parent6">
-                    <div class="frame-parent7">
-                      <button class="city-wrapper">
-                          <button class="city6">
-{#                          <img class="icon5" alt="" src="{% static 'img/2-1@2x.png' %}" />#}
-                              <img class="icon5" src="{{ object.image.url }}" />
+                    <div class="gyroscope">
+                        <div class="magnetometer">
+                            <button class="city1">
+                                <img class="icon" alt="" src="{{ object.image.url }}"/>
 
-{#                              <div class="bg-enrollment5"></div>#}
-                          <div class="pressure-sensor">
-                            <img
-                              class="sound-sensor-icon"
-                              alt=""
-                              src="{% static 'img/biometric-verification.svg' %}"
-                            />
-                          </div>
-                          <div class="tbilisi1">{{ object.city }}</div>
-                        </button>
-                      </button>
-                      <div class="header-item5">
-                        <div class="decoration6"></div>
-                        <b class="art-classes-for1">{{ object.title }}</b>
-                      </div>
-                      <div class="lorem-ipsum-is-simply-dummy-te-wrapper2">
-                        <div class="lorem-ipsum-is-simply5">
-                          {{ object.text }}
+                                <div class="bg-enrollment"></div>
+                                <div class="facial-expression">
+                                    <img
+                                            class="biometric-verification-icon"
+                                            alt=""
+                                            src="{% static 'img/biometric-verification.svg' %}"
+                                    />
+                                </div>
+                                <div class="batumi">{{ object.city }}</div>
+                            </button>
+                            <div class="condition-splitter">
+                                <div class="header-item">
+                                    <div class="decoration1"></div>
+                                    <b class="crafts-for-children">{{ object.title }}</b>
+                                </div>
+                                <div class="iteration-loop">
+                                    <div class="lorem-ipsum-is-simply5">{{ object.text }}</div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
+                        {% if object.is_active %}
+                            <a class="button-join5" href="{{ object.get_url }}">
+                              <div class="join-parent3">
+                                 <div class="join5">Join</div>
+                                <div class="vector-wrapper7">
+                                  <img
+                                    class="vector-icon9"
+                                    alt=""
+                                    src="{% static 'img/vector-11.svg' %}"
+                                  />
+                                </div>
+                              </div>
+                            </a>
+                        {% else %}
+                            <button class="button-join">
+                              <div class="join-parent">
+                                <div class="join">Closed</div>
+                                <div class="vector-wrapper">
+                                  <img
+                                    class="vector-icon"
+                                    alt=""
+                                    src="{% static 'img/vector-11.svg' %}"
+                                  />
+                                </div>
+                              </div>
+                            </button>
+                        {% endif %}
                     </div>
-                    {% if object.is_active %}
-                        <a class="button-join5" href="{{ object.get_url }}">
-                          <div class="join-parent3">
-                             <div class="join5">Join</div>
-                            <div class="vector-wrapper7">
-                              <img
-                                class="vector-icon9"
-                                alt=""
-                                src="{% static 'img/vector-11.svg' %}"
-                              />
-                            </div>
-                          </div>
-                        </a>
-                    {% else %}
-                        <button class="button-join">
-                          <div class="join-parent">
-                            <div class="join">Closed</div>
-                            <div class="vector-wrapper">
-                              <img
-                                class="vector-icon"
-                                alt=""
-                                src="{% static 'img/vector-11.svg' %}"
-                              />
-                            </div>
-                          </div>
-                        </button>
-                    {% endif %}
-                  </div>
-
                 </div>
             {% endfor %}
           </div>
@@ -216,69 +212,7 @@
 
 
 
-{#            <div class="item-1">#}
-{#              <div class="form"></div>#}
-{#              <div class="touch-input">#}
-{#                <div class="gesture-recognizer">#}
-{#                  <div class="date6">#}
-{#                    <div class="date7">#}
-{#                      <div class="facial-recognition">#}
-{#                        <div class="biometric-authentication">28</div>#}
-{#                      </div>#}
-{#                      <div class="year6">Feb 2024</div>#}
-{#                    </div>#}
-{#                  </div>#}
-{#                  <div class="age7">#}
-{#                    <div class="age8">#}
-{#                      <span>Age: </span>#}
-{#                      <span class="span">9-10</span>#}
-{#                    </div>#}
-{#                  </div>#}
-{#                </div>#}
-{#              </div>#}
-{#              <div class="gyroscope">#}
-{#                <div class="magnetometer">#}
-{#                  <button class="city1">#}
-{#                    <img class="icon" alt="" src="{% static 'img/1-1@2x.png' %}" />#}
-{##}
-{#                    <div class="bg-enrollment"></div>#}
-{#                    <div class="facial-expression">#}
-{#                      <img#}
-{#                        class="biometric-verification-icon"#}
-{#                        alt=""#}
-{#                        src="{% static 'img/biometric-verification.svg' %}"#}
-{#                      />#}
-{#                    </div>#}
-{#                    <div class="batumi">Batumi</div>#}
-{#                  </button>#}
-{#                  <div class="condition-splitter">#}
-{#                    <div class="header-item">#}
-{#                      <div class="decoration1"></div>#}
-{#                      <b class="crafts-for-children">Arts and crafts for children </b>#}
-{#                    </div>#}
-{#                    <div class="iteration-loop">#}
-{#                      <div class="lorem-ipsum-is-simply">#}
-{#                        Lorem Ipsum is simply dummy text of the printing and#}
-{#                        typesetting industry and typesetting industry and#}
-{#                        typesetting industry.#}
-{#                      </div>#}
-{#                    </div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <button class="button-join">#}
-{#                  <div class="join-parent">#}
-{#                    <div class="join">Closed</div>#}
-{#                    <div class="vector-wrapper">#}
-{#                      <img#}
-{#                        class="vector-icon"#}
-{#                        alt=""#}
-{#                        src="{% static 'img/vector-11.svg' %}"#}
-{#                      />#}
-{#                    </div>#}
-{#                  </div>#}
-{#                </button>#}
-{#              </div>#}
-{#            </div>#}
+
 {#            <div class="item-2">#}
 {#              <div class="form1"></div>#}
 {#              <div class="item-2-inner">#}
