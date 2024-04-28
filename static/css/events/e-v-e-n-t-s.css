@@ -1,10 +1,4 @@
 /* temporary fixes for calendar to reapper */
-.nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
 .to-front {
   z-index:10
 }
@@ -68,6 +62,11 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  color: black;
+}
+
+.logo-ut23:hover {
+  color: var(--color-cornflowerblue-100);
 }
 .group9 {
   flex-direction: column;
@@ -97,8 +96,13 @@
   white-space: nowrap;
   z-index: 1;
   text-decoration: none; /* Remove underline */
-  color: var(--color-silver-200);
+  color: black;
 }
+
+.about-us3:hover {
+  color: var(--color-cornflowerblue-100);
+}
+
 .about-us-wrapper {
   display: flex;
   flex-direction: column;
@@ -142,7 +146,12 @@
   min-width: 76px;
   z-index: 1;
   text-decoration: none; /* Remove underline */
+  color:black;
 }
+.projects3:hover {
+  color: var(--color-cornflowerblue-100);
+}
+
 .projects-wrapper {
   flex-direction: column;
   justify-content: flex-start;
@@ -454,11 +463,9 @@
   font-family: var(--font-montserrat);
 }
 .sect-events-child {
-  align-self: stretch;
   width: 1440px;
   height: 1378px;
   position: relative;
-  box-sizing: border-box;
   background-color: var(--color-gray-100);
   display: none;
   max-width: 100%;
@@ -513,6 +520,10 @@
   font-weight: 500;
   z-index: 1;
   text-decoration: none; /* Remove underline */
+  color:black;
+}
+.sport1:hover {
+  color: var(--color-cornflowerblue-100);
 }
 .dec-line-1-icon {
   height: 1px;
@@ -2327,14 +2338,6 @@
   z-index: 1;
 }
 
-.frame-parent7,
-.lorem-ipsum-is-simply-dummy-te-wrapper2 {
-  align-self: stretch;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-
 .lorem-ipsum-is-simply5 {
   max-width: 300px; /* Set the maximum width of the div */
   overflow: hidden; /* Hide any overflowing text */
@@ -2345,7 +2348,13 @@
   line-height: 125%;
   z-index: 1;
 }
-
+.frame-parent7,
+.lorem-ipsum-is-simply-dummy-te-wrapper2 {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
 .lorem-ipsum-is-simply-dummy-te-wrapper2 {
   flex-direction: row;
   padding: 0 0 0 var(--padding-smi);
@@ -2726,7 +2735,7 @@
 .logo-ut-footer-group {
   flex: 1;
   gap: var(--gap-7xl-6);
-  min-width: 199px;
+  min-width: 280px;
 }
 .menu2 {
   align-self: stretch;
