@@ -62,6 +62,11 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  color: black;
+}
+
+.logo-ut23:hover {
+  color: var(--color-cornflowerblue-100);
 }
 .group9 {
   flex-direction: column;
@@ -91,7 +96,13 @@
   white-space: nowrap;
   z-index: 1;
   text-decoration: none; /* Remove underline */
+  color: black;
 }
+
+.about-us3:hover {
+  color: var(--color-cornflowerblue-100);
+}
+
 .about-us-wrapper {
   display: flex;
   flex-direction: column;
@@ -135,7 +146,12 @@
   min-width: 76px;
   z-index: 1;
   text-decoration: none; /* Remove underline */
+  color:black;
 }
+.projects3:hover {
+  color: var(--color-cornflowerblue-100);
+}
+
 .projects-wrapper {
   flex-direction: column;
   justify-content: flex-start;
@@ -504,6 +520,10 @@
   font-weight: 500;
   z-index: 1;
   text-decoration: none; /* Remove underline */
+  color:black;
+}
+.sport1:hover {
+  color: var(--color-cornflowerblue-100);
 }
 .dec-line-1-icon {
   height: 1px;
@@ -2715,7 +2735,7 @@
 .logo-ut-footer-group {
   flex: 1;
   gap: var(--gap-7xl-6);
-  min-width: 199px;
+  min-width: 280px;
 }
 .menu2 {
   align-self: stretch;

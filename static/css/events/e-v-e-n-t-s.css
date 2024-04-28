@@ -97,6 +97,7 @@
   white-space: nowrap;
   z-index: 1;
   text-decoration: none; /* Remove underline */
+  color: var(--color-silver-200);
 }
 .about-us-wrapper {
   display: flex;
