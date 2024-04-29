@@ -167,44 +167,75 @@
             {% endfor %}
           </div>
         </div>
+{#      paginator #}
         <div class="data-visualizer">
-          <div class="frame-parent8">
-            <div class="frame-wrapper">
-              <div class="frame-parent9">
-                <div class="vector-wrapper8">
-                  <img
-                    class="vector-icon10"
-                    alt=""
-                    src="{% static 'img/vector-12.svg' %}"
-                  />
-                </div>
-                <div class="back">Back</div>
-              </div>
-            </div>
-            <div class="active1">
-              <div class="active-child"></div>
-              <div class="div15">1</div>
-            </div>
-            <div class="wrapper3">
-              <div class="div16">2</div>
-            </div>
-            <div class="wrapper4">
-              <div class="div17">3</div>
-            </div>
-            <div class="frame-wrapper1">
-              <div class="forward-parent">
-                <div class="forward">Forward</div>
-                <div class="vector-wrapper9">
-                  <img
-                    class="vector-icon11"
-                    alt=""
-                    src="{% static 'img/vector-13.svg' %}"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+{#          <div class="frame-parent8">#}
+{#            <div class="frame-wrapper">#}
+{#              <div class="frame-parent9">#}
+{#                <div class="vector-wrapper8">#}
+{#                  <img#}
+{#                    class="vector-icon10"#}
+{#                    alt=""#}
+{#                    src="{% static 'img/vector-12.svg' %}"#}
+{#                  />#}
+{#                </div>#}
+{#                <div class="back">Back</div>#}
+{#              </div>#}
+{#            </div>#}
+{#            <div class="active1">#}
+{#              <div class="active-child"></div>#}
+{#              <div class="div15">1</div>#}
+{#            </div>#}
+{#            <div class="wrapper3">#}
+{#              <div class="div16">2</div>#}
+{#            </div>#}
+{#            <div class="wrapper4">#}
+{#              <div class="div17">3</div>#}
+{#            </div>#}
+{#            <div class="frame-wrapper1">#}
+{#              <div class="forward-parent">#}
+{#                <div class="forward">Forward</div>#}
+{#                <div class="vector-wrapper9">#}
+{#                  <img#}
+{#                    class="vector-icon11"#}
+{#                    alt=""#}
+{#                    src="{% static 'img/vector-13.svg' %}"#}
+{#                  />#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#      new paginator#}
+          <nav class="mt-4" aria-label="Page navigation sample">
+                {% if all_objects.has_other_pages %}
+                <ul class="pagination">
+                    {% if all_objects.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{ all_objects.previous_page_number }}">Previous</a></li>
+                    {% else %}
+                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    {% endif %}
+
+                    {% for page_number in all_objects.paginator.page_range %}
+                        {% if all_objects.number == page_number %}
+                            <li class="page-item active"><a class="page-link" href="#">{{ page_number }}</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+
+                    {% if all_objects.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ all_objects.next_page_number }}">Next</a></li>
+                    {% else %}
+                        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </nav>
+{#      end new paginator#}
         </div>
+{#      end old paginator#}
+
       </section>
 
 

@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 
 from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup
@@ -31,8 +32,6 @@ def about_us(request):
 
 
 def events(request, group_slug=None):
-    categories = None
-    products = None
     if group_slug:
         group = get_object_or_404(ObjectsGroup, slug=group_slug)
         # all_objects = Events.objects.filter(group=group, is_active=True)
@@ -43,6 +42,17 @@ def events(request, group_slug=None):
 
     context = {
         "all_objects": all_objects,
+    }
+
+    paginator = Paginator(all_objects, 2)
+    page = request.GET.get("page")
+    page_all_objects = paginator.get_page(page)
+
+    objects_count = all_objects.count()
+
+    context = {
+        "all_objects": page_all_objects,
+        "objects_count": objects_count,
     }
 
     return render(request, 'events/events_index.html', context=context)
