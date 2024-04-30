@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
 
 from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup
 
@@ -32,17 +33,33 @@ def about_us(request):
 
 
 def events(request, group_slug=None):
-    if group_slug:
-        group = get_object_or_404(ObjectsGroup, slug=group_slug)
-        # all_objects = Events.objects.filter(group=group, is_active=True)
-        all_objects = Events.objects.filter(group=group)  # Get all, with non activ also
-    else:
-        # all_objects = Events.objects.all().filter(is_active=True).order_by("id")
-        all_objects = Events.objects.all().filter().order_by("id")
 
-    context = {
-        "all_objects": all_objects,
-    }
+
+
+    if request.method == 'GET':
+
+        # Get the checkbox state from the session, default to False if not set
+        is_active = request.session.get('activeCheckbox', False)
+        print(is_active)
+
+        if group_slug:
+            group = get_object_or_404(ObjectsGroup, slug=group_slug)
+            if is_active:
+                all_objects = Events.objects.filter(group=group, is_active=True)
+            else:
+                all_objects = Events.objects.all().filter().order_by("id")
+        else:
+            if is_active:
+                all_objects = Events.objects.all().filter(is_active=True).order_by("id")
+            else:
+                all_objects = Events.objects.all().filter().order_by("id")
+    elif request.method == 'POST':
+
+        # Save the checkbox state to the session
+        is_active = request.POST.get('activeCheckbox', False)
+        print(f"POST{is_active}")
+        request.session['activeCheckbox'] = is_active == 'on'
+        return redirect('your_view')
 
     paginator = Paginator(all_objects, 2)
     page = request.GET.get("page")
@@ -53,13 +70,13 @@ def events(request, group_slug=None):
     context = {
         "all_objects": page_all_objects,
         "objects_count": objects_count,
+        "free_spots": is_active,
     }
 
     return render(request, 'events/events_index.html', context=context)
 
 
 def event_detail(request, group_slug=None, event_slug=None):
-
     try:
         single_event = Events.objects.get(group__slug=group_slug, slug=event_slug)
     except Exception as error:

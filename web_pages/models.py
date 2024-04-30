@@ -23,7 +23,6 @@ class ObjectsGroup(models.Model):  # Spotr, non-formal education, Events and mas
         return reverse("events_by_group", args=[self.slug])
 
 
-
 class WebContentObject(models.Model):
     name = models.CharField(max_length=250)
     title = models.CharField(max_length=250, blank=True)
