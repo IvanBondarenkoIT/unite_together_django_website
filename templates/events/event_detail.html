@@ -9,160 +9,118 @@
 
   <body>
     <div class="events-detail" data-animate-on-scroll>
-
-      <section class="sec-detail">
-        <div class="bg-detail"></div>
-        <div class="aside-box">
-
-            <div class="iterative-processor">
-
-              <div class="database-connection">
-                <div class="error-handler">
-                  <a class="sport1" href="{% url 'events' %}">All</a>
-                  {% for category in links %}
-                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
-
-                  {% endfor %}
-                  <div class="variable-holder">
-
-                    <div class="function-caller">
-                      <img
-                        class="dec-line-1-icon"
-                        loading="lazy"
-                        alt=""
-                        src="{% static 'img/decline1.svg' %}"
-                      />
-                    </div>
-                    <div class="dropdown-city">
-                      <div class="list-processor">
-                        <div class="text-wrap">
-                          <div class="select-your-city">Select your city</div>
+        <section class="sec-detail">
+            <div class="bg-detail"></div>
+            <div class="aside-box">
+                <div class="iterative-processor">
+                    <div class="database-connection">
+                        <div class="error-handler">
+                            <a class="sport1" href="{% url 'events' %}">All</a>
+                            {% for category in links %}
+                                <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
+                            {% endfor %}
                         </div>
-                      </div>
-                      <img
-                        class="keyboard-arrow-down"
-                        alt=""
-                        src="{% static 'img/keyboard-arrow-down.svg' %}"
-                      />
                     </div>
-                    <div class="function-caller1">
-                      <img
-                        class="dec-line-2-icon"
+                </div>
+            </div>
+            <div class="while-loop">
+                <img
+                        class="baner-image-icon"
                         loading="lazy"
                         alt=""
-                        src="{% static 'img/decline2.svg' %}"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="audio-processor">
-              <div class="availability">
-                <div class="availability1">Availability</div>
-                <div class="check-button1">
-                  <input class="icon-check1" type="checkbox" />
+                        src="{{ single_event.image.url }}"
+                />
 
-                  <div class="event-dispatcher">
-                    <div class="vacant-seats1">Free spots</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        <div class="while-loop">
-          <img
-            class="baner-image-icon"
-            loading="lazy"
-            alt=""
-            src="{{ single_event.image.url }}"
-          />
+                <div class="about-events">
+                    <div class="bg"></div>
+                    <div class="variable-holder">
+                        <div class="constant-holder">
+                            <h1 class="autism-speaks-to">
+                                {{ single_event.title }}
+                            </h1>
+                            <div class="age-3-16-parent">
+                                <div class="age-3-16">
+                                    <b>Age</b>
+                                    <span class="span">: {{ single_event.start_age }}-{{ single_event.end_age }}</span>
+                                </div>
+                                <div class="free-classes-of-container">
+                                    <p class="free-classes-of">
+                                        {{ single_event.text }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img
+                            class="dec-line-3-icon"
+                            loading="lazy"
+                            alt=""
+                            src="{% static 'img/decline3.svg' %}"
+                    />
 
-          <div class="about-events">
-            <div class="bg"></div>
-            <div class="variable-holder">
-              <div class="constant-holder">
-                <h1 class="autism-speaks-to">
-                  {{ single_event.title }}
-                </h1>
-                <div class="age-3-16-parent">
-                  <div class="age-3-16">
-                    <b>Age</b>
-                    <span class="span">: {{ single_event.start_age }}-{{ single_event.end_age }}</span>
-                  </div>
-                  <div class="free-classes-of-container">
-                    <p class="free-classes-of">
-                      {{ single_event.text }}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <img
-              class="dec-line-3-icon"
-              loading="lazy"
-              alt=""
-              src="{% static 'img/decline3.svg' %}"
-            />
+                    <div class="string-op">
+                        <div class="array-op">
+                            <div class="list-op">
+                                <div class="dictionary-op">
+                                    <div class="set-op">
+                                        <img
+                                                class="set-op-child"
+                                                loading="lazy"
+                                                alt=""
+                                                src="{% static 'img/group-679.svg' %}"
+                                        />
+                                    </div>
+                                    <div class="weekly-at-1400">Weekly at 14:00</div>
 
-            <div class="string-op">
-              <div class="array-op">
-                <div class="list-op">
-                  <div class="dictionary-op">
-                    <div class="set-op">
-                      <img
-                        class="set-op-child"
-                        loading="lazy"
-                        alt=""
-                        src="{% static 'img/group-679.svg' %}"
-                      />
+                                </div>
+                                <div class="frame-div">
+                                        <div class="vector-wrapper">
+                                            <img
+                                                    class="vector-icon"
+                                                    loading="lazy"
+                                                    alt=""
+                                                    src="{% static 'img/vector.svg' %}"
+                                            />
+                                        </div>
+                                        <div class="batumi-127-luka">
+                                            {{ single_event.city }} {{ single_event.address }}
+                                        </div>
+                                    </div>
+                                    {% if single_event.is_active %}
+                                        <a class="button-registration" href="{% url 'login' %}">
+                                            <div class="registration">Registration</div>
+                                            <div class="vector-container">
+                                                <img
+                                                        class="vector-icon1"
+                                                        alt=""
+                                                        src="{% static 'img/vector-1.svg' %}"
+                                                />
+                                            </div>
+                                        </a>
+                                    {% else %}
+                                        <button class="button-join">
+                                            <div class="join-parent">
+                                                <div class="join">Closed</div>
+                                                <div class="vector-container">
+                                                    <img
+                                                            class="vector-icon1"
+                                                            alt=""
+                                                            src="{% static 'img/vector-1.svg' %}"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </button>
+                                    {% endif %}
+
+                            </div>
+
+                        </div>
+
                     </div>
-                    <div class="weekly-at-1400">Weekly at 14:00</div>
-                  </div>
-                  <div class="frame-div">
-                    <div class="vector-wrapper">
-                      <img
-                        class="vector-icon"
-                        loading="lazy"
-                        alt=""
-                        src="{% static 'img/vector.svg' %}"
-                      />
-                    </div>
-                    <div class="batumi-127-luka">
-                        {{ single_event.city }} {{ single_event.address }}
-                    </div>
-                  </div>
+
                 </div>
-                {% if single_event.is_active %}
-                    <button class="button-registration">
-                      <div class="registration">Registration</div>
-                      <div class="vector-container">
-                        <img
-                          class="vector-icon1"
-                          alt=""
-                          src="{% static 'img/vector-1.svg' %}"
-                        />
-                      </div>
-                    </button>
-                {% else %}
-                    <button class="button-join">
-                    <div class="join-parent">
-                      <div class="join">Closed</div>
-                      <div class="vector-container">
-                        <img
-                          class="vector-icon1"
-                          alt=""
-                          src="{% static 'img/vector-1.svg' %}"
-                        />
-                      </div>
-                    </div>
-                    </button>
-                {% endif %}
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
       
     </div>
 
