@@ -6,11 +6,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-
+    <link rel="stylesheet" href="{% static 'css/aboutus/abou-us.css'%}" />
     <link rel="stylesheet" href="{% static 'css/events/global.css'%}" />
+
     <link rel="stylesheet" href="{% static 'css/events/index.css'%}" />
     <link rel="stylesheet" href="{% static 'css/events/e-v-e-n-t-s.css'%}" />
     <link rel="stylesheet" href="{% static 'css/events/event_detail.css'%}" />
+
+
 
     <link
       rel="stylesheet"
@@ -27,18 +30,25 @@
 
     <link rel="stylesheet" href="{% static 'css/events/bootstrap.min.css' %}">
 
+    <link rel="stylesheet" href="{% static 'css/aboutus/index.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/aboutus/global.css'%}" />
+
   </head>
 
-{#  navbar#}
-{% include 'includes/new/navbar.html' %}
+
+  <body>
+    <div class="about-us-history" data-animate-on-scroll>
+  {#  navbar#}
+  {% include 'includes/new/navbar.html' %}
 
 
-    {% block content  %}
-{#        content#}
-    {% endblock %}
+  {% block content %}
+      {#        content#}
+  {% endblock %}
 
-{% include 'includes/new/footer.html' %}
+  {#  footer#}
+  {% include 'includes/new/footer.html' %}
 
-
-
+    </div>
+  </body>
 </html>

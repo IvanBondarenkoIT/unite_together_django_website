@@ -10,37 +10,35 @@ def home(request):
 
 
 def about_us(request):
-    try:
-        stats_section = WebContentObject.objects.get(name="about_us_stats")
-        stats_section_subs = WebContentSubordinateObject.objects.all().filter(content_master_object=stats_section)
+    # try:
+    #     stats_section = WebContentObject.objects.get(name="about_us_stats")
+    #     stats_section_subs = WebContentSubordinateObject.objects.all().filter(content_master_object=stats_section)
+    #
+    #     context = {
+    #         # "header": WebContentObject.objects.get(name="about_us_header"),
+    #         # "mission": WebContentObject.objects.get(name="about_us_mission"),
+    #         "header": stats_section,
+    #         "stats": stats_section,
+    #         "stats_subs": stats_section_subs,
+    #         "history": stats_section,
+    #         "history_subs": stats_section_subs,
+    #         "achievements": stats_section,
+    #         "achievements_subs": stats_section_subs,
+    #
+    #     }
+    # except WebContentObject:
+    context = {}
 
-        context = {
-            # "header": WebContentObject.objects.get(name="about_us_header"),
-            # "mission": WebContentObject.objects.get(name="about_us_mission"),
-            "header": stats_section,
-            "stats": stats_section,
-            "stats_subs": stats_section_subs,
-            "history": stats_section,
-            "history_subs": stats_section_subs,
-            "achievements": stats_section,
-            "achievements_subs": stats_section_subs,
-
-        }
-    except WebContentObject:
-        context = {}
-
-    return render(request, 'about_us.html', context=context)
+    return render(request, 'aboutus/aboutus_index.html', context=context)
 
 
 def events(request, group_slug=None):
-
-
 
     if request.method == 'GET':
 
         # Get the checkbox state from the session, default to False if not set
         is_active = request.session.get('activeCheckbox', False)
-        print(is_active)
+        print(f"GET {is_active}")
 
         if group_slug:
             group = get_object_or_404(ObjectsGroup, slug=group_slug)
