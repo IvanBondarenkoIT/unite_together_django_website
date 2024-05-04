@@ -97,10 +97,25 @@
   z-index: 1;
   text-decoration: none; /* Remove underline */
   color: black;
+  padding: 10px;
 }
 
 .about-us3:hover {
   color: var(--color-cornflowerblue-100);
+}
+
+.about-us3-active {
+  position: relative;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 84px;
+  white-space: nowrap;
+  z-index: 1;
+  text-decoration: underline; /* Remove underline */
+  background-color: var(--color-royalblue); /* Цвет фона активного пункта меню */
+  color: white;
+  border-radius: var(--br-3xs); /* Задаем радиус скругления углов */
+  padding: 10px 20px; /* Подбираем подходящий внутренний отступ для красивого вида */
 }
 
 .about-us-wrapper {
