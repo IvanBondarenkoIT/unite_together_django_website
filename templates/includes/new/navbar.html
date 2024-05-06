@@ -36,17 +36,17 @@
                     <ul class="horizontal-menu">
                         <li class="menu-item">
                             <div class="about-us-wrapper">
-                                <a class="about-us3{% if request.path == '/about-us/' %}-active{% endif %}" href="{% url 'about-us' %}">About us</a>
+                                <a class="about-us3{% if '/about-us/' in request.path %}-active{% endif %}" href="{% url 'about-us' %}">About us</a>
                             </div>
                         </li>
                         <li class="menu-item">
                             <div class="projects-wrapper">
-                                <a class="about-us3{% if request.path == '/events/' %}-active{% endif %}" href="{% url 'events' %}">Events</a>
+                                <a class="about-us3{% if '/events/' in request.path %}-active{% endif %}" href="{% url 'events' %}">Events</a>
                             </div>
                         </li>
                         <li class="menu-item">
                             <div class="projects-wrapper">
-                                <a class="about-us3{% if request.path == '/projects/' %}-active{% endif %}" href="{% url 'projects' %}">Projects</a>
+                                <a class="about-us3{% if '/projects/' in request.path  %}-active{% endif %}" href="{% url 'projects' %}">Projects</a>
                             </div>
                         </li>
                     </ul>

@@ -31,9 +31,11 @@
 
               <div class="database-connection">
                 <div class="error-handler">
-                  <a class="sport1" href="{% url 'events' %}">All</a>
+                    <a class="sport1{% if request.path == '/events/' %}-active{% endif %}" href="{% url 'events' %}">All</a>
+{#                  <a class="sport1" href="{% url 'events' %}">All</a>#}
                   {% for category in links %}
-                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
+                      <a class="sport1{% if category.slug in request.path %}-active{% endif %}" href="{{ category.get_url }}">{{ category.name }}</a>
+{#                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>#}
 
                   {% endfor %}
                   <div class="variable-holder">
@@ -187,43 +189,6 @@
         </div>
 {#      paginator #}
         <div class="data-visualizer">
-{#          <div class="frame-parent8">#}
-{#            <div class="frame-wrapper">#}
-{#              <div class="frame-parent9">#}
-{#                <div class="vector-wrapper8">#}
-{#                  <img#}
-{#                    class="vector-icon10"#}
-{#                    alt=""#}
-{#                    src="{% static 'img/vector-12.svg' %}"#}
-{#                  />#}
-{#                </div>#}
-{#                <div class="back">Back</div>#}
-{#              </div>#}
-{#            </div>#}
-{#            <div class="active1">#}
-{#              <div class="active-child"></div>#}
-{#              <div class="div15">1</div>#}
-{#            </div>#}
-{#            <div class="wrapper3">#}
-{#              <div class="div16">2</div>#}
-{#            </div>#}
-{#            <div class="wrapper4">#}
-{#              <div class="div17">3</div>#}
-{#            </div>#}
-{#            <div class="frame-wrapper1">#}
-{#              <div class="forward-parent">#}
-{#                <div class="forward">Forward</div>#}
-{#                <div class="vector-wrapper9">#}
-{#                  <img#}
-{#                    class="vector-icon11"#}
-{#                    alt=""#}
-{#                    src="{% static 'img/vector-13.svg' %}"#}
-{#                  />#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#      new paginator#}
           <nav class="mt-4" aria-label="Page navigation sample">
                 {% if all_objects.has_other_pages %}
                 <ul class="pagination">
@@ -252,7 +217,6 @@
             </nav>
 {#      end new paginator#}
         </div>
-{#      end old paginator#}
 
       </section>
 
