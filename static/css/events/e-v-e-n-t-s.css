@@ -540,6 +540,20 @@
 .sport1:hover {
   color: var(--color-cornflowerblue-100);
 }
+
+.sport1-active {
+  position: relative;
+  line-height: 130%;
+  font-weight: 500;
+  z-index: 1;
+  text-decoration: none; /* Remove underline */
+  color:black;
+  background-color: var(--color-royalblue); /* Цвет фона активного пункта меню */
+  color: white;
+  border-radius: var(--br-3xs); /* Задаем радиус скругления углов */
+  padding: 10px 20px; /* Подбираем подходящий внутренний отступ для красивого вида */
+}
+
 .dec-line-1-icon {
   height: 1px;
   width: 256px;
