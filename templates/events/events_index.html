@@ -83,9 +83,10 @@
 {#                    <div class="vacant-seats1">Free spots</div>#}
 {#                  </div>#}
 
-                    <form id="filterForm">
-                        <input id="activeCheckbox" class="icon-check1" type="checkbox">
+                    <form id="filterForm" action="{% url 'events' %}" method="POST">
                         {% csrf_token %}
+                        <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox" {% if free_spots == True %}checked="{true}{% endif %}">
+
                         <label for="activeCheckbox">Free spots</label>
                     </form>
 

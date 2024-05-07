@@ -4,62 +4,40 @@ from django.http import JsonResponse
 
 from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup
 
+OBJECTS_ON_PAGE = 3
 
 def home(request):
     return render(request, "base.html")
 
 
 def about_us(request):
-    # try:
-    #     stats_section = WebContentObject.objects.get(name="about_us_stats")
-    #     stats_section_subs = WebContentSubordinateObject.objects.all().filter(content_master_object=stats_section)
-    #
-    #     context = {
-    #         # "header": WebContentObject.objects.get(name="about_us_header"),
-    #         # "mission": WebContentObject.objects.get(name="about_us_mission"),
-    #         "header": stats_section,
-    #         "stats": stats_section,
-    #         "stats_subs": stats_section_subs,
-    #         "history": stats_section,
-    #         "history_subs": stats_section_subs,
-    #         "achievements": stats_section,
-    #         "achievements_subs": stats_section_subs,
-    #
-    #     }
-    # except WebContentObject:
     context = {}
 
     return render(request, 'aboutus/aboutus_index.html', context=context)
 
 
 def events(request, group_slug=None):
-
     if request.method == 'GET':
-
         # Get the checkbox state from the session, default to False if not set
         is_active = request.session.get('activeCheckbox', False)
-        print(f"GET {is_active}")
-
-        if group_slug:
-            group = get_object_or_404(ObjectsGroup, slug=group_slug)
-            if is_active:
-                all_objects = Events.objects.filter(group=group, is_active=True)
-            else:
-                all_objects = Events.objects.all().filter().order_by("id")
-        else:
-            if is_active:
-                all_objects = Events.objects.all().filter(is_active=True).order_by("id")
-            else:
-                all_objects = Events.objects.all().filter().order_by("id")
     elif request.method == 'POST':
-
         # Save the checkbox state to the session
-        is_active = request.POST.get('activeCheckbox', False)
-        print(f"POST{is_active}")
-        request.session['activeCheckbox'] = is_active == 'on'
-        return redirect('your_view')
+        is_active = request.POST.get("free-spots-checkbox") == "on"
+        request.session['activeCheckbox'] = is_active
 
-    paginator = Paginator(all_objects, 2)
+    if group_slug:
+        group = get_object_or_404(ObjectsGroup, slug=group_slug)
+        if is_active:
+            all_objects = Events.objects.filter(group=group, is_active=True)
+        else:
+            all_objects = Events.objects.all().filter().order_by("id")
+    else:
+        if is_active:
+            all_objects = Events.objects.all().filter(is_active=True).order_by("id")
+        else:
+            all_objects = Events.objects.all().filter().order_by("id")
+
+    paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
     page = request.GET.get("page")
     page_all_objects = paginator.get_page(page)
 

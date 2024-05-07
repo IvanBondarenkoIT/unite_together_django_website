@@ -173,8 +173,9 @@
       }
       </script>
 
-    <script>
 
+    <script>
+      // Make navbar sticky
       window.addEventListener('scroll', function() {
         const navbar = document.querySelector('nav');
         const sticky = navbar.offsetTop;
@@ -185,7 +186,20 @@
             navbar.classList.remove('sticky');
         }
     });
+    </script>
 
+    <script>
+        // Save scroll position before navigating away
+        window.onbeforeunload = function() {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        };
 
+        // Restore scroll position on page load
+        window.onload = function() {
+            var scrollPosition = sessionStorage.getItem('scrollPosition');
+            if (scrollPosition !== null) {
+                window.scrollTo(0, parseInt(scrollPosition));
+            }
+        };
     </script>
 

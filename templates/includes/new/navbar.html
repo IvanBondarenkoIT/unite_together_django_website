@@ -1,102 +1,99 @@
 {% load static %}
+{#    <div class="events4" data-animate-on-scroll>#}
+        <nav class="navbar1">
+            <div class="bg-menu"></div>
+            <div class="connecter">
+                <a class="logo-ut2" href="{% url 'home' %}">
+                    <img
+                            class="logo-flag-ut-icon3"
+                            loading="lazy"
+                            alt=""
+                            src="{% static 'img/logoflagut3.svg' %}"
 
+                    />
 
-
-{#  <div class="events4" data-animate-on-scroll>#}
-    <nav class="navbar1">
-
-
-
-        <div class="bg-menu"></div>
-        <div class="connecter">
-          <a class="logo-ut2" href="{% url 'home' %}">
-            <img
-              class="logo-flag-ut-icon3"
-              loading="lazy"
-              alt=""
-              src="{% static 'img/logoflagut3.svg' %}"
-              
-            />
-
-            <div class="logo-text-ut3">
-              <div class="group9">
-                <div class="group10">
-                  <b class="unite3">UNITE</b>
-                </div>
-                <div class="group11">
-                  <b class="together3">TOGETHER</b>
-                </div>
-              </div>
+                    <div class="logo-text-ut3">
+                        <div class="group9">
+                            <div class="group10">
+                                <b class="unite3">UNITE</b>
+                            </div>
+                            <div class="group11">
+                                <b class="together3">TOGETHER</b>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
-          </a>
-        </div>
 
             <div class="connecter-inner">
                 <div class="frame-parent1">
                     <ul class="horizontal-menu">
                         <li class="menu-item">
                             <div class="about-us-wrapper">
-                                <a class="about-us3{% if '/about-us/' in request.path %}-active{% endif %}" href="{% url 'about-us' %}">About us</a>
+                                <a class="about-us3{% if '/about-us/' in request.path %}-active{% endif %}"
+                                   href="{% url 'about-us' %}">About us</a>
                             </div>
                         </li>
                         <li class="menu-item">
                             <div class="projects-wrapper">
-                                <a class="about-us3{% if '/events/' in request.path %}-active{% endif %}" href="{% url 'events' %}">Events</a>
+                                <a class="about-us3{% if '/events/' in request.path %}-active{% endif %}"
+                                   href="{% url 'events' %}">Events</a>
                             </div>
                         </li>
                         <li class="menu-item">
                             <div class="projects-wrapper">
-                                <a class="about-us3{% if '/projects/' in request.path  %}-active{% endif %}" href="{% url 'projects' %}">Projects</a>
+                                <a class="about-us3{% if '/projects/' in request.path %}-active{% endif %}"
+                                   href="{% url 'projects' %}">Projects</a>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-        <div class="right-part-wrapper">
-          <div class="right-part1">
-            <div class="languages-wrapper">
-              <div class="languages1">
-                <div class="flag-ua-wrapper">
-                  <div class="flag-ua1">
-                    <div class="yellow-rectangle1"></div>
-                    <div class="blue-rectangle1"></div>
-                  </div>
+            <div class="right-part-wrapper">
+                <div class="right-part1">
+                    <div class="languages-wrapper">
+                        <div class="languages1">
+                            <div class="flag-ua-wrapper">
+                                <div class="flag-ua1">
+                                    <div class="yellow-rectangle1"></div>
+                                    <div class="blue-rectangle1"></div>
+                                </div>
+                            </div>
+                            <div class="language-ua1">UA</div>
+                            <div class="arrow-wrapper">
+                                <img
+                                        class="arrow-icon4"
+                                        loading="lazy"
+                                        alt=""
+                                        src="{% static 'img/arrow1.svg' %}"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dividing-line-wrapper">
+                        <img
+                                class="dividing-line-icon1"
+                                loading="lazy"
+                                alt=""
+                                src="{% static 'img/dividingline.svg' %}"
+                        />
+                    </div>
+                    <a class="button-register7" href="{% url 'login' %}">
+                        <div class="group-div">
+                            <div class="user-icon-wrapper">
+                                <img class="user-icon1" alt="" src="{% static 'img/usericon.svg' %}"/>
+                            </div>
+                            <div class="loginsign-up1">Log In / Sing Up</div>
+                        </div>
+                    </a>
+                    <a class="button-donate1" href="{% url 'donate-paypal' %}">
+                        <div class="donate-wrapper">
+                            <div class="donate1">Donate</div>
+                        </div>
+                        <img class="donate-icon1" alt="" src="{% static 'img/donateicon.svg' %}"/>
+                    </a>
                 </div>
-                <div class="language-ua1">UA</div>
-                <div class="arrow-wrapper">
-                  <img
-                    class="arrow-icon4"
-                    loading="lazy"
-                    alt=""
-                    src="{% static 'img/arrow1.svg' %}"
-                  />
-                </div>
-              </div>
             </div>
-            <div class="dividing-line-wrapper">
-              <img
-                class="dividing-line-icon1"
-                loading="lazy"
-                alt=""
-                src="{% static 'img/dividingline.svg' %}"
-              />
-            </div>
-            <a class="button-register7" href="{% url 'login' %}">
-              <div class="group-div">
-                <div class="user-icon-wrapper">
-                  <img class="user-icon1" alt="" src="{% static 'img/usericon.svg' %}" />
-                </div>
-                <div class="loginsign-up1">Log In / Sing Up</div>
-              </div>
-            </a>
-            <a class="button-donate1" href="{% url 'donate-paypal' %}">
-              <div class="donate-wrapper">
-                <div class="donate1">Donate</div>
-              </div>
-              <img class="donate-icon1" alt="" src="{% static 'img/donateicon.svg' %}" />
-            </a>
-          </div>
-        </div>
 
-    </nav>
-{#      </div>#}
+        </nav>
+{#</div>#}
