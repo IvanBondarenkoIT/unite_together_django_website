@@ -60,6 +60,29 @@
 {#                        src="{% static 'img/keyboard-arrow-down.svg' %}"#}
 {#                      />#}
 {#                    </div>#}
+
+                  <lable class="select-your-city">Select your city</lable>
+                      <form id="cityForm" method="POST" action="{% url 'events' %}">
+                      {% csrf_token %}
+                          <select id="cities" name="selected-city">
+                            {% if selected_city %}
+                                <option value="{{ selected_city }}">{{ selected_city }}</option>
+                            {% else %}
+                                <option value="All">All</option>
+                            {% endif %}
+
+                              {% for city in cities %}
+                                  {% if city.name == selected_city %}
+                                      <option value="All">All</option>
+                                  {% else %}
+                                      <option value="{{ city }}">{{ city }}</option>
+                                  {% endif %}
+                              {% endfor %}
+                          </select>
+                      </form>
+{#                  <ul id="itemList">#}
+{##}
+{#                  </ul>#}
                     <div class="function-caller1">
                       <img
                         class="dec-line-2-icon"
@@ -83,21 +106,12 @@
 {#                    <div class="vacant-seats1">Free spots</div>#}
 {#                  </div>#}
 
-                    <form id="filterForm">
-                        <input id="activeCheckbox" class="icon-check1" type="checkbox">
+                    <form id="filterForm" action="{% url 'events' %}" method="POST">
                         {% csrf_token %}
+                        <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox" {% if free_spots == True %}checked="{true}{% endif %}">
+
                         <label for="activeCheckbox">Free spots</label>
                     </form>
-
-                  <ul id="itemList">
-                      <!-- This will be populated with list items dynamically -->
-                  </ul>
-{#                  <ul id="itemList">#}
-{##}
-{#                  </ul>#}
-
-
-
 
 {#                </div>#}
               </div>
@@ -222,7 +236,11 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script>
-
+    <script>
+        document.getElementById('cities').addEventListener('change', function() {
+            document.getElementById('cityForm').submit();
+        });
+    </script>
 
 
 {% endblock %}
