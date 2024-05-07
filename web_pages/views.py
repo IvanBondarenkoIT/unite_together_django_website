@@ -21,19 +21,19 @@ def events(request, group_slug=None):
         # Get the checkbox state from the session, default to False if not set
         is_active = request.session.get('activeCheckbox', False)
         selected_city = request.session.get('activeCityFilter', None)
-        print(selected_city)
+        # print(selected_city)
 
     elif request.method == 'POST':
         # Save the checkbox state to the session
         is_active = request.POST.get("free-spots-checkbox") == "on"
         request.session['activeCheckbox'] = is_active
 
-        print(request.session['activeCityFilter'])
+        # print(request.session['activeCityFilter'])
         # Save the selected City state to the session
         selected_city = request.POST.get("selected-city")
         request.session['activeCityFilter'] = selected_city
-        print(request.POST.get("selected-city"))
-        print(request.session['activeCityFilter'])
+        # print(request.POST.get("selected-city"))
+        # print(request.session['activeCityFilter'])
 
     else:
         is_active = False
