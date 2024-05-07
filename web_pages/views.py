@@ -30,7 +30,7 @@ def events(request, group_slug=None):
         if is_active:
             all_objects = Events.objects.filter(group=group, is_active=True)
         else:
-            all_objects = Events.objects.all().filter().order_by("id")
+            all_objects = Events.objects.all().filter(group=group).order_by("id")
     else:
         if is_active:
             all_objects = Events.objects.all().filter(is_active=True).order_by("id")
