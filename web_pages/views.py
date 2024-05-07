@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 
-from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup
+from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City
 
 OBJECTS_ON_PAGE = 3
 
@@ -20,10 +20,24 @@ def events(request, group_slug=None):
     if request.method == 'GET':
         # Get the checkbox state from the session, default to False if not set
         is_active = request.session.get('activeCheckbox', False)
+        selected_city = request.session.get('activeCityFilter', None)
+        print(selected_city)
+
     elif request.method == 'POST':
         # Save the checkbox state to the session
         is_active = request.POST.get("free-spots-checkbox") == "on"
         request.session['activeCheckbox'] = is_active
+
+        print(request.session['activeCityFilter'])
+        # Save the selected City state to the session
+        selected_city = request.POST.get("selected-city")
+        request.session['activeCityFilter'] = selected_city
+        print(request.POST.get("selected-city"))
+        print(request.session['activeCityFilter'])
+
+    else:
+        is_active = False
+        selected_city = None
 
     if group_slug:
         group = get_object_or_404(ObjectsGroup, slug=group_slug)
@@ -43,10 +57,14 @@ def events(request, group_slug=None):
 
     objects_count = all_objects.count()
 
+    cities = City.objects.all()
+
     context = {
         "all_objects": page_all_objects,
         "objects_count": objects_count,
         "free_spots": is_active,
+        "cities": cities,
+        "selected_city": selected_city,
     }
 
     return render(request, 'events/events_index.html', context=context)
