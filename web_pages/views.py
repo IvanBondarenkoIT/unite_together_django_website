@@ -20,37 +20,42 @@ def events(request, group_slug=None):
     if request.method == 'GET':
         # Get the checkbox state from the session, default to False if not set
         is_active = request.session.get('activeCheckbox', False)
-        selected_city = request.session.get('activeCityFilter', None)
-        # print(selected_city)
+        selected_city = request.session.get('activeCityFilter', "All")
 
     elif request.method == 'POST':
-        # Save the checkbox state to the session
-        is_active = request.POST.get("free-spots-checkbox") == "on"
-        request.session['activeCheckbox'] = is_active
-
-        # print(request.session['activeCityFilter'])
         # Save the selected City state to the session
-        selected_city = request.POST.get("selected-city")
-        request.session['activeCityFilter'] = selected_city
-        # print(request.POST.get("selected-city"))
-        # print(request.session['activeCityFilter'])
+        new_selected_city = request.POST.get("selected-city")
 
+        if new_selected_city is None:  # It means that POST not from City selector
+            selected_city = request.session.get('activeCityFilter', "All")  # Get old value from session or default All
+
+            is_active = request.POST.get("free-spots-checkbox") == "on"  # It means checkbox change to True or False
+            request.session['activeCheckbox'] = is_active
+
+        else:
+            selected_city = new_selected_city
+            request.session['activeCityFilter'] = new_selected_city
+            is_active = request.session.get('activeCheckbox', False)  # Checkbox stay with old value
     else:
-        is_active = False
-        selected_city = None
+        is_active = request.session.get('activeCheckbox', False)
+        selected_city = request.session.get('activeCityFilter', "All")
 
-    if group_slug:
+    kw_args = {}
+
+    if is_active:
+        kw_args = {"is_active": is_active}
+
+    if group_slug:  # If have group_slug - added filter by group
         group = get_object_or_404(ObjectsGroup, slug=group_slug)
-        if is_active:
-            all_objects = Events.objects.filter(group=group, is_active=True)
-        else:
-            all_objects = Events.objects.all().filter(group=group).order_by("id")
-    else:
-        if is_active:
-            all_objects = Events.objects.all().filter(is_active=True).order_by("id")
-        else:
-            all_objects = Events.objects.all().filter().order_by("id")
+        kw_args["group"] = group
 
+    if selected_city and selected_city != "All":  # If city option selected "All" then no filter by city
+        _city = get_object_or_404(City, name=selected_city)
+        kw_args['selected_city'] = _city
+
+    all_objects = Events.objects.all().filter(**kw_args).order_by("id")
+
+    # Pagination functional
     paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
     page = request.GET.get("page")
     page_all_objects = paginator.get_page(page)
@@ -88,3 +93,4 @@ def event_detail(request, group_slug=None, event_slug=None):
 def projects(request, group_slug=None):
     context = {}
     return render(request, 'projects/projects_index.html', context=context)
+
