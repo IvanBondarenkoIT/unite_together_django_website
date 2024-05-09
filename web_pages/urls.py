@@ -14,6 +14,9 @@ urlpatterns = [
     path('events/<slug:group_slug>/<slug:event_slug>', views.event_detail, name='event_detail'),
 
     path("about-us/", views.about_us, name="about-us"),
+    path("about-us/", views.about_us, name="about-us"),
+    path("about-us/", views.about_us, name="about-us"),
+    path("about-us/", views.about_us, name="about-us"),
 
 
 
