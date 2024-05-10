@@ -31,19 +31,14 @@
         <div class="bg3"></div>
         <div class="aside-box6">
           <div class="rectangle-bg6"></div>
-          <button class="item-active5">
-            <div class="item-active-inner"></div>
-            <div class="who-we-are3">Who we are</div>
-          </button>
-          <div class="image-analyzer1">
-            <div class="documents-parent">
-              <h3 class="documents5">Documents</h3>
-              <h3 class="partners-and-collaboration4">
-                Partners and collaboration
-              </h3>
-              <h3 class="contacts5">Contacts</h3>
-            </div>
-          </div>
+
+          {% for category, link in links.items %}
+              <a class="sport1{% if link in request.path %}-active{% endif %}" href="{% url  link %}">{{ category }}{{ link }}</a>
+{#              <a class="sport1{% if link in request.path %}-active{% endif %}" href="{% url 'events' %}">All</a>#}
+
+{#            <a class="sport1{% if request.path == '/events/' %}-active{% endif %}" href="{% url 'events' %}">All</a>#}
+          {% endfor %}
+
         </div>
         <section class="while-loop">
           <div class="for-loop">
