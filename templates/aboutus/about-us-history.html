@@ -4,8 +4,6 @@
 
 {% block content %}
 
-  <body>
-
     <div class="about-us12" data-animate-on-scroll>
       <div class="about-us-child"></div>
       <div class="about-us-item"></div>
@@ -31,14 +29,9 @@
         <div class="bg3"></div>
         <div class="aside-box6">
           <div class="rectangle-bg6"></div>
-
           {% for category, link in links.items %}
-              <a class="sport1{% if link in request.path %}-active{% endif %}" href="{% url  link %}">{{ category }}{{ link }}</a>
-{#              <a class="sport1{% if link in request.path %}-active{% endif %}" href="{% url 'events' %}">All</a>#}
-
-{#            <a class="sport1{% if request.path == '/events/' %}-active{% endif %}" href="{% url 'events' %}">All</a>#}
+              <a class="sport1{% if link in request.path %}-active{% endif %}" href="{% url  link %}">{{ category }}</a>
           {% endfor %}
-
         </div>
         <section class="while-loop">
           <div class="for-loop">
@@ -301,28 +294,5 @@
       </main>
 
     </div>
-
-    <script>
-      var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
-      var observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting || entry.intersectionRatio > 0) {
-              const targetElement = entry.target;
-              targetElement.classList.add("animate");
-              observer.unobserve(targetElement);
-            }
-          }
-        },
-        {
-          threshold: 0.15,
-        }
-      );
-      
-      for (let i = 0; i < scrollAnimElements.length; i++) {
-        observer.observe(scrollAnimElements[i]);
-      }
-      </script>
-  </body>
 
 {% endblock %}
