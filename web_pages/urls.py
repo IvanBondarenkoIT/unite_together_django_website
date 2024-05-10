@@ -14,9 +14,11 @@ urlpatterns = [
     path('events/<slug:group_slug>/<slug:event_slug>', views.event_detail, name='event_detail'),
 
     path("about-us/", views.about_us, name="about-us"),
-    path("about-us/", views.about_us, name="about-us"),
-    path("about-us/", views.about_us, name="about-us"),
-    path("about-us/", views.about_us, name="about-us"),
+    # path("about-us/", views.history, name="about-us-history"),
+    path("about-us/history", views.history, name="about-us-history"),
+    path("about-us/documents", views.documents, name="about-us-documents"),
+    path("about-us/partners", views.partners, name="about-us-partners"),
+    path("about-us/contacts", views.contacts, name="about-us-contacts"),
 
 
 

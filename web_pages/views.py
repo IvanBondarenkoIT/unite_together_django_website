@@ -10,12 +10,6 @@ def home(request):
     return render(request, "base.html")
 
 
-def about_us(request):
-    context = {}
-
-    return render(request, 'aboutus/aboutus_index.html', context=context)
-
-
 def events(request, group_slug=None):
     if request.method == 'GET':
         # Get the checkbox state from the session, default to False if not set
@@ -94,3 +88,27 @@ def projects(request, group_slug=None):
     context = {}
     return render(request, 'projects/projects_index.html', context=context)
 
+
+def about_us(request):
+    context = {}
+    return render(request, 'aboutus/aboutus_index.html', context=context)
+
+
+def history(request):
+    context = {}
+    return render(request, 'aboutus/about-us-history.html', context=context)
+
+
+def documents(request):
+    context = {}
+    return render(request, 'aboutus/about-us-documents.html', context=context)
+
+
+def partners(request):
+    context = {}
+    return render(request, 'aboutus/about-us-partners.html', context=context)
+
+
+def contacts(request):
+    context = {}
+    return render(request, 'aboutus/about-us-contacts.html')
