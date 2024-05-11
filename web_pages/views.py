@@ -6,6 +6,7 @@ from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObj
 
 OBJECTS_ON_PAGE = 3
 
+
 def home(request):
     return render(request, "base.html")
 
@@ -86,7 +87,12 @@ def event_detail(request, group_slug=None, event_slug=None):
 
 def projects(request, group_slug=None):
     context = {}
-    return render(request, 'projects/projects_index.html', context=context)
+    return render(request, 'projects/projects.html', context=context)
+
+
+def projects_detail(request, group_slug=None, project_slug=None):
+    context = {}
+    return render(request, 'projects/projects-details.html', context=context)
 
 
 def about_us(request):
