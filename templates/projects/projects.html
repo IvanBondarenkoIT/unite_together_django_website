@@ -69,417 +69,77 @@
         <div class="stroke-manager">
           <div class="bg5"></div>
           <div class="blend-mode-adapter">
-            <div class="opacity-controller">
-              <div class="raster-image-processor">
-                <div class="placeholder-image-parent">
-                  <img
-                    class="placeholder-image-icon5"
-                    alt=""
-                    src="{% static 'img/placeholder-image@2x.png' %}"
-                  />
-
-                  <img
-                    class="placeholder-image-icon6"
-                    loading="lazy"
-                    alt=""
-                    src="{% static 'img/placeholder-image@2x.png' %}"
-                  />
-                </div>
-                <div class="auto-layout-handler">
-                  <div class="constraint-solver">
+            {% for object in all_objects %}
+                <div class="opacity-controller2">
+                  <div class="placeholder-image-container">
                     <img
-                      class="constraint-solver-child"
+                      class="placeholder-image-icon8"
                       alt=""
-                      src="{% static 'img/vector-35.svg' %}"
+                      src="{{ object.image.url }}"
                     />
 
-                    <img
-                      class="constraint-solver-item"
-                      alt=""
-                      src="{% static 'img/vector-35.svg' %}"
-                    />
-                  </div>
-                </div>
-                <div class="decoration16"></div>
-              </div>
-              <div class="character-spacing-calculator">
-                <div class="frame-parent51">
-                  <div class="heading-parent2">
-                    <b class="heading17"
-                      >PLIS (PENSION LEGAL & INFORMATIONAL SUPPORT)</b
-                    >
-                    <b class="heading18"
-                      >PLIS (PENSION LEGAL & INFORMATIONAL SUPPORT)</b
-                    >
-                  </div>
-                  <div class="layer-duplicator">
-                    <div class="component-instance-manager">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Dummy text of the printing and
-                      typesetting industry.
+                    <div class="vector-wrapper13">
+                      <img
+                        class="frame-child14"
+                        alt=""
+                        src="{% static 'img/vector-35.svg' %}"
+                      />
                     </div>
-                    <div class="text15">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Dummy text of the printing and
-                      typesetting industry.
-                    </div>
+                    <div class="decoration18"></div>
                   </div>
-                  <div class="tag">
-                    <div class="tag-one">Other</div>
-                  </div>
-                </div>
-                <div class="style-library">
-                  <div class="prototype-creator">
-                    <img
-                      class="variant-handler-icon"
-                      alt=""
-                      src="{% static 'img/variant-handler.svg' %}"
-                    />
+                  <div class="frame-parent54">
+                    <div class="heading-parent4">
+                      <b class="heading20">{{ object.title }}</b>
+                      <div class="text-parent">
+                        <div class="lorem-ipsum-is-simply5">
+                            {{ object.text }}
 
-                    <img
-                      class="component-state-controller"
-                      alt=""
-                      src="{% static 'img/variant-handler.svg' %}"
-                    />
-                  </div>
-                </div>
-                <div class="auto-animate-helper">
-                  <div class="transition-manager">
-                    <div class="tag-one1">Ongoing</div>
-                    <div class="tag-one2">Ongoing</div>
-                  </div>
-                </div>
-              </div>
-              <div class="shape-container1">
-                <div class="link-list-parent">
-                  <div class="link-list">
-                    <img
-                      class="link-list-child"
-                      alt=""
-                      src="{% static 'img/variant-handler.svg' %}"
-                    />
-
-                    <img
-                      class="icon-set"
-                      alt=""
-                      src="{% static 'img/variant-handler.svg' %}"
-                    />
-                  </div>
-                  <div class="property-bank">
-                    <button class="button-delails">
-                      <div class="details">details</div>
-                      <div class="size-saver">
-                        <img
-                          class="position-recorder-icon"
-                          alt=""
-                          src="{% static 'img/vector-11.svg' %}"
-                        />
-                      </div>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="angle-adjuster">
-              <div class="ratio-regulator">
-                <img
-                  class="state-manager-icon"
-                  loading="lazy"
-                  alt=""
-                  src="{% static 'img/vector-33.svg' %}"
-                />
-
-                <img
-                  class="state-manager-icon1"
-                  alt=""
-                  src="{% static 'img/vector-33.svg' %}"
-                />
-              </div>
-            </div>
-            <div class="opacity-controller1">
-              <div class="placeholder-image-group">
-                <img
-                  class="placeholder-image-icon7"
-                  alt=""
-                  src="{% static 'img/placeholder-image-11@2x.png' %}"
-                />
-
-                <div class="vector-wrapper10">
-                  <img
-                    class="frame-child11"
-                    alt=""
-                    src="{% static 'img/vector-35.svg' %}"
-                  />
-                </div>
-                <div class="decoration17"></div>
-              </div>
-              <div class="frame-parent52">
-                <div class="frame-parent53">
-                  <div class="heading-parent3">
-                    <b class="heading19">ENGLISH COURSE FOR CHILDREN</b>
-                    <div class="layer-ordering-helper-parent">
-                      <div class="layer-ordering-helper">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Dummy text of the printing and
-                        typesetting industry.
-                      </div>
-                      <div class="tag1">
-                        <div class="tag-one3">Non-profin education</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="vector-wrapper11">
-                    <img
-                      class="frame-child12"
-                      alt=""
-                      src="{% static 'img/variant-handler.svg' %}"
-                    />
-                  </div>
-                  <div class="tag-one-wrapper">
-                    <div class="tag-one4">Complited</div>
-                  </div>
-                </div>
-                <div class="frame-wrapper10">
-                  <div class="vector-parent1">
-                    <img
-                      class="frame-child13"
-                      alt=""
-                      src="{% static 'img/variant-handler.svg' %}"
-                    />
-
-                    <div class="button-delails-wrapper">
-                      <button class="button-delails1">
-                        <div class="details1">details</div>
-                        <div class="vector-wrapper12">
-                          <img
-                            class="vector-icon12"
-                            alt=""
-                            src="{% static 'img/vector-11.svg' %}"
-                          />
                         </div>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <img
-              class="opacity-controller-icon"
-              alt=""
-              src="{% static 'img/vector-33.svg' %}"
-            />
-
-            <div class="opacity-controller2">
-              <div class="placeholder-image-container">
-                <img
-                  class="placeholder-image-icon8"
-                  alt=""
-                  src="{% static 'img/placeholder-image-21@2x.png' %}"
-                />
-
-                <div class="vector-wrapper13">
-                  <img
-                    class="frame-child14"
-                    alt=""
-                    src="{% static 'img/vector-35.svg' %}"
-                  />
-                </div>
-                <div class="decoration18"></div>
-              </div>
-              <div class="frame-parent54">
-                <div class="heading-parent4">
-                  <b class="heading20">modern dance classes </b>
-                  <div class="text-parent">
-                    <div class="text16">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Dummy text of the printing and
-                      typesetting industry.
-                    </div>
-                    <div class="tag2">
-                      <div class="tag-one5">Event and masster clases</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="vector-wrapper14">
-                  <img
-                    class="frame-child15"
-                    alt=""
-                    src="{% static 'img/variant-handler.svg' %}"
-                  />
-                </div>
-                <div class="tag-one-container">
-                  <div class="tag-one6">Ongoing</div>
-                </div>
-              </div>
-              <div class="opacity-controller-inner">
-                <div class="vector-parent2">
-                  <img
-                    class="frame-child16"
-                    alt=""
-                    src="{% static 'img/variant-handler.svg' %}"
-                  />
-
-                  <div class="button-delails-container">
-                    <button class="button-delails2">
-                      <div class="details2">details</div>
-                      <div class="vector-wrapper15">
-                        <img
-                          class="vector-icon13"
-                          alt=""
-                          src="{% static 'img/vector-11.svg' %}"
-                        />
+                        <div class="tag2">
+                          <div class="tag-one5">{{ object.group }}</div>
+                        </div>
                       </div>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <img
-              class="opacity-controller-icon1"
-              alt=""
-              src="{% static 'img/vector-33.svg' %}"
-            />
-
-            <div class="opacity-controller3">
-              <div class="placeholder-image-parent1">
-                <img
-                  class="placeholder-image-icon9"
-                  alt=""
-                  src="{% static 'img/placeholder-image@2x.png' %}"
-                />
-
-                <div class="vector-wrapper16">
-                  <img
-                    class="frame-child17"
-                    alt=""
-                    src="{% static 'img/vector-35.svg' %}"
-                  />
-                </div>
-                <div class="decoration19"></div>
-              </div>
-              <div class="frame-parent55">
-                <div class="heading-parent5">
-                  <b class="heading21"
-                    >PLIS (PENSION LEGAL & INFORMATIONAL SUPPORT)</b
-                  >
-                  <div class="text-group">
-                    <div class="text17">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Dummy text of the printing and
-                      typesetting industry.
                     </div>
-                    <div class="tag3">
-                      <div class="tag-one7">Other</div>
+                    <div class="vector-wrapper14">
+                      <img
+                        class="frame-child15"
+                        alt=""
+                        src="{% static 'img/variant-handler.svg' %}"
+                      />
+                    </div>
+                    <div class="tag-one-container">
+                      <div class="tag-one6">{% if object.is_active %}Ongoing{% else %}Complited{% endif %}</div>
                     </div>
                   </div>
-                </div>
-                <div class="vector-wrapper17">
-                  <img
-                    class="frame-child18"
-                    alt=""
-                    src="{% static 'img/variant-handler.svg' %}"
-                  />
-                </div>
-                <div class="tag-one-frame">
-                  <div class="tag-one8">Ongoing</div>
-                </div>
-              </div>
-              <div class="opacity-controller-child">
-                <div class="vector-parent3">
-                  <img
-                    class="frame-child19"
-                    alt=""
-                    src="{% static 'img/variant-handler.svg' %}"
-                  />
+                  <div class="opacity-controller-inner">
+                    <div class="vector-parent2">
+                      <img
+                        class="frame-child16"
+                        alt=""
+                        src="{% static 'img/variant-handler.svg' %}"
+                      />
 
-                  <div class="button-delails-frame">
-                    <button class="button-delails3">
-                      <div class="details3">details</div>
-                      <div class="vector-wrapper18">
-                        <img
-                          class="vector-icon14"
-                          alt=""
-                          src="{% static 'img/vector-11.svg' %}"
-                        />
+                      <div class="button-delails-container">
+                        <button class="button-delails2">
+                          <a href="{{ object.get_url }}" class="details2">details</a>
+                          <div class="vector-wrapper15">
+                            <img
+                              class="vector-icon13"
+                              alt=""
+                              src="{% static 'img/vector-11.svg' %}"
+                            />
+                          </div>
+                        </button>
                       </div>
-                    </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <img
-              class="opacity-controller-icon2"
-              alt=""
-              src="{% static 'img/vector-33.svg' %}"
-            />
-
-            <div class="opacity-controller4">
-              <div class="placeholder-image-parent2">
                 <img
-                  class="placeholder-image-icon10"
+                  class="opacity-controller-icon1"
                   alt=""
-                  src="{% static 'img/placeholder-image@2x.png' %}"
+                  src="{% static 'img/vector-33.svg' %}"
                 />
-
-                <div class="vector-wrapper19">
-                  <img
-                    class="frame-child20"
-                    alt=""
-                    src="{% static 'img/vector-35.svg' %}"
-                  />
-                </div>
-                <div class="decoration20"></div>
-              </div>
-              <div class="frame-parent56">
-                <div class="heading-parent6">
-                  <b class="heading22"
-                    >PLIS (PENSION LEGAL & INFORMATIONAL SUPPORT)</b
-                  >
-                  <div class="text-parent1">
-                    <div class="text18">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Dummy text of the printing and
-                      typesetting industry.
-                    </div>
-                    <div class="tag4">
-                      <div class="tag-one9">Other</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="vector-wrapper20">
-                  <img
-                    class="frame-child21"
-                    alt=""
-                    src="{% static 'img/variant-handler.svg' %}"
-                  />
-                </div>
-                <div class="tag-one-wrapper1">
-                  <div class="tag-one10">Ongoing</div>
-                </div>
-              </div>
-              <div class="opacity-controller-inner1">
-                <div class="vector-parent4">
-                  <img
-                    class="frame-child22"
-                    alt=""
-                    src="{% static 'img/variant-handler.svg' %}"
-                  />
-
-                  <div class="button-delails-wrapper1">
-                    <button class="button-delails4">
-                      <div class="details4">details</div>
-                      <div class="vector-wrapper21">
-                        <img
-                          class="vector-icon15"
-                          alt=""
-                          src="{% static 'img/vector-11.svg' %}"
-                        />
-                      </div>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
           </div>
           <div class="transition-trio">
             <div class="effect-enabler">
