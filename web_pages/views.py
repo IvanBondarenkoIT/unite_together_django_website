@@ -86,7 +86,8 @@ def event_detail(request, group_slug=None, event_slug=None):
 
 
 def projects(request, group_slug=None):
-    context = {}
+    all_objects = Events.objects.all().filter().order_by("id")
+    context = {"all_objects": all_objects,}
     return render(request, 'projects/projects.html', context=context)
 
 
