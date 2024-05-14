@@ -88,14 +88,14 @@ class Events(WebContentObject):
         return reverse("event_detail", args=[self.group.slug, self.slug])
 
 
-class Projects(Events):
+class Projects(WebContentObject):
     # selected_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
     # # city = models.CharField(max_length=250, blank=True, null=True)
     # address = models.CharField(max_length=250, blank=True, null=True)
     # start_age = models.IntegerField(blank=True, null=True)
     # end_age = models.IntegerField(blank=True, null=True)
-    # start_date = models.DateField(blank=True,null=True)
-    # end_date = models.DateField(blank=True,null=True)
+    start_date = models.DateField(blank=True,null=True)
+    end_date = models.DateField(blank=True,null=True)
 
     def __str__(self):
         return f"Event - {self.name}"

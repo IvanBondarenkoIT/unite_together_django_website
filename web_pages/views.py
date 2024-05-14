@@ -8,7 +8,7 @@ OBJECTS_ON_PAGE = 3
 
 
 def home(request):
-    return render(request, "base.html")
+    return render(request, "home/index.html")
 
 
 def events(request, group_slug=None):
