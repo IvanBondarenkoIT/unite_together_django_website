@@ -28,7 +28,7 @@ class ObjectsGroup(models.Model):  # Spotr, non-formal education, Events and mas
         return f'{self.name} {self.page}'
 
     def get_url(self):
-        return reverse("events_by_group", args=[self.slug])
+        return reverse(f"{self.page.name}_by_group", args=[self.slug])
 
 
 class WebContentObject(models.Model):
