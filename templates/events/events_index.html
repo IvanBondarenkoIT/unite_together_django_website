@@ -117,91 +117,94 @@
               </div>
             </div>
           </div>
-          <div class="items2">
+            <div class="stroke-manager">
+              <div class="items2">
 
 
 
-            {% for object in all_objects %}
+                {% for object in all_objects %}
 
-                <div class="item-1">
-                    <div class="touch-input to-front">
-                        <div class="gesture-recognizer">
-                            <div class="date6">
-                                <div class="date7">
-                                    <div class="facial-recognition">
-                                        <div class="biometric-authentication to-center">{{ object.get_start_date_day }}</div>
+                    <div class="item-1">
+                        <div class="touch-input to-front">
+                            <div class="gesture-recognizer">
+                                <div class="date6">
+                                    <div class="date7">
+                                        <div class="facial-recognition">
+                                            <div class="biometric-authentication to-center">{{ object.get_start_date_day }}</div>
+                                        </div>
+                                        <div class="year6">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
                                     </div>
-                                    <div class="year6">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
                                 </div>
-                            </div>
-                            <div class="age7">
-                                <div class="age8">
-                                    <span>Age: </span>
-                                    <span class="span">{{ object.start_age }}-{{ object.end_age }}</span>
+                                <div class="age7">
+                                    <div class="age8">
+                                        <span>Age: </span>
+                                        <span class="span">{{ object.start_age }}-{{ object.end_age }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="gyroscope">
-                        <div class="magnetometer">
-                            <button class="city1">
-                                <a href="{{ object.get_url }}">
-                                    <img class="icon" alt="" src="{{ object.image.url }}"/>
-                                </a>
+                        <div class="gyroscope">
+                            <div class="magnetometer">
+                                <button class="city1">
+                                    <a href="{{ object.get_url }}">
+                                        <img class="icon" alt="" src="{{ object.image.url }}"/>
+                                    </a>
 
-                                <div class="bg-enrollment"></div>
-                                <div class="facial-expression">
-                                    <img
-                                            class="biometric-verification-icon"
-                                            alt=""
-                                            src="{% static 'img/biometric-verification.svg' %}"
-                                    />
-                                </div>
-                                <div class="batumi">{{ object.selected_city }}</div>
-                            </button>
-                            <div class="condition-splitter">
-                                <div class="header-item">
-                                    <div class="decoration1"></div>
-                                    <b class="crafts-for-children">{{ object.title }}</b>
-                                </div>
-                                <div class="iteration-loop">
-                                    <div class="lorem-ipsum-is-simply5">{{ object.text }}</div>
+                                    <div class="bg-enrollment"></div>
+                                    <div class="facial-expression">
+                                        <img
+                                                class="biometric-verification-icon"
+                                                alt=""
+                                                src="{% static 'img/biometric-verification.svg' %}"
+                                        />
+                                    </div>
+                                    <div class="batumi">{{ object.selected_city }}</div>
+                                </button>
+                                <div class="condition-splitter">
+                                    <div class="header-item">
+                                        <div class="decoration1"></div>
+                                        <b class="crafts-for-children">{{ object.title }}</b>
+                                    </div>
+                                    <div class="iteration-loop">
+                                        <div class="lorem-ipsum-is-simply5">{{ object.text }}</div>
+                                    </div>
                                 </div>
                             </div>
+                            {% if object.is_active %}
+                                <a class="button-join5" href="{{ object.get_url }}">
+                                  <div class="join-parent3">
+                                     <div class="join5">Join</div>
+                                    <div class="vector-wrapper7">
+                                      <img
+                                        class="vector-icon9"
+                                        alt=""
+                                        src="{% static 'img/vector-11.svg' %}"
+                                      />
+                                    </div>
+                                  </div>
+                                </a>
+                            {% else %}
+                                <button class="button-join">
+                                  <div class="join-parent">
+                                    <div class="join">Closed</div>
+                                    <div class="vector-wrapper">
+                                      <img
+                                        class="vector-icon"
+                                        alt=""
+                                        src="{% static 'img/vector-11.svg' %}"
+                                      />
+                                    </div>
+                                  </div>
+                                </button>
+                            {% endif %}
                         </div>
-                        {% if object.is_active %}
-                            <a class="button-join5" href="{{ object.get_url }}">
-                              <div class="join-parent3">
-                                 <div class="join5">Join</div>
-                                <div class="vector-wrapper7">
-                                  <img
-                                    class="vector-icon9"
-                                    alt=""
-                                    src="{% static 'img/vector-11.svg' %}"
-                                  />
-                                </div>
-                              </div>
-                            </a>
-                        {% else %}
-                            <button class="button-join">
-                              <div class="join-parent">
-                                <div class="join">Closed</div>
-                                <div class="vector-wrapper">
-                                  <img
-                                    class="vector-icon"
-                                    alt=""
-                                    src="{% static 'img/vector-11.svg' %}"
-                                  />
-                                </div>
-                              </div>
-                            </button>
-                        {% endif %}
                     </div>
-                </div>
-            {% endfor %}
-          </div>
+                {% endfor %}
+              </div>
+            </div>
         </div>
 {#      paginator #}
+
         <div class="data-visualizer">
           <nav class="mt-4" aria-label="Page navigation sample">
                 {% if all_objects.has_other_pages %}
@@ -231,6 +234,7 @@
             </nav>
 {#      end new paginator#}
         </div>
+
 
       </section>
 
