@@ -4,192 +4,207 @@
 
 {% block content %}
 
-      <section class="page-header6">
-        <img class="bg-icon6" loading="lazy" alt="" src="{% static 'img/bg@2x.png' %}" />
+    <section class="page-header6">
+        <img class="bg-icon6" loading="lazy" alt="" src="{% static 'img/bg@2x.png' %}"/>
 
         <div class="sec-title6">
-          <div class="sublitle6">Subtitle</div>
-          <div class="content18">
-            <h1 class="events24">Projects</h1>
-            <div class="discover-the-diverse-range-of-wrapper3">
-              <div class="discover-the-diverse6">
-                Discover the diverse range of events and activities we offer to
-                support the Ukrainian community in Georgia.
-              </div>
+            <div class="sublitle6">Subtitle</div>
+            <div class="content18">
+                <h1 class="events24">Projects</h1>
+                <div class="discover-the-diverse-range-of-wrapper3">
+                    <div class="discover-the-diverse6">
+                        Discover the diverse range of events and activities we offer to
+                        support the Ukrainian community in Georgia.
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
-      <section class="rectangle-group">
+    </section>
+    <section class="rectangle-group">
         <div class="rectangle-div"></div>
-        <div class="aside-box7">
-          <div class="rectangle-bg7"></div>
-          <div class="value-comparator2">
-            <div class="item-active6">
-              <div class="item-active-child1"></div>
-              <div class="all2">All</div>
-            </div>
-          </div>
-          <div class="data-aggregator4">
-            <div class="financial-assistance">Financial assistance</div>
-          </div>
-          <div class="data-aggregator5">
-            <div class="sport2">Sport</div>
-          </div>
-          <div class="data-aggregator6">
-            <div class="non-formal-education2">Non-formal education</div>
-          </div>
-          <div class="data-aggregator7">
-            <div class="events-and-master2">Events and master classes</div>
-          </div>
-          <div class="data-aggregator8">
-            <div class="other">Other</div>
-          </div>
-          <div class="color-palette">
-            <img
-              class="dec-line-1-icon2"
-              loading="lazy"
-              alt=""
-              src="{% static 'img/decline1.svg' %}"
-            />
-          </div>
-          <div class="position-coordinator">
-            <div class="availability3">Availability</div>
-          </div>
-          <div class="symbol-library-wrapper">
-            <div class="symbol-library">
-              <input class="icon-check2" type="checkbox" />
+        <div class="aside-box">
+            <div class="iterative-processor">
 
-              <div class="spacing-calculator">
-                <div class="ongoing-projects">Ongoing projects</div>
-              </div>
+                <div class="database-connection">
+                    <div class="error-handler">
+                        <a class="sport1{% if request.path == '/events/' %}-active{% endif %}"
+                           href="{% url 'events' %}">All</a>
+                        {#                  <a class="sport1" href="{% url 'events' %}">All</a>#}
+                        {% for category in links %}
+                            <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
+                               href="{{ category.get_url }}">{{ category.name }}</a>
+                            {#                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>#}
+
+                        {% endfor %}
+                        <div class="variable-holder">
+
+                            <div class="function-caller">
+                                <img
+                                        class="dec-line-1-icon"
+                                        loading="lazy"
+                                        alt=""
+                                        src="{% static 'img/decline1.svg' %}"
+                                />
+                            </div>
+
+                            <div class="function-caller1">
+                                <img
+                                        class="dec-line-2-icon"
+                                        loading="lazy"
+                                        alt=""
+                                        src="{% static 'img/decline2.svg' %}"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="audio-processor">
+                <div class="availability">
+                    <div class="availability1">Availability</div>
+                    {#                <div class="check-button1">#}
+                    {#                  <input class="icon-check1" type="checkbox" id="activeCheckbox">#}
+                    {#                  <div class="event-dispatcher">#}
+                    {#                    <div class="vacant-seats1">Free spots</div>#}
+                    {#                  </div>#}
+
+                    <form id="filterForm" action="{% url 'events' %}" method="POST">
+                        {% csrf_token %}
+                        <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox"
+                               {% if free_spots == True %}checked="{true}{% endif %}">
+
+                        <label for="activeCheckbox">Free spots</label>
+                    </form>
+
+                    {#                </div>#}
+                </div>
+            </div>
         </div>
         <div class="stroke-manager">
-          <div class="bg5"></div>
-          <div class="blend-mode-adapter">
-            {% for object in all_objects %}
-                <div class="opacity-controller2">
-                  <div class="placeholder-image-container">
-                    <img
-                      class="placeholder-image-icon8"
-                      alt=""
-                      src="{{ object.image.url }}"
-                    />
-
-                    <div class="vector-wrapper13">
-                      <img
-                        class="frame-child14"
-                        alt=""
-                        src="{% static 'img/vector-35.svg' %}"
-                      />
-                    </div>
-                    <div class="decoration18"></div>
-                  </div>
-                  <div class="frame-parent54">
-                    <div class="heading-parent4">
-                      <b class="heading20">{{ object.title }}</b>
-                      <div class="text-parent">
-                        <div class="lorem-ipsum-is-simply5">
-                            {{ object.text }}
-
-                        </div>
-                        <div class="tag2">
-                          <div class="tag-one5">{{ object.group }}</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="vector-wrapper14">
-                      <img
-                        class="frame-child15"
-                        alt=""
-                        src="{% static 'img/variant-handler.svg' %}"
-                      />
-                    </div>
-                    <div class="tag-one-container">
-                      <div class="tag-one6">{% if object.is_active %}Ongoing{% else %}Complited{% endif %}</div>
-                    </div>
-                  </div>
-                  <div class="opacity-controller-inner">
-                    <div class="vector-parent2">
-                      <img
-                        class="frame-child16"
-                        alt=""
-                        src="{% static 'img/variant-handler.svg' %}"
-                      />
-
-                      <div class="button-delails-container">
-                        <button class="button-delails2">
-                          <a href="{{ object.get_url }}" class="details2">details</a>
-                          <div class="vector-wrapper15">
+            <div class="bg5"></div>
+            <div class="blend-mode-adapter">
+                {% for object in all_objects %}
+                    <div class="opacity-controller2">
+                        <div class="placeholder-image-container">
                             <img
-                              class="vector-icon13"
-                              alt=""
-                              src="{% static 'img/vector-11.svg' %}"
+                                    class="placeholder-image-icon8"
+                                    alt=""
+                                    src="{{ object.image.url }}"
                             />
-                          </div>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <img
-                  class="opacity-controller-icon1"
-                  alt=""
-                  src="{% static 'img/vector-33.svg' %}"
-                />
-            {% endfor %}
-          </div>
-          <div class="transition-trio">
-            <div class="effect-enabler">
-              <div class="sub-component-store-wrapper">
-                <div class="sub-component-store">
-                  <div class="nesting-navigator">
-                    <img
-                      class="interaction-invoker-icon"
-                      alt=""
-                      src="{% static 'img/vector-12.svg' %}"
-                    />
-                  </div>
-                  <div class="back1">Back</div>
-                </div>
-              </div>
-              <div class="active1">
-                <div class="active-item"></div>
-                <div class="alignment-adjustment">1</div>
-              </div>
-              <div class="visibility-validator">
-                <div class="access-controller">2</div>
-              </div>
-              <div class="visibility-validator1">
-                <div class="div11">3</div>
-              </div>
-              <div class="spacing-scheduler">
-                <div class="fill-finder">
-                  <div class="forward1">Forward</div>
-                  <div class="icon-identifier">
-                    <img
-                      class="shape-shaper-icon"
-                      alt=""
-                      src="{% static 'img/vector-13.svg' %}"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <div class="tag5">
+                            <div class="vector-wrapper13">
+                                <img
+                                        class="frame-child14"
+                                        alt=""
+                                        src="{% static 'img/vector-35.svg' %}"
+                                />
+                            </div>
+                            <div class="decoration18"></div>
+                        </div>
+                        <div class="frame-parent54">
+                            <div class="heading-parent4">
+                                <b class="heading20">{{ object.title }}</b>
+                                <div class="text-parent">
+                                    <div class="lorem-ipsum-is-simply5">
+                                        {{ object.text }}
+
+                                    </div>
+                                    <div class="tag2">
+                                        <div class="tag-one5">{{ object.group }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="vector-wrapper14">
+                                <img
+                                        class="frame-child15"
+                                        alt=""
+                                        src="{% static 'img/variant-handler.svg' %}"
+                                />
+                            </div>
+                            <div class="tag-one-container">
+                                <div class="tag-one6">{% if object.is_active %}Ongoing{% else %}
+                                    Complited{% endif %}</div>
+                            </div>
+                        </div>
+                        <div class="opacity-controller-inner">
+                            <div class="vector-parent2">
+                                <img
+                                        class="frame-child16"
+                                        alt=""
+                                        src="{% static 'img/variant-handler.svg' %}"
+                                />
+
+                                <div class="button-delails-container">
+                                    <button class="button-delails2">
+                                        <a href="{{ object.get_url }}" class="details2">details</a>
+                                        <div class="vector-wrapper15">
+                                            <img
+                                                    class="vector-icon13"
+                                                    alt=""
+                                                    src="{% static 'img/vector-11.svg' %}"
+                                            />
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img
+                            class="opacity-controller-icon1"
+                            alt=""
+                            src="{% static 'img/vector-33.svg' %}"
+                    />
+                {% endfor %}
+            </div>
+            <div class="transition-trio">
+                <div class="effect-enabler">
+                    <div class="sub-component-store-wrapper">
+                        <div class="sub-component-store">
+                            <div class="nesting-navigator">
+                                <img
+                                        class="interaction-invoker-icon"
+                                        alt=""
+                                        src="{% static 'img/vector-12.svg' %}"
+                                />
+                            </div>
+                            <div class="back1">Back</div>
+                        </div>
+                    </div>
+                    <div class="active1">
+                        <div class="active-item"></div>
+                        <div class="alignment-adjustment">1</div>
+                    </div>
+                    <div class="visibility-validator">
+                        <div class="access-controller">2</div>
+                    </div>
+                    <div class="visibility-validator1">
+                        <div class="div11">3</div>
+                    </div>
+                    <div class="spacing-scheduler">
+                        <div class="fill-finder">
+                            <div class="forward1">Forward</div>
+                            <div class="icon-identifier">
+                                <img
+                                        class="shape-shaper-icon"
+                                        alt=""
+                                        src="{% static 'img/vector-13.svg' %}"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="tag5">
         <div class="tag-one11">Other</div>
-      </div>
-      <div class="decoration22"></div>
-      <div class="button-delails5">
+    </div>
+    <div class="decoration22"></div>
+    <div class="button-delails5">
         <div class="details5">details</div>
-        <img class="vector-icon16" alt="" src="{% static 'img/vector-11.svg' %}" />
-      </div>
+        <img class="vector-icon16" alt="" src="{% static 'img/vector-11.svg' %}"/>
+    </div>
     </div>
 
 
