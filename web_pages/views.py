@@ -4,7 +4,7 @@ from django.http import JsonResponse
 
 from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City
 
-OBJECTS_ON_PAGE = 3
+OBJECTS_ON_PAGE = 6
 
 
 def home(request):
