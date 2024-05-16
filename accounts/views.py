@@ -59,7 +59,7 @@ def register(request):
         "form": form,
     }
 
-    return render(request, "accounts/register.html", context=context)
+    return render(request, "accounts/new/signup.html", context=context)
 
 
 def login(request):
