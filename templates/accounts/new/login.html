@@ -9,11 +9,7 @@
         <div class="header1">
           <div class="heading15">
             <div class="title-login">Log in to your account</div>
-            <input
-              class="subtitle"
-              placeholder="Welcome back! Please enter your details."
-              type="text"
-            />
+              <div class="subtitle">Welcome back! Please enter your details.</div>
           </div>
         </div>
         <div class="content9">
@@ -240,7 +236,7 @@
               </div>
             </div>
             <div class="texttext">
-              <div class="text25">Forgot password</div>
+              <a class="text25" href="{% url 'forgot_password' %}">Forgot password</a>
             </div>
           </div>
           <div class="actions">
@@ -263,7 +259,7 @@
                 </div>
               </div>
               <div class="text26">
-                <div class="icon-width">Sign in</div>
+                <a class="icon-width" href="{% url "home" %}">Sign in</a>
               </div>
               <div class="icon-2">
                 <div class="width-change-size-here7">
@@ -283,35 +279,36 @@
                 </div>
               </div>
             </button>
-            <button class="buttonmediumprimarytruenor">
-              <div class="icon7">
-                <div class="width-change-size-here8">
-                  <div class="ignore40"></div>
-                  <div class="ignore41"></div>
-                </div>
-                <div class="icon-wrapper-h8">
-                  <div class="height-change-size-here8">
-                    <div class="ignore42"></div>
-                    <div class="ignore43"></div>
-                  </div>
-                  <img
-                    class="icon-wrapper14"
-                    alt=""
-                    src="{% static 'img/iconwrapper-8@2x.png' %}"
-                  />
-                </div>
-              </div>
-              <div class="text27">
-                <div class="text28">Sign in with Google</div>
-              </div>
-            </button>
+{#            <button class="buttonmediumprimarytruenor">#}
+{#              <div class="icon7">#}
+{#                <div class="width-change-size-here8">#}
+{#                  <div class="ignore40"></div>#}
+{#                  <div class="ignore41"></div>#}
+{#                </div>#}
+{#                <div class="icon-wrapper-h8">#}
+{#                  <div class="height-change-size-here8">#}
+{#                    <div class="ignore42"></div>#}
+{#                    <div class="ignore43"></div>#}
+{#                  </div>#}
+{#                  <img#}
+{#                    class="icon-wrapper14"#}
+{#                    alt=""#}
+{#                    src="{% static 'img/iconwrapper-8@2x.png' %}"#}
+{#                  />#}
+{#                </div>#}
+{#              </div>#}
+{#              <div class="text27">#}
+{#                <div class="text28">Sign in with Google</div>#}
+{#              </div>#}
+{#            </button>#}
 
           </div>
 
             <div class="texttext1">
                 <div class="text29">Don’t have an account?</div>
             </div>
-            <input class="texttext2" placeholder="Sign up" type="text"/>
+            <a class="texttext2" href="{% url "register" %}">Sign up</a>
+
         </div>
 
 
