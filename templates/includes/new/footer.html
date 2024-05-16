@@ -188,18 +188,5 @@
     });
     </script>
 
-    <script>
-        // Save scroll position before navigating away
-        window.onbeforeunload = function() {
-            sessionStorage.setItem('scrollPosition', window.scrollY);
-        };
 
-        // Restore scroll position on page load
-        window.onload = function() {
-            var scrollPosition = sessionStorage.getItem('scrollPosition');
-            if (scrollPosition !== null) {
-                window.scrollTo(0, parseInt(scrollPosition));
-            }
-        };
-    </script>
 

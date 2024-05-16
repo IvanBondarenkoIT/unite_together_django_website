@@ -59,7 +59,7 @@ def register(request):
         "form": form,
     }
 
-    return render(request, "accounts/register.html", context=context)
+    return render(request, "accounts/new/signup.html", context=context)
 
 
 def login(request):
@@ -76,7 +76,7 @@ def login(request):
             messages.error(request, "Invalid Login Credentials")
             return redirect("login")
 
-    return render(request, "accounts/login.html")
+    return render(request, "accounts/new/login.html")
 
 
 @login_required(login_url="login")

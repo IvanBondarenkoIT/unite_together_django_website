@@ -28,7 +28,7 @@ class ObjectsGroup(models.Model):  # Spotr, non-formal education, Events and mas
         return f'{self.name} {self.page}'
 
     def get_url(self):
-        return reverse("events_by_group", args=[self.slug])
+        return reverse(f"{self.page.name}_by_group", args=[self.slug])
 
 
 class WebContentObject(models.Model):
@@ -89,16 +89,16 @@ class Events(WebContentObject):
 
 
 class Projects(WebContentObject):
-    # selected_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
+    selected_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
     # # city = models.CharField(max_length=250, blank=True, null=True)
-    # address = models.CharField(max_length=250, blank=True, null=True)
+    address = models.CharField(max_length=250, blank=True, null=True)
     # start_age = models.IntegerField(blank=True, null=True)
     # end_age = models.IntegerField(blank=True, null=True)
-    start_date = models.DateField(blank=True,null=True)
-    end_date = models.DateField(blank=True,null=True)
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return f"Event - {self.name}"
+        return f"Project - {self.name}"
 
     def get_start_date_year(self):
         return self.start_date.strftime("%Y")
@@ -110,4 +110,4 @@ class Projects(WebContentObject):
         return self.start_date.strftime("%d")
 
     def get_url(self):
-        return reverse("event_detail", args=[self.group.slug, self.slug])
+        return reverse("project_detail", args=[self.group.slug, self.slug])

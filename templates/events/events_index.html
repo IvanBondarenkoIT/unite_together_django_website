@@ -25,183 +25,175 @@
       <section class="sect-events">
         <div class="sect-events-child"></div>
         <div class="aside-box-parent">
-          <div class="aside-box">
+            <div class="aside-box">
 
-            <div class="iterative-processor">
+                <div class="iterative-processor">
 
-              <div class="database-connection">
-                <div class="error-handler">
-                    <a class="sport1{% if request.path == '/events/' %}-active{% endif %}" href="{% url 'events' %}">All</a>
-{#                  <a class="sport1" href="{% url 'events' %}">All</a>#}
-                  {% for category in links %}
-                      <a class="sport1{% if category.slug in request.path %}-active{% endif %}" href="{{ category.get_url }}">{{ category.name }}</a>
-{#                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>#}
+                    <div class="database-connection">
+                        <div class="error-handler">
+                            <a class="sport1{% if request.path == '/events/' %}-active{% endif %}"
+                               href="{% url 'events' %}">All</a>
+                            {#                  <a class="sport1" href="{% url 'events' %}">All</a>#}
+                            {% for category in links %}
+                                <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
+                                   href="{{ category.get_url }}">{{ category.name }}</a>
+                                {#                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>#}
 
-                  {% endfor %}
-                  <div class="variable-holder">
+                            {% endfor %}
+                            <div class="variable-holder">
 
-                    <div class="function-caller">
-                      <img
-                        class="dec-line-1-icon"
-                        loading="lazy"
-                        alt=""
-                        src="{% static 'img/decline1.svg' %}"
-                      />
-                    </div>
-{#                    <div class="dropdown-city">#}
-{#                      <div class="list-processor">#}
-{#                        <div class="text-wrap">#}
-{#                          <div class="select-your-city">Select your city</div>#}
-{#                        </div>#}
-{#                      </div>#}
-{#                      <img#}
-{#                        class="keyboard-arrow-down"#}
-{#                        alt=""#}
-{#                        src="{% static 'img/keyboard-arrow-down.svg' %}"#}
-{#                      />#}
-{#                    </div>#}
-
-                  <lable class="select-your-city">Select your city</lable>
-                      <form id="cityForm" method="POST" action="{% url 'events' %}">
-                      {% csrf_token %}
-                          <select id="cities" name="selected-city">
-                            {% if selected_city %}
-                                <option value="{{ selected_city }}">{{ selected_city }}</option>
-                            {% else %}
-                                <option value="All">All</option>
-                            {% endif %}
-
-                              {% for city in cities %}
-                                  {% if city.name == selected_city %}
-                                      <option value="All">All</option>
-                                  {% else %}
-                                      <option value="{{ city }}">{{ city }}</option>
-                                  {% endif %}
-                              {% endfor %}
-                          </select>
-                      </form>
-{#                  <ul id="itemList">#}
-{##}
-{#                  </ul>#}
-                    <div class="function-caller1">
-                      <img
-                        class="dec-line-2-icon"
-                        loading="lazy"
-                        alt=""
-                        src="{% static 'img/decline2.svg' %}"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="audio-processor">
-              <div class="availability">
-                <div class="availability1">Availability</div>
-{#                <div class="check-button1">#}
-{#                  <input class="icon-check1" type="checkbox" id="activeCheckbox">#}
-{#                  <div class="event-dispatcher">#}
-{#                    <div class="vacant-seats1">Free spots</div>#}
-{#                  </div>#}
-
-                    <form id="filterForm" action="{% url 'events' %}" method="POST">
-                        {% csrf_token %}
-                        <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox" {% if free_spots == True %}checked="{true}{% endif %}">
-
-                        <label for="activeCheckbox">Free spots</label>
-                    </form>
-
-{#                </div>#}
-              </div>
-            </div>
-          </div>
-          <div class="items2">
-
-
-
-            {% for object in all_objects %}
-
-                <div class="item-1">
-                    <div class="touch-input to-front">
-                        <div class="gesture-recognizer">
-                            <div class="date6">
-                                <div class="date7">
-                                    <div class="facial-recognition">
-                                        <div class="biometric-authentication to-center">{{ object.get_start_date_day }}</div>
-                                    </div>
-                                    <div class="year6">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
-                                </div>
-                            </div>
-                            <div class="age7">
-                                <div class="age8">
-                                    <span>Age: </span>
-                                    <span class="span">{{ object.start_age }}-{{ object.end_age }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="gyroscope">
-                        <div class="magnetometer">
-                            <button class="city1">
-                                <a href="{{ object.get_url }}">
-                                    <img class="icon" alt="" src="{{ object.image.url }}"/>
-                                </a>
-
-                                <div class="bg-enrollment"></div>
-                                <div class="facial-expression">
+                                <div class="function-caller">
                                     <img
-                                            class="biometric-verification-icon"
+                                            class="dec-line-1-icon"
+                                            loading="lazy"
                                             alt=""
-                                            src="{% static 'img/biometric-verification.svg' %}"
+                                            src="{% static 'img/decline1.svg' %}"
                                     />
                                 </div>
-                                <div class="batumi">{{ object.selected_city }}</div>
-                            </button>
-                            <div class="condition-splitter">
-                                <div class="header-item">
-                                    <div class="decoration1"></div>
-                                    <b class="crafts-for-children">{{ object.title }}</b>
-                                </div>
-                                <div class="iteration-loop">
-                                    <div class="lorem-ipsum-is-simply5">{{ object.text }}</div>
+
+
+                                <lable class="select-your-city">Select your city</lable>
+                                <form id="cityForm" method="POST" action="{% url 'events' %}">
+                                    {% csrf_token %}
+                                    <select id="cities" name="selected-city">
+                                        {% if selected_city %}
+                                            <option value="{{ selected_city }}">{{ selected_city }}</option>
+                                        {% else %}
+                                            <option value="All">All</option>
+                                        {% endif %}
+
+                                        {% for city in cities %}
+                                            {% if city.name == selected_city %}
+                                                <option value="All">All</option>
+                                            {% else %}
+                                                <option value="{{ city }}">{{ city }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </form>
+
+                                <div class="function-caller1">
+                                    <img
+                                            class="dec-line-2-icon"
+                                            loading="lazy"
+                                            alt=""
+                                            src="{% static 'img/decline2.svg' %}"
+                                    />
                                 </div>
                             </div>
                         </div>
-                        {% if object.is_active %}
-                            <a class="button-join5" href="{{ object.get_url }}">
-                              <div class="join-parent3">
-                                 <div class="join5">Join</div>
-                                <div class="vector-wrapper7">
-                                  <img
-                                    class="vector-icon9"
-                                    alt=""
-                                    src="{% static 'img/vector-11.svg' %}"
-                                  />
-                                </div>
-                              </div>
-                            </a>
-                        {% else %}
-                            <button class="button-join">
-                              <div class="join-parent">
-                                <div class="join">Closed</div>
-                                <div class="vector-wrapper">
-                                  <img
-                                    class="vector-icon"
-                                    alt=""
-                                    src="{% static 'img/vector-11.svg' %}"
-                                  />
-                                </div>
-                              </div>
-                            </button>
-                        {% endif %}
                     </div>
                 </div>
-            {% endfor %}
-          </div>
+
+
+                <div class="audio-processor">
+                    <div class="availability">
+                        <div class="availability1">Availability</div>
+                        {#                <div class="check-button1">#}
+                        {#                  <input class="icon-check1" type="checkbox" id="activeCheckbox">#}
+                        {#                  <div class="event-dispatcher">#}
+                        {#                    <div class="vacant-seats1">Free spots</div>#}
+                        {#                  </div>#}
+
+                        <form id="filterForm" action="{% url 'events' %}" method="POST">
+                            {% csrf_token %}
+                            <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox"
+                                   {% if free_spots == True %}checked="{true}{% endif %}">
+
+                            <label for="activeCheckbox">Free spots</label>
+                        </form>
+
+                        {#                </div>#}
+                    </div>
+                </div>
+            </div>
+            <div class="stroke-manager">
+                <div class="items2">
+
+
+                    {% for object in all_objects %}
+
+                        <div class="item-1">
+                            <div class="touch-input to-front">
+                                <div class="gesture-recognizer">
+                                    <div class="date6">
+                                        <div class="date7">
+                                            <div class="facial-recognition">
+                                                <div class="biometric-authentication to-center">{{ object.get_start_date_day }}</div>
+                                            </div>
+                                            <div class="year6">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="age7">
+                                        <div class="age8">
+                                            <span>Age: </span>
+                                            <span class="span">{{ object.start_age }}-{{ object.end_age }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="gyroscope">
+                                <div class="magnetometer">
+                                    <button class="city1">
+                                        <a href="{{ object.get_url }}">
+                                            <img class="icon" alt="" src="{{ object.image.url }}"/>
+                                        </a>
+
+                                        <div class="bg-enrollment"></div>
+                                        <div class="facial-expression">
+                                            <img
+                                                    class="biometric-verification-icon"
+                                                    alt=""
+                                                    src="{% static 'img/biometric-verification.svg' %}"
+                                            />
+                                        </div>
+                                        <div class="batumi">{{ object.selected_city }}</div>
+                                    </button>
+                                    <div class="condition-splitter">
+                                        <div class="header-item">
+                                            <div class="decoration1"></div>
+                                            <b class="crafts-for-children">{{ object.title }}</b>
+                                        </div>
+                                        <div class="iteration-loop">
+                                            <div class="lorem-ipsum-is-simply5">{{ object.text }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if object.is_active %}
+                                    <a class="button-join5" href="{{ object.get_url }}">
+                                        <div class="join-parent3">
+                                            <div class="join5">Join</div>
+                                            <div class="vector-wrapper7">
+                                                <img
+                                                        class="vector-icon9"
+                                                        alt=""
+                                                        src="{% static 'img/vector-11.svg' %}"
+                                                />
+                                            </div>
+                                        </div>
+                                    </a>
+                                {% else %}
+                                    <button class="button-join">
+                                        <div class="join-parent">
+                                            <div class="join">Closed</div>
+                                            <div class="vector-wrapper">
+                                                <img
+                                                        class="vector-icon"
+                                                        alt=""
+                                                        src="{% static 'img/vector-11.svg' %}"
+                                                />
+                                            </div>
+                                        </div>
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
 {#      paginator #}
+
         <div class="data-visualizer">
           <nav class="mt-4" aria-label="Page navigation sample">
                 {% if all_objects.has_other_pages %}
@@ -232,6 +224,7 @@
 {#      end new paginator#}
         </div>
 
+
       </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -240,6 +233,21 @@
         document.getElementById('cities').addEventListener('change', function() {
             document.getElementById('cityForm').submit();
         });
+    </script>
+
+    <script>
+        // Save scroll position before navigating away
+        window.onbeforeunload = function() {
+            sessionStorage.setItem('scrollPosition', window.scrollY);
+        };
+
+        // Restore scroll position on page load
+        window.onload = function() {
+            var scrollPosition = sessionStorage.getItem('scrollPosition');
+            if (scrollPosition !== null) {
+                window.scrollTo(0, parseInt(scrollPosition));
+            }
+        };
     </script>
 
 
