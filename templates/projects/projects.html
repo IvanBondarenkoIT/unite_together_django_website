@@ -32,7 +32,7 @@
                         {#                  <a class="sport1" href="{% url 'events' %}">All</a>#}
                         {% for category in links %}
                             <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
-                               href="{{ category.get_url }}">{{ category.name }}</a>
+                               href="{{ category.pre_computed_url }}">{{ category.name }}</a>
                             {#                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>#}
 
                         {% endfor %}
@@ -136,7 +136,7 @@
 
                                 <div class="button-delails-container">
                                     <button class="button-delails2">
-                                        <a href="{{ object.get_url }}" class="details2">details</a>
+                                        <a href="{{ object.pre_computed_url }}" class="details2">details</a>
                                         <div class="vector-wrapper15">
                                             <img
                                                     class="vector-icon13"

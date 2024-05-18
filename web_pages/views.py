@@ -1,6 +1,8 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
+from django.db.models import F, CharField, Value
+from django.db.models.functions import Concat
 
 from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City
 
@@ -48,16 +50,22 @@ def events(request, group_slug=None):
         _city = get_object_or_404(City, name=selected_city)
         kw_args['selected_city'] = _city
 
-    all_objects = Events.objects.all().filter(**kw_args).order_by("id")
+    #     all_objects = Events.objects.all().filter(**kw_args).order_by("id")
+
+    all_objects = Events.objects.filter(**kw_args).select_related('selected_city').annotate(
+        pre_computed_url=Concat(F('group__slug'), Value('/'), F('slug'), output_field=CharField())
+    ).order_by("id")
 
     # Pagination functional
     paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
     page = request.GET.get("page")
     page_all_objects = paginator.get_page(page)
 
-    objects_count = all_objects.count()
+    # Get count efficiently / faster
+    objects_count = paginator.count
 
-    cities = City.objects.all()
+    # Optimize fetching cities if related to events
+    cities = City.objects.only('id', 'name').all()
 
     context = {
         "all_objects": page_all_objects,
@@ -86,7 +94,8 @@ def event_detail(request, group_slug=None, event_slug=None):
 
 
 def projects(request, group_slug=None):
-    all_objects = Events.objects.all().filter().order_by("id")
+    # this is a sample how to speedify x3 sql query
+    all_objects = Events.objects.all().filter().order_by("id").select_related('group__page')
     context = {"all_objects": all_objects,}
     return render(request, 'projects/projects.html', context=context)
 
