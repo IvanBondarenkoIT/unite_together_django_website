@@ -27,7 +27,7 @@
 
                 <div class="database-connection">
                     <div class="error-handler">
-                        <a class="sport1{% if request.path == '/events/' %}-active{% endif %}"
+                        <a class="sport1{% if request.path == '/projects/' %}-active{% endif %}"
                            href="{% url 'projects' %}">All</a>
                         {#                  <a class="sport1" href="{% url 'events' %}">All</a>#}
                         {% for category in links %}

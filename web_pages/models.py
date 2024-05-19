@@ -92,8 +92,8 @@ class Projects(WebContentObject):
     selected_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
     # # city = models.CharField(max_length=250, blank=True, null=True)
     address = models.CharField(max_length=250, blank=True, null=True)
-    # start_age = models.IntegerField(blank=True, null=True)
-    # end_age = models.IntegerField(blank=True, null=True)
+    start_age = models.IntegerField(blank=True, null=True)
+    end_age = models.IntegerField(blank=True, null=True)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
 
@@ -110,4 +110,4 @@ class Projects(WebContentObject):
         return self.start_date.strftime("%d")
 
     def get_url(self):
-        return reverse("project_detail", args=[self.group.slug, self.slug])
+        return reverse("projects_detail", args=[self.group.slug, self.slug])
