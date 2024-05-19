@@ -1,5 +1,6 @@
 from django.contrib import admin
-from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City
+from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City, \
+    Projects
 
 
 # Register your models here.
@@ -32,9 +33,16 @@ class EventAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', 'group')}
 
 
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('name', 'title', 'text', 'image', 'is_active', 'created_at', 'updated_at',)
+    list_editable = ('is_active',)
+    prepopulated_fields = {'slug': ('name', 'group')}
+
+
 admin.site.register(City, CityAdmin)
 admin.site.register(WebPage, WebPageAdmin)
 admin.site.register(WebContentObject, WebContentObjectAdmin)
 admin.site.register(WebContentSubordinateObject, WebContentSubordinateObjectAdmin)
 admin.site.register(ObjectsGroup, ObjectsGroupAdmin)
 admin.site.register(Events, EventAdmin)
+admin.site.register(Projects, ProjectAdmin)

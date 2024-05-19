@@ -2,7 +2,8 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 
-from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City
+from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City, \
+    Projects
 
 OBJECTS_ON_PAGE = 6
 
@@ -86,14 +87,14 @@ def event_detail(request, group_slug=None, event_slug=None):
 
 
 def projects(request, group_slug=None):
-    all_objects = Events.objects.all().filter().order_by("id")
+    all_objects = Projects.objects.all().filter().order_by("id")
     context = {"all_objects": all_objects,}
     return render(request, 'projects/projects.html', context=context)
 
 
 def projects_detail(request, group_slug=None, project_slug=None):
     context = {}
-    return render(request, 'projects/projects-details.html', context=context)
+    return render(request, 'projects/project-detail.html', context=context)
 
 
 def about_us(request):
