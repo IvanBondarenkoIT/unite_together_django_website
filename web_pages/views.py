@@ -93,7 +93,17 @@ def projects(request, group_slug=None):
 
 
 def projects_detail(request, group_slug=None, project_slug=None):
-    context = {}
+    try:
+        single_project = Projects.objects.get(group__slug=group_slug, slug=project_slug)
+    except Exception as error:
+        raise error
+
+        # event = get_object_or_404(Events, slug=event_slug)
+
+    context = {
+        "single_project": single_project,
+    }
+
     return render(request, 'projects/project-detail.html', context=context)
 
 
