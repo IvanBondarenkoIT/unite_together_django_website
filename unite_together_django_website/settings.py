@@ -88,6 +88,25 @@ AUTH_USER_MODEL = 'accounts.Account'
 # Database Configuration
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# philippio python-dotenv to read .env
+# from dotenv import load_dotenv
+
+# Load environment variables from .env file (optional: specify path)
+# load_dotenv()
+
+DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'PASSWORD': '_UkrGeo2024_SQL',
+            'HOST': 'unite-together-db.cl0cciya4wxj.us-west-2.rds.amazonaws.com',
+            'PORT': '5432',
+        }
+    }
+
+
+'''
 if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
         'default': {
@@ -118,7 +137,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

@@ -36,7 +36,7 @@
                             {#                  <a class="sport1" href="{% url 'events' %}">All</a>#}
                             {% for category in links %}
                                 <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
-                                   href="{{ category.get_url }}">{{ category.name }}</a>
+                                   href="{{ category.pre_computed_url }}">{{ category.name }}</a>
                                 {#                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>#}
 
                             {% endfor %}
@@ -135,7 +135,7 @@
                             <div class="gyroscope">
                                 <div class="magnetometer">
                                     <button class="city1">
-                                        <a href="{{ object.get_url }}">
+                                        <a href="{{ object.pre_computed_url }}">
                                             <img class="icon" alt="" src="{{ object.image.url }}"/>
                                         </a>
 
@@ -160,7 +160,7 @@
                                     </div>
                                 </div>
                                 {% if object.is_active %}
-                                    <a class="button-join5" href="{{ object.get_url }}">
+                                    <a class="button-join5" href="{{ object.pre_computed_url }}">
                                         <div class="join-parent3">
                                             <div class="join5">Join</div>
                                             <div class="vector-wrapper7">
