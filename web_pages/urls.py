@@ -21,6 +21,7 @@ urlpatterns = [
     path("about-us/partners", views.partners, name="partners"),
     path("about-us/contacts", views.contacts, name="contacts"),
 
+
     path("", include("paypal.standard.ipn.urls")),
 
 

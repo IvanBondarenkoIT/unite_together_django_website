@@ -25,7 +25,10 @@ from unite_together_django_website import settings
 urlpatterns = [
     path("secure/", admin.site.urls),
     path("", include("web_pages.urls")),
+    # ACCOUNTS
     path("accounts/", include("accounts.urls")),
+    # PERSONS
+    path("persons/", include("persons.urls")),
     path("", include("donate.urls")),
     path("", include("paypal.standard.ipn.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
