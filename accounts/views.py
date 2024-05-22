@@ -71,12 +71,12 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, "Login Successful")
-            return redirect("about_us")
+            return redirect("home")
         else:
             messages.error(request, "Invalid Login Credentials")
             return redirect("login")
 
-    return render(request, "accounts/new/login.html")
+    return render(request, "accounts/login.html")
 
 
 @login_required(login_url="login")

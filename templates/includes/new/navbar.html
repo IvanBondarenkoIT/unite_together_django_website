@@ -1,6 +1,5 @@
 {% load static %}
-{#    <div class="events4" data-animate-on-scroll>#}
-        <!-- root templates/includes/new/navbar -->
+{% if user.id is None %}
         <nav class="navbar1">
             <div class="bg-menu"></div>
             <div class="connecter">
@@ -85,4 +84,98 @@
             </div>
 
         </nav>
-{#</div>#}
+{% else %}
+        <header class="navbaraccount2">
+        <div class="logo-ut12">
+          <img
+            class="logo-flag-ut-icon24"
+            alt=""
+            src="{% static 'img/logoflagut3.svg' %}"
+          />
+
+          <div class="logo-text-ut24">
+            <div class="group72">
+              <div class="group73">
+                <b class="unite24">UNITE</b>
+              </div>
+              <div class="group74">
+                <b class="together24">TOGETHER</b>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navbaraccount-inner1">
+          <div class="about-us-parent7">
+            <div class="about-us25">About us</div>
+            <div class="events34">Events</div>
+            <div class="projects25">Projects</div>
+          </div>
+        </div>
+        <div class="navbaraccount-inner2">
+          <div class="language-picker-parent">
+            <div class="language-picker">
+              <div class="languages12">
+                <div class="u-a-language">
+                  <div class="flag-ua12">
+                    <div class="u-a-flag-colors"></div>
+                    <div class="u-a-flag-colors1"></div>
+                  </div>
+                </div>
+                <div class="language-ua12">UA</div>
+                <div class="arrow-wrapper8">
+                  <img class="arrow-icon12" alt="" src="{% static 'img/arrow.svg' %}" />
+                </div>
+              </div>
+            </div>
+            <div class="language-divider">
+              <img
+                class="dividing-line-icon12"
+                alt=""
+                src="{% static 'img/dividingline1.svg' %}"
+              />
+            </div>
+            <div class="frame-parent65">
+              <img
+                class="frame-child29"
+                alt=""
+                src="{% static 'img/group-1000001845.svg' %}"
+              />
+
+              <div class="ellipse-parent2">
+                <div class="frame-child30"></div>
+                <div class="icon-wrapper50">
+                  <div class="width-change-size-here28">
+                    <div class="ignore136"></div>
+                    <div class="ignore137"></div>
+                  </div>
+                  <div class="icon-wrapper-h28">
+                    <div class="height-change-size-here28">
+                      <div class="ignore138"></div>
+                      <div class="ignore139"></div>
+                    </div>
+                    <img
+                      class="icon-wrapper51"
+                      alt=""
+                      src="{% static 'img/iconwrapper@2x.png' %}"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="avatar6">
+                <img
+                  class="avatar-placeholder-change-i2"
+                  alt=""
+                  src="{% static 'img/avatarplaceholder--change-image-here@2x.png' %}"
+                />
+
+                <img
+                  class="aspect-ratio-keeper-addition2"
+                  alt=""
+                  src="{% static 'img/aspect-ratio-keeper--additionally-45-rotated-auto-layout@2x.png' %}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+{% endif %}
