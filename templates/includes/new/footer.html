@@ -1,131 +1,221 @@
 {% load static %}
 
-      <footer class="footer2">
-        <div class="bg-footer1"></div>
-        <div class="footer-inner">
-          <div class="frame-parent10">
-            <div class="frame-parent11">
-              <div class="logo-ut-footer-group">
-                <div class="logo-ut-footer1">
-                  <img
-                    class="main-logo-footer"
-                    alt=""
-                    src="{% static 'img_f/unite-together.svg' %}"
-                  />
-                    
+<!-- move out styles to css file after final footer optimizations! -->
+
+<style>
+
+    @media (max-width: 1000px) {
+        .footer-container {
+            grid-template-columns: repeat(2, 1fr);
+            display: grid !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+        }
+
+                .foot-1-about {order: 3;}
+        .foot-2-menu {order: 1;}
+        .foot-3-address {order: 4;}
+        .foot-4-social {order: 2;}
+    }
+
+
+    @media screen and (max-width: 720px) {
+        .footer-container {
+            grid-template-columns: 1fr;
+            display: grid !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+            gap: 10px !important;
+        }
+
+        .foot-1-about {order: 2;}
+        .foot-2-menu {order: 1;}
+        .foot-3-address {order: 4;}
+        .foot-4-social {order: 3;}
+    }
+
+
+    .foot-col {
+        flex: 1; /* Make each div flexible and grow equally */
+        padding: 1rem; /* Adjust padding as needed */
+        gap: var(--gap-xl);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer_text {
+        align-self: stretch;
+        gap: var(--gap-xl);
+        flex-shrink: 0;
+        font-size: var(--font-size-smi);
+        line-height: 170%;
+        font-family: var(--font-montserrat);
+        color: var(--color-darkslategray-300);
+    }
+
+    .footer_text b {
+        align-self: stretch;
+        position: relative;
+        text-transform: uppercase;
+        z-index: 1;
+        font-weight: bolder;
+        font-size: var(--font-size-lg);
+        color: var(--color-darkslategray-100);
+
+    }
+
+    .footer-menu-links {
+        font-weight: 500;
+        font-size: var(--font-size-sm);
+        line-height: 27px;
+        /* list-style: none; */
+        padding-left: 0px !important;
+        list-style-type: none;
+        list-style-position: inside
+    }
+
+    .footer-menu-links__active {
+        text-decoration: underline;
+        text-decoration: underline solid 1px;
+    }
+
+    .footer-menu-links a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+      .footer-menu-address {
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+    line-height: 36px;
+    padding-left: 0 !important;
+    list-style-type: none;
+    list-style-position: inside;
+}
+
+.footer-menu-address li {
+    position: relative;
+    padding-left: 25px; /* Adjust padding to accommodate icon size */
+}
+
+.footer-menu-address li::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-repeat: no-repeat;
+}
+
+.footer-menu-address-phone::before {
+    background-image: url("{% static 'img/iconphone.svg' %}");
+    transform: translateY(60%);
+    width: 15.6px;
+    height: 15px;
+}
+
+.footer-menu-address-email::before {
+    background-image: url("{% static 'img/iconemail.svg' %}");
+    transform: translateY(115%);
+    width: 15px;
+    height: 11px;
+}
+
+.footer-menu-address-location::before {
+    background-image: url("{% static 'img/icongeo.svg' %}");
+    transform: translateY(10%);
+    width: 15.6px;
+    height: 21.2px;
+
+}
+.footer-menu-address-location{
+line-height: 26px;
+margin-top: 10px;}
+
+
+</style>
+
+<footer class="footer_text">
+
+    <div>
+        <div class='footer-container' style="padding-top: 50px; max-width: 1300px; margin:auto; gap: 25px; display: flex; padding-left: 50px; padding-right: 50px">
+            <div class="foot-col foot-1-about" style="min-width: 250px">
+                <div class="logo-ut-footer1" style="gap: var(--gap-7xl-6); margin-bottom: 6px;">
+                    <img class="main-logo-footer" alt="" src="/static/img_f/unite-together.svg">
                 </div>
-                <div class="briefly-about-us-group">
-                  <b class="briefly-about-us1">briefly about us</b>
-                  <div class="our-organization-unite1">
-                    Our organization "Unite Together" is aimed at creating and
+                <b>briefly about us</b>
+                <p>Our organization "Unite Together" is aimed at creating and
                     implementing projects aimed at supporting and developing
                     Ukrainians affected by the war. Our main goal is to achieve
-                    sustainable systemic change in their lives and society.
-                  </div>
-                </div>
-              </div>
-              <div class="footer-heading-container">
-                <div class="footer-heading3">
-                  <b class="menu2">MENU</b>
-                  <div class="line-decoration2"></div>
-                </div>
-                <div class="data-aggregator">
-                  <div class="about-us4">About us</div>
-                  <div class="events7">Events</div>
-                  <div class="projects4">Projects</div>
-                </div>
-              </div>
+                    sustainable systemic change in their lives and society.</p>
             </div>
-            <div class="input-filter">
-              <div class="output-combiner">
-                <div class="footer-heading4">
-                  <b class="contact1">CONTACT</b>
-                  <div class="line-decoration3"></div>
-                </div>
-                <div class="variable-holder1">
-                  <div class="phone1">
-                    <img
-                      class="icon-phone1"
-                      loading="lazy"
-                      alt=""
-                      src="{% static 'img/iconphone.svg' %}"
-                    />
 
-                    <div class="decision-maker">+995 595 720 449</div>
-                  </div>
-                  <div class="e-mail1">
-                    <div class="else-branch">
-                      <img
-                        class="icon-email1"
-                        loading="lazy"
-                        alt=""
-                        src="{% static 'img/iconemail.svg' %}"
-                      />
-                    </div>
-                    <div class="uniteforukrainegmailcom1">
-                      uniteforukraine@gmail.com
-                    </div>
-                  </div>
-                  <div class="geolocation1">
-                    <img
-                      class="icon-geo1"
-                      loading="lazy"
-                      alt=""
-                      src="{% static 'img/icongeo.svg' %}"
-                    />
+            <div class="foot-col foot-2-menu" style="max-width: 130px; min-width: 100px "><b>Menu</b>
+                <div class="line-decoration2"></div>
+                <ul class="footer-menu-links">
+                    <li class="footer-menu-links__active"><a href="#">About Us</a></li>
+                    <li class="footer-menu-links">Events</li>
+                    <li class="footer-menu-links">Projects</li>
+                </ul>
+            </div>
 
-                    <div class="address1">
-                      <div class="tbilisi-2123-tsotne1">
-                        Tbilisi, 21/23 Tsotne Dadiani St., office 8
-                      </div>
-                      <div class="decrement-value">
-                        <div class="batumi-127-luka1">
-                          Batumi, 127 Luka Asatiani St.
-                        </div>
-                        <div class="kutaisi-62-agmashenebeli1">
-                          Kutaisi, 62 Agmashenebeli St.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+            <!-- CONTACT -->
+            <div class="foot-col foot-3-address" style="min-width: 330px">
+                <b>Contact</b>
+                <div class="line-decoration2"></div>
+                <ul class="footer-menu-address">
+                    <li class="footer-menu-address-phone">+995 595 720 449</li>
+                    <li class="footer-menu-address-email">uniteforukraine@gmail.com</li>
+                    <li class="footer-menu-address-location">
+                        <div>
+                        Tbilisi, 21/23 Tsotne Dadiani St., office 8<br>
+                        Batumi, 127 Luka Asatiani St.<br>
+                        Kutaisi, 62 Agmashenebeli St.</div>
+                    </li>
+                </ul>
+            </div>
+
+
+            <!-- WERE SOCIAL -->
+            <div class="foot-col foot-4-social">
+
+                <b>We are on social&nbsp;media</b>
+                <div class="decoration7"></div>
+                <div>
+                    Subscribe to us on social media so you don't miss the release
+                    of new outstanding events.
                 </div>
-              </div>
-              <div class="subtract-operation">
-                <div class="footer-heading5">
-                  <b class="we-are-on1">we are on social media</b>
-                  <div class="decoration7"></div>
-                </div>
-                <div class="subscribe-to-us1">
-                  Subscribe to us on social media so you don't miss the release
-                  of new outstanding events.
-                </div>
+
                 <div class="soc-icons-footer1">
-                  <img
-                    class="icon-insta1"
-                    loading="lazy"
-                    alt=""
-                    src="{% static 'img/iconinsta.svg' %}"
-                  />
+                    <img
+                            class="icon-insta1"
+                            loading="lazy"
+                            alt=""
+                            src="{% static 'img/iconinsta.svg' %}"
+                    />
 
-                  <img
-                    class="icon-fb2"
-                    loading="lazy"
-                    alt=""
-                    src="{% static 'img/iconfb.svg' %}"
-                  />
+                    <img
+                            class="icon-fb2"
+                            loading="lazy"
+                            alt=""
+                            src="{% static 'img/iconfb.svg' %}"
+                    />
 
-                  <img
-                    class="icon-tg2"
-                    loading="lazy"
-                    alt=""
-                    src="{% static 'img/icontg.svg' %}"
-                  />
+                    <img
+                            class="icon-tg2"
+                            loading="lazy"
+                            alt=""
+                            src="{% static 'img/icontg.svg' %}"
+                    />
                 </div>
-              </div>
+
+
             </div>
-          </div>
         </div>
-        <div class="not-equal-comparison">
+    </div>
+    <div class="footer2" style="padding-top: 0">
+
+<div class="not-equal-comparison">
           <div class="divider2"></div>
           <div class="or-comparison">
             <div class="row2">
@@ -138,35 +228,38 @@
             </div>
           </div>
         </div>
-      </footer>
+</div>
+</footer>
+
+
 {#    </div>#}
 
-    <script>
-      var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
-      var observer = new IntersectionObserver(
+<script>
+    var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
+    var observer = new IntersectionObserver(
         (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting || entry.intersectionRatio > 0) {
-              const targetElement = entry.target;
-              targetElement.classList.add("animate");
-              observer.unobserve(targetElement);
+            for (const entry of entries) {
+                if (entry.isIntersecting || entry.intersectionRatio > 0) {
+                    const targetElement = entry.target;
+                    targetElement.classList.add("animate");
+                    observer.unobserve(targetElement);
+                }
             }
-          }
         },
         {
-          threshold: 0.15,
+            threshold: 0.15,
         }
-      );
+    );
 
-      for (let i = 0; i < scrollAnimElements.length; i++) {
+    for (let i = 0; i < scrollAnimElements.length; i++) {
         observer.observe(scrollAnimElements[i]);
-      }
-      </script>
+    }
+</script>
 
 
-    <script>
-      // Make navbar sticky
-      window.addEventListener('scroll', function() {
+<script>
+    // Make navbar sticky
+    window.addEventListener('scroll', function () {
         const navbar = document.querySelector('nav');
         const sticky = navbar.offsetTop;
 
@@ -176,7 +269,7 @@
             navbar.classList.remove('sticky');
         }
     });
-    </script>
+</script>
 
 
 

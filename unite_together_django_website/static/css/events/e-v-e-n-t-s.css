@@ -2978,12 +2978,14 @@
   box-sizing: border-box;
 }
 .footer-inner {
+  max-width: 1500px;
+  margin: auto;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
   padding: 0 var(--padding-53xl);
-  max-width: 100%;
+  /* max-width: 100%; */
 }
 .divider2 {
   height: 1px;
@@ -3031,7 +3033,7 @@
 }
 .footer2 {
   align-self: stretch;
-  padding: var(--padding-93xl) 0 var(--padding-18xl);
+  padding: var(--padding-45xl) 0 var(--padding-18xl);
   box-sizing: border-box;
   gap: var(--gap-31xl);
   max-width: 100%;
@@ -3127,7 +3129,7 @@
   }
   .footer2 {
     gap: var(--gap-6xl);
-    padding-top: var(--padding-54xl);
+    padding-top: 0;
     padding-bottom: var(--padding-5xl);
     box-sizing: border-box;
   }
