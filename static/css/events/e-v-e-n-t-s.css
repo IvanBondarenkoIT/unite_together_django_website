@@ -1,4 +1,6 @@
-/* temporary fixes for calendar to reapper */
+/*  unite_together_django folder????  css */
+
+/* temporary fixes for calendar to reappear */
 .to-front {
   z-index:10
 }
@@ -26,38 +28,7 @@
   left: 0;
   background-color: var(--neutral-background);
 }
-.logo-flag-ut-icon3 {
-  margin-left: -106.20000000000071px;
-  height: 62.2px;
-  width: 96.8px;
-  position: relative;
-  flex-shrink: 0;
-  debug_commit: f6aba90;
-}
-.unite3 {
-  position: relative;
-  display: inline-block;
-  min-width: 88.9px;
-  white-space: nowrap;
-}
-.group10 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-.together3 {
-  position: relative;
-  display: inline-block;
-  min-width: 90.9px;
-}
-.group11 {
-  flex-direction: row;
-  font-size: var(--font-size-base-9);
-}
-.group11,
-.group9,
-.logo-text-ut3,
+
 .logo-ut2 {
   display: flex;
   align-items: flex-start;
@@ -68,19 +39,12 @@
 .logo-ut23:hover {
   color: var(--color-cornflowerblue-100);
 }
-.group9 {
-  flex-direction: column;
-  gap: 3.5px;
-}
-.logo-text-ut3,
+
 .logo-ut2 {
   flex-direction: row;
   text-decoration: none; /* Remove underline */
 }
-.logo-text-ut3 {
-  flex-shrink: 0;
-  debug_commit: f6aba90;
-}
+
 .logo-ut2 {
   width: 197px;
   padding: 0 0 0 106.1px;
@@ -2659,13 +2623,7 @@
   left: 0;
   background-color: var(--neutral-background);
 }
-.logo-flag-ut-icon4 {
-  height: 38.5px;
-  width: 60px;
-  position: relative;
-  flex-shrink: 0;
-  debug_commit: f6aba90;
-}
+
 .unite4 {
   position: relative;
   display: inline-block;
@@ -2684,42 +2642,13 @@
   align-items: flex-start;
   justify-content: flex-start;
 }
-.together4 {
-  position: relative;
-  display: inline-block;
-  min-width: 56.3px;
-}
-.group12,
-.group14 {
-  position: absolute;
-  width: 100%;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-.group14 {
-  height: 34.09%;
-  top: 65.91%;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  font-size: var(--font-size-3xs-9);
-}
-.group12 {
-  height: 100%;
-  top: 0;
-}
+
 .logo-text-ut4,
 .logo-ut-footer1 {
   flex-shrink: 0;
   debug_commit: f6aba90;
 }
-.logo-text-ut4 {
-  height: 35.2px;
-  flex: 1;
-  position: relative;
-}
+
 .logo-ut-footer1 {
   width: 122px;
   display: flex;
@@ -3059,29 +2988,10 @@
 .divider2 {
   height: 1px;
   position: relative;
-  border: 1.5px solid var(--color-silver-100);
+  border: 0.5px solid var(--color-silver-100);
   z-index: 1;
 }
-.unite-together-all1 {
-  position: relative;
-  text-decoration: underline;
-  line-height: 150%;
-}
-.privacy-policy2 {
-  display: inline-block;
-  min-width: 96px;
-}
-.cookies-settings2,
-.privacy-policy2,
-.terms-of-service2 {
-  position: relative;
-  text-decoration: underline;
-  line-height: 150%;
-}
-.cookies-settings2 {
-  display: inline-block;
-  min-width: 94px;
-}
+
 .or-comparison,
 .row2 {
   display: flex;
