@@ -1,5 +1,6 @@
 {% load static %}
 {% if user.id is None %}
+{#    USER NOT LOGIN#}
         <nav class="navbar1">
             <div class="bg-menu"></div>
             <div class="connecter">
@@ -85,32 +86,44 @@
 
         </nav>
 {% else %}
-        <header class="navbaraccount2">
-        <div class="logo-ut12">
-          <img
-            class="logo-flag-ut-icon24"
-            alt=""
-            src="{% static 'img/logoflagut3.svg' %}"
-          />
-
-          <div class="logo-text-ut24">
-            <div class="group72">
-              <div class="group73">
-                <b class="unite24">UNITE</b>
-              </div>
-              <div class="group74">
-                <b class="together24">TOGETHER</b>
-              </div>
+{#    USER IS LOGGED IN#}
+        <nav class="navbar1">
+            <div class="bg-menu"></div>
+            <div class="connecter">
+                <a class="logo-ut2" href="{% url 'home' %}">
+                    <img
+                            class="main-logo"
+                            loading="lazy"
+                            alt=""
+                            src="{% static 'img_f/unite-together.svg' %}"
+                    />
+                </a>
             </div>
-          </div>
-        </div>
-        <div class="navbaraccount-inner1">
-          <div class="about-us-parent7">
-            <div class="about-us25">About us</div>
-            <div class="events34">Events</div>
-            <div class="projects25">Projects</div>
-          </div>
-        </div>
+
+            <div class="connecter-inner">
+                <div class="frame-parent1">
+                    <ul class="horizontal-menu">
+                        <li class="menu-item">
+                            <div class="about-us-wrapper">
+                                <a class="about-us3{% if '/about-us/' in request.path %}-active{% endif %}"
+                                   href="{% url 'history' %}">About us</a>
+                            </div>
+                        </li>
+                        <li class="menu-item">
+                            <div class="projects-wrapper">
+                                <a class="about-us3{% if '/events/' in request.path %}-active{% endif %}"
+                                   href="{% url 'events' %}">Events</a>
+                            </div>
+                        </li>
+                        <li class="menu-item">
+                            <div class="projects-wrapper">
+                                <a class="about-us3{% if '/projects/' in request.path %}-active{% endif %}"
+                                   href="{% url 'projects' %}">Projects</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         <div class="navbaraccount-inner2">
           <div class="language-picker-parent">
             <div class="language-picker">
@@ -135,11 +148,11 @@
               />
             </div>
             <div class="frame-parent65">
-              <img
+                <a href="{% url 'donate-paypal' %}"><img
                 class="frame-child29"
                 alt=""
                 src="{% static 'img/group-1000001845.svg' %}"
-              />
+              /></a>
 
               <div class="ellipse-parent2">
                 <div class="frame-child30"></div>
@@ -153,29 +166,30 @@
                       <div class="ignore138"></div>
                       <div class="ignore139"></div>
                     </div>
-                    <img
+                      <a href="#"><img
                       class="icon-wrapper51"
                       alt=""
                       src="{% static 'img/iconwrapper@2x.png' %}"
-                    />
+                    /></a>
                   </div>
                 </div>
               </div>
               <div class="avatar6">
-                <img
+
+                  <a href="{% url 'person_list' %}"><img
                   class="avatar-placeholder-change-i2"
                   alt=""
                   src="{% static 'img/avatarplaceholder--change-image-here@2x.png' %}"
-                />
+                /></a>
 
-                <img
-                  class="aspect-ratio-keeper-addition2"
-                  alt=""
-                  src="{% static 'img/aspect-ratio-keeper--additionally-45-rotated-auto-layout@2x.png' %}"
-                />
+{#                <img#}
+{#                  class="aspect-ratio-keeper-addition2"#}
+{#                  alt=""#}
+{#                  src="{% static 'img/aspect-ratio-keeper--additionally-45-rotated-auto-layout@2x.png' %}"#}
+{#                />#}
               </div>
             </div>
           </div>
         </div>
-      </header>
+      </nav>
 {% endif %}
