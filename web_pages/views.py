@@ -97,7 +97,19 @@ def event_detail(request, group_slug=None, event_slug=None):
 def projects(request, group_slug=None):
     # this is a sample how to speedify x3 sql query
     all_objects = Projects.objects.all().filter().order_by("id").select_related('group__page')
-    context = {"all_objects": all_objects,}
+
+    # Pagination functional
+    paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
+    page = request.GET.get("page")
+    page_all_objects = paginator.get_page(page)
+    # Get count efficiently / faster
+    objects_count = paginator.count
+
+    context = {
+        "all_objects": page_all_objects,
+        "objects_count": objects_count,
+    }
+
     return render(request, 'projects/projects.html', context=context)
 
 
