@@ -89,7 +89,11 @@
                             <img
                                     class="placeholder-image-icon8"
                                     alt=""
-                                    src="{{ object.image.url }}"
+                                    src="{% if object.image %}
+                                            {{ object.image.url }}
+                                         {% else %}
+                                            {% static '/img/placeholder-image1%402x.png' %}
+                                         {% endif %}"
                             />
 
                             <div class="vector-wrapper13">

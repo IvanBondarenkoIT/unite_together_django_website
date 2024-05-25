@@ -74,7 +74,10 @@
                 class="baner-image-icon1"
                 loading="lazy"
                 alt=""
-                src="{{ single_project.image.url }}"
+                src="
+                        {% if single_event.image %} {{ single_event.image.url }}
+                        {% else %} {% static '/img/placeholder-image1%402x.png' %}
+                        {% endif %}"
               />
 
               <div class="error-handler3">
