@@ -136,7 +136,13 @@
                                 <div class="magnetometer">
                                     <button class="city1">
                                         <a href="{{ object.pre_computed_url }}">
-                                            <img class="icon" alt="" src="{{ object.image.url }}"/>
+                                            <img class="icon" alt=""
+                                                 src="
+                                                    {% if object.image %}
+                                                        {{ object.image.url }}
+                                                    {% else %}
+                                                        {% static '/img/placeholder-image1%402x.png' %}
+                                                    {% endif %}"/>
                                         </a>
 
                                         <div class="bg-enrollment"></div>

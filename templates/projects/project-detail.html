@@ -44,26 +44,26 @@
                     </div>
                 </div>
             </div>
-            <div class="audio-processor">
-                <div class="availability">
-                    <div class="availability1">Availability</div>
+{#            <div class="audio-processor">#}
+{#                <div class="availability">#}
+{#                    <div class="availability1">Availability</div>#}
                     {#                <div class="check-button1">#}
                     {#                  <input class="icon-check1" type="checkbox" id="activeCheckbox">#}
                     {#                  <div class="event-dispatcher">#}
                     {#                    <div class="vacant-seats1">Free spots</div>#}
                     {#                  </div>#}
-
-                    <form id="filterForm" action="{% url 'events' %}" method="POST">
-                        {% csrf_token %}
-                        <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox"
-                               {% if free_spots == True %}checked="{true}{% endif %}">
-
-                        <label for="activeCheckbox">Free spots</label>
-                    </form>
-
+{##}
+{#                    <form id="filterForm" action="{% url 'events' %}" method="POST">#}
+{#                        {% csrf_token %}#}
+{#                        <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox"#}
+{#                               {% if free_spots == True %}checked="{true}{% endif %}">#}
+{##}
+{#                        <label for="activeCheckbox">Free spots</label>#}
+{#                    </form>#}
+{##}
                     {#                </div>#}
-                </div>
-            </div>
+{#                </div>#}
+{#            </div>#}
         </div>
         </div>
         <section class="content19">
@@ -74,7 +74,10 @@
                 class="baner-image-icon1"
                 loading="lazy"
                 alt=""
-                src="{{ single_project.image.url }}"
+                src="
+                        {% if single_event.image %} {{ single_event.image.url }}
+                        {% else %} {% static '/img/placeholder-image1%402x.png' %}
+                        {% endif %}"
               />
 
               <div class="error-handler3">
