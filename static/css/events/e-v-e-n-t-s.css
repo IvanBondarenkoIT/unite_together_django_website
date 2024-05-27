@@ -75,7 +75,7 @@
   min-width: 84px;
   white-space: nowrap;
   z-index: 1;
-  text-decoration: underline; /* Remove underline */
+  text-decoration: none; /* Remove underline */
   background-color: var(--color-royalblue); /* Цвет фона активного пункта меню */
   color: white;
   border-radius: var(--br-3xs); /* Задаем радиус скругления углов */

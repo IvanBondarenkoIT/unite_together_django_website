@@ -82,7 +82,7 @@
                           src="./public/vector1.svg"
                         />
                       </div>
-                      <div class="ongoing-project">Ongoing project</div>
+                      <div class="ongoing-project">{% if single_project.is_active %}Ongoing project{% else %}Complited{% endif %}</div>
                     </div>
                     <div class="frame-parent61">
                       <div class="vector-wrapper23">
@@ -93,7 +93,7 @@
                         />
                       </div>
                       <div class="financial-assistance2">
-                        Financial assistance
+                          {{ single_project.group.name }}
                       </div>
                     </div>
                     <div class="dec-line-wrapper">
@@ -113,7 +113,12 @@
                         />
                       </div>
                       <div class="december-2023-">
-                        December 2023 - February 2024
+                          {% if single_project.start_date %}
+                              {{ single_project.get_start_date_month }} {{ single_project.get_start_date_year }}
+                          {% endif %}
+                          {% if single_project.end_date %}
+                              - {{ single_project.get_end_date_month }} {{ single_project.get_end_date_year }}
+                          {% endif %}
                       </div>
                     </div>
                     <div class="frame-parent63">
@@ -124,21 +129,21 @@
                           src="./public/vector-2.svg"
                         />
                       </div>
-                      <div class="georgia">Georgia</div>
+                      <div class="georgia">{{ single_project.selected_city.name }}</div>
                     </div>
                   </div>
                   <div class="text-wrapper2">
                     <div class="text19">
-                      <span
-                        >The program reimburses utility costs in winter in the
-                        amount of
-                      </span>
-                      <span class="gel">150 GEL</span>
-                      <span> per month.</span>
+                     {% if single_project.extra_details %}
+                        <div>
+                          {{ single_project.extra_details }}
+                        </div>
+                     {% endif %}
+
                     </div>
                   </div>
-                  <div class="button-registration1">
-                    <div class="registration1">Registration</div>
+                  <div class="button-registration1" style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
+                    <div class="registration1" >Registration</div>
                     <div class="vector-wrapper25">
                       <img
                         class="vector-icon20"
