@@ -91,6 +91,7 @@ class Events(WebContentObject):
 class Projects(WebContentObject):
     selected_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
     # # city = models.CharField(max_length=250, blank=True, null=True)
+    extra_details = models.TextField(blank=True, null=True)
     address = models.CharField(max_length=250, blank=True, null=True)
     start_age = models.IntegerField(blank=True, null=True)
     end_age = models.IntegerField(blank=True, null=True)
@@ -108,6 +109,15 @@ class Projects(WebContentObject):
 
     def get_start_date_day(self):
         return self.start_date.strftime("%d")
+
+    def get_end_date_year(self):
+        return self.end_date.strftime("%Y")
+
+    def get_end_date_month(self):
+        return self.end_date.strftime("%b")
+
+    def get_end_date_day(self):
+        return self.end_date.strftime("%d")
 
     def get_url(self):
         return reverse("projects_detail", args=[self.group.slug, self.slug])
