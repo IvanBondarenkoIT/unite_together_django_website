@@ -5,7 +5,7 @@ from django.db.models import F, CharField, Value
 from django.db.models.functions import Concat
 
 from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City, \
-    Projects
+    Projects, ProjectGallery
 
 OBJECTS_ON_PAGE = 4
 
@@ -142,8 +142,11 @@ def projects_detail(request, group_slug=None, project_slug=None):
 
         # event = get_object_or_404(Events, slug=event_slug)
 
+    project_gallery = ProjectGallery.objects.filter(project_id=single_project.id)
+
     context = {
         "single_project": single_project,
+        "project_gallery": project_gallery,
     }
 
     return render(request, 'projects/project-detail.html', context=context)
