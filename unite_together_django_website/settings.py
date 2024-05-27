@@ -26,8 +26,9 @@ SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool, default=True)
+USE_REMOTE_DB_SETTINGS = config("USE_REMOTE_DB_SETTINGS",cast=bool, default=False)
 
-ALLOWED_HOSTS = [ "*",
+ALLOWED_HOSTS = ["*",
                  ]
 
 # CSRF_TRUSTED_ORIGINS = [""]
@@ -102,7 +103,7 @@ if 'RDS_DB_NAME' in os.environ:
         }
     }
 else:
-    if config("USE_REMOTE_DB_SETTINGS"):
+    if USE_REMOTE_DB_SETTINGS:
         DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.postgresql',
