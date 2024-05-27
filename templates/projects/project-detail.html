@@ -44,38 +44,20 @@
                     </div>
                 </div>
             </div>
-{#            <div class="audio-processor">#}
-{#                <div class="availability">#}
-{#                    <div class="availability1">Availability</div>#}
-                    {#                <div class="check-button1">#}
-                    {#                  <input class="icon-check1" type="checkbox" id="activeCheckbox">#}
-                    {#                  <div class="event-dispatcher">#}
-                    {#                    <div class="vacant-seats1">Free spots</div>#}
-                    {#                  </div>#}
-{##}
-{#                    <form id="filterForm" action="{% url 'events' %}" method="POST">#}
-{#                        {% csrf_token %}#}
-{#                        <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox"#}
-{#                               {% if free_spots == True %}checked="{true}{% endif %}">#}
-{##}
-{#                        <label for="activeCheckbox">Free spots</label>#}
-{#                    </form>#}
-{##}
-                    {#                </div>#}
-{#                </div>#}
-{#            </div>#}
         </div>
         </div>
         <section class="content19">
           <div class="bg6"></div>
           <div class="content-inner">
-            <div class="baner-image-group">
-              <img
+            <div class="baner-image-group mainImage">
+
+
+                <img
                 class="baner-image-icon1"
                 loading="lazy"
                 alt=""
                 src="
-                        {% if single_event.image %} {{ single_event.image.url }}
+                        {% if single_project.image %} {{ single_project.image.url }}
                         {% else %} {% static '/img/placeholder-image1%402x.png' %}
                         {% endif %}"
               />
@@ -87,6 +69,7 @@
                   src="./public/decline31.svg"
                 />
               </div>
+
               <div class="frame-wrapper11">
                 <div class="frame-parent58">
                   <div class="frame-parent59">
@@ -168,6 +151,20 @@
               </div>
             </div>
           </div>
+        {% if project_gallery %}
+            <article class="gallery-wrap">
+                <ul class="thumb">
+                    <li>
+                        <a href="{{ single_project.image.url }}" target="mainImage"><img
+                                src="{{ single_project.image.url }}" alt="Product Image"></a>
+                        {% for i in project_gallery %}
+                            <a href="{{ i.image.url }}" target="mainImage"><img src="{{ i.image.url }}"
+                                                                                alt="Product Image"></a>
+                        {% endfor %}
+                    </li>
+                </ul>
+            </article> <!-- gallery-wrap .end// -->
+        {% endif %}
           <div class="content-child">
             <div class="winterization-parent">
               <h1 class="winterization">{{ single_project.name }}</h1>
@@ -184,69 +181,80 @@
               </div>
             </div>
           </div>
-          <div class="gallery-v13-m2">
-            <div class="surface">
-              <div class="list">
-                <div class="aspectratioblock">
-                  <div class="aspect-ratio">
-                    <div class="aspect-ratio-keeper-rotated"></div>
-                  </div>
-                </div>
-                <div class="aspectratioblock1">
-                  <div class="aspect-ratio1">
-                    <div class="aspect-ratio-keeper-rotated1"></div>
-                  </div>
-                </div>
-                <div class="aspectratioblock2">
-                  <div class="aspect-ratio2">
-                    <div class="aspect-ratio-keeper-rotated2"></div>
-                  </div>
-                </div>
-                <div class="aspectratioblock3">
-                  <div class="aspect-ratio3">
-                    <div class="aspect-ratio-keeper-rotated3"></div>
-                  </div>
-                </div>
-                <div class="aspectratioblock4">
-                  <div class="aspect-ratio4">
-                    <div class="aspect-ratio-keeper-rotated4"></div>
-                  </div>
-                </div>
-                <div class="aspectratioblock5">
-                  <div class="aspect-ratio5">
-                    <div class="aspect-ratio-keeper-rotated5"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="arrows">
-                <div class="navigationbutton">
-                  <div class="surface1">
-                    <div class="navigationicon">
-                      <b class="b">←</b>
-                    </div>
-                  </div>
-                </div>
-                <div class="nubmers-wrapper">
-                  <div class="nubmers">
-                    <div class="number">1</div>
-                    <div class="div12">/</div>
-                    <div class="number1">10</div>
-                  </div>
-                </div>
-                <div class="navigationbutton1">
-                  <div class="surface2">
-                    <div class="navigationicon1">
-                      <b class="b1">→</b>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+{#          <div class="gallery-v13-m2">#}
+{#            <div class="surface">#}
+{#              <div class="list">#}
+{#                <div class="aspectratioblock">#}
+{#                  <div class="aspect-ratio">#}
+{#                    <div class="aspect-ratio-keeper-rotated"></div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="aspectratioblock1">#}
+{#                  <div class="aspect-ratio1">#}
+{#                    <div class="aspect-ratio-keeper-rotated1"></div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="aspectratioblock2">#}
+{#                  <div class="aspect-ratio2">#}
+{#                    <div class="aspect-ratio-keeper-rotated2"></div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="aspectratioblock3">#}
+{#                  <div class="aspect-ratio3">#}
+{#                    <div class="aspect-ratio-keeper-rotated3"></div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="aspectratioblock4">#}
+{#                  <div class="aspect-ratio4">#}
+{#                    <div class="aspect-ratio-keeper-rotated4"></div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="aspectratioblock5">#}
+{#                  <div class="aspect-ratio5">#}
+{#                    <div class="aspect-ratio-keeper-rotated5"></div>#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+{#              <div class="arrows">#}
+{#                <div class="navigationbutton">#}
+{#                  <div class="surface1">#}
+{#                    <div class="navigationicon">#}
+{#                      <b class="b">←</b>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="nubmers-wrapper">#}
+{#                  <div class="nubmers">#}
+{#                    <div class="number">1</div>#}
+{#                    <div class="div12">/</div>#}
+{#                    <div class="number1">10</div>#}
+{#                  </div>#}
+{#                </div>#}
+{#                <div class="navigationbutton1">#}
+{#                  <div class="surface2">#}
+{#                    <div class="navigationicon1">#}
+{#                      <b class="b1">→</b>#}
+{#                    </div>#}
+{#                  </div>#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#        #}
+{#        #}
         </section>
       </main>
 
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.thumb a').click(function (e) {
+                e.preventDefault();
+                $('.mainImage img').attr('src', $(this).attr("href"))
+            })
+        })
+    </script>
 
 {% endblock %}

@@ -3,7 +3,9 @@ from django.utils.translation import gettext_lazy as _
 
 from web_pages.forms import ProjectsForm, EventsForm
 from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City, \
-    Projects
+    Projects, ProjectGallery
+
+import admin_thumbnails
 
 
 # Register your models here.
@@ -16,6 +18,7 @@ class WebPageAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
+@admin_thumbnails.thumbnail('image')
 class WebContentObjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'title', 'text', 'is_active', 'created_at', 'updated_at',)
     list_editable = ('is_active', )
@@ -50,13 +53,22 @@ class ObjectsGroupAdmin(admin.ModelAdmin):
     list_filter = (PageTypeListFilter,)
 
 
+@admin_thumbnails.thumbnail('image')
+class ProjectGalleryInline(admin.TabularInline):
+    model = ProjectGallery
+    extra = 1
+
+
+@admin_thumbnails.thumbnail('image')
 class ProjectsAdmin(admin.ModelAdmin):
     form = ProjectsForm
     list_display = ('name', 'title', 'text', 'is_active', 'created_at', 'updated_at',)
     list_editable = ('is_active',)
     prepopulated_fields = {'slug': ('name', 'group')}
+    inlines = [ProjectGalleryInline]
 
 
+@admin_thumbnails.thumbnail('image')
 class EventsAdmin(admin.ModelAdmin):
     form = EventsForm
     list_display = ('name', 'title', 'text', 'is_active', 'created_at', 'updated_at',)
@@ -75,4 +87,4 @@ admin.site.register(WebPage, WebPageAdmin)
 admin.site.register(WebContentObject, WebContentObjectAdmin)
 admin.site.register(WebContentSubordinateObject, WebContentSubordinateObjectAdmin)
 admin.site.register(ObjectsGroup, ObjectsGroupAdmin)
-
+admin.site.register(ProjectGallery)
