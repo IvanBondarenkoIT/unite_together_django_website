@@ -5,9 +5,9 @@ from django.db.models import F, CharField, Value
 from django.db.models.functions import Concat
 
 from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City, \
-    Projects
+    Projects, ProjectGallery
 
-OBJECTS_ON_PAGE = 6
+OBJECTS_ON_PAGE = 4
 
 
 def home(request):
@@ -44,7 +44,7 @@ def events(request, group_slug=None):
         kw_args = {"is_active": is_active}
 
     if group_slug:  # If have group_slug - added filter by group
-        group = get_object_or_404(ObjectsGroup, slug=group_slug)
+        group = get_object_or_404(ObjectsGroup, slug=group_slug, page__name__iexact='events', **kw_args)
         kw_args["group"] = group
 
     if selected_city and selected_city != "All":  # If city option selected "All" then no filter by city
@@ -95,8 +95,28 @@ def event_detail(request, group_slug=None, event_slug=None):
 
 
 def projects(request, group_slug=None):
+
+    if request.method == 'POST':
+        is_active = request.POST.get("free-spots-checkbox") == "on"  # It means checkbox change to True or False
+        request.session['activeCheckbox'] = is_active
+    else:
+        is_active = request.session.get('activeCheckbox', False)
+
+    kw_args = {}
+
+    if is_active:
+        kw_args = {"is_active": is_active}
+
+    if group_slug:  # If have group_slug - added filter by group
+        group = get_object_or_404(ObjectsGroup, slug=group_slug, page__name__iexact='projects', **kw_args)
+        kw_args["group"] = group
+
     # this is a sample how to speedify x3 sql query
-    all_objects = Projects.objects.all().filter().order_by("id").select_related('group__page')
+    all_objects = Projects.objects.all().filter(**kw_args).order_by("id").select_related('group__page')
+
+    # all_objects = Projects.objects.filter(**kw_args).select_related('selected_city').annotate(
+    #     pre_computed_url=Concat(F('group__slug'), Value('/'), F('slug'), output_field=CharField())
+    # ).order_by("id")
 
     # Pagination functional
     paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
@@ -108,6 +128,7 @@ def projects(request, group_slug=None):
     context = {
         "all_objects": page_all_objects,
         "objects_count": objects_count,
+        "free_spots": is_active,
     }
 
     return render(request, 'projects/projects.html', context=context)
@@ -121,8 +142,11 @@ def projects_detail(request, group_slug=None, project_slug=None):
 
         # event = get_object_or_404(Events, slug=event_slug)
 
+    project_gallery = ProjectGallery.objects.filter(project_id=single_project.id)
+
     context = {
         "single_project": single_project,
+        "project_gallery": project_gallery,
     }
 
     return render(request, 'projects/project-detail.html', context=context)

@@ -26,8 +26,9 @@ SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool, default=True)
+USE_REMOTE_DB_SETTINGS = config("USE_REMOTE_DB_SETTINGS",cast=bool, default=False)
 
-ALLOWED_HOSTS = [ "*",
+ALLOWED_HOSTS = ["*",
                  ]
 
 # CSRF_TRUSTED_ORIGINS = [""]
@@ -102,24 +103,25 @@ if 'RDS_DB_NAME' in os.environ:
         }
     }
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('RDS_DB_NAME'),
-            'USER': config('RDS_USERNAME'),
-            'PASSWORD': config('RDS_PASSWORD'),
-            'HOST': config('RDS_HOSTNAME'),
-            'PORT': config('RDS_PORT'),
+    if USE_REMOTE_DB_SETTINGS:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': config('RDS_DB_NAME'),
+                'USER': config('RDS_USERNAME'),
+                'PASSWORD': config('RDS_PASSWORD'),
+                'HOST': config('RDS_HOSTNAME'),
+                'PORT': config('RDS_PORT'),
+            }
         }
-    }
-
-    # Sqlit settings
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.sqlite3',
-    #         'NAME': BASE_DIR / 'db.sqlite3',
-    #     }
-    # }
+    else:
+        # Sqlit settings
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

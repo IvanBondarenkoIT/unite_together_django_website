@@ -111,3 +111,15 @@ class Projects(WebContentObject):
 
     def get_url(self):
         return reverse("projects_detail", args=[self.group.slug, self.slug])
+
+
+class ProjectGallery(models.Model):
+    project = models.ForeignKey(Projects, default=None, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='store/products/', max_length=255)
+
+    def __str__(self):
+        return self.project.name
+
+    class Meta:
+        verbose_name = "projectgallery"
+        verbose_name_plural = "project gallerie"
