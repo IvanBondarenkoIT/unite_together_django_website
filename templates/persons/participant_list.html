@@ -10,10 +10,10 @@
         <div class="navigation-links">
             <div class="item-active10">
                 <div class="item-active-child5"></div>
-                <div class="accounts2">Accounts</div>
+                <a class="accounts2" href="{% url 'person_list' %}">Accounts</a>
             </div>
             <div class="inactive-item">
-                <div class="events33">Events</div>
+                <a class="events33" href="{% url 'participant_list' %}">Events</a>
             </div>
         </div>
         <div class="settings-item">
@@ -30,6 +30,7 @@
             <table>
                 <thead>
                 <tr>
+                    <th>Registered On</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Date of Birth</th>
@@ -44,12 +45,13 @@
                     <th>City</th>
                     <th>Region</th>
                     <th>Address Line</th>
-                    <th>Registered On</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 {% for form in formset %}
                     <tr>
+                        <td>{{ form.registered_on }}</td>
                         <td>{{ form.first_name }}</td>
                         <td>{{ form.last_name }}</td>
                         <td>{{ form.date_of_birth }}</td>
@@ -64,7 +66,7 @@
                         <td>{{ form.city }}</td>
                         <td>{{ form.region }}</td>
                         <td>{{ form.address_line }}</td>
-                        <td>{{ form.registered_on }}</td>
+
                     </tr>
                 {% endfor %}
                 </tbody>
