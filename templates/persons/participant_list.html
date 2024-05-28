@@ -1,41 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Participant List</title>
-    <style>
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            outline: none;
-            color: #fff;
-            background-color: #4CAF50;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0 4px #999;
-        }
+{% extends "base.html" %}
 
-        .button:hover {
-            background-color: #3e8e41;
-        }
+{% load static %}
 
-        .button:active {
-            background-color: #3e8e41;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-    </style>
-</head>
-<body>
-    <h1>Participant List</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ formset.management_form }}
-        <table>
-            <thead>
+{% block content %}
+<main class="sec-accounts1">
+    <div class="bg-personal-account2"></div>
+    <div class="aside-box10">
+        <div class="rectangle-bg10"></div>
+        <div class="navigation-links">
+            <div class="item-active10">
+                <div class="item-active-child5"></div>
+                <div class="accounts2">Accounts</div>
+            </div>
+            <div class="inactive-item">
+                <div class="events33">Events</div>
+            </div>
+        </div>
+        <div class="settings-item">
+            <div class="settings2">Settings</div>
+        </div>
+    </div>
+    <section class="group-section">
+
+
+        <h1>Participant List</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            <table>
+                <thead>
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -53,31 +46,32 @@
                     <th>Address Line</th>
                     <th>Registered On</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 {% for form in formset %}
-                <tr>
-                    <td>{{ form.first_name }}</td>
-                    <td>{{ form.last_name }}</td>
-                    <td>{{ form.date_of_birth }}</td>
-                    <td>{{ form.citizenship }}</td>
-                    <td>{{ form.date_of_arrival }}</td>
-                    <td>{{ form.type_of_document }}</td>
-                    <td>{{ form.document_number }}</td>
-                    <td>{{ form.gender }}</td>
-                    <td>{{ form.georgian_phone_number }}</td>
-                    <td>{{ form.ukrainian_phone_number }}</td>
-                    <td>{{ form.country }}</td>
-                    <td>{{ form.city }}</td>
-                    <td>{{ form.region }}</td>
-                    <td>{{ form.address_line }}</td>
-                    <td>{{ form.registered_on }}</td>
-                </tr>
+                    <tr>
+                        <td>{{ form.first_name }}</td>
+                        <td>{{ form.last_name }}</td>
+                        <td>{{ form.date_of_birth }}</td>
+                        <td>{{ form.citizenship }}</td>
+                        <td>{{ form.date_of_arrival }}</td>
+                        <td>{{ form.type_of_document }}</td>
+                        <td>{{ form.document_number }}</td>
+                        <td>{{ form.gender }}</td>
+                        <td>{{ form.georgian_phone_number }}</td>
+                        <td>{{ form.ukrainian_phone_number }}</td>
+                        <td>{{ form.country }}</td>
+                        <td>{{ form.city }}</td>
+                        <td>{{ form.region }}</td>
+                        <td>{{ form.address_line }}</td>
+                        <td>{{ form.registered_on }}</td>
+                    </tr>
                 {% endfor %}
-            </tbody>
-        </table>
-        <button type="submit">Save Changes</button>
-        <a href="{% url 'create_participant' %}" class="button">Create New Participant</a>
-    </form>
-</body>
-</html>
+                </tbody>
+            </table>
+            <button type="submit">Save Changes</button>
+            <a href="{% url 'create_participant' %}" class="button">Create New Participant</a>
+        </form>
+    </section>
+</main>
+{% endblock %}
