@@ -30,6 +30,7 @@ class ParticipantForm(forms.ModelForm):
     class Meta:
         model = Participant
         fields = [
+            'registered_on',
             'user_owner',
             'first_name',
             'last_name',
@@ -45,7 +46,7 @@ class ParticipantForm(forms.ModelForm):
             'city',
             'region',
             'address_line',
-            'registered_on',
+
         ]
 
 

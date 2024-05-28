@@ -133,3 +133,5 @@ class ProjectGallery(models.Model):
     class Meta:
         verbose_name = "projectgallery"
         verbose_name_plural = "project gallerie"
+
+
