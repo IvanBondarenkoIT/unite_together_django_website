@@ -1,9 +1,134 @@
 {% load static %}
+
+<style>
+    .ut-navbar {
+        justify-content: space-between;
+        background-color: var(--neutral-background);
+        /* background-color: black; */
+        /* ниже перечислен стандартный набор до оптимизаций от navbar1 */
+        align-self: stretch;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: var(--padding-21xl) var(--padding-53xl);
+        box-sizing: border-box;
+        position: sticky;
+        gap: 141px;
+        z-index: 99;
+        text-align: left;
+        font-size: var(--font-size-8xl-5);
+        color: var(--color-darkslategray-100);
+        font-family: var(--font-inter);
+        top: 0;
+        max-width: 100%;
+    }
+
+    .ut-navbar-wrapper {
+        display: flex;
+        max-width: 1400px;
+        margin: auto;
+        justify-content: space-between;
+        flex-direction: row;
+        flex: 1;
+        align-items: center;
+    }
+
+    .ut-navbar-logo-wrapper {
+        /* flex: 1; */
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+        max-width: 100%;
+        /* gap: var(--gap-xl); */
+    }
+
+    .right-part-main {
+        align-items: center !important;
+        display: flex;
+        justify-content: flex-start;
+        align-self: stretch;
+        flex-direction: row;
+        gap: var(--gap-6xl);
+        z-index: 1;
+    }
+
+    .right-part-wrapper-main {
+        flex-grow: initial;
+        /* width: 484px; */
+        flex-direction: column;
+        padding: 0;
+        box-sizing: border-box;
+        max-width: 100%;
+        font-size: var(--text-regular-semi-bold-size);
+        font-family: var(--font-montserrat);
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .languages-wrapper {
+        padding: 0 !important;
+        margin-right: 5px;
+    }
+
+
+    /* TOP MENU ITEMS */
+
+    /* it IS used (but that is not visible to IDE */
+    .ut-top-menu-text {
+        position: relative;
+        font-weight: 600;
+        display: inline-block;
+        min-width: 84px;
+        white-space: nowrap;
+        z-index: 1;
+        text-decoration: none; /* Remove underline */
+        color: black;
+        padding: 10px;
+    }
+
+    /* it IS used (but that is not visible to IDE */
+    .ut-top-menu-text:hover {
+        color: var(--color-cornflowerblue-100);
+    }
+
+    /* it IS used (but that is not visible to IDE */
+    .ut-top-menu-text-active {
+        position: relative;
+        font-weight: 600;
+        display: inline-block;
+        min-width: 84px;
+        white-space: nowrap;
+        z-index: 1;
+        text-decoration: none; /* Remove underline */
+        background-color: var(--color-royalblue); /* Цвет фона активного пункта меню */
+        color: white;
+        border-radius: var(--br-3xs); /* Задаем радиус скругления углов */
+        padding: 10px 20px; /* Подбираем подходящий внутренний отступ для красивого вида */
+    }
+
+    .ut-top-menu-div {
+        display: flex;
+        align-items: flex-start;
+        /* flex-direction: column; */
+        /* justify-content: flex-start; */
+        /* padding: var(--padding-10xs) 0 0; */
+    }
+
+    .ut-top-menu-li {
+        display: inline-block;
+    }
+
+</style>
+
+
 {% if user.id is None %}
-{#    USER NOT LOGIN#}
-        <nav class="navbar1">
-            <div class="bg-menu"></div>
-            <div class="connecter">
+    <nav class="ut-navbar shadow-sm">
+
+        <div class="ut-navbar-wrapper">
+            <div class="ut-navbar-logo-wrapper">
                 <a class="logo-ut2" href="{% url 'home' %}">
                     <img
                             class="main-logo"
@@ -17,32 +142,32 @@
             <div class="connecter-inner">
                 <div class="frame-parent1">
                     <ul class="horizontal-menu">
-                        <li class="menu-item">
-                            <div class="about-us-wrapper">
-                                <a class="about-us3{% if '/about-us/' in request.path %}-active{% endif %}"
+                        <li class="ut-top-menu-li">
+                            <div class="ut-top-menu-div">
+                                <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
                                    href="{% url 'history' %}">About us</a>
                             </div>
                         </li>
-                        <li class="menu-item">
-                            <div class="projects-wrapper">
-                                <a class="about-us3{% if '/events/' in request.path %}-active{% endif %}"
+                        <li class="ut-top-menu-li">
+                            <div class="ut-top-menu-div">
+                                <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
                                    href="{% url 'events' %}">Events</a>
                             </div>
                         </li>
-                        <li class="menu-item">
-                            <div class="projects-wrapper">
-                                <a class="about-us3{% if '/projects/' in request.path %}-active{% endif %}"
+                        <li class="ut-top-menu-li">
+                            <div class="ut-top-menu-div">
+                                <a class="ut-top-menu-text{% if '/projects/' in request.path %}-active{% endif %}"
                                    href="{% url 'projects' %}">Projects</a>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="right-part-wrapper">
-                <div class="right-part1">
+            <div class="right-part-wrapper-main">
+                <div class="right-part-main">
                     <div class="languages-wrapper">
                         <div class="languages1">
-                            <div class="flag-ua-wrapper">
+                            <div class="flag-ua-wrapper" style="transform: translateY(2px);">
                                 <div class="flag-ua1">
                                     <div class="yellow-rectangle1"></div>
                                     <div class="blue-rectangle1"></div>
@@ -59,6 +184,7 @@
                             </div>
                         </div>
                     </div>
+                    <!--
                     <div class="dividing-line-wrapper">
                         <img
                                 class="dividing-line-icon1"
@@ -67,61 +193,125 @@
                                 src="{% static 'img/dividingline.svg' %}"
                         />
                     </div>
-                    <a class="button-register7" href="{% url 'login' %}">
-                        <div class="group-div">
-                            <div class="user-icon-wrapper">
-                                <img class="user-icon1" alt="" src="{% static 'img/usericon.svg' %}"/>
+                    -->
+
+
+                    <style>
+
+                        .signup-button {
+                            width: 198px;
+                            min-width: 198px;
+                            padding: 10px 20px;
+                            background-color: white; /* White background to match the screenshot */
+                            border: 2px solid var(--color-royalblue); /* Blue border */
+                            border-radius: var(--br-3xs);
+                            text-decoration: none;
+                            color: var(--color-royalblue); /* Blue text color */
+                            display: flex;
+                            cursor: pointer;
+
+                        }
+
+                        .signup-button .text {
+                            font-size: var(--text-regular-semi-bold-size);
+                            font-weight: 500;
+                            color: var(--color-darkslategray-100);
+                            text-decoration: none;
+                            position: relative;
+                        }
+
+                        .signup-button .ut-icon {
+                            width: 14px;
+                            height: 15.5px;
+                            position: inherit;
+                            transform: translateY(4px);
+                            /* color: var(--color-royalblue);  Blue icon color */
+                        }
+
+
+                        .donate-button {
+                            width: 150px;
+                            min-width: 150px;
+                            padding: 11px 27px;
+                            background-color: var(--color-royalblue);
+                            border-radius: var(--br-3xs);
+                            text-decoration: none;
+                            color: white;
+                            border: none;
+                            display: flex;
+                            cursor: pointer;
+                        }
+
+                        .donate-button .ut-text {
+                            font-size: var(--text-regular-semi-bold-size);
+                            font-weight: 600;
+                        }
+
+                        .donate-button .ut-icon {
+                            height: 25px;
+                            width: 25px;
+                            position: inherit;
+                        }
+
+                        .ut-button-w-icon {
+                            justify-content: space-between;
+                            display: flex;
+                            flex: max-content;
+                        }
+
+
+                    </style>
+
+                    <a class="signup-button" href="{% url 'login' %}">
+                        <div class="ut-button-w-icon">
+                            <div style="display: flex;">
+                                <img class="ut-icon" alt="" src="{% static 'img/usericon.svg' %}"/>
                             </div>
-                            <div class="loginsign-up1">Log In / Sing Up</div>
+                            <!-- Icon for sign up button -->
+                            <span class="text">Log In / Sign Up</span>
                         </div>
                     </a>
-                    <a class="button-donate1" href="{% url 'donate-paypal' %}">
-                        <div class="donate-wrapper">
-                            <div class="donate1">Donate</div>
+
+                    <a class="donate-button" href="{% url 'donate-paypal' %}">
+                        <div class="ut-button-w-icon">
+                            <div class="ut-text" style="transform: translateY(1px);">Donate</div>
+                            <div style="display: flex;">
+                                <img class="ut-icon" alt="" src="{% static 'img/donateicon.svg' %}"/>️
+                            </div>
                         </div>
-                        <img class="donate-icon1" alt="" src="{% static 'img/donateicon.svg' %}"/>
                     </a>
+
+
                 </div>
             </div>
 
+        </div>
         </nav>
 {% else %}
-{#    USER IS LOGGED IN#}
-        <nav class="navbar1">
-            <div class="bg-menu"></div>
-            <div class="connecter">
-                <a class="logo-ut2" href="{% url 'home' %}">
+    <header class="navbaraccount2">
+        <div class="logo-ut12">
                     <img
-                            class="main-logo"
-                            loading="lazy"
+                    class="logo-flag-ut-icon24"
                             alt=""
-                            src="{% static 'img_f/unite-together.svg' %}"
+                    src="{% static 'img/logoflagut3.svg' %}"
                     />
-                </a>
-            </div>
 
-            <div class="connecter-inner">
-                <div class="frame-parent1">
-                    <ul class="horizontal-menu">
-                        <li class="menu-item">
-                            <div class="about-us-wrapper">
-                                <a class="about-us3{% if '/about-us/' in request.path %}-active{% endif %}"
-                                   href="{% url 'history' %}">About us</a>
+            <div class="logo-text-ut24">
+                <div class="group72">
+                    <div class="group73">
+                        <b class="unite24">UNITE</b>
+                    </div>
+                    <div class="group74">
+                        <b class="together24">TOGETHER</b>
                             </div>
-                        </li>
-                        <li class="menu-item">
-                            <div class="projects-wrapper">
-                                <a class="about-us3{% if '/events/' in request.path %}-active{% endif %}"
-                                   href="{% url 'events' %}">Events</a>
                             </div>
-                        </li>
-                        <li class="menu-item">
-                            <div class="projects-wrapper">
-                                <a class="about-us3{% if '/projects/' in request.path %}-active{% endif %}"
-                                   href="{% url 'projects' %}">Projects</a>
                             </div>
-                        </li>
-                    </ul>
+        </div>
+        <div class="navbaraccount-inner1">
+            <div class="about-us-parent7">
+                <div class="about-us25">About us</div>
+                <div class="events34">Events</div>
+                <div class="projects25">Projects</div>
                 </div>
             </div>
         <div class="navbaraccount-inner2">
@@ -136,7 +326,7 @@
                 </div>
                 <div class="language-ua12">UA</div>
                 <div class="arrow-wrapper8">
-                  <img class="arrow-icon12" alt="" src="{% static 'img/arrow.svg' %}" />
+                            <img class="arrow-icon12" alt="" src="{% static 'img/arrow.svg' %}"/>
                 </div>
               </div>
             </div>
@@ -148,11 +338,11 @@
               />
             </div>
             <div class="frame-parent65">
-                <a href="{% url 'donate-paypal' %}"><img
+                    <img
                 class="frame-child29"
                 alt=""
                 src="{% static 'img/group-1000001845.svg' %}"
-              /></a>
+                    />
 
               <div class="ellipse-parent2">
                 <div class="frame-child30"></div>
@@ -166,30 +356,31 @@
                       <div class="ignore138"></div>
                       <div class="ignore139"></div>
                     </div>
-                      <a href="#"><img
+                                <img
                       class="icon-wrapper51"
                       alt=""
                       src="{% static 'img/iconwrapper@2x.png' %}"
-                    /></a>
+                                />
                   </div>
                 </div>
               </div>
               <div class="avatar6">
 
                   <a href="{% url 'dashboard' %}"><img
+
                   class="avatar-placeholder-change-i2"
                   alt=""
                   src="{% static 'img/avatarplaceholder--change-image-here@2x.png' %}"
-                /></a>
+                        />
 
-{#                <img#}
-{#                  class="aspect-ratio-keeper-addition2"#}
-{#                  alt=""#}
-{#                  src="{% static 'img/aspect-ratio-keeper--additionally-45-rotated-auto-layout@2x.png' %}"#}
-{#                />#}
+                        <img
+                                class="aspect-ratio-keeper-addition2"
+                                alt=""
+                                src="{% static 'img/aspect-ratio-keeper--additionally-45-rotated-auto-layout@2x.png' %}"
+                        />
               </div>
             </div>
           </div>
         </div>
-      </nav>
+    </header>
 {% endif %}

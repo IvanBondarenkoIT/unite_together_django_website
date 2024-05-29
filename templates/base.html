@@ -2,11 +2,11 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="initial-scale=1, width=device-width"/>
 
-{#    <link rel="stylesheet" href="{% static 'css/aboutus/index.css'%}" />#}
+
     <link rel="stylesheet" href="{% static 'css/custom.css' %}" type="text/css" />
 
 
@@ -16,62 +16,225 @@
     <link rel="stylesheet" href="{% static 'css/aboutus/about-us-partners.css'%}" />
     <link rel="stylesheet" href="{% static 'css/aboutus/about-us-contacts.css'%}" />
 
-    <link rel="stylesheet" href="{% static 'css/events/global.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/events/index.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/events/event_detail.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/events/e-v-e-n-t-s.css'%}" />
-      
-    <link rel="stylesheet" href="{% static 'css/common.css'%}" />
-      
 
-    <link rel="stylesheet" href="{% static 'css/projects/global.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/projects/projects.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/projects/project-detail.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/events/global.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/events/index.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/events/event_detail.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/events/e-v-e-n-t-s.css' %}"/>
 
-    <link rel="stylesheet" href="{% static 'css/home/global.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/home/index.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/common.css' %}"/>
 
 
+    <link rel="stylesheet" href="{% static 'css/projects/global.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/projects/projects.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/projects/project-detail.css' %}"/>
 
-    <link rel="stylesheet" href="{% static 'css/accounts/global.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/accounts/login.css'%}" />
-    <link rel="stylesheet" href="{% static 'css/accounts/signup.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/home/global.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/home/index.css' %}"/>
+
 
     <link rel="stylesheet" href="{% static 'css/persons/personal-account-accounts-family.css'%}" />
     <link rel="stylesheet" href="{% static 'css/persons/personal-account-accounts-my-profile.css'%}" />
     <link rel="stylesheet" href="{% static 'css/persons/personal-account-settings.css' %}"/>
 
+    <link rel="stylesheet" href="{% static 'css/accounts/global.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/accounts/login.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/accounts/signup.css' %}"/>
+
+
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"    />
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"/>
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"    />
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"/>
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap"    />
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap"/>
 
     <link rel="stylesheet" href="{% static 'css/events/bootstrap.min.css' %}">
 
 
+</head>
+
+<style>
+    body {
+        font-family: Geneva, Verdana, sans-serif !important;
+    }
+
+    .ut-root-container {
+        /* max-width: 1500px; */
+        margin: auto;
+        justify-content: space-between;
+
+        /*  BREAKS HOME PAGE.
+        display: flex;
+        flex-direction: column;
+        height: 100%; */
+    }
+
+    .ut-content-container {
+        max-width: 1500px;
+        margin: auto;
+        background-color: var(--color-ghostwhite);
+    }
+
+    /*
+
+    div:empty {
+        border: 1px solid red
+    }
+
+     */
+
+</style>
+
+<style>
+    /* style to make footer at the end of page in any case,
+    even when there is not enough content to push it to the bottom  */
+
+    html, body {
+    /* height: 100%;
+    margin: 0; */
+}
+
+</style>
+
+<style>
+    /* common styles for static pages with 2 columns */
+
+    :root {
+        --pad-70: 70px;
+        --pad-40: 40px;
+        --pad-30: 30px;
+        --pad-20: 20px;
+    }
+
+    .two-columns-with-selectors {
+        align-self: stretch;
+        background-color: var(--color-ghostwhite);
+        flex-direction: row;
+        flex-wrap: wrap;
+        /* padding: var(--padding-93xl) var(--padding-53xl); */
+        padding: var(--pad-70) var(--pad-70);
+        gap: var(--gap-5xl);
+        color: var(--primary-text);
+        justify-content: flex-start;
+        box-sizing: border-box;
+        text-align: left;
+        font-size: var(--font-size-xl);
+        font-family: var(--font-montserrat);
+        display: flex;
+        align-items: flex-start;
+        max-width: 100%;
+    }
 
 
-  </head>
+    .left-selector-box {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 306px;
+        border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
+        /* background-color: var(--color-gray); */
+        flex-direction: column;
+        padding: var(--pad-40) 0 0 4px;
+        box-sizing: border-box;
+        gap: 10px;
+        z-index: 2;
+    }
+
+    @media screen and (max-width: 1110px) {
+        .two-columns-with-selectors {
+            padding: var(--pad-30) var(--pad-70)
+        }
 
 
-  <body>
+        .left-selector-box {
+            flex-flow: row;
+            justify-content: center;
+            width: 100%;
+            align-items: center;
+            padding-top: 0;
+            gap: 20px;
+            font-size: 16px; !important;
+        }
 
-  {#  navbar#}
-  {% include 'includes/new/navbar.html' %}
+        .left-selector-text-active, .left-selector-text {
+            padding: 10px 15px;
+            margin-left: 0;
+        }
+    }
 
 
-  {% block content %}
-      {#        content#}
-  {% endblock %}
+    .left-selector-text, .left-selector-text-active {
+        position: relative;
+        line-height: 130%;
+        font-weight: 500;
+        font-weight: 500;
+        z-index: 1;
+        text-decoration: none;
+        border-radius: var(--br-3xs);
+        width: auto;
+        width: fit-content;
 
-  {#  footer#}
-  {% include 'includes/new/footer.html' %}
+        padding: 10px 15px;
+        margin-left: -15px;
+        display: inline;
+        overflow: inherit;
+        white-space: nowrap;
+        max-width: fit-content;
+
+    }
+    .left-selector-text {
+        color: black;
+        display: inline-block;
+        /*min-width: 56px;*/
+        /* width: min-content;*/
+    }
+
+    .left-selector-text-active {
+        background-color: var(--color-royalblue);
+        color: white;
+    }
+
+    .right-part-of-static-page {
+        flex: 1;
+        border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
+        background-color: var(--neutral-background);
+        flex-direction: column;
+        padding: 50px 50px 80px;
+        gap: 30.4px;
+        min-width: 628px;
+        z-index: 1;
+        color: var(--primary-text);
+        justify-content: flex-start;
+        box-sizing: border-box;
+        text-align: left;
+        font-size: var(--font-size-xl);
+        font-family: var(--font-montserrat);
+        display: flex;
+        align-items: flex-start;
+        max-width: 100%;
+    }
+</style>
 
 
-  </body>
+<body style="background-color: var(--color-ghostwhite);">
+<!-- <body style="background-color: saddlebrown;"> -->
+<div class="ut-root-container">
+
+    {#  navbar#}
+    {% include 'includes/new/navbar.html' %}
+
+    <div class="ut-content-container">
+        {% block content %}
+            {#        content#}
+        {% endblock %}
+    </div>
+    {#  footer#}
+    {% include 'includes/new/footer.html' %}
+
+</div>
+</body>
 </html>
