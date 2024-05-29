@@ -5,21 +5,7 @@
 {% block content %}
     <main class="sec-accounts1">
         <div class="bg-personal-account2"></div>
-        <div class="aside-box10">
-            <div class="rectangle-bg10"></div>
-            <div class="navigation-links">
-                <div class="item-active10">
-                    <div class="item-active-child5"></div>
-                    <a class="accounts2" href="{% url 'person_list' %}">Accounts</a>
-            </div>
-            <div class="inactive-item">
-                <a class="events33" href="{% url 'participant_list' %}">Events</a>
-            </div>
-            </div>
-            <div class="settings-item">
-                <div class="settings2">Settings</div>
-            </div>
-        </div>
+        {% include "includes/dashboard_sidebar.html" %}
         <section class="group-section">
             <h1>Persons List</h1>
             <form method="post">

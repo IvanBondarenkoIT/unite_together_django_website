@@ -1,19 +1,33 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 
-<!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-conten padding-y bg">
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <main class="sec-accounts1">
+        <div class="bg-personal-account2"></div>
+        <div class="bg-personal-account2"></div>
+        {% include 'includes/dashboard_sidebar.html' %}
+        <section class="group-section">
+            <h1>Fill your personal data</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="button" style="display: inline-block; padding: 10px 20px; color: white">
+                    Submit
+                </button>
+                <a href="{% url 'person_list' %}" class="button"
+                   style="display: inline-block; padding: 10px 20px; color: white; text-decoration: none;">List of
+                    Persons</a>
+
+            </form>
+        </section>
+    </main>
 
 
-{% include 'includes/alerts.html' %}
-<div class="container">
-	Dashboard
-</div>
 
 
-</section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
 
-    
+
 {% endblock %}

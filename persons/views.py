@@ -52,3 +52,6 @@ def participant_list(request):
         formset = ParticipantFormSet(queryset=Participant.objects.all())
 
     return render(request, 'persons/participant_list.html', {'formset': formset})
+
+def settings(request):
+    return render(request, 'persons/personal-account-settings.html')

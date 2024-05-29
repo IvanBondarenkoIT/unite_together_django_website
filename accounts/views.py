@@ -10,6 +10,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from accounts.forms import RegistrationForm
 from accounts.models import Account
+from persons.forms import PersonForm
 
 
 # Create your views here.
@@ -106,7 +107,8 @@ def activate(request, uidb64, token):
 
 @login_required(login_url="login")
 def dashboard(request):
-    return render(request, "accounts/dashboard.html")
+    form = PersonForm()
+    return render(request, "accounts/dashboard.html", {'form': form})
 
 
 def forgot_password(request):
