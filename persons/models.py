@@ -18,11 +18,12 @@ class Person(models.Model):
     class Gender(models.TextChoices):
         MALE = 'M', 'Male'
         FEMALE = 'F', 'Female'
-    #     OTHER = 'O', 'Other'
+        OTHER = 'O', 'Other'
     #     NON_BINARY = 'NB', 'Non-Binary'
-        PREFER_NOT_TO_SAY = 'PNS', 'Prefer not to say'
+    #     PREFER_NOT_TO_SAY = 'PNS', 'Prefer not to say'
 
     user_owner = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True)
+    # is_default = models.BooleanField(default=False)
 
     first_name = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)
