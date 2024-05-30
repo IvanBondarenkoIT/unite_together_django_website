@@ -8,7 +8,6 @@ class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
         fields = [
-            'user_owner',
             'first_name',
             'last_name',
             'date_of_birth',
@@ -31,7 +30,6 @@ class ParticipantForm(forms.ModelForm):
         model = Participant
         fields = [
             'registered_on',
-            'user_owner',
             'first_name',
             'last_name',
             'date_of_birth',

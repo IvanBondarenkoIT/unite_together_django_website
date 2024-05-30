@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 ul.thumb{
     margin: 0 auto;
     padding: 0;
@@ -13,3 +17,4 @@ ul.thumb li img{
     height: 80px;
     border: 1px solid grey;
 }
+
