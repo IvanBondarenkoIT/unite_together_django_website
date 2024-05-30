@@ -7,7 +7,7 @@
 
     <div class="about-us-contacts" data-animate-on-scroll>
       <section class="page-header4">
-        <img class="bg-icon4" loading="lazy" alt="" src="{% static 'img/aboutus/bg@2x.png' %}" />
+        <img class="bg-icon4" loading="lazy" alt="" src="{% static 'img/aboutus/bg@2x-1600px.jpg' %}" />
 
         <div class="sec-title4">
           <h2 class="sublitle4">Subtitle</h2>
@@ -23,16 +23,23 @@
           </div>
         </div>
       </section>
-      <section class="sec-contacts">
-        <div class="bg-blue-contacts"></div>
-        <div class="aside-box6">
-          <div class="rectangle-bg6"></div>
-          {% for category, link in links.items %}
-              <a class="sport1{% if link in request.path %}-active{% endif %}" href="{% url  link %}">{{ category }}</a>
-          {% endfor %}
-        </div>
-        <div class="left-contacts">
-          <div class="bg-white-contacts"></div>
+
+
+      <main class="two-columns-with-selectors">
+            <!-- BEGIN OF MAIN PART -->
+
+            <!-- Selectors to be copied to all About pages -->
+            <div class="left-selector-box">
+                {% for category, link in links.items %}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
+                       href="{% url  link %}">{{ category }}</a>
+                {% endfor %}
+            </div>
+
+
+          <section class="right-part-of-static-page">
+
+
           <div class="contacts-parent">
             <h1 class="contacts4">Contacts</h1>
             <h2 class="unite-together-is">
@@ -254,8 +261,8 @@
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
     </div>
 
 {% endblock %}
