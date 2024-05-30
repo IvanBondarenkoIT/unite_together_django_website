@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from .forms import PersonForm, ParticipantForm
 from .forms import PersonFormSet, ParticipantFormSet
@@ -6,6 +7,7 @@ from .forms import PersonFormSet, ParticipantFormSet
 from .models import Person, Participant
 
 
+@login_required(login_url="login")
 def create_person(request):
     if request.method == 'POST':
         form = PersonForm(request.POST)
@@ -18,6 +20,7 @@ def create_person(request):
     return render(request, 'persons/create_person.html', {'form': form})
 
 
+@login_required(login_url="login")
 def person_list(request):
     if request.method == 'POST':
         formset = PersonFormSet(request.POST)
@@ -30,6 +33,7 @@ def person_list(request):
     return render(request, 'persons/person_list.html', {'formset': formset})
 
 
+@login_required(login_url="login")
 def create_participant(request):
     if request.method == 'POST':
         form = ParticipantForm(request.POST)
@@ -42,6 +46,7 @@ def create_participant(request):
     return render(request, 'persons/create_participant.html', {'form': form})
 
 
+@login_required(login_url="login")
 def participant_list(request):
     if request.method == 'POST':
         formset = ParticipantFormSet(request.POST)
@@ -53,5 +58,7 @@ def participant_list(request):
 
     return render(request, 'persons/participant_list.html', {'formset': formset})
 
+
+@login_required(login_url="login")
 def settings(request):
     return render(request, 'persons/personal-account-settings.html')
