@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import Account
+
 from web_pages.models import WebContentObject
 
 
@@ -22,7 +22,7 @@ class Person(models.Model):
     #     NON_BINARY = 'NB', 'Non-Binary'
     #     PREFER_NOT_TO_SAY = 'PNS', 'Prefer not to say'
 
-    user_owner = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True)
+    # user_owner = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True)
     # is_default = models.BooleanField(default=False)
 
     first_name = models.CharField(max_length=50, blank=True, null=True)
