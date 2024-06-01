@@ -1,11 +1,30 @@
-from django.shortcuts import render, redirect
+from django.contrib import messages, auth
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
+from .models import UserProfile
 from .forms import PersonForm, ParticipantForm
 from .forms import PersonFormSet, ParticipantFormSet
 
 from .models import Person, Participant
 
+
+@login_required(login_url="login")
+def dashboard(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)  # Get UserProfile with user==request.user
+
+    if request.method == "POST":
+        person_form = PersonForm(request.POST, request.FILES, instance=user_profile.person)
+        if person_form.is_valid():
+            person_form.save()
+            messages.success(request, "Your profile has been updated")
+            return redirect("dashboard")
+    else:
+        person_form = PersonForm(instance=user_profile.person)
+
+
+    # form = PersonForm()
+    return render(request, "accounts/dashboard.html", {'form': person_form})
 
 @login_required(login_url="login")
 def create_person(request):
@@ -22,13 +41,14 @@ def create_person(request):
 
 @login_required(login_url="login")
 def person_list(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)  # Get UserProfile with user==request.user
     if request.method == 'POST':
         formset = PersonFormSet(request.POST)
         if formset.is_valid():
             formset.save()
             return redirect('person_list')  # Change to your desired redirect target
     else:
-        formset = PersonFormSet(queryset=Person.objects.all())
+        formset = PersonFormSet(queryset=Person.objects.all().filter(is_active=True, user_owner=request.user))
 
     return render(request, 'persons/person_list.html', {'formset': formset})
 

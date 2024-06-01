@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Person, Participant
+from .models import Person, Participant, UserProfile
 
 
 # Register your models here.
@@ -25,5 +25,10 @@ class ParticipantAdmin(admin.ModelAdmin):
     fieldsets = ()
 
 
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'person')
+
+
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Participant, ParticipantAdmin)
+admin.site.register(UserProfile, UserProfileAdmin)

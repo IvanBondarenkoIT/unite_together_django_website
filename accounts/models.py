@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-from persons.models import Person
-
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, password=None):
@@ -71,6 +69,3 @@ class Account(AbstractBaseUser):
         return True
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    person = models.OneToOneField(Person, on_delete=models.CASCADE)
