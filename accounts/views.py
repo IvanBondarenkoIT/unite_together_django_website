@@ -10,7 +10,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from accounts.forms import RegistrationForm
 from accounts.models import Account
-
+from persons.models import UserProfile, AssociatedPerson
 
 
 # Create your views here.
@@ -35,6 +35,11 @@ def register(request):
 
             user.phone_number = phone_number
             user.save()
+
+            # Create user Profile
+            profile = UserProfile.objects.create(user=user)
+            profile.person = AssociatedPerson.object.create(user_owner=user)
+            profile.save()
 
 
             # USER ACTIVATION
@@ -103,7 +108,6 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, "Invalid activation link")
         return redirect("Register")
-
 
 
 def forgot_password(request):

@@ -78,4 +78,4 @@ class Participant(Person):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
-    person = models.OneToOneField(Person, on_delete=models.CASCADE)
+    person = models.OneToOneField(AssociatedPerson, on_delete=models.CASCADE)
