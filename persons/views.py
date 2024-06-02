@@ -2,7 +2,7 @@ from django.contrib import messages, auth
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .models import UserProfile
+from .models import UserProfile, AssociatedPerson
 from .forms import PersonForm, ParticipantForm
 from .forms import PersonFormSet, ParticipantFormSet
 
@@ -48,7 +48,7 @@ def person_list(request):
             formset.save()
             return redirect('person_list')  # Change to your desired redirect target
     else:
-        formset = PersonFormSet(queryset=Person.objects.all().filter(is_active=True, user_owner=request.user))
+        formset = PersonFormSet(queryset=AssociatedPerson.objects.all().filter(is_active=True, user_owner=request.user))
 
     return render(request, 'persons/person_list.html', {'formset': formset})
 
