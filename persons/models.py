@@ -73,7 +73,8 @@ class Participant(Person):
     registered_on = models.ForeignKey(WebContentObject, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} {self.registered_on.name}"
+        # return f"{self.first_name} {self.last_name} {self.registered_on.name}"
+        return f"{self.first_name} {self.last_name}"
 
 
 class UserProfile(models.Model):
