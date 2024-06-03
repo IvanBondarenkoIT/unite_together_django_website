@@ -24,6 +24,11 @@ class ObjectsGroup(models.Model):  # Spotr, non-formal education, Events and mas
     is_active = models.BooleanField(default=True)
     page = models.ForeignKey("WebPage", on_delete=models.CASCADE, blank=True, null=True)
 
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
     def __str__(self):
         return f'{self.name} {self.page}'
 

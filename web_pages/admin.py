@@ -51,6 +51,9 @@ class PageTypeListFilter(admin.SimpleListFilter):
 class ObjectsGroupAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_filter = (PageTypeListFilter,)
+    list_display = ('name', 'order')
+    list_editable = ('order',)
+    ordering = ('order',)
 
 
 @admin_thumbnails.thumbnail('image')

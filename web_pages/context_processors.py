@@ -25,11 +25,11 @@ def menu_links(request):
         page_name = "projects"
 
     if page_name:
-        links = ObjectsGroup.objects.filter(page__name=page_name).annotate(
+        links = ObjectsGroup.objects.filter(page__name=page_name).order_by("order").annotate(
             pre_computed_url=generate_url(page_name, F('slug'))
         )
     else:
-        links = ObjectsGroup.objects.all().annotate(
+        links = ObjectsGroup.objects.all().order_by("order").annotate(
             pre_computed_url=generate_url(page_name, F('slug'))
         )
 

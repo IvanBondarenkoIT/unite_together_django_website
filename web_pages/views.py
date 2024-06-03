@@ -53,9 +53,11 @@ def events(request, group_slug=None):
 
     #     all_objects = Events.objects.all().filter(**kw_args).order_by("id")
 
+    # Pilippio update
     all_objects = Events.objects.filter(**kw_args).select_related('selected_city').annotate(
         pre_computed_url=Concat(F('group__slug'), Value('/'), F('slug'), output_field=CharField())
     ).order_by("id")
+    # all_objects = Events.objects.all().filter(**kw_args).order_by("id").select_related('group__page')
 
     # Pagination functional
     paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
@@ -76,6 +78,7 @@ def events(request, group_slug=None):
         "selected_city": selected_city,
     }
 
+    # print(request.path)
     return render(request, 'events/events_index.html', context=context)
 
 
@@ -112,7 +115,7 @@ def projects(request, group_slug=None):
         kw_args["group"] = group
 
     # this is a sample how to speedify x3 sql query
-    all_objects = Projects.objects.all().filter(**kw_args).order_by("id").select_related('group__page')
+    all_objects = Projects.objects.all().filter(**kw_args).select_related('group__page')
 
     # all_objects = Projects.objects.filter(**kw_args).select_related('selected_city').annotate(
     #     pre_computed_url=Concat(F('group__slug'), Value('/'), F('slug'), output_field=CharField())
