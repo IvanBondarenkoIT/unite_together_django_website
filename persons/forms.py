@@ -1,12 +1,12 @@
 from django import forms
 from django.forms import modelformset_factory
 
-from .models import Person, Participant
+from .models import AssociatedPerson, Participant
 
 
-class PersonForm(forms.ModelForm):
+class AssociatedPersonForm(forms.ModelForm):
     class Meta:
-        model = Person
+        model = AssociatedPerson
         fields = [
             'user_owner',
             'first_name',
@@ -50,4 +50,4 @@ class ParticipantForm(forms.ModelForm):
 
 
 ParticipantFormSet = modelformset_factory(Participant, form=ParticipantForm, extra=0)
-PersonFormSet = modelformset_factory(Person, form=PersonForm, extra=0)
+AssociatedPersonFormSet = modelformset_factory(AssociatedPerson, form=AssociatedPersonForm, extra=0)
