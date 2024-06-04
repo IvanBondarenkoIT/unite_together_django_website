@@ -142,7 +142,9 @@
 
                     </div>
                   </div>
-                  <div class="button-registration1" style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
+                  <a class="button-registration1"
+                     href="{% if single_project.url_linc %} {{ single_project.url_linc }} {% endif %}"
+                     style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
                     <div class="registration1" >Registration</div>
                     <div class="vector-wrapper25">
                       <img
@@ -151,7 +153,7 @@
                         src="./public/vector-11.svg"
                       />
                     </div>
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>

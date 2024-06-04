@@ -37,6 +37,11 @@ class ObjectsGroup(models.Model):  # Spotr, non-formal education, Events and mas
 
 
 class WebContentObject(models.Model):
+    class Status(models.TextChoices):
+        REGISTERED = 'Reg', 'Registered'
+        CANCELED = 'Csl', 'Canceled'
+        VISITED = 'Vst', 'Visited'
+
     name = models.CharField(max_length=250)
     title = models.CharField(max_length=250, blank=True, null=True)
     text = models.TextField(blank=True, null=True)
@@ -50,6 +55,8 @@ class WebContentObject(models.Model):
 
     group = models.ForeignKey("ObjectsGroup", on_delete=models.CASCADE, blank=True, null=True)
     # web_page_owner = models.ForeignKey(WebPage, on_delete=models.CASCADE, blank=True)
+
+    status = models.CharField(max_length=3, choices=Status.choices, blank=True, null=True)
 
     def __str__(self):
         return f"{self.name} - {self.title}"
@@ -102,6 +109,7 @@ class Projects(WebContentObject):
     end_age = models.IntegerField(blank=True, null=True)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
+    url_link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return f"Project - {self.name}"
