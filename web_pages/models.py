@@ -66,6 +66,8 @@ class WebContentSubordinateObject(models.Model):
     content_master_object = models.ForeignKey(WebContentObject, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return f"{self.name} - {self.title} - {self.text}"
 
