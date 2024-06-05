@@ -25,8 +25,8 @@
                    href="{% url 'dashboard' %}"> Account </a>
                 <a class="events33{% if 'participant_list' in request.path %} active{% endif %}"
                    href="{% url 'person_list' %}"> Persons </a>
-                <a class="events33{% if 'participant_list' in request.path %} active{% endif %}"
-                   href="{% url 'participant_list' %}"> Events </a>
+                <a class="events33{% if 'registered-events' in request.path %} active{% endif %}"
+                   href="{% url 'registered_events' %}"> Events & Projects </a>
                 <a class="events33{% if 'settings' in request.path %} active{% endif %}"
                    href="{% url 'settings' %}"> Settings </a>
             </ul>

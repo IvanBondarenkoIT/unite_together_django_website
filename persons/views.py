@@ -82,3 +82,17 @@ def participant_list(request):
 @login_required(login_url="login")
 def settings(request):
     return render(request, 'persons/personal-account-settings.html')
+
+
+@login_required(login_url="login")
+def registered_events(request):
+    # participants = Participant.objects.all().filter(user_owner=request.user).order_by('-created_at')
+    participants = Participant.objects.all()
+    # for participant in participants:
+    #     if participant.registered_on in list
+    # result = {}
+
+    context = {
+        'participants': participants
+    }
+    return render(request, 'persons/personal-account-events.html', context=context)
