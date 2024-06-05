@@ -18,15 +18,15 @@ class WebPageAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 
-@admin_thumbnails.thumbnail('image')
-class WebContentObjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'title', 'text', 'is_active', 'created_at', 'updated_at',)
-    list_editable = ('is_active', )
-    prepopulated_fields = {'slug': ('name',)}
+# @admin_thumbnails.thumbnail('image')
+# class WebContentObjectAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'title', 'text', 'is_active', 'created_at', 'updated_at',)
+#     list_editable = ('is_active', )
+#     prepopulated_fields = {'slug': ('name',)}
 
 
-class WebContentSubordinateObjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'title', 'text',)
+# class WebContentSubordinateObjectAdmin(admin.ModelAdmin):
+#     list_display = ('name', 'title', 'text',)
 
 
 # +
@@ -87,7 +87,7 @@ admin.site.register(Events, EventsAdmin)
 
 admin.site.register(City, CityAdmin)
 admin.site.register(WebPage, WebPageAdmin)
-admin.site.register(WebContentObject, WebContentObjectAdmin)
-admin.site.register(WebContentSubordinateObject, WebContentSubordinateObjectAdmin)
+# admin.site.register(WebContentObject, WebContentObjectAdmin)
+# admin.site.register(WebContentSubordinateObject, WebContentSubordinateObjectAdmin)
 admin.site.register(ObjectsGroup, ObjectsGroupAdmin)
 admin.site.register(ProjectGallery)

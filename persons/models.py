@@ -14,6 +14,10 @@ from web_pages.models import WebContentObject
 
 
 class Person(models.Model):
+    class Status(models.TextChoices):
+        REGISTERED = 'Reg', 'Registered'
+        CANCELED = 'Csl', 'Canceled'
+        VISITED = 'Vst', 'Visited'
 
     class Gender(models.TextChoices):
         MALE = 'M', 'Male'
@@ -39,7 +43,7 @@ class Person(models.Model):
     # Type of document
     type_of_document = models.CharField(max_length=100, blank=True, null=True)
     # Document number
-    document_number = models.IntegerField(blank=True, null=True)
+    document_number = models.IntegerField(blank=True, null=True, unique=True)
 
     gender = models.CharField(max_length=3, choices=Gender.choices)
 
@@ -55,6 +59,8 @@ class Person(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     is_active = models.BooleanField(default=True)
+
+    status = models.CharField(max_length=3, choices=Status.choices, blank=True, null=True)
 
     # is_approved = models.BooleanField(default=True)
 
