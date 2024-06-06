@@ -69,10 +69,9 @@ class Person(models.Model):
 
 
 class AssociatedPerson(Person):
-    # user_owner = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} {self.user_owner.first_name}"
+        return f"{self.first_name} {self.last_name}"
 
 
 class Participant(Person):

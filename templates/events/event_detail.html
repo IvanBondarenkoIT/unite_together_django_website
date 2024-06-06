@@ -91,7 +91,28 @@
                                             {{ single_event.selected_city }} {{ single_event.address }}
                                         </div>
                                     </div>
+{#                                    <form id="personForm" method="POST" action="{% url 'event_detail' %}">#}
+                                    <form id="personForm" method="POST">
+                                        {% csrf_token %}
+                                        <select id="persons" name="selected-person">
+{#                                            {% if selected_person %}#}
+{#                                                <option value="{{ selected_person }}">{{ selected_person }}</option>#}
+{#                                            {% else %}#}
+{#                                                <option value="All">All</option>#}
+{#                                            {% endif %}#}
+
+                                            {% for person in persons %}
+{#                                                {% if person.name == selected_city %}#}
+{#                                                    <option value="All">All</option>#}
+{#                                                {% else %}#}
+                                                    <option value="{{ person }}">{{ person }}</option>
+{#                                                {% endif %}#}
+                                            {% endfor %}
+                                        </select>
+                                    </form>
+
                                     {% if single_event.is_active %}
+{#                                        Need ToDo registration button#}
                                         <a class="button-registration" href="{% url 'login' %}">
                                             <div class="registration">Registration</div>
                                             <div class="vector-container">

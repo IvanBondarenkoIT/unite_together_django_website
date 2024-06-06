@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.db.models import F, CharField, Value
 from django.db.models.functions import Concat
 
+from persons.models import AssociatedPerson
 from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City, \
     Projects, ProjectGallery
 
@@ -90,8 +91,11 @@ def event_detail(request, group_slug=None, event_slug=None):
 
         # event = get_object_or_404(Events, slug=event_slug)
 
+    persons = AssociatedPerson.objects.all().filter(user_owner=request.user)
+
     context = {
         "single_event": single_event,
+        "persons": persons,
     }
 
     return render(request, 'events/event_detail.html', context=context)
