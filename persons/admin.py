@@ -3,7 +3,7 @@ from .models import AssociatedPerson, Participant, UserProfile, Person
 
 
 # class PersonAdmin(admin.ModelAdmin):
-#     list_display = ('first_name', 'last_name', 'updated_at', 'created_at', 'is_active')
+#     list_display = ('first_name', 'last_name', 'document_number', 'created_at', 'is_active')
 #     list_display_links = ('first_name', 'last_name')
 #     # readonly_fields = ('date_joined', 'last_login')
 #     # ordering = ('-date_joined',)
@@ -25,13 +25,13 @@ class AssociatedPersonAdmin(admin.ModelAdmin):
 
 
 class ParticipantAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'updated_at', 'created_at', 'is_active')
+    list_display = ('registered_on', 'first_name', 'last_name', 'date_of_birth', 'date_of_birth', 'document_number', 'created_at', 'is_active')
     list_display_links = ('first_name', 'last_name')
     # readonly_fields = ('date_joined', 'last_login')
-    # ordering = ('-date_joined',)
+    ordering = ('-created_at',)
 
     filter_horizontal = ()
-    list_filter = ()
+    list_filter = ('registered_on',)
     fieldsets = ()
 
 
