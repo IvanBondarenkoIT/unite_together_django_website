@@ -65,6 +65,7 @@
                         <div class="array-op">
                             <div class="list-op">
                                 <div class="dictionary-op">
+                                    {% if single_event.extra_details %}
                                     <div class="set-op">
                                         <img
                                                 class="set-op-child"
@@ -73,7 +74,8 @@
                                                 src="{% static 'img/group-679.svg' %}"
                                         />
                                     </div>
-                                    <div class="weekly-at-1400">Weekly at 14:00</div>
+                                    <div class="weekly-at-1400">{{ single_event.extra_details }}</div>
+                                    {% endif %}
 
                                 </div>
                                 <div class="frame-div">
