@@ -1,9 +1,11 @@
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.db.models import F, CharField, Value
 from django.db.models.functions import Concat
 
+from persons.models import AssociatedPerson, Participant
 from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City, \
     Projects, ProjectGallery
 
@@ -82,6 +84,40 @@ def events(request, group_slug=None):
     return render(request, 'events/events_index.html', context=context)
 
 
+def create_participant(selected_associated_person: AssociatedPerson, selected_event: WebContentObject) -> Participant:
+    """
+    Create a new Participant from an AssociatedPerson and a WebContentObject (event).
+
+    Args:
+        selected_associated_person (AssociatedPerson): The associated person to be copied.
+        selected_event (WebContentObject): The event to associate with the new participant.
+
+    Returns:
+        Participant: The created Participant instance.
+    """
+    new_participant = Participant.objects.create(
+        user_owner=selected_associated_person.user_owner,
+        first_name=selected_associated_person.first_name,
+        last_name=selected_associated_person.last_name,
+        date_of_birth=selected_associated_person.date_of_birth,
+        citizenship=selected_associated_person.citizenship,
+        date_of_arrival=selected_associated_person.date_of_arrival,
+        type_of_document=selected_associated_person.type_of_document,
+        document_number=selected_associated_person.document_number,
+        gender=selected_associated_person.gender,
+        georgian_phone_number=selected_associated_person.georgian_phone_number,
+        ukrainian_phone_number=selected_associated_person.ukrainian_phone_number,
+        country=selected_associated_person.country,
+        city=selected_associated_person.city,
+        region=selected_associated_person.region,
+        address_line=selected_associated_person.address_line,
+        is_active=selected_associated_person.is_active,
+        status="Registered",
+        registered_on=selected_event
+    )
+    return new_participant
+
+
 def event_detail(request, group_slug=None, event_slug=None):
     try:
         single_event = Events.objects.get(group__slug=group_slug, slug=event_slug)
@@ -90,8 +126,28 @@ def event_detail(request, group_slug=None, event_slug=None):
 
         # event = get_object_or_404(Events, slug=event_slug)
 
+    persons = AssociatedPerson.objects.all().filter(user_owner=request.user)
+
+    if request.method == "POST":
+        selected_person_id = request.POST.get('selected-person')
+        print(selected_person_id)
+        if selected_person_id:
+            try:
+                selected_person = AssociatedPerson.objects.get(id=selected_person_id, user_owner=request.user)
+                # Save the selected person (you can add more logic here)
+                new_participant = create_participant(selected_person, single_event)
+                messages.success(request, f"Person {new_participant.first_name} {new_participant.last_name} registarted on {single_event.name}")
+                # single_event.associated_person = selected_person
+                # single_event.save()
+                # Redirect or provide feedback after saving
+                return redirect('registered_events')  # Replace with your success handling
+            except AssociatedPerson.DoesNotExist:
+                # Handle the case where the person does not exist or does not belong to the user
+                return redirect('some_error_page')  # Replace with your error handling
+
     context = {
         "single_event": single_event,
+        "persons": persons,
     }
 
     return render(request, 'events/event_detail.html', context=context)

@@ -570,10 +570,15 @@
   z-index: 2;
 }
 .heading25,
-.text41 {
-  align-self: stretch;
+.event-registered-on-text {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
   position: relative;
-  line-height: 140%;
+  line-height: 125%;
+
   z-index: 2;
 }
 .tag-one12 {
