@@ -4,10 +4,10 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
 
-  <body>
+    <body>
     <div class="events-detail" data-animate-on-scroll>
         <section class="sec-detail">
             <div class="bg-detail"></div>
@@ -66,67 +66,59 @@
                             <div class="list-op">
                                 <div class="dictionary-op">
                                     {% if single_event.extra_details %}
-                                    <div class="set-op">
-                                        <img
-                                                class="set-op-child"
-                                                loading="lazy"
-                                                alt=""
-                                                src="{% static 'img/group-679.svg' %}"
-                                        />
-                                    </div>
-                                    <div class="weekly-at-1400">{{ single_event.extra_details }}</div>
+                                        <div class="set-op">
+                                            <img
+                                                    class="set-op-child"
+                                                    loading="lazy"
+                                                    alt=""
+                                                    src="{% static 'img/group-679.svg' %}"
+                                            />
+                                        </div>
+                                        <div class="weekly-at-1400">{{ single_event.extra_details }}</div>
                                     {% endif %}
 
                                 </div>
                                 <div class="frame-div">
-                                        <div class="vector-wrapper">
-                                            <img
-                                                    class="vector-icon"
-                                                    loading="lazy"
-                                                    alt=""
-                                                    src="{% static 'img/vector.svg' %}"
-                                            />
-                                        </div>
-                                        <div class="batumi-127-luka">
-                                            {{ single_event.selected_city }} {{ single_event.address }}
-                                        </div>
+                                    <div class="vector-wrapper">
+                                        <img
+                                                class="vector-icon"
+                                                loading="lazy"
+                                                alt=""
+                                                src="{% static 'img/vector.svg' %}"
+                                        />
                                     </div>
-{#                                    <form id="personForm" method="POST" action="{% url 'event_detail' %}">#}
+                                    <div class="batumi-127-luka">
+                                        {{ single_event.selected_city }} {{ single_event.address }}
+                                    </div>
+                                </div>
+                                {#                                    <form id="personForm" method="POST" action="{% url 'event_detail' %}">#}
+                                {% if single_event.is_active %}
                                     <form id="personForm" method="POST">
                                         {% csrf_token %}
-                                        <select id="persons" name="selected-person">
-{#                                            {% if selected_person %}#}
-{#                                                <option value="{{ selected_person }}">{{ selected_person }}</option>#}
-{#                                            {% else %}#}
-{#                                                <option value="All">All</option>#}
-{#                                            {% endif %}#}
+                                        {% if request.user %}
+{#                                            #}
 
-                                            {% for person in persons %}
-{#                                                {% if person.name == selected_city %}#}
-{#                                                    <option value="All">All</option>#}
-{#                                                {% else %}#}
-                                                    <option value="{{ person }}">{{ person }}</option>
-{#                                                {% endif %}#}
-                                            {% endfor %}
-                                        </select>
-                                    </form>
+                                            <select name="selected-person">
+                                                {% for person in persons %}
+                                                    <option value="{{ person.id }}">{{ person }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <button type="submit" class="button-registration">
+                                                <div class="registration">Registration</div>
+                                                <div class="vector-container">
+                                                    <img class="vector-icon1" alt=""
+                                                         src="{% static 'img/vector-1.svg' %}"/>
+                                                </div>
+                                            </button>
 
-                                    {% if single_event.is_active %}
-{#                                        Need ToDo registration button#}
-                                        <a class="button-registration" href="{% url 'login' %}">
-                                            <div class="registration">Registration</div>
-                                            <div class="vector-container">
-                                                <img
-                                                        class="vector-icon1"
-                                                        alt=""
-                                                        src="{% static 'img/vector-1.svg' %}"
-                                                />
-                                            </div>
-                                        </a>
-                                    {% else %}
-                                        <button class="button-join">
-                                            <div class="join-parent">
-                                                <div class="join">Closed</div>
+
+
+
+                                        {% else %}
+                                            <a class="button-registration" href="{% url 'login' %}">
+                                                <div class="registration">Registration</div>
                                                 <div class="vector-container">
                                                     <img
                                                             class="vector-icon1"
@@ -134,9 +126,23 @@
                                                             src="{% static 'img/vector-1.svg' %}"
                                                     />
                                                 </div>
+                                            </a>
+                                        {% endif %}
+                                    </form>
+                                {% else %}
+                                    <button class="button-join">
+                                        <div class="join-parent">
+                                            <div class="join">Closed</div>
+                                            <div class="vector-container">
+                                                <img
+                                                        class="vector-icon1"
+                                                        alt=""
+                                                        src="{% static 'img/vector-1.svg' %}"
+                                                />
                                             </div>
-                                        </button>
-                                    {% endif %}
+                                        </div>
+                                    </button>
+                                {% endif %}
 
                             </div>
 
@@ -147,11 +153,11 @@
                 </div>
             </div>
         </section>
-      
+
     </div>
 
 
-  </body>
-</html>
+    </body>
+    </html>
 
 {% endblock %}
