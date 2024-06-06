@@ -15,9 +15,9 @@ from web_pages.models import WebContentObject
 
 class Person(models.Model):
     class Status(models.TextChoices):
-        REGISTERED = 'Reg', 'Registered'
-        CANCELED = 'Csl', 'Canceled'
-        VISITED = 'Vst', 'Visited'
+        REGISTERED = 'Registered', 'Registered'
+        CANCELED = 'Canceled', 'Canceled'
+        VISITED = 'Visited', 'Visited'
 
     class Gender(models.TextChoices):
         MALE = 'M', 'Male'
@@ -60,7 +60,7 @@ class Person(models.Model):
 
     is_active = models.BooleanField(default=True)
 
-    status = models.CharField(max_length=3, choices=Status.choices, blank=True, null=True)
+    status = models.CharField(max_length=10, choices=Status.choices, blank=True, null=True)
 
     # is_approved = models.BooleanField(default=True)
 
