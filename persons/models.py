@@ -43,7 +43,8 @@ class Person(models.Model):
     # Type of document
     type_of_document = models.CharField(max_length=100, blank=True, null=True)
     # Document number
-    document_number = models.IntegerField(blank=True, null=True, unique=True)
+
+    document_number = models.IntegerField(blank=True, null=True)
 
     gender = models.CharField(max_length=3, choices=Gender.choices)
 
