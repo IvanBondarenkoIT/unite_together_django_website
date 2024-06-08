@@ -534,7 +534,6 @@
 }
 .unite-together-was-container1 {
   align-self: stretch;
-  height: 199px;
   position: relative;
   font-size: var(--font-size-base);
   line-height: 150%;
@@ -820,8 +819,8 @@
   min-width: 285px;
 }
 .group-icon {
-  align-self: stretch;
-  height: 368.5px;
+  /* align-self: stretch;
+  height: 368.5px; */
   position: relative;
   max-width: 100%;
   overflow: hidden;

@@ -86,8 +86,8 @@ def settings(request):
 
 @login_required(login_url="login")
 def registered_events(request):
-    # participants = Participant.objects.all().filter(user_owner=request.user).order_by('-created_at')
-    participants = Participant.objects.all()
+    participants = Participant.objects.all().filter(user_owner=request.user).order_by('-created_at')
+    # participants = Participant.objects.all()
     # for participant in participants:
     #     if participant.registered_on in list
     # result = {}
