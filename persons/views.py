@@ -3,13 +3,13 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from .models import UserProfile, AssociatedPerson
+from .models import UserProfile, AssociatedPerson, Participant
+from accounts.models import Account
 from .forms import AssociatedPersonForm, ParticipantForm
 from .forms import AssociatedPersonFormSet, ParticipantFormSet
 
-from .models import Person, Participant
-
 OBJECTS_ON_PAGE = 4
+
 
 @login_required(login_url="login")
 def dashboard(request):
@@ -81,11 +81,6 @@ def participant_list(request):
 
 
 @login_required(login_url="login")
-def settings(request):
-    return render(request, 'persons/personal-account-settings.html')
-
-
-@login_required(login_url="login")
 def registered_events(request):
     participants = Participant.objects.all().filter(user_owner=request.user).order_by('-created_at')
 
@@ -107,3 +102,29 @@ def registered_events(request):
         'objects_count': objects_count
     }
     return render(request, 'persons/personal-account-events.html', context=context)
+
+
+@login_required(login_url="login")
+def settings(request):
+    if request.method == "POST":
+        current_password = request.POST.get("current_password")
+        new_password = request.POST.get("new_password")
+        confirm_password = request.POST.get("confirm_password")
+
+        user = Account.objects.get(username__exact=request.user.username)
+
+        if new_password == confirm_password:
+            success = user.check_password(current_password)
+            if success:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, "Password updated succesfully.")
+                return redirect("change_password")
+            else:
+                messages.error(request, "Please enter correct password")
+                return redirect("change_password")
+        else:
+            messages.error(request, "Passwords do not match")
+            return redirect("change_password")
+
+    return render(request, 'persons/personal-account-settings.html')

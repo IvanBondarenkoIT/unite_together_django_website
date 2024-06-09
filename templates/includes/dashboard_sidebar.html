@@ -28,13 +28,14 @@
             <a class="events33{% if 'registered-events' in request.path %} active{% endif %}"
                href="{% url 'registered_events' %}"> Events & Projects </a>
             <a class="events33{% if 'settings' in request.path %} active{% endif %}"
-               href="{% url 'settings' %}"> Settings </a>
+               href="{% url 'settings' %}"> Change Password </a>
+            <br>
+            <br>
+            <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text" >Log out</span></a>
         </ul>
+
+
 
     </div>
 
-    <br>
-    <br>
-    <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span>
-    </a>
 </div>
