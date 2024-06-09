@@ -1,34 +1,40 @@
 <div class="aside-box10">
     <div class="rectangle-bg10"></div>
-{#    <div class="navigation-links">#}
-{#        <div class="item-active10">#}
-{#            <div class="item-active-child5"></div>#}
-{#            <a class="accounts2" href="{% url 'person_list' %}">Account</a>#}
-{#        </div>#}
-{##}
-{#        <div class="inactive-item">#}
-{#            <a class="events33" href="{% url 'participant_list' %}">Persons</a>#}
-{#        </div>#}
-{##}
-{#        <div class="inactive-item">#}
-{#            <a class="events33" href="{% url 'participant_list' %}">Events</a>#}
-{#        </div>#}
-{#    </div>#}
-{#    <div class="settings-item">#}
-{#        <div class="settings2">Settings</div>#}
-{#    </div>#}
+    {#    <div class="navigation-links">#}
+    {#        <div class="item-active10">#}
+    {#            <div class="item-active-child5"></div>#}
+    {#            <a class="accounts2" href="{% url 'person_list' %}">Account</a>#}
+    {#        </div>#}
+    {##}
+    {#        <div class="inactive-item">#}
+    {#            <a class="events33" href="{% url 'participant_list' %}">Persons</a>#}
+    {#        </div>#}
+    {##}
+    {#        <div class="inactive-item">#}
+    {#            <a class="events33" href="{% url 'participant_list' %}">Events</a>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    <div class="settings-item">#}
+    {#        <div class="settings2">Settings</div>#}
+    {#    </div>#}
 
-            <div class="container">
-            <!--   SIDEBAR   -->
-            <ul class="list-group navigation-links">
-                <a class="events33{% if 'person_list' in request.path %} active{% endif %}"
-                   href="{% url 'dashboard' %}"> Account </a>
-                <a class="events33{% if 'participant_list' in request.path %} active{% endif %}"
-                   href="{% url 'person_list' %}"> Persons </a>
-                <a class="events33{% if 'registered-events' in request.path %} active{% endif %}"
-                   href="{% url 'registered_events' %}"> Events & Projects </a>
-                <a class="events33{% if 'settings' in request.path %} active{% endif %}"
-                   href="{% url 'settings' %}"> Settings </a>
-            </ul>
-        </div>
+    <div class="container">
+        <!--   SIDEBAR   -->
+        <ul class="list-group navigation-links">
+            <a class="events33{% if 'person_list' in request.path %} active{% endif %}"
+               href="{% url 'dashboard' %}"> Account </a>
+            <a class="events33{% if 'participant_list' in request.path %} active{% endif %}"
+               href="{% url 'person_list' %}"> Persons </a>
+            <a class="events33{% if 'registered-events' in request.path %} active{% endif %}"
+               href="{% url 'registered_events' %}"> Events & Projects </a>
+            <a class="events33{% if 'settings' in request.path %} active{% endif %}"
+               href="{% url 'settings' %}"> Settings </a>
+        </ul>
+
+    </div>
+
+    <br>
+    <br>
+    <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span>
+    </a>
 </div>

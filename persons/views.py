@@ -9,7 +9,7 @@ from .forms import AssociatedPersonFormSet, ParticipantFormSet
 
 from .models import Person, Participant
 
-OBJECTS_ON_PAGE = 1
+OBJECTS_ON_PAGE = 4
 
 @login_required(login_url="login")
 def dashboard(request):
