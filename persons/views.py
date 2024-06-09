@@ -1,4 +1,5 @@
 from django.contrib import messages, auth
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
@@ -8,6 +9,7 @@ from .forms import AssociatedPersonFormSet, ParticipantFormSet
 
 from .models import Person, Participant
 
+OBJECTS_ON_PAGE = 1
 
 @login_required(login_url="login")
 def dashboard(request):
@@ -23,7 +25,6 @@ def dashboard(request):
         person_form = AssociatedPersonForm(instance=user_profile.person)
 
 
-    # form = PersonForm()
     return render(request, "accounts/dashboard.html", {'form': person_form})
 
 @login_required(login_url="login")
@@ -87,12 +88,22 @@ def settings(request):
 @login_required(login_url="login")
 def registered_events(request):
     participants = Participant.objects.all().filter(user_owner=request.user).order_by('-created_at')
+
     # participants = Participant.objects.all()
     # for participant in participants:
     #     if participant.registered_on in list
     # result = {}
 
+    # Pagination functional
+    paginator = Paginator(participants, OBJECTS_ON_PAGE)
+    page = request.GET.get("page")
+    page_all_objects = paginator.get_page(page)
+
+    # Get count efficiently / faster
+    objects_count = paginator.count
+
     context = {
-        'participants': participants
+        'participants': page_all_objects,
+        'objects_count': objects_count
     }
     return render(request, 'persons/personal-account-events.html', context=context)
