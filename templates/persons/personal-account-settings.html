@@ -11,20 +11,12 @@
         <div class="bg-group">
           <div class="bg6"></div>
           <div class="profile-info">
-            <h2 class="edit-profile">Edit profile</h2>
-            <div class="your-profile-is-container">
-              <p class="your-profile-is">
-                Your profile is a record of your personal information
-              </p>
-              <p class="that-defines-who">that defines who you are</p>
-            </div>
+            <h2 class="edit-profile">Edit password</h2>
           </div>
           <div class="input-fields">
             <div class="password-email">
-              <div class="password-email-labels">
-                <div class="e-mail9">E-mail</div>
-                <div class="enter-your-new">Enter your new e-mail here</div>
-              </div>
+
+
               <div class="password-email-labels1">
                 <div class="current-password">Current Password</div>
                 <div class="enter-your-current">
@@ -35,154 +27,43 @@
                 <div class="new-password">New Password</div>
                 <div class="enter-your-new1">Enter your new password here</div>
               </div>
-            </div>
-            <form class="inputs-container">
-              <div class="inputs">
-                <div class="input-items">
-                  <div class="input7">
-                    <div class="input-base6">
-                      <input
-                        class="placeholder7"
-                        placeholder="olga.popova@gmail.com"
-                        type="text"
-                      />
+              <div class="password-email-labels2">
+                <div class="new-password">Confirm Password</div>
+                <div class="enter-your-new1">Enter your new password here</div>
+              </div>
 
-                      <div class="spacer6">
-                        <div class="ignore92"></div>
-                        <div class="ignore93"></div>
-                      </div>
-                      <div class="input-suffix6">
-                        <div class="icon-wrapper32">
-                          <div class="width-change-size-here19">
-                            <div class="ignore94"></div>
-                            <div class="ignore95"></div>
-                          </div>
-                          <div class="icon-wrapper-h19">
-                            <div class="height-change-size-here19">
-                              <div class="ignore96"></div>
-                              <div class="ignore97"></div>
-                            </div>
-                            <img
-                              class="icon-wrapper33"
-                              alt=""
-                              src="./public/iconwrapper-51@2x.png"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <img class="black-icon6" alt="" />
-                </div>
+
+            </div>
+            <form class="inputs-container" method="POST">
+                {% csrf_token %}
+              <div class="inputs">
                 <div class="input-items1">
                   <div class="input8">
-                    <div class="input-base7">
                       <div class="placeholder8">
-                        <div class="input-prefix3">
-                          <div class="icon-wrapper34">
-                            <div class="width-change-size-here20">
-                              <div class="ignore98"></div>
-                              <div class="ignore99"></div>
-                            </div>
-                            <div class="icon-wrapper-h20">
-                              <div class="height-change-size-here20">
-                                <div class="ignore100"></div>
-                                <div class="ignore101"></div>
-                              </div>
-                              <img
-                                class="icon-wrapper35"
-                                alt=""
-                                src="./public/iconwrapper-61@2x.png"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="placeholder9">******************</div>
+                        <input type="password" name="current_password" placeholder="Current Password" class="form-control" required>
                       </div>
-                      <div class="spacer7">
-                        <div class="ignore102"></div>
-                        <div class="ignore103"></div>
-                      </div>
-                      <div class="input-suffix7">
-                        <div class="icon-wrapper36">
-                          <div class="width-change-size-here21">
-                            <div class="ignore104"></div>
-                            <div class="ignore105"></div>
-                          </div>
-                          <div class="icon-wrapper-h21">
-                            <div class="height-change-size-here21">
-                              <div class="ignore106"></div>
-                              <div class="ignore107"></div>
-                            </div>
-                            <img
-                              class="icon-wrapper37"
-                              alt=""
-                              src="./public/iconwrapper-71@2x.png"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                   <img class="black-icon7" alt="" src="./public/black-1.svg" />
                 </div>
                 <div class="input-items2">
                   <div class="input9">
-                    <div class="input-base8">
                       <div class="placeholder10">
-                        <div class="input-prefix4">
-                          <div class="icon-wrapper38">
-                            <div class="width-change-size-here22">
-                              <div class="ignore108"></div>
-                              <div class="ignore109"></div>
-                            </div>
-                            <div class="icon-wrapper-h22">
-                              <div class="height-change-size-here22">
-                                <div class="ignore110"></div>
-                                <div class="ignore111"></div>
-                              </div>
-                              <img
-                                class="icon-wrapper39"
-                                alt=""
-                                src="./public/iconwrapper-61@2x.png"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="placeholder11">******************</div>
+                        <input type="password" name="new_password" placeholder="Create New Password" class="form-control" required>
                       </div>
-                      <div class="spacer8">
-                        <div class="ignore112"></div>
-                        <div class="ignore113"></div>
+                  </div>
+                  <img class="black-icon8" alt="" src="./public/black-2.svg" />
+                </div>
+                <div class="input-items2">
+                  <div class="input9">
+                      <div class="placeholder10">
+                        <input type="password" name="confirm_password" placeholder="Confirm New Password" class="form-control" required>
                       </div>
-                      <div class="input-suffix8">
-                        <div class="icon-wrapper40">
-                          <div class="width-change-size-here23">
-                            <div class="ignore114"></div>
-                            <div class="ignore115"></div>
-                          </div>
-                          <div class="icon-wrapper-h23">
-                            <div class="height-change-size-here23">
-                              <div class="ignore116"></div>
-                              <div class="ignore117"></div>
-                            </div>
-                            <img
-                              class="icon-wrapper41"
-                              alt=""
-                              src="./public/iconwrapper-71@2x.png"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                   <img class="black-icon8" alt="" src="./public/black-2.svg" />
                 </div>
               </div>
               <div class="update-button-container">
-                <button class="upload">
-                  <div class="update">Update</div>
-                </button>
+                <input type="submit" value="Submit" class="btn btn-primary">
               </div>
             </form>
           </div>
