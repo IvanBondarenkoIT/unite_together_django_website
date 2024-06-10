@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1 1 45%;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <main class="sec-accounts1">
+        <div class="bg-personal-account2"></div>
+        <div class="bg-personal-account2"></div>
+        {% include 'includes/dashboard_sidebar.html' %}
+        <section class="group-section">
+{#            <h1>Fill your personal data</h1>#}
+{#            <form method="post">#}
+{#                {% csrf_token %}#}
+{#                {{ form.as_p }}#}
+{#                <button type="submit" class="button" style="display: inline-block; padding: 10px 20px; color: white">#}
+{#                    Submit#}
+{#                </button>#}
+{#                <a href="{% url 'person_list' %}" class="button"#}
+{#                   style="display: inline-block; padding: 10px 20px; color: white; text-decoration: none;">List of#}
+{#                    Persons</a>#}
+{##}
+{#            </form>#}
+            <h1>Create Person</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form.first_name.label_tag }} {{ form.first_name }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.last_name.label_tag }} {{ form.last_name }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.date_of_birth.label_tag }} {{ form.date_of_birth }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.citizenship.label_tag }} {{ form.citizenship }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.date_of_arrival.label_tag }} {{ form.date_of_arrival }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.type_of_document.label_tag }} {{ form.type_of_document }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.document_number.label_tag }} {{ form.document_number }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        {{ form.gender.label_tag }} {{ form.gender }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.georgian_phone_number.label_tag }} {{ form.georgian_phone_number }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.ukrainian_phone_number.label_tag }} {{ form.ukrainian_phone_number }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.country.label_tag }} {{ form.country }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.chosen_city.label_tag }} {{ form.chosen_city }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form.address_line.label_tag }} {{ form.address_line }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.status.label_tag }} {{ form.status }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.is_active.label_tag }} {{ form.is_active }}
+                    </div>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+
+
+
+
+
+{% endblock %}

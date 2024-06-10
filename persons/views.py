@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 
 from .models import UserProfile, AssociatedPerson, Participant
 from accounts.models import Account
-from .forms import AssociatedPersonForm, ParticipantForm
-from .forms import AssociatedPersonFormSet, ParticipantFormSet
+from .forms import AssociatedPersonForm, AssociatedPersonFormSet
+
 
 OBJECTS_ON_PAGE = 4
 
@@ -24,16 +24,21 @@ def dashboard(request):
     else:
         person_form = AssociatedPersonForm(instance=user_profile.person)
 
+    return render(request, "persons/dashboard.html", {'form': person_form})
 
-    return render(request, "accounts/dashboard.html", {'form': person_form})
 
 @login_required(login_url="login")
 def create_person(request):
     if request.method == 'POST':
         form = AssociatedPersonForm(request.POST)
         if form.is_valid():
-            form.save()
+            associated_person = form.save(commit=False)
+            associated_person.user_owner = request.user
+            associated_person.save()
+            messages.success(request, 'Person created successfully!')
             return redirect('home')  # Change to your desired redirect target
+        else:
+            messages.error(request, 'Please correct the errors below.')
     else:
         form = AssociatedPersonForm()
 
@@ -46,48 +51,48 @@ def person_list(request):
     if request.method == 'POST':
         formset = AssociatedPersonFormSet(request.POST)
         if formset.is_valid():
-            formset.save()
+            associated_person = formset.save(commit=False)
+            associated_person.user_owner = request.user
+            associated_person.save()
+            messages.success(request, 'Person created successfully!')
             return redirect('person_list')  # Change to your desired redirect target
+        else:
+            messages.error(request, 'Please correct the errors below.')
     else:
         formset = AssociatedPersonFormSet(queryset=AssociatedPerson.objects.all().filter(is_active=True, user_owner=request.user))
 
     return render(request, 'persons/person_list.html', {'formset': formset})
 
 
-@login_required(login_url="login")
-def create_participant(request):
-    if request.method == 'POST':
-        form = ParticipantForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('participant_list')  # Change to your desired redirect target
-    else:
-        form = ParticipantForm()
+# @login_required(login_url="login")
+# def create_participant(request):
+#     if request.method == 'POST':
+#         form = ParticipantForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('participant_list')  # Change to your desired redirect target
+#     else:
+#         form = ParticipantForm()
+#
+#     return render(request, 'persons/create_participant.html', {'form': form})
 
-    return render(request, 'persons/create_participant.html', {'form': form})
 
-
-@login_required(login_url="login")
-def participant_list(request):
-    if request.method == 'POST':
-        formset = ParticipantFormSet(request.POST)
-        if formset.is_valid():
-            formset.save()
-            return redirect('participant_list')  # Change to your desired redirect target
-    else:
-        formset = ParticipantFormSet(queryset=Participant.objects.all())
-
-    return render(request, 'persons/participant_list.html', {'formset': formset})
+# @login_required(login_url="login")
+# def participant_list(request):
+#     if request.method == 'POST':
+#         formset = ParticipantFormSet(request.POST)
+#         if formset.is_valid():
+#             formset.save()
+#             return redirect('participant_list')  # Change to your desired redirect target
+#     else:
+#         formset = ParticipantFormSet(queryset=Participant.objects.all())
+#
+#     return render(request, 'persons/participant_list.html', {'formset': formset})
 
 
 @login_required(login_url="login")
 def registered_events(request):
     participants = Participant.objects.all().filter(user_owner=request.user).order_by('-created_at')
-
-    # participants = Participant.objects.all()
-    # for participant in participants:
-    #     if participant.registered_on in list
-    # result = {}
 
     # Pagination functional
     paginator = Paginator(participants, OBJECTS_ON_PAGE)
