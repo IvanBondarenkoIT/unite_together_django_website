@@ -1,7 +1,7 @@
 from django.db import models
 
 from accounts.models import Account
-from web_pages.models import WebContentObject
+from web_pages.models import WebContentObject, City
 
 
 # GENDER_CHOICES = [
@@ -14,17 +14,15 @@ from web_pages.models import WebContentObject
 
 
 class Person(models.Model):
-    class Status(models.TextChoices):
-        REGISTERED = 'Registered', 'Registered'
-        CANCELED = 'Canceled', 'Canceled'
-        VISITED = 'Visited', 'Visited'
-
     class Gender(models.TextChoices):
         MALE = 'M', 'Male'
         FEMALE = 'F', 'Female'
         OTHER = 'O', 'Other'
-    #     NON_BINARY = 'NB', 'Non-Binary'
-    #     PREFER_NOT_TO_SAY = 'PNS', 'Prefer not to say'
+
+    class Country(models.TextChoices):
+        Ukraine = 'Ukraine', 'Ukraine'
+        Georgia = 'Georgia', 'Georgia'
+        OTHER = 'Other', 'Other'
 
     user_owner = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True)
     # is_default = models.BooleanField(default=False)
@@ -44,16 +42,16 @@ class Person(models.Model):
     type_of_document = models.CharField(max_length=100, blank=True, null=True)
     # Document number
 
-    document_number = models.IntegerField(blank=True, null=True)
+    document_number = models.CharField(max_length=50, blank=True, null=True)
 
     gender = models.CharField(max_length=3, choices=Gender.choices)
 
     georgian_phone_number = models.CharField(max_length=50, blank=True, null=True)
     ukrainian_phone_number = models.CharField(max_length=50, blank=True, null=True)
 
-    country = models.CharField(max_length=50, blank=True, null=True)
-    city = models.CharField(max_length=50, blank=True, null=True)
-    region = models.CharField(max_length=50, blank=True, null=True)
+    country = models.CharField(max_length=7, choices=Country.choices, blank=True, null=True)
+    # city = models.CharField(max_length=50, blank=True, null=True)
+    chosen_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
     address_line = models.CharField(max_length=100, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -61,10 +59,7 @@ class Person(models.Model):
 
     is_active = models.BooleanField(default=True)
 
-    status = models.CharField(max_length=10, choices=Status.choices, blank=True, null=True)
-
     # is_approved = models.BooleanField(default=True)
-
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -76,7 +71,14 @@ class AssociatedPerson(Person):
 
 
 class Participant(Person):
+    class Status(models.TextChoices):
+        REGISTERED = 'Registered', 'Registered'
+        CANCELED = 'Canceled', 'Canceled'
+        VISITED = 'Visited', 'Visited'
+
     registered_on = models.ForeignKey(WebContentObject, on_delete=models.CASCADE, blank=True, null=True)
+
+    status = models.CharField(max_length=10, choices=Status.choices, blank=True, null=True)
 
     def __str__(self):
         # return f"{self.first_name} {self.last_name} {self.registered_on.name}"
