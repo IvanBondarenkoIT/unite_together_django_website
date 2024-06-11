@@ -65,7 +65,7 @@ class Person(models.Model):
 
     edit_permission = models.BooleanField(default=True)
 
-    # is_approved = models.BooleanField(default=True)
+    is_approved = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

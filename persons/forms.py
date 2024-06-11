@@ -45,11 +45,12 @@ class AssociatedPersonForm(forms.ModelForm):
         model = AssociatedPerson
         fields = [
             'first_name', 'last_name', 'date_of_birth',
-            'citizenship', 'date_of_arrival', 'type_of_document',
-            'document_number', 'gender', 'georgian_phone_number',
-            'ukrainian_phone_number', 'country', 'chosen_city',
-            'address_line', 'is_active'
+            'citizenship', 'date_of_arrival', 'type_of_document', 'document_number',
+            'gender', 'georgian_phone_number', 'ukrainian_phone_number',
+            'country', 'chosen_city', 'address_line', 'is_active'
         ]
+
+        # 'country', 'type_of_document', 'chosen_city',
         widgets = {
             'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
             'date_of_arrival': forms.DateInput(attrs={'type': 'date'}),
@@ -62,7 +63,6 @@ class AssociatedPersonForm(forms.ModelForm):
             'ukrainian_phone_number': forms.TextInput(attrs={'placeholder': 'Ukrainian Phone Number'}),
             'country': forms.Select(),
             'chosen_city': forms.Select(),
-            # 'region': forms.TextInput(attrs={'placeholder': 'Region'}),
             'address_line': forms.TextInput(attrs={'placeholder': 'Address Line'}),
             'gender': forms.Select(),
         }
