@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import modelformset_factory
 
-from .models import AssociatedPerson, Participant
+from .models import AssociatedPerson, Participant, TypeOfDocument
 
 
 # class AssociatedPersonForm(forms.ModelForm):
@@ -27,28 +27,42 @@ from .models import AssociatedPerson, Participant
 
 
 class AssociatedPersonForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AssociatedPersonForm, self).__init__(*args, **kwargs)
+        self.fields['document_number'].help_text = 'Select a document type to see the format.'
+
+        if 'type_of_document' in self.data:
+            try:
+                type_of_document_id = self.data.get('type_of_document')
+                type_of_document = TypeOfDocument.objects.get(id=type_of_document_id)
+                self.fields['document_number'].help_text = type_of_document.hint
+            except (ValueError, TypeOfDocument.DoesNotExist):
+                pass
+        elif self.instance.pk:
+            self.fields['document_number'].help_text = self.instance.type_of_document.hint
+
     class Meta:
         model = AssociatedPerson
         fields = [
             'first_name', 'last_name', 'date_of_birth',
-            'citizenship', 'date_of_arrival', 'type_of_document',
-            'document_number', 'gender', 'georgian_phone_number',
-            'ukrainian_phone_number', 'country', 'chosen_city',
-            'address_line', 'is_active'
+            'citizenship', 'date_of_arrival', 'type_of_document', 'document_number',
+            'gender', 'georgian_phone_number', 'ukrainian_phone_number',
+            'country', 'chosen_city', 'address_line', 'is_active'
         ]
+
+        # 'country', 'type_of_document', 'chosen_city',
         widgets = {
             'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
             'date_of_arrival': forms.DateInput(attrs={'type': 'date'}),
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
             'citizenship': forms.TextInput(attrs={'placeholder': 'Citizenship'}),
-            'type_of_document': forms.TextInput(attrs={'placeholder': 'Type of Document'}),
+            'type_of_document': forms.Select(attrs={'placeholder': 'Type of Document'}),
             'document_number': forms.TextInput(attrs={'placeholder': 'Document Number'}),
             'georgian_phone_number': forms.TextInput(attrs={'placeholder': 'Georgian Phone Number'}),
             'ukrainian_phone_number': forms.TextInput(attrs={'placeholder': 'Ukrainian Phone Number'}),
             'country': forms.Select(),
             'chosen_city': forms.Select(),
-            # 'region': forms.TextInput(attrs={'placeholder': 'Region'}),
             'address_line': forms.TextInput(attrs={'placeholder': 'Address Line'}),
             'gender': forms.Select(),
         }
@@ -72,6 +86,8 @@ class AssociatedPersonForm(forms.ModelForm):
         return last_name
 
     # Add any additional custom validation here
+
+
 
 
 #
