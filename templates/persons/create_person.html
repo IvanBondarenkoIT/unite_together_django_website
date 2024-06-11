@@ -81,6 +81,9 @@
                 {% if form.document_number.errors %}
                     <div class="error">{{ form.document_number.errors }}</div>
                 {% endif %}
+                {% if form.document_number.help_text %}
+                    <small class="form-text text-muted">!!!{{ form.document_number.help_text }}</small>
+                {% endif %}
             </div>
         </div>
 

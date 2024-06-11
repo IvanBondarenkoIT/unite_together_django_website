@@ -1,16 +1,19 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+
+import re
 
 from accounts.models import Account
 from web_pages.models import WebContentObject, City
 
 
-# GENDER_CHOICES = [
-#     ('M', 'Male'),
-#     ('F', 'Female'),
-#     ('NB', 'Non-Binary'),
-#     ('O', 'Other'),
-#     ('PNS', 'Prefer not to say'),
-# ]
+class TypeOfDocument(models.Model):
+    name = models.CharField(max_length=100)
+    regex = models.CharField(max_length=100)
+    hint = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Person(models.Model):
@@ -39,10 +42,11 @@ class Person(models.Model):
     # Date of arrival
     date_of_arrival = models.DateField(blank=True, null=True)
     # Type of document
-    type_of_document = models.CharField(max_length=100, blank=True, null=True)
+    # type_of_document = models.CharField(max_length=100, blank=True, null=True)
+    type_of_document = models.ForeignKey(TypeOfDocument, on_delete=models.CASCADE, blank=True, null=True)
     # Document number
-
-    document_number = models.CharField(max_length=50, blank=True, null=True)
+    document_number = models.CharField(max_length=20, blank=True, null=True)
+    # document_number = models.CharField(max_length=50, blank=True, null=True)
 
     gender = models.CharField(max_length=3, choices=Gender.choices)
 
@@ -59,7 +63,10 @@ class Person(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    edit_permission = models.BooleanField(default=True)
+
     # is_approved = models.BooleanField(default=True)
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -83,6 +90,14 @@ class Participant(Person):
     def __str__(self):
         # return f"{self.first_name} {self.last_name} {self.registered_on.name}"
         return f"{self.first_name} {self.last_name}"
+
+    def clean(self):
+        super().clean()
+        if self.type_of_document and self.document_number:
+            pattern = self.type_of_document.regex
+            if not re.match(pattern, self.document_number):
+                raise ValidationError(
+                    {'document_number': 'Invalid document number format for the selected document type.'})
 
 
 class UserProfile(models.Model):
