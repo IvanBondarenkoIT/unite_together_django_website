@@ -69,7 +69,7 @@ class AssociatedPersonForm(forms.ModelForm):
 
     def clean_document_number(self):
         document_number = self.cleaned_data.get('document_number')
-        if document_number and int(document_number) < 0:
+        if document_number and document_number < 0:
             raise forms.ValidationError("Document number cannot be negative.")
         return document_number
 
