@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "donate",
     "storages",
     "persons",
+    "about_us",
 ]
 
 MIDDLEWARE = [
