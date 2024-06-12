@@ -24,6 +24,8 @@ from unite_together_django_website import settings
 
 urlpatterns = [
     path("secure/", admin.site.urls),
+    # ABOUT US
+    path("about-us/", include("about_us.urls")),
     path("", include("web_pages.urls")),
     # ACCOUNTS
     path("accounts/", include("accounts.urls")),
