@@ -10,7 +10,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from accounts.forms import RegistrationForm
 from accounts.models import Account
-from persons.models import UserProfile, AssociatedPerson
+from persons.models import UserProfile, AssociatedPerson, TypeOfDocument
 
 
 # Create your views here.
@@ -38,7 +38,10 @@ def register(request):
 
             # Create user Profile
             profile = UserProfile.objects.create(user=user)
-            profile.person = AssociatedPerson.object.create(user_owner=user)
+            default_document_type = TypeOfDocument.objects.first()
+            new_person = AssociatedPerson.object.create(user_owner=user, type_of_document=default_document_type)
+            new_person.save()
+            profile.person = new_person
             profile.save()
 
 

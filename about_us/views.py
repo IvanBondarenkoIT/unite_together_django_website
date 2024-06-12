@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render
 
-from .models import History, Mission, Vision, Value, Program
+from .models import History, Mission, Vision, Value, Program, DocumentCategory
 
 TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST = True
 
@@ -132,3 +132,10 @@ def who_we_are(request):
     }
 
     return render(request, 'aboutus/who-we-are.html', context)
+
+def documents_view(request):
+    categories = DocumentCategory.objects.prefetch_related('documents').all()
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'aboutus/documents.html', context)

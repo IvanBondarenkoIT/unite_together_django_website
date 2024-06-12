@@ -47,3 +47,21 @@ class Program(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class DocumentCategory(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class Document(models.Model):
+    category = models.ForeignKey(DocumentCategory, on_delete=models.CASCADE, related_name='documents')
+    title = models.CharField(max_length=255)
+    subtitle = models.CharField(max_length=255, blank=True, null=True)
+    upload = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title

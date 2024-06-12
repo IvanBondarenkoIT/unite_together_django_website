@@ -9,13 +9,13 @@ urlpatterns = [
 
     # ABOUT US
     path("", views.who_we_are, name="who_we_are"),
+    path('documents/', views.documents_view, name='documents'),
     # path("about-us/history", views.history, name="history"),
     # path("about-us/documents", views.documents, name="documents"),
     # path("about-us/partners", views.partners, name="partners"),
     # path("about-us/contacts", views.contacts, name="contacts"),
 
-
-    path("", include("paypal.standard.ipn.urls")),
+    # path("", include("paypal.standard.ipn.urls")),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
