@@ -123,7 +123,7 @@ def who_we_are(request):
     history = History.objects.first()
     mission = Mission.objects.first()
     vision = Vision.objects.first()
-    values = Value.objects.first()
+    values = Value.objects.all()
     programs = Program.objects.all()
 
     context = {
@@ -134,7 +134,7 @@ def who_we_are(request):
         'programs': programs,
     }
 
-    return render(request, 'aboutus/who-we-are.html', context)
+    return render(request, 'aboutus/about-us-history.html', context)
 
 
 def documents_view(request):
@@ -174,3 +174,28 @@ def contact_view(request):
 
 def contact_success_view(request):
     return render(request, 'aboutus/contact_success.html')
+
+
+def about_us(request):
+    context = {}
+    return render(request, 'aboutus/aboutus_index.html', context=context)
+
+
+def history(request):
+    context = {}
+    return render(request, 'aboutus/about-us-history.html', context=context)
+
+
+def documents(request):
+    context = {}
+    return render(request, 'aboutus/about-us-documents.html', context=context)
+
+
+def partners(request):
+    context = {}
+    return render(request, 'aboutus/about-us-partners.html', context=context)
+
+
+def contacts(request):
+    context = {}
+    return render(request, 'aboutus/about-us-contacts.html')

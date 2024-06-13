@@ -19,5 +19,11 @@ urlpatterns = [
 
     # path("", include("paypal.standard.ipn.urls")),
 
+                  # ABOUT US
+                  path("history", views.history, name="history"),
+                  # path("documents", views.documents, name="documents"),
+                  path("partners", views.partners, name="partners"),
+                  # path("contacts", views.contacts, name="contacts"),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

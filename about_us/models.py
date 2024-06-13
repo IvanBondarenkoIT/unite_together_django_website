@@ -7,6 +7,7 @@ from django.db import models
 class History(models.Model):
     title = models.CharField(max_length=255, default="History of Unite Together")
     content = models.TextField()
+    image = models.ImageField(upload_to='img/partners', blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -31,6 +32,7 @@ class Vision(models.Model):
 class Value(models.Model):
     title = models.CharField(max_length=255, default="Values")
     content = models.TextField()
+    image = models.ImageField(upload_to='img/partners', blank=True, null=True)
 
     def __str__(self):
         return self.title
