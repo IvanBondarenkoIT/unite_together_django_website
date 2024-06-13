@@ -40,24 +40,10 @@
 
             <section class="right-part-of-static-page">
                                    <div class="variable-store">
-                        <h1 class="history-of-unite2">History of Unite Together</h1>
+                        <h1 class="history-of-unite2">{{ history.title }}</h1>
                         <div class="unite-together-was-container1">
                             <p class="unite-together-was1">
-                                "Unite Together" was founded by an initiative group of
-                                Ukrainians who sought to contribute to supporting their
-                                compatriots during the war. The beginning of its history is
-                                connected with the purchase and shipment of necessary
-                                medicines to Ukraine, collected during charity concerts and
-                                events, analysis of the needs and support of Ukrainians who
-                                are in Georgia. Over time, the organization has evolved from a
-                                group of volunteers gathered during a vacation in Georgia into
-                                a structured organization with a clearly defined mission and
-                                strategy to help Ukrainians in Georgia. In June 2022, the
-                                organization conducted an extensive survey among Ukrainians
-                                living in Georgia, which allowed it to receive its first grant
-                                from European partners. In addition, on September 1, 2022,
-                                Unite Together received legal status as a non-governmental
-                                organization (NGO).
+                                {{ history.content }}
                             </p>
 
                         </div>
@@ -69,29 +55,24 @@
                                     class="frame-child6"
                                     loading="lazy"
                                     alt=""
-                                    src="{% static 'img/aboutus/our-team.jpg' %}"
+                                    src="
+                                    {% if history.image %}
+                                        {{ history.image.url }}
+                                    {% else %}
+                                        {% static '/img/placeholder-image1%402x.png' %}
+                                    {% endif %}"
                             />
                         </div>
                         <div class="mission-parent">
-                            <h2 class="mission1">Mission:</h2>
+                            <h2 class="mission1">{{ mission.title }}:</h2>
                             <div class="our-organization-unite-togeth-group">
                                 <div class="our-organization-unite7">
-                                    Our organization "Unite Together" is aimed at creating and
-                                    implementing projects aimed at supporting and developing
-                                    Ukrainians affected by the war. Our main goal is to achieve
-                                    sustainable systemic change in their lives and society.
+                                    {{ mission.content }}
                                 </div>
                                 <div class="error-handler2">
-                                    <h2 class="vision1">Vision:</h2>
+                                    <h2 class="vision1">{{ vision.title }}:</h2>
                                     <div class="we-see-a1">
-                                        We see a future in which Ukrainians who survived the
-                                        tragedy of war have successfully integrated into society.
-                                        They are motivated to constantly develop and actively
-                                        participate in the formation of civil society and
-                                        sustainable social change. Our vision is a society in
-                                        which every person has equal opportunities for
-                                        self-realization and contribution to the well-being of
-                                        society.
+                                        {{ vision.content }}
                                     </div>
                                 </div>
                             </div>

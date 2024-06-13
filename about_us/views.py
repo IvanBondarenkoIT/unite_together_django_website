@@ -1,6 +1,9 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
 
+from unite_together_django_website import settings
+from .forms import ContactForm
 from .models import History, Mission, Vision, Value, Program, DocumentCategory
 
 TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST = True
@@ -120,7 +123,7 @@ def who_we_are(request):
     history = History.objects.first()
     mission = Mission.objects.first()
     vision = Vision.objects.first()
-    values = Value.objects.first()
+    values = Value.objects.all()
     programs = Program.objects.all()
 
     context = {
@@ -131,7 +134,8 @@ def who_we_are(request):
         'programs': programs,
     }
 
-    return render(request, 'aboutus/who-we-are.html', context)
+    return render(request, 'aboutus/about-us-history.html', context)
+
 
 def documents_view(request):
     categories = DocumentCategory.objects.prefetch_related('documents').all()
@@ -139,3 +143,59 @@ def documents_view(request):
         'categories': categories,
     }
     return render(request, 'aboutus/documents.html', context)
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Process the data in form.cleaned_data
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+            phone_number = form.cleaned_data['phone_number']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+
+            # Send email (for example)
+            send_mail(
+                f'Contact Form: {subject}',
+                f'Name: {first_name} {last_name}\nEmail: {email}\nPhone: {phone_number}\n\nMessage:\n{message}',
+                settings.EMAIL_HOST_USER,
+                [settings.EMAIL_HOST_USER],  # Ensure you have this setting
+            )
+
+            return redirect('contact_success')
+    else:
+        form = ContactForm()
+
+    return render(request, 'aboutus/contact.html', {'form': form})
+
+
+def contact_success_view(request):
+    return render(request, 'aboutus/contact_success.html')
+
+
+def about_us(request):
+    context = {}
+    return render(request, 'aboutus/aboutus_index.html', context=context)
+
+
+def history(request):
+    context = {}
+    return render(request, 'aboutus/about-us-history.html', context=context)
+
+
+def documents(request):
+    context = {}
+    return render(request, 'aboutus/about-us-documents.html', context=context)
+
+
+def partners(request):
+    context = {}
+    return render(request, 'aboutus/about-us-partners.html', context=context)
+
+
+def contacts(request):
+    context = {}
+    return render(request, 'aboutus/about-us-contacts.html')

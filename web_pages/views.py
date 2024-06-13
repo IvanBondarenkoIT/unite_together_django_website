@@ -209,27 +209,3 @@ def projects_detail(request, group_slug=None, project_slug=None):
 
     return render(request, 'projects/project-detail.html', context=context)
 
-
-def about_us(request):
-    context = {}
-    return render(request, 'aboutus/aboutus_index.html', context=context)
-
-
-def history(request):
-    context = {}
-    return render(request, 'aboutus/about-us-history.html', context=context)
-
-
-def documents(request):
-    context = {}
-    return render(request, 'aboutus/about-us-documents.html', context=context)
-
-
-def partners(request):
-    context = {}
-    return render(request, 'aboutus/about-us-partners.html', context=context)
-
-
-def contacts(request):
-    context = {}
-    return render(request, 'aboutus/about-us-contacts.html')
