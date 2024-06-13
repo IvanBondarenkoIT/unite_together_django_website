@@ -65,3 +65,10 @@ class Document(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Partners(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='img/partners', blank=True, null=True)
+    url_link = models.URLField(blank=True, null=True)

@@ -10,6 +10,8 @@ urlpatterns = [
     # ABOUT US
     path("", views.who_we_are, name="who_we_are"),
     path('documents/', views.documents_view, name='documents'),
+    path('contact/', views.contact_view, name='contact'),
+    path('contact/success/', views.contact_success_view, name='contact_success'),
     # path("about-us/history", views.history, name="history"),
     # path("about-us/documents", views.documents, name="documents"),
     # path("about-us/partners", views.partners, name="partners"),
