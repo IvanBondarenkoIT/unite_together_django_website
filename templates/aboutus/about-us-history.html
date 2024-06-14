@@ -89,7 +89,7 @@
                             <h2 class="values1">Values:</h2>
                             <div class="frame-parent41">
                                 <div class="decoration-parent">
-                                    <div class="decoration13"></div>
+{#                                    <div class="decoration13"></div>#}
                                     <div class="frame-wrapper6">
                                         <div class="frame-parent42">
                                             {% for value in values %}
@@ -175,7 +175,7 @@
                                 </span>
 
                                 <div class="listener-registry">
-                                    <button id="toggle-button" onclick="toggleText()">Read More</button>
+                                    <button id="toggle-button" onclick="toggleText()" class="btn btn-light">MORE TEXT</button>
 {#                                    <h3 class="less-text">LESS TEXT</h3>#}
                                 </div>
                             </div>
@@ -194,10 +194,10 @@
             var button = document.getElementById("toggle-button");
             if (moreContent.style.display === "none" || moreContent.style.display === "") {
                 moreContent.style.display = "inline";
-                button.textContent = "Read Less";
+                button.textContent = "LESS TEXT";
             } else {
                 moreContent.style.display = "none";
-                button.textContent = "Read More";
+                button.textContent = "MORE TEXT";
             }
         }
     </script>
