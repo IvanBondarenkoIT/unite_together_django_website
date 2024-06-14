@@ -8,8 +8,10 @@ from . import views
 urlpatterns = [
 
     # ABOUT US
+    path("history", views.history, name="history"),
     path("", views.who_we_are, name="who_we_are"),
     path('documents/', views.documents_view, name='documents'),
+    path("partners", views.partners, name="partners"),
     path('contact/', views.contact_view, name='contact'),
     path('contact/success/', views.contact_success_view, name='contact_success'),
     # path("about-us/history", views.history, name="history"),
@@ -20,9 +22,9 @@ urlpatterns = [
     # path("", include("paypal.standard.ipn.urls")),
 
                   # ABOUT US
-                  path("history", views.history, name="history"),
+
                   # path("documents", views.documents, name="documents"),
-                  path("partners", views.partners, name="partners"),
+
                   # path("contacts", views.contacts, name="contacts"),
 
 

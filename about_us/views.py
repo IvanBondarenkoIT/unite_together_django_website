@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 from unite_together_django_website import settings
 from .forms import ContactForm
-from .models import History, Mission, Vision, Value, Program, DocumentCategory
+from .models import History, Mission, Vision, Value, Program, DocumentCategory, Partners
 
 TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST = True
 
@@ -38,19 +38,35 @@ def first_lunch(request):
         messages.success(request, 'Vision - Imports done!')
 
     if not Value.objects.exists():
-        values = Value.objects.create(
+        value1 = Value.objects.create(
+            title="Sustainability and responsibility",
             content="""
-            Sustainability and responsibility:
             We attach great importance to creating sustainable conditions for the life and development of those affected by war. We are responsible for our obligations to beneficiaries and partners.
-    
-            Cooperation and partnership:
+            """
+        )
+        value1.save()
+        value2 = Value.objects.create(
+            title="Cooperation and partnership",
+            content="""
             We value mutually beneficial and productive cooperation with our partners and stakeholders. We believe that only through joint efforts can we achieve our goals and create positive change.
-    
-            Compassion and Empathy:
+            """
+        )
+        value2.save()
+        value3 = Value.objects.create(
+            title="Compassion and Empathy",
+            content="""
             In our work, we show deep compassion and empathy for everyone who needs our support and help. We listen and understand the needs of our beneficiaries, striving to provide them with not only material but also emotional support.
             """
         )
-        values.save()
+        value3.save()
+
+        value4 = Value.objects.create(
+            title="Changes are created here",
+            content="""
+            At the initial stage of Unite Together's activities, the organization focused on meeting the humanitarian needs of Ukrainians in Georgia. However, over time, the goals of the organization expanded, and in addition to the humanitarian mission, the task of developing and integrating Ukrainians into Georgian society was added.
+            """
+        )
+        value4.save()
         messages.success(request, 'Value - Imports done!')
 
     if not Program.objects.exists():
@@ -142,7 +158,7 @@ def documents_view(request):
     context = {
         'categories': categories,
     }
-    return render(request, 'aboutus/documents.html', context)
+    return render(request, 'aboutus/about-us-documents.html', context)
 
 
 def contact_view(request):
@@ -169,7 +185,7 @@ def contact_view(request):
     else:
         form = ContactForm()
 
-    return render(request, 'aboutus/contact.html', {'form': form})
+    return render(request, 'aboutus/about-us-contacts.html', {'form': form})
 
 
 def contact_success_view(request):
@@ -192,8 +208,13 @@ def documents(request):
 
 
 def partners(request):
-    context = {}
-    return render(request, 'aboutus/about-us-partners.html', context=context)
+    partners = Partners.objects.all()
+    return render(request, 'aboutus/about-us-partners.html', {'partners': partners})
+
+
+# def partners(request):
+#     context = {}
+#     return render(request, 'aboutus/about-us-partners.html', context=context)
 
 
 def contacts(request):

@@ -85,81 +85,23 @@
             /* background-size: 100px ; */
         }
 
-        .logo-1-ukraine {
-            /* width: 120.4px; */
-            background-image: url("{% static 'img/aboutus/image-4@2x.png' %}");
-            background-size: 120.4px;
-            height: 127.9px;
+       .partners-section {
+            margin-bottom: 20px;
         }
-
-        .logo-2-federal-office {
-            /* width: 152.9px; */
-            background-image: url("{% static 'img/aboutus/logo-german-humanitarian.png' %}");
-            background-size: 152.9px;
-            height: 97.8px;
+        .partner-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
         }
-
-        .logo-3-aktiondeutsch {
-            /* width: 170.3px; */
-            background-image: url("{% static 'img/aboutus/logo-aktion-deutschland-hilft.png' %}");
-            background-size: 170.3px;
-            height: 46.6px;
+        .partner-item img {
+            max-width: 150px;
+            margin-right: 20px;
         }
-
-        .logo-4-ASB {
-            /* width: 168.7px; */
-            background-image: url("{% static 'img/aboutus/rectangle-8-1@2x.png' %}");
-            background-size: 168.7px;
-            height: 74.6px;
+        .partner-item .description-part {
+            flex: 1;
         }
-
-        .logo-5-SSK {
-            /* width: 180.5px; */
-            background-image: url("{% static 'img/aboutus/ssk-logo-1@2x.png' %}");
-            background-size: 180.5px;
-            height: 54.2px;
-        }
-
-        .logo-6-care {
-            /* width: 165.7px; */
-            background-image: url("{% static 'img/aboutus/logo-care.png' %}");
-            background-size: 165.7px;
-            height: 54.5px;
-        }
-
-        .logo-7-worldvision {
-            /* width: 169.4px;; */
-            background-image: url("{% static 'img/aboutus/logo-world-vision.png' %}");
-            background-size: 169.4px;
-            height: 60px;
-        }
-
-        .logo-8-actionagainsthunger {
-            /* width: 147.4px; */
-            background-image: url("{% static 'img/aboutus/logo-action-against-hunger.png' %}");
-            background-size: 147.4px;
-            height: 88px;
-        }
-
-        .logo-9-peopleinneed {
-            /* width: 147.4px; */
-            background-image: url("{% static 'img/aboutus/image-1@2x.png' %}");
-            background-size: 147.4px;
-            height: 79.5px;
-        }
-
-        .logo-10-adra {
-            /* width: 120.4px; */
-            background-image: url("{% static 'img/aboutus/logo-adra.png' %}");
-            background-size: 120.4px;
-            height: 121.8px;
-        }
-
-        .logo-11-helpinghand {
-            /* width: 125.6px; */
-            background-image: url("{% static 'img/aboutus/logo-helping-hand.png' %}");
-            background-size: 125.6px;
-            height: 125px;
+        .partner-item h3 {
+            margin: 0 0 10px;
         }
 
         .description-part {
@@ -212,8 +154,6 @@
 
 
             <section class="right-part-of-static-page">
-
-
                 <div class="partners-and-collaboration-parent" style="gap: 10px; padding-bottom: 10px;">
                     <h1 class="partners-and-collaboration2">
                         Partners and collaboration
@@ -224,136 +164,22 @@
                     </div>
                 </div>
 
-
-                <div class="organization">
-                    <div class="logo logo-1-ukraine">  <!-- logo --> </div>
-                    <div class="description-part">
-                        <h3>Embassy of Ukraine in Georgia</h3>
-                        <p>The Embassy promotes the development of interstate relations between Ukraine and Georgia at
-                            all levels in order to ensure harmonious development of mutual relations, as well as
-                            cooperation on issues of mutual interest. The Embassy also performs consular functions.</p>
+                {% for partner in partners %}
+                    <div class="partner-item">
+                        <div class="logo">
+                            {% if partner.image %}
+                                <img src="{{ partner.image.url }}" alt="{{ partner.title }}">
+                            {% endif %}
+                        </div>
+                        <div class="description-part">
+                            <h3>{{ partner.title }}</h3>
+                            <p>{{ partner.description }}</p>
+                            {% if partner.url_link %}
+                                <a href="{{ partner.url_link }}" target="_blank">Learn more</a>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-
-                <div class="organization">
-                    <div class="logo logo-2-federal-office">  <!-- logo --> </div>
-                    <div class="description-part">
-                        <h3>Federal Foreign office</h3>
-                        <p>With offices in Berlin and Bonn and about 230 missions abroad, the Federal Foreign Office
-                            manages Germany's global relations. It promotes extensive interactions not only in politics
-                            but also in business, culture, science, and more, reflecting Germany's deep integration into
-                            international networks. </p>
-                    </div>
-                </div>
-
-
-                <div class="organization">
-                    <div class="logo logo-3-aktiondeutsch"> <!-- logo --> </div>
-                    <div class="description-part">
-                        <h3>Aktion Deutschland Hilft</h3>
-                        <p>In 2001, Aktion Deutschland Hilft was founded by ten renowned relief aid organizations in
-                            order to provide fast and effective help in severe catastrophes. Today, our alliance of 23
-                            aid organizations is active in over 100 countries worldwide.</p>
-                    </div>
-                </div>
-
-
-                <div class="organization">
-                    <div class="logo logo-4-ASB"> <!-- logo --> </div>
-                    <div class="description-part">
-                        <h3>ASB Georgia</h3>
-                        <p>Since 1992, ASB has supported Georgia initially with humanitarian aid and later by enhancing
-                            agriculture through irrigation projects. Post-1997, its focus shifted to development,
-                            emphasizing disaster preparedness and strengthening local capacities, with funding from
-                            international and German sources.</p>
-                    </div>
-                </div>
-
-
-                <div class="organization">
-                    <div class="logo logo-5-SSK"> <!-- logo --> </div>
-                    <div class="description-part">
-                        <h3>SSK Georgia</h3>
-                        <p>Founded in 1992, the Samaritan Association of Georgia (SSK) re-registered in 2010 as an
-                            independent NGO focusing on refugee reintegration, disaster prevention, and child welfare.
-                            In 2011, SSK launched a coalition to support disabled children and initiated a mobile
-                            nursing service in Tbilisi, also providing first-aid training and job creation for displaced
-                            individuals. </p>
-                    </div>
-                </div>
-
-
-                <div class="organization">
-                    <div class="logo logo-6-care"> <!-- logo --> </div>
-                    <div class="description-part">
-                        <h3>CARE Caucasus</h3>
-                        <p>CARE International, a 75-year-old global confederation, fights poverty and social injustice,
-                            focusing on empowering women and girls. We collaborate with communities to address poverty's
-                            roots through innovative, locally-led solutions. Our approach emphasizes transparency,
-                            accountability, and quality. </p>
-                    </div>
-                </div>
-
-
-                <div class="organization">
-                    <div class="logo logo-7-worldvision"> <!-- logo --> </div>
-                    <div class="description-part">
-                        <h3>World Vision Georgia</h3>
-                        <p>For over 70 years, World Vision has cared for children and the needy. From its founding in
-                            1947, when Bob Pierce helped a Chinese girl, to rescuing Vietnamese refugees in 1979, World
-                            Vision reaches where needed most. Starting in Oregon, it’s now the largest Christian NGO
-                            globally, operating in nearly 100 countries. </p>
-                    </div>
-                </div>
-
-
-                <div class="organization">
-                    <div class="logo logo-8-actionagainsthunger"> <!-- logo --> </div>
-                    <div class="description-part">
-                        <h3>Action Against Hunger</h3>
-                        <p>Founded on the principles of humanism, freedom, equality and solidarity, promotes human
-                            dignity and the Universal Declaration of Human Rights. Active in many countries and
-                            committed to promoting a society enriched by diversity, it addresses critical social issues,
-                            education and humanitarian assistance with the support of the global community. </p>
-                    </div>
-                </div>
-
-
-                <div class="organization">
-                    <div class="logo logo-9-peopleinneed"> <!-- logo --> </div>
-                    <div class="description-part">
-                        <h3>People in Need</h3>
-                        <p>Founded on the principles of humanism, freedom, equality and solidarity, promotes human
-                            dignity and the Universal Declaration of Human Rights. Active in many countries and
-                            committed to promoting a society enriched by diversity, it addresses critical social issues,
-                            education and humanitarian assistance with the support of the global community. </p>
-                    </div>
-                </div>
-
-
-                <div class="organization">
-                    <div class="logo logo-10-adra"> <!-- logo --> </div>
-                    <div class="description-part">
-                        <h3>ADRA</h3>
-                        <p>The global humanitarian arm of the Seventh-day Adventist Church, this organization serves a
-                            vast community with the world’s largest health and education network. It offers relief and
-                            development assistance in over 120 countries to all people, regardless of ethnicity,
-                            politics, gender, or religion. </p>
-                    </div>
-                </div>
-
-
-                <div class="organization">
-                    <div class="logo logo-11-helpinghand"> <!-- logo --> </div>
-                    <div class="description-part">
-                        <h3>Helping Hand</h3>
-                        <p>This project aims to activate youth in Marnueli, Borjomi, and Nukriani through volunteerism,
-                            providing trainings and small grants for projects focused on integrating people with limited
-                            opportunities. Initiatives include volunteer services for day centers and those in need, and
-                            producing a motivational video, "Become a Volunteer, You Too".</p>
-                    </div>
-                </div>
-
+                {% endfor %}
             </section>
         </main>
     </div>
