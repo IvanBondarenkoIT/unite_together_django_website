@@ -38,19 +38,27 @@ def first_lunch(request):
         messages.success(request, 'Vision - Imports done!')
 
     if not Value.objects.exists():
-        values = Value.objects.create(
+        value1 = Value.objects.create(
+            title="Sustainability and responsibility",
             content="""
-            Sustainability and responsibility:
             We attach great importance to creating sustainable conditions for the life and development of those affected by war. We are responsible for our obligations to beneficiaries and partners.
-    
-            Cooperation and partnership:
+            """
+        )
+        value1.save()
+        value2 = Value.objects.create(
+            title="Cooperation and partnership",
+            content="""
             We value mutually beneficial and productive cooperation with our partners and stakeholders. We believe that only through joint efforts can we achieve our goals and create positive change.
-    
-            Compassion and Empathy:
+            """
+        )
+        value2.save()
+        value3 = Value.objects.create(
+            title="Compassion and Empathy",
+            content="""
             In our work, we show deep compassion and empathy for everyone who needs our support and help. We listen and understand the needs of our beneficiaries, striving to provide them with not only material but also emotional support.
             """
         )
-        values.save()
+        value3.save()
         messages.success(request, 'Value - Imports done!')
 
     if not Program.objects.exists():
