@@ -158,7 +158,7 @@ def documents_view(request):
     context = {
         'categories': categories,
     }
-    return render(request, 'aboutus/documents.html', context)
+    return render(request, 'aboutus/about-us-documents.html', context)
 
 
 def contact_view(request):

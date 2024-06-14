@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <!DOCTYPE html>
+
 
 
     <div class="about-us-documents" data-animate-on-scroll>
@@ -39,127 +39,54 @@
             </div>
 
 
-            <section class="right-part-of-static-page">
-                <div class="bg-white-documents"></div>
-                <div class="variable-remover">
-                    <h1 class="documents2">Documents</h1>
-                    <div class="on-this-page-container">
-                        <p class="on-this-page">
-                            On this page you will find official documents governing the work
-                            of our organization, as well as informational materials to help
-                            you better understand the principles and goals of our charitable
-                            work.
-                        </p>
-                        <p class="blank-line3">&nbsp;</p>
-                    </div>
+             <section class="right-part-of-static-page">
+            <div class="bg-white-documents"></div>
+            <div class="variable-remover">
+                <h1 class="documents2">Documents</h1>
+                <div class="on-this-page-container">
+                    <p class="on-this-page">
+                        On this page you will find official documents governing the work
+                        of our organization, as well as informational materials to help
+                        you better understand the principles and goals of our charitable
+                        work.
+                    </p>
+                    <p class="blank-line3">&nbsp;</p>
                 </div>
-                <div class="sequence-controller">
-                    <div class="loop-parent">
-                        <div class="loop">
-                            <h3 class="heading">Registration documents</h3>
-                        </div>
-                        <img
-                                class="chevron-up-icon"
-                                loading="lazy"
-                                alt=""
-                                src="{% static 'img/aboutus/chevron-up.svg' %}"
-                        />
-                    </div>
-                    <div class="title">
-                        <div class="black-wrapper">
-                            <img
-                                    class="black-icon"
-                                    loading="lazy"
-                                    alt=""
-                                    src="{% static 'img/aboutus/black.svg' %}"
-                            />
-                        </div>
-                        <div class="heading-parent">
-                            <b class="heading1">Document 1</b>
-                            <div class="variable-updater">subtitle</div>
+            </div>
+            {% for category in categories %}
+            <div class="documents-section">
+                <h3 onclick="toggleDocuments({{ category.id }})">{{ category.name }}</h3>
+                <div class="documents-list" id="documents-{{ category.id }}">
+                    {% for document in category.documents.all %}
+                    <div class="document-item">
+                        <div class="title">
+                            <div class="black-wrapper">
+                                <img class="black-icon" loading="lazy" alt="" src="{% static 'img/aboutus/black.svg' %}" />
+                            </div>
+                            <div class="heading-parent">
+                                <b class="heading1">{{ document.title }}</b>
+                                <div class="variable-updater">{{ document.subtitle }}</div>
+                                <a href="{{ document.upload.url }}">Download</a>
+                            </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                <div class="new-operator">
-                    <div class="title1">
-                        <div class="black-container">
-                            <img class="black-icon1" alt="" src="{% static 'img/aboutus/black.svg' %}"/>
-                        </div>
-                        <div class="function-combiner">
-                            <b class="heading2">Document 2</b>
-                            <div class="output-sorter-x">subtitle</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="value-multiplier">
-                    <div class="divider3"></div>
-                    <div class="constant-selector">
-                        <div class="function-splitter">
-                            <h3 class="heading3">Procedures and policies</h3>
-                        </div>
-                        <img
-                                class="chevron-down-icon"
-                                loading="lazy"
-                                alt=""
-                                src="{% static 'img/aboutus/chevron-up.svg' %}"
-                        />
-                    </div>
-                </div>
-                <div class="jobs">
-                    <div class="title2">
-                        <div class="variable-remover-x">
-                            <img class="black-icon2" alt="" src="{% static 'img/aboutus/black.svg' %}"/>
-                        </div>
-                        <div class="constant-holder-x">
-                            <b class="heading4">Document 1</b>
-                            <div class="data-merger-y">subtitle</div>
-                        </div>
-                    </div>
-                    <div class="title3">
-                        <div class="black-frame">
-                            <img class="black-icon3" alt="" src="{% static 'img/aboutus/black.svg' %}"/>
-                        </div>
-                        <div class="heading-group">
-                            <b class="heading5">Document 2</b>
-                            <div class="text4">subtitle</div>
-                        </div>
-                    </div>
-                    <div class="title4">
-                        <div class="black-wrapper1">
-                            <img class="black-icon4" alt="" src="{% static 'img/aboutus/black.svg' %}"/>
-                        </div>
-                        <div class="heading-container">
-                            <b class="heading6">Document 3</b>
-                            <div class="text5">subtitle</div>
-                        </div>
-                    </div>
-                    <div class="divider4"></div>
-                </div>
-                <div class="sequence-controller1">
-                    <div class="frame-parent16">
-                        <div class="heading-wrapper">
-                            <h3 class="heading7">Narrative reports</h3>
-                        </div>
-                        <img
-                                class="chevron-down-icon1"
-                                alt=""
-                                src="{% static 'img/aboutus/chevron-down-1@2x.png' %}"
-                        />
-                    </div>
-                    <div class="title5">
-                        <div class="black-wrapper2">
-                            <img class="black-icon5" alt="" src="{% static 'img/aboutus/black.svg' %}"/>
-                        </div>
-                        <div class="heading-parent1">
-                            <b class="heading8">Document 1</b>
-                            <div class="text6">subtitle</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
+            {% endfor %}
+        </section>
         </main>
     </div>
 
-
+    <script>
+        function toggleDocuments(id) {
+            var element = document.getElementById('documents-' + id);
+            if (element.classList.contains('show')) {
+                element.classList.remove('show');
+            } else {
+                element.classList.add('show');
+            }
+        }
+    </script>
 
 {% endblock %}
