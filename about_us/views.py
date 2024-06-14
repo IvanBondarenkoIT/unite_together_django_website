@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 from unite_together_django_website import settings
 from .forms import ContactForm
-from .models import History, Mission, Vision, Value, Program, DocumentCategory
+from .models import History, Mission, Vision, Value, Program, DocumentCategory, Partners
 
 TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST = True
 
@@ -208,8 +208,13 @@ def documents(request):
 
 
 def partners(request):
-    context = {}
-    return render(request, 'aboutus/about-us-partners.html', context=context)
+    partners = Partners.objects.all()
+    return render(request, 'aboutus/about-us-partners.html', {'partners': partners})
+
+
+# def partners(request):
+#     context = {}
+#     return render(request, 'aboutus/about-us-partners.html', context=context)
 
 
 def contacts(request):
