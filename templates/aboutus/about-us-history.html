@@ -4,6 +4,12 @@
 
 {% block content %}
 
+    <style>
+        .more-content {
+            display: none;
+        }
+    </style>
+
     <div class="about-us12" data-animate-on-scroll>
         <div class="about-us-child"></div>
         <div class="about-us-item"></div>
@@ -86,48 +92,26 @@
                                     <div class="decoration13"></div>
                                     <div class="frame-wrapper6">
                                         <div class="frame-parent42">
-                                            <div class="frame-wrapper7">
-                                                <div class="sustainability-and-responsibil-parent">
-                                                    <h3 class="sustainability-and-responsibil1">
-                                                        Sustainability and responsibility:
-                                                    </h3>
-                                                    <div class="we-attach-great-container1">
-                                                        <p class="we-attach-great1">
-                                                            We attach great importance to creating
-                                                            sustainable conditions for the life and
-                                                            development of those affected by war. We are
-                                                            responsible for our obligations to beneficiaries
-                                                            and partners.
-                                                        </p>
-                                                        <p class="blank-line5">&nbsp;</p>
+                                            {% for value in values %}
+                                                <div class="frame-wrapper7">
+                                                    <div class="sustainability-and-responsibil-parent">
+                                                        <h3 class="sustainability-and-responsibil1">
+                                                            {{ value.title }}:
+                                                        </h3>
+                                                        <div class="we-attach-great-container1">
+                                                            <p class="we-attach-great1">
+                                                                {{ value.content }}
+                                                            </p>
+                                                            <p class="blank-line5">&nbsp;</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="frame-wrapper8">
-                                                <div class="cooperation-and-partnership-group">
-                                                    <h3 class="cooperation-and-partnership1">
-                                                        Cooperation and partnership:
-                                                    </h3>
-                                                    <div class="we-value-mutually1">
-                                                        We value mutually beneficial and productive
-                                                        cooperation with our partners and stakeholders. We
-                                                        believe that only through joint efforts can we
-                                                        achieve our goals and create positive change.
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="compassion-and-empathy-parent">
-                                                <h3 class="compassion-and-empathy1">
-                                                    Compassion and Empathy:
-                                                </h3>
-                                                <div class="in-our-work1">
-                                                    In our work, we show deep compassion and empathy for
-                                                    everyone who needs our support and help. We listen
-                                                    and understand the needs of our beneficiaries,
-                                                    striving to provide them with not only material but
-                                                    also emotional support.
-                                                </div>
-                                            </div>
+                                            {% endfor %}
+
+
+
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -143,139 +127,79 @@
                         </div>
                     </div>
                     <div class="changes-are-created-here-parent">
-                        <h2 class="changes-are-created1">Changes are created here:</h2>
+                        <h2 class="changes-are-created1"></h2>
                         <div class="at-the-initial-stage-of-unite-parent">
                             <div class="at-the-initial1">
-                                At the initial stage of Unite Together's activities, the
-                                organization focused on meeting the humanitarian needs of
-                                Ukrainians in Georgia. However, over time, the goals of the
-                                organization expanded, and in addition to the humanitarian
-                                mission, the task of developing and integrating Ukrainians
-                                into Georgian society was added.
+
                             </div>
                             <div class="frame-parent43">
                                 <div class="frame-parent44">
-                                    <div class="frame-parent45">
+                                <h1>Programs:</h1>
+                                <span id="more-content" class="more-content">
+                                    {% for program in programs %}
+                                        <div class="frame-parent45">
+
                                         <div class="ellipse-parent">
                                             <div class="frame-child7"></div>
                                             <h3 class="financial-support-for1">
-                                                Financial support for Ukrainians:
+                                                {{ program.category }}:
+
                                             </h3>
                                         </div>
+
                                         <div class="text-wrapper">
                                             <div class="text7">
-                                                the #UkrCash program, supported by ASB, provided
-                                                monthly financial aid to over 3,000 Ukrainians,
-                                                totaling more than 2 million euros this year.
-                                            </div>
+
+                                                {{ program.description }}
+                                                {% if program.support_partner %}
+                                                    <p><strong>Support Partner:</strong> {{ program.support_partner }}
+                                                    </p>
+                                                {% endif %}
+                                                {% if program.beneficiaries_count %}
+                                                    <p><strong>Beneficiaries:</strong> {{ program.beneficiaries_count }}
+                                                    </p>
+                                                {% endif %}
+                                                {% if program.funding_amount %}
+                                                    <p><strong>Funding Amount:</strong> €{{ program.funding_amount }}
+                                                    </p>
+                                                {% endif %}
+                                                {% if program.additional_info %}
+                                                    <p><strong>Additional Info:</strong> {{ program.additional_info }}
+                                                    </p>
+                                                {% endif %}
+                                               </div>
                                         </div>
+
                                     </div>
-                                    <div class="frame-parent46">
-                                        <div class="ellipse-group">
-                                            <div class="frame-child8"></div>
-                                            <h3 class="help-with-utility1">
-                                                Help with utility bills:
-                                            </h3>
-                                        </div>
-                                        <div class="text-container">
-                                            <div class="text8">
-                                                launch of the #Winterization program with the support
-                                                of ASB and PIN, aimed at covering utility costs for
-                                                670 families.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="frame-parent47">
-                                        <div class="ellipse-container">
-                                            <div class="frame-child9"></div>
-                                            <h3 class="support-for-ukrainian1">
-                                                Support for Ukrainian communities:
-                                            </h3>
-                                        </div>
-                                        <div class="text-frame">
-                                            <div class="text9">
-                                                reimbursement of 50% of housing costs for 90 Ukrainian
-                                                families with PIN support.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="data-aggregator2">
-                                    <div class="array-filter">
-                                        <div class="list-creator">
-                                            <div class="tuple-splitter">
-                                                <div class="function-applier"></div>
-                                            </div>
-                                            <h3 class="educational-and-cultural1">
-                                                Educational and cultural programs:
-                                            </h3>
-                                        </div>
-                                        <div class="map-reducer">
-                                            <div class="graph-builder"></div>
-                                            <div class="tree-traverser">
-                                                <div class="network-analyzer">
-                                                    implementation of programs for children and the
-                                                    elderly in Tbilisi, Batumi, and Kutaisi, including
-                                                    educational events, sports, entertainment, language
-                                                    lessons, and master classes.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="pattern-matcher1">
-                                            <div class="rule-engine">
-                                                <div class="data-validator"></div>
-                                                <h3 class="sports-initiatives1">
-                                                    Sports initiatives:
-                                                </h3>
-                                            </div>
-                                            <div class="log-writer">
-                                                <div class="event-emitter">
-                                                    the #UniteForActiveSports program, supported by PIN
-                                                    in Tbilisi and Batumi, includes sports activities
-                                                    like rock climbing, dancing, SUP surfing, and
-                                                    camping.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="condition-splitter2">
-                                        <div class="value-comparator1">
-                                            <div class="value-comparator-child"></div>
-                                            <h3 class="support-for-older1">
-                                                Support for older people:
-                                            </h3>
-                                        </div>
-                                        <div class="date-extractor">
-                                            <div class="string-concatenator">
-                                                implementation of the #HandMade program with support
-                                                from CARE, including workshops, excursions and visits
-                                                to cultural events such as ballet.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="condition-splitter3">
-                                        <div class="ellipse-parent1">
-                                            <div class="frame-child10"></div>
-                                            <h3 class="medical-provision1">Medical provision:</h3>
-                                        </div>
-                                        <div class="text-wrapper1">
-                                            <div class="text10">
-                                                of drugs for the treatment of thyroid diseases in
-                                                Ukraine and Georgia (1260 beneficiaries)
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    {% endfor %}
+                                </span>
+
                                 <div class="listener-registry">
-                                    <h3 class="less-text">LESS TEXT</h3>
+                                    <button id="toggle-button" onclick="toggleText()">Read More</button>
+{#                                    <h3 class="less-text">LESS TEXT</h3>#}
                                 </div>
                             </div>
                         </div>
                     </div>
 
+
             </section>
         </main>
 
     </div>
+
+    <script>
+        function toggleText() {
+            var moreContent = document.getElementById("more-content");
+            var button = document.getElementById("toggle-button");
+            if (moreContent.style.display === "none" || moreContent.style.display === "") {
+                moreContent.style.display = "inline";
+                button.textContent = "Read Less";
+            } else {
+                moreContent.style.display = "none";
+                button.textContent = "Read More";
+            }
+        }
+    </script>
 
 {% endblock %}

@@ -59,6 +59,14 @@ def first_lunch(request):
             """
         )
         value3.save()
+
+        value4 = Value.objects.create(
+            title="Changes are created here",
+            content="""
+            At the initial stage of Unite Together's activities, the organization focused on meeting the humanitarian needs of Ukrainians in Georgia. However, over time, the goals of the organization expanded, and in addition to the humanitarian mission, the task of developing and integrating Ukrainians into Georgian society was added.
+            """
+        )
+        value4.save()
         messages.success(request, 'Value - Imports done!')
 
     if not Program.objects.exists():
