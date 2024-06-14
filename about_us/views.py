@@ -185,7 +185,7 @@ def contact_view(request):
     else:
         form = ContactForm()
 
-    return render(request, 'aboutus/contact.html', {'form': form})
+    return render(request, 'aboutus/about-us-contacts.html', {'form': form})
 
 
 def contact_success_view(request):
