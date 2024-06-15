@@ -1,6 +1,6 @@
 from django.contrib import admin
-from import_export.admin import ExportMixin
-from import_export.formats.base_formats import XLS
+# from import_export.admin import ExportMixin
+# from import_export.formats.base_formats import XLS
 
 from django.utils.translation import gettext_lazy as _
 
@@ -60,7 +60,7 @@ class UserOwnerFilter(admin.SimpleListFilter):
         return queryset
 
 
-class AssociatedPersonAdmin(ExportMixin, admin.ModelAdmin):
+class AssociatedPersonAdmin(admin.ModelAdmin):
     list_display = (
         'user_owner', 'first_name', 'last_name', 'date_of_birth', 'citizenship', 'date_of_arrival',
         'type_of_document', 'document_number', 'gender', 'georgian_phone_number',
@@ -73,7 +73,7 @@ class AssociatedPersonAdmin(ExportMixin, admin.ModelAdmin):
     )
     search_fields = ('user_owner', 'first_name', 'last_name', 'document_number', 'georgian_phone_number', 'ukrainian_phone_number')
     ordering = ('-created_at',)  # Default sorting by created_at descending
-    formats = [XLS]
+    # formats = [XLS]
 
 
 class ParticipantAdmin(admin.ModelAdmin):
