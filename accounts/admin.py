@@ -5,8 +5,9 @@ from .models import Account
 
 # Register your models here.
 class AccountAdmin(UserAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'username', 'last_login', 'date_joined', 'is_active')
-    list_display_links = ('email', 'first_name', 'last_name')
+    list_display = ('email', 'family_identifier', 'first_name', 'last_name', 'username', 'last_login', 'date_joined', 'is_active')
+    list_display_links = ('email', 'first_name', 'last_name', )
+    search_fields = ('family_identifier',)
     # readonly_fields = ('date_joined', 'last_login')
     # ordering = ('-date_joined',)
 

@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
+
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
@@ -52,6 +55,9 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
 
+    # family_identifier = models.CharField(max_length=10, unique=True, blank=True, null=True, editable=False)
+    family_identifier = models.CharField(max_length=10, blank=True, null=True)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
@@ -67,3 +73,13 @@ class Account(AbstractBaseUser):
         return True
 
 
+@receiver(post_save, sender=Account)
+def set_family_identifier(sender, instance, created, **kwargs):
+    if created and not instance.family_identifier:
+        last_identifier = Account.objects.exclude(family_identifier__isnull=True).order_by('-family_identifier').first()
+        if last_identifier and last_identifier.family_identifier:
+            next_id = int(last_identifier.family_identifier) + 1
+        else:
+            next_id = 1
+        instance.family_identifier = f'{next_id:05d}'
+        instance.save()
