@@ -6,14 +6,22 @@ from django.db.models import F, CharField, Value
 from django.db.models.functions import Concat
 
 from persons.models import AssociatedPerson, Participant
-from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City, \
-    Projects, ProjectGallery
+from web_pages.models import WebContentObject, Events, ObjectsGroup, City, Projects, ProjectGallery, Initiative
 
 OBJECTS_ON_PAGE = 4
 
 
 def home(request):
-    return render(request, "home/index.html")
+    initiatives = Initiative.objects.all().order_by('order')
+    projects = Projects.objects.all().order_by('order')
+    events = Events.objects.all().order_by('order')
+
+    context = {
+        'initiatives': initiatives,
+        'projects': projects,
+        'events': events,
+    }
+    return render(request, 'home/index.html', context)
 
 
 def events(request, group_slug=None):
@@ -111,8 +119,11 @@ def create_participant(selected_associated_person: AssociatedPerson, selected_ev
         chosen_city=selected_associated_person.chosen_city,
         address_line=selected_associated_person.address_line,
         is_active=selected_associated_person.is_active,
+        copy_of_unique_identifier=selected_associated_person.unique_identifier,
+
         status="Registered",
-        registered_on=selected_event
+        registered_on=selected_event,
+
     )
     return new_participant
 

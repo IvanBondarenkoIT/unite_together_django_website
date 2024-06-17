@@ -1,10 +1,11 @@
 from web_pages.models import ObjectsGroup
 from django.db.models import F, Value
 from django.db.models.functions import Concat
+from django.db.models import CharField
 
 
 def generate_url(group_name, slug):
-    return Concat(Value(f"/{group_name}/"), F("slug"))
+    return Concat(Value(f"/{group_name}/"), F("slug"), output_field=CharField())
 
 
 def menu_links(request):
@@ -32,7 +33,7 @@ def menu_links(request):
         links = ObjectsGroup.objects.all().order_by("order").annotate(
             pre_computed_url=generate_url(page_name, F('slug'))
         )
-
+    print(links)
     return {"links": links}
 
 

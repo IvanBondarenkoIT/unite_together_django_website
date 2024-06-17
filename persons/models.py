@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.core.exceptions import ValidationError
 
 import re
@@ -72,12 +74,24 @@ class Person(models.Model):
 
 
 class AssociatedPerson(Person):
+    # unique_identifier = models.CharField(max_length=15, unique=True, blank=True, null=True, editable=False)
+    unique_identifier = models.CharField(max_length=15, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.unique_identifier} {self.first_name} {self.last_name}"
+
+
+@receiver(pre_save, sender=AssociatedPerson)
+def set_unique_identifier(sender, instance, **kwargs):
+    if not instance.unique_identifier:
+        family_identifier = instance.user_owner.family_identifier
+        person_number = AssociatedPerson.objects.filter(user_owner=instance.user_owner).count() + 1
+        person_identifier = f'{person_number:02d}'
+        instance.unique_identifier = f'GE.{family_identifier}.{person_identifier}'
 
 
 class Participant(Person):
+    copy_of_unique_identifier = models.CharField(max_length=15, blank=True, null=True, editable=False)
     class Status(models.TextChoices):
         REGISTERED = 'Registered', 'Registered'
         CANCELED = 'Canceled', 'Canceled'
