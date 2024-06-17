@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 from web_pages.forms import ProjectsForm, EventsForm
-from web_pages.models import WebPage, WebContentObject, WebContentSubordinateObject, Events, ObjectsGroup, City, \
+from web_pages.models import WebPage, Events, ObjectsGroup, City, \
     Projects, ProjectGallery
 
 import admin_thumbnails
