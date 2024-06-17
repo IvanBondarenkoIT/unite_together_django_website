@@ -62,28 +62,28 @@ class UserOwnerFilter(admin.SimpleListFilter):
 
 class AssociatedPersonAdmin(admin.ModelAdmin):
     list_display = (
-        'user_owner', 'first_name', 'last_name', 'date_of_birth', 'citizenship', 'date_of_arrival',
+        'unique_identifier', 'user_owner', 'first_name', 'last_name', 'date_of_birth', 'citizenship', 'date_of_arrival',
         'type_of_document', 'document_number', 'gender', 'georgian_phone_number',
         'ukrainian_phone_number', 'country', 'chosen_city', 'address_line', 'created_at',
         'updated_at', 'is_active',
     )
     list_filter = (
-        UserOwnerFilter, 'gender', 'country', 'is_active', 'is_approved', 'citizenship', 'type_of_document',
+        'unique_identifier', UserOwnerFilter, 'gender', 'country', 'is_active', 'is_approved', 'citizenship', 'type_of_document',
         'chosen_city', 'created_at', 'updated_at'
     )
-    search_fields = ('user_owner', 'first_name', 'last_name', 'document_number', 'georgian_phone_number', 'ukrainian_phone_number')
+    search_fields = ('unique_identifier', 'first_name', 'last_name', 'document_number', 'georgian_phone_number', 'ukrainian_phone_number')
     ordering = ('-created_at',)  # Default sorting by created_at descending
     # formats = [XLS]
 
 
 class ParticipantAdmin(admin.ModelAdmin):
-    list_display = ('registered_on','created_at', 'first_name', 'last_name', 'date_of_birth', 'date_of_birth', 'document_number', 'created_at', 'is_active')
+    list_display = ('copy_of_unique_identifier', 'registered_on','created_at', 'first_name', 'last_name', 'date_of_birth', 'date_of_birth', 'document_number', 'created_at', 'is_active')
     list_display_links = ('first_name', 'last_name')
     # readonly_fields = ('date_joined', 'last_login')
     ordering = ('-created_at',)
 
     filter_horizontal = ()
-    list_filter = ('registered_on',)
+    list_filter = ('copy_of_unique_identifier', 'registered_on',)
     fieldsets = ()
 
 

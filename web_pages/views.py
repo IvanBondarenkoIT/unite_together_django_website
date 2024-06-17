@@ -111,8 +111,11 @@ def create_participant(selected_associated_person: AssociatedPerson, selected_ev
         chosen_city=selected_associated_person.chosen_city,
         address_line=selected_associated_person.address_line,
         is_active=selected_associated_person.is_active,
+        copy_of_unique_identifier=selected_associated_person.unique_identifier,
+
         status="Registered",
-        registered_on=selected_event
+        registered_on=selected_event,
+
     )
     return new_participant
 
