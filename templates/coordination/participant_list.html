@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include 'coordination/navigation.html' %}
+<h2>Participants</h2>
+<a href="{% url 'participant_create' %}">Create Participant</a>
+<ul>
+    {% for participant in participants %}
+    <li>{{ participant.registered_on }}
+        {{ participant.copy_of_unique_identifier }}
+        {{ participant.first_name }} {{ participant.last_name }}
+        - <a href="{% url 'participant_update' participant.pk %}">Edit</a> - <a href="{% url 'participant_delete' participant.pk %}">Delete</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

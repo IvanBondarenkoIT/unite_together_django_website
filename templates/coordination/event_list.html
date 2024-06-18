@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include 'coordination/navigation.html' %}
+<h2>Events</h2>
+<a href="{% url 'event_create' %}">Create Event</a>
+<ul>
+    {% for event in events %}
+    <li>{{ event.name }} - <a href="{% url 'event_update' event.pk %}">Edit</a> - <a href="{% url 'event_delete' event.pk %}">Delete</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

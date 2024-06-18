@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "storages",
     "persons",
     "about_us",
+    "coordination",
 ]
 
 MIDDLEWARE = [

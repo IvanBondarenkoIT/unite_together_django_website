@@ -31,6 +31,8 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     # PERSONS
     path("persons/", include("persons.urls")),
+    # COORDINATION
+    path("coordination/", include("coordination.urls")),
     path("", include("donate.urls")),
     path("", include("paypal.standard.ipn.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
