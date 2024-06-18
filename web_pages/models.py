@@ -58,21 +58,6 @@ class WebContentObject(models.Model):
         return f"{self.name} - {self.title}"
 
 
-# class WebContentSubordinateObject(models.Model):
-#     name = models.CharField(max_length=250)
-#     title = models.CharField(max_length=250) #  must be max=27
-#     text = models.TextField()
-#     image = models.ImageField(upload_to='img/pages_content_sub', blank=True)
-#
-#     content_master_object = models.ForeignKey(WebContentObject, on_delete=models.CASCADE)
-#     is_active = models.BooleanField(default=True)
-#
-#     created_at = models.DateTimeField(auto_now_add=True)
-#
-#     def __str__(self):
-#         return f"{self.name} - {self.title} - {self.text}"
-
-
 class Events(WebContentObject):
     selected_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
     # city = models.CharField(max_length=250, blank=True, null=True)
@@ -154,3 +139,17 @@ class Initiative(models.Model):
 
     def __str__(self):
         return self.title
+
+    # class WebContentSubordinateObject(models.Model):
+    #     name = models.CharField(max_length=250)
+    #     title = models.CharField(max_length=250) #  must be max=27
+    #     text = models.TextField()
+    #     image = models.ImageField(upload_to='img/pages_content_sub', blank=True)
+    #
+    #     content_master_object = models.ForeignKey(WebContentObject, on_delete=models.CASCADE)
+    #     is_active = models.BooleanField(default=True)
+    #
+    #     created_at = models.DateTimeField(auto_now_add=True)
+    #
+    #     def __str__(self):
+    #         return f"{self.name} - {self.title} - {self.text}"
