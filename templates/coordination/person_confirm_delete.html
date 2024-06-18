@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include 'coordination/navigation.html' %}
+<h2>Confirm Delete Person</h2>
+<p>Are you sure you want to delete "{{ object.first_name }} {{ object.last_name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+    <a href="{% url 'person_list' %}">Cancel</a>
+</form>
+{% endblock %}
