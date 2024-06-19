@@ -6,7 +6,7 @@
 <a href="{% url 'event_create' %}">Create Event</a>
 <ul>
     {% for event in events %}
-    <li>{{ event.name }} - <a href="{% url 'event_update' event.pk %}">Edit</a> - <a href="{% url 'event_delete' event.pk %}">Delete</a></li>
+    <li>{{ event.name }}  {{ event.title }} - <a href="{% url 'event_update' event.pk %}">Edit</a> - <a href="{% url 'event_delete' event.pk %}">Delete</a></li>
     {% endfor %}
 </ul>
 {% endblock %}
