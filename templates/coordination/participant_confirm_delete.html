@@ -2,10 +2,14 @@
 
 {% block coordination_content %}
 <h2>Confirm Delete Participant</h2>
-<p>Are you sure you want to delete "{{ object.name }}"?</p>
+<p>Are you sure you want to delete "
+    {{ object.copy_of_unique_identifier }}
+    {{ object.first_name }}
+    {{ object.last_name }}
+    "?</p>
 <form method="post">
     {% csrf_token %}
-    <button type="submit">Confirm</button>
-    <a href="{% url 'participant_list' %}">Cancel</a>
+    <button class="btn btn-danger" type="submit">Confirm</button>
+    <a class="btn btn-primary" href="{% url 'participant_list' event_pk %}">Cancel</a>
 </form>
 {% endblock %}

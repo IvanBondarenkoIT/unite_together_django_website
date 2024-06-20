@@ -11,7 +11,13 @@
         {{ participant.copy_of_unique_identifier }} -
         {{ participant.first_name }} {{ participant.last_name }}
         - <a class="btn btn-primary" href="{% url 'participant_update' participant.pk %}">Edit</a>
-        - <a type="button" class="btn btn-danger" href="{% url 'participant_delete' participant.pk %}">Delete</a></li>
+        - <a type="button" class="btn btn-danger" href="{% url 'participant_delete' event.pk participant.pk %}">Delete</a></li>
     {% endfor %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a href="{% url 'export_participants' event.pk %}" class="btn btn-secondary">Export Participants to Excel</a>
+
+    </form>
 </ul>
 {% endblock %}
