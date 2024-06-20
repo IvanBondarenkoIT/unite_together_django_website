@@ -1,12 +1,21 @@
-{% extends "base.html" %}
+{% extends "coordination/coordination_base.html" %}
 
-{% block content %}
-{% include 'coordination/navigation.html' %}
-<h2>Events</h2>
-<a href="{% url 'event_create' %}">Create Event</a>
-<ul>
-    {% for event in events %}
-    <li>{{ event.name }} - <a href="{% url 'event_update' event.pk %}">Edit</a> - <a href="{% url 'event_delete' event.pk %}">Delete</a></li>
-    {% endfor %}
-</ul>
+{% block coordination_content %}
+
+            <h2>Events</h2>
+            <a type="button" class="btn btn-primary" href="{% url 'event_create' %}">Create Event</a>
+            <ul>
+                {% for event in events %}
+                    <li class="element-item">
+                        <span class="element-name">
+                            <a href="{% url 'participant_list' event.pk %}">{{ event.name }}</a>
+                        </span>
+                        <span class="element-actions">
+                            <a type="button" class="btn btn-primary" href="{% url 'event_update' event.pk %}">Edit</a>
+                            <a type="button" class="btn btn-danger" href="{% url 'event_delete' event.pk %}">X</a>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+
 {% endblock %}

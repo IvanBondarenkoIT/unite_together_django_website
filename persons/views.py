@@ -34,6 +34,7 @@ def create_person(request):
         if form.is_valid():
             associated_person = form.save(commit=False)
             associated_person.user_owner = request.user
+            associated_person.is_active = True
             associated_person.save()
             messages.success(request, 'Person created successfully!')
             return redirect('home')  # Change to your desired redirect target
@@ -53,6 +54,7 @@ def person_list(request):
         if formset.is_valid():
             associated_person = formset.save(commit=False)
             associated_person.user_owner = request.user
+            associated_person.is_active = True
             associated_person.save()
             messages.success(request, 'Person created successfully!')
             return redirect('person_list')  # Change to your desired redirect target

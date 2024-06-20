@@ -1,15 +1,23 @@
-{% extends "base.html" %}
+{% extends "coordination/coordination_base.html" %}
 
-{% block content %}
-{% include 'coordination/navigation.html' %}
-<h2>Participants</h2>
-<a href="{% url 'participant_create' %}">Create Participant</a>
+{% block coordination_content %}
+<h2>Participants registered on:</h2>
+<h3>{{ event.name }}</h3>
+
+<a class="btn btn-primary" href="{% url 'participant_create' %}">Create Participant</a>
 <ul>
     {% for participant in participants %}
-    <li>{{ participant.registered_on }}
-        {{ participant.copy_of_unique_identifier }}
+    <li>
+        {{ participant.copy_of_unique_identifier }} -
         {{ participant.first_name }} {{ participant.last_name }}
-        - <a href="{% url 'participant_update' participant.pk %}">Edit</a> - <a href="{% url 'participant_delete' participant.pk %}">Delete</a></li>
+        - <a class="btn btn-primary" href="{% url 'participant_update' participant.pk %}">Edit</a>
+        - <a type="button" class="btn btn-danger" href="{% url 'participant_delete' event.pk participant.pk %}">Delete</a></li>
     {% endfor %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a href="{% url 'export_participants' event.pk %}" class="btn btn-secondary">Export Participants to Excel</a>
+
+    </form>
 </ul>
 {% endblock %}

@@ -1,12 +1,19 @@
-{% extends "base.html" %}
+{% extends "coordination/coordination_base.html" %}
 
-{% block content %}
-{% include 'coordination/navigation.html' %}
+{% block coordination_content %}
 <h2>Persons</h2>
-<a href="{% url 'person_create' %}">Create Person</a>
+<a class="btn btn-primary" href="{% url 'person_create' %}">Create Person</a>
 <ul>
     {% for person in persons %}
-    <li>{{ person.unique_identifier }} {{ person.first_name }} {{ person.last_name }} - <a href="{% url 'person_update' person.pk %}">Edit</a> - <a href="{% url 'person_delete' person.pk %}">Delete</a></li>
+    <li class="element-item">
+        <span class="element-name">
+            {{ person.unique_identifier }} {{ person.first_name }} {{ person.last_name }}
+        </span>
+        <span class="element-actions">
+            <a class="btn btn-primary" href="{% url 'person_update' person.pk %}">Edit</a>
+            <a type="button" class="btn btn-danger" href="{% url 'person_delete' person.pk %}">X</a>
+        </span>
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}

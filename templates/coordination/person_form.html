@@ -1,11 +1,10 @@
-{% extends "base.html" %}
+{% extends "coordination/coordination_base.html" %}
 
-{% block content %}
-{% include 'coordination/navigation.html' %}
+{% block coordination_content %}
 <h2>{% if form.instance.pk %}Edit Person{% else %}Create Person{% endif %}</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+    <button class="btn btn-primary" type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
 </form>
 {% endblock %}
