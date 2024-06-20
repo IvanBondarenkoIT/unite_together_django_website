@@ -46,8 +46,12 @@ def event_delete(request, pk):
 
 @login_required
 # @permission_required('web_pages.view_participant', raise_exception=True)
-def participant_list(request):
-    participants = Participant.objects.all()
+def participant_list(request, pk):
+    if pk:
+        event = get_object_or_404(Events, pk=pk)
+        participants = Participant.objects.all().filter(is_active=True, registered_on=event)
+    else:
+        participants = Participant.objects.all()
     return render(request, 'coordination/participant_list.html', {'participants': participants})
 
 @login_required
