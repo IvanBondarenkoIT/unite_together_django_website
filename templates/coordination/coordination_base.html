@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        .event-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .event-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        .event-name {
+            flex: 1; /* This will take up all available space */
+            max-width: 60%; /* Adjust this percentage based on your layout */
+        }
+
+        .event-actions {
+            white-space: nowrap;
+        }
+
+        .event-item a {
+            margin-right: 10px; /* Add some space between the links */
+        }
+
+    </style>
+    <main class="sec-accounts1">
+        <div class="bg-personal-account2"></div>
+        {% include "includes/coordination_sidebar.html" %}
+        <section class="group-section">
+
+            {% block coordination_content %}
+                {#        content#}
+            {% endblock %}
+
+        </section>
+    </main>
+{% endblock %}
