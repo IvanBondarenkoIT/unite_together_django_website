@@ -1,12 +1,11 @@
-{% extends "base.html" %}
+{% extends "coordination/coordination_base.html" %}
 
-{% block content %}
+{% block coordination_content %}
 <h2>Confirm Delete Event</h2>
-{% include 'navigation.html' %}
 <p>Are you sure you want to delete "{{ object.name }}"?</p>
 <form method="post">
     {% csrf_token %}
-    <button type="submit">Confirm</button>
-    <a href="{% url 'event_list' %}">Cancel</a>
+    <button class="btn btn-danger" type="submit">Confirm</button>
+    <a class="btn btn-primary" href="{% url 'event_list' %}">Cancel</a>
 </form>
 {% endblock %}
