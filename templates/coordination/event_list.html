@@ -6,11 +6,11 @@
             <a type="button" class="btn btn-primary" href="{% url 'event_create' %}">Create Event</a>
             <ul>
                 {% for event in events %}
-                    <li class="event-item">
-                        <span class="event-name">
+                    <li class="element-item">
+                        <span class="element-name">
                             <a href="{% url 'participant_list' event.pk %}">{{ event.name }}</a>
                         </span>
-                        <span class="event-actions">
+                        <span class="element-actions">
                             <a type="button" class="btn btn-primary" href="{% url 'event_update' event.pk %}">Edit</a>
                             <a type="button" class="btn btn-danger" href="{% url 'event_delete' event.pk %}">X</a>
                         </span>
