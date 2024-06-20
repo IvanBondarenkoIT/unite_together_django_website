@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EventForm, ParticipantForm, PersonForm
 from web_pages.models import Events
-from persons.models import Participant, Person
+from persons.models import Participant, AssociatedPerson
 
 @login_required
 # @permission_required('web_pages.view_event', raise_exception=True)
@@ -105,7 +105,7 @@ def participant_delete(request, event_pk, pk):
 @login_required
 # @permission_required('web_pages.view_person', raise_exception=True)
 def person_list(request):
-    persons = Person.objects.all()
+    persons = AssociatedPerson.objects.all()
     return render(request, 'coordination/person_list.html', {'persons': persons})
 
 @login_required
@@ -123,7 +123,7 @@ def person_create(request):
 @login_required
 # @permission_required('web_pages.change_person', raise_exception=True)
 def person_update(request, pk):
-    person = get_object_or_404(Person, pk=pk)
+    person = get_object_or_404(AssociatedPerson, pk=pk)
     if request.method == 'POST':
         form = PersonForm(request.POST, request.FILES, instance=person)
         if form.is_valid():
@@ -136,7 +136,7 @@ def person_update(request, pk):
 @login_required
 # @permission_required('web_pages.delete_person', raise_exception=True)
 def person_delete(request, pk):
-    person = get_object_or_404(Person, pk=pk)
+    person = get_object_or_404(AssociatedPerson, pk=pk)
     if request.method == 'POST':
         person.delete()
         return redirect('person_list')
@@ -169,7 +169,8 @@ def export_participants(request, pk):
     date_string = current_datetime.strftime("%d/%m/%Y")
     # Save the workbook to an HttpResponse
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = f'attachment; filename="participants {event} {date_string}.xlsx"'
+    # response['Content-Disposition'] = f'attachment; filename="participants {event.name} {date_string}.xlsx"'
+    response['Content-Disposition'] = f'attachment; filename="participants {date_string}.xlsx"'
     workbook.save(response)
 
     return response
