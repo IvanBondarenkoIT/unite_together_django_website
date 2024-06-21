@@ -85,9 +85,14 @@ class AssociatedPerson(Person):
 def set_unique_identifier(sender, instance, **kwargs):
     if not instance.unique_identifier:
         family_identifier = instance.user_owner.family_identifier
-        person_number = AssociatedPerson.objects.filter(user_owner=instance.user_owner).count() + 1
+        all_family = AssociatedPerson.objects.filter(user_owner=instance.user_owner)
+        person_number = all_family.count() + 1
+        # Check is exist AssociatedPerson with the same number
+        while all_family.get(unique_identifier=f'GE{family_identifier}-{person_number:02d}'):
+            person_number += 1
+
         person_identifier = f'{person_number:02d}'
-        instance.unique_identifier = f'GE.{family_identifier}.{person_identifier}'
+        instance.unique_identifier = f'GE{family_identifier}-{person_identifier}'
 
 
 class Participant(Person):
