@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "paypal.standard.ipn",
 
     "web_pages",
+    "homepage",
     "accounts",
     "donate",
     "storages",

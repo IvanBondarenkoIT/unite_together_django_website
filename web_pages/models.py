@@ -50,6 +50,8 @@ class WebContentObject(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    show_in_main_page_carousel = models.BooleanField(default=False)
+
     group = models.ForeignKey("ObjectsGroup", on_delete=models.CASCADE, blank=True, null=True)
     # web_page_owner = models.ForeignKey(WebPage, on_delete=models.CASCADE, blank=True)
     order = models.PositiveIntegerField(default=0)
@@ -130,15 +132,7 @@ class ProjectGallery(models.Model):
         verbose_name_plural = "project gallerie"
 
 
-class Initiative(models.Model):
-    title = models.CharField(max_length=200, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='initiatives/', blank=True, null=True)
-    order = models.IntegerField(default=0, blank=True, null=True)
-    link = models.URLField(blank=True, null=True)
 
-    def __str__(self):
-        return self.title
 
     # class WebContentSubordinateObject(models.Model):
     #     name = models.CharField(max_length=250)
