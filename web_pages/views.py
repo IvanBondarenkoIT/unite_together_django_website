@@ -1,27 +1,14 @@
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
+
 from django.db.models import F, CharField, Value
 from django.db.models.functions import Concat
 
 from persons.models import AssociatedPerson, Participant
-from web_pages.models import WebContentObject, Events, ObjectsGroup, City, Projects, ProjectGallery, Initiative
+from web_pages.models import WebContentObject, Events, ObjectsGroup, City, Projects, ProjectGallery
 
 OBJECTS_ON_PAGE = 4
-
-
-def home(request):
-    initiatives = Initiative.objects.all().order_by('order')
-    projects = Projects.objects.all().order_by('order')
-    events = Events.objects.all().order_by('order')
-
-    context = {
-        'initiatives': initiatives,
-        'projects': projects,
-        'events': events,
-    }
-    return render(request, 'home/index.html', context)
 
 
 def events(request, group_slug=None):

@@ -23,16 +23,22 @@ from unite_together_django_website import views
 from unite_together_django_website import settings
 
 urlpatterns = [
+
+    # ADMIN
     path("secure/", admin.site.urls),
+    # Home
+    path("", include("homepage.urls")),
     # ABOUT US
     path("about-us/", include("about_us.urls")),
-    path("", include("web_pages.urls")),
     # ACCOUNTS
     path("accounts/", include("accounts.urls")),
     # PERSONS
     path("persons/", include("persons.urls")),
     # COORDINATION
     path("coordination/", include("coordination.urls")),
+
+    path("", include("web_pages.urls")),
     path("", include("donate.urls")),
     path("", include("paypal.standard.ipn.urls")),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

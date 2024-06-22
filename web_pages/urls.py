@@ -6,7 +6,7 @@ from unite_together_django_website import settings
 from web_pages import views
 
 urlpatterns = [
-    path("", views.home, name="home"),
+    # path("", views.home, name="home"),
     # EVENTS
     path("events/", views.events, name="events"),
     path('events/<slug:group_slug>/', views.events, name='events_by_group'),

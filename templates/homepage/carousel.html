@@ -1,0 +1,88 @@
+{#{% extends "homepage/index.html" %}#}
+{##}
+{#{% block carousel_content %}#}
+
+<div class="carousel-container">
+    <div class="carousel">
+        {% for event in carousel_objects %}
+
+        <div class="carousel-item">
+            <a href="{{ event.get_url }}">
+                <img src="{{ event.image.url }}" alt="{{ event.name }}" style="               width: 671.95px;
+height: 496.56px;
+top: 253.72px;
+left: 703.58px;
+gap: 0px;
+
+">
+
+                <div class="carousel-caption">
+                    <h3>{{ event.name }}</h3>
+                    <p>{{ event.title }}</p>
+                    <p>{{ event.get_start_date_day }} {{ event.get_start_date_month }} {{ event.get_start_date_year }}</p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Add your carousel JavaScript here -->
+<script>
+    // Example JavaScript for a simple carousel (you can use a library like Slick or Swiper)
+    const carousel = document.querySelector('.carousel');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    carousel.addEventListener('mousedown', (e) => {
+        isDown = true;
+        carousel.classList.add('active');
+        startX = e.pageX - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+        isDown = false;
+        carousel.classList.remove('active');
+    });
+
+    carousel.addEventListener('mouseup', () => {
+        isDown = false;
+        carousel.classList.remove('active');
+    });
+
+    carousel.addEventListener('mousemove', (e) => {
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - carousel.offsetLeft;
+        const walk = (x - startX) * 3; //scroll-fast
+        carousel.scrollLeft = scrollLeft - walk;
+    });
+</script>
+
+<style>
+    /* Add your carousel styles here */
+    .carousel-container {
+        width: 100%;
+        overflow: hidden;
+    }
+    .carousel {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+    .carousel-item {
+        min-width: 300px;
+        margin-right: 16px;
+        flex-shrink: 0;
+    }
+    .carousel img {
+        width: 100%;
+        height: auto;
+    }
+    .carousel-caption {
+        text-align: center;
+        padding: 8px 0;
+    }
+</style>
+{#{% endblock %}#}

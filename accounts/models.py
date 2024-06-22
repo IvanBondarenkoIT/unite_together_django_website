@@ -90,30 +90,30 @@ def set_family_identifier(sender, instance, created, **kwargs):
 # models.py
 
 
-@receiver(post_migrate)
-def create_user_roles(sender, **kwargs):
-    coordinator_group, created = Group.objects.get_or_create(name='Coordinator')
-    supervisor_group, created = Group.objects.get_or_create(name='Supervisor')
-
-    # Assign permissions to groups
-    # Coordinator permissions
-    coordinator_permissions = [
-        Permission.objects.get(codename='view_event'),
-        Permission.objects.get(codename='add_event'),
-        Permission.objects.get(codename='change_event'),
-        Permission.objects.get(codename='delete_event'),
-        Permission.objects.get(codename='view_participant'),
-        Permission.objects.get(codename='add_participant'),
-        Permission.objects.get(codename='change_participant'),
-        Permission.objects.get(codename='delete_participant'),
-    ]
-    coordinator_group.permissions.set(coordinator_permissions)
-
-    # Supervisor permissions (all Coordinator permissions + Person management)
-    supervisor_permissions = coordinator_permissions + [
-        Permission.objects.get(codename='view_person'),
-        Permission.objects.get(codename='add_person'),
-        Permission.objects.get(codename='change_person'),
-        Permission.objects.get(codename='delete_person'),
-    ]
-    supervisor_group.permissions.set(supervisor_permissions)
+# @receiver(post_migrate)
+# def create_user_roles(sender, **kwargs):
+#     coordinator_group, created = Group.objects.get_or_create(name='Coordinator')
+#     supervisor_group, created = Group.objects.get_or_create(name='Supervisor')
+#
+#     # Assign permissions to groups
+#     # Coordinator permissions
+#     coordinator_permissions = [
+#         Permission.objects.get(codename='view_event'),
+#         Permission.objects.get(codename='add_event'),
+#         Permission.objects.get(codename='change_event'),
+#         Permission.objects.get(codename='delete_event'),
+#         Permission.objects.get(codename='view_participant'),
+#         Permission.objects.get(codename='add_participant'),
+#         Permission.objects.get(codename='change_participant'),
+#         Permission.objects.get(codename='delete_participant'),
+#     ]
+#     coordinator_group.permissions.set(coordinator_permissions)
+#
+#     # Supervisor permissions (all Coordinator permissions + Person management)
+#     supervisor_permissions = coordinator_permissions + [
+#         Permission.objects.get(codename='view_person'),
+#         Permission.objects.get(codename='add_person'),
+#         Permission.objects.get(codename='change_person'),
+#         Permission.objects.get(codename='delete_person'),
+#     ]
+#     supervisor_group.permissions.set(supervisor_permissions)
