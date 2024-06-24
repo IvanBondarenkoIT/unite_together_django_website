@@ -18,7 +18,8 @@ def homepage(request):
         'projects': projects
         }
     # print(f"carousel_objects - {carousel_objects}")
-    return render(request, 'homepage/index.html', context=context)
+    # return render(request, 'homepage/index.html', context=context)
+    return render(request, 'homepage/carousel.html', context=context)
 
 
 # def home(request):
