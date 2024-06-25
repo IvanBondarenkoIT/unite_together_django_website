@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 
 
 <div id="carouselExample" class="carousel slide">
@@ -7,7 +8,13 @@
     {% for carousel_object in carousel_objects %}
 
         <div class="carousel-item{% if forloop.first %} active{% endif %}">
-            <a href="{{ carousel_object.get_url }}"><img src="{{ carousel_object.image.url }}" class="d-block w-100" alt=""></a>
+            <a href="{{ carousel_object.get_url }}">
+                {% if carousel_object.image %}
+                	<img src="{{ carousel_object.image.url }}" class="d-block w-100" alt="">
+                {% else %}
+                    {% static 'img/placeholder-image1@2x.png' %}
+                {% endif %}
+            </a>
         </div>
     {% endfor %}
 
