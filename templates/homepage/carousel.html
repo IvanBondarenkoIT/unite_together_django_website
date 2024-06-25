@@ -7,7 +7,7 @@
     {% for carousel_object in carousel_objects %}
 
         <div class="carousel-item{% if forloop.first %} active{% endif %}">
-            <img src="{{ carousel_object.image.url }}" class="d-block w-100" alt="">
+            <a href="{{ carousel_object.get_url }}"><img src="{{ carousel_object.image.url }}" class="d-block w-100" alt=""></a>
         </div>
     {% endfor %}
 

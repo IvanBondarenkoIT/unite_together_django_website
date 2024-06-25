@@ -1,23 +1,32 @@
 from django.shortcuts import render
 
-from web_pages.models import WebContentObject
+from web_pages.models import WebContentObject, Events, Projects
 from .models import SectionAboutUs, SectionEvents, SectionProjects, CallToAction
 
 
 def homepage(request):
     sec_about_us = SectionAboutUs.objects.first()
     sec_events = SectionEvents.objects.first()
+
     sec_projects = SectionProjects.objects.first()
     sec_cta_first = CallToAction.objects.first()
     sec_cta_last = CallToAction.objects.last()
 
-    carousel_objects = WebContentObject.objects.filter(show_in_main_page_carousel=True).order_by('order')
+    events_objects = list(Events.objects.filter(show_in_main_page_carousel=True).order_by('order'))
+    projects_objects = list(Projects.objects.filter(show_in_main_page_carousel=True).order_by('order'))
+
+    carousel_objects = events_objects + projects_objects
+
+    carousel_objects.sort(key=lambda x: x.order)
 
     context = {
+        'events_objects': events_objects,
         'carousel_objects': carousel_objects,
-        'about_us': sec_about_us,
-        'events': sec_events,
-        'projects': sec_projects
+        'sec_about_us': sec_about_us,
+        'sec_events': sec_events,
+        'sec_projects': sec_projects,
+        'first_cta': sec_cta_first,
+        'last_cta': sec_cta_last,
         }
     # print(f"carousel_objects - {carousel_objects}")
     return render(request, 'homepage/index.html', context=context)
