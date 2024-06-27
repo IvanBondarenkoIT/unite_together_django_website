@@ -9,11 +9,13 @@
 
         <div class="carousel-item{% if forloop.first %} active{% endif %}">
             <a href="{{ carousel_object.get_url }}">
-                {% if carousel_object.image %}
-                	<img src="{{ carousel_object.image.url }}" class="d-block w-100" alt="">
+            <img src="
+                {% if carousel_object.image_exists %}
+                	{{ carousel_object.image.url }}
                 {% else %}
                     {% static 'img/placeholder-image1@2x.png' %}
                 {% endif %}
+                " class="d-block w-100" alt="">
             </a>
         </div>
     {% endfor %}

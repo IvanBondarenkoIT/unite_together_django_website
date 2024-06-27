@@ -15,6 +15,7 @@ class Section(models.Model):
 class CallToAction(models.Model):
     title = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='img/homepage', blank=True, null=True)
     link = models.URLField(blank=True, null=True)
 
     def __str__(self):
