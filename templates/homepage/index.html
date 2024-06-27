@@ -84,7 +84,15 @@
 
         {#3 CTA-1 Register#}
 
-        <section class="cta-1">
+{#        <section class="cta-1" style="background-image: {% static 'img/cta1@3x.png' %}  ;">#}
+    <section class="cta-1"
+                {% if sec_cta_first.image %}
+                    style="background-image: url({{ sec_cta_first.image.url }});">
+                {% else %}
+                    style="background-image: url({% static 'img/cta1@3x.png' %});">
+                {% endif %}
+
+
             <div class="content20">
                 <div class="content21">
                     <h1 class="heading23">{{ sec_cta_first.title}}</h1>
@@ -176,10 +184,17 @@
                 <img class="placeholder-image-icon6" loading="lazy" alt="" src="{{ sec_projects.image.url }}"/>
             </div>
         </section>
-
         {#6 CTA-2 DONATE#}
-        <section class="cta-2">
+        <section class="cta-2" style="
+                {% if sec_cta_last.image %}
+                    background-image: url({{ sec_cta_last.image.url }});">
+                {% else %}
+                    background-image: url({% static 'img/cta1@3x.png' %});">
+                {% endif %}
+
+
             <div class="content12">
+
                 <div class="content13">
                     <h1 class="heading17">{{ sec_cta_last.title }}</h1>
                     <div class="text37">

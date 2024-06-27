@@ -37,8 +37,8 @@ def homepage(request):
         'sec_about_us': sec_about_us,
         'sec_events': sec_events,
         'sec_projects': sec_projects,
-        'first_cta': sec_cta_first,
-        'last_cta': sec_cta_last,
+        'sec_cta_first': sec_cta_first,
+        'sec_cta_last': sec_cta_last,
         }
     # print(f"carousel_objects - {carousel_objects}")
     return render(request, 'homepage/index.html', context=context)
