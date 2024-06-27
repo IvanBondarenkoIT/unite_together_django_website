@@ -1,7 +1,16 @@
+import os
+from django.conf import settings
 from django.shortcuts import render
 
 from web_pages.models import WebContentObject, Events, Projects
 from .models import SectionAboutUs, SectionEvents, SectionProjects, CallToAction
+
+
+def image_exists(image_field):
+    if not image_field:
+        return False
+    image_path = os.path.join(settings.MEDIA_ROOT, image_field.name)
+    return os.path.isfile(image_path)
 
 
 def homepage(request):
@@ -18,6 +27,9 @@ def homepage(request):
     carousel_objects = events_objects + projects_objects
 
     carousel_objects.sort(key=lambda x: x.order)
+
+    for obj in carousel_objects:
+        obj.image_exists = image_exists(obj.image)
 
     context = {
         'events_objects': events_objects,

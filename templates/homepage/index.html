@@ -121,7 +121,11 @@
                     {% for event in events_objects %}
                         <div class="column1">
                             <a href="{{ event.get_url }}"><img class="placeholder-image-icon7" alt=""
-                                                               src="{{ event.image.url }}"/></a>
+                                                               src="{% if event.image %}
+                                                                   {{ event.image.url }}
+                                                               {% else %}
+                                                                   {% static 'img/placeholder-image1@2x.png' %}
+                                                               {% endif %}"/></a>
                             <div class="content17">
                                 <h1 class="heading20">{{ event.title }}</h1>
                                 <div class="text-duis-cursus" style="
