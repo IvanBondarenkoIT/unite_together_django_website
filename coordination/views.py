@@ -69,8 +69,9 @@ def participant_create(request):
     if request.method == 'POST':
         form = ParticipantForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('participant_list')
+            participant = form.save()
+            event_pk = participant.registered_on.pk  # Assuming 'event' is the ForeignKey field in the Participant model
+            return redirect('participant_list', pk=event_pk)
     else:
         form = ParticipantForm()
     return render(request, 'coordination/participant_form.html', {'form': form})
@@ -82,8 +83,9 @@ def participant_update(request, pk):
     if request.method == 'POST':
         form = ParticipantForm(request.POST, request.FILES, instance=participant)
         if form.is_valid():
-            form.save()
-            return redirect('participant_list')
+            participant = form.save()
+            event_pk = participant.registered_on.pk  # Assuming 'event' is the ForeignKey field in the Participant model
+            return redirect('participant_list', pk=event_pk)
     else:
         form = ParticipantForm(instance=participant)
     return render(request, 'coordination/participant_form.html', {'form': form})
