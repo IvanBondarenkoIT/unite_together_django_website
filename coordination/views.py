@@ -105,22 +105,39 @@ def participant_delete(request, event_pk, pk):
     }
     return render(request, 'coordination/participant_confirm_delete.html', context=context)
 
+
 @login_required
 # @permission_required('web_pages.view_person', raise_exception=True)
 def person_list(request):
     persons = AssociatedPerson.objects.all()
 
-    #
-    # for person in persons:
-    #     person_owner_profile = UserProfile.objects.get(user=person.user_owner)
-    #     # person_owner_profile = get_object_or_404(UserProfile, user=person.user_owner)
-    #     print(person_owner_profile)
-    #     print(person_owner_profile.person.first_name)
-    #     user_owner_uid = person_owner_profile.person.unique_identifier
-    #
-    #     person.user_owner_uin = user_owner_uid
+    person_details = []
 
-    return render(request, 'coordination/person_list.html', {'persons': persons})
+    for person in persons:
+        try:
+            user_profile = UserProfile.objects.get(user=person.user_owner)
+            owner_uid = user_profile.person.unique_identifier
+        except UserProfile.DoesNotExist:
+            owner_uid = None
+
+        person_details.append({
+            'pk': person.pk,
+            'unique_identifier': person.unique_identifier,
+            'owner_unique_identifier': owner_uid,
+            'first_name': person.first_name,
+            'last_name': person.last_name,
+            'email': person.user_owner.email,
+            # 'status': person.status,  # Assuming status is an attribute of AssociatedPerson
+            'gender': person.gender,  # Assuming gender is an attribute of AssociatedPerson
+            'document': person.document_number,  # Assuming document is an attribute of AssociatedPerson
+            'citizenship': person.citizenship,  # Assuming citizenship is an attribute of AssociatedPerson
+            'city': person.chosen_city,  # Assuming city is an attribute of AssociatedPerson
+            'ge_phone_number': person.georgian_phone_number,  # Assuming phone_number is an attribute of AssociatedPerson
+            'ua_phone_number': person.ukrainian_phone_number,  # Assuming phone_number is an attribute of AssociatedPerson
+        })
+
+    return render(request, 'coordination/person_list.html', {'persons': person_details})
+
 @login_required
 # @permission_required('web_pages.add_person', raise_exception=True)
 def person_create(request):
