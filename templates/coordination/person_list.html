@@ -1,9 +1,8 @@
 {% extends "coordination/coordination_base.html" %}
 
 {% block coordination_content %}
-
 <h2>Persons</h2>
-<a class="btn btn-primary mb-3" href="{% url 'person_create' %}">Create Person</a>
+<a class="btn btn-primary" href="{% url 'person_create' %}">Create Person</a>
 <table id="persons-table" class="display table table-striped table-bordered" style="margin: auto">
     <thead>
         <tr>
@@ -16,17 +15,19 @@
     </thead>
     <tfoot>
         <tr>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>ID</th>
+{#            <th>User ID</th>#}
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Email</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </tfoot>
     <tbody>
         {% for person in persons %}
         <tr>
             <td>{{ person.unique_identifier }}</td>
+{#            <td>{{ person.user_owner_uid }}</td>#}
             <td>{{ person.first_name }}</td>
             <td>{{ person.last_name }}</td>
             <td>{{ person.user_owner.email }}</td>
@@ -51,7 +52,7 @@
 <script>
     $(document).ready(function() {
         // Initialize DataTables
-        var table = $('#persons-table').DataTable({
+        $('#persons-table').DataTable({
             initComplete: function () {
                 // Add a text input to each footer cell
                 this.api().columns().every(function () {

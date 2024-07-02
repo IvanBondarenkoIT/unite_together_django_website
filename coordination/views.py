@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EventForm, ParticipantForm, PersonForm
 from web_pages.models import Events
-from persons.models import Participant, AssociatedPerson
+from persons.models import Participant, AssociatedPerson, UserProfile
+
 
 @login_required
 # @permission_required('web_pages.view_event', raise_exception=True)
@@ -108,8 +109,18 @@ def participant_delete(request, event_pk, pk):
 # @permission_required('web_pages.view_person', raise_exception=True)
 def person_list(request):
     persons = AssociatedPerson.objects.all()
-    return render(request, 'coordination/person_list.html', {'persons': persons})
 
+    #
+    # for person in persons:
+    #     person_owner_profile = UserProfile.objects.get(user=person.user_owner)
+    #     # person_owner_profile = get_object_or_404(UserProfile, user=person.user_owner)
+    #     print(person_owner_profile)
+    #     print(person_owner_profile.person.first_name)
+    #     user_owner_uid = person_owner_profile.person.unique_identifier
+    #
+    #     person.user_owner_uin = user_owner_uid
+
+    return render(request, 'coordination/person_list.html', {'persons': persons})
 @login_required
 # @permission_required('web_pages.add_person', raise_exception=True)
 def person_create(request):
@@ -176,4 +187,5 @@ def export_participants(request, pk):
     workbook.save(response)
 
     return response
+
 
