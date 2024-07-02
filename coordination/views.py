@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EventForm, ParticipantForm, PersonForm
 from web_pages.models import Events
-from persons.models import Participant, AssociatedPerson
+from persons.models import Participant, AssociatedPerson, UserProfile
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 @login_required
 # @permission_required('web_pages.view_event', raise_exception=True)
@@ -48,17 +50,40 @@ def event_delete(request, pk):
     return render(request, 'coordination/event_confirm_delete.html', {'object': event})
 
 @login_required
-# @permission_required('web_pages.view_participant', raise_exception=True)
 def participant_list(request, pk):
-    # if pk:
     event = get_object_or_404(Events, pk=pk)
-    participants = Participant.objects.all().filter(is_active=True, registered_on=event)
-    # else:
-    #     participants = Participant.objects.all()
+
+    # Fetch participants for the specific event
+    participants = Participant.objects.filter(registered_on=event, is_active=True)
+
+    # Prepare participant details list
+    participant_details = []
+
+    for participant in participants:
+        try:
+            user_profile = UserProfile.objects.get(user=participant.user_owner)
+            owner_uid = user_profile.person.unique_identifier
+        except UserProfile.DoesNotExist:
+            owner_uid = None
+
+        participant_details.append({
+            'pk': participant.pk,
+            'unique_identifier': participant.copy_of_unique_identifier,
+            'owner_unique_identifier': owner_uid,
+            'first_name': participant.first_name,
+            'last_name': participant.last_name,
+            'email': participant.user_owner.email,
+            'gender': participant.gender,
+            'document': participant.document_number,
+            'citizenship': participant.citizenship,
+            'city': participant.chosen_city,
+            'ge_phone_number': participant.georgian_phone_number,
+            'ua_phone_number': participant.ukrainian_phone_number,
+        })
 
     context = {
         'event': event,
-        'participants': participants
+        'participants': participant_details,
     }
 
     return render(request, 'coordination/participant_list.html', context=context)
@@ -104,11 +129,38 @@ def participant_delete(request, event_pk, pk):
     }
     return render(request, 'coordination/participant_confirm_delete.html', context=context)
 
+
 @login_required
 # @permission_required('web_pages.view_person', raise_exception=True)
 def person_list(request):
     persons = AssociatedPerson.objects.all()
-    return render(request, 'coordination/person_list.html', {'persons': persons})
+
+    person_details = []
+
+    for person in persons:
+        try:
+            user_profile = UserProfile.objects.get(user=person.user_owner)
+            owner_uid = user_profile.person.unique_identifier
+        except UserProfile.DoesNotExist:
+            owner_uid = None
+
+        person_details.append({
+            'pk': person.pk,
+            'unique_identifier': person.unique_identifier,
+            'owner_unique_identifier': owner_uid,
+            'first_name': person.first_name,
+            'last_name': person.last_name,
+            'email': person.user_owner.email,
+            # 'status': person.status,  # Assuming status is an attribute of AssociatedPerson
+            'gender': person.gender,  # Assuming gender is an attribute of AssociatedPerson
+            'document': person.document_number,  # Assuming document is an attribute of AssociatedPerson
+            'citizenship': person.citizenship,  # Assuming citizenship is an attribute of AssociatedPerson
+            'city': person.chosen_city,  # Assuming city is an attribute of AssociatedPerson
+            'ge_phone_number': person.georgian_phone_number,  # Assuming phone_number is an attribute of AssociatedPerson
+            'ua_phone_number': person.ukrainian_phone_number,  # Assuming phone_number is an attribute of AssociatedPerson
+        })
+
+    return render(request, 'coordination/person_list.html', {'persons': person_details})
 
 @login_required
 # @permission_required('web_pages.add_person', raise_exception=True)
@@ -176,4 +228,5 @@ def export_participants(request, pk):
     workbook.save(response)
 
     return response
+
 

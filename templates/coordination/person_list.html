@@ -3,17 +3,138 @@
 {% block coordination_content %}
 <h2>Persons</h2>
 <a class="btn btn-primary" href="{% url 'person_create' %}">Create Person</a>
-<ul>
-    {% for person in persons %}
-    <li class="element-item">
-        <span class="element-name">
-            {{ person.unique_identifier }} {{ person.first_name }} {{ person.last_name }}
-        </span>
-        <span class="element-actions">
-            <a class="btn btn-primary" href="{% url 'person_update' person.pk %}">Edit</a>
-            <a type="button" class="btn btn-danger" href="{% url 'person_delete' person.pk %}">X</a>
-        </span>
-    </li>
-    {% endfor %}
-</ul>
+<table id="persons-table" class="display table table-striped table-bordered" style="margin: auto">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Owner User №</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+{#            <th>Status</th>#}
+            <th>Gender</th>
+            <th>Document</th>
+            <th>Citizenship</th>
+            <th>City</th>
+            <th>GE Phone number</th>
+            <th>UA Phone number</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>ID</th>
+            <th>Owner User №</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+{#            <th>Status</th>#}
+            <th>Gender</th>
+            <th>Document</th>
+            <th>Citizenship</th>
+            <th>City</th>
+            <th>GE Phone number</th>
+            <th>UA Phone number</th>
+            <th>Actions</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for person in persons %}
+        <tr>
+            <td>{{ person.unique_identifier }}</td>
+            <th>{{ person.owner_unique_identifier }}</th>
+            <td>{{ person.first_name }}</td>
+            <td>{{ person.last_name }}</td>
+            <td>{{ person.email }}</td>
+{#            <td>{{ person.status }}</td>#}
+            <td>{{ person.gender }}</td>
+            <td>{{ person.document }}</td>
+            <td>{{ person.citizenship }}</td>
+            <td>{{ person.city }}</td>
+            <td>{{ person.ge_phone_number }}</td>
+            <td>{{ person.ua_phone_number }}</td>
+            <td>
+                <span class="element-actions">
+                    <a class="btn btn-primary" href="{% url 'person_update' person.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'person_delete' person.pk %}">Delete</a>
+                </span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Initialize DataTables
+        $('#persons-table').DataTable({
+            initComplete: function () {
+                // Add a text input to each footer cell
+                this.api().columns().every(function () {
+                    var column = this;
+                    if (column.index() === 4) { // Email column index
+                        var input = $('<input type="text" placeholder="Search Email" />')
+                            .appendTo($(column.footer()).empty())
+                            .on('keyup change clear', function () {
+                                if (column.search() !== this.value) {
+                                    column
+                                        .search(this.value)
+                                        .draw();
+                                }
+                            });
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<style>
+    /* Excel-like styling for the table */
+    table.dataTable {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: Arial, sans-serif;
+    }
+    table.dataTable thead th, table.dataTable tfoot th {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+    table.dataTable tbody td {
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+    table.dataTable tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    table.dataTable tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .dataTables_wrapper .dataTables_filter {
+        float: left;
+    }
+    .dataTables_wrapper .dataTables_length {
+        float: right;
+    }
+    .dataTables_wrapper .dataTables_paginate {
+        float: right;
+        margin-top: 10px;
+    }
+    .dataTables_wrapper .dataTables_info {
+        float: left;
+        margin-top: 10px;
+    }
+    .element-actions a {
+        margin-right: 5px;
+    }
+</style>
+
 {% endblock %}

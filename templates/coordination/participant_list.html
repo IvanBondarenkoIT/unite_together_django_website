@@ -5,19 +5,119 @@
 <h3>{{ event.name }}</h3>
 
 <a class="btn btn-primary" href="{% url 'participant_create' %}">Create Participant</a>
-<ul>
-    {% for participant in participants %}
-    <li>
-        {{ participant.copy_of_unique_identifier }} -
-        {{ participant.first_name }} {{ participant.last_name }}
-        - <a class="btn btn-primary" href="{% url 'participant_update' participant.pk %}">Edit</a>
-        - <a type="button" class="btn btn-danger" href="{% url 'participant_delete' event.pk participant.pk %}">Delete</a></li>
-    {% endfor %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <a href="{% url 'export_participants' event.pk %}" class="btn btn-secondary">Export Participants to Excel</a>
+<table id="participants-table" class="display table table-striped table-bordered" style="margin: auto">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Owner User №</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Document</th>
+            <th>Citizenship</th>
+            <th>City</th>
+            <th>GE Phone number</th>
+            <th>UA Phone number</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>ID</th>
+            <th>Owner User №</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Document</th>
+            <th>Citizenship</th>
+            <th>City</th>
+            <th>GE Phone number</th>
+            <th>UA Phone number</th>
+            <th>Actions</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for participant in participants %}
+        <tr>
+            <td>{{ participant.unique_identifier }}</td>
+            <td>{{ participant.owner_unique_identifier }}</td>
+            <td>{{ participant.first_name }}</td>
+            <td>{{ participant.last_name }}</td>
+            <td>{{ participant.email }}</td>
+            <td>{{ participant.gender }}</td>
+            <td>{{ participant.document }}</td>
+            <td>{{ participant.citizenship }}</td>
+            <td>{{ participant.city }}</td>
+            <td>{{ participant.ge_phone_number }}</td>
+            <td>{{ participant.ua_phone_number }}</td>
+            <td>
+                <span class="element-actions">
+                    <a class="btn btn-primary" href="{% url 'participant_update' participant.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'participant_delete' event.pk participant.pk %}">Delete</a>
+                </span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
-    </form>
-</ul>
+<a href="{% url 'export_participants' event.pk %}" class="btn btn-secondary">Export Participants to Excel</a>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Initialize DataTables
+        $('#participants-table').DataTable();
+    });
+</script>
+
+<style>
+    /* Excel-like styling for the table */
+    table.dataTable {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: Arial, sans-serif;
+    }
+    table.dataTable thead th, table.dataTable tfoot th {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+    table.dataTable tbody td {
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+    table.dataTable tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    table.dataTable tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .dataTables_wrapper .dataTables_filter {
+        float: left;
+    }
+    .dataTables_wrapper .dataTables_length {
+        float: right;
+    }
+    .dataTables_wrapper .dataTables_paginate {
+        float: right;
+        margin-top: 10px;
+    }
+    .dataTables_wrapper .dataTables_info {
+        float: left;
+        margin-top: 10px;
+    }
+    .element-actions a {
+        margin-right: 5px;
+    }
+</style>
+
 {% endblock %}
