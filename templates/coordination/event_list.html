@@ -2,20 +2,116 @@
 
 {% block coordination_content %}
 
-            <h2>Events</h2>
-            <a type="button" class="btn btn-primary" href="{% url 'event_create' %}">Create Event</a>
-            <ul>
-                {% for event in events %}
-                    <li class="element-item">
-                        <span class="element-name">
-                            <a href="{% url 'participant_list' event.pk %}">{{ event.name }}</a>
-                        </span>
-                        <span class="element-actions">
-                            <a type="button" class="btn btn-primary" href="{% url 'event_update' event.pk %}">Edit</a>
-                            <a type="button" class="btn btn-danger" href="{% url 'event_delete' event.pk %}">X</a>
-                        </span>
-                    </li>
-                {% endfor %}
-            </ul>
+<h2>Events</h2>
+<a class="btn btn-primary mb-3" href="{% url 'event_create' %}">Create Event</a>
+<table id="events-table" class="display table table-striped table-bordered" style="margin: auto">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Group</th>
+            <th>Selected City</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Selected City</th>
+            <th></th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for event in events %}
+        <tr>
+            <td>{{ event.pk }}</td>
+            <td><a href="{% url 'participant_list' event.pk %}">{{ event.name }}</a></td>
+            <td>{{ event.group }}</td>
+            <td>{{ event.selected_city }}</td>
+            <td>
+                <span class="element-actions">
+                    <a class="btn btn-primary" href="{% url 'event_update' event.pk %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'event_delete' event.pk %}">Delete</a>
+                </span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Initialize DataTables
+        var table = $('#events-table').DataTable({
+            initComplete: function () {
+                // Add a text input to each footer cell
+                this.api().columns().every(function () {
+                    var column = this;
+                    if (column.index() === 3) { // Selected City column index
+                        var input = $('<input type="text" placeholder="Search Selected City" />')
+                            .appendTo($(column.footer()).empty())
+                            .on('keyup change clear', function () {
+                                if (column.search() !== this.value) {
+                                    column
+                                        .search(this.value)
+                                        .draw();
+                                }
+                            });
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<style>
+    /* Excel-like styling for the table */
+    table.dataTable {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: Arial, sans-serif;
+    }
+    table.dataTable thead th, table.dataTable tfoot th {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+    table.dataTable tbody td {
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+    table.dataTable tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    table.dataTable tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .dataTables_wrapper .dataTables_filter {
+        float: left;
+    }
+    .dataTables_wrapper .dataTables_length {
+        float: right;
+    }
+    .dataTables_wrapper .dataTables_paginate {
+        float: right;
+        margin-top: 10px;
+    }
+    .dataTables_wrapper .dataTables_info {
+        float: left;
+        margin-top: 10px;
+    }
+    .element-actions a {
+        margin-right: 5px;
+    }
+</style>
 
 {% endblock %}
