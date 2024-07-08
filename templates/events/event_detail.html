@@ -4,10 +4,6 @@
 
 {% block content %}
 
-    <!DOCTYPE html>
-    <html>
-
-    <body>
     <div class="events-detail" data-animate-on-scroll>
         <section class="sec-detail">
             <div class="bg-detail"></div>
@@ -66,15 +62,12 @@
                             <div class="list-op">
                                 <div class="dictionary-op">
                                     {% if single_event.extra_details %}
-                                        <div class="set-op">
-                                            <img
-                                                    class="set-op-child"
-                                                    loading="lazy"
-                                                    alt=""
-                                                    src="{% static 'img/group-679.svg' %}"
-                                            />
+                                        <div id="extra-details" class="event-extra-details">
+                                            <span id="extra-details-short">{{ single_event.extra_details|truncatewords:20 }}</span>
+                                            <span id="extra-details-full"
+                                                  style="display:none;">{{ single_event.extra_details }}</span>
+                                            <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">more</a>
                                         </div>
-                                        <div class="weekly-at-1400">{{ single_event.extra_details }}</div>
                                     {% endif %}
 
                                 </div>
@@ -161,7 +154,64 @@
     </div>
 
 
-    </body>
-    </html>
+
+
+<script>
+    $(document).ready(function() {
+        $('#participants-table').DataTable();
+    });
+
+    function toggleDetails() {
+        var shortText = document.getElementById("extra-details-short");
+        var fullText = document.getElementById("extra-details-full");
+        var toggleLink = document.getElementById("toggle-details");
+
+        if (shortText.style.display === "none") {
+            shortText.style.display = "inline";
+            fullText.style.display = "none";
+            toggleLink.innerText = "more";
+        } else {
+            shortText.style.display = "none";
+            fullText.style.display = "inline";
+            toggleLink.innerText = "less";
+        }
+    }
+</script>
+
+<style>
+    /* Excel-like styling for the table */
+    table.dataTable {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: Arial, sans-serif;
+    }
+    table.dataTable thead th, table.dataTable tfoot th {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+    table.dataTable tbody td {
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+    table.dataTable tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    table.dataTable tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .event-extra-details {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ddd;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+</style>
 
 {% endblock %}

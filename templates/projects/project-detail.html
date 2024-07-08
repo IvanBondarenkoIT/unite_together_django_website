@@ -70,92 +70,117 @@
                 />
               </div>
 
-              <div class="frame-wrapper11">
-                <div class="frame-parent58">
-                  <div class="frame-parent59">
-                    <div class="frame-parent60">
-                      <div class="vector-wrapper22">
-                        <img
-                          class="vector-icon17"
-                          loading="lazy"
-                          alt=""
-                          src="./public/vector1.svg"
-                        />
-                      </div>
-                      <div class="ongoing-project">{% if single_project.is_active %}Ongoing project{% else %}Complited{% endif %}</div>
-                    </div>
-                    <div class="frame-parent61">
-                      <div class="vector-wrapper23">
-                        <img
-                          class="vector-icon18"
-                          alt=""
-                          src="./public/vector-14.svg"
-                        />
-                      </div>
-                      <div class="financial-assistance2">
-                          {{ single_project.group.name }}
-                      </div>
-                    </div>
-                    <div class="dec-line-wrapper">
-                      <img
-                        class="dec-line-icon"
-                        alt=""
-                        src="./public/decline.svg"
-                      />
-                    </div>
-                    <div class="frame-parent62">
-                      <div class="frame-wrapper12">
-                        <img
-                          class="frame-child23"
-                          loading="lazy"
-                          alt=""
-                          src="./public/group-6791.svg"
-                        />
-                      </div>
-                      <div class="december-2023-">
-                          {% if single_project.start_date %}
-                              {{ single_project.get_start_date_month }} {{ single_project.get_start_date_year }}
-                          {% endif %}
-                          {% if single_project.end_date %}
-                              - {{ single_project.get_end_date_month }} {{ single_project.get_end_date_year }}
-                          {% endif %}
-                      </div>
-                    </div>
-                    <div class="frame-parent63">
-                      <div class="vector-wrapper24">
-                        <img
-                          class="vector-icon19"
-                          alt=""
-                          src="./public/vector-2.svg"
-                        />
-                      </div>
-                      <div class="georgia">{{ single_project.selected_city.name }}</div>
-                    </div>
-                  </div>
-                  <div class="text-wrapper2">
-                    <div class="text19">
-                     {% if single_project.extra_details %}
-                        <div>
-                          {{ single_project.extra_details }}
-                        </div>
-                     {% endif %}
+                <div class="frame-wrapper11">
 
+                    <div class="frame-parent58">
+                        {% if single_project.extra_details %}
+                            <div id="extra-details" class="event-extra-details">
+                                <span id="extra-details-short">{{ single_project.extra_details|truncatewords:20 }}</span>
+                                <span id="extra-details-full"
+                                      style="display:none;">{{ single_project.extra_details }}</span>
+                                <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">more</a>
+                            </div>
+                        {% endif %}
+                        <div class="frame-parent59">
+                            <div class="frame-parent60">
+                                <div class="vector-wrapper22">
+                                    <img
+                                            class="vector-icon17"
+                                            loading="lazy"
+                                            alt=""
+                                            src="./public/vector1.svg"
+                                    />
+                                </div>
+                                <div class="ongoing-project">{% if single_project.is_active %}Ongoing project{% else %}
+                                    Complited{% endif %}</div>
+                            </div>
+                            <div class="frame-parent61">
+                                <div class="vector-wrapper23">
+                                    <img
+                                            class="vector-icon18"
+                                            alt=""
+                                            src="./public/vector-14.svg"
+                                    />
+                                </div>
+
+
+                                <div class="financial-assistance2">
+                                    {{ single_project.group.name }}
+                                </div>
+
+                            </div>
+                            <div class="dec-line-wrapper">
+                                <img
+                                        class="dec-line-icon"
+                                        alt=""
+                                        src="./public/decline.svg"
+                                />
+                            </div>
+                            <div class="frame-parent62">
+                                <div class="frame-wrapper12">
+                                    <img
+                                            class="frame-child23"
+                                            loading="lazy"
+                                            alt=""
+                                            src="./public/group-6791.svg"
+                                    />
+                                </div>
+                                <div class="december-2023-">
+                                    {% if single_project.start_date %}
+                                        {{ single_project.get_start_date_month }}
+                                        {{ single_project.get_start_date_year }}
+                                    {% endif %}
+                                    {% if single_project.end_date %}
+                                        - {{ single_project.get_end_date_month }} {{ single_project.get_end_date_year }}
+                                    {% endif %}
+                                </div>
+
+                            </div>
+
+                            <div class="frame-parent63">
+                                <div class="vector-wrapper24">
+                                    <img
+                                            class="vector-icon19"
+                                            alt=""
+                                            src="./public/vector-2.svg"
+                                    />
+                                </div>
+                                <div class="georgia">{{ single_project.selected_city.name }}</div>
+                            </div>
+                        </div>
+                        <div class="text-wrapper2">
+                            {#                    <div class="text19">#}
+                            {#                     {% if single_project.extra_details %}#}
+                            {#                        <div>#}
+                            {#                          {{ single_project.extra_details }}#}
+                            {#                        </div>#}
+                            {#                     {% endif %}#}
+                            {##}
+                            {#                        {% if single_project.extra_details %}#}
+                            {#                            <div id="extra-details" class="event-extra-details">#}
+                            {#                                <span id="extra-details-short">{{ single_project.extra_details|truncatewords:20 }}</span>#}
+                            {#                                <span id="extra-details-full"#}
+                            {#                                      style="display:none;">{{ single_project.extra_details }}</span>#}
+                            {#                                <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">more</a>#}
+                            {#                            </div>#}
+                            {#                        {% endif %}#}
+                            {##}
+                            {#                    </div>#}
+                        </div>
+                        <a class="button-registration1"
+                           href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
+                           style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
+                            <div class="registration1">Registration</div>
+                            <div class="vector-wrapper25">
+                                <img
+                                        class="vector-icon20"
+                                        alt=""
+                                        src="./public/vector-11.svg"
+                                />
+                            </div>
+                        </a>
                     </div>
-                  </div>
-                  <a class="button-registration1"
-                     href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
-                     style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
-                    <div class="registration1" >Registration</div>
-                    <div class="vector-wrapper25">
-                      <img
-                        class="vector-icon20"
-                        alt=""
-                        src="./public/vector-11.svg"
-                      />
-                    </div>
-                  </a>
                 </div>
-              </div>
             </div>
           </div>
         {% if project_gallery %}
@@ -188,67 +213,6 @@
               </div>
             </div>
           </div>
-{#          <div class="gallery-v13-m2">#}
-{#            <div class="surface">#}
-{#              <div class="list">#}
-{#                <div class="aspectratioblock">#}
-{#                  <div class="aspect-ratio">#}
-{#                    <div class="aspect-ratio-keeper-rotated"></div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="aspectratioblock1">#}
-{#                  <div class="aspect-ratio1">#}
-{#                    <div class="aspect-ratio-keeper-rotated1"></div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="aspectratioblock2">#}
-{#                  <div class="aspect-ratio2">#}
-{#                    <div class="aspect-ratio-keeper-rotated2"></div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="aspectratioblock3">#}
-{#                  <div class="aspect-ratio3">#}
-{#                    <div class="aspect-ratio-keeper-rotated3"></div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="aspectratioblock4">#}
-{#                  <div class="aspect-ratio4">#}
-{#                    <div class="aspect-ratio-keeper-rotated4"></div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="aspectratioblock5">#}
-{#                  <div class="aspect-ratio5">#}
-{#                    <div class="aspect-ratio-keeper-rotated5"></div>#}
-{#                  </div>#}
-{#                </div>#}
-{#              </div>#}
-{#              <div class="arrows">#}
-{#                <div class="navigationbutton">#}
-{#                  <div class="surface1">#}
-{#                    <div class="navigationicon">#}
-{#                      <b class="b">←</b>#}
-{#                    </div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="nubmers-wrapper">#}
-{#                  <div class="nubmers">#}
-{#                    <div class="number">1</div>#}
-{#                    <div class="div12">/</div>#}
-{#                    <div class="number1">10</div>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="navigationbutton1">#}
-{#                  <div class="surface2">#}
-{#                    <div class="navigationicon1">#}
-{#                      <b class="b1">→</b>#}
-{#                    </div>#}
-{#                  </div>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#        #}
-{#        #}
         </section>
       </main>
 
@@ -263,5 +227,63 @@
             })
         })
     </script>
+
+    <script>
+    $(document).ready(function() {
+        $('#participants-table').DataTable();
+    });
+
+    function toggleDetails() {
+        var shortText = document.getElementById("extra-details-short");
+        var fullText = document.getElementById("extra-details-full");
+        var toggleLink = document.getElementById("toggle-details");
+
+        if (shortText.style.display === "none") {
+            shortText.style.display = "inline";
+            fullText.style.display = "none";
+            toggleLink.innerText = "more";
+        } else {
+            shortText.style.display = "none";
+            fullText.style.display = "inline";
+            toggleLink.innerText = "less";
+        }
+    }
+</script>
+
+{#<style>#}
+{#    /* Excel-like styling for the table */#}
+{#    table.dataTable {#}
+{#        border-collapse: collapse;#}
+{#        width: 100%;#}
+{#        font-family: Arial, sans-serif;#}
+{#    }#}
+{#    table.dataTable thead th, table.dataTable tfoot th {#}
+{#        background-color: #f2f2f2;#}
+{#        border-bottom: 1px solid #ddd;#}
+{#        padding: 8px;#}
+{#    }#}
+{#    table.dataTable tbody td {#}
+{#        border-bottom: 1px solid #ddd;#}
+{#        padding: 8px;#}
+{#    }#}
+{#    table.dataTable tbody tr:nth-child(even) {#}
+{#        background-color: #f9f9f9;#}
+{#    }#}
+{#    table.dataTable tbody tr:hover {#}
+{#        background-color: #f1f1f1;#}
+{#    }#}
+{#    .event-extra-details {#}
+{#        white-space: pre-wrap;#}
+{#        word-wrap: break-word;#}
+{#        background-color: #f9f9f9;#}
+{#        padding: 10px;#}
+{#        border: 1px solid #ddd;#}
+{#        font-family: Arial, sans-serif;#}
+{#        font-size: 14px;#}
+{#        line-height: 1.5;#}
+{#        max-width: 100%;#}
+{#        overflow-wrap: anywhere;#}
+{#    }#}
+{#</style>#}
 
 {% endblock %}
