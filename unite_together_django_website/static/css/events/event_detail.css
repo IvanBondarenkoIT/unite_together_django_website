@@ -689,7 +689,7 @@
   justify-content: flex-start;
   padding: 2.6px 0 0;
 }
-.weekly-at-1400 {
+.event-extra-details {
   flex: 1;
   position: relative;
   line-height: 21.1px;
@@ -698,6 +698,16 @@
   min-width: 100px;
   white-space: nowrap;
   z-index: 1;
+  white-space: pre-wrap; /* Ensures line breaks and white spaces are preserved */
+  word-wrap: break-word; /* Breaks long words to avoid overflow */
+  background-color: #f9f9f9; /* Light background for better readability */
+  padding: 10px; /* Padding for some spacing */
+  border: 1px solid #ddd; /* Light border to distinguish the section */
+  font-family: Arial, sans-serif; /* Consistent font for readability */
+  font-size: 14px; /* Base font size */
+  line-height: 1.5; /* Increased line height for better readability */
+  max-width: 100%; /* Ensure the div doesn't exceed the container width */
+  overflow-wrap: anywhere; /* Break long text if necessary */
 }
 .dictionary-op {
   align-self: stretch;
