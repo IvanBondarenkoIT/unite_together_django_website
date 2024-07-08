@@ -95,14 +95,18 @@
                                 {% if single_event.is_active %}
                                     <form id="personForm" method="POST">
                                         {% csrf_token %}
-                                        {% if request.user %}
+                                        {% if request.user.is_authenticated %}
 {#                                            #}
-
+{#                                            {% if persons %}#}
                                             <select name="selected-person">
-                                                {% for person in persons %}
+
+                                            	{% for person in persons %}
                                                     <option value="{{ person.id }}">{{ person }}</option>
                                                 {% endfor %}
+
+
                                             </select>
+{#                                            {% endif %}#}
                                             <br>
                                             <br>
                                             <button type="submit" class="button-registration">

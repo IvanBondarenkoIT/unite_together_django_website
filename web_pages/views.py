@@ -121,26 +121,30 @@ def event_detail(request, group_slug=None, event_slug=None):
     except Exception as error:
         raise error
 
-        # event = get_object_or_404(Events, slug=event_slug)
+    # event = get_object_or_404(Events, slug=event_slug)
+    print(request.user.is_authenticated)
+    if request.user.is_authenticated:
+        persons = AssociatedPerson.objects.all().filter(user_owner=request.user)
 
-    persons = AssociatedPerson.objects.all().filter(user_owner=request.user)
+        if request.method == "POST":
+            selected_person_id = request.POST.get('selected-person')
+            print(selected_person_id)
+            if selected_person_id:
+                try:
+                    selected_person = AssociatedPerson.objects.get(id=selected_person_id, user_owner=request.user)
+                    # Save the selected person (you can add more logic here)
+                    new_participant = create_participant(selected_person, single_event)
+                    messages.success(request, f"Person {new_participant.first_name} {new_participant.last_name} registarted on {single_event.name}")
+                    # single_event.associated_person = selected_person
+                    # single_event.save()
+                    # Redirect or provide feedback after saving
+                    return redirect('registered_events')  # Replace with your success handling
+                except AssociatedPerson.DoesNotExist:
+                    # Handle the case where the person does not exist or does not belong to the user
+                    return redirect('some_error_page')  # Replace with your error handling
 
-    if request.method == "POST":
-        selected_person_id = request.POST.get('selected-person')
-        print(selected_person_id)
-        if selected_person_id:
-            try:
-                selected_person = AssociatedPerson.objects.get(id=selected_person_id, user_owner=request.user)
-                # Save the selected person (you can add more logic here)
-                new_participant = create_participant(selected_person, single_event)
-                messages.success(request, f"Person {new_participant.first_name} {new_participant.last_name} registarted on {single_event.name}")
-                # single_event.associated_person = selected_person
-                # single_event.save()
-                # Redirect or provide feedback after saving
-                return redirect('registered_events')  # Replace with your success handling
-            except AssociatedPerson.DoesNotExist:
-                # Handle the case where the person does not exist or does not belong to the user
-                return redirect('some_error_page')  # Replace with your error handling
+    else:
+        persons = []
 
     context = {
         "single_event": single_event,
