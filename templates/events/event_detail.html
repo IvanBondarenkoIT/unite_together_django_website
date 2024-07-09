@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="free-classes-of-container">
                                     <p class="free-classes-of">
-                                        {{ single_event.text }}
+                                        {{ single_event.text|safe }}
                                     </p>
                                 </div>
                             </div>
@@ -81,7 +81,13 @@
                                         />
                                     </div>
                                     <div class="batumi-127-luka">
-                                        {{ single_event.selected_city }} {{ single_event.address }}
+                                        {% if single_event.selected_city %}
+                                            {{ single_event.selected_city }}
+                                        {% endif %}
+
+                                        {% if single_event.address %}
+                                        	{{ single_event.address }}
+                                        {% endif %}
                                     </div>
                                 </div>
                                 {#                                    <form id="personForm" method="POST" action="{% url 'event_detail' %}">#}
