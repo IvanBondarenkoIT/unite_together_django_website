@@ -12,7 +12,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 @login_required
 # @permission_required('web_pages.view_event', raise_exception=True)
 def event_list(request):
-    events = Events.objects.all()
+    events = Events.objects.all().order_by('-updated_at')
     return render(request, 'coordination/event_list.html', {'events': events})
 
 @login_required
