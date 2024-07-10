@@ -60,17 +60,17 @@
                     <div class="string-op">
                         <div class="array-op">
                             <div class="list-op">
-                                <div class="dictionary-op">
+{#                                <div class="dictionary-op">#}
                                     {% if single_event.extra_details %}
                                         <div id="extra-details" class="event-extra-details">
-                                            <span id="extra-details-short">{{ single_event.extra_details|truncatewords:20 }}</span>
+                                            <span id="extra-details-short">{{ single_event.extra_details|truncatewords:20|safe }}</span>
                                             <span id="extra-details-full"
-                                                  style="display:none;">{{ single_event.extra_details }}</span>
+                                                  style="display:none;">{{ single_event.extra_details|safe }}</span>
                                             <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">more</a>
                                         </div>
                                     {% endif %}
 
-                                </div>
+{#                                </div>#}
                                 <div class="frame-div">
                                     <div class="vector-wrapper">
                                         <img
