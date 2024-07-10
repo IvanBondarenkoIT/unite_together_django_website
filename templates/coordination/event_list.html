@@ -11,6 +11,9 @@
             <th>Name</th>
             <th>Group</th>
             <th>Selected City</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Is active</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -30,6 +33,14 @@
             <td><a href="{% url 'participant_list' event.pk %}">{{ event.name }}</a></td>
             <td>{{ event.group }}</td>
             <td>{{ event.selected_city }}</td>
+            <td>{{ event.start_date }}</td>
+            <td>{{ event.end_date }}</td>
+            <td>{% if event.is_active %}
+                    <span>Active</span>
+                {% else %}
+                    <span>Closed</span>
+                {% endif %}
+            </td>
             <td>
                 <span class="element-actions">
                     <a class="btn btn-primary" href="{% url 'event_update' event.pk %}">Edit</a>
