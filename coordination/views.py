@@ -62,16 +62,18 @@ def participant_list(request, pk):
     for participant in participants:
         try:
             user_profile = UserProfile.objects.get(user=participant.user_owner)
+            owner_full_name = user_profile.user.first_name + " " + user_profile.user.last_name
             owner_uid = user_profile.person.unique_identifier
         except UserProfile.DoesNotExist:
-            owner_uid = None
+            owner_uid = ""
+            owner_full_name = ""
 
         participant_details.append({
             'pk': participant.pk,
             'unique_identifier': participant.copy_of_unique_identifier,
+            'full_name': participant.first_name + " " + participant.last_name,
             'owner_unique_identifier': owner_uid,
-            'first_name': participant.first_name,
-            'last_name': participant.last_name,
+            'owner_full_name': owner_full_name,
             'email': participant.user_owner.email,
             'gender': participant.gender,
             'document': participant.document_number,

@@ -8,7 +8,7 @@ from django.db.models.functions import Concat
 from persons.models import AssociatedPerson, Participant
 from web_pages.models import WebContentObject, Events, ObjectsGroup, City, Projects, ProjectGallery
 
-OBJECTS_ON_PAGE = 4
+OBJECTS_ON_PAGE = 6
 
 
 def events(request, group_slug=None):
