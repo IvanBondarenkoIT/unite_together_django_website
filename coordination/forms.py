@@ -8,6 +8,11 @@ class EventForm(forms.ModelForm):
         model = Events
         fields = '__all__'
 
+        widgets = {
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+
 
 class ParticipantForm(forms.ModelForm):
     class Meta:

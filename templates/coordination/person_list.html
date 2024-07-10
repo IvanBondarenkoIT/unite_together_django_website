@@ -7,9 +7,10 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Full Name</th>
+            <th>Date of birth</th>
             <th>Owner User №</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Owner Full Name</th>
             <th>Email</th>
 {#            <th>Status</th>#}
             <th>Gender</th>
@@ -24,9 +25,10 @@
     <tfoot>
         <tr>
             <th>ID</th>
+            <th>Full Name</th>
+            <th>Date of birth</th>
             <th>Owner User №</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Owner Full Name</th>
             <th>Email</th>
 {#            <th>Status</th>#}
             <th>Gender</th>
@@ -42,9 +44,10 @@
         {% for person in persons %}
         <tr>
             <td>{{ person.unique_identifier }}</td>
+            <td>{{ person.full_name }}</td>
+            <td>{{ person.date_of_birth }}</td>
             <th>{{ person.owner_unique_identifier }}</th>
-            <td>{{ person.first_name }}</td>
-            <td>{{ person.last_name }}</td>
+            <th>{{ person.owner_full_name }}</th>
             <td>{{ person.email }}</td>
 {#            <td>{{ person.status }}</td>#}
             <td>{{ person.gender }}</td>

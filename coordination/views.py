@@ -12,7 +12,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 @login_required
 # @permission_required('web_pages.view_event', raise_exception=True)
 def event_list(request):
-    events = Events.objects.all()
+    events = Events.objects.all().order_by('-updated_at')
     return render(request, 'coordination/event_list.html', {'events': events})
 
 @login_required
@@ -72,13 +72,17 @@ def participant_list(request, pk):
             'pk': participant.pk,
             'unique_identifier': participant.copy_of_unique_identifier,
             'full_name': participant.first_name + " " + participant.last_name,
+            'date_of_birth': participant.date_of_birth,
+
             'owner_unique_identifier': owner_uid,
             'owner_full_name': owner_full_name,
+
             'email': participant.user_owner.email,
             'gender': participant.gender,
             'document': participant.document_number,
             'citizenship': participant.citizenship,
             'city': participant.chosen_city,
+
             'ge_phone_number': participant.georgian_phone_number,
             'ua_phone_number': participant.ukrainian_phone_number,
         })
@@ -143,15 +147,20 @@ def person_list(request):
         try:
             user_profile = UserProfile.objects.get(user=person.user_owner)
             owner_uid = user_profile.person.unique_identifier
+            owner_full_name = user_profile.user.first_name + " " + user_profile.user.last_name
         except UserProfile.DoesNotExist:
-            owner_uid = None
+            owner_uid = ""
+            owner_full_name = ""
 
         person_details.append({
             'pk': person.pk,
             'unique_identifier': person.unique_identifier,
+            'full_name': person.first_name + ' ' + person.last_name,
+            'date_of_birth': person.date_of_birth,
+
             'owner_unique_identifier': owner_uid,
-            'first_name': person.first_name,
-            'last_name': person.last_name,
+            'owner_full_name': owner_full_name,
+
             'email': person.user_owner.email,
             # 'status': person.status,  # Assuming status is an attribute of AssociatedPerson
             'gender': person.gender,  # Assuming gender is an attribute of AssociatedPerson
