@@ -1,9 +1,12 @@
 from django import forms
+
+from unite_together_django_website.validators import CustomPasswordValidator
 from .models import Account
 
 
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(
+        label="Password",
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": "Enter Password",
@@ -43,4 +46,6 @@ class RegistrationForm(forms.ModelForm):
             raise forms.ValidationError(
                 "Password is not matched. Please try again."
             )
+
+        CustomPasswordValidator().validate(password)
 

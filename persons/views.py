@@ -1,8 +1,12 @@
+from django.core.exceptions import ValidationError
 from django.contrib import messages, auth
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404
+
+from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.decorators import login_required
 
+from unite_together_django_website.validators import CustomPasswordValidator
 from .models import UserProfile, AssociatedPerson, Participant
 from accounts.models import Account
 from .forms import AssociatedPersonForm, AssociatedPersonFormSet
@@ -121,17 +125,29 @@ def settings(request):
         user = Account.objects.get(username__exact=request.user.username)
 
         if new_password == confirm_password:
-            success = user.check_password(current_password)
-            if success:
-                user.set_password(new_password)
-                user.save()
-                messages.success(request, "Password updated succesfully.")
-                return redirect("change_password")
+            if user.check_password(current_password):
+                try:
+                    # Validate the new password using Django's built-in validators
+                    # validate_password(new_password, user)
+                    # If custom password validator is needed additionally
+                    password_validator = CustomPasswordValidator()
+                    password_validator.validate(new_password)
+
+                    user.set_password(new_password)
+                    user.save()
+                    messages.success(request, "Password updated successfully.")
+                    return redirect("settings")
+                except ValidationError as e:
+                    # Catching multiple error messages and adding them to the messages framework
+                    for error in e:
+                        messages.error(request, error)
+                    return redirect("settings")
             else:
-                messages.error(request, "Please enter correct password")
-                return redirect("change_password")
+                messages.error(request, "Please enter the correct current password")
+                return redirect("settings")
         else:
             messages.error(request, "Passwords do not match")
-            return redirect("change_password")
+            return redirect("settings")
+    else:
 
-    return render(request, 'persons/personal-account-settings.html')
+        return render(request, 'persons/personal-account-settings.html')
