@@ -19,6 +19,7 @@ class TypeOfDocument(models.Model):
 
 
 class Person(models.Model):
+
     class Gender(models.TextChoices):
         MALE = 'M', 'Male'
         FEMALE = 'F', 'Female'
@@ -50,7 +51,7 @@ class Person(models.Model):
     document_number = models.CharField(max_length=20, blank=True, null=True)
     # document_number = models.CharField(max_length=50, blank=True, null=True)
 
-    gender = models.CharField(max_length=3, choices=Gender.choices)
+    gender = models.CharField(max_length=3, choices=Gender.choices, blank=True, null=True)
 
     georgian_phone_number = models.CharField(max_length=50, blank=True, null=True)
     ukrainian_phone_number = models.CharField(max_length=50, blank=True, null=True)
@@ -85,11 +86,18 @@ class AssociatedPerson(Person):
 def set_unique_identifier(sender, instance, **kwargs):
     if not instance.unique_identifier:
         family_identifier = instance.user_owner.family_identifier
-        all_family = AssociatedPerson.objects.filter(user_owner=instance.user_owner)
-        person_number = all_family.count() + 1
-        # Check is exist AssociatedPerson with the same number
-        while all_family.get(unique_identifier=f'GE{family_identifier}-{person_number:02d}'):
-            person_number += 1
+
+        if AssociatedPerson.objects.filter(user_owner=instance.user_owner).exists():
+            all_family = AssociatedPerson.objects.filter(user_owner=instance.user_owner)
+            person_number = all_family.count() + 1
+            # Check is exist AssociatedPerson with the same number
+            while all_family.get(unique_identifier=f'GE{family_identifier}-{person_number:02d}'):
+                person_number += 1
+        else:
+            # Its first persson in this family
+            person_number = 1
+
+
 
         person_identifier = f'{person_number:02d}'
         instance.unique_identifier = f'GE{family_identifier}-{person_identifier}'

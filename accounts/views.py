@@ -25,41 +25,57 @@ def register(request):
             password = form.cleaned_data["password"]
             username = email
 
-            user = Account.objects.create_user(
-                first_name=first_name,
-                last_name=last_name,
-                email=email,
-                username=username,
-                password=password,
-            )
+            try:
 
-            user.phone_number = phone_number
-            user.save()
+                user = Account.objects.create_user(
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email,
+                    username=username,
+                    password=password,
+                )
+                user.phone_number = phone_number
+                user.save()
+                # Create new Person
+                default_document_type = TypeOfDocument.objects.first()
+                new_person = AssociatedPerson.objects.create(
+                    user_owner=user,
+                    # type_of_document=default_document_type,
+                    first_name=first_name,
+                    last_name=last_name,
+                    # georgian_phone_number=phone_number,
+                    # ukrainian_phone_number=phone_number
+                )
+                new_person.save()
+                # Create user Profile
+                profile = UserProfile.objects.create(
+                    user=user,
+                    person=new_person,
 
-            # Create user Profile
-            profile = UserProfile.objects.create(user=user)
-            default_document_type = TypeOfDocument.objects.first()
-            new_person = AssociatedPerson.object.create(user_owner=user, type_of_document=default_document_type)
-            new_person.save()
-            profile.person = new_person
-            profile.save()
+                )
+                profile.save()
 
+                messages.success(request, "Successfully created")
 
-            # USER ACTIVATION
-            current_site = get_current_site(request)
-            mail_subject = "Please activate your account"
-            message = render_to_string('accounts/account_verification_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': default_token_generator.make_token(user)
-            })
-            to_email = email
-            send_email = EmailMessage(mail_subject, message, to=[to_email])
-            send_email.send()
+                # USER ACTIVATION
+                current_site = get_current_site(request)
+                mail_subject = "Please activate your account"
+                message = render_to_string('accounts/account_verification_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': default_token_generator.make_token(user)
+                })
+                to_email = email
+                send_email = EmailMessage(mail_subject, message, to=[to_email])
+                send_email.send()
 
-            # messages.success(request, "Registration Successful")
-            return redirect(f"/accounts/login/?command=verification&email={email}")
+                # messages.success(request, "Registration Successful")
+                return redirect(f"/accounts/login/?command=verification&email={email}")
+
+            except Exception as e:
+                messages.error(request, e)
+                return redirect("register")
 
     else:
         form = RegistrationForm()
