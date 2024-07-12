@@ -1,38 +1,148 @@
 {% load static %}
-{#{% load custom_filters %}#}
+<style>
+    .carousel-container {
+        position: relative;
+        overflow: hidden;
+        max-width: 100%; /* Ensure the carousel does not exceed its container */
+    }
 
+    .carousel-example .carousel-item {
+        display: none; /* Hide all carousel items by default */
+        align-items: center;
+        height: 100%; /* Ensure each carousel item fills the height of the container */
+    }
 
-<div id="carouselExample" class="carousel slide">
+    .carousel-example .carousel-item.active {
+        display: flex; /* Display only the active carousel item */
+    }
 
-  <div class="carousel-inner">
-    {% for carousel_object in carousel_objects %}
+    .carousel-example .carousel-text {
+        flex: 1; /* Allocate full width to text container */
+        padding: 20px;
+    }
 
-        <div class="carousel-item{% if forloop.first %} active{% endif %}">
-            <a href="{{ carousel_object.get_url }}">
-            <img src="
-                {% if carousel_object.image_exists %}
-                	{{ carousel_object.image.url }}
-                {% else %}
-                    {% static 'img/placeholder-image1@2x.png' %}
-                {% endif %}
-                " class="d-block w-100" alt="">
-            </a>
+    .carousel-example .carousel-text h5 {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .carousel-example .carousel-text p {
+        font-size: 1rem;
+        color: #666;
+        /* Allow text to wrap */
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+        white-space: normal;
+        max-height: 200px; /* Limit the maximum height of the text */
+        overflow: hidden; /* Hide overflowing text */
+        text-overflow: ellipsis; /* Show ellipsis (...) for long text */
+    }
+
+    .carousel-example .carousel-image {
+        flex: 1;
+        overflow: hidden; /* Ensure image does not exceed its container */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add box-shadow for image */
+    }
+
+    .carousel-example img {
+        width: 100%;
+        height: auto;
+        object-fit: cover; /* Ensure the image covers its entire container */
+        border-radius: 10px;
+    }
+
+    /* Custom styles for carousel indicators */
+    .carousel-indicators {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        margin: 0 auto; /* Center horizontally */
+        z-index: 15;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        width: auto; /* Adjust width as needed */
+    }
+
+    .carousel-indicators .indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ccc; /* Inactive indicator color */
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+    }
+
+    .carousel-indicators .active {
+        background-color: #007bff; /* Active indicator color */
+    }
+</style>
+
+<div class="carousel-container">
+    <div id="carouselExample" class="carousel slide carousel-example" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for carousel_object in carousel_objects %}
+                <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                    <div class="d-flex">
+                        <div class="carousel-text">
+                            <h5>{{ carousel_object.title }}</h5>
+                            <p>{{ carousel_object.text }}</p>
+                            <a href="{{ carousel_object.get_url }}" class="btn btn-primary">Learn More</a>
+                        </div>
+                        <div class="carousel-image">
+                            <a href="{{ carousel_object.get_url }}">
+                                <img src="{% if carousel_object.image_exists %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" class="d-block" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+        <div class="carousel-indicators">
+            {% for carousel_object in carousel_objects %}
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="{{ forloop.counter0 }}" class="indicator{% if forloop.first %} active{% endif %}"></button>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
 </div>
-
 
 <!-- Add your carousel JavaScript here -->
 <script>
-    const carousel = new bootstrap.Carousel('#myCarousel')
+    document.addEventListener('DOMContentLoaded', function () {
+        const carousel = new bootstrap.Carousel(document.getElementById('carouselExample'), {
+            interval: 2000, // Slide interval in milliseconds
+            wrap: true // Whether the carousel should cycle continuously
+        });
+
+        // Handle indicator clicks
+        const indicators = document.querySelectorAll('.indicator');
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                carousel.to(index); // Move carousel to the corresponding slide index
+            });
+        });
+
+        // Update active indicator on slide change
+        carousel._element.addEventListener('slide.bs.carousel', function (event) {
+            const indicators = document.querySelectorAll('.indicator');
+            indicators.forEach((indicator, index) => {
+                indicator.classList.remove('active');
+                if (index === event.to) {
+                    indicator.classList.add('active');
+                }
+            });
+        });
+    });
 </script>
