@@ -154,7 +154,13 @@
                                                     src="{% static 'img/biometric-verification.svg' %}"
                                             />
                                         </div>
-                                        <div class="batumi">{{ object.selected_city }}</div>
+                                        <div class="batumi">
+                                            {% if object.selected_city %}
+                                                {{ object.selected_city }}
+                                            {% else %}
+                                                <span>Georgia</span>
+                                            {% endif %}
+                                        </div>
                                     </button>
                                     <div class="condition-splitter">
                                         <div class="header-item">
