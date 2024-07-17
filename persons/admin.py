@@ -10,7 +10,7 @@ from .models import AssociatedPerson, Participant, UserProfile, Person, TypeOfDo
 
 @admin.register(TypeOfDocument)
 class TypeOfDocumentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'regex')
+    list_display = ('name', 'hint', 'regex')
 
 
 # class PersonAdmin(admin.ModelAdmin):
