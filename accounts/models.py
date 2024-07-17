@@ -7,6 +7,8 @@ from django.dispatch import receiver
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+# from persons.models import AssociatedPerson
+
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, password=None):
@@ -60,6 +62,7 @@ class Account(AbstractBaseUser):
 
     # family_identifier = models.CharField(max_length=10, unique=True, blank=True, null=True, editable=False)
     family_identifier = models.CharField(max_length=10, blank=True, null=True)
+    associated_person = models.OneToOneField('persons.AssociatedPerson', on_delete=models.CASCADE, blank="True", null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']

@@ -62,7 +62,7 @@ class UserOwnerFilter(admin.SimpleListFilter):
 
 class AssociatedPersonAdmin(admin.ModelAdmin):
     list_display = (
-        'unique_identifier', 'user_owner', 'first_name', 'last_name', 'date_of_birth', 'citizenship', 'date_of_arrival',
+        'user_owner', 'unique_identifier', 'first_name', 'last_name', 'date_of_birth', 'citizenship', 'date_of_arrival',
         'type_of_document', 'document_number', 'gender', 'georgian_phone_number',
         'ukrainian_phone_number', 'country', 'chosen_city', 'address_line', 'created_at',
         'updated_at', 'is_active',
