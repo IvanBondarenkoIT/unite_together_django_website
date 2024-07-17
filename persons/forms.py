@@ -35,11 +35,13 @@ class AssociatedPersonForm(forms.ModelForm):
             try:
                 type_of_document_id = self.data.get('type_of_document')
                 type_of_document = TypeOfDocument.objects.get(id=type_of_document_id)
-                self.fields['document_number'].help_text = type_of_document.hint
+                if type_of_document:
+                    self.fields['document_number'].help_text = type_of_document.hint
             except (ValueError, TypeOfDocument.DoesNotExist):
                 pass
         elif self.instance.pk:
-            self.fields['document_number'].help_text = self.instance.type_of_document.hint
+            if self.instance.type_of_document:
+                self.fields['document_number'].help_text = self.instance.type_of_document.hint
 
     class Meta:
         model = AssociatedPerson
