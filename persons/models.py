@@ -88,18 +88,29 @@ def set_unique_identifier(sender, instance, **kwargs):
         family_identifier = instance.user_owner.family_identifier
 
         if AssociatedPerson.objects.filter(user_owner=instance.user_owner).exists():
-            all_family = AssociatedPerson.objects.filter(user_owner=instance.user_owner)
-            person_number = all_family.count() + 1
-            # Check is exist AssociatedPerson with the same number
-            while all_family.get(unique_identifier=f'GE{family_identifier}-{person_number:02d}'):
+
+            all_family = AssociatedPerson.objects.filter(user_owner=instance.user_owner).order_by('unique_identifier')
+            print(f"TEST  {[i.unique_identifier for i in list(all_family)]}")
+            last_of_all_family_unique_identifier = [i.unique_identifier for i in list(all_family)][-1::]
+            print(last_of_all_family_unique_identifier)
+            person_number = int(last_of_all_family_unique_identifier[0][-2::])
+            print(person_number)
+            # person_number = all_family.count() + 1
+            person_number += 1
+            # Check is exist AssociatedPerson with the same number and try +1 to unique_identifier
+            try:
+                all_family.get(unique_identifier=f'GE{family_identifier}-{person_number:02d}')
                 person_number += 1
+            except:
+                pass
+
         else:
             # Its first persson in this family
             person_number = 1
 
-
-
+        # Reformat the  person_number
         person_identifier = f'{person_number:02d}'
+        # Create new unique_identifier formated as example GE00001-01
         instance.unique_identifier = f'GE{family_identifier}-{person_identifier}'
 
 

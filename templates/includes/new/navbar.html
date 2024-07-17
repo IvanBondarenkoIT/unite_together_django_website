@@ -1,11 +1,10 @@
 {% load static %}
 
+
 <style>
     .ut-navbar {
         justify-content: space-between;
         background-color: var(--neutral-background);
-        /* background-color: black; */
-        /* ниже перечислен стандартный набор до оптимизаций от navbar1 */
         align-self: stretch;
         display: flex;
         flex-direction: row;
@@ -35,13 +34,11 @@
     }
 
     .ut-navbar-logo-wrapper {
-        /* flex: 1; */
         display: flex;
         flex-direction: row;
         align-items: flex-end;
         justify-content: space-between;
         max-width: 100%;
-        /* gap: var(--gap-xl); */
     }
 
     .right-part-main {
@@ -56,7 +53,6 @@
 
     .right-part-wrapper-main {
         flex-grow: initial;
-        /* width: 484px; */
         flex-direction: column;
         padding: 0;
         box-sizing: border-box;
@@ -73,10 +69,6 @@
         margin-right: 5px;
     }
 
-
-    /* TOP MENU ITEMS */
-
-    /* it IS used (but that is not visible to IDE */
     .ut-top-menu-text {
         position: relative;
         font-weight: 600;
@@ -84,17 +76,15 @@
         min-width: 84px;
         white-space: nowrap;
         z-index: 1;
-        text-decoration: none; /* Remove underline */
+        text-decoration: none;
         color: black;
         padding: 10px;
     }
 
-    /* it IS used (but that is not visible to IDE */
     .ut-top-menu-text:hover {
         color: var(--color-cornflowerblue-100);
     }
 
-    /* it IS used (but that is not visible to IDE */
     .ut-top-menu-text-active {
         position: relative;
         font-weight: 600;
@@ -102,43 +92,124 @@
         min-width: 84px;
         white-space: nowrap;
         z-index: 1;
-        text-decoration: none; /* Remove underline */
-        background-color: var(--color-royalblue); /* Цвет фона активного пункта меню */
+        text-decoration: none;
+        background-color: var(--color-royalblue);
         color: white;
-        border-radius: var(--br-3xs); /* Задаем радиус скругления углов */
-        padding: 10px 20px; /* Подбираем подходящий внутренний отступ для красивого вида */
+        border-radius: var(--br-3xs);
+        padding: 10px 20px;
     }
 
     .ut-top-menu-div {
         display: flex;
         align-items: flex-start;
-        /* flex-direction: column; */
-        /* justify-content: flex-start; */
-        /* padding: var(--padding-10xs) 0 0; */
     }
 
     .ut-top-menu-li {
         display: inline-block;
     }
 
+    .signup-button {
+        width: 198px;
+        min-width: 198px;
+        padding: 10px 20px;
+        background-color: white;
+        border: 2px solid var(--color-royalblue);
+        border-radius: var(--br-3xs);
+        text-decoration: none;
+        color: var(--color-royalblue);
+        display: flex;
+        cursor: pointer;
+    }
+
+    .signup-button .text {
+        font-size: var(--text-regular-semi-bold-size);
+        font-weight: 500;
+        color: var(--color-darkslategray-100);
+        text-decoration: none;
+        position: relative;
+    }
+
+    .signup-button .ut-icon {
+        width: 14px;
+        height: 15.5px;
+        position: inherit;
+        transform: translateY(4px);
+    }
+
+    .donate-button {
+        width: 150px;
+        min-width: 150px;
+        padding: 11px 27px;
+        background-color: var(--color-royalblue);
+        border-radius: var(--br-3xs);
+        text-decoration: none;
+        color: white;
+        border: none;
+        display: flex;
+        cursor: pointer;
+    }
+
+    .donate-button .ut-text {
+        font-size: var(--text-regular-semi-bold-size);
+        font-weight: 600;
+    }
+
+    .donate-button .ut-icon {
+        height: 25px;
+        width: 25px;
+        position: inherit;
+    }
+
+    .ut-button-w-icon {
+        justify-content: space-between;
+        display: flex;
+        flex: max-content;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: var(--br-3xs);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 100;
+        min-width: 160px;
+        overflow: hidden;
+    }
+
+    .dropdown-menu a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
 </style>
 
 
 {% if user.id is None %}
     <nav class="ut-navbar shadow-sm">
-
         <div class="ut-navbar-wrapper">
             <div class="ut-navbar-logo-wrapper">
                 <a class="logo-ut2" href="{% url 'home' %}">
                     <img
-                            class="main-logo"
-                            loading="lazy"
-                            alt=""
-                            src="{% static 'img_f/unite-together.svg' %}"
+                        class="main-logo"
+                        loading="lazy"
+                        alt=""
+                        src="{% static 'img_f/unite-together.svg' %}"
                     />
                 </a>
             </div>
-
             <div class="connecter-inner">
                 <div class="frame-parent1">
                     <ul class="horizontal-menu">
@@ -176,98 +247,20 @@
                             <div class="language-ua1">UA</div>
                             <div class="arrow-wrapper">
                                 <img
-                                        class="arrow-icon4"
-                                        loading="lazy"
-                                        alt=""
-                                        src="{% static 'img/arrow1.svg' %}"
+                                    class="arrow-icon4"
+                                    loading="lazy"
+                                    alt=""
+                                    src="{% static 'img/arrow1.svg' %}"
                                 />
                             </div>
                         </div>
                     </div>
-                    <!--
-                    <div class="dividing-line-wrapper">
-                        <img
-                                class="dividing-line-icon1"
-                                loading="lazy"
-                                alt=""
-                                src="{% static 'img/dividingline.svg' %}"
-                        />
-                    </div>
-                    -->
-
-
-                    <style>
-
-                        .signup-button {
-                            width: 198px;
-                            min-width: 198px;
-                            padding: 10px 20px;
-                            background-color: white; /* White background to match the screenshot */
-                            border: 2px solid var(--color-royalblue); /* Blue border */
-                            border-radius: var(--br-3xs);
-                            text-decoration: none;
-                            color: var(--color-royalblue); /* Blue text color */
-                            display: flex;
-                            cursor: pointer;
-
-                        }
-
-                        .signup-button .text {
-                            font-size: var(--text-regular-semi-bold-size);
-                            font-weight: 500;
-                            color: var(--color-darkslategray-100);
-                            text-decoration: none;
-                            position: relative;
-                        }
-
-                        .signup-button .ut-icon {
-                            width: 14px;
-                            height: 15.5px;
-                            position: inherit;
-                            transform: translateY(4px);
-                            /* color: var(--color-royalblue);  Blue icon color */
-                        }
-
-
-                        .donate-button {
-                            width: 150px;
-                            min-width: 150px;
-                            padding: 11px 27px;
-                            background-color: var(--color-royalblue);
-                            border-radius: var(--br-3xs);
-                            text-decoration: none;
-                            color: white;
-                            border: none;
-                            display: flex;
-                            cursor: pointer;
-                        }
-
-                        .donate-button .ut-text {
-                            font-size: var(--text-regular-semi-bold-size);
-                            font-weight: 600;
-                        }
-
-                        .donate-button .ut-icon {
-                            height: 25px;
-                            width: 25px;
-                            position: inherit;
-                        }
-
-                        .ut-button-w-icon {
-                            justify-content: space-between;
-                            display: flex;
-                            flex: max-content;
-                        }
-
-
-                    </style>
 
                     <a class="signup-button" href="{% url 'login' %}">
                         <div class="ut-button-w-icon">
                             <div style="display: flex;">
                                 <img class="ut-icon" alt="" src="{% static 'img/usericon.svg' %}"/>
                             </div>
-                            <!-- Icon for sign up button -->
                             <span class="text">Log In / Sign Up</span>
                         </div>
                     </a>
@@ -280,22 +273,18 @@
                             </div>
                         </div>
                     </a>
-
-
                 </div>
             </div>
-
         </div>
-        </nav>
+    </nav>
 {% else %}
     <header class="navbaraccount2">
         <a class="logo-ut12" href="{% url 'home' %}" style="color: black">
-                    <img
-                    class="logo-flag-ut-icon24"
-                            alt=""
-                    src="{% static 'img/logoflagut3.svg' %}"
-                    />
-
+            <img
+                class="logo-flag-ut-icon24"
+                alt=""
+                src="{% static 'img/logoflagut3.svg' %}"
+            />
             <div class="logo-text-ut24">
                 <div class="group72">
                     <div class="group73">
@@ -318,75 +307,72 @@
             </div>
         </div>
         <div class="navbaraccount-inner2">
-          <div class="language-picker-parent">
-            <div class="language-picker">
-              <div class="languages12">
-                <div class="u-a-language">
-                  <div class="flag-ua12">
-                    <div class="u-a-flag-colors"></div>
-                    <div class="u-a-flag-colors1"></div>
-                  </div>
-                </div>
-                <div class="language-ua12">UA</div>
-                <div class="arrow-wrapper8">
+            <div class="language-picker-parent">
+                <div class="language-picker">
+                    <div class="languages12">
+                        <div class="u-a-language">
+                            <div class="flag-ua12">
+                                <div class="u-a-flag-colors"></div>
+                                <div class="u-a-flag-colors1"></div>
+                            </div>
+                        </div>
+                        <div class="language-ua12">UA</div>
+                        <div class="arrow-wrapper8">
                             <img class="arrow-icon12" alt="" src="{% static 'img/arrow.svg' %}"/>
-                </div>
-              </div>
-            </div>
-            <div class="language-divider">
-              <img
-                class="dividing-line-icon12"
-                alt=""
-                src="{% static 'img/dividingline1.svg' %}"
-              />
-            </div>
-            <div class="frame-parent65">
-                    <img
-                class="frame-child29"
-                alt=""
-                src="{% static 'img/group-1000001845.svg' %}"
-                    />
-
-              <div class="ellipse-parent2">
-                <div class="frame-child30"></div>
-                <a class="icon-wrapper50" href="{% url "event_list" %}">
-                  <div class="width-change-size-here28">
-                    <div class="ignore136"></div>
-                    <div class="ignore137"></div>
-                  </div>
-                  <div class="icon-wrapper-h28">
-                    <div class="height-change-size-here28">
-                      <div class="ignore138"></div>
-                      <div class="ignore139"></div>
+                        </div>
                     </div>
+                </div>
+                <div class="language-divider">
+                    <img
+                        class="dividing-line-icon12"
+                        alt=""
+                        src="{% static 'img/dividingline1.svg' %}"
+                    />
+                </div>
+                <div class="frame-parent65">
+                    <img
+                        class="frame-child29"
+                        alt=""
+                        src="{% static 'img/group-1000001845.svg' %}"
+                    />
+                    <div class="ellipse-parent2">
+                        <div class="frame-child30"></div>
+                        <a class="icon-wrapper50" href="{% url 'event_list' %}">
+                            <div class="width-change-size-here28">
+                                <div class="ignore136"></div>
+                                <div class="ignore137"></div>
+                            </div>
+                            <div class="icon-wrapper-h28">
+                                <div class="height-change-size-here28">
+                                    <div class="ignore138"></div>
+                                    <div class="ignore139"></div>
+                                </div>
                                 <img
-                      class="icon-wrapper51"
-                      alt=""
-                      src="{% static 'img/iconwrapper@2x.png' %}"
+                                    class="icon-wrapper51"
+                                    alt=""
+                                    src="{% static 'img/iconwrapper@2x.png' %}"
                                 />
-                  </div>
-                </a>
-              </div>
-              <div class="avatar6">
-
-                  <a href="{% url 'dashboard' %}"><img
-
-                  class="avatar-placeholder-change-i2"
-                  alt=""
-                  src="{% static 'img/avatarplaceholder--change-image-here@2x.png' %}"
-                        />
-
-                        <img
-                                class="aspect-ratio-keeper-addition2"
+                            </div>
+                        </a>
+                    </div>
+                    <div class="avatar6 dropdown">
+                        <a href="javascript:void(0);">
+                            <img
+                                class="avatar-placeholder-change-i2"
                                 alt=""
-                                src="{% static 'img/aspect-ratio-keeper--additionally-45-rotated-auto-layout@2x.png' %}"
-                        />
-                  </a>
-
-              </div>
-
+                                src="{% static 'img/avatarplaceholder--change-image-here@2x.png' %}"
+                            />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>
+                            <a href="{% url 'settings' %}">{{ user.email }}</a>
+                            <a href="{% url 'person_list' %}">Family persons</a>
+                            <a href="{% url 'registered_events' %}">Events & Projects</a>
+                            <a href="{% url 'logout' %}">Logout</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
     </header>
 {% endif %}
