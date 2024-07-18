@@ -1,6 +1,7 @@
 import datetime
 import openpyxl
 from django.http import HttpResponse
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EventForm, ParticipantForm, PersonForm
@@ -71,7 +72,7 @@ def participant_list(request, pk):
         participant_details.append({
             'pk': participant.pk,
             'unique_identifier': participant.copy_of_unique_identifier,
-            'full_name': participant.first_name + " " + participant.last_name,
+            'full_name': str(participant.first_name) + " " + str(participant.last_name),
             'date_of_birth': participant.date_of_birth,
 
             'owner_unique_identifier': owner_uid,
@@ -116,7 +117,16 @@ def participant_update(request, pk):
         if form.is_valid():
             participant = form.save()
             event_pk = participant.registered_on.pk  # Assuming 'event' is the ForeignKey field in the Participant model
+            messages.success(request, 'Participant updated successfully!')
             return redirect('participant_list', pk=event_pk)
+        else:
+            # Extract and format errors from the form
+            error_messages = []
+            for field, errors in form.errors.items():
+                for error in errors:
+                    error_messages.append(f"{field}: {error}")
+            formatted_errors = " ".join(error_messages)
+            messages.error(request, f'Participant update failed!\n {formatted_errors}')
     else:
         form = ParticipantForm(instance=participant)
     return render(request, 'coordination/participant_form.html', {'form': form})
@@ -147,7 +157,7 @@ def person_list(request):
         try:
             user_profile = UserProfile.objects.get(user=person.user_owner)
             owner_uid = user_profile.person.unique_identifier
-            owner_full_name = user_profile.user.first_name + " " + user_profile.user.last_name
+            owner_full_name = str(user_profile.user.first_name) + " " + str(user_profile.user.last_name)
         except UserProfile.DoesNotExist:
             owner_uid = ""
             owner_full_name = ""
@@ -155,7 +165,7 @@ def person_list(request):
         person_details.append({
             'pk': person.pk,
             'unique_identifier': person.unique_identifier,
-            'full_name': person.first_name + ' ' + person.last_name,
+            'full_name': str(person.first_name) + ' ' + str(person.last_name),
             'date_of_birth': person.date_of_birth,
 
             'owner_unique_identifier': owner_uid,
@@ -181,6 +191,7 @@ def person_create(request):
         if form.is_valid():
             form.save()
             return redirect('person_list')
+
     else:
         form = PersonForm()
     return render(request, 'coordination/person_form.html', {'form': form})
@@ -192,8 +203,17 @@ def person_update(request, pk):
     if request.method == 'POST':
         form = PersonForm(request.POST, request.FILES, instance=person)
         if form.is_valid():
+            messages.success(request, 'Person updated successfully!')
             form.save()
-            return redirect('person_list')
+            return redirect('coordination_person_list')
+        else:
+            # Extract and format errors from the form
+            error_messages = []
+            for field, errors in form.errors.items():
+                for error in errors:
+                    error_messages.append(f"{field}: {error}")
+            formatted_errors = " ".join(error_messages)
+            messages.error(request, f'Person update failed!\n {formatted_errors}')
     else:
         form = PersonForm(instance=person)
     return render(request, 'coordination/person_form.html', {'form': form})
