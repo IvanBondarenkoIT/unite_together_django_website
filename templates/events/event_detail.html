@@ -1,166 +1,116 @@
 {% extends "base.html" %}
-
 {% load static %}
 
 {% block content %}
 
-    <div class="events-detail" data-animate-on-scroll>
-        <section class="sec-detail">
-            <div class="bg-detail"></div>
-            <div class="aside-box">
-                <div class="iterative-processor">
-                    <div class="database-connection">
-                        <div class="error-handler">
-                            <a class="sport1" href="{% url 'events' %}">All</a>
-                            {% for category in links %}
-                                <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
-                            {% endfor %}
-                        </div>
+<div class="events-detail" data-animate-on-scroll>
+    <section class="sec-detail">
+        <div class="bg-detail"></div>
+        <div class="aside-box">
+            <div class="iterative-processor">
+                <div class="database-connection">
+                    <div class="error-handler">
+                        <a class="sport1" href="{% url 'events' %}">All</a>
+                        {% for category in links %}
+                            <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-            <div class="while-loop">
-                <img
-                        class="baner-image-icon"
-                        loading="lazy"
-                        alt=""
-                        src="
-                        {% if single_event.image %} {{ single_event.image.url }}
-                        {% else %} {% static '/img/placeholder-image1%402x.png' %}
-                        {% endif %}"/>
+        </div>
+        <div class="while-loop">
+            <img class="baner-image-icon" loading="lazy" alt="" src="{% if single_event.image %} {{ single_event.image.url }} {% else %} {% static '/img/placeholder-image1%402x.png' %} {% endif %}"/>
 
-
-                <div class="about-events">
-                    <div class="bg"></div>
-                    <div class="variable-holder">
-                        <div class="constant-holder">
-                            <h1 class="autism-speaks-to">
-                                {{ single_event.title }}
-                            </h1>
-                            <div class="age-3-16-parent">
-                                <div class="age-3-16">
-                                    <b>Age</b>
-                                    <span class="span">: {{ single_event.start_age }}-{{ single_event.end_age }}</span>
-                                </div>
-                                <div class="free-classes-of-container">
-                                    <p class="free-classes-of">
-                                        {{ single_event.text|safe }}
-                                    </p>
-                                </div>
+            <div class="about-events">
+                <div class="bg"></div>
+                <div class="variable-holder">
+                    <div class="constant-holder">
+                        <h1 class="autism-speaks-to">{{ single_event.title }}</h1>
+                        <div class="age-3-16-parent">
+                            <div class="age-3-16">
+                                <b>Age</b>
+                                <span class="span">: {{ single_event.start_age }}-{{ single_event.end_age }}</span>
+                            </div>
+                            <div class="free-classes-of-container">
+                                <p class="free-classes-of">{{ single_event.text|safe }}</p>
                             </div>
                         </div>
                     </div>
-                    <img
-                            class="dec-line-3-icon"
-                            loading="lazy"
-                            alt=""
-                            src="{% static 'img/decline3.svg' %}"
-                    />
+                </div>
+                <img class="dec-line-3-icon" loading="lazy" alt="" src="{% static 'img/decline3.svg' %}" />
 
-                    <div class="string-op">
-                        <div class="array-op">
-                            <div class="list-op">
-{#                                <div class="dictionary-op">#}
-                                    {% if single_event.extra_details %}
-                                        <div id="extra-details" class="event-extra-details">
-                                            <span id="extra-details-short">{{ single_event.extra_details|truncatewords:20|safe }}</span>
-                                            <span id="extra-details-full"
-                                                  style="display:none;">{{ single_event.extra_details|safe }}</span>
-                                            <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">more</a>
-                                        </div>
+                <div class="string-op">
+                    <div class="array-op">
+                        <div class="list-op">
+                            {% if single_event.extra_details %}
+                                <div id="extra-details" class="event-extra-details">
+                                    <span id="extra-details-short">{{ single_event.extra_details|truncatewords:20|safe }}</span>
+                                    <span id="extra-details-full" style="display:none;">{{ single_event.extra_details|safe }}</span>
+                                    <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">more</a>
+                                </div>
+                            {% endif %}
+
+                            <div class="frame-div">
+                                <div class="vector-wrapper">
+                                    <img class="vector-icon" loading="lazy" alt="" src="{% static 'img/vector.svg' %}" />
+                                </div>
+                                <div class="batumi-127-luka">
+                                    {% if single_event.selected_city %}
+                                        {{ single_event.selected_city }}
                                     {% endif %}
 
-{#                                </div>#}
-                                <div class="frame-div">
-                                    <div class="vector-wrapper">
-                                        <img
-                                                class="vector-icon"
-                                                loading="lazy"
-                                                alt=""
-                                                src="{% static 'img/vector.svg' %}"
-                                        />
-                                    </div>
-                                    <div class="batumi-127-luka">
-                                        {% if single_event.selected_city %}
-                                            {{ single_event.selected_city }}
-                                        {% endif %}
-
-                                        {% if single_event.address %}
-                                        	{{ single_event.address }}
-                                        {% endif %}
-                                    </div>
+                                    {% if single_event.address %}
+                                        {{ single_event.address }}
+                                    {% endif %}
                                 </div>
-                                {#                                    <form id="personForm" method="POST" action="{% url 'event_detail' %}">#}
-                                {% if single_event.is_active %}
-                                    <form id="personForm" method="POST">
-                                        {% csrf_token %}
-                                        {% if request.user.is_authenticated %}
-{#                                            #}
-{#                                            {% if persons %}#}
-                                            <select name="selected-person">
-
-                                            	{% for person in persons %}
-                                                    <option value="{{ person.id }}">{{ person }}</option>
-                                                {% endfor %}
-
-
-                                            </select>
-{#                                            {% endif %}#}
-                                            <br>
-                                            <br>
-                                            <button type="submit" class="button-registration">
-                                                <div class="registration">Registration</div>
-                                                <div class="vector-container">
-                                                    <img class="vector-icon1" alt=""
-                                                         src="{% static 'img/vector-1.svg' %}"/>
-                                                </div>
-                                            </button>
-
-
-
-
-                                        {% else %}
-                                            <a class="button-registration" href="{% url 'login' %}">
-                                                <div class="registration">Registration</div>
-                                                <div class="vector-container">
-                                                    <img
-                                                            class="vector-icon1"
-                                                            alt=""
-                                                            src="{% static 'img/vector-1.svg' %}"
-                                                    />
-                                                </div>
-                                            </a>
-                                        {% endif %}
-                                    </form>
-                                {% else %}
-                                    <button class="button-join">
-                                        <div class="join-parent">
-                                            <div class="join">Closed</div>
-                                            <div class="vector-container">
-                                                <img
-                                                        class="vector-icon1"
-                                                        alt=""
-                                                        src="{% static 'img/vector-1.svg' %}"
-                                                />
-                                            </div>
-                                        </div>
-                                    </button>
-                                {% endif %}
-
                             </div>
 
+                            {% if single_event.is_active %}
+                                <form id="personForm" method="POST">
+                                    {% csrf_token %}
+                                    {% if request.user.is_authenticated %}
+                                        <div class="checkbox-list">
+                                            {% for person in persons %}
+                                                <div class="checkbox-item">
+                                                    <input type="checkbox" name="selected-persons" value="{{ person.id }}" id="person-{{ person.id }}">
+                                                    <label for="person-{{ person.id }}">{{ person }}</label>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <button type="submit" class="button-registration">
+                                            <div class="registration">Registration</div>
+                                            <div class="vector-container">
+                                                <img class="vector-icon1" alt="" src="{% static 'img/vector-1.svg' %}" />
+                                            </div>
+                                        </button>
+                                    {% else %}
+                                        <a class="button-registration" href="{% url 'login' %}">
+                                            <div class="registration">Registration</div>
+                                            <div class="vector-container">
+                                                <img class="vector-icon1" alt="" src="{% static 'img/vector-1.svg' %}" />
+                                            </div>
+                                        </a>
+                                    {% endif %}
+                                </form>
+                            {% else %}
+                                <button class="button-join">
+                                    <div class="join-parent">
+                                        <div class="join">Closed</div>
+                                        <div class="vector-container">
+                                            <img class="vector-icon1" alt="" src="{% static 'img/vector-1.svg' %}" />
+                                        </div>
+                                    </div>
+                                </button>
+                            {% endif %}
                         </div>
-
                     </div>
-
                 </div>
             </div>
-        </section>
-
-    </div>
-
-
-
+        </div>
+    </section>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -217,6 +167,13 @@
         line-height: 1.5;
         max-width: 100%;
         overflow-wrap: anywhere;
+    }
+    .checkbox-list {
+        display: flex;
+        flex-direction: column;
+    }
+    .checkbox-item {
+        margin-bottom: 10px;
     }
 </style>
 
