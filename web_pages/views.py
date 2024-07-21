@@ -125,14 +125,26 @@ def event_detail(request, group_slug=None, event_slug=None):
     if request.user.is_authenticated:
         persons = AssociatedPerson.objects.filter(user_owner=request.user).order_by('unique_identifier')
 
+
         if request.method == "POST":
             selected_person_ids = request.POST.getlist('selected-persons')
             if selected_person_ids:
                 for person_id in selected_person_ids:
                     try:
                         selected_person = AssociatedPerson.objects.get(id=person_id, user_owner=request.user)
-                        new_participant = create_participant(selected_person, single_event)
-                        messages.success(request, f"Person {new_participant.first_name} {new_participant.last_name} registered for {single_event.name}")
+
+                        total_participants_in_event = Participant.objects.filter(registered_on=single_event).count()
+                        if single_event.max_participants >= total_participants_in_event:
+                            new_participant = create_participant(selected_person, single_event)
+                            messages.success(request, f"Person {new_participant.first_name} {new_participant.last_name} registered for {single_event.name}")
+                        else:  # overflowing
+                            messages.error(request,
+                                           f"Person {selected_person.first_name} {selected_person.last_name} is not registered."
+                                           f" Maximum number of participants is already registered!")
+                            single_event.is_active = False
+                            single_event.save()
+                            break
+
                     except AssociatedPerson.DoesNotExist:
                         messages.error(request, "Person not found or not owned by the user.")
                 return redirect('registered_events')  # Replace with your success handling

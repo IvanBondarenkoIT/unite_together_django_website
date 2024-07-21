@@ -137,7 +137,7 @@ def participant_delete(request, event_pk, pk):
     participant = get_object_or_404(Participant, pk=pk)
     if request.method == 'POST':
         participant.delete()
-        return redirect('participant_list')
+        return redirect('participant_list', pk=event_pk)
 
     context = {
         'object': participant,
