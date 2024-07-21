@@ -26,7 +26,11 @@ def event_create(request):
             return redirect('event_list')
     else:
         form = EventForm()
+
+    messages.success(request, 'Event Created')
+
     return render(request, 'coordination/event_form.html', {'form': form})
+
 
 @login_required
 # @permission_required('web_pages.change_event', raise_exception=True)
@@ -36,10 +40,20 @@ def event_update(request, pk):
         form = EventForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Event updated')
             return redirect('event_list')
+        else:
+            # Extract and format errors from the form
+            error_messages = []
+            for field, errors in form.errors.items():
+                for error in errors:
+                    error_messages.append(f"{field}: {error}")
+            formatted_errors = " ".join(error_messages)
+            messages.error(request, f'Event update failed!\n {formatted_errors}')
     else:
         form = EventForm(instance=event)
     return render(request, 'coordination/event_form.html', {'form': form})
+
 
 @login_required
 # @permission_required('web_pages.delete_event', raise_exception=True)
@@ -47,8 +61,10 @@ def event_delete(request, pk):
     event = get_object_or_404(Events, pk=pk)
     if request.method == 'POST':
         event.delete()
+        messages.success(request, 'Event deleted')
         return redirect('event_list')
     return render(request, 'coordination/event_confirm_delete.html', {'object': event})
+
 
 @login_required
 def participant_list(request, pk):
@@ -95,6 +111,7 @@ def participant_list(request, pk):
 
     return render(request, 'coordination/participant_list.html', context=context)
 
+
 @login_required
 # @permission_required('web_pages.add_participant', raise_exception=True)
 def participant_create(request):
@@ -103,10 +120,21 @@ def participant_create(request):
         if form.is_valid():
             participant = form.save()
             event_pk = participant.registered_on.pk  # Assuming 'event' is the ForeignKey field in the Participant model
+
+            messages.success(request, 'Participant created successfully!')
             return redirect('participant_list', pk=event_pk)
+        else:
+            # Extract and format errors from the form
+            error_messages = []
+            for field, errors in form.errors.items():
+                for error in errors:
+                    error_messages.append(f"{field}: {error}")
+            formatted_errors = " ".join(error_messages)
+            messages.error(request, f'Participant create failed!\n {formatted_errors}')
     else:
         form = ParticipantForm()
     return render(request, 'coordination/participant_form.html', {'form': form})
+
 
 @login_required
 # @permission_required('web_pages.change_participant', raise_exception=True)
@@ -137,7 +165,8 @@ def participant_delete(request, event_pk, pk):
     participant = get_object_or_404(Participant, pk=pk)
     if request.method == 'POST':
         participant.delete()
-        return redirect('participant_list')
+        messages.success(request, 'Participant deleted successfully')
+        return redirect('participant_list', pk=event_pk)
 
     context = {
         'object': participant,
@@ -190,6 +219,7 @@ def person_create(request):
         form = PersonForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Person created successfully!')
             return redirect('person_list')
 
     else:

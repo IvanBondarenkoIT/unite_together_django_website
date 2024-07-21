@@ -69,6 +69,8 @@ class Events(WebContentObject):
     start_date = models.DateField(blank=True,null=True)
     end_date = models.DateField(blank=True,null=True)
 
+    max_participants = models.IntegerField(blank=True, null=True, default=0)
+
     def __str__(self):
         return f"Event - {self.name}"
 
