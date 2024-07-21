@@ -53,7 +53,7 @@ def events(request, group_slug=None):
     # Pilippio update
     all_objects = Events.objects.filter(**kw_args).select_related('selected_city').annotate(
         pre_computed_url=Concat(F('group__slug'), Value('/'), F('slug'), output_field=CharField())
-    ).order_by("id")
+    ).order_by("-is_active", "start_date")
     # all_objects = Events.objects.all().filter(**kw_args).order_by("id").select_related('group__page')
 
     # Pagination functional
