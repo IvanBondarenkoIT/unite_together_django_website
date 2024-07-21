@@ -123,7 +123,9 @@ def event_detail(request, group_slug=None, event_slug=None):
         return redirect('some_error_page')  # Replace with your error handling
 
     if request.user.is_authenticated:
-        persons = AssociatedPerson.objects.filter(user_owner=request.user).order_by('unique_identifier')
+        # included is_approved - filter
+        # persons = AssociatedPerson.objects.filter(user_owner=request.user).order_by('unique_identifier')
+        persons = AssociatedPerson.objects.filter(user_owner=request.user, is_approved=True).order_by('unique_identifier')
 
 
         if request.method == "POST":
@@ -132,7 +134,6 @@ def event_detail(request, group_slug=None, event_slug=None):
                 for person_id in selected_person_ids:
                     try:
                         selected_person = AssociatedPerson.objects.get(id=person_id, user_owner=request.user)
-
                         total_participants_in_event = Participant.objects.filter(registered_on=single_event).count()
                         if single_event.max_participants >= total_participants_in_event:
                             new_participant = create_participant(selected_person, single_event)
