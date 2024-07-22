@@ -115,18 +115,20 @@ def create_participant(selected_associated_person: AssociatedPerson, selected_ev
     return new_participant
 
 
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import Events, AssociatedPerson, Participant
+from .utils import create_participant  # Assuming you have a function to create a participant
+
 def event_detail(request, group_slug=None, event_slug=None):
     try:
-        single_event = Events.objects.get(group__slug=group_slug, slug=event_slug)
+        single_event = Events.objects.select_related('group').get(group__slug=group_slug, slug=event_slug)
     except Events.DoesNotExist:
         messages.error(request, "Event not found.")
-        return redirect('some_error_page')  # Replace with your error handling
+        return redirect('some_error_page')  # Replace with your error handling page
 
     if request.user.is_authenticated:
-        # included is_approved - filter
-        # persons = AssociatedPerson.objects.filter(user_owner=request.user).order_by('unique_identifier')
         persons = AssociatedPerson.objects.filter(user_owner=request.user, is_approved=True).order_by('unique_identifier')
-
 
         if request.method == "POST":
             selected_person_ids = request.POST.getlist('selected-persons')
@@ -135,20 +137,20 @@ def event_detail(request, group_slug=None, event_slug=None):
                     try:
                         selected_person = AssociatedPerson.objects.get(id=person_id, user_owner=request.user)
                         total_participants_in_event = Participant.objects.filter(registered_on=single_event).count()
-                        if single_event.max_participants >= total_participants_in_event:
-                            new_participant = create_participant(selected_person, single_event)
-                            messages.success(request, f"Person {new_participant.first_name} {new_participant.last_name} registered for {single_event.name}")
-                        else:  # overflowing
-                            messages.error(request,
-                                           f"Person {selected_person.first_name} {selected_person.last_name} is not registered."
-                                           f" Maximum number of participants is already registered!")
+                        if single_event.max_participants > total_participants_in_event:
+                            if not Participant.objects.filter(person=selected_person, registered_on=single_event).exists():
+                                new_participant = create_participant(selected_person, single_event)
+                                messages.success(request, f"Person {new_participant.first_name} {new_participant.last_name} registered for {single_event.name}")
+                            else:
+                                messages.warning(request, f"Person {selected_person.first_name} {selected_person.last_name} is already registered for this event.")
+                        else:
+                            messages.error(request, f"Person {selected_person.first_name} {selected_person.last_name} is not registered. Maximum number of participants has been reached!")
                             single_event.is_active = False
                             single_event.save()
                             break
-
                     except AssociatedPerson.DoesNotExist:
                         messages.error(request, "Person not found or not owned by the user.")
-                return redirect('registered_events')  # Replace with your success handling
+                return redirect('registered_events')
 
     else:
         persons = []
@@ -159,6 +161,7 @@ def event_detail(request, group_slug=None, event_slug=None):
     }
 
     return render(request, 'events/event_detail.html', context=context)
+
 
 
 def projects(request, group_slug=None):
