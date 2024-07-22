@@ -115,11 +115,6 @@ def create_participant(selected_associated_person: AssociatedPerson, selected_ev
     return new_participant
 
 
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from .models import Events, AssociatedPerson, Participant
-from .utils import create_participant  # Assuming you have a function to create a participant
-
 def event_detail(request, group_slug=None, event_slug=None):
     try:
         single_event = Events.objects.select_related('group').get(group__slug=group_slug, slug=event_slug)
