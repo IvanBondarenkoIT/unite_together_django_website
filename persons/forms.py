@@ -63,7 +63,7 @@ class AssociatedPersonForm(forms.ModelForm):
             'document_number': forms.TextInput(attrs={'placeholder': 'Document Number'}),
             'georgian_phone_number': forms.TextInput(attrs={'placeholder': 'Georgian Phone Number'}),
             'ukrainian_phone_number': forms.TextInput(attrs={'placeholder': 'Ukrainian Phone Number'}),
-            'country': forms.Select(),
+            # 'country': forms.Select(),
             'chosen_city': forms.Select(),
             'address_line': forms.TextInput(attrs={'placeholder': 'Address Line'}),
             'gender': forms.Select(),

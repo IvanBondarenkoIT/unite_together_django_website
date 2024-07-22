@@ -19,8 +19,26 @@ class ParticipantForm(forms.ModelForm):
         model = Participant
         fields = '__all__'
 
+        widgets = {
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
+            'date_of_arrival': forms.DateInput(attrs={'type': 'date'}),
+            'type_of_document': forms.Select(attrs={'placeholder': 'Type of Document'}),
+            'country': forms.Select(),
+            'chosen_city': forms.Select(),
+            'gender': forms.Select(),
+        }
+
 
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
         fields = '__all__'
+
+        widgets = {
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
+            'date_of_arrival': forms.DateInput(attrs={'type': 'date'}),
+            'type_of_document': forms.Select(attrs={'placeholder': 'Type of Document'}),
+            'country': forms.Select(),
+            'chosen_city': forms.Select(),
+            'gender': forms.Select(),
+        }
