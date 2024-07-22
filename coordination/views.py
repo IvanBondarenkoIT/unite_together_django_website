@@ -265,7 +265,17 @@ def export_participants(request, pk):
     sheet.title = 'Participants'
 
     # Write the headers
-    headers = ['Unic ID№', 'Name', 'Email', 'Document', 'Status']  # Adjust headers as needed
+    headers = ['Unic ID',
+               'Participant Name',
+               'Email',
+               'Document',
+               'Status',
+               'Birth Date',
+               'User UID',
+               'User Full Name',
+               'User GE phone №',
+               'User UA phone №',
+               ]  # Adjust headers as needed
     sheet.append(headers)
 
     # Write data rows
@@ -275,10 +285,18 @@ def export_participants(request, pk):
     for participant in participants:
         sheet.append([
             participant.copy_of_unique_identifier,
-            f"{participant.first_name}{participant.last_name}",
+            f"{participant.first_name} {participant.last_name}",
             participant.user_owner.email,
             participant.document_number,
             participant.status,
+            participant.date_of_birth,
+            participant.user_owner.associated_person.unique_identifier,
+            f"{participant.user_owner.associated_person.first_name} {participant.user_owner.associated_person.last_name}",
+            participant.user_owner.associated_person.georgian_phone_number,
+            participant.user_owner.associated_person.ukrainian_phone_number,
+
+
+
             ])  # Adjust fields as needed
     current_datetime = datetime.datetime.now()
     date_string = current_datetime.strftime("%d/%m/%Y")
