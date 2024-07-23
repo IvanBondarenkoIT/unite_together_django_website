@@ -1,4 +1,8 @@
+import datetime
+
+import openpyxl
 from django.contrib import admin
+from django.http import HttpResponse
 # from import_export.admin import ExportMixin
 # from import_export.formats.base_formats import XLS
 
@@ -44,6 +48,73 @@ class TypeOfDocumentAdmin(admin.ModelAdmin):
 #             'fields': ('created_at', 'updated_at')
 #         }),
 #     )
+def export_associated_persons(modeladmin, request, queryset):
+    # Create a workbook and add a worksheet
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active
+    sheet.title = 'AssociatedPersons'
+
+    # Write the headers
+    headers = [
+        'Unique ID',
+        'First Name',
+        'Last Name',
+        'Date of Birth',
+        'Citizenship',
+        'Date of Arrival',
+        'Type of Document',
+        'Document Number',
+        'Gender',
+        'Georgian Phone Number',
+        'Ukrainian Phone Number',
+        'Country',
+        'City',
+        'Address Line',
+        'Created At',
+        'Updated At',
+        'Is Active',
+        'Edit Permission',
+        'Is Approved',
+        'User Owner Email'
+    ]  # Adjust headers as needed
+    sheet.append(headers)
+
+    # Write data rows
+    for person in queryset:
+        sheet.append([
+            person.unique_identifier,
+            person.first_name,
+            person.last_name,
+            person.date_of_birth,
+            person.citizenship,
+            person.date_of_arrival,
+            person.type_of_document.name if person.type_of_document else '',  # Assuming TypeOfDocument has a 'name' field
+            person.document_number,
+            person.gender,
+            person.georgian_phone_number,
+            person.ukrainian_phone_number,
+            person.country,
+            person.chosen_city.name if person.chosen_city else '',  # Assuming City has a 'name' field
+            person.address_line,
+            person.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            person.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
+            person.is_active,
+            person.edit_permission,
+            person.is_approved,
+            person.user_owner.email if person.user_owner else ''
+        ])  # Adjust fields as needed
+
+    current_datetime = datetime.datetime.now()
+    date_string = current_datetime.strftime("%d-%m-%Y")
+    # Save the workbook to an HttpResponse
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename="associated_persons_{date_string}.xlsx"'
+    workbook.save(response)
+
+    return response
+
+
+export_associated_persons.short_description = "Export selected AssociatedPersons to Excel"
 
 
 class UserOwnerFilter(admin.SimpleListFilter):
@@ -74,6 +145,7 @@ class AssociatedPersonAdmin(admin.ModelAdmin):
     search_fields = ('unique_identifier', 'first_name', 'last_name', 'document_number', 'georgian_phone_number', 'ukrainian_phone_number')
     ordering = ('-created_at',)  # Default sorting by created_at descending
     # formats = [XLS]
+    actions = [export_associated_persons]
 
 
 class ParticipantAdmin(admin.ModelAdmin):
