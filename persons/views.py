@@ -65,7 +65,7 @@ def person_list(request):
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
-        formset = AssociatedPersonFormSet(queryset=AssociatedPerson.objects.all().filter(is_active=True, user_owner=request.user))
+        formset = AssociatedPersonFormSet(queryset=AssociatedPerson.objects.all().filter(is_active=True, user_owner=request.user).order_by("unique_identifier"))
 
     return render(request, 'persons/person_list.html', {'formset': formset})
 
