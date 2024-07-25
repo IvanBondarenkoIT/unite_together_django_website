@@ -229,4 +229,8 @@ body {
   --br-8xs-3: 4.3px;
   --br-5xs: 8px;
   --br-lg-8: 18.8px;
+
+  /* New variables for mobile adjustments */
+  --gap-3xl: 15px;
+  --text-regular-size: 14px;
 }
