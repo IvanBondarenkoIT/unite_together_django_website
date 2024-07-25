@@ -1,202 +1,5 @@
 {% load static %}
 
-
-<style>
-    .ut-navbar {
-        justify-content: space-between;
-        background-color: var(--neutral-background);
-        align-self: stretch;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: flex-start;
-        padding: var(--padding-21xl) var(--padding-53xl);
-        box-sizing: border-box;
-        position: sticky;
-        gap: 141px;
-        z-index: 99;
-        text-align: left;
-        font-size: var(--font-size-8xl-5);
-        color: var(--color-darkslategray-100);
-        font-family: var(--font-inter);
-        top: 0;
-        max-width: 100%;
-    }
-
-    .ut-navbar-wrapper {
-        display: flex;
-        max-width: 1400px;
-        margin: auto;
-        justify-content: space-between;
-        flex-direction: row;
-        flex: 1;
-        align-items: center;
-    }
-
-    .ut-navbar-logo-wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        justify-content: space-between;
-        max-width: 100%;
-    }
-
-    .right-part-main {
-        align-items: center !important;
-        display: flex;
-        justify-content: flex-start;
-        align-self: stretch;
-        flex-direction: row;
-        gap: var(--gap-6xl);
-        z-index: 1;
-    }
-
-    .right-part-wrapper-main {
-        flex-grow: initial;
-        flex-direction: column;
-        padding: 0;
-        box-sizing: border-box;
-        max-width: 100%;
-        font-size: var(--text-regular-semi-bold-size);
-        font-family: var(--font-montserrat);
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-    }
-
-    .languages-wrapper {
-        padding: 0 !important;
-        margin-right: 5px;
-    }
-
-    .ut-top-menu-text {
-        position: relative;
-        font-weight: 600;
-        display: inline-block;
-        min-width: 84px;
-        white-space: nowrap;
-        z-index: 1;
-        text-decoration: none;
-        color: black;
-        padding: 10px;
-    }
-
-    .ut-top-menu-text:hover {
-        color: var(--color-cornflowerblue-100);
-    }
-
-    .ut-top-menu-text-active {
-        position: relative;
-        font-weight: 600;
-        display: inline-block;
-        min-width: 84px;
-        white-space: nowrap;
-        z-index: 1;
-        text-decoration: none;
-        background-color: var(--color-royalblue);
-        color: white;
-        border-radius: var(--br-3xs);
-        padding: 10px 20px;
-    }
-
-    .ut-top-menu-div {
-        display: flex;
-        align-items: flex-start;
-    }
-
-    .ut-top-menu-li {
-        display: inline-block;
-    }
-
-    .signup-button {
-        width: 198px;
-        min-width: 198px;
-        padding: 10px 20px;
-        background-color: white;
-        border: 2px solid var(--color-royalblue);
-        border-radius: var(--br-3xs);
-        text-decoration: none;
-        color: var(--color-royalblue);
-        display: flex;
-        cursor: pointer;
-    }
-
-    .signup-button .text {
-        font-size: var(--text-regular-semi-bold-size);
-        font-weight: 500;
-        color: var(--color-darkslategray-100);
-        text-decoration: none;
-        position: relative;
-    }
-
-    .signup-button .ut-icon {
-        width: 14px;
-        height: 15.5px;
-        position: inherit;
-        transform: translateY(4px);
-    }
-
-    .donate-button {
-        width: 150px;
-        min-width: 150px;
-        padding: 11px 27px;
-        background-color: var(--color-royalblue);
-        border-radius: var(--br-3xs);
-        text-decoration: none;
-        color: white;
-        border: none;
-        display: flex;
-        cursor: pointer;
-    }
-
-    .donate-button .ut-text {
-        font-size: var(--text-regular-semi-bold-size);
-        font-weight: 600;
-    }
-
-    .donate-button .ut-icon {
-        height: 25px;
-        width: 25px;
-        position: inherit;
-    }
-
-    .ut-button-w-icon {
-        justify-content: space-between;
-        display: flex;
-        flex: max-content;
-    }
-
-    .dropdown-menu {
-        position: absolute;
-        right: 0;
-        top: 100%;
-        background-color: white;
-        border: 1px solid #ccc;
-        border-radius: var(--br-3xs);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        display: none;
-        z-index: 100;
-        min-width: 160px;
-        overflow: hidden;
-    }
-
-    .dropdown-menu a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
-
-    .dropdown-menu a:hover {
-        background-color: #f1f1f1;
-    }
-
-    .dropdown:hover .dropdown-menu {
-        display: block;
-    }
-</style>
-
-
 {% if user.id is None %}
     <nav class="ut-navbar shadow-sm">
         <div class="ut-navbar-wrapper">
@@ -206,11 +9,11 @@
                         class="main-logo"
                         loading="lazy"
                         alt=""
-                        src="{% static 'img_f/unite-together.svg' %}"
+                        src="{% static 'img/new-unite-together.jpg' %}"
                     />
                 </a>
             </div>
-            <div class="connecter-inner">
+            <div class="connecter-inner desktop-navbar">
                 <div class="frame-parent1">
                     <ul class="horizontal-menu">
                         <li class="ut-top-menu-li">
@@ -234,7 +37,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="right-part-wrapper-main">
+            <div class="right-part-wrapper-main desktop-navbar">
                 <div class="right-part-main">
                     <div class="languages-wrapper">
                         <div class="languages1">
@@ -275,16 +78,26 @@
                     </a>
                 </div>
             </div>
+            <!-- Mobile Navbar -->
+            <div class="mobile-navbar">
+{#                <a class="logo-ut2" href="{% url 'home' %}">#}
+{#                    <img class="main-logo" loading="lazy" alt="" src="{% static 'img/new-unite-together.jpg' %}" />#}
+{#                </a>#}
+                <div class="hamburger-menu" onclick="toggleDropdown()">☰</div>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu">
+                <a href="{% url 'who_we_are' %}">About us</a>
+                <a href="{% url 'events' %}">Events</a>
+                <a href="{% url 'projects' %}">Projects</a>
+                <a href="{% url 'login' %}">Log In / Sign Up</a>
+                <a href="{% url 'donate-paypal' %}">Donate</a>
+            </div>
         </div>
     </nav>
 {% else %}
     <header class="navbaraccount2">
         <a class="logo-ut12" href="{% url 'home' %}" style="color: black">
-            <img
-                class="logo-flag-ut-icon24"
-                alt=""
-                src="{% static 'img/logoflagut3.svg' %}"
-            />
+            <img class="logo-flag-ut-icon24" alt="" src="{% static 'img/logoflagut3.svg' %}" />
             <div class="logo-text-ut24">
                 <div class="group72">
                     <div class="group73">
@@ -296,7 +109,7 @@
                 </div>
             </div>
         </a>
-        <div class="navbaraccount-inner1">
+        <div class="navbaraccount-inner1 desktop-navbar">
             <div class="about-us-parent7">
                 <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
                    href="{% url 'who_we_are' %}">About us</a>
@@ -306,7 +119,7 @@
                    href="{% url 'projects' %}">Projects</a>
             </div>
         </div>
-        <div class="navbaraccount-inner2">
+        <div class="navbaraccount-inner2 desktop-navbar">
             <div class="language-picker-parent">
                 <div class="language-picker">
                     <div class="languages12">
@@ -318,23 +131,15 @@
                         </div>
                         <div class="language-ua12">UA</div>
                         <div class="arrow-wrapper8">
-                            <img class="arrow-icon12" alt="" src="{% static 'img/arrow.svg' %}"/>
+                            <img class="arrow-icon12" alt="" src="{% static 'img/arrow.svg' %}" />
                         </div>
                     </div>
                 </div>
                 <div class="language-divider">
-                    <img
-                        class="dividing-line-icon12"
-                        alt=""
-                        src="{% static 'img/dividingline1.svg' %}"
-                    />
+                    <img class="dividing-line-icon12" alt="" src="{% static 'img/dividingline1.svg' %}" />
                 </div>
                 <div class="frame-parent65">
-                    <img
-                        class="frame-child29"
-                        alt=""
-                        src="{% static 'img/group-1000001845.svg' %}"
-                    />
+                    <img class="frame-child29" alt="" src="{% static 'img/group-1000001845.svg' %}" />
                     <div class="ellipse-parent2">
                         <div class="frame-child30"></div>
                         <a class="icon-wrapper50" href="{% url 'event_list' %}">
@@ -347,21 +152,13 @@
                                     <div class="ignore138"></div>
                                     <div class="ignore139"></div>
                                 </div>
-                                <img
-                                    class="icon-wrapper51"
-                                    alt=""
-                                    src="{% static 'img/iconwrapper@2x.png' %}"
-                                />
+                                <img class="icon-wrapper51" alt="" src="{% static 'img/iconwrapper@2x.png' %}" />
                             </div>
                         </a>
                     </div>
                     <div class="avatar6 dropdown">
                         <a href="javascript:void(0);">
-                            <img
-                                class="avatar-placeholder-change-i2"
-                                alt=""
-                                src="{% static 'img/avatarplaceholder--change-image-here@2x.png' %}"
-                            />
+                            <img class="avatar-placeholder-change-i2" alt="" src="{% static 'img/avatarplaceholder--change-image-here@2x.png' %}" />
                         </a>
                         <div class="dropdown-menu">
                             <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>
@@ -374,7 +171,32 @@
                 </div>
             </div>
         </div>
+        <!-- Mobile Navbar -->
+        <div class="mobile-navbar">
+            <a class="logo-ut2" href="{% url 'home' %}">
+                <img class="main-logo" loading="lazy" alt="" src="{% static 'img/new-unite-together.jpg' %}" />
+            </a>
+            <div class="hamburger-menu" onclick="toggleDropdown()">☰</div>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu">
+            <a href="{% url 'who_we_are' %}">About us</a>
+            <a href="{% url 'events' %}">Events</a>
+            <a href="{% url 'projects' %}">Projects</a>
+            <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>
+            <a href="{% url 'settings' %}">{{ user.email }}</a>
+            <a href="{% url 'person_list' %}">Family persons</a>
+            <a href="{% url 'registered_events' %}">Events & Projects</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
     </header>
 {% endif %}
 
+
 {% include 'includes/alerts.html' %}
+
+<script>
+function toggleDropdown() {
+    var dropdown = document.getElementById('dropdown-menu');
+    dropdown.classList.toggle('active');
+}
+</script>
