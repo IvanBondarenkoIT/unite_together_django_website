@@ -160,6 +160,19 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Date and time formats
+
+DATE_FORMAT = 'd-m-Y'  # Example: 31-12-2024
+DATETIME_FORMAT = 'd-m-Y H:i'  # Example: 31-12-2024 23:59
+TIME_FORMAT = 'H:i'  # Example: 23:59
+
+# Input formats for parsing dates
+
+DATE_INPUT_FORMATS = [
+    '%d-%m-%Y',  # Example: 31-12-2024
+]
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
