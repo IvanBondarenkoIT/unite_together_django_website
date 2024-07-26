@@ -133,7 +133,7 @@ def event_detail(request, group_slug=None, event_slug=None):
                         selected_person = AssociatedPerson.objects.get(id=person_id, user_owner=request.user)
                         total_participants_in_event = Participant.objects.filter(registered_on=single_event).count()
                         if single_event.max_participants > total_participants_in_event:
-                            if not Participant.objects.filter(person=selected_person, registered_on=single_event).exists():
+                            if not Participant.objects.filter(copy_of_unique_identifier=selected_person.unique_identifier, registered_on=single_event).exists():
                                 new_participant = create_participant(selected_person, single_event)
                                 messages.success(request, f"Person {new_participant.first_name} {new_participant.last_name} registered for {single_event.name}")
                             else:
