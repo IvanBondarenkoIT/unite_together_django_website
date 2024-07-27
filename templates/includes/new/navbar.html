@@ -96,18 +96,8 @@
     </nav>
 {% else %}
     <header class="navbaraccount2">
-        <a class="logo-ut12" href="{% url 'home' %}" style="color: black">
-            <img class="logo-flag-ut-icon24" alt="" src="{% static 'img/logoflagut3.svg' %}" />
-            <div class="logo-text-ut24">
-                <div class="group72">
-                    <div class="group73">
-                        <b class="unite24">UNITE</b>
-                    </div>
-                    <div class="group74">
-                        <b class="together24">TOGETHER</b>
-                    </div>
-                </div>
-            </div>
+        <a class="logo-ut2" href="{% url 'home' %}">
+            <img class="main-logo" loading="lazy" alt="" src="{% static 'img/new-unite-together.jpg' %}"/>
         </a>
         <div class="navbaraccount-inner1 desktop-navbar">
             <div class="about-us-parent7">
@@ -157,10 +147,10 @@
                         </a>
                     </div>
                     <div class="avatar6 dropdown">
-                        <a href="javascript:void(0);">
+                        <a href="javascript:void(0);" onclick="toggleUserDropdown()">
                             <img class="avatar-placeholder-change-i2" alt="" src="{% static 'img/avatarplaceholder--change-image-here@2x.png' %}" />
                         </a>
-                        <div class="dropdown-menu">
+                        <div class="dropdown-menu" id="user-dropdown">
                             <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>
                             <a href="{% url 'settings' %}">{{ user.email }}</a>
                             <a href="{% url 'person_list' %}">Family persons</a>
@@ -198,5 +188,23 @@
 function toggleDropdown() {
     var dropdown = document.getElementById('dropdown-menu');
     dropdown.classList.toggle('active');
+}
+
+function toggleUserDropdown() {
+    var dropdown = document.getElementById('user-dropdown');
+    dropdown.classList.toggle('active');
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+    if (!event.target.matches('.avatar-placeholder-change-i2') && !event.target.matches('.hamburger-menu')) {
+        var dropdowns = document.getElementsByClassName("dropdown-menu");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('active')) {
+                openDropdown.classList.remove('active');
+            }
+        }
+    }
 }
 </script>
