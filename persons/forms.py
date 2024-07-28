@@ -4,26 +4,16 @@ from django.forms import modelformset_factory
 from .models import AssociatedPerson, Participant, TypeOfDocument
 
 
-# class AssociatedPersonForm(forms.ModelForm):
-#     class Meta:
-#         model = AssociatedPerson
-#         fields = [
-#             'user_owner',
-#             'first_name',
-#             'last_name',
-#             'date_of_birth',
-#             'citizenship',
-#             'type_of_document',
-#             'date_of_arrival',
-#             'document_number',
-#             'gender',
-#             'georgian_phone_number',
-#             'ukrainian_phone_number',
-#             'country',
-#             'city',
-#             'region',
-#             'address_line',
-#         ]
+class AssociatedPersonAdminForm(forms.ModelForm):
+
+    class Meta:
+        model = AssociatedPerson
+        fields = '__all__'
+
+        widgets = {
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
+            'date_of_arrival': forms.DateInput(attrs={'type': 'date'}),
+        }
 
 
 class AssociatedPersonForm(forms.ModelForm):
@@ -91,7 +81,16 @@ class AssociatedPersonForm(forms.ModelForm):
     # Add any additional custom validation here
 
 
+class ParticipantAdminForm(forms.ModelForm):
 
+    class Meta:
+        model = Participant
+        fields = '__all__'
+
+        widgets = {
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
+            'date_of_arrival': forms.DateInput(attrs={'type': 'date'}),
+        }
 
 #
 # class ParticipantForm(forms.ModelForm):
