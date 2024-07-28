@@ -75,13 +75,22 @@ class Events(WebContentObject):
         return f"Event - {self.name}"
 
     def get_start_date_year(self):
-        return self.start_date.strftime("%Y")
+        if self.start_date:
+            return self.start_date.strftime("%Y")
+        else:
+            return ''
 
     def get_start_date_month(self):
-        return self.start_date.strftime("%b")
+        if self.start_date:
+            return self.start_date.strftime("%b")
+        else:
+            return ''
 
     def get_start_date_day(self):
-        return self.start_date.strftime("%d")
+        if self.start_date:
+            return self.start_date.strftime("%d")
+        else:
+            return ''
 
     def get_url(self):
         return reverse("event_detail", args=[self.group.slug, self.slug])
@@ -101,13 +110,22 @@ class Projects(WebContentObject):
         return f"Project - {self.name}"
 
     def get_start_date_year(self):
-        return self.start_date.strftime("%Y")
+        if self.start_date:
+            return self.start_date.strftime("%Y")
+        else:
+            return ''
 
     def get_start_date_month(self):
-        return self.start_date.strftime("%b")
+        if self.start_date:
+            return self.start_date.strftime("%b")
+        else:
+            return ''
 
     def get_start_date_day(self):
-        return self.start_date.strftime("%d")
+        if self.start_date:
+            return self.start_date.strftime("%d")
+        else:
+            return ''
 
     def get_end_date_year(self):
         return self.end_date.strftime("%Y")
