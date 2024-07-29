@@ -1835,3 +1835,10 @@
     min-height: 142;
   }
 }
+
+/* Hide mobile navbar by default */
+.mobile-navbar {
+    display: none;
+}
+
+

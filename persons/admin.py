@@ -15,7 +15,8 @@ from .models import AssociatedPerson, Participant, UserProfile, Person, TypeOfDo
 
 @admin.register(TypeOfDocument)
 class TypeOfDocumentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'hint', 'regex')
+    list_display = ('pk', 'name', 'hint', 'regex')
+
 
 
 # class PersonAdmin(admin.ModelAdmin):
