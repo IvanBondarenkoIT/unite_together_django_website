@@ -96,10 +96,12 @@
     </nav>
 {% else %}
     <header class="navbaraccount2">
+
+
+        <div class="navbaraccount-inner1 desktop-navbar">
         <a class="logo-ut2" href="{% url 'home' %}">
             <img class="main-logo" loading="lazy" alt="" src="{% static 'img/new-unite-together.jpg' %}"/>
         </a>
-        <div class="navbaraccount-inner1 desktop-navbar">
             <div class="about-us-parent7">
                 <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
                    href="{% url 'who_we_are' %}">About us</a>
