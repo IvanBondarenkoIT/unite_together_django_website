@@ -1,0 +1,173 @@
+{% load static %}
+
+    <style>
+        .simple-mobile-carousel-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .simple-mobile-carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .simple-mobile-carousel-item {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .simple-mobile-carousel-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .simple-mobile-carousel-text {
+            text-align: center;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .simple-mobile-carousel-text h5 {
+            font-size: 1.25rem;
+        }
+
+        .simple-mobile-carousel-text p {
+            font-size: 1rem;
+            color: #666;
+            max-height: 3rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .simple-mobile-carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .simple-mobile-carousel-control {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 18px;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .simple-mobile-carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .simple-mobile-carousel-indicator {
+            width: 10px;
+            height: 10px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .simple-mobile-carousel-indicator.active {
+            background-color: #007bff;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 768px) {
+            .simple-mobile-carousel-text h5 {
+                font-size: 1rem;
+            }
+
+            .simple-mobile-carousel-text p {
+                font-size: 0.875rem;
+                max-height: 2.5rem;
+            }
+
+            .simple-mobile-carousel-control {
+                font-size: 16px;
+                padding: 5px 10px;
+            }
+        }
+    </style>
+
+
+<div class="simple-mobile-carousel-container">
+    <div class="simple-mobile-carousel-inner">
+        {% for carousel_object in carousel_objects %}
+        <div class="simple-mobile-carousel-item{% if forloop.first %} active{% endif %}">
+            <div class="simple-mobile-carousel-image">
+                <a href="{{ carousel_object.get_url }}">
+                    <img src="{% if carousel_object.image_exists %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" alt="{{ carousel_object.title }}">
+                </a>
+            </div>
+            <div class="simple-mobile-carousel-text">
+                <h5>{{ carousel_object.title }}</h5>
+                <p>{{ carousel_object.text }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="simple-mobile-carousel-indicators">
+        {% for carousel_object in carousel_objects %}
+        <div class="simple-mobile-carousel-indicator{% if forloop.first %} active{% endif %}" data-slide-to="{{ forloop.counter0 }}"></div>
+        {% endfor %}
+    </div>
+    <div class="simple-mobile-carousel-controls">
+        <button class="simple-mobile-carousel-control simple-mobile-carousel-control-prev" aria-label="Previous Slide">&lt;</button>
+        <button class="simple-mobile-carousel-control simple-mobile-carousel-control-next" aria-label="Next Slide">&gt;</button>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const carouselContainer = document.querySelector('.simple-mobile-carousel-container');
+        const carouselInner = document.querySelector('.simple-mobile-carousel-inner');
+        const carouselItems = document.querySelectorAll('.simple-mobile-carousel-item');
+        const indicators = document.querySelectorAll('.simple-mobile-carousel-indicator');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            const width = carouselContainer.clientWidth;
+            carouselInner.style.transform = `translateX(-${currentIndex * width}px)`;
+
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+            updateCarousel();
+        }
+
+        document.querySelector('.simple-mobile-carousel-control-next').addEventListener('click', nextSlide);
+        document.querySelector('.simple-mobile-carousel-control-prev').addEventListener('click', prevSlide);
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
+
+        setInterval(nextSlide, 3000);
+
+        window.addEventListener('resize', updateCarousel);
+
+        updateCarousel();
+    });
+</script>
