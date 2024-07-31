@@ -1,17 +1,18 @@
 {% load static %}
 
 {% if user.id is None %}
+{#    NOT LOGIN USER #}
     <nav class="ut-navbar shadow-sm">
         <div class="ut-navbar-wrapper">
-            <div class="ut-navbar-logo-wrapper">
-                <a class="logo-ut2" href="{% url 'home' %}">
-                    <img
-                        class="main-logo"
-                        loading="lazy"
-                        alt=""
-                        src="{% static 'img/new-unite-together.jpg' %}"
-                    />
-                </a>
+            <div class="ut-navbar-logo-wrapper  desktop-navbar">
+                <div class="logo-container">
+                    <img class="main-logo" loading="lazy" alt="Logo"
+                         src="{% static 'img/new-unite-together.jpg' %}"/>
+                    <div class="logo-text">
+                        <h4 class="logo-title">UNITE</h4>
+                        <h6 class="logo-subtitle">TOGETHER</h6>
+                    </div>
+                </div>
             </div>
             <div class="connecter-inner desktop-navbar">
                 <div class="frame-parent1">
@@ -49,16 +50,10 @@
                             </div>
                             <div class="language-ua1">UA</div>
                             <div class="arrow-wrapper">
-                                <img
-                                    class="arrow-icon4"
-                                    loading="lazy"
-                                    alt=""
-                                    src="{% static 'img/arrow1.svg' %}"
-                                />
+                                <img class="arrow-icon4" loading="lazy" alt="" src="{% static 'img/arrow1.svg' %}"/>
                             </div>
                         </div>
                     </div>
-
                     <a class="signup-button" href="{% url 'login' %}">
                         <div class="ut-button-w-icon">
                             <div style="display: flex;">
@@ -67,7 +62,6 @@
                             <span class="text">Log In / Sign Up</span>
                         </div>
                     </a>
-
                     <a class="donate-button" href="{% url 'donate-paypal' %}">
                         <div class="ut-button-w-icon">
                             <div class="ut-text" style="transform: translateY(1px);">Donate</div>
@@ -79,10 +73,18 @@
                 </div>
             </div>
             <!-- Mobile Navbar -->
+
             <div class="mobile-navbar">
-{#                <a class="logo-ut2" href="{% url 'home' %}">#}
-{#                    <img class="main-logo" loading="lazy" alt="" src="{% static 'img/new-unite-together.jpg' %}" />#}
-{#                </a>#}
+                <a class="logo-ut2" href="{% url 'home' %}">
+                    <div class="logo-container">
+                        <img class="main-logo" loading="lazy" alt="Logo"
+                             src="{% static 'img/new-unite-together.jpg' %}"/>
+                        <div class="logo-text">
+                            <h4 class="logo-title">UNITE</h4>
+                            <h6 class="logo-subtitle">TOGETHER</h6>
+                        </div>
+                    </div>
+                </a>
                 <div class="hamburger-menu" onclick="toggleDropdown()">☰</div>
             </div>
             <div class="dropdown-menu" id="dropdown-menu">
@@ -95,94 +97,113 @@
         </div>
     </nav>
 {% else %}
-    <header class="navbaraccount2">
+{#    LOGIN USER #}
+    <nav class="ut-navbar shadow-sm">
+        <div class="ut-navbar-wrapper">
 
-
-        <div class="navbaraccount-inner1 desktop-navbar">
-        <a class="logo-ut2" href="{% url 'home' %}">
-            <img class="main-logo" loading="lazy" alt="" src="{% static 'img/new-unite-together.jpg' %}"/>
-        </a>
-            <div class="about-us-parent7">
-                <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
-                   href="{% url 'who_we_are' %}">About us</a>
-                <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
-                   href="{% url 'events' %}">Events</a>
-                <a class="ut-top-menu-text{% if '/projects/' in request.path %}-active{% endif %}"
-                   href="{% url 'projects' %}">Projects</a>
-            </div>
-        </div>
-        <div class="navbaraccount-inner2 desktop-navbar">
-            <div class="language-picker-parent">
-                <div class="language-picker">
-                    <div class="languages12">
-                        <div class="u-a-language">
-                            <div class="flag-ua12">
-                                <div class="u-a-flag-colors"></div>
-                                <div class="u-a-flag-colors1"></div>
-                            </div>
-                        </div>
-                        <div class="language-ua12">UA</div>
-                        <div class="arrow-wrapper8">
-                            <img class="arrow-icon12" alt="" src="{% static 'img/arrow.svg' %}" />
-                        </div>
+            <div class="ut-navbar-logo-wrapper desktop-navbar">
+                <div class="logo-container desktop-navbar">
+                    <img class="main-logo" loading="lazy" alt="Logo"
+                         src="{% static 'img/new-unite-together.jpg' %}"/>
+                    <div class="logo-text">
+                        <h4 class="logo-title">UNITE</h4>
+                        <h6 class="logo-subtitle">TOGETHER</h6>
                     </div>
                 </div>
-                <div class="language-divider">
-                    <img class="dividing-line-icon12" alt="" src="{% static 'img/dividingline1.svg' %}" />
+            </div>
+            <div class="navbaraccount-inner1 desktop-navbar">
+                <div class="about-us-parent7">
+                    <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
+                       href="{% url 'who_we_are' %}">About us</a>
+                    <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
+                       href="{% url 'events' %}">Events</a>
+                    <a class="ut-top-menu-text{% if '/projects/' in request.path %}-active{% endif %}"
+                       href="{% url 'projects' %}">Projects</a>
                 </div>
-                <div class="frame-parent65">
-                    <img class="frame-child29" alt="" src="{% static 'img/group-1000001845.svg' %}" />
-                    <div class="ellipse-parent2">
-                        <div class="frame-child30"></div>
-                        <a class="icon-wrapper50" href="{% url 'event_list' %}">
-                            <div class="width-change-size-here28">
-                                <div class="ignore136"></div>
-                                <div class="ignore137"></div>
-                            </div>
-                            <div class="icon-wrapper-h28">
-                                <div class="height-change-size-here28">
-                                    <div class="ignore138"></div>
-                                    <div class="ignore139"></div>
+            </div>
+            <div class="navbaraccount-inner2 desktop-navbar">
+                <div class="language-picker-parent">
+                    <div class="language-picker">
+                        <div class="languages12">
+                            <div class="u-a-language">
+                                <div class="flag-ua12">
+                                    <div class="u-a-flag-colors"></div>
+                                    <div class="u-a-flag-colors1"></div>
                                 </div>
-                                <img class="icon-wrapper51" alt="" src="{% static 'img/iconwrapper@2x.png' %}" />
                             </div>
-                        </a>
+                            <div class="language-ua12">UA</div>
+                            <div class="arrow-wrapper8">
+                                <img class="arrow-icon12" alt="" src="{% static 'img/arrow.svg' %}"/>
+                            </div>
+                        </div>
                     </div>
-                    <div class="avatar6 dropdown">
-                        <a href="javascript:void(0);" onclick="toggleUserDropdown()">
-                            <img class="avatar-placeholder-change-i2" alt="" src="{% static 'img/avatarplaceholder--change-image-here@2x.png' %}" />
-                        </a>
-                        <div class="dropdown-menu" id="user-dropdown">
-                            <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>
-                            <a href="{% url 'settings' %}">{{ user.email }}</a>
-                            <a href="{% url 'person_list' %}">Family persons</a>
-                            <a href="{% url 'registered_events' %}">Events & Projects</a>
-                            <a href="{% url 'logout' %}">Logout</a>
+                    <div class="language-divider">
+                        <img class="dividing-line-icon12" alt="" src="{% static 'img/dividingline1.svg' %}"/>
+                    </div>
+                    <div class="frame-parent65">
+                        <img class="frame-child29" alt="" src="{% static 'img/group-1000001845.svg' %}"/>
+                        <div class="ellipse-parent2">
+                            <div class="frame-child30"></div>
+                            <a class="icon-wrapper50" href="{% url 'event_list' %}">
+                                <div class="width-change-size-here28">
+                                    <div class="ignore136"></div>
+                                    <div class="ignore137"></div>
+                                </div>
+                                <div class="icon-wrapper-h28">
+                                    <div class="height-change-size-here28">
+                                        <div class="ignore138"></div>
+                                        <div class="ignore139"></div>
+                                    </div>
+                                    <img class="icon-wrapper51" alt="" src="{% static 'img/iconwrapper@2x.png' %}"/>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="avatar6 dropdown">
+                            <a href="javascript:void(0);" onclick="toggleUserDropdown()">
+                                <img class="avatar-placeholder-change-i2" alt=""
+                                     src="{% static 'img/avatarplaceholder--change-image-here@2x.png' %}"/>
+                            </a>
+                            <div class="dropdown-menu" id="user-dropdown">
+                                <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>
+                                <a href="{% url 'settings' %}">{{ user.email }}</a>
+                                <a href="{% url 'person_list' %}">Family persons</a>
+                                <a href="{% url 'registered_events' %}">Events & Projects</a>
+                                <a href="{% url 'logout' %}">Logout</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Mobile Navbar -->
-        <div class="mobile-navbar">
-            <a class="logo-ut2" href="{% url 'home' %}">
-                <img class="main-logo" loading="lazy" alt="" src="{% static 'img/new-unite-together.jpg' %}" />
-            </a>
-            <div class="hamburger-menu" onclick="toggleDropdown()">☰</div>
-        </div>
-        <div class="dropdown-menu" id="dropdown-menu">
-            <a href="{% url 'who_we_are' %}">About us</a>
-            <a href="{% url 'events' %}">Events</a>
-            <a href="{% url 'projects' %}">Projects</a>
-            <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>
-            <a href="{% url 'settings' %}">{{ user.email }}</a>
-            <a href="{% url 'person_list' %}">Family persons</a>
-            <a href="{% url 'registered_events' %}">Events & Projects</a>
-            <a href="{% url 'logout' %}">Logout</a>
-        </div>
-    </header>
-{% endif %}
+            <!-- Mobile Navbar -->
 
+            <div class="mobile-navbar">
+                <a class="logo-ut2" href="{% url 'home' %}">
+                    <div class="logo-container">
+                        <img class="main-logo" loading="lazy" alt="Logo"
+                             src="{% static 'img/new-unite-together.jpg' %}"/>
+                        <div class="logo-text">
+                            <h4 class="logo-title">UNITE</h4>
+                            <h6 class="logo-subtitle">TOGETHER</h6>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="hamburger-menu" onclick="toggleDropdown()">☰</div>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu">
+                <a href="{% url 'who_we_are' %}">About us</a>
+                <a href="{% url 'events' %}">Events</a>
+                <a href="{% url 'projects' %}">Projects</a>
+                <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>
+                <a href="{% url 'settings' %}">{{ user.email }}</a>
+                <a href="{% url 'person_list' %}">Family persons</a>
+                <a href="{% url 'registered_events' %}">Events & Projects</a>
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+{#        </header>#}
+        </div>
+    </nav>
+{% endif %}
 
 {% include 'includes/alerts.html' %}
 

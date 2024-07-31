@@ -271,6 +271,41 @@
     background-color: #f1f1f1;
 }
 
+/*LOGO part*/
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.main-logo {
+    height: 50px; /* Adjust the height as needed */
+    margin-right: 10px; /* Space between the image and the text */
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo-title {
+    font-size: 24px; /* Larger size for "UNITE" */
+    margin: 0;
+}
+
+.logo-subtitle {
+    font-size: 14px; /* Smaller size for "TOGETHER" */
+    margin: 0;
+    line-height: 1; /* Adjust for better alignment */
+}
+
+/* Optional: Ensuring the text occupies the same width */
+.logo-title,
+.logo-subtitle {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+}
 /*!* Media Queries for Mobile Version *!*/
 
 /*@media (max-width: 768px) {*/
