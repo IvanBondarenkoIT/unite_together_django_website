@@ -1,18 +1,20 @@
 {% load static %}
 
 {% if user.id is None %}
-{#    NOT LOGIN USER #}
+    {#    NOT LOGIN USER #}
     <nav class="ut-navbar shadow-sm">
         <div class="ut-navbar-wrapper">
             <div class="ut-navbar-logo-wrapper  desktop-navbar">
-                <div class="logo-container">
-                    <img class="main-logo" loading="lazy" alt="Logo"
-                         src="{% static 'img/new-unite-together.jpg' %}"/>
-                    <div class="logo-text">
-                        <h4 class="logo-title">UNITE</h4>
-                        <h6 class="logo-subtitle">TOGETHER</h6>
+                <a class="logo-ut2" href="{% url 'home' %}">
+                    <div class="logo-container">
+                        <img class="main-logo" loading="lazy" alt="Logo"
+                             src="{% static 'img/new-unite-together.jpg' %}"/>
+                        <div class="logo-text">
+                            <h4 class="logo-title">UNITE</h4>
+                            <h6 class="logo-subtitle">TOGETHER</h6>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="connecter-inner desktop-navbar">
                 <div class="frame-parent1">
@@ -97,19 +99,21 @@
         </div>
     </nav>
 {% else %}
-{#    LOGIN USER #}
+    {#    LOGIN USER #}
     <nav class="ut-navbar shadow-sm">
         <div class="ut-navbar-wrapper">
 
             <div class="ut-navbar-logo-wrapper desktop-navbar">
-                <div class="logo-container desktop-navbar">
-                    <img class="main-logo" loading="lazy" alt="Logo"
-                         src="{% static 'img/new-unite-together.jpg' %}"/>
-                    <div class="logo-text">
-                        <h4 class="logo-title">UNITE</h4>
-                        <h6 class="logo-subtitle">TOGETHER</h6>
+                <a class="logo-ut2" href="{% url 'home' %}">
+                    <div class="logo-container">
+                        <img class="main-logo" loading="lazy" alt="Logo"
+                             src="{% static 'img/new-unite-together.jpg' %}"/>
+                        <div class="logo-text">
+                            <h4 class="logo-title">UNITE</h4>
+                            <h6 class="logo-subtitle">TOGETHER</h6>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="navbaraccount-inner1 desktop-navbar">
                 <div class="about-us-parent7">
@@ -200,7 +204,7 @@
                 <a href="{% url 'registered_events' %}">Events & Projects</a>
                 <a href="{% url 'logout' %}">Logout</a>
             </div>
-{#        </header>#}
+            {#        </header>#}
         </div>
     </nav>
 {% endif %}
@@ -208,26 +212,26 @@
 {% include 'includes/alerts.html' %}
 
 <script>
-function toggleDropdown() {
-    var dropdown = document.getElementById('dropdown-menu');
-    dropdown.classList.toggle('active');
-}
+    function toggleDropdown() {
+        var dropdown = document.getElementById('dropdown-menu');
+        dropdown.classList.toggle('active');
+    }
 
-function toggleUserDropdown() {
-    var dropdown = document.getElementById('user-dropdown');
-    dropdown.classList.toggle('active');
-}
+    function toggleUserDropdown() {
+        var dropdown = document.getElementById('user-dropdown');
+        dropdown.classList.toggle('active');
+    }
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-    if (!event.target.matches('.avatar-placeholder-change-i2') && !event.target.matches('.hamburger-menu')) {
-        var dropdowns = document.getElementsByClassName("dropdown-menu");
-        for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('active')) {
-                openDropdown.classList.remove('active');
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.avatar-placeholder-change-i2') && !event.target.matches('.hamburger-menu')) {
+            var dropdowns = document.getElementsByClassName("dropdown-menu");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('active')) {
+                    openDropdown.classList.remove('active');
+                }
             }
         }
     }
-}
 </script>
