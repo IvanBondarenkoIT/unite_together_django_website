@@ -1,0 +1,110 @@
+:root {
+    /* New variables for mobile adjustments */
+    --gap-3xl: 15px;
+    --text-regular-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .ut-navbar {
+        padding: var(--padding-10xl) var(--padding-20xl);
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .ut-navbar-wrapper {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+    }
+
+    .right-part-main {
+        justify-content: center;
+        gap: var(--gap-3xl);
+        flex-direction: column;
+    }
+
+    .right-part-wrapper-main {
+        align-items: center;
+    }
+
+    .ut-top-menu-text {
+        font-size: var(--text-regular-size);
+    }
+
+    .signup-button, .donate-button {
+        width: auto;
+        min-width: auto;
+        padding: 8px 16px;
+    }
+
+    .ut-button-w-icon {
+        flex-direction: column;
+        align-items: center;
+    }
+    /* Add styles here to fix dropdown position */
+    .dropdown-menu {
+        position: absolute;
+        top: 50px; /* Adjust based on the height of the navbar */
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        display: none; /* Hidden by default */
+        z-index: 1000;
+    }
+
+    .dropdown-menu.active {
+        display: block; /* Show the dropdown when active */
+    }
+
+    .mobile-navbar .hamburger-menu {
+        cursor: pointer;
+    }
+    /*LOGO part*/
+    .logo-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .main-logo {
+        height: 50px; /* Adjust the height as needed */
+        margin-right: 10px; /* Space between the image and the text */
+    }
+
+    .logo-text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo-title {
+        font-size: 24px; /* Larger size for "UNITE" */
+        margin: 0;
+    }
+
+    .logo-subtitle {
+        font-size: 14px; /* Smaller size for "TOGETHER" */
+        margin: 0;
+        line-height: 1; /* Adjust for better alignment */
+    }
+
+    /* Optional: Ensuring the text occupies the same width */
+    .logo-title,
+    .logo-subtitle {
+        display: inline-block;
+        width: 100%;
+        text-align: left;
+    }
+}
+/* Media Queries */
+@media (max-width: 768px) {
+    .desktop-navbar {
+        display: none;
+    }
+
+    .mobile-navbar {
+        display: flex;
+    }
+}
