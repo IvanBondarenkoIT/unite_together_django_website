@@ -72,7 +72,7 @@ class Events(WebContentObject):
     max_participants = models.IntegerField(blank=True, null=True, default=0)
 
     def __str__(self):
-        return f"Event - {self.name}"
+        return f"{self.name}"
 
     def get_start_date_year(self):
         if self.start_date:
