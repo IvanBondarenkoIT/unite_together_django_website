@@ -3,21 +3,21 @@
     .carousel-container {
         position: relative;
         overflow: hidden;
-        max-width: 100%; /* Ensure the carousel does not exceed its container */
+        max-width: 100%;
     }
 
     .carousel-example .carousel-item {
-        display: none; /* Hide all carousel items by default */
+        display: none;
         align-items: center;
-        height: 100%; /* Ensure each carousel item fills the height of the container */
+        height: 100%;
     }
 
     .carousel-example .carousel-item.active {
-        display: flex; /* Display only the active carousel item */
+        display: flex;
     }
 
     .carousel-example .carousel-text {
-        flex: 1; /* Allocate full width to text container */
+        flex: 1;
         padding: 20px;
     }
 
@@ -30,55 +30,85 @@
     .carousel-example .carousel-text p {
         font-size: 1rem;
         color: #666;
-        /* Allow text to wrap */
         overflow-wrap: break-word;
         word-wrap: break-word;
         hyphens: auto;
         white-space: normal;
-        max-height: 200px; /* Limit the maximum height of the text */
-        overflow: hidden; /* Hide overflowing text */
-        text-overflow: ellipsis; /* Show ellipsis (...) for long text */
+        max-height: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .carousel-example .carousel-image {
         flex: 1;
-        overflow: hidden; /* Ensure image does not exceed its container */
+        overflow: hidden;
         border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add box-shadow for image */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
     .carousel-example img {
         width: 100%;
         height: auto;
-        object-fit: cover; /* Ensure the image covers its entire container */
+        object-fit: cover;
         border-radius: 10px;
     }
 
-    /* Custom styles for carousel indicators */
     .carousel-indicators {
         position: absolute;
-        bottom: 10px;
-        left: 0;
-        right: 0;
-        margin: 0 auto; /* Center horizontally */
+        bottom: -12px; /* Position below the carousel content */
+        left: 50%;
+        transform: translateX(-125%);
         z-index: 15;
         display: flex;
         justify-content: center;
         gap: 5px;
-        width: auto; /* Adjust width as needed */
+        width: auto;
     }
 
     .carousel-indicators .indicator {
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: #ccc; /* Inactive indicator color */
+        background-color: #ccc;
         transition: background-color 0.3s ease;
         cursor: pointer;
     }
 
     .carousel-indicators .active {
-        background-color: #007bff; /* Active indicator color */
+        background-color: #007bff;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        position: absolute;
+        bottom: 0px; /* Position below the carousel content */
+        top: auto; /* Disable vertical centering */
+        transform: translateY(0); /* Disable vertical centering */
+        background-color: rgba(0, 0, 0, 0.5); /* Grey background color */
+        color: white;
+        font-size: 2rem;
+        z-index: 20;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel-control-prev {
+        left: 30%;
+    }
+
+    .carousel-control-next {
+        right: 30%;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 20px;
+        height: 20px;
     }
 </style>
 
@@ -118,23 +148,20 @@
     </div>
 </div>
 
-<!-- Add your carousel JavaScript here -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const carousel = new bootstrap.Carousel(document.getElementById('carouselExample'), {
-            interval: 2000, // Slide interval in milliseconds
-            wrap: true // Whether the carousel should cycle continuously
+            interval: 2000,
+            wrap: true
         });
 
-        // Handle indicator clicks
         const indicators = document.querySelectorAll('.indicator');
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => {
-                carousel.to(index); // Move carousel to the corresponding slide index
+                carousel.to(index);
             });
         });
 
-        // Update active indicator on slide change
         carousel._element.addEventListener('slide.bs.carousel', function (event) {
             const indicators = document.querySelectorAll('.indicator');
             indicators.forEach((indicator, index) => {
