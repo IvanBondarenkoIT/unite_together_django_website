@@ -12,10 +12,21 @@
             padding-right: 20px !important;
         }
 
-                .foot-1-about {order: 3;}
-        .foot-2-menu {order: 1;}
-        .foot-3-address {order: 4;}
-        .foot-4-social {order: 2;}
+        .foot-1-about {
+            order: 3;
+        }
+
+        .foot-2-menu {
+            order: 1;
+        }
+
+        .foot-3-address {
+            order: 4;
+        }
+
+        .foot-4-social {
+            order: 2;
+        }
     }
 
 
@@ -28,10 +39,21 @@
             gap: 10px !important;
         }
 
-        .foot-1-about {order: 2;}
-        .foot-2-menu {order: 1;}
-        .foot-3-address {order: 4;}
-        .foot-4-social {order: 3;}
+        .foot-1-about {
+            order: 2;
+        }
+
+        .foot-2-menu {
+            order: 1;
+        }
+
+        .foot-3-address {
+            order: 4;
+        }
+
+        .foot-4-social {
+            order: 3;
+        }
     }
 
 
@@ -85,54 +107,91 @@
         text-decoration: none;
     }
 
-      .footer-menu-address {
-    font-weight: 500;
-    font-size: var(--font-size-sm);
-    line-height: 36px;
-    padding-left: 0 !important;
-    list-style-type: none;
-    list-style-position: inside;
-}
+    .footer-menu-address {
+        font-weight: 500;
+        font-size: var(--font-size-sm);
+        line-height: 36px;
+        padding-left: 0 !important;
+        list-style-type: none;
+        list-style-position: inside;
+    }
 
-.footer-menu-address li {
-    position: relative;
-    padding-left: 25px; /* Adjust padding to accommodate icon size */
-}
+    .footer-menu-address li {
+        position: relative;
+        padding-left: 25px; /* Adjust padding to accommodate icon size */
+    }
 
-.footer-menu-address li::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
+    .footer-menu-address li::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
 
-    background-repeat: no-repeat;
-}
+        background-repeat: no-repeat;
+    }
 
-.footer-menu-address-phone::before {
-    background-image: url("{% static 'img/iconphone.svg' %}");
-    transform: translateY(60%);
-    width: 15.6px;
-    height: 15px;
-}
+    .footer-menu-address-phone::before {
+        background-image: url("{% static 'img/iconphone.svg' %}");
+        transform: translateY(60%);
+        width: 15.6px;
+        height: 15px;
+    }
 
-.footer-menu-address-email::before {
-    background-image: url("{% static 'img/iconemail.svg' %}");
-    transform: translateY(115%);
-    width: 15px;
-    height: 11px;
-}
+    .footer-menu-address-email::before {
+        background-image: url("{% static 'img/iconemail.svg' %}");
+        transform: translateY(115%);
+        width: 15px;
+        height: 11px;
+    }
 
-.footer-menu-address-location::before {
-    background-image: url("{% static 'img/icongeo.svg' %}");
-    transform: translateY(10%);
-    width: 15.6px;
-    height: 21.2px;
+    .footer-menu-address-location::before {
+        background-image: url("{% static 'img/icongeo.svg' %}");
+        transform: translateY(10%);
+        width: 15.6px;
+        height: 21.2px;
 
-}
-.footer-menu-address-location{
-line-height: 26px;
-margin-top: 10px;}
+    }
 
+    .footer-menu-address-location {
+        line-height: 26px;
+        margin-top: 10px;
+    }
+
+    /*LOGO part*/
+    .logo-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .main-logo {
+        height: 50px; /* Adjust the height as needed */
+        margin-right: 10px; /* Space between the image and the text */
+    }
+
+    .logo-text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo-title {
+        font-size: 24px; /* Larger size for "UNITE" */
+        margin: 0;
+    }
+
+    .logo-subtitle {
+        font-size: 14px; /* Smaller size for "TOGETHER" */
+        margin: 0;
+        line-height: 1; /* Adjust for better alignment */
+    }
+
+    /* Optional: Ensuring the text occupies the same width */
+    .logo-title,
+    .logo-subtitle {
+        display: inline-block;
+        width: 100%;
+        text-align: left;
+    }
 
 </style>
 
@@ -142,7 +201,16 @@ margin-top: 10px;}
         <div class='footer-container' style="padding-top: 50px; max-width: 1300px; margin:auto; gap: 25px; display: flex; padding-left: 50px; padding-right: 50px;">
             <div class="foot-col foot-1-about" style="min-width: 250px;">
                 <div class="logo-ut-footer1" style="gap: var(--gap-7xl-6); margin-bottom: 6px;">
-                    <img class="main-logo-footer" alt="" src="/static/img_f/unite-together.svg">
+                    <a class="logo-ut2" href="{% url 'home' %}">
+                        <div class="logo-container">
+                            <img class="main-logo" loading="lazy" alt="Logo"
+                                 src="{% static 'img/new-unite-together.jpg' %}"/>
+                            <div class="logo-text">
+                                <h4 class="logo-title">UNITE</h4>
+                                <h6 class="logo-subtitle">TOGETHER</h6>
+                            </div>
+                        </div>
+                    </a>
                 </div>
                 <b>briefly about us</b>
                 <p>Our organization "Unite Together" is aimed at creating and
@@ -154,9 +222,12 @@ margin-top: 10px;}
             <div class="foot-col foot-2-menu" style="max-width: 130px; min-width: 100px; "><b>Menu</b>
                 <div class="line-decoration2"></div>
                 <ul class="footer-menu-links">
-                    <li class="footer-menu-links__active"><a href="#">About Us</a></li>
-                    <li class="footer-menu-links">Events</li>
-                    <li class="footer-menu-links">Projects</li>
+                    <li class="footer-menu-links"><a href="{% url 'who_we_are' %}"
+                                                     {% if '/about-us/' in request.path %}style="text-decoration: underline"{% endif %}>About Us</a></li>
+                    <li class="footer-menu-links"><a href="{% url 'events' %}"
+                                                     {% if '/events/' in request.path %}style="text-decoration: underline"{% endif %}>Events</a></li>
+                    <li class="footer-menu-links"><a href="{% url 'projects' %}"
+                                                     {% if '/projects/' in request.path %}style="text-decoration: underline"{% endif %}>Projects</a></li>
                 </ul>
             </div>
 
@@ -165,11 +236,18 @@ margin-top: 10px;}
                 <b>Contact</b>
                 <div class="line-decoration2"></div>
                 <ul class="footer-menu-address">
-                    <li class="footer-menu-address-phone">+995 595 720 449</li>
-                    <li class="footer-menu-address-email">uniteforukraine@gmail.com</li>
+                    <li class="footer-menu-address-phone">
+                        <a href="tel:+995595720449">+995 595 720 449</a>
+                    </li>
+                    <li class="footer-menu-address-email">
+                        <a href="mailto:uniteforukraine@gmail.com">uniteforukraine@gmail.com</a>
+                    </li>
+
                     <li class="footer-menu-address-location">
-                        <div>
-                        Tbilisi, 21/23 Tsotne Dadiani St., office 8<br>
+
+                        <a href="https://www.google.com/maps?q=21/23+Tsotne+Dadiani+St.,+Tbilisi,+office+8"
+                                          aria-pressed="true">Tbilisi, 21/23 Tsotne Dadiani St., office 8</a>
+                        <br>
 {#                        Batumi, 127 Luka Asatiani St.<br>#}
 {#                        Kutaisi, 62 Agmashenebeli St.</div>#}
                     </li>
@@ -188,26 +266,27 @@ margin-top: 10px;}
                 </div>
 
                 <div class="soc-icons-footer1">
-                    <img
+
+                    <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5cmlibXVydGRz"><img
                             class="icon-insta1"
                             loading="lazy"
                             alt=""
                             src="{% static 'img/iconinsta.svg' %}"
-                    />
+                    /></a>
 
-                    <img
+                    <a href="https://www.facebook.com/UniteTogetherForUkraine?mibextid=LQQJ4d"><img
                             class="icon-fb2"
                             loading="lazy"
                             alt=""
                             src="{% static 'img/iconfb.svg' %}"
-                    />
+                    /></a>
 
-                    <img
+                    <a href="https://t.me/Unite_T"><img
                             class="icon-tg2"
                             loading="lazy"
                             alt=""
                             src="{% static 'img/icontg.svg' %}"
-                    />
+                    /></a>
                 </div>
 
 
