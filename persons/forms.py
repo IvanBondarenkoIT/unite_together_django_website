@@ -18,21 +18,23 @@ class AssociatedPersonAdminForm(forms.ModelForm):
         }
 
 
-class AssociatedPersonForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(AssociatedPersonForm, self).__init__(*args, **kwargs)
-        self.fields['document_number'].help_text = 'Select a document type to see the format.'
+    # def __init__(self, *args, **kwargs):
+    #     super(AssociatedPersonForm, self).__init__(*args, **kwargs)
+    #     self.fields['document_number'].help_text = 'Select a document type to see the format.'
+    #
+    #     if 'type_of_document' in self.data:
+    #         try:
+    #             type_of_document_id = self.data.get('type_of_document')
+    #             type_of_document = TypeOfDocument.objects.get(id=type_of_document_id)
+    #             self.fields['document_number'].help_text = type_of_document.hint if type_of_document else self.fields['document_number'].help_text
+    #         except (ValueError, TypeOfDocument.DoesNotExist) as e:
+    #             # Consider logging the error here
+    #             pass
+    #     elif self.instance.pk:
+    #         self.fields['document_number'].help_text = self.instance.type_of_document.hint if self.instance.type_of_document else self.fields['document_number'].help_text
 
-        if 'type_of_document' in self.data:
-            try:
-                type_of_document_id = self.data.get('type_of_document')
-                type_of_document = TypeOfDocument.objects.get(id=type_of_document_id)
-                self.fields['document_number'].help_text = type_of_document.hint if type_of_document else self.fields['document_number'].help_text
-            except (ValueError, TypeOfDocument.DoesNotExist) as e:
-                # Consider logging the error here
-                pass
-        elif self.instance.pk:
-            self.fields['document_number'].help_text = self.instance.type_of_document.hint if self.instance.type_of_document else self.fields['document_number'].help_text
+
+class AssociatedPersonForm(forms.ModelForm):
 
     class Meta:
         model = AssociatedPerson
@@ -47,11 +49,20 @@ class AssociatedPersonForm(forms.ModelForm):
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
             'citizenship': forms.TextInput(attrs={'placeholder': 'Citizenship'}),
+            # 'type_of_document': forms.TextInput(attrs={'placeholder': ''})
             'document_number': forms.TextInput(attrs={'placeholder': 'Document Number'}),
             'georgian_phone_number': forms.TextInput(attrs={'placeholder': 'Georgian Phone Number', 'pattern': '\\+995[0-9]{9}'}),
             'ukrainian_phone_number': forms.TextInput(attrs={'placeholder': 'Ukrainian Phone Number', 'pattern': '\\+380[0-9]{9}'}),
             'address_line': forms.TextInput(attrs={'placeholder': 'Address Line'}),
         }
+
+    def clean_document_number(self):
+        document_number = self.cleaned_data.get('document_number')
+        type_of_document = self.cleaned_data.get('type_of_document')
+        pattern = type_of_document.regex
+        if document_number and not re.match(pattern, document_number):
+            raise forms.ValidationError(f"Document Type:{type_of_document.name} have to bee formatted as {type_of_document.hint}")
+        return document_number
 
     def clean_first_name(self):
         first_name = self.cleaned_data.get('first_name')
