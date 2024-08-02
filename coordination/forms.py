@@ -1,6 +1,6 @@
 from django import forms
 from web_pages.models import Events
-from persons.models import Participant, Person
+from persons.models import Participant, AssociatedPerson
 
 
 class EventForm(forms.ModelForm):
@@ -29,9 +29,9 @@ class ParticipantForm(forms.ModelForm):
         }
 
 
-class PersonForm(forms.ModelForm):
+class AssociatedPersonForm(forms.ModelForm):
     class Meta:
-        model = Person
+        model = AssociatedPerson
         fields = '__all__'
 
         widgets = {

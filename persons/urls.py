@@ -13,4 +13,5 @@ urlpatterns = [
     path('registered-events/', views.registered_events, name='registered_events'),
 
     path('settings/', views.settings, name='settings'),
+
 ]
