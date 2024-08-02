@@ -12,6 +12,7 @@ from accounts.models import Account
 from .forms import AssociatedPersonForm, AssociatedPersonFormSet
 
 
+
 OBJECTS_ON_PAGE = 4
 
 
@@ -69,31 +70,6 @@ def person_list(request):
 
     return render(request, 'persons/person_list.html', {'formset': formset})
 
-
-# @login_required(login_url="login")
-# def create_participant(request):
-#     if request.method == 'POST':
-#         form = ParticipantForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('participant_list')  # Change to your desired redirect target
-#     else:
-#         form = ParticipantForm()
-#
-#     return render(request, 'persons/create_participant.html', {'form': form})
-
-
-# @login_required(login_url="login")
-# def participant_list(request):
-#     if request.method == 'POST':
-#         formset = ParticipantFormSet(request.POST)
-#         if formset.is_valid():
-#             formset.save()
-#             return redirect('participant_list')  # Change to your desired redirect target
-#     else:
-#         formset = ParticipantFormSet(queryset=Participant.objects.all())
-#
-#     return render(request, 'persons/participant_list.html', {'formset': formset})
 
 
 @login_required(login_url="login")

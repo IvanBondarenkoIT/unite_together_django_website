@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import EventForm, ParticipantForm, PersonForm
+from .forms import EventForm, ParticipantForm, AssociatedPersonForm
 from web_pages.models import Events
 from persons.models import Participant, AssociatedPerson, UserProfile
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -216,14 +216,14 @@ def person_list(request):
 # @permission_required('web_pages.add_person', raise_exception=True)
 def person_create(request):
     if request.method == 'POST':
-        form = PersonForm(request.POST, request.FILES)
+        form = AssociatedPersonForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Person created successfully!')
             return redirect('person_list')
 
     else:
-        form = PersonForm()
+        form = AssociatedPersonForm()
     return render(request, 'coordination/person_form.html', {'form': form})
 
 @login_required
@@ -231,7 +231,7 @@ def person_create(request):
 def person_update(request, pk):
     person = get_object_or_404(AssociatedPerson, pk=pk)
     if request.method == 'POST':
-        form = PersonForm(request.POST, request.FILES, instance=person)
+        form = AssociatedPersonForm(request.POST, request.FILES, instance=person)
         if form.is_valid():
             messages.success(request, 'Person updated successfully!')
             form.save()
@@ -245,7 +245,7 @@ def person_update(request, pk):
             formatted_errors = " ".join(error_messages)
             messages.error(request, f'Person update failed!\n {formatted_errors}')
     else:
-        form = PersonForm(instance=person)
+        form = AssociatedPersonForm(instance=person)
     return render(request, 'coordination/person_form.html', {'form': form})
 
 @login_required

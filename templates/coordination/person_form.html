@@ -2,9 +2,24 @@
 
 {% block coordination_content %}
 <h2>{% if form.instance.pk %}Edit Person{% else %}Create Person{% endif %}</h2>
+
+{% if messages %}
+    <div class="alert alert-info">
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-primary" type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+    <fieldset>
+        {{ form.as_p }}
+    </fieldset>
+    <button class="btn btn-primary" type="submit">
+        {% if form.instance.pk %}Update{% else %}Create{% endif %}
+    </button>
 </form>
 {% endblock %}

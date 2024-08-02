@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 import re
 
 from accounts.models import Account
-from web_pages.models import WebContentObject, City
+from web_pages.models import WebContentObject, City, Events
 
 
 class TypeOfDocument(models.Model):
@@ -121,7 +121,7 @@ class Participant(Person):
         CANCELED = 'Canceled', 'Canceled'
         VISITED = 'Visited', 'Visited'
 
-    registered_on = models.ForeignKey(WebContentObject, on_delete=models.CASCADE, blank=True, null=True)
+    registered_on = models.ForeignKey(Events, on_delete=models.CASCADE, blank=True, null=True)
 
     status = models.CharField(max_length=10, choices=Status.choices, blank=True, null=True)
 
