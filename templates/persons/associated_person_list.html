@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    .table-container {
+        max-width: 100%;
+        margin: 20px auto;
+        background-color: grey;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow-x: auto; /* Enables horizontal scrolling */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .button {
+        padding: 8px 12px;
+        font-size: 14px;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 5px;
+        display: inline-block;
+    }
+
+    .button.active {
+        background-color: #4CAF50;
+    }
+
+    .button.inactive {
+        background-color: #999;
+        cursor: not-allowed;
+    }
+
+    .button.add-person {
+        display: inline-block;
+        margin-bottom: 15px;
+        background-color: #007BFF;
+    }
+
+    .button:hover {
+        background-color: #45a049;
+    }
+
+    .button.inactive:hover {
+        background-color: #999;
+    }
+
+    @media (max-width: 768px) {
+        .table-container {
+            padding: 10px;
+        }
+
+        th, td {
+            padding: 8px;
+            font-size: 12px;
+        }
+
+        .button {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+    }
+</style>
+
+<main class="sec-accounts1">
+    {% include 'includes/dashboard_sidebar.html' %}
+    <div class="table-container">
+        <h2>Associated Persons</h2>
+        <a href="{% url 'associated_person_create' %}" class="button add-person">Add New Person</a>
+
+        {% if persons %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Actions</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Date of Birth</th>
+                        <th>Citizenship</th>
+                        <th>Date of Arrival</th>
+                        <th>Type of Document</th>
+                        <th>Document Number</th>
+                        <th>Gender</th>
+                        <th>Georgian Phone Number</th>
+                        <th>Ukrainian Phone Number</th>
+                        <th>Country</th>
+                        <th>Chosen City</th>
+                        <th>Address Line</th>
+                        <th>Is Active</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for person in persons %}
+                        <tr>
+                            <td>
+                                {% if person.edit_permission %}
+                                    <a href="{% url 'associated_person_edit' person.id %}" class="button active">Edit</a>
+                                {% else %}
+                                    <span class="button inactive">Edit</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ person.first_name }}</td>
+                            <td>{{ person.last_name }}</td>
+                            <td>{{ person.date_of_birth|date:"Y-m-d" }}</td>
+                            <td>{{ person.citizenship }}</td>
+                            <td>{{ person.date_of_arrival|date:"Y-m-d" }}</td>
+                            <td>{{ person.type_of_document.name }}</td>
+                            <td>{{ person.document_number }}</td>
+                            <td>{{ person.gender }}</td>
+                            <td>{{ person.georgian_phone_number }}</td>
+                            <td>{{ person.ukrainian_phone_number }}</td>
+                            <td>{{ person.country }}</td>
+                            <td>{{ person.chosen_city }}</td>
+                            <td>{{ person.address_line }}</td>
+                            <td>{{ person.is_active }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No persons found.</p>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
