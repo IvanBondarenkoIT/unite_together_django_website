@@ -70,6 +70,22 @@ def person_list(request):
 
     return render(request, 'persons/person_list.html', {'formset': formset})
 
+@login_required(login_url="login")
+def associated_person_list(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    persons = AssociatedPerson.objects.filter(user_owner=user_profile.user).order_by("unique_identifier")
+    return render(request, 'persons/associated_person_list.html', {'persons': persons})
+
+@login_required(login_url="login")
+def associated_person_create(request):
+    pass
+
+@login_required(login_url="login")
+def associated_person_edit(request, person_id):
+    pass
+
+
+
 
 
 @login_required(login_url="login")
