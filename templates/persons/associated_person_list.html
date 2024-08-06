@@ -117,16 +117,20 @@
     </div>
 
     <div class="table-container">
-        <h2>Associated Persons</h2>
+        <h2>Persons</h2>
 
         {% if main_person %}
             <div>
-                <h3>Main Person</h3>
+                <h3>Main Person:</h3>
                 <p><strong>{{ main_person.first_name }} {{ main_person.last_name }}</strong></p>
-                <p>Date of Birth: {{ main_person.date_of_birth|date:"Y-m-d" }}</p>
+                <p>Date of Birth: {{ main_person.date_of_birth|date:"d.m.Y" }}</p>
                 <p>Citizenship: {{ main_person.citizenship }}</p>
                 <p>Document Number: {{ main_person.document_number }}</p>
-                <a href="{% url 'associated_person_edit' main_person.id %}" class="button active">Edit Main Person</a>
+                {% if main_person.edit_permission %}
+                    <a href="{% url 'associated_person_edit' main_person.id %}" class="button active">Edit Main Person</a>
+                {% else %}
+                    <a href="{% url 'contact' %}">To edit person sand the request</a>
+                {% endif %}
             </div>
         {% endif %}
 
@@ -162,8 +166,8 @@
                                 {% endif %}
                             </td>
                             <td>{{ person.first_name }} {{ person.last_name }}</td>
-                            <td>{{ person.date_of_birth|date:"Y-m-d" }}</td>
-                            <td>{{ person.date_of_arrival|date:"Y-m-d" }}</td>
+                            <td>{{ person.date_of_birth|date:"d.m.Y" }}</td>
+                            <td>{{ person.date_of_arrival|date:"d.m.Y" }}</td>
                             <td>{{ person.type_of_document.name }}</td>
                             <td>{{ person.document_number }}</td>
                             <td>{{ person.gender }}</td>
