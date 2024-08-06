@@ -16,24 +16,70 @@ from .forms import AssociatedPersonForm, AssociatedPersonFormSet
 OBJECTS_ON_PAGE = 4
 
 
+# @login_required(login_url="login")
+# def dashboard(request):
+#     user_profile = get_object_or_404(UserProfile, user=request.user)  # Get UserProfile with user==request.user
+#
+#     if request.method == "POST":
+#         person_form = AssociatedPersonForm(request.POST, request.FILES, instance=user_profile.person)
+#         if person_form.is_valid():
+#             person_form.save()
+#             messages.success(request, "Your profile has been updated")
+#             return redirect("dashboard")
+#     else:
+#         person_form = AssociatedPersonForm(instance=user_profile.person)
+#
+#     return render(request, "persons/dashboard.html", {'form': person_form})
+
+
+# @login_required(login_url="login")
+# def create_person(request):
+#     if request.method == 'POST':
+#         form = AssociatedPersonForm(request.POST)
+#         if form.is_valid():
+#             associated_person = form.save(commit=False)
+#             associated_person.user_owner = request.user
+#             associated_person.is_active = True
+#             associated_person.save()
+#             messages.success(request, 'Person created successfully!')
+#             return redirect("dashboard")
+#         else:
+#             messages.error(request, 'Please correct the errors below.')
+#             return redirect("dashboard")
+#     else:
+#         form = AssociatedPersonForm()
+#
+#     return render(request, 'persons/create_person.html', {'form': form})
+
+
+# @login_required(login_url="login")
+# def person_list(request):
+#     user_profile = get_object_or_404(UserProfile, user=request.user)  # Get UserProfile with user==request.user
+#     if request.method == 'POST':
+#         formset = AssociatedPersonFormSet(request.POST)
+#         if formset.is_valid():
+#             associated_person = formset.save(commit=False)
+#             associated_person.user_owner = request.user
+#             associated_person.is_active = True
+#             associated_person.save()
+#             messages.success(request, 'Person created successfully!')
+#             return redirect('person_list')  # Change to your desired redirect target
+#         else:
+#             messages.error(request, 'Please correct the errors below.')
+#     else:
+#         formset = AssociatedPersonFormSet(queryset=AssociatedPerson.objects.all().filter(is_active=True, user_owner=request.user).order_by("unique_identifier"))
+#
+#     return render(request, 'persons/person_list.html', {'formset': formset})
+
 @login_required(login_url="login")
-def dashboard(request):
-    user_profile = get_object_or_404(UserProfile, user=request.user)  # Get UserProfile with user==request.user
-
-    if request.method == "POST":
-        person_form = AssociatedPersonForm(request.POST, request.FILES, instance=user_profile.person)
-        if person_form.is_valid():
-            person_form.save()
-            messages.success(request, "Your profile has been updated")
-            return redirect("dashboard")
-    else:
-        person_form = AssociatedPersonForm(instance=user_profile.person)
-
-    return render(request, "persons/dashboard.html", {'form': person_form})
-
+def associated_person_list(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    persons = AssociatedPerson.objects.filter(user_owner=user_profile.user).order_by("unique_identifier")
+    main_person = user_profile.user.associated_person
+    return render(request, 'persons/associated_person_list.html', {'persons': persons, 'main_person': main_person})
 
 @login_required(login_url="login")
-def create_person(request):
+def associated_person_create(request):
     if request.method == 'POST':
         form = AssociatedPersonForm(request.POST)
         if form.is_valid():
@@ -42,47 +88,33 @@ def create_person(request):
             associated_person.is_active = True
             associated_person.save()
             messages.success(request, 'Person created successfully!')
-            return redirect('home')  # Change to your desired redirect target
+            return redirect("associated_person_list")
         else:
             messages.error(request, 'Please correct the errors below.')
+        #     return redirect("associated_person_create")
     else:
         form = AssociatedPersonForm()
 
-    return render(request, 'persons/create_person.html', {'form': form})
-
+    return render(request, 'persons/dashboard.html', {'form': form})
 
 @login_required(login_url="login")
-def person_list(request):
-    user_profile = get_object_or_404(UserProfile, user=request.user)  # Get UserProfile with user==request.user
-    if request.method == 'POST':
-        formset = AssociatedPersonFormSet(request.POST)
-        if formset.is_valid():
-            associated_person = formset.save(commit=False)
-            associated_person.user_owner = request.user
-            associated_person.is_active = True
-            associated_person.save()
-            messages.success(request, 'Person created successfully!')
-            return redirect('person_list')  # Change to your desired redirect target
+def associated_person_edit(request, pk):
+    edited_person = AssociatedPerson.objects.get(pk=pk)
+
+    if request.method == "POST":
+        person_form = AssociatedPersonForm(request.POST, request.FILES, instance=edited_person)
+        if person_form.is_valid():
+            person_form.save()
+            messages.success(request, "Your profile has been updated")
+            return redirect("associated_person_list")
+
         else:
             messages.error(request, 'Please correct the errors below.')
+        #     return redirect("associated_person_edit", pk=edited_person.pk)
     else:
-        formset = AssociatedPersonFormSet(queryset=AssociatedPerson.objects.all().filter(is_active=True, user_owner=request.user).order_by("unique_identifier"))
+        person_form = AssociatedPersonForm(instance=edited_person)
 
-    return render(request, 'persons/person_list.html', {'formset': formset})
-
-@login_required(login_url="login")
-def associated_person_list(request):
-    user_profile = get_object_or_404(UserProfile, user=request.user)
-    persons = AssociatedPerson.objects.filter(user_owner=user_profile.user).order_by("unique_identifier")
-    return render(request, 'persons/associated_person_list.html', {'persons': persons})
-
-@login_required(login_url="login")
-def associated_person_create(request):
-    pass
-
-@login_required(login_url="login")
-def associated_person_edit(request, person_id):
-    pass
+    return render(request, "persons/dashboard.html", {'form': person_form})
 
 
 

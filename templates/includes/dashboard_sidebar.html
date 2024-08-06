@@ -1,22 +1,20 @@
+
+
 <div class="aside-box10">
     <div class="rectangle-bg10"></div>
 
     <div class="container">
         <!--   SIDEBAR   -->
         <ul class="list-group navigation-links">
-            <a class="events33{% if 'dashboard' in request.path %} active{% endif %}"
-               href="{% url 'dashboard' %}"> Account </a>
-            <a class="events33{% if 'persons-list' in request.path %} active{% endif %}"
-               href="{% url 'person_list' %}"> Persons </a>
+            <a class="events33{% if 'associated-persons' in request.path %} active{% endif %}"
+               href="{% url 'associated_person_list' %}"> Persons </a>
             <a class="events33{% if 'registered-events' in request.path %} active{% endif %}"
                href="{% url 'registered_events' %}"> Events & Projects </a>
             <a class="events33{% if 'settings' in request.path %} active{% endif %}"
                href="{% url 'settings' %}"> Change Password </a>
             <br>
             <br>
-            <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text" >Log out</span></a>
+            <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span></a>
         </ul>
-
     </div>
-
 </div>
