@@ -4,10 +4,10 @@
     <div class="container">
         <!--   SIDEBAR   -->
         <ul class="list-group navigation-links">
-            <a class="events33{% if 'dashboard' in request.path %} active{% endif %}"
-               href="{% url 'dashboard' %}"> Account </a>
-            <a class="events33{% if 'persons-list' in request.path %} active{% endif %}"
-               href="{% url 'person_list' %}"> Persons </a>
+{#            <a class="events33{% if 'dashboard' in request.path %} active{% endif %}"#}
+{#               href="{% url 'dashboard' %}"> Account </a>#}
+            <a class="events33{% if 'associated-persons' in request.path %} active{% endif %}"
+               href="{% url 'associated_person_list' %}"> Persons </a>
             <a class="events33{% if 'registered-events' in request.path %} active{% endif %}"
                href="{% url 'registered_events' %}"> Events & Projects </a>
             <a class="events33{% if 'settings' in request.path %} active{% endif %}"

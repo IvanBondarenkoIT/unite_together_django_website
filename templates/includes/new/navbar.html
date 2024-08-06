@@ -168,10 +168,13 @@
                                      src="{% static 'img/avatarplaceholder--change-image-here@2x.png' %}"/>
                             </a>
                             <div class="dropdown-menu" id="user-dropdown">
-                                <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>
-                                <a href="{% url 'settings' %}">{{ user.email }}</a>
-                                <a href="{% url 'person_list' %}">Family persons</a>
+                                <br>
+                                <h4 style="margin-left: 15px">{{ user.associated_person.last_name }} {{ user.associated_person.first_name }}</h4>
+{#                                <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>#}
+
+                                <a href="{% url 'associated_person_list' %}">Family persons</a>
                                 <a href="{% url 'registered_events' %}">Events & Projects</a>
+                                <a href="{% url 'settings' %}">Settings</a>
                                 <a href="{% url 'logout' %}">Logout</a>
                             </div>
                         </div>
@@ -195,13 +198,15 @@
                 <div class="hamburger-menu" onclick="toggleDropdown()">☰</div>
             </div>
             <div class="dropdown-menu" id="dropdown-menu">
+                <h4 style="margin-left: 15px">{{ user.associated_person.last_name }} {{ user.associated_person.first_name }}</h4>
                 <a href="{% url 'who_we_are' %}">About us</a>
                 <a href="{% url 'events' %}">Events</a>
                 <a href="{% url 'projects' %}">Projects</a>
-                <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>
-                <a href="{% url 'settings' %}">{{ user.email }}</a>
-                <a href="{% url 'person_list' %}">Family persons</a>
+                <br>
+{#                <a href="{% url 'associated_person_list' %}">{{ user.associated_person }}</a>#}
+                <a href="{% url 'associated_person_list' %}">Family persons</a>
                 <a href="{% url 'registered_events' %}">Events & Projects</a>
+                <a href="{% url 'settings' %}">Settings</a>
                 <a href="{% url 'logout' %}">Logout</a>
             </div>
             {#        </header>#}

@@ -141,7 +141,7 @@
                 {% if form.georgian_phone_number.errors %}
                     <div class="error">{{ form.georgian_phone_number.errors }}</div>
                 {% endif %}
-                <small>Format: +995XXXXXXXXX</small>
+                <small>Format: 995XXXXXXXXX</small>
             </div>
             <div class="form-group">
                 {{ form.ukrainian_phone_number.label_tag }}
@@ -149,7 +149,7 @@
                 {% if form.ukrainian_phone_number.errors %}
                     <div class="error">{{ form.ukrainian_phone_number.errors }}</div>
                 {% endif %}
-                <small>Format: +380XXXXXXXXX</small>
+                <small>Format: 380XXXXXXXXX</small>
             </div>
             <div class="form-group">
                 {{ form.country.label_tag }}
@@ -184,28 +184,28 @@
     </div>
 </main>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const typeOfDocumentField = document.getElementById('{{ form.type_of_document.id_for_label }}');
-        const documentNumberHelp = document.getElementById('document-number-help');
-
-        function updateHelpText() {
-            const selectedOption = typeOfDocumentField.value;
-
-            fetch(`/document_hint/${selectedOption}/`)
-                .then(response => response.json())
-                .then(data => {
-                    documentNumberHelp.textContent = data.hint;
-                })
-                .catch(error => {
-                    console.error('Error fetching document hint:', error);
-                });
-        }
-
-        typeOfDocumentField.addEventListener('change', updateHelpText);
-
-        // Call the function once to set the initial help text based on the default selection
-        updateHelpText();
-    });
-</script>
+{#<script>#}
+{#    document.addEventListener('DOMContentLoaded', function () {#}
+{#        const typeOfDocumentField = document.getElementById('{{ form.type_of_document.id_for_label }}');#}
+{#        const documentNumberHelp = document.getElementById('document-number-help');#}
+{##}
+{#        function updateHelpText() {#}
+{#            const selectedOption = typeOfDocumentField.value;#}
+{##}
+{#            fetch(`/document_hint/${selectedOption}/`)#}
+{#                .then(response => response.json())#}
+{#                .then(data => {#}
+{#                    documentNumberHelp.textContent = data.hint;#}
+{#                })#}
+{#                .catch(error => {#}
+{#                    console.error('Error fetching document hint:', error);#}
+{#                });#}
+{#        }#}
+{##}
+{#        typeOfDocumentField.addEventListener('change', updateHelpText);#}
+{##}
+{#        // Call the function once to set the initial help text based on the default selection#}
+{#        updateHelpText();#}
+{#    });#}
+{#</script>#}
 {% endblock %}
