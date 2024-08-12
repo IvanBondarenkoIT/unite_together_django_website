@@ -118,6 +118,79 @@ def export_associated_persons(modeladmin, request, queryset):
 
 export_associated_persons.short_description = "Export selected AssociatedPersons to Excel"
 
+def export_participants(modeladmin, request, queryset):
+    # Create a workbook and add a worksheet
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active
+    sheet.title = 'Participants'
+
+    # Write the headers
+    headers = [
+        'Unique ID',
+        'First Name',
+        'Last Name',
+        'Date of Birth',
+        'Citizenship',
+        'Date of Arrival',
+        'Type of Document',
+        'Document Number',
+        'Gender',
+        'Georgian Phone Number',
+        'Ukrainian Phone Number',
+        'Country',
+        'City',
+        'Address Line',
+        'Created At',
+        'Updated At',
+        'Is Active',
+        'Edit Permission',
+        'Is Approved',
+        'User Owner Email',
+        'Copy of Unique Identifier',
+        'Registered On (Event)',
+        'Status'
+    ]
+    sheet.append(headers)
+
+    # Write data rows
+    for participant in queryset:
+        sheet.append([
+            participant.copy_of_unique_identifier,
+            participant.first_name,
+            participant.last_name,
+            participant.date_of_birth,
+            participant.citizenship,
+            participant.date_of_arrival,
+            participant.type_of_document.name if participant.type_of_document else '',  # Assuming TypeOfDocument has a 'name' field
+            participant.document_number,
+            participant.gender,
+            participant.georgian_phone_number,
+            participant.ukrainian_phone_number,
+            participant.country,
+            participant.chosen_city.name if participant.chosen_city else '',  # Assuming City has a 'name' field
+            participant.address_line,
+            participant.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            participant.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
+            participant.is_active,
+            participant.edit_permission,
+            participant.is_approved,
+            participant.user_owner.email if participant.user_owner else '',
+            participant.copy_of_unique_identifier,
+            participant.registered_on.name if participant.registered_on else '',  # Assuming Events has a 'name' field
+            participant.status
+        ])
+
+    current_datetime = datetime.datetime.now()
+    date_string = current_datetime.strftime("%d-%m-%Y")
+    # Save the workbook to an HttpResponse
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename="participants_{date_string}.xlsx"'
+    workbook.save(response)
+
+    return response
+
+export_participants.short_description = "Export selected Participants to Excel"
+
 
 class UserOwnerFilter(admin.SimpleListFilter):
     title = _('User Owner')
@@ -154,7 +227,7 @@ class AssociatedPersonAdmin(admin.ModelAdmin):
 
 class ParticipantAdmin(admin.ModelAdmin):
     form = ParticipantAdminForm
-    list_display = ('copy_of_unique_identifier', 'registered_on','created_at', 'first_name', 'last_name', 'date_of_birth', 'date_of_birth', 'document_number', 'created_at', 'is_active')
+    list_display = ('copy_of_unique_identifier', 'registered_on','created_at', 'first_name', 'last_name', 'date_of_birth', 'date_of_arrival', 'document_number', 'created_at', 'is_active')
     list_display_links = ('copy_of_unique_identifier', 'first_name', 'last_name')
     # readonly_fields = ('date_joined', 'last_login')
     ordering = ('-created_at',)
@@ -162,6 +235,7 @@ class ParticipantAdmin(admin.ModelAdmin):
     filter_horizontal = ()
     list_filter = ('copy_of_unique_identifier', 'registered_on',)
     fieldsets = ()
+    actions = [export_participants]
 
 
 class UserProfileAdmin(admin.ModelAdmin):
