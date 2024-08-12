@@ -30,7 +30,7 @@ class Person(models.Model):
         Georgia = 'Georgia', 'Georgia'
         OTHER = 'Other', 'Other'
 
-    user_owner = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True)
+    user_owner: Account = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True)
     # is_default = models.BooleanField(default=False)
 
     first_name = models.CharField(max_length=50, blank=True, null=True)
@@ -80,6 +80,12 @@ class AssociatedPerson(Person):
 
     def __str__(self):
         return f"{self.unique_identifier} {self.first_name} {self.last_name}"
+
+    def get_default_phone_number(self):
+        if self.user_owner.associated_person:
+            return self.user_owner.associated_person.georgian_phone_number
+        else:
+            return ""
 
 
 @receiver(pre_save, sender=AssociatedPerson)
