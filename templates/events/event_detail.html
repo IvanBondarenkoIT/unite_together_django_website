@@ -30,7 +30,13 @@
                             {% if single_event.start_age %}
                                 <div class="age-3-16">
                                     <b>Age</b>
-                                    <span class="span">: {{ single_event.start_age }}-{{ single_event.end_age }}</span>
+                                    <span class="span">:
+                                        {% if single_event.start_age %}
+                                        	{{ single_event.start_age }}
+                                        {% endif %}
+                                        {% if single_event.end_age %}
+                                        	-{{ single_event.end_age }}
+                                        {% endif %}  </span>
                                 </div>
 
                             {% endif %}
