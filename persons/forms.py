@@ -103,7 +103,8 @@ class AssociatedPersonForm(forms.ModelForm):
                 raise forms.ValidationError("Ukrainian phone number must be in the format: 380XXXXXXXXX.")
             return ukrainian_phone_number
         else:
-            raise forms.ValidationError("Fill your ukrainian phone number")
+            pass
+            # raise forms.ValidationError("Fill your ukrainian phone number")
 
 
 class ParticipantAdminForm(forms.ModelForm):

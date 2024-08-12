@@ -142,15 +142,15 @@
                     <th>Actions</th>
                     <th>Name</th>
                     <th>Date of Birth</th>
-                    <th>Date of Arrival</th>
-                    <th>Type of Document</th>
+{#                    <th>Date of Arrival</th>#}
+{#                    <th>Type of Document</th>#}
                     <th>Document Number</th>
                     <th>Gender</th>
-                    <th>Georgian Phone Number</th>
-                    <th>Ukrainian Phone Number</th>
-                    <th>Country</th>
-                    <th>Chosen City</th>
-                    <th>Address Line</th>
+{#                    <th>Georgian Phone Number</th>#}
+{#                    <th>Ukrainian Phone Number</th>#}
+{#                    <th>Country</th>#}
+{#                    <th>Chosen City</th>#}
+{#                    <th>Address Line</th>#}
                 </tr>
             </thead>
             <tbody>
@@ -167,15 +167,15 @@
                             </td>
                             <td>{{ person.first_name }} {{ person.last_name }}</td>
                             <td>{{ person.date_of_birth|date:"d.m.Y" }}</td>
-                            <td>{{ person.date_of_arrival|date:"d.m.Y" }}</td>
-                            <td>{{ person.type_of_document.name }}</td>
+{#                            <td>{{ person.date_of_arrival|date:"d.m.Y" }}</td>#}
+{#                            <td>{{ person.type_of_document.name }}</td>#}
                             <td>{{ person.document_number }}</td>
                             <td>{{ person.gender }}</td>
-                            <td>{{ person.georgian_phone_number }}</td>
-                            <td>{{ person.ukrainian_phone_number }}</td>
-                            <td>{{ person.country }}</td>
-                            <td>{{ person.chosen_city }}</td>
-                            <td>{{ person.address_line }}</td>
+{#                            <td>{{ person.georgian_phone_number }}</td>#}
+{#                            <td>{{ person.ukrainian_phone_number }}</td>#}
+{#                            <td>{{ person.country }}</td>#}
+{#                            <td>{{ person.chosen_city }}</td>#}
+{#                            <td>{{ person.address_line }}</td>#}
                         </tr>
                     {% endif %}
                 {% endfor %}
