@@ -227,11 +227,18 @@ class AssociatedPersonAdmin(admin.ModelAdmin):
 
 class ParticipantAdmin(admin.ModelAdmin):
     form = ParticipantAdminForm
-    list_display = ('copy_of_unique_identifier', 'registered_on','created_at', 'first_name', 'last_name', 'date_of_birth', 'date_of_arrival', 'document_number', 'created_at', 'is_active')
+    list_display = ('copy_of_unique_identifier', 'registered_on', 'registered_date', 'first_name', 'last_name', 'date_of_birth', 'date_of_arrival', 'document_number', 'created_at', 'is_active')
+
+    def registered_date(self, obj):
+        return obj.created_at.strftime('%Y-%m-%d %H:%M:%S')
+
+    registered_date.short_description = 'Registered Date'
+
     list_display_links = ('copy_of_unique_identifier', 'first_name', 'last_name')
     # readonly_fields = ('date_joined', 'last_login')
     ordering = ('-created_at',)
-
+    search_fields = ('copy_of_unique_identifier', 'first_name', 'last_name', 'document_number', 'georgian_phone_number',
+                     'ukrainian_phone_number')
     filter_horizontal = ()
     list_filter = ('copy_of_unique_identifier', 'registered_on',)
     fieldsets = ()
