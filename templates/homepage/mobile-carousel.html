@@ -1,102 +1,102 @@
 {% load static %}
 
-    <style>
-        .simple-mobile-carousel-container {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            max-width: 600px;
-            margin: auto;
-        }
+<style>
+    .simple-mobile-carousel-container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        max-width: 400px; /* Adjusted max-width to 400px */
+        margin: auto;
+    }
 
-        .simple-mobile-carousel-inner {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
+    .simple-mobile-carousel-inner {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
 
-        .simple-mobile-carousel-item {
-            min-width: 100%;
-            box-sizing: border-box;
-        }
+    .simple-mobile-carousel-item {
+        min-width: 100%;
+        box-sizing: border-box;
+    }
 
-        .simple-mobile-carousel-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
+    .simple-mobile-carousel-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
 
-        .simple-mobile-carousel-text {
-            text-align: center;
-            padding: 10px;
-            overflow: hidden;
-        }
+    .simple-mobile-carousel-text {
+        text-align: center;
+        padding: 8px; /* Adjusted padding */
+        overflow: hidden;
+    }
 
+    .simple-mobile-carousel-text h5 {
+        font-size: 1.15rem; /* Slightly smaller font size */
+    }
+
+    .simple-mobile-carousel-text p {
+        font-size: 0.9rem; /* Slightly smaller font size */
+        color: #666;
+        max-height: 2.5rem; /* Adjusted height for smaller screens */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .simple-mobile-carousel-controls {
+        display: flex;
+        justify-content: center;
+        gap: 8px; /* Adjusted gap */
+        margin-top: 8px; /* Adjusted margin */
+    }
+
+    .simple-mobile-carousel-control {
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: white;
+        font-size: 16px; /* Slightly smaller font size */
+        padding: 5px 10px; /* Adjusted padding */
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    .simple-mobile-carousel-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 4px; /* Adjusted gap */
+        margin-top: 8px; /* Adjusted margin */
+    }
+
+    .simple-mobile-carousel-indicator {
+        width: 8px; /* Slightly smaller indicator */
+        height: 8px;
+        background-color: #ccc;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .simple-mobile-carousel-indicator.active {
+        background-color: #007bff;
+    }
+
+    /* Additional media query for screens with a max width of 400px */
+    @media (max-width: 400px) {
         .simple-mobile-carousel-text h5 {
-            font-size: 1.25rem;
+            font-size: 1rem; /* Smaller font size for the title */
         }
 
         .simple-mobile-carousel-text p {
-            font-size: 1rem;
-            color: #666;
-            max-height: 3rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .simple-mobile-carousel-controls {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
+            font-size: 0.85rem; /* Smaller font size for the description */
+            max-height: 2rem; /* Adjusted max height */
         }
 
         .simple-mobile-carousel-control {
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            color: white;
-            font-size: 18px;
-            padding: 5px 15px;
-            cursor: pointer;
-            border-radius: 5px;
+            font-size: 14px; /* Smaller font size for controls */
+            padding: 4px 8px; /* Adjusted padding */
         }
-
-        .simple-mobile-carousel-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-            margin-top: 10px;
-        }
-
-        .simple-mobile-carousel-indicator {
-            width: 10px;
-            height: 10px;
-            background-color: #ccc;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .simple-mobile-carousel-indicator.active {
-            background-color: #007bff;
-        }
-
-        /* Media query for smaller screens */
-        @media (max-width: 768px) {
-            .simple-mobile-carousel-text h5 {
-                font-size: 1rem;
-            }
-
-            .simple-mobile-carousel-text p {
-                font-size: 0.875rem;
-                max-height: 2.5rem;
-            }
-
-            .simple-mobile-carousel-control {
-                font-size: 16px;
-                padding: 5px 10px;
-            }
-        }
-    </style>
+    }
+</style>
 
 
 <div class="simple-mobile-carousel-container">
@@ -126,7 +126,6 @@
     </div>
 </div>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const carouselContainer = document.querySelector('.simple-mobile-carousel-container');
@@ -171,3 +170,4 @@
         updateCarousel();
     });
 </script>
+
