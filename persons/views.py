@@ -81,7 +81,8 @@ def associated_person_list(request):
 @login_required(login_url="login")
 def associated_person_create(request):
     if request.method == 'POST':
-        form = AssociatedPersonForm(request.POST)
+        user_owner = request.user  # Assuming user is the owner
+        form = AssociatedPersonForm(request.POST, user_owner=user_owner)
         if form.is_valid():
             associated_person = form.save(commit=False)
             associated_person.user_owner = request.user
@@ -93,7 +94,7 @@ def associated_person_create(request):
             messages.error(request, 'Please correct the errors below.')
         #     return redirect("associated_person_create")
     else:
-        form = AssociatedPersonForm()
+        form = AssociatedPersonForm(user_owner=request.user)
 
     return render(request, 'persons/dashboard.html', {'form': form})
 
@@ -102,7 +103,8 @@ def associated_person_edit(request, pk):
     edited_person = AssociatedPerson.objects.get(pk=pk)
 
     if request.method == "POST":
-        person_form = AssociatedPersonForm(request.POST, request.FILES, instance=edited_person)
+        user_owner = request.user  # Assuming user is the owner
+        person_form = AssociatedPersonForm(request.POST, request.FILES, instance=edited_person, user_owner=user_owner)
         if person_form.is_valid():
             person_form.save()
             messages.success(request, "Your profile has been updated")

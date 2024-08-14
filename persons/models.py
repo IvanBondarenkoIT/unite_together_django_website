@@ -19,15 +19,19 @@ class TypeOfDocument(models.Model):
 
 
 class Person(models.Model):
-
     class Gender(models.TextChoices):
-        MALE = 'M', 'Male'
-        FEMALE = 'F', 'Female'
-        OTHER = 'O', 'Other'
+        MALE = 'Male', 'Male'
+        FEMALE = 'Female', 'Female'
+        OTHER = 'Other', 'Other'
 
     class Country(models.TextChoices):
-        Ukraine = 'Ukraine', 'Ukraine'
+        # Ukraine = 'Ukraine', 'Ukraine'
         Georgia = 'Georgia', 'Georgia'
+        # OTHER = 'Other', 'Other'
+
+    class CitizenshipChoices(models.TextChoices):
+        GEORGIAN = 'Georgian', 'Georgian'
+        UKRAINIAN = 'Ukrainian', 'Ukrainian'
         OTHER = 'Other', 'Other'
 
     user_owner: Account = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True)
@@ -41,7 +45,22 @@ class Person(models.Model):
     # Date of Birth
     date_of_birth = models.DateField(blank=True, null=True)
     # Citizenship
-    citizenship = models.CharField(max_length=100, blank=True, null=True)
+
+    citizenship = models.CharField(
+        max_length=20,
+        choices=CitizenshipChoices.choices,
+        default=CitizenshipChoices.GEORGIAN,
+        blank=True,
+        null=True
+    )
+    # # Custom citizenship field to fill when 'Other' is selected
+    # other_citizenship = models.CharField(
+    #     max_length=100,
+    #     blank=True,
+    #     null=True,
+    #     help_text="Specify citizenship if 'Other' is selected."
+    # )
+
     # Date of arrival
     date_of_arrival = models.DateField(blank=True, null=True)
     # Type of document
@@ -51,12 +70,23 @@ class Person(models.Model):
     document_number = models.CharField(max_length=20, blank=True, null=True)
     # document_number = models.CharField(max_length=50, blank=True, null=True)
 
-    gender = models.CharField(max_length=3, choices=Gender.choices, blank=True, null=True)
+    gender = models.CharField(max_length=6, choices=Gender.choices, blank=True, null=True)
 
-    georgian_phone_number = models.CharField(max_length=50, blank=True, null=True)
+    georgian_phone_number = models.CharField(
+        max_length=50,
+        # default=get_default_phone_number(),
+        blank=True,
+        null=True
+    )
     ukrainian_phone_number = models.CharField(max_length=50, blank=True, null=True)
 
-    country = models.CharField(max_length=7, choices=Country.choices, blank=True, null=True)
+    country = models.CharField(
+        max_length=7,
+        choices=Country.choices,
+        default=Country.Georgia,
+        blank=True,
+        null=True,
+    )
     # city = models.CharField(max_length=50, blank=True, null=True)
     chosen_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
     address_line = models.CharField(max_length=100, blank=True, null=True)
@@ -73,6 +103,12 @@ class Person(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+    # def get_default_phone_number(self):
+    #     if self.user_owner.associated_person:
+    #         return self.user_owner.associated_person.georgian_phone_number
+    #     else:
+    #         return ""
+
 
 class AssociatedPerson(Person):
     # unique_identifier = models.CharField(max_length=15, unique=True, blank=True, null=True, editable=False)
@@ -81,11 +117,7 @@ class AssociatedPerson(Person):
     def __str__(self):
         return f"{self.unique_identifier} {self.first_name} {self.last_name}"
 
-    def get_default_phone_number(self):
-        if self.user_owner.associated_person:
-            return self.user_owner.associated_person.georgian_phone_number
-        else:
-            return ""
+
 
 
 @receiver(pre_save, sender=AssociatedPerson)
@@ -122,6 +154,7 @@ def set_unique_identifier(sender, instance, **kwargs):
 
 class Participant(Person):
     copy_of_unique_identifier = models.CharField(max_length=15, blank=True, null=True, editable=False)
+
     class Status(models.TextChoices):
         REGISTERED = 'Registered', 'Registered'
         CANCELED = 'Canceled', 'Canceled'
