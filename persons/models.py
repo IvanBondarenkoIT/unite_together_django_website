@@ -49,7 +49,7 @@ class Person(models.Model):
     citizenship = models.CharField(
         max_length=20,
         choices=CitizenshipChoices.choices,
-        default=CitizenshipChoices.GEORGIAN,
+        default=CitizenshipChoices.UKRAINIAN,
         blank=True,
         null=True
     )
