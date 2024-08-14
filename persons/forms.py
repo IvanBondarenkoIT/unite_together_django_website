@@ -44,22 +44,34 @@ class AssociatedPersonForm(forms.ModelForm):
             'ukrainian_phone_number', 'country', 'chosen_city', 'address_line', 'is_active'
         ]
         widgets = {
-            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
-            'date_of_arrival': forms.DateInput(attrs={'type': 'date'}),
-            'first_name': forms.TextInput(attrs={'placeholder': 'First Name'}),
-            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name'}),
-            'citizenship': forms.TextInput(attrs={'placeholder': 'Citizenship'}),
-            # 'type_of_document': forms.TextInput(attrs={'placeholder': ''})
-            'document_number': forms.TextInput(attrs={'placeholder': 'Document Number'}),
-            'georgian_phone_number': forms.TextInput(attrs={'placeholder': 'Georgian Phone Number', 'pattern': '\\995[0-9]{9}'}),
-            'ukrainian_phone_number': forms.TextInput(attrs={'placeholder': 'Ukrainian Phone Number', 'pattern': '\\380[0-9]{9}'}),
-            'address_line': forms.TextInput(attrs={'placeholder': 'Address Line'}),
+            'date_of_birth': forms.DateInput(attrs={'type': 'date', 'required': True}),
+            'date_of_arrival': forms.DateInput(attrs={'type': 'date', 'required': True}),
+            'first_name': forms.TextInput(attrs={'placeholder': 'First Name', 'required': True}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Last Name', 'required': True}),
+            'citizenship': forms.Select(attrs={
+                'placeholder': 'Citizenship',
+                'class': 'form-control',
+                'required': True,
+            }),
+            'type_of_document': forms.Select(attrs={
+                'placeholder': 'Type of Document',
+                'class': 'form-control',
+                'required': True,
+            }),
+            'document_number': forms.TextInput(attrs={'placeholder': 'Document Number', 'required': True}),
+            'georgian_phone_number': forms.TextInput(attrs={
+                'placeholder': 'Georgian Phone Number',
+                'pattern': r'^\995[0-9]{9}$',
+                'required': True,
+            }),
+            'ukrainian_phone_number': forms.TextInput(attrs={'placeholder': 'Ukrainian Phone Number', 'pattern': r'^\380[0-9]{9}$'}),
+            'address_line': forms.TextInput(attrs={'placeholder': 'Address Line', 'required': True}),
         }
 
-    # def clean_type_of_document(self):
-    #     type_of_document = self.cleaned_data.get('type_of_document')
-    #     if type_of_document:
-    #         raise forms.ValidationError("Document Type must chosen")
+    def __init__(self, user_owner=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if user_owner and hasattr(user_owner, 'associated_person'):
+            self.fields['georgian_phone_number'].initial = user_owner.associated_person.georgian_phone_number
 
     def clean_document_number(self):
         type_of_document = self.cleaned_data.get('type_of_document')
@@ -67,11 +79,10 @@ class AssociatedPersonForm(forms.ModelForm):
             document_number = self.cleaned_data.get('document_number')
             pattern = type_of_document.regex
             if document_number and not re.match(pattern, document_number):
-                raise forms.ValidationError(f"Document Type:{type_of_document.name} have to bee formatted as {type_of_document.hint}")
+                raise forms.ValidationError(f"Document Type: {type_of_document.name} must be formatted as {type_of_document.hint}")
             return document_number
         else:
-            raise forms.ValidationError(
-                f"Document Type must be chosen")
+            raise forms.ValidationError("Document Type must be chosen")
 
     def clean_first_name(self):
         first_name = self.cleaned_data.get('first_name')
@@ -88,23 +99,21 @@ class AssociatedPersonForm(forms.ModelForm):
     def clean_georgian_phone_number(self):
         georgian_phone_number = self.cleaned_data.get('georgian_phone_number')
         if georgian_phone_number:
-            pattern = r'^(995)[0-9]{9}$'
-            if georgian_phone_number and not re.match(pattern, georgian_phone_number):
+            pattern = r'^\995[0-9]{9}$'
+            if not re.match(pattern, georgian_phone_number):
                 raise forms.ValidationError("Georgian phone number must be in the format: 995XXXXXXXXX.")
             return georgian_phone_number
         else:
-            raise forms.ValidationError("Fill your georgian phone")
+            raise forms.ValidationError("Georgian phone number is required.")
 
     def clean_ukrainian_phone_number(self):
         ukrainian_phone_number = self.cleaned_data.get('ukrainian_phone_number')
         if ukrainian_phone_number:
-            pattern = r'^(380)[0-9]{9}$'
-            if ukrainian_phone_number and not re.match(pattern, ukrainian_phone_number):
+            pattern = r'^\380[0-9]{9}$'
+            if not re.match(pattern, ukrainian_phone_number):
                 raise forms.ValidationError("Ukrainian phone number must be in the format: 380XXXXXXXXX.")
             return ukrainian_phone_number
-        else:
-            pass
-            # raise forms.ValidationError("Fill your ukrainian phone number")
+        return ukrainian_phone_number  # No validation error if the field is left empty
 
 
 class ParticipantAdminForm(forms.ModelForm):
