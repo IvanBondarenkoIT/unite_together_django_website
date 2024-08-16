@@ -68,11 +68,11 @@ class AssociatedPersonForm(forms.ModelForm):
             'address_line': forms.TextInput(attrs={'placeholder': 'Address Line', 'required': True}),
         }
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     user_owner = kwargs.get('user_owner')
-    #     if user_owner and hasattr(user_owner, 'associated_person'):
-    #         self.fields['georgian_phone_number'].initial = user_owner.associated_person.georgian_phone_number
+    def __init__(self, *args, **kwargs):
+        default_ge_phone = kwargs.pop('default_ge_phone', None)  # Extract and remove custom argument
+        super().__init__(*args, **kwargs)
+        if default_ge_phone:
+            self.fields['georgian_phone_number'].initial = default_ge_phone
 
     def clean_document_number(self):
         type_of_document = self.cleaned_data.get('type_of_document')
