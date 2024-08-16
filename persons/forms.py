@@ -118,17 +118,17 @@ class AssociatedPersonForm(forms.ModelForm):
             return ukrainian_phone_number
         return ukrainian_phone_number  # No validation error if the field is left empty
 
-    # def clean_date_of_birth(self):
-    #     date_of_birth = self.cleaned_data.get('date_of_birth')
-    #     if not date_of_birth:
-    #         raise ValidationError("Date of birth is required and must be in the format DD-MM-YYYY.")
-    #     return date_of_birth
-    #
-    # def clean_date_of_arrival(self):
-    #     date_of_arrival = self.cleaned_data.get('date_of_arrival')
-    #     if not date_of_arrival:
-    #         raise ValidationError("Date of arrival is required and must be in the format DD-MM-YYYY.")
-    #     return date_of_arrival
+    def clean_date_of_birth(self):
+        date_of_birth = self.cleaned_data.get('date_of_birth')
+        if not date_of_birth:
+            raise ValidationError("Date of birth is required and must be in the format DD-MM-YYYY.")
+        return date_of_birth
+
+    def clean_date_of_arrival(self):
+        date_of_arrival = self.cleaned_data.get('date_of_arrival')
+        if not date_of_arrival:
+            raise ValidationError("Date of arrival is required and must be in the format DD-MM-YYYY.")
+        return date_of_arrival
 
 
 class ParticipantAdminForm(forms.ModelForm):
