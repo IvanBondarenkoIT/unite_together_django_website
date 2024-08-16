@@ -1,37 +1,29 @@
 import re
+from datetime import datetime
 
 from django import forms
+from django.core.exceptions import ValidationError
 from django.forms import modelformset_factory
 
 from .models import AssociatedPerson, Participant, TypeOfDocument
 
 
 class AssociatedPersonAdminForm(forms.ModelForm):
-
+#
     class Meta:
         model = AssociatedPerson
         fields = '__all__'
 
         widgets = {
-            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
-            'date_of_arrival': forms.DateInput(attrs={'type': 'date'}),
+            'date_of_birth': forms.DateInput(
+
+                attrs={'type': 'date'}
+            ),
+            'date_of_arrival': forms.DateInput(
+
+                attrs={'type': 'date'}
+            ),
         }
-
-
-    # def __init__(self, *args, **kwargs):
-    #     super(AssociatedPersonForm, self).__init__(*args, **kwargs)
-    #     self.fields['document_number'].help_text = 'Select a document type to see the format.'
-    #
-    #     if 'type_of_document' in self.data:
-    #         try:
-    #             type_of_document_id = self.data.get('type_of_document')
-    #             type_of_document = TypeOfDocument.objects.get(id=type_of_document_id)
-    #             self.fields['document_number'].help_text = type_of_document.hint if type_of_document else self.fields['document_number'].help_text
-    #         except (ValueError, TypeOfDocument.DoesNotExist) as e:
-    #             # Consider logging the error here
-    #             pass
-    #     elif self.instance.pk:
-    #         self.fields['document_number'].help_text = self.instance.type_of_document.hint if self.instance.type_of_document else self.fields['document_number'].help_text
 
 
 class AssociatedPersonForm(forms.ModelForm):
@@ -44,8 +36,10 @@ class AssociatedPersonForm(forms.ModelForm):
             'ukrainian_phone_number', 'country', 'chosen_city', 'address_line', 'is_active'
         ]
         widgets = {
-            'date_of_birth': forms.DateInput(attrs={'type': 'date', 'required': True}),
-            'date_of_arrival': forms.DateInput(attrs={'type': 'date', 'required': True}),
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'}
+            ),
+            'date_of_arrival': forms.DateInput(attrs={'type': 'date'},
+            ),
             'first_name': forms.TextInput(attrs={'placeholder': 'First Name', 'required': True}),
             'last_name': forms.TextInput(attrs={'placeholder': 'Last Name', 'required': True}),
             'citizenship': forms.Select(attrs={
@@ -69,10 +63,18 @@ class AssociatedPersonForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        default_ge_phone = kwargs.pop('default_ge_phone', None)  # Extract and remove custom argument
+        default_ge_phone = kwargs.pop('default_ge_phone', None)
         super().__init__(*args, **kwargs)
         if default_ge_phone:
             self.fields['georgian_phone_number'].initial = default_ge_phone
+
+        # Преобразование формата даты для отображения в форме
+        if self.instance.pk:  # Если объект уже существует
+            if self.instance.date_of_birth:
+                self.fields['date_of_birth'].initial = self.instance.date_of_birth.strftime('%d-%m-%Y')
+            if self.instance.date_of_arrival:
+                self.fields['date_of_arrival'].initial = self.instance.date_of_arrival.strftime('%d-%m-%Y')
+
 
     def clean_document_number(self):
         type_of_document = self.cleaned_data.get('type_of_document')
@@ -115,6 +117,18 @@ class AssociatedPersonForm(forms.ModelForm):
                 raise forms.ValidationError("Ukrainian phone number must be in the format: 380XXXXXXXXX.")
             return ukrainian_phone_number
         return ukrainian_phone_number  # No validation error if the field is left empty
+
+    # def clean_date_of_birth(self):
+    #     date_of_birth = self.cleaned_data.get('date_of_birth')
+    #     if not date_of_birth:
+    #         raise ValidationError("Date of birth is required and must be in the format DD-MM-YYYY.")
+    #     return date_of_birth
+    #
+    # def clean_date_of_arrival(self):
+    #     date_of_arrival = self.cleaned_data.get('date_of_arrival')
+    #     if not date_of_arrival:
+    #         raise ValidationError("Date of arrival is required and must be in the format DD-MM-YYYY.")
+    #     return date_of_arrival
 
 
 class ParticipantAdminForm(forms.ModelForm):
