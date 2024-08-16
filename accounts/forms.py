@@ -9,7 +9,7 @@ class RegistrationForm(forms.ModelForm):
         label="Password",
         widget=forms.PasswordInput(
             attrs={
-                "placeholder": "Enter Password",
+                "placeholder": "Введіть пароль",
                 "class": "form-control",
             }
         )
@@ -18,7 +18,7 @@ class RegistrationForm(forms.ModelForm):
     confirm_password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                "placeholder": "Repeat Password",
+                "placeholder": "Повторіть пароль",
                 "class": "form-control",
             }
         )
