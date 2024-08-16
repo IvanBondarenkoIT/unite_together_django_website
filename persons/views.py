@@ -142,6 +142,12 @@ def registered_events(request):
     return render(request, 'persons/personal-account-events.html', context=context)
 
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from django.core.exceptions import ValidationError
+from django.contrib import messages
+from django.shortcuts import render, redirect
+
 @login_required(login_url="login")
 def settings(request):
     if request.method == "POST":
@@ -156,12 +162,18 @@ def settings(request):
                 try:
                     # Validate the new password using Django's built-in validators
                     # validate_password(new_password, user)
-                    # If custom password validator is needed additionally
+
+                    # Custom password validator (if any)
                     password_validator = CustomPasswordValidator()
                     password_validator.validate(new_password)
 
+                    # If no exception is raised, set the new password
                     user.set_password(new_password)
                     user.save()
+
+                    # Update session to prevent logout
+                    update_session_auth_hash(request, user)
+
                     messages.success(request, "Password updated successfully.")
                     return redirect("settings")
                 except ValidationError as e:
@@ -176,5 +188,5 @@ def settings(request):
             messages.error(request, "Passwords do not match")
             return redirect("settings")
     else:
-
         return render(request, 'persons/personal-account-settings.html')
+
