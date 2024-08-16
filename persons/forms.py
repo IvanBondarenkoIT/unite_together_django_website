@@ -68,10 +68,11 @@ class AssociatedPersonForm(forms.ModelForm):
             'address_line': forms.TextInput(attrs={'placeholder': 'Address Line', 'required': True}),
         }
 
-    def __init__(self, user_owner=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        default_ge_phone = kwargs.pop('default_ge_phone', None)  # Extract and remove custom argument
         super().__init__(*args, **kwargs)
-        if user_owner and hasattr(user_owner, 'associated_person'):
-            self.fields['georgian_phone_number'].initial = user_owner.associated_person.georgian_phone_number
+        if default_ge_phone:
+            self.fields['georgian_phone_number'].initial = default_ge_phone
 
     def clean_document_number(self):
         type_of_document = self.cleaned_data.get('type_of_document')
@@ -99,7 +100,7 @@ class AssociatedPersonForm(forms.ModelForm):
     def clean_georgian_phone_number(self):
         georgian_phone_number = self.cleaned_data.get('georgian_phone_number')
         if georgian_phone_number:
-            pattern = r'^\995[0-9]{9}$'
+            pattern = r'^995[0-9]{9}$'
             if not re.match(pattern, georgian_phone_number):
                 raise forms.ValidationError("Georgian phone number must be in the format: 995XXXXXXXXX.")
             return georgian_phone_number
@@ -109,7 +110,7 @@ class AssociatedPersonForm(forms.ModelForm):
     def clean_ukrainian_phone_number(self):
         ukrainian_phone_number = self.cleaned_data.get('ukrainian_phone_number')
         if ukrainian_phone_number:
-            pattern = r'^\380[0-9]{9}$'
+            pattern = r'^380[0-9]{9}$'
             if not re.match(pattern, ukrainian_phone_number):
                 raise forms.ValidationError("Ukrainian phone number must be in the format: 380XXXXXXXXX.")
             return ukrainian_phone_number

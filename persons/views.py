@@ -1,15 +1,24 @@
 from django.core.exceptions import ValidationError
-from django.contrib import messages, auth
 from django.core.paginator import Paginator
+
+from django.contrib import messages, auth
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, redirect, get_object_or_404
 
-from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.password_validation import validate_password
+
 
 from unite_together_django_website.validators import CustomPasswordValidator
 from .models import UserProfile, AssociatedPerson, Participant
 from accounts.models import Account
 from .forms import AssociatedPersonForm, AssociatedPersonFormSet
+
+
+
+
+
 
 
 
@@ -81,8 +90,8 @@ def associated_person_list(request):
 @login_required(login_url="login")
 def associated_person_create(request):
     if request.method == 'POST':
-        user_owner = request.user  # Assuming user is the owner
-        form = AssociatedPersonForm(request.POST, user_owner=user_owner)
+        # user_owner = request.user  # Assuming user is the owner
+        form = AssociatedPersonForm(request.POST, default_ge_phone=request.user.associated_person.georgian_phone_number)
         if form.is_valid():
             associated_person = form.save(commit=False)
             associated_person.user_owner = request.user
@@ -94,7 +103,7 @@ def associated_person_create(request):
             messages.error(request, 'Please correct the errors below.')
         #     return redirect("associated_person_create")
     else:
-        form = AssociatedPersonForm(user_owner=request.user)
+        form = AssociatedPersonForm(default_ge_phone=request.user.associated_person.georgian_phone_number)
 
     return render(request, 'persons/dashboard.html', {'form': form})
 
@@ -103,8 +112,12 @@ def associated_person_edit(request, pk):
     edited_person = AssociatedPerson.objects.get(pk=pk)
 
     if request.method == "POST":
-        user_owner = request.user  # Assuming user is the owner
-        person_form = AssociatedPersonForm(request.POST, request.FILES, instance=edited_person, user_owner=user_owner)
+
+        # person_form = AssociatedPersonForm(request.POST, request.FILES, instance=edited_person)
+        person_form = AssociatedPersonForm(
+            request.POST, instance=edited_person,
+
+        )
         if person_form.is_valid():
             person_form.save()
             messages.success(request, "Your profile has been updated")
@@ -114,7 +127,10 @@ def associated_person_edit(request, pk):
             messages.error(request, 'Please correct the errors below.')
         #     return redirect("associated_person_edit", pk=edited_person.pk)
     else:
-        person_form = AssociatedPersonForm(instance=edited_person)
+        person_form = AssociatedPersonForm(
+            instance=edited_person,
+            default_ge_phone=request.user.associated_person.georgian_phone_number
+        )
 
     return render(request, "persons/dashboard.html", {'form': person_form})
 
@@ -155,12 +171,18 @@ def settings(request):
                 try:
                     # Validate the new password using Django's built-in validators
                     # validate_password(new_password, user)
-                    # If custom password validator is needed additionally
+
+                    # Custom password validator (if any)
                     password_validator = CustomPasswordValidator()
                     password_validator.validate(new_password)
 
+                    # If no exception is raised, set the new password
                     user.set_password(new_password)
                     user.save()
+
+                    # Update session to prevent logout
+                    update_session_auth_hash(request, user)
+
                     messages.success(request, "Password updated successfully.")
                     return redirect("settings")
                 except ValidationError as e:
@@ -175,5 +197,5 @@ def settings(request):
             messages.error(request, "Passwords do not match")
             return redirect("settings")
     else:
-
         return render(request, 'persons/personal-account-settings.html')
+

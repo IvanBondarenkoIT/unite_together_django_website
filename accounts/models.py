@@ -13,9 +13,9 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 class MyAccountManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, password=None):
         if not email:
-            raise ValueError('Email address must be set')
+            raise ValueError('Необхідно вказати адресу електронної пошти')
         if not username:
-            raise ValueError('Username must be set')
+            raise ValueError("Необхідно встановити ім'я користувача")
 
         user = self.model(
             email=self.normalize_email(email),

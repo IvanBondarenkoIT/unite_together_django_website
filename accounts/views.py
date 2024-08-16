@@ -4,6 +4,7 @@ from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
@@ -13,6 +14,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from accounts.forms import RegistrationForm
 from accounts.models import Account
 from persons.models import UserProfile, AssociatedPerson, TypeOfDocument
+from unite_together_django_website.validators import CustomPasswordValidator
 
 
 # Create your views here.
@@ -62,7 +64,7 @@ def register(request):
                     )
                     profile.save()
 
-                    messages.success(request, "Successfully created")
+                    messages.success(request, "Профіль успішно створено ")
 
                     # USER ACTIVATION
                     current_site = get_current_site(request)
@@ -102,10 +104,10 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            messages.success(request, "Login Successful")
+            messages.success(request, "Успішний вхід")
             return redirect("home")
         else:
-            messages.error(request, "Invalid Login Credentials")
+            messages.error(request, "Недійсні облікові дані для входу")
             return redirect("login")
 
     return render(request, "accounts/login.html")
@@ -114,7 +116,7 @@ def login(request):
 @login_required(login_url="login")
 def logout(request):
     auth.logout(request)
-    messages.success(request, "Logout Successful")
+    messages.success(request, "Успішний вхід")
     return redirect("login")
 
 
@@ -129,10 +131,10 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        messages.success(request, "Congratulations! Your account has been activated!")
+        messages.success(request, "Щиро вітаю! Ваш обліковий запис активовано!")
         return redirect("login")
     else:
-        messages.error(request, "Invalid activation link")
+        messages.error(request, "Недійсне посилання для активації")
         return redirect("Register")
 
 
@@ -143,7 +145,7 @@ def forgot_password(request):
             user = Account.objects.get(email__exact=email)
             # Reset password email
             current_site = get_current_site(request)
-            mail_subject = "Please reset your password"
+            mail_subject = "Будь ласка, скиньте свій пароль"
             message = render_to_string(
                 "accounts/reset_password_email.html",
                 {
@@ -158,13 +160,13 @@ def forgot_password(request):
             send_email.send()
 
             messages.success(
-                request, "Password reset email has been sent to your email address"
+                request, "Лист для зміни пароля надіслано на вашу електронну адресу"
             )
 
             return redirect("login")
 
         else:
-            messages.error(request, "Account does not exist")
+            messages.error(request, "Обліковий запис не існує")
             return redirect("forgot_password")
 
     return render(request, "accounts/forgot_password.html")
@@ -181,10 +183,10 @@ def reset_password_validate(request, uidb64, token):
         request.session["uid"] = uid
         #     user.is_active = True
         #     user.save()
-        messages.success(request, "Please reset your password")
+        messages.success(request, "Будь ласка, скиньте свій пароль")
         return redirect("reset_password")
     else:
-        messages.error(request, "This link has been expired")
+        messages.error(request, "Термін дії цього посилання закінчився")
         return redirect("login")
 
 
@@ -196,12 +198,21 @@ def reset_password(request):
         if password == confirm_password:
             uid = request.session.get("uid", None)
             user = Account.objects.get(pk=uid)
-            user.set_password(password)
-            user.save()
-            messages.success(request, "Password reset successful")
-            return redirect("login")
+            try:
+                # Custom password validator
+                password_validator = CustomPasswordValidator()
+                password_validator.validate(password)
+                user.set_password(password)
+                user.save()
+                messages.success(request, "Скидання пароля успішне")
+                return redirect("login")
+            except ValidationError as e:
+                # Catching multiple error messages and adding them to the messages framework
+                for error in e:
+                    messages.error(request, error)
+                return redirect("settings")
         else:
-            messages.error(request, "Passwords do not match")
+            messages.error(request, "Паролі не збігаються")
             return redirect("reset_password")
     else:
         return render(request, "accounts/reset_password.html")
