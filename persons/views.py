@@ -16,12 +16,6 @@ from accounts.models import Account
 from .forms import AssociatedPersonForm, AssociatedPersonFormSet
 
 
-
-
-
-
-
-
 OBJECTS_ON_PAGE = 4
 
 

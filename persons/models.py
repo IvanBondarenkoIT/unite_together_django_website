@@ -20,19 +20,19 @@ class TypeOfDocument(models.Model):
 
 class Person(models.Model):
     class Gender(models.TextChoices):
-        MALE = 'Male', 'Male'
-        FEMALE = 'Female', 'Female'
-        OTHER = 'Other', 'Other'
+        MALE = 'Чоловік', 'Чоловік'
+        FEMALE = 'Жінка', 'Жінка'
+        OTHER = 'Інше', 'Інше'
 
     class Country(models.TextChoices):
         # Ukraine = 'Ukraine', 'Ukraine'
-        Georgia = 'Georgia', 'Georgia'
+        Georgia = 'Грузія', 'Грузія'
         # OTHER = 'Other', 'Other'
 
     class CitizenshipChoices(models.TextChoices):
-        GEORGIAN = 'Georgian', 'Georgian'
-        UKRAINIAN = 'Ukrainian', 'Ukrainian'
-        OTHER = 'Other', 'Other'
+        GEORGIAN = 'Грузинський', 'Грузинський'
+        UKRAINIAN = 'Українська', 'Українська'
+        OTHER = 'Інше', 'Інше'
 
     user_owner: Account = models.ForeignKey(Account, on_delete=models.CASCADE, blank=True, null=True)
     # is_default = models.BooleanField(default=False)
@@ -70,7 +70,7 @@ class Person(models.Model):
     document_number = models.CharField(max_length=20, blank=True, null=True)
     # document_number = models.CharField(max_length=50, blank=True, null=True)
 
-    gender = models.CharField(max_length=6, choices=Gender.choices, blank=True, null=True)
+    gender = models.CharField(max_length=7, choices=Gender.choices, blank=True, null=True)
 
     georgian_phone_number = models.CharField(
         max_length=50,
@@ -156,13 +156,13 @@ class Participant(Person):
     copy_of_unique_identifier = models.CharField(max_length=15, blank=True, null=True, editable=False)
 
     class Status(models.TextChoices):
-        REGISTERED = 'Registered', 'Registered'
-        CANCELED = 'Canceled', 'Canceled'
-        VISITED = 'Visited', 'Visited'
+        REGISTERED = 'Зареєстрований', 'Зареєстрований'
+        CANCELED = 'Скасовано', 'Скасовано'
+        VISITED = 'Відвідали', 'Відвідали'
 
     registered_on = models.ForeignKey(Events, on_delete=models.CASCADE, blank=True, null=True)
 
-    status = models.CharField(max_length=10, choices=Status.choices, blank=True, null=True)
+    status = models.CharField(max_length=14, choices=Status.choices, blank=True, null=True)
 
     def __str__(self):
         # return f"{self.first_name} {self.last_name} {self.registered_on.name}"
@@ -174,7 +174,7 @@ class Participant(Person):
             pattern = self.type_of_document.regex
             if not re.match(pattern, self.document_number):
                 raise ValidationError(
-                    {'document_number': 'Invalid document number format for the selected document type.'})
+                    {'document_number': 'Недійсний формат номера документа для вибраного типу документа'})
 
 
 class UserProfile(models.Model):
