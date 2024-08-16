@@ -30,10 +30,10 @@ class RegistrationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RegistrationForm, self).__init__(*args, **kwargs)
-        self.fields["first_name"].widget.attrs["placeholder"] = "Enter First Name"
-        self.fields["last_name"].widget.attrs["placeholder"] = "Enter Last Name"
-        self.fields["phone_number"].widget.attrs["placeholder"] = "Enter Phone Number"
-        self.fields["email"].widget.attrs["placeholder"] = "Enter Email Address"
+        self.fields["first_name"].widget.attrs["placeholder"] = "Ім'я"
+        self.fields["last_name"].widget.attrs["placeholder"] = "Прізвище"
+        self.fields["phone_number"].widget.attrs["placeholder"] = "Номер телефону"
+        self.fields["email"].widget.attrs["placeholder"] = "Електрона адреса"
         for field in self.fields:
             self.fields[field].widget.attrs["class"] = "form-control"
 
@@ -44,7 +44,7 @@ class RegistrationForm(forms.ModelForm):
 
         if password != confirm_password:
             raise forms.ValidationError(
-                "Password is not matched. Please try again."
+                "Пароль не співпадає. Будласка спробуйте ще раз"
             )
 
         CustomPasswordValidator().validate(password)

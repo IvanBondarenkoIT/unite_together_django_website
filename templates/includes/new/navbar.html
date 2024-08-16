@@ -22,7 +22,7 @@
                         <li class="ut-top-menu-li">
                             <div class="ut-top-menu-div">
                                 <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
-                                   href="{% url 'who_we_are' %}">Хто ми</a>
+                                   href="{% url 'who_we_are' %}">Про нас</a>
                             </div>
                         </li>
                         <li class="ut-top-menu-li">
@@ -90,7 +90,7 @@
                 <div class="hamburger-menu" onclick="toggleDropdown()">☰</div>
             </div>
             <div class="dropdown-menu" id="dropdown-menu">
-                <a href="{% url 'who_we_are' %}">Хто ми</a>
+                <a href="{% url 'who_we_are' %}">Про нас</a>
                 <a href="{% url 'events' %}">Події</a>
                 <a href="{% url 'projects' %}">Проєкти</a>
                 <a href="{% url 'login' %}">Логін/Реєстація</a>
@@ -118,7 +118,7 @@
             <div class="navbaraccount-inner1 desktop-navbar">
                 <div class="about-us-parent7">
                     <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
-                       href="{% url 'who_we_are' %}">Хто ми</a>
+                       href="{% url 'who_we_are' %}">Про нас</a>
                     <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
                        href="{% url 'events' %}">Події</a>
                     <a class="ut-top-menu-text{% if '/projects/' in request.path %}-active{% endif %}"
@@ -199,7 +199,7 @@
             </div>
             <div class="dropdown-menu" id="dropdown-menu">
                 <h4 style="margin-left: 15px">{{ user.associated_person.last_name }} {{ user.associated_person.first_name }}</h4>
-                <a href="{% url 'who_we_are' %}">Хто ми</a>
+                <a href="{% url 'who_we_are' %}">Про нас</a>
                 <a href="{% url 'events' %}">Події</a>
                 <a href="{% url 'projects' %}">Проєкти</a>
                 <br>
