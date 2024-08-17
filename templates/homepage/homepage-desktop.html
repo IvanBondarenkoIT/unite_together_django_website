@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="home desktop-navbar" data-animate-on-scroll>
-    {#1 Carousel section#}
+    {#1 Секція Карусель#}
     <section class="main">
         <div class="container">
             <div class="row">
@@ -12,7 +12,7 @@
         </div>
     </section>
 
-    {#2 About Us section#}
+    {#2 Секція Про нас#}
     <section class="sec-about">
         <div class="container2">
             <div class="content22">
@@ -29,10 +29,10 @@
                 </div>
                 <div class="actions6">
                     <button class="stylesecondary-smallfalse4">
-                        <a class="button12" href="{% url 'who_we_are' %}">Learn More</a>
+                        <a class="button12" href="{% url 'who_we_are' %}">Дізнатися більше</a>
                     </button>
                     <button class="stylelink-smallfalse-dark2">
-                        <a class="button13" href="{% url 'register' %}">Sign Up</a>
+                        <a class="button13" href="{% url 'register' %}">Зареєструватися</a>
                         <img
                                 class="icon-chevron-right2"
                                 alt=""
@@ -53,7 +53,7 @@
         </div>
     </section>
 
-    {#3 CTA-1 Register#}
+    {#3 СТА-1 Зареєструватися#}
 
     {#        <section class="cta-1" style="background-image: {% static 'img/cta1@3x.png' %}  ;">#}
     <section class="cta-1"
@@ -73,16 +73,16 @@
         </div>
         <div class="actions5">
             <button class="styleprimary-smallfalse-da1">
-                <a class="button10" href="{% url 'login' %}">Log in</a>
+                <a class="button10" href="{% url 'login' %}">Увійти</a>
             </button>
             <button class="stylesecondary-smallfalse3">
-                <a class="button11" href="{% url 'register' %}">Sign up</a>
+                <a class="button11" href="{% url 'register' %}">Зареєструватися</a>
             </button>
         </div>
     </div>
     </section>
 
-    {#4 Events section#}
+    {#4 Секція Події#}
     <section class="sec-events">
         <div class="section-title1">
             <div class="column">
@@ -108,10 +108,10 @@
                         <div class="content17">
                             <h1 class="heading20">{{ event.title }}</h1>
                             <div class="text-duis-cursus" style="
-                                            max-width: 300px; /* Set the maximum width of the div */
-                                            overflow: hidden; /* Hide any overflowing text */
-                                            text-overflow: ellipsis; /* Display an ellipsis (...) to indicate text overflow */
-                                            white-space: nowrap; /* Prevent text from wrapping */
+                                            max-width: 300px; /* Встановити максимальну ширину div */
+                                            overflow: hidden; /* Сховати будь-який текст, що виходить за межі */
+                                            text-overflow: ellipsis; /* Відобразити многоточие (...) для вказівки перевищення тексту */
+                                            white-space: nowrap; /* Заборонити перенесення тексту */
                                                 ">{{ event.text }}</div>
                         </div>
                     </div>
@@ -119,17 +119,17 @@
             </div>
             <div class="actions4">
                 <button class="stylesecondary-smallfalse2">
-                    <a class="button8" href="{% url 'events' %}">Learn More</a>
+                    <a class="button8" href="{% url 'events' %}">Дізнатися більше</a>
                 </button>
                 <button class="stylelink-smallfalse-dark1">
-                    <a class="button9" href="{% url 'register' %}">Sign Up</a>
+                    <a class="button9" href="{% url 'register' %}">Зареєструватися</a>
                     <img class="icon-chevron-right1" alt="" src="{% static 'img/icon--chevronright.svg' %}"/>
                 </button>
             </div>
         </div>
     </section>
 
-    {#5 Projects section#}
+    {#5 Секція Проеєти#}
     <section class="sec-projects">
         <div class="container1">
             <div class="content14">
@@ -144,10 +144,10 @@
                 </div>
                 <div class="actions3">
                     <button class="stylesecondary-smallfalse1">
-                        <a class="button6" href="{% url 'projects' %}">Learn More</a>
+                        <a class="button6" href="{% url 'projects' %}">Дізнатися більше</a>
                     </button>
                     <button class="stylelink-smallfalse-dark">
-                        <a class="button7" href="{% url 'register' %}">Sign Up</a>
+                        <a class="button7" href="{% url 'register' %}">Зареєструватися</a>
                         <img class="icon-chevron-right" alt="" src="{% static 'img/icon--chevronright.svg' %}"/>
                     </button>
                 </div>
@@ -155,7 +155,7 @@
             <img class="placeholder-image-icon6" loading="lazy" alt="" src="{{ sec_projects.image.url }}"/>
         </div>
     </section>
-    {#6 CTA-2 DONATE#}
+    {#6 СТА-2 Пожертвувати#}
     <section class="cta-2" style="
             {% if sec_cta_last.image %}
                 background-image: url({{ sec_cta_last.image.url }});">
@@ -174,15 +174,13 @@
         </div>
         <div class="actions2">
             <button class="styleprimary-smallfalse-da">
-                <a class="button4" href="{% url 'donate-paypal' %}">Donate</a>
+                <a class="button4" href="{% url 'donate-paypal' %}">Пожертвувати</a>
             </button>
             <button class="stylesecondary-smallfalse">
-                <a class="button5" href="{{ sec_cta_last.link }}">Learn More</a>
+                <a class="button5" href="{{ sec_cta_last.link }}">Дізнатися більше</a>
             </button>
         </div>
     </div>
     </section>
 
 </div>
-
-

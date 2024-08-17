@@ -55,7 +55,7 @@
 
     .carousel-indicators {
         position: absolute;
-        bottom: -12px; /* Position below the carousel content */
+        bottom: -12px; /* Позиція під вмістом каруселі */
         left: 50%;
         transform: translateX(-125%);
         z-index: 15;
@@ -81,10 +81,10 @@
     .carousel-control-prev,
     .carousel-control-next {
         position: absolute;
-        bottom: 0px; /* Position below the carousel content */
-        top: auto; /* Disable vertical centering */
-        transform: translateY(0); /* Disable vertical centering */
-        background-color: rgba(0, 0, 0, 0.5); /* Grey background color */
+        bottom: 0px; /* Позиція під вмістом каруселі */
+        top: auto; /* Вимкнути вертикальне центрування */
+        transform: translateY(0); /* Вимкнути вертикальне центрування */
+        background-color: rgba(0, 0, 0, 0.5); /* Сірий колір фону */
         color: white;
         font-size: 2rem;
         z-index: 20;
@@ -121,7 +121,7 @@
                         <div class="carousel-text">
                             <h5>{{ carousel_object.title }}</h5>
                             <p>{{ carousel_object.text }}</p>
-                            <a href="{{ carousel_object.get_url }}" class="btn btn-primary">Learn More</a>
+                            <a href="{{ carousel_object.get_url }}" class="btn btn-primary">Дізнатися більше</a>
                         </div>
                         <div class="carousel-image">
                             <a href="{{ carousel_object.get_url }}">
@@ -139,11 +139,11 @@
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+            <span class="visually-hidden">Попереднє</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+            <span class="visually-hidden">Наступне</span>
         </button>
     </div>
 </div>
