@@ -14,7 +14,7 @@
                         <div class="database-connection">
                             <div class="error-handler">
                                 <a class="sport1{% if request.path == '/projects/' %}-active{% endif %}"
-                                   href="{% url 'projects' %}">All</a>
+                                   href="{% url 'projects' %}">Усі</a>
                                 {% for category in links %}
                                     <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
                                        href="{{ category.get_url }}">{{ category.name }}</a>
@@ -48,8 +48,6 @@
                 <div class="bg6"></div>
                 <div class="content-inner">
                     <div class="baner-image-group mainImage">
-
-
                         <img
                                 class="baner-image-icon1"
                                 loading="lazy"
@@ -68,15 +66,14 @@
                             />
                         </div>
 
-
                     </div>
                     <div class="frame-wrapper11">
                         <div class="frame-parent58">
                             <ul class="frame-parent59">
                                 <li>
-                                    <div class="ongoing-project">{% if single_project.is_active %}Ongoing
-                                        project{% else %}
-                                        Complited{% endif %}
+                                    <div class="ongoing-project">{% if single_project.is_active %}Поточний
+                                        проект{% else %}
+                                        Завершений{% endif %}
                                     </div>
                                 </li>
                                 <li>
@@ -85,7 +82,6 @@
                                     </div>
                                 </li>
                                 <li>
-
                                     {% if single_project.start_date %}
                                         {{ single_project.get_start_date_month }}
                                         {{ single_project.get_start_date_year }}
@@ -94,7 +90,6 @@
                                         - {{ single_project.get_end_date_month }}
                                         {{ single_project.get_end_date_year }}
                                     {% endif %}
-
                                 </li>
                                 <li>
                                     <div class="georgia">{{ single_project.selected_city }}</div>
@@ -106,14 +101,14 @@
                                     <span id="extra-details-full"
                                           style="display:none;">{{ single_project.extra_details }}</span>
                                     <a href="#" id="toggle-details"
-                                       onclick="toggleDetails(); return false;">more</a>
+                                       onclick="toggleDetails(); return false;">більше</a>
                                 </div>
                             {% endif %}
 
                             <a class="button-registration1"
                                href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
                                style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
-                                <div class="registration1">Registration</div>
+                                <div class="registration1">Реєстрація</div>
                             </a>
                         </div>
                     </div>
@@ -124,10 +119,10 @@
                         <ul class="thumb">
                             <li>
                                 <a href="{{ single_project.image.url }}" target="mainImage"><img
-                                        src="{{ single_project.image.url }}" alt="Product Image"></a>
+                                        src="{{ single_project.image.url }}" alt="Зображення продукту"></a>
                                 {% for i in project_gallery %}
                                     <a href="{{ i.image.url }}" target="mainImage"><img src="{{ i.image.url }}"
-                                                                                        alt="Product Image"></a>
+                                                                                        alt="Зображення продукту"></a>
                                 {% endfor %}
                             </li>
                         </ul>
@@ -173,11 +168,11 @@
             if (shortText.style.display === "none") {
                 shortText.style.display = "inline";
                 fullText.style.display = "none";
-                toggleLink.innerText = "more";
+                toggleLink.innerText = "більше";
             } else {
                 shortText.style.display = "none";
                 fullText.style.display = "inline";
-                toggleLink.innerText = "less";
+                toggleLink.innerText = "менше";
             }
         }
     </script>
