@@ -10,7 +10,7 @@
             <div class="iterative-processor">
                 <div class="database-connection">
                     <div class="error-handler">
-                        <a class="sport1" href="{% url 'events' %}">All</a>
+                        <a class="sport1" href="{% url 'events' %}">Усі</a>
                         {% for category in links %}
                             <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
                         {% endfor %}
@@ -29,7 +29,7 @@
                         <div class="age-3-16-parent">
                             {% if single_event.start_age %}
                                 <div class="age-3-16">
-                                    <b>Age</b>
+                                    <b>Вік</b>
                                     <span class="span">:
                                         {% if single_event.start_age %}
                                         	{{ single_event.start_age }}
@@ -57,7 +57,7 @@
                                     <span id="extra-details-short">{{ single_event.extra_details|truncatewords:20|safe }}</span>
                                     <span id="extra-details-full" style="display:none;">{{ single_event.extra_details|safe }}</span>
                                     {% if single_event.extra_details|length > 100 %}
-                                        <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">more</a>
+                                        <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">далі</a>
                                     {% endif %}
                                 </div>
                             {% endif %}
@@ -83,7 +83,7 @@
                                     {% csrf_token %}
                                     {% if request.user.is_authenticated %}
                                         {% if persons %}
-                                            <h5>Chose persons to registrate:</h5>
+                                            <h5>Оберіть осіб для реєстрації:</h5>
                                             <br>
                                             <div class="checkbox-list">
                                                 {% for person in persons %}
@@ -95,31 +95,29 @@
                                                 {% endfor %}
                                             </div>
                                             <br>
-                                            <h6>(To be included in this list, persons must be verified by the
-                                                operator)</h6>
+                                            <h6>(Щоб бути включеними до цього списку, особи повинні бути перевірені оператором)</h6>
                                             <br>
                                             <br>
                                             <button type="submit" class="button-registration">
-                                                <div class="registration">Registration</div>
+                                                <div class="registration">Реєстрація</div>
                                                 <div class="vector-container">
                                                     <img class="vector-icon1" alt=""
                                                          src="{% static 'img/vector-1.svg' %}"/>
                                                 </div>
                                             </button>
                                         {% else %}
-                                            <h5>You don't have any verified persons.</h5>
+                                            <h5>У вас немає жодної підтвердженої особи.</h5>
                                             <br>
-                                            <h6>(To be included in this list, persons must be verified by the
-                                                operator)</h6>
+                                            <h6>(Щоб бути включеними до цього списку, особи повинні бути перевірені оператором)</h6>
                                         {% endif %}
 
                                         <br>
-                                        <h6>In case you have family members who are not indicated above - please add them to your profile.</h6>
+                                        <h6>Якщо у вас є члени сім'ї, які не вказані вище - будь ласка, додайте їх до вашого профілю.</h6>
 
-                                        <a href="{% url "associated_person_list" %}">Persons list</a>
+                                        <a href="{% url "associated_person_list" %}">Список осіб</a>
                                     {% else %}
                                         <a class="button-registration" href="{% url 'login' %}">
-                                            <div class="registration">Registration</div>
+                                            <div class="registration">Реєстрація</div>
                                             <div class="vector-container">
                                                 <img class="vector-icon1" alt="" src="{% static 'img/vector-1.svg' %}" />
                                             </div>
@@ -129,7 +127,7 @@
                             {% else %}
                                 <button class="button-join">
                                     <div class="join-parent">
-                                        <div class="join">Closed</div>
+                                        <div class="join">Закрито</div>
                                         <div class="vector-container">
                                             <img class="vector-icon1" alt="" src="{% static 'img/vector-1.svg' %}" />
                                         </div>
@@ -157,11 +155,11 @@
         if (shortText.style.display === "none") {
             shortText.style.display = "inline";
             fullText.style.display = "none";
-            toggleLink.innerText = "more";
+            toggleLink.innerText = "далі";
         } else {
             shortText.style.display = "none";
             fullText.style.display = "inline";
-            toggleLink.innerText = "less";
+            toggleLink.innerText = "менше";
         }
     }
 </script>
