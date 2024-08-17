@@ -8,118 +8,110 @@ from .models import History, Mission, Vision, Value, Program, DocumentCategory, 
 
 TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST = True
 
-
 def first_lunch(request):
     if not History.objects.exists():
         history = History.objects.create(
             content="""
-            "Unite Together" was founded by an initiative group of Ukrainians who sought to contribute to supporting their compatriots during the war. The beginning of its history is connected with the purchase and shipment of necessary medicines to Ukraine, collected during charity concerts and events, analysis of the needs and support of Ukrainians who are in Georgia. Over time, the organization has evolved from a group of volunteers gathered during a vacation in Georgia into a structured organization with a clearly defined mission and strategy to help Ukrainians in Georgia. In June 2022, the organization conducted an extensive survey among Ukrainians living in Georgia, which allowed it to receive its first grant from European partners. In addition, on September 1, 2022, Unite Together received legal status as a non-governmental organization (NGO).
+            "Unite Together" була заснована ініціативною групою українців, які прагнули підтримати своїх співвітчизників під час війни. Початок її історії пов'язаний з закупівлею та відправкою необхідних ліків в Україну, зібраних під час благодійних концертів та заходів, аналізом потреб і підтримкою українців, які перебувають у Грузії. З часом організація перетворилася з групи волонтерів, зібраних під час відпустки в Грузії, на структуровану організацію з чітко визначеною місією та стратегією допомоги українцям у Грузії. У червні 2022 року організація провела масштабне опитування серед українців, які проживають у Грузії, що дозволило їй отримати перший грант від європейських партнерів. Крім того, 1 вересня 2022 року Unite Together отримала юридичний статус неприбуткової організації (НГО).
             """
         )
         history.save()
-        messages.success(request, 'History - Imports done!')
+        messages.success(request, 'Історія - Імпорт виконано!')
 
     if not Mission.objects.exists():
         mission = Mission.objects.create(
             content="""
-            Our organization "Unite Together" is aimed at creating and implementing projects aimed at supporting and developing Ukrainians affected by the war. Our main goal is to achieve sustainable systemic change in their lives and society.
+            Наша організація "Unite Together" спрямована на створення та реалізацію проектів, які підтримують і розвивають українців, постраждалих від війни. Наша головна мета — досягти стійких системних змін у їхньому житті та суспільстві.
             """
         )
         mission.save()
-        messages.success(request, 'Mission - Imports done!')
+        messages.success(request, 'Місія - Імпорт виконано!')
 
     if not Vision.objects.exists():
         vision = Vision.objects.create(
             content="""
-            We see a future in which Ukrainians who survived the tragedy of war have successfully integrated into society. They are motivated to constantly develop and actively participate in the formation of civil society and sustainable social change. Our vision is a society in which every person has equal opportunities for self-realization and contribution to the well-being of society.
+            Ми бачимо майбутнє, в якому українці, які пережили трагедію війни, успішно інтегровані в суспільство. Вони мотивовані постійно розвиватися та активно брати участь у формуванні громадянського суспільства та стійких соціальних змін. Наша візія — суспільство, в якому кожна людина має рівні можливості для самореалізації та внеску у добробут суспільства.
             """
         )
         vision.save()
-        messages.success(request, 'Vision - Imports done!')
+        messages.success(request, 'Візія - Імпорт виконано!')
 
     if not Value.objects.exists():
         value1 = Value.objects.create(
-            title="Sustainability and responsibility",
+            title="Сталий розвиток і відповідальність",
             content="""
-            We attach great importance to creating sustainable conditions for the life and development of those affected by war. We are responsible for our obligations to beneficiaries and partners.
+            Ми надаємо велике значення створенню сталих умов для життя і розвитку постраждалих від війни. Ми відповідальні за наші зобов'язання перед бенефіціарами та партнерами.
             """
         )
         value1.save()
         value2 = Value.objects.create(
-            title="Cooperation and partnership",
+            title="Співпраця та партнерство",
             content="""
-            We value mutually beneficial and productive cooperation with our partners and stakeholders. We believe that only through joint efforts can we achieve our goals and create positive change.
+            Ми цінуємо взаємовигідну та продуктивну співпрацю з нашими партнерами та зацікавленими сторонами. Ми віримо, що тільки завдяки спільним зусиллям ми можемо досягти наших цілей та створити позитивні зміни.
             """
         )
         value2.save()
         value3 = Value.objects.create(
-            title="Compassion and Empathy",
+            title="Співчуття та емпатія",
             content="""
-            In our work, we show deep compassion and empathy for everyone who needs our support and help. We listen and understand the needs of our beneficiaries, striving to provide them with not only material but also emotional support.
+            У нашій роботі ми проявляємо глибоке співчуття та емпатію до всіх, хто потребує нашої підтримки та допомоги. Ми слухаємо і розуміємо потреби наших бенефіціарів, прагнучи надати їм не тільки матеріальну, але й емоційну підтримку.
             """
         )
         value3.save()
-
         value4 = Value.objects.create(
-            title="Changes are created here",
+            title="Зміни створюються тут",
             content="""
-            At the initial stage of Unite Together's activities, the organization focused on meeting the humanitarian needs of Ukrainians in Georgia. However, over time, the goals of the organization expanded, and in addition to the humanitarian mission, the task of developing and integrating Ukrainians into Georgian society was added.
+            На початковому етапі діяльності Unite Together організація зосередилася на задоволенні гуманітарних потреб українців у Грузії. Однак з часом цілі організації розширилися, і до гуманітарної місії додалося завдання розвитку та інтеграції українців у грузинське суспільство.
             """
         )
         value4.save()
-        messages.success(request, 'Value - Imports done!')
+        messages.success(request, 'Цінності - Імпорт виконано!')
 
     if not Program.objects.exists():
         program1 = Program.objects.create(
-            category="Financial support",
-            title="#UkrCash program",
-            description="Provided monthly financial aid to over 3,000 Ukrainians, totaling more than 2 million euros this year.",
+            category="Фінансова підтримка",
+            title="#UkrCash програма",
+            description="Надано щомісячну фінансову допомогу понад 3000 українцям, на загальну суму більше 2 мільйонів євро цього року.",
             support_partner="ASB",
             beneficiaries_count=3000,
             funding_amount=2000000.00
         )
-
         program2 = Program.objects.create(
-            category="Utility bills support",
-            title="#Winterization program",
-            description="Covered utility costs for 670 families.",
-            support_partner="ASB and PIN",
+            category="Підтримка комунальних платежів",
+            title="#Програма зимової допомоги",
+            description="Покрито комунальні витрати для 670 сімей.",
+            support_partner="ASB і PIN",
             beneficiaries_count=670
         )
-
         program3 = Program.objects.create(
-            category="Housing support",
-            title="Support for Ukrainian communities",
-            description="Reimbursement of 50% of housing costs for 90 Ukrainian families.",
+            category="Підтримка житла",
+            title="Підтримка українських громад",
+            description="Відшкодування 50% витрат на житло для 90 українських сімей.",
             support_partner="PIN",
             beneficiaries_count=90
         )
-
         program4 = Program.objects.create(
-            category="Educational and cultural programs",
-            title="Educational and cultural programs",
-            description="Implementation of programs for children and the elderly in Tbilisi, Batumi, and Kutaisi, including educational events, sports, entertainment, language lessons, and master classes."
+            category="Освітні та культурні програми",
+            title="Освітні та культурні програми",
+            description="Реалізація програм для дітей і літніх людей у Тбілісі, Батумі та Кутаїсі, включаючи освітні заходи, спорт, розваги, мовні курси та майстер-класи."
         )
-
         program5 = Program.objects.create(
-            category="Sports initiatives",
-            title="#UniteForActiveSports program",
-            description="Includes sports activities like rock climbing, dancing, SUP surfing, and camping.",
+            category="Спортивні ініціативи",
+            title="#UniteForActiveSports програма",
+            description="Включає спортивні заходи, такі як скелелазіння, танці, SUP серфінг і кемпінг.",
             support_partner="PIN",
-            additional_info="Locations: Tbilisi and Batumi"
+            additional_info="Місця: Тбілісі та Батумі"
         )
-
         program6 = Program.objects.create(
-            category="Support for older people",
-            title="#HandMade program",
-            description="Includes workshops, excursions and visits to cultural events such as ballet.",
+            category="Підтримка старших людей",
+            title="#HandMade програма",
+            description="Включає майстер-класи, екскурсії та відвідування культурних заходів, таких як балет.",
             support_partner="CARE"
         )
-
         program7 = Program.objects.create(
-            category="Medical provision",
-            title="Medical provision",
-            description="Provision of drugs for the treatment of thyroid diseases in Ukraine and Georgia.",
+            category="Медичне забезпечення",
+            title="Медичне забезпечення",
+            description="Надання ліків для лікування захворювань щитовидної залози в Україні та Грузії.",
             beneficiaries_count=1260
         )
         program1.save()
@@ -129,8 +121,7 @@ def first_lunch(request):
         program5.save()
         program6.save()
         program7.save()
-        messages.success(request, 'Program - Imports done!')
-
+        messages.success(request, 'Програми - Імпорт виконано!')
 
 def who_we_are(request):
     if TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST:
@@ -152,7 +143,6 @@ def who_we_are(request):
 
     return render(request, 'aboutus/about-us-history.html', context)
 
-
 def documents_view(request):
     categories = DocumentCategory.objects.prefetch_related('documents').all()
     context = {
@@ -160,12 +150,11 @@ def documents_view(request):
     }
     return render(request, 'aboutus/about-us-documents.html', context)
 
-
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            # Process the data in form.cleaned_data
+            # Обробка даних з form.cleaned_data
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
@@ -173,12 +162,12 @@ def contact_view(request):
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
 
-            # Send email (for example)
+            # Надсилання електронного листа
             send_mail(
-                f'Contact Form: {subject}',
-                f'Name: {first_name} {last_name}\nEmail: {email}\nPhone: {phone_number}\n\nMessage:\n{message}',
+                f'Форма контакту: {subject}',
+                f'Ім\'я: {first_name} {last_name}\nEmail: {email}\nТелефон: {phone_number}\n\nПовідомлення:\n{message}',
                 settings.EMAIL_HOST_USER,
-                [settings.EMAIL_HOST_USER],  # Ensure you have this setting
+                [settings.EMAIL_HOST_USER],
             )
 
             return redirect('contact_success')
@@ -187,35 +176,24 @@ def contact_view(request):
 
     return render(request, 'aboutus/about-us-contacts.html', {'form': form})
 
-
 def contact_success_view(request):
     return render(request, 'aboutus/contact_success.html')
-
 
 def about_us(request):
     context = {}
     return render(request, 'aboutus/aboutus_index.html', context=context)
 
-
 def history(request):
     context = {}
     return render(request, 'aboutus/about-us-history.html', context=context)
-
 
 def documents(request):
     context = {}
     return render(request, 'aboutus/about-us-documents.html', context=context)
 
-
 def partners(request):
     partners = Partners.objects.all()
     return render(request, 'aboutus/about-us-partners.html', {'partners': partners})
-
-
-# def partners(request):
-#     context = {}
-#     return render(request, 'aboutus/about-us-partners.html', context=context)
-
 
 def contacts(request):
     context = {}

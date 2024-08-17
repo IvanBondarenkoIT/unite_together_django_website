@@ -1,107 +1,107 @@
-{% extends "base.html" %}
-
-{% load static %}
-
-{% block content %}
-
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-
-        header {
-            background: #333;
-            color: #fff;
-            padding: 1em 0;
-            text-align: center;
-        }
-
-        h1, h2 {
-            margin: 0.5em 0;
-        }
-
-        section {
-            padding: 1em;
-            border-bottom: 1px solid #ccc;
-        }
-
-        footer {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1em 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 1em;
-        }
-
-        h3 {
-            margin: 0;
-        }
-
-    </style>
-
-    <header>
-        <h1>Unite Together</h1>
-    </header>
-
-    <section>
-        <h2>{{ history.title }}</h2>
-        <p>{{ history.content }}</p>
-    </section>
-
-    <section>
-        <h2>{{ mission.title }}</h2>
-        <p>{{ mission.content }}</p>
-    </section>
-
-    <section>
-        <h2>{{ vision.title }}</h2>
-        <p>{{ vision.content }}</p>
-    </section>
-
-    <section>
-        <h2>{{ values.title }}</h2>
-        <p>{{ values.content }}</p>
-    </section>
-
-    <section>
-        <h2>Programs</h2>
-        <ul>
-            {% for program in programs %}
-                <li>
-                    <h3>{{ program.title }}</h3>
-                    <p><strong>Category:</strong> {{ program.category }}</p>
-                    <p>{{ program.description }}</p>
-                    {% if program.support_partner %}
-                        <p><strong>Support Partner:</strong> {{ program.support_partner }}</p>
-                    {% endif %}
-                    {% if program.beneficiaries_count %}
-                        <p><strong>Beneficiaries:</strong> {{ program.beneficiaries_count }}</p>
-                    {% endif %}
-                    {% if program.funding_amount %}
-                        <p><strong>Funding Amount:</strong> €{{ program.funding_amount }}</p>
-                    {% endif %}
-                    {% if program.additional_info %}
-                        <p><strong>Additional Info:</strong> {{ program.additional_info }}</p>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    </section>
-
-
-{% endblock %}
+{#{% extends "base.html" %}#}
+{##}
+{#{% load static %}#}
+{##}
+{#{% block content %}#}
+{##}
+{##}
+{#    <style>#}
+{#        body {#}
+{#            font-family: Arial, sans-serif;#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            line-height: 1.6;#}
+{#        }#}
+{##}
+{#        header {#}
+{#            background: #333;#}
+{#            color: #fff;#}
+{#            padding: 1em 0;#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        h1, h2 {#}
+{#            margin: 0.5em 0;#}
+{#        }#}
+{##}
+{#        section {#}
+{#            padding: 1em;#}
+{#            border-bottom: 1px solid #ccc;#}
+{#        }#}
+{##}
+{#        footer {#}
+{#            background: #333;#}
+{#            color: #fff;#}
+{#            text-align: center;#}
+{#            padding: 1em 0;#}
+{#            position: fixed;#}
+{#            width: 100%;#}
+{#            bottom: 0;#}
+{#        }#}
+{##}
+{#        ul {#}
+{#            list-style: none;#}
+{#            padding: 0;#}
+{#        }#}
+{##}
+{#        li {#}
+{#            margin-bottom: 1em;#}
+{#        }#}
+{##}
+{#        h3 {#}
+{#            margin: 0;#}
+{#        }#}
+{##}
+{#    </style>#}
+{##}
+{#    <header>#}
+{#        <h1>Unite Together</h1>#}
+{#    </header>#}
+{##}
+{#    <section>#}
+{#        <h2>{{ history.title }}</h2>#}
+{#        <p>{{ history.content }}</p>#}
+{#    </section>#}
+{##}
+{#    <section>#}
+{#        <h2>{{ mission.title }}</h2>#}
+{#        <p>{{ mission.content }}</p>#}
+{#    </section>#}
+{##}
+{#    <section>#}
+{#        <h2>{{ vision.title }}</h2>#}
+{#        <p>{{ vision.content }}</p>#}
+{#    </section>#}
+{##}
+{#    <section>#}
+{#        <h2>{{ values.title }}</h2>#}
+{#        <p>{{ values.content }}</p>#}
+{#    </section>#}
+{##}
+{#    <section>#}
+{#        <h2>Programs</h2>#}
+{#        <ul>#}
+{#            {% for program in programs %}#}
+{#                <li>#}
+{#                    <h3>{{ program.title }}</h3>#}
+{#                    <p><strong>Category:</strong> {{ program.category }}</p>#}
+{#                    <p>{{ program.description }}</p>#}
+{#                    {% if program.support_partner %}#}
+{#                        <p><strong>Support Partner:</strong> {{ program.support_partner }}</p>#}
+{#                    {% endif %}#}
+{#                    {% if program.beneficiaries_count %}#}
+{#                        <p><strong>Beneficiaries:</strong> {{ program.beneficiaries_count }}</p>#}
+{#                    {% endif %}#}
+{#                    {% if program.funding_amount %}#}
+{#                        <p><strong>Funding Amount:</strong> €{{ program.funding_amount }}</p>#}
+{#                    {% endif %}#}
+{#                    {% if program.additional_info %}#}
+{#                        <p><strong>Additional Info:</strong> {{ program.additional_info }}</p>#}
+{#                    {% endif %}#}
+{#                </li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </section>#}
+{##}
+{##}
+{#{% endblock %}#}

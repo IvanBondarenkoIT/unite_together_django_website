@@ -1,32 +1,32 @@
-{% extends "base.html" %}
-
-{% load static %}
-
-{% block content %}
-
-
-    <header>
-        <h1>Contact Us</h1>
-        <p>Unite Together is a non-profit Ukrainian organization that aims to unite people to create and implement projects that support and develop Ukrainians affected by the war for sustainable systemic changes in their lives and society.</p>
-    </header>
-
-    <main>
-        <section>
-            <h2>Contact Information</h2>
-            <p>Phone: +995 551 146 364</p>
-            <p>Email: uniteforukrain@gmail.com</p>
-            <p>Address: Tbilisi, 21/23 Tsotne Dadiani St., office 8</p>
-            <p><a href="https://www.google.com/maps?q=21/23+Tsotne+Dadiani+St.,+Tbilisi,+office+8">See on the map</a></p>
-        </section>
-
-        <section>
-            <h2>Have a question? Just write us a message!</h2>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Send Message</button>
-            </form>
-        </section>
-    </main>
-
-{% endblock %}
+{#{% extends "base.html" %}#}
+{##}
+{#{% load static %}#}
+{##}
+{#{% block content %}#}
+{##}
+{##}
+{#    <header>#}
+{#        <h1>Contact Us</h1>#}
+{#        <p>Unite Together is a non-profit Ukrainian organization that aims to unite people to create and implement projects that support and develop Ukrainians affected by the war for sustainable systemic changes in their lives and society.</p>#}
+{#    </header>#}
+{##}
+{#    <main>#}
+{#        <section>#}
+{#            <h2>Contact Information</h2>#}
+{#            <p>Phone: +995 551 146 364</p>#}
+{#            <p>Email: uniteforukrain@gmail.com</p>#}
+{#            <p>Address: Tbilisi, 21/23 Tsotne Dadiani St., office 8</p>#}
+{#            <p><a href="https://www.google.com/maps?q=21/23+Tsotne+Dadiani+St.,+Tbilisi,+office+8">See on the map</a></p>#}
+{#        </section>#}
+{##}
+{#        <section>#}
+{#            <h2>Have a question? Just write us a message!</h2>#}
+{#            <form method="post">#}
+{#                {% csrf_token %}#}
+{#                {{ form.as_p }}#}
+{#                <button type="submit">Send Message</button>#}
+{#            </form>#}
+{#        </section>#}
+{#    </main>#}
+{##}
+{#{% endblock %}#}

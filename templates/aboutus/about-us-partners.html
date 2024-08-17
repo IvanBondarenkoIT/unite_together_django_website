@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <!-- STYLES ONLY FOR PARTNERS -->
+    <!-- СТИЛІ ТІЛЬКИ ДЛЯ ПАРТНЕРІВ -->
 
     <style>
         .organization {
@@ -13,7 +13,7 @@
             margin-bottom: 3px !important;
         }
 
-        /* mobile styles not finished at all */
+        /* мобільні стилі не завершені */
         @media screen and (max-width: 720px) {
 
             .organization {
@@ -80,8 +80,8 @@
             flex-shrink: 0;
             /* height: 79.5px; */
             width: 220px;
-            background-repeat: no-repeat; /* Prevent image tiling */
-            background-position: left; /* Center the logo */
+            background-repeat: no-repeat; /* запобігти повторенню зображення */
+            background-position: left; /* розмістити логотип ліворуч */
             /* background-size: 100px ; */
         }
 
@@ -126,14 +126,13 @@
             <img class="bg-icon3" loading="lazy" alt="" src="{% static 'img/aboutus/bg@2x-1600px.jpg' %}"/>
 
             <div class="sec-title3">
-                <div class="sublitle3">Subtitle</div>
+                <div class="sublitle3">Підзаголовок</div>
                 <div class="content3">
-                    <h1 class="events13">About us</h1>
+                    <h1 class="events13">Про нас</h1>
                     <div class="assets-panel">
                         <div class="discover-the-diverse3">
-                            Unite Together is dedicated to supporting and uplifting
-                            Ukrainian communities in Georgia through sustainable projects
-                            and programs.
+                            Об'єднаймося для підтримки та розвитку українських громад у Грузії
+                            через сталі проєкти та програми.
                         </div>
                     </div>
                 </div>
@@ -142,9 +141,9 @@
 
 
         <main class="two-columns-with-selectors">
-            <!-- BEGIN OF MAIN PART -->
+            <!-- ОСНОВНА ЧАСТИНА -->
 
-            <!-- Selectors to be copied to all About pages -->
+            <!-- Вибір категорій для сторінок "Про нас" -->
             <div class="left-selector-box">
                 {% for category, link in links.items %}
                     <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
@@ -156,11 +155,11 @@
             <section class="right-part-of-static-page">
                 <div class="partners-and-collaboration-parent" style="gap: 10px; padding-bottom: 10px;">
                     <h1 class="partners-and-collaboration2">
-                        Partners and collaboration
+                        Партнери та співпраця
                     </h1>
                     <div class="this-page-features">
-                        This page features organizations and companies that support us in our mission to help those in
-                        need and contribute significantly to the development of our projects.
+                        Ця сторінка висвітлює організації та компанії, які підтримують нас у нашій місії допомоги
+                        тим, хто потребує, і роблять значний внесок у розвиток наших проєктів.
                     </div>
                 </div>
 
@@ -175,7 +174,7 @@
                             <h3>{{ partner.title }}</h3>
                             <p>{{ partner.description }}</p>
                             {% if partner.url_link %}
-                                <a href="{{ partner.url_link }}" target="_blank">Learn more</a>
+                                <a href="{{ partner.url_link }}" target="_blank">Дізнатись більше</a>
                             {% endif %}
                         </div>
                     </div>
