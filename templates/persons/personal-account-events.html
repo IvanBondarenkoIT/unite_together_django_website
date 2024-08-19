@@ -12,13 +12,6 @@
         {% include "includes/dashboard_sidebar.html" %}
         <section class="group-section">
 
-
-{#              <div class="frame-parent65">#}
-{##}
-{##}
-{#              </div>#}
-{#                <div class="bg-container">#}
-
                     <div class="frame-parent68" style="margin-left: 0px">
 
                         {% for participant in participants %}
@@ -84,7 +77,6 @@
                         {% endfor %}
 
                     </div>
-{#                </div>#}
 
             </section>
 {#      paginator #}
@@ -93,9 +85,9 @@
                 {% if participants.has_other_pages %}
                 <ul class="pagination">
                     {% if participants.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page={{ participants.previous_page_number }}">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ participants.previous_page_number }}">Попередня</a></li>
                     {% else %}
-                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#">Попередня</a></li>
                     {% endif %}
 
                     {% for page_number in participants.paginator.page_range %}
@@ -106,11 +98,10 @@
                         {% endif %}
                     {% endfor %}
 
-
-                    {% if all_objects.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{ all_objects.next_page_number }}">Next</a></li>
+                    {% if participants.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ participants.next_page_number }}">Далі</a></li>
                     {% else %}
-                        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#">Далі</a></li>
                     {% endif %}
                 </ul>
                 {% endif %}
@@ -120,51 +111,8 @@
 
         </section>
 
-{#        <div class="frame-wrapper19">#}
-{#            #}
-{#          <div class="frame-parent80">#}
-{#              #}
-{#            <div class="frame-wrapper20">#}
-{#                #}
-{#              <div class="frame-parent81">#}
-{#                <div class="vector-wrapper32">#}
-{#                  <img#}
-{#                    class="vector-icon21"#}
-{#                    loading="lazy"#}
-{#                    alt=""#}
-{#                    src="./public/vector-12.svg"#}
-{#                  />#}
-{#                </div>#}
-{#                <div class="back2">Back</div>#}
-{#              </div>#}
-{#            </div>#}
-{#            <div class="active2">#}
-{#              <div class="active-inner"></div>#}
-{#              <div class="div13">1</div>#}
-{#            </div>#}
-{#            <div class="wrapper5">#}
-{#              <div class="div14">2</div>#}
-{#            </div>#}
-{#            <div class="wrapper6">#}
-{#              <div class="div15">3</div>#}
-{#            </div>#}
-{#            <div class="frame-wrapper21">#}
-{#              <div class="forward-parent">#}
-{#                <u class="forward2">Forward</u>#}
-{#                <div class="vector-wrapper33">#}
-{#                  <img#}
-{#                    class="vector-icon22"#}
-{#                    alt=""#}
-{#                    src="./public/vector-13.svg"#}
-{#                  />#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
       </main>
 
     </div>
-
 
 {% endblock %}

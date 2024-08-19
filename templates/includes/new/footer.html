@@ -29,7 +29,6 @@
         }
     }
 
-
     @media screen and (max-width: 720px) {
         .footer-container {
             grid-template-columns: 1fr;
@@ -55,7 +54,6 @@
             order: 3;
         }
     }
-
 
     .foot-col {
         flex: 1; /* Make each div flexible and grow equally */
@@ -84,7 +82,6 @@
         font-weight: bolder;
         font-size: var(--font-size-lg);
         color: var(--color-darkslategray-100);
-
     }
 
     .footer-menu-links {
@@ -126,7 +123,6 @@
         position: absolute;
         top: 0;
         left: 0;
-
         background-repeat: no-repeat;
     }
 
@@ -149,7 +145,6 @@
         transform: translateY(10%);
         width: 15.6px;
         height: 21.2px;
-
     }
 
     .footer-menu-address-location {
@@ -203,7 +198,7 @@
                 <div class="logo-ut-footer1" style="gap: var(--gap-7xl-6); margin-bottom: 6px;">
                     <a class="logo-ut2" href="{% url 'home' %}">
                         <div class="logo-container">
-                            <img class="main-logo" loading="lazy" alt="Logo"
+                            <img class="main-logo" loading="lazy" alt="Логотип"
                                  src="{% static 'img/new-unite-together.jpg' %}"/>
                             <div class="logo-text">
                                 <h4 class="logo-title">UNITE</h4>
@@ -212,28 +207,25 @@
                         </div>
                     </a>
                 </div>
-                <b>briefly about us</b>
-                <p>Our organization "Unite Together" is aimed at creating and
-                    implementing projects aimed at supporting and developing
-                    Ukrainians affected by the war. Our main goal is to achieve
-                    sustainable systemic change in their lives and society.</p>
+                <b>Коротко про нас</b>
+                <p>Наша організація "Unite Together" спрямована на створення та реалізацію проектів, які підтримують і розвивають українців, постраждалих від війни. Наша головна мета — досягти стійких системних змін у їхньому житті та суспільстві.</p>
             </div>
 
-            <div class="foot-col foot-2-menu" style="max-width: 130px; min-width: 100px; "><b>Menu</b>
+            <div class="foot-col foot-2-menu" style="max-width: 130px; min-width: 100px; "><b>Меню</b>
                 <div class="line-decoration2"></div>
                 <ul class="footer-menu-links">
                     <li class="footer-menu-links"><a href="{% url 'who_we_are' %}"
-                                                     {% if '/about-us/' in request.path %}style="text-decoration: underline"{% endif %}>About Us</a></li>
+                                                     {% if '/about-us/' in request.path %}style="text-decoration: underline"{% endif %}>Про нас</a></li>
                     <li class="footer-menu-links"><a href="{% url 'events' %}"
-                                                     {% if '/events/' in request.path %}style="text-decoration: underline"{% endif %}>Events</a></li>
+                                                     {% if '/events/' in request.path %}style="text-decoration: underline"{% endif %}>Події</a></li>
                     <li class="footer-menu-links"><a href="{% url 'projects' %}"
-                                                     {% if '/projects/' in request.path %}style="text-decoration: underline"{% endif %}>Projects</a></li>
+                                                     {% if '/projects/' in request.path %}style="text-decoration: underline"{% endif %}>Проєкти</a></li>
                 </ul>
             </div>
 
             <!-- CONTACT -->
             <div class="foot-col foot-3-address" style="min-width: 330px;">
-                <b>Contact</b>
+                <b>Контакти</b>
                 <div class="line-decoration2"></div>
                 <ul class="footer-menu-address">
                     <li class="footer-menu-address-phone">
@@ -244,73 +236,68 @@
                     </li>
 
                     <li class="footer-menu-address-location">
-
                         <a href="https://www.google.com/maps?q=21/23+Tsotne+Dadiani+St.,+Tbilisi,+office+8"
-                                          aria-pressed="true">Tbilisi, 21/23 Tsotne Dadiani St., office 8</a>
+                                          aria-pressed="true">Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8</a>
                         <br>
-{#                        Batumi, 127 Luka Asatiani St.<br>#}
-{#                        Kutaisi, 62 Agmashenebeli St.</div>#}
+{#                        Батумі, вул. Лука Асатіані, 127<br>#}
+{#                        Кутаїсі, вул. Агмашенебелі, 62</div>#}
                     </li>
                 </ul>
             </div>
 
-
-            <!-- WERE SOCIAL -->
+            <!-- WE'RE SOCIAL -->
             <div class="foot-col foot-4-social">
-
-                <b>We are on social&nbsp;media</b>
+                <b>Ми в соціальних мережах</b>
                 <div class="decoration7"></div>
                 <div>
-                    Subscribe to us on social media so you don't miss the release
-                    of new outstanding events.
+                    Підписуйтесь на нас у соціальних мережах, щоб не пропустити вихід нових видатних подій.
                 </div>
 
                 <div class="soc-icons-footer1">
 
+{#                    <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5```html#}
                     <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5cmlibXVydGRz"><img
                             class="icon-insta1"
                             loading="lazy"
-                            alt=""
+                            alt="Instagram"
                             src="{% static 'img/iconinsta.svg' %}"
                     /></a>
 
                     <a href="https://www.facebook.com/UniteTogetherForUkraine?mibextid=LQQJ4d"><img
                             class="icon-fb2"
                             loading="lazy"
-                            alt=""
+                            alt="Facebook"
                             src="{% static 'img/iconfb.svg' %}"
                     /></a>
 
                     <a href="https://t.me/Unite_T"><img
                             class="icon-tg2"
                             loading="lazy"
-                            alt=""
+                            alt="Telegram"
                             src="{% static 'img/icontg.svg' %}"
                     /></a>
                 </div>
-
 
             </div>
         </div>
     </div>
     <div class="footer2" style="padding-top: 0;">
 
-<div class="not-equal-comparison">
-          <div class="divider2"></div>
-          <div class="or-comparison">
-            <div class="row2">
-              <div>
-                © 2024 Unite Together. All rights reserved.
-              </div>
-              <div><a href="">Privacy Policy</a></div>
-              <div><a href="">Terms and Conditions</a></div>
-              <div><a href="">Cookie Policy</a></div>
+        <div class="not-equal-comparison">
+            <div class="divider2"></div>
+            <div class="or-comparison">
+                <div class="row2">
+                    <div>
+                        © 2024 Unite Together. Всі права захищені.
+                    </div>
+                    <div><a href="">Політика конфіденційності</a></div>
+                    <div><a href="">Умови та положення</a></div>
+                    <div><a href="">Політика щодо cookies</a></div>
+                </div>
             </div>
-          </div>
         </div>
-</div>
+    </div>
 </footer>
-
 
 {#    </div>#}
 

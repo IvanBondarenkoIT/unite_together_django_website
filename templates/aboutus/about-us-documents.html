@@ -4,89 +4,10 @@
 
 {% block content %}
 
+    {% include 'aboutus/desktop/about-us-documents-desktop.html' %}
 
-
-
-    <div class="about-us-documents" data-animate-on-scroll>
-        <section class="page-header2">
-            <img class="bg-icon2" loading="lazy" alt="" src="{% static 'img/aboutus/bg@2x-1600px.jpg' %}"/>
-
-            <div class="sec-title2">
-                <div class="sublitle2">Subtitle</div>
-                <div class="content2">
-                    <h1 class="events10">About us</h1>
-                    <div class="discover-the-diverse-range-of-frame">
-                        <div class="discover-the-diverse2">
-                            Unite Together is dedicated to supporting and uplifting
-                            Ukrainian communities in Georgia through sustainable projects
-                            and programs.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <main class="two-columns-with-selectors">
-            <!-- BEGIN OF MAIN PART -->
-
-            <!-- Selectors to be copied to all About pages -->
-            <div class="left-selector-box">
-                {% for category, link in links.items %}
-                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
-                       href="{% url  link %}">{{ category }}</a>
-                {% endfor %}
-            </div>
-
-
-             <section class="right-part-of-static-page">
-            <div class="bg-white-documents"></div>
-            <div class="variable-remover">
-                <h1 class="documents2">Documents</h1>
-                <div class="on-this-page-container">
-                    <p class="on-this-page">
-                        On this page you will find official documents governing the work
-                        of our organization, as well as informational materials to help
-                        you better understand the principles and goals of our charitable
-                        work.
-                    </p>
-                    <p class="blank-line3">&nbsp;</p>
-                </div>
-            </div>
-            {% for category in categories %}
-            <div class="documents-section">
-                <h3 onclick="toggleDocuments({{ category.id }})">{{ category.name }}</h3>
-                <div class="documents-list" id="documents-{{ category.id }}">
-                    {% for document in category.documents.all %}
-                    <div class="document-item">
-                        <div class="title">
-                            <div class="black-wrapper">
-                                <img class="black-icon" loading="lazy" alt="" src="{% static 'img/aboutus/black.svg' %}" />
-                            </div>
-                            <div class="heading-parent">
-                                <b class="heading1">{{ document.title }}</b>
-                                <div class="variable-updater">{{ document.subtitle }}</div>
-                                <a href="{{ document.upload.url }}">Download</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endfor %}
-        </section>
-        </main>
-    </div>
-
-    <script>
-        function toggleDocuments(id) {
-            var element = document.getElementById('documents-' + id);
-            if (element.classList.contains('show')) {
-                element.classList.remove('show');
-            } else {
-                element.classList.add('show');
-            }
-        }
-    </script>
+    {% include 'aboutus/mobile/about-us-documents-mobile.html' %}
 
 {% endblock %}
+
+

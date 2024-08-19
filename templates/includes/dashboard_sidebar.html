@@ -1,5 +1,3 @@
-
-
 <div class="aside-box10">
     <div class="rectangle-bg10"></div>
 
@@ -7,14 +5,14 @@
         <!--   SIDEBAR   -->
         <ul class="list-group navigation-links">
             <a class="events33{% if 'associated-persons' in request.path %} active{% endif %}"
-               href="{% url 'associated_person_list' %}"> Persons </a>
+               href="{% url 'associated_person_list' %}"> Персоналії </a>
             <a class="events33{% if 'registered-events' in request.path %} active{% endif %}"
-               href="{% url 'registered_events' %}"> Events & Projects </a>
+               href="{% url 'registered_events' %}"> Події та Проекти </a>
             <a class="events33{% if 'settings' in request.path %} active{% endif %}"
-               href="{% url 'settings' %}"> Change Password </a>
+               href="{% url 'settings' %}"> Змінити пароль </a>
             <br>
             <br>
-            <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span></a>
+            <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Вийти</span></a>
         </ul>
     </div>
 </div>

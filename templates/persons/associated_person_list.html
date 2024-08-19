@@ -117,50 +117,48 @@
     </div>
 
     <div class="table-container">
-        <h2>Persons</h2>
+        <h2>Родина</h2>
 
         {% if main_person %}
             <div>
-{#             номер телефона (грузинский, если ввел украинский то и его),адресс. Убираем дату рождения, гражданство и все оставляем по кнопке FULL INFORMATION#}
-                <h3>Main Person:</h3>
+{#             номер телефона (грузинский, если ввел украинский то и его), адресс. Убираем дату рождения, гражданство и все оставляем по кнопке ПОВНА ІНФОРМАЦІЯ#}
+                <h3>Головна Особа:</h3>
                 <p><strong>{{ main_person.first_name }} {{ main_person.last_name }}</strong></p>
-{#                <p>Date of Birth: {{ main_person.date_of_birth|date:"d.m.Y" }}</p>#}
+{#                <p>Дата народження: {{ main_person.date_of_birth|date:"d.m.Y" }}</p>#}
                 <p>e-mail: {{ main_person.user_owner.email }}</p>
-                <p>Georgian Phone Number: {{ main_person.georgian_phone_number }}</p>
+                <p>Грузинський номер телефону: {{ main_person.georgian_phone_number }}</p>
                 {% if main_person.ukrainian_phone_number %}
-                	<p>Ukrainian Phone Number: {{ main_person.ukrainian_phone_number }}</p>
+                	<p>Український номер телефону: {{ main_person.ukrainian_phone_number }}</p>
                 {% endif %}
                 {% if main_person.address_line %}
-                    <p>Address: {{ main_person.address_line }}</p>
+                    <p>Адреса: {{ main_person.address_line }}</p>
                 {% endif %}
 
-
-
                 {% if main_person.edit_permission %}
-                    <a href="{% url 'associated_person_edit' main_person.id %}" class="button active">Full information</a>
+                    <a href="{% url 'associated_person_edit' main_person.id %}" class="button active">Повна інформація</a>
                 {% else %}
-                    <a href="{% url 'contact' %}">To edit person sand the request</a>
+                    <a href="{% url 'contact' %}">Щоб редагувати особу, відправте запит</a>
                 {% endif %}
             </div>
         {% endif %}
 
-        <a href="{% url 'associated_person_create' %}" class="button add-person">Add New Person</a>
+        <a href="{% url 'associated_person_create' %}" class="button add-person">Додати нову особу</a>
 
         <table>
             <thead>
                 <tr>
-                    <th>Actions</th>
-                    <th>Name</th>
-                    <th>Date of Birth</th>
-{#                    <th>Date of Arrival</th>#}
-{#                    <th>Type of Document</th>#}
-                    <th>Document Number</th>
-                    <th>Gender</th>
-{#                    <th>Georgian Phone Number</th>#}
-{#                    <th>Ukrainian Phone Number</th>#}
-{#                    <th>Country</th>#}
-{#                    <th>Chosen City</th>#}
-{#                    <th>Address Line</th>#}
+                    <th>Дії</th>
+                    <th>Ім'я</th>
+                    <th>Дата народження</th>
+{#                    <th>Дата прибуття</th>#}
+{#                    <th>Тип документу</th>#}
+                    <th>Номер документу</th>
+                    <th>Стать</th>
+{#                    <th>Грузинський номер телефону</th>#}
+{#                    <th>Український номер телефону</th>#}
+{#                    <th>Країна</th>#}
+{#                    <th>Вибране місто</th>#}
+{#                    <th>Адреса</th>#}
                 </tr>
             </thead>
             <tbody>
@@ -170,9 +168,9 @@
                         <tr class="{% if person.is_main %}main-person{% endif %}">
                             <td>
                                 {% if person.edit_permission %}
-                                    <a href="{% url 'associated_person_edit' person.id %}" class="button active">Edit</a>
+                                    <a href="{% url 'associated_person_edit' person.id %}" class="button active">Редагувати</a>
                                 {% else %}
-                                    <span class="button inactive">Edit</span>
+                                    <span class="button inactive">Редагувати</span>
                                 {% endif %}
                             </td>
                             <td>{{ person.first_name }} {{ person.last_name }}</td>

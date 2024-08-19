@@ -8,13 +8,12 @@
         <img class="bg-icon6" loading="lazy" alt="" src="{% static 'img/bg@2x.png' %}"/>
 
         <div class="sec-title6">
-            <div class="sublitle6">Subtitle</div>
+            <div class="sublitle6">Підзаголовок</div>
             <div class="content18">
-                <h1 class="events24">Projects</h1>
+                <h1 class="events24">Проекти</h1>
                 <div class="discover-the-diverse-range-of-wrapper3">
                     <div class="discover-the-diverse6">
-                        Discover the diverse range of events and activities we offer to
-                        support the Ukrainian community in Georgia.
+                        Відкрийте різноманітний спектр подій та активностей, які ми пропонуємо для підтримки української громади в Грузії.
                     </div>
                 </div>
             </div>
@@ -28,13 +27,10 @@
                 <div class="database-connection">
                     <div class="error-handler">
                         <a class="sport1{% if request.path == '/projects/' %}-active{% endif %}"
-                           href="{% url 'projects' %}">All</a>
-                        {#                  <a class="sport1" href="{% url 'events' %}">All</a>#}
+                           href="{% url 'projects' %}">Усі</a>
                         {% for category in links %}
                             <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
                                href="{{ category.pre_computed_url }}">{{ category.name }}</a>
-                            {#                      <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>#}
-
                         {% endfor %}
                         <div class="variable-holder">
 
@@ -62,21 +58,15 @@
             <div class="audio-processor">
                 <div class="availability">
                     <div class="availability1"></div>
-                    {#                <div class="check-button1">#}
-                    {#                  <input class="icon-check1" type="checkbox" id="activeCheckbox">#}
-                    {#                  <div class="event-dispatcher">#}
-                    {#                    <div class="vacant-seats1">Free spots</div>#}
-                    {#                  </div>#}
 
                     <form id="filterForm" action="{% url 'projects' %}" method="POST">
                         {% csrf_token %}
                         <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox"
                                {% if free_spots == True %}checked="{true}{% endif %}">
 
-                        <label for="activeCheckbox">Only Ongoing</label>
+                        <label for="activeCheckbox">Тільки поточні</label>
                     </form>
 
-                    {#                </div>#}
                 </div>
             </div>
         </div>
@@ -126,8 +116,8 @@
                                 />
                             </div>
                             <div class="tag-one-container">
-                                <div class="tag-one6">{% if object.is_active %}Ongoing{% else %}
-                                    Complited{% endif %}</div>
+                                <div class="tag-one6">{% if object.is_active %}Поточний{% else %}
+                                    Завершений{% endif %}</div>
                             </div>
                         </div>
                         <div class="opacity-controller-inner">
@@ -140,7 +130,7 @@
 
                                 <div class="button-delails-container">
                                     <button class="button-delails2">
-                                        <a href="{{ object.get_url }}" class="details2">details</a>
+                                        <a href="{{ object.get_url }}" class="details2">деталі</a>
                                         <div class="vector-wrapper15">
                                             <img
                                                     class="vector-icon13"
@@ -160,17 +150,15 @@
                     />
                 {% endfor %}
             </div>
-{#            <div class="transition-trio">#}
-                {#      paginator #}
 
         <div class="data-visualizer">
-          <nav class="mt-4" aria-label="Page navigation sample">
+          <nav class="mt-4" aria-label="Навігація по сторінках">
                 {% if all_objects.has_other_pages %}
                 <ul class="pagination">
                     {% if all_objects.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page={{ all_objects.previous_page_number }}">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ all_objects.previous_page_number }}">Попередня</a></li>
                     {% else %}
-                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#">Попередня</a></li>
                     {% endif %}
 
                     {% for page_number in all_objects.paginator.page_range %}
@@ -183,60 +171,22 @@
 
 
                     {% if all_objects.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{ all_objects.next_page_number }}">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ all_objects.next_page_number }}">Наступна</a></li>
                     {% else %}
-                        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#">Наступна</a></li>
                     {% endif %}
                 </ul>
                 {% endif %}
             </nav>
-{#      end new paginator#}
-{#                <div class="effect-enabler">#}
-{#                    <div class="sub-component-store-wrapper">#}
-{#                        <div class="sub-component-store">#}
-{#                            <div class="nesting-navigator">#}
-{#                                <img#}
-{#                                        class="interaction-invoker-icon"#}
-{#                                        alt=""#}
-{#                                        src="{% static 'img/vector-12.svg' %}"#}
-{#                                />#}
-{#                            </div>#}
-{#                            <div class="back1">Back</div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="active1">#}
-{#                        <div class="active-item"></div>#}
-{#                        <div class="alignment-adjustment">1</div>#}
-{#                    </div>#}
-{#                    <div class="visibility-validator">#}
-{#                        <div class="access-controller">2</div>#}
-{#                    </div>#}
-{#                    <div class="visibility-validator1">#}
-{#                        <div class="div11">3</div>#}
-{#                    </div>#}
-{#                    <div class="spacing-scheduler">#}
-{#                        <div class="fill-finder">#}
-{#                            <div class="forward1">Forward</div>#}
-{#                            <div class="icon-identifier">#}
-{#                                <img#}
-{#                                        class="shape-shaper-icon"#}
-{#                                        alt=""#}
-{#                                        src="{% static 'img/vector-13.svg' %}"#}
-{#                                />#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
         </div>
     </section>
 
     <div class="tag5">
-        <div class="tag-one11">Other</div>
+        <div class="tag-one11">Інше</div>
     </div>
     <div class="decoration22"></div>
     <div class="button-delails5">
-        <div class="details5">details</div>
+        <div class="details5">деталі</div>
         <img class="vector-icon16" alt="" src="{% static 'img/vector-11.svg' %}"/>
     </div>
     </div>
@@ -250,12 +200,12 @@
     </script>
 
     <script>
-        // Save scroll position before navigating away
+        // Зберегти позицію прокрутки перед переходом
         window.onbeforeunload = function() {
             sessionStorage.setItem('scrollPosition', window.scrollY);
         };
 
-        // Restore scroll position on page load
+        // Відновити позицію прокрутки при завантаженні сторінки
         window.onload = function() {
             var scrollPosition = sessionStorage.getItem('scrollPosition');
             if (scrollPosition !== null) {
@@ -263,6 +213,5 @@
             }
         };
     </script>
-
 
 {% endblock %}
