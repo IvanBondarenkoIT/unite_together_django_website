@@ -4,9 +4,30 @@
 
 {% block content %}
 
-    {% include 'aboutus/desktop/about-us-documents-desktop.html' %}
+    <style>
+        /* Hide mobile navbar by default */
+        .mobile-section {
+            display: none;
+        }
 
-    {% include 'aboutus/mobile/about-us-documents-mobile.html' %}
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .desktop-section {
+                display: none;
+            }
+
+            .mobile-section {
+                display: flex;
+            }
+
+        }
+    </style>
+    <section class="desktop-section">
+        {% include 'aboutus/desktop/about-us-documents-desktop.html' %}
+    </section>
+    <section class="mobile-section">
+        {% include 'aboutus/mobile/about-us-documents-mobile.html' %}
+    </section>
 
 {% endblock %}
 
