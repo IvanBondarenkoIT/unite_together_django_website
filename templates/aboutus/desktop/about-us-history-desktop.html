@@ -1,0 +1,181 @@
+
+
+{% load static %}
+
+
+<style>
+    .more-content {
+        display: none;
+    }
+</style>
+
+<div class="about-us12" data-animate-on-scroll>
+    <div class="about-us-child"></div>
+    <div class="about-us-item"></div>
+    <div class="page-header5">
+        <img class="bg-icon5" loading="lazy" alt="" src="{% static 'img/aboutus/bg@2x-1600px.jpg' %}"/>
+
+        <div class="sec-title5">
+            <div class="sublitle5">Підзаголовок</div>
+            <div class="content5">
+                <h1 class="events19">Про нас</h1>
+                <div class="discover-the-diverse-range-of-wrapper2">
+                    <div class="discover-the-diverse5">
+                        Об'єднаймося для підтримки та розвитку українських громад у Грузії
+                        через сталі проєкти та програми.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="two-columns-with-selectors">
+        <!-- ПОЧАТОК ОСНОВНОЇ ЧАСТИНИ -->
+
+        <!-- Вибір категорій для сторінок "Про нас" -->
+        <div class="left-selector-box">
+            {% for category, link in links.items %}
+                <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
+                   href="{% url  link %}">{{ category }}</a>
+            {% endfor %}
+        </div>
+
+        <section class="right-part-of-static-page">
+            <div class="variable-store">
+                <h1 class="history-of-unite2">{{ history.title }}</h1>
+                <div class="unite-together-was-container1">
+                    <p class="unite-together-was1">
+                        {{ history.content }}
+                    </p>
+                </div>
+            </div>
+            <div class="frame-parent39">
+                <div class="frame-parent40">
+                    <img
+                            class="frame-child6"
+                            loading="lazy"
+                            alt=""
+                            src="
+                                {% if history.image %}
+                                    {{ history.image.url }}
+                                {% else %}
+                                    {% static '/img/placeholder-image1%402x.png' %}
+                                {% endif %}"
+                    />
+                </div>
+                <div class="mission-parent">
+                    <h2 class="mission1">{{ mission.title }}:</h2>
+                    <div class="our-organization-unite-togeth-group">
+                        <div class="our-organization-unite7">
+                            {{ mission.content }}
+                        </div>
+                        <div class="error-handler2">
+                            <h2 class="vision1">{{ vision.title }}:</h2>
+                            <div class="we-see-a1">
+                                {{ vision.content }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="switch-statement">
+                <div class="values-parent">
+                    <h2 class="values1">Цінності:</h2>
+                    <div class="frame-parent41">
+                        <div class="decoration-parent">
+                            <div class="frame-wrapper6">
+                                <div class="frame-parent42">
+                                    {% for value in values %}
+                                        <div class="frame-wrapper7">
+                                            <div class="sustainability-and-responsibil-parent">
+                                                <h3 class="sustainability-and-responsibil1">
+                                                    {{ value.title }}:
+                                                </h3>
+                                                <div class="we-attach-great-container1">
+                                                    <p class="we-attach-great1">
+                                                        {{ value.content }}
+                                                    </p>
+                                                    <p class="blank-line5">&nbsp;</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="frame-wrapper9">
+                                <img
+                                        class="group-icon"
+                                        loading="lazy"
+                                        alt=""
+                                        src="{% static 'img/aboutus/group-7301-temporary.jpg' %}"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="changes-are-created-here-parent">
+                <h2 class="changes-are-created1"></h2>
+                <div class="at-the-initial-stage-of-unite-parent">
+                    <div class="at-the-initial1"></div>
+                    <div class="frame-parent43">
+                        <div class="frame-parent44">
+                            <h1>Програми:</h1>
+                            <span id="more-content" class="more-content">
+                                    {% for program in programs %}
+                                        <div class="frame-parent45">
+                                            <div class="ellipse-parent">
+                                                <div class="frame-child7"></div>
+                                                <h3 class="financial-support-for1">
+                                                    {{ program.category }}:
+                                                </h3>
+                                            </div>
+
+                                            <div class="text-wrapper">
+                                                <div class="text7">
+                                                    {{ program.description }}
+                                                    {% if program.support_partner %}
+                                                        <p><strong>Партнер з підтримки:</strong> {{ program.support_partner }}</p>
+                                                    {% endif %}
+                                                    {% if program.beneficiaries_count %}
+                                                        <p><strong>Бенефіціарії:</strong> {{ program.beneficiaries_count }}</p>
+                                                    {% endif %}
+                                                    {% if program.funding_amount %}
+                                                        <p><strong>Сума фінансування:</strong> €{{ program.funding_amount }}</p>
+                                                    {% endif %}
+                                                    {% if program.additional_info %}
+                                                        <p><strong>Додаткова інформація:</strong> {{ program.additional_info }}</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </span>
+
+                            <div class="listener-registry">
+                                <button id="toggle-button" onclick="toggleText()" class="btn btn-light">БІЛЬШЕ ТЕКСТУ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+    function toggleText() {
+        var moreContent = document.getElementById("more-content");
+        var button = document.getElementById("toggle-button");
+        if (moreContent.style.display === "none" || moreContent.style.display === "") {
+            moreContent.style.display = "inline";
+            button.textContent = "МЕНШЕ ТЕКСТУ";
+        } else {
+            moreContent.style.display = "none";
+            button.textContent = "БІЛЬШЕ ТЕКСТУ";
+        }
+    }
+</script>
+
+

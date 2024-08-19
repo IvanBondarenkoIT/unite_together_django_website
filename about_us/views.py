@@ -8,6 +8,7 @@ from .models import History, Mission, Vision, Value, Program, DocumentCategory, 
 
 TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST = True
 
+
 def first_lunch(request):
     if not History.objects.exists():
         history = History.objects.create(
@@ -16,7 +17,7 @@ def first_lunch(request):
             """
         )
         history.save()
-        messages.success(request, 'Історія - Імпорт виконано!')
+        messages.success(request, "Історія - Імпорт виконано!")
 
     if not Mission.objects.exists():
         mission = Mission.objects.create(
@@ -25,7 +26,7 @@ def first_lunch(request):
             """
         )
         mission.save()
-        messages.success(request, 'Місія - Імпорт виконано!')
+        messages.success(request, "Місія - Імпорт виконано!")
 
     if not Vision.objects.exists():
         vision = Vision.objects.create(
@@ -34,38 +35,38 @@ def first_lunch(request):
             """
         )
         vision.save()
-        messages.success(request, 'Візія - Імпорт виконано!')
+        messages.success(request, "Візія - Імпорт виконано!")
 
     if not Value.objects.exists():
         value1 = Value.objects.create(
             title="Сталий розвиток і відповідальність",
             content="""
             Ми надаємо велике значення створенню сталих умов для життя і розвитку постраждалих від війни. Ми відповідальні за наші зобов'язання перед бенефіціарами та партнерами.
-            """
+            """,
         )
         value1.save()
         value2 = Value.objects.create(
             title="Співпраця та партнерство",
             content="""
             Ми цінуємо взаємовигідну та продуктивну співпрацю з нашими партнерами та зацікавленими сторонами. Ми віримо, що тільки завдяки спільним зусиллям ми можемо досягти наших цілей та створити позитивні зміни.
-            """
+            """,
         )
         value2.save()
         value3 = Value.objects.create(
             title="Співчуття та емпатія",
             content="""
             У нашій роботі ми проявляємо глибоке співчуття та емпатію до всіх, хто потребує нашої підтримки та допомоги. Ми слухаємо і розуміємо потреби наших бенефіціарів, прагнучи надати їм не тільки матеріальну, але й емоційну підтримку.
-            """
+            """,
         )
         value3.save()
         value4 = Value.objects.create(
             title="Зміни створюються тут",
             content="""
             На початковому етапі діяльності Unite Together організація зосередилася на задоволенні гуманітарних потреб українців у Грузії. Однак з часом цілі організації розширилися, і до гуманітарної місії додалося завдання розвитку та інтеграції українців у грузинське суспільство.
-            """
+            """,
         )
         value4.save()
-        messages.success(request, 'Цінності - Імпорт виконано!')
+        messages.success(request, "Цінності - Імпорт виконано!")
 
     if not Program.objects.exists():
         program1 = Program.objects.create(
@@ -74,45 +75,45 @@ def first_lunch(request):
             description="Надано щомісячну фінансову допомогу понад 3000 українцям, на загальну суму більше 2 мільйонів євро цього року.",
             support_partner="ASB",
             beneficiaries_count=3000,
-            funding_amount=2000000.00
+            funding_amount=2000000.00,
         )
         program2 = Program.objects.create(
             category="Підтримка комунальних платежів",
             title="#Програма зимової допомоги",
             description="Покрито комунальні витрати для 670 сімей.",
             support_partner="ASB і PIN",
-            beneficiaries_count=670
+            beneficiaries_count=670,
         )
         program3 = Program.objects.create(
             category="Підтримка житла",
             title="Підтримка українських громад",
             description="Відшкодування 50% витрат на житло для 90 українських сімей.",
             support_partner="PIN",
-            beneficiaries_count=90
+            beneficiaries_count=90,
         )
         program4 = Program.objects.create(
             category="Освітні та культурні програми",
             title="Освітні та культурні програми",
-            description="Реалізація програм для дітей і літніх людей у Тбілісі, Батумі та Кутаїсі, включаючи освітні заходи, спорт, розваги, мовні курси та майстер-класи."
+            description="Реалізація програм для дітей і літніх людей у Тбілісі, Батумі та Кутаїсі, включаючи освітні заходи, спорт, розваги, мовні курси та майстер-класи.",
         )
         program5 = Program.objects.create(
             category="Спортивні ініціативи",
             title="#UniteForActiveSports програма",
             description="Включає спортивні заходи, такі як скелелазіння, танці, SUP серфінг і кемпінг.",
             support_partner="PIN",
-            additional_info="Місця: Тбілісі та Батумі"
+            additional_info="Місця: Тбілісі та Батумі",
         )
         program6 = Program.objects.create(
             category="Підтримка старших людей",
             title="#HandMade програма",
             description="Включає майстер-класи, екскурсії та відвідування культурних заходів, таких як балет.",
-            support_partner="CARE"
+            support_partner="CARE",
         )
         program7 = Program.objects.create(
             category="Медичне забезпечення",
             title="Медичне забезпечення",
             description="Надання ліків для лікування захворювань щитовидної залози в Україні та Грузії.",
-            beneficiaries_count=1260
+            beneficiaries_count=1260,
         )
         program1.save()
         program2.save()
@@ -121,7 +122,8 @@ def first_lunch(request):
         program5.save()
         program6.save()
         program7.save()
-        messages.success(request, 'Програми - Імпорт виконано!')
+        messages.success(request, "Програми - Імпорт виконано!")
+
 
 def who_we_are(request):
     if TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST:
@@ -134,67 +136,75 @@ def who_we_are(request):
     programs = Program.objects.all()
 
     context = {
-        'history': history,
-        'mission': mission,
-        'vision': vision,
-        'values': values,
-        'programs': programs,
+        "history": history,
+        "mission": mission,
+        "vision": vision,
+        "values": values,
+        "programs": programs,
     }
 
-    return render(request, 'aboutus/about-us-history.html', context)
+    return render(request, "aboutus/aboutus-index.html", context)
+
 
 def documents_view(request):
-    categories = DocumentCategory.objects.prefetch_related('documents').all()
+    categories = DocumentCategory.objects.prefetch_related("documents").all()
     context = {
-        'categories': categories,
+        "categories": categories,
     }
-    return render(request, 'aboutus/about-us-documents.html', context)
+    return render(request, "aboutus/about-us-documents.html", context)
+
 
 def contact_view(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
             # Обробка даних з form.cleaned_data
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
-            phone_number = form.cleaned_data['phone_number']
-            subject = form.cleaned_data['subject']
-            message = form.cleaned_data['message']
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
+            email = form.cleaned_data["email"]
+            phone_number = form.cleaned_data["phone_number"]
+            subject = form.cleaned_data["subject"]
+            message = form.cleaned_data["message"]
 
             # Надсилання електронного листа
             send_mail(
-                f'Форма контакту: {subject}',
-                f'Ім\'я: {first_name} {last_name}\nEmail: {email}\nТелефон: {phone_number}\n\nПовідомлення:\n{message}',
+                f"Форма контакту: {subject}",
+                f"Ім'я: {first_name} {last_name}\nEmail: {email}\nТелефон: {phone_number}\n\nПовідомлення:\n{message}",
                 settings.EMAIL_HOST_USER,
                 [settings.EMAIL_HOST_USER],
             )
 
-            return redirect('contact_success')
+            return redirect("contact_success")
     else:
         form = ContactForm()
 
-    return render(request, 'aboutus/about-us-contacts.html', {'form': form})
+    return render(request, "aboutus/about-us-contacts.html", {"form": form})
+
 
 def contact_success_view(request):
-    return render(request, 'aboutus/contact_success.html')
+    return render(request, "aboutus/contact_success.html")
+
 
 def about_us(request):
     context = {}
-    return render(request, 'aboutus/aboutus_index.html', context=context)
+    return render(request, "aboutus/aboutus_index.html", context=context)
+
 
 def history(request):
     context = {}
-    return render(request, 'aboutus/about-us-history.html', context=context)
+    return render(request, "aboutus/about-us-history.html", context=context)
+
 
 def documents(request):
     context = {}
-    return render(request, 'aboutus/about-us-documents.html', context=context)
+    return render(request, "aboutus/about-us-documents.html", context=context)
+
 
 def partners(request):
     partners = Partners.objects.all()
-    return render(request, 'aboutus/about-us-partners.html', {'partners': partners})
+    return render(request, "aboutus/about-us-partners.html", {"partners": partners})
+
 
 def contacts(request):
     context = {}
-    return render(request, 'aboutus/about-us-contacts.html')
+    return render(request, "aboutus/about-us-contacts.html")

@@ -3,6 +3,105 @@
 {% load static %}
 
 {% block content %}
+    <style>
+        /* General mobile adjustments */
+        @media only screen and (max-width: 768px) {
+            .page-header4 {
+                text-align: center;
+            }
+
+            .sec-title4 h2,
+            .sec-title4 .content4 h1,
+            .sec-title4 .content4 h2 {
+                font-size: 1.5rem;
+                padding: 0 15px;
+            }
+
+            .left-selector-box {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 10px 0;
+            }
+
+            .left-selector-text {
+                padding: 5px 10px;
+                font-size: 1rem;
+            }
+
+            .two-columns-with-selectors {
+                display: block;
+                padding: 0 15px;
+            }
+
+            .right-part-of-static-page {
+                margin-top: 20px;
+            }
+
+            .frame-parent25 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .icon-phone-parent,
+            .frame-parent27,
+            .icon-insta-parent {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .icon-phone5, .icon-email5, .icon-geo5, .icon-insta5, .icon-fb5, .icon-tg5 {
+                margin: 10px auto;
+            }
+
+            .have-a-question-container {
+                text-align: center;
+            }
+
+            .frame-parent28 {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .first-name-parent,
+            .last-name-parent,
+            .select-subject-parent {
+                width: 100%;
+            }
+
+            .message-parent {
+                width: 100%;
+            }
+
+            .button-wrapper {
+                display: flex;
+                justify-content: center;
+            }
+
+            .button {
+                width: 100%;
+                max-width: 300px;
+                padding: 10px;
+            }
+        }
+
+        /* Tablet adjustments */
+        @media only screen and (max-width: 1024px) {
+            .two-columns-with-selectors {
+                padding: 0 30px;
+            }
+
+            .sec-title4 h2,
+            .sec-title4 .content4 h1,
+            .sec-title4 .content4 h2 {
+                font-size: 1.75rem;
+            }
+        }
+
+    </style>
+
 
     <div class="about-us-contacts" data-animate-on-scroll>
       <section class="page-header4">
