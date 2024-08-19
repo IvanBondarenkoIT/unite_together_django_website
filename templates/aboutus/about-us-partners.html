@@ -3,11 +3,30 @@
 {% load static %}
 
 {% block content %}
+    <style>
+        /* Hide mobile navbar by default */
+        .mobile-section {
+            display: none;
+        }
 
-    {% include 'aboutus/desktop/about-us-partners-desktop.html' %}
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .desktop-section {
+                display: none;
+            }
 
-    {% include 'aboutus/mobile/about-us-partners-mobile.html' %}
+            .mobile-section {
+                display: flex;
+            }
 
+        }
+    </style>
+    <section class="desktop-section">
+        {% include 'aboutus/desktop/about-us-partners-desktop.html' %}
+    </section>
+    <section class="mobile-section">
+        {% include 'aboutus/mobile/about-us-partners-mobile.html' %}
+    </section>
 {% endblock %}
 
 
