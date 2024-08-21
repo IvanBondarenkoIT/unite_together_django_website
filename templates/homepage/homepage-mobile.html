@@ -2,70 +2,55 @@
 
 <div class="home-mobile1 mobile-navbar">
     {#1 Секція каруселі#}
-
-                <div class="col-md-12">
-                    {% include 'homepage/mobile-carousel.html' %}
-                </div>
+    <div class="col-md-12">
+        {% include 'homepage/mobile-carousel.html' %}
+    </div>
     {#2 Секція Про нас#}
     <section class="registration-form-wrapper">
         <div class="registration-form">
 
-
             <div class="form-content">
                 <h4 class="subheading3">{{ sec_about_us.subtitle }}</h4>
-                <h1 class="title25">
+                <h2 class="title25">
                     {{ sec_about_us.title }}
-                </h1>
+                </h2>
                 <div class="subtitle4">
                     {{ sec_about_us.text }}
                 </div>
-{#                <div class="registration-buttons">#}
-{#                    <button class="register1">#}
-{#                        <a class="button12" href="{% url 'who_we_are' %}">Дізнатися більше</a>#}
-{#                    </button>#}
-{#                    <img#}
-{#                            class="image-icon1"#}
-{#                            loading="lazy"#}
-{#                            alt=""#}
-{#                            src="./public/image1@2x.png"#}
-{#                    />#}
-{##}
-{#                    <div class="donation-button-wrapper-parent">#}
-{#                        <div class="donation-button-wrapper">#}
-{#                            <button class="donate13">#}
-{#                                <div class="button17">ПІДТРИМАТИ</div>#}
-{#                            </button>#}
-{#                        </div>#}
-{#                        <img#}
-{#                                class="pagination-icon1"#}
-{#                                loading="lazy"#}
-{#                                alt=""#}
-{#                                src="./public/pagination1.svg"#}
-{#                        />#}
-{#                    </div>#}
-{#                </div>#}
+
                 <div class="content-actions-one">
                     <button class="stylesecondary-smallfalse5">
-                        <div class="button18">Подробиці</div>
+                        <a class="button18" href="{% url 'who_we_are' %}">Подробиці</a>
                     </button>
 
                     <div class="stylelink-smallfalse-dark3">
-                        <a class="button19" href="{% url 'register' %}" style="tex">Зареєструватися</a>
+                        <a class="button19" href="{% url 'register' %}" style="font-size: medium">Зареєструватися</a>
                         <img
-                                class="icon-chevron-right3"
-                                loading="lazy"
+                                class="icon-chevron-right2"
                                 alt=""
-                                src="./public/icon--chevronright1.svg"
+                                src="{% static 'img/icon--chevronright.svg' %}"
                         />
                     </div>
 
+                    <img
+                            class="placeholder-image-icon14"
+                            loading="lazy"
+                            alt=""
+                            src="
+                        {% if sec_about_us.image %}
+                            {{ sec_about_us.image.url }}
+                        {% else %}
+                            {% static 'img/placeholder-image1@2x.png' %}
+                        {% endif %}
+                        "
+                    />
 
                 </div>
 
             </div>
         </div>
     </section>
-
+    {#3 СТА-1 Зареєструватися#}
     <section class="content-wrapper-one-wrapper">
         <div class="content-wrapper-one">
             <div class="content-header-one">
@@ -225,25 +210,33 @@
             />
         </div>
     </section>
-
+    {#6 СТА-2 Пожертвувати#}
     <section class="cta-27-container">
-        <div class="cta-271">
+
+        <div class="cta-271"
+                {% if sec_cta_first.image %}
+                    style="background-image: url({{ sec_cta_first.image.url }});"
+                {% else %}
+                    style="background-image: url({% static 'img/cta1@3x.png' %});"
+                {% endif %}>
             <div class="content31">
                 <div class="content32">
-                    <h1 class="heading32">Підтримайте наші ініціативи сьогодні!</h1>
+                    <h2 class="heading32">{{ sec_cta_last.title }}</h2>
                     <div class="text51">
-                        Ваша пожертва може змінити життя українців у Грузії.
+                        {{ sec_cta_last.description }}
                     </div>
                 </div>
                 <div class="actions9">
                     <button class="styleprimary-smallfalse-da3">
-                        <div class="button26">ПІДТРИМАТИ</div>
+                        <a class="button26" href="{% url 'donate-paypal' %}">ПІДТРИМАТИ</a>
                     </button>
                     <button class="stylesecondary-smallfalse9">
-                        <div class="button27">Дізнатися більше</div>
+                        <a class="button27" href="{{ sec_cta_last.link }}">Дізнатися більше</a>
                     </button>
                 </div>
             </div>
         </div>
     </section>
+
+
 </div>

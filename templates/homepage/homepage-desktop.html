@@ -58,11 +58,10 @@
     {#        <section class="cta-1" style="background-image: {% static 'img/cta1@3x.png' %}  ;">#}
     <section class="cta-1"
             {% if sec_cta_first.image %}
-             style="background-image: url({{ sec_cta_first.image.url }});">
+                style="background-image: url({{ sec_cta_first.image.url }});"
             {% else %}
-                style="background-image: url({% static 'img/cta1@3x.png' %});">
-            {% endif %}
-
+                style="background-image: url({% static 'img/cta1@3x.png' %});"
+            {% endif %}>
 
     <div class="content20">
         <div class="content21">
@@ -155,32 +154,32 @@
             <img class="placeholder-image-icon6" loading="lazy" alt="" src="{{ sec_projects.image.url }}"/>
         </div>
     </section>
+
     {#6 СТА-2 Пожертвувати#}
-    <section class="cta-2" style="
+    <section class="cta-2"
             {% if sec_cta_last.image %}
-                background-image: url({{ sec_cta_last.image.url }});">
+             style="background-image: url({{ sec_cta_last.image.url }});"
             {% else %}
-                background-image: url({% static 'img/cta1@3x.png' %});">
-            {% endif %}
+             style="background-image: url({% static 'img/cta1@3x.png' %});"
+            {% endif %}>
 
+        <div class="content12">
 
-    <div class="content12">
-
-        <div class="content13">
-            <h1 class="heading17">{{ sec_cta_last.title }}</h1>
-            <div class="text37">
-                {{ sec_cta_last.description }}
+            <div class="content13">
+                <h1 class="heading17">{{ sec_cta_last.title }}</h1>
+                <div class="text37">
+                    {{ sec_cta_last.description }}
+                </div>
+            </div>
+            <div class="actions2">
+                <button class="styleprimary-smallfalse-da">
+                    <a class="button4" href="{% url 'donate-paypal' %}">ПІДТРИМАТИ</a>
+                </button>
+                <button class="stylesecondary-smallfalse">
+                    <a class="button5" href="{{ sec_cta_last.link }}">Дізнатися більше</a>
+                </button>
             </div>
         </div>
-        <div class="actions2">
-            <button class="styleprimary-smallfalse-da">
-                <a class="button4" href="{% url 'donate-paypal' %}">ПІДТРИМАТИ</a>
-            </button>
-            <button class="stylesecondary-smallfalse">
-                <a class="button5" href="{{ sec_cta_last.link }}">Дізнатися більше</a>
-            </button>
-        </div>
-    </div>
     </section>
 
 </div>
