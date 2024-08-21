@@ -1,48 +1,71 @@
+{% load static %}
+
 <div class="home-mobile1 mobile-navbar">
     {#1 Секція каруселі#}
 
                 <div class="col-md-12">
                     {% include 'homepage/mobile-carousel.html' %}
                 </div>
-
+    {#2 Секція Про нас#}
     <section class="registration-form-wrapper">
         <div class="registration-form">
-            <div class="actions7"></div>
+
+
             <div class="form-content">
+                <h4 class="subheading3">{{ sec_about_us.subtitle }}</h4>
                 <h1 class="title25">
-                    Підтримка та розвиток українців у Грузії
+                    {{ sec_about_us.title }}
                 </h1>
                 <div class="subtitle4">
-                    Unite Together присвячено створенню сталих змін у житті українців у Грузії, які постраждали від війни. Через наші проєкти та програми ми надаємо фінансову допомогу, неформальну освіту, спортивні та консультаційні послуги.
+                    {{ sec_about_us.text }}
                 </div>
-                <div class="registration-buttons">
-                    <button class="register1">
-                        <div class="button16">Реєстрація</div>
+{#                <div class="registration-buttons">#}
+{#                    <button class="register1">#}
+{#                        <a class="button12" href="{% url 'who_we_are' %}">Дізнатися більше</a>#}
+{#                    </button>#}
+{#                    <img#}
+{#                            class="image-icon1"#}
+{#                            loading="lazy"#}
+{#                            alt=""#}
+{#                            src="./public/image1@2x.png"#}
+{#                    />#}
+{##}
+{#                    <div class="donation-button-wrapper-parent">#}
+{#                        <div class="donation-button-wrapper">#}
+{#                            <button class="donate13">#}
+{#                                <div class="button17">ПІДТРИМАТИ</div>#}
+{#                            </button>#}
+{#                        </div>#}
+{#                        <img#}
+{#                                class="pagination-icon1"#}
+{#                                loading="lazy"#}
+{#                                alt=""#}
+{#                                src="./public/pagination1.svg"#}
+{#                        />#}
+{#                    </div>#}
+{#                </div>#}
+                <div class="content-actions-one">
+                    <button class="stylesecondary-smallfalse5">
+                        <div class="button18">Подробиці</div>
                     </button>
-                    <img
-                            class="image-icon1"
-                            loading="lazy"
-                            alt=""
-                            src="./public/image1@2x.png"
-                    />
 
-                    <div class="donation-button-wrapper-parent">
-                        <div class="donation-button-wrapper">
-                            <button class="donate13">
-                                <div class="button17">ПІДТРИМАТИ</div>
-                            </button>
-                        </div>
+                    <div class="stylelink-smallfalse-dark3">
+                        <a class="button19" href="{% url 'register' %}" style="tex">Зареєструватися</a>
                         <img
-                                class="pagination-icon1"
+                                class="icon-chevron-right3"
                                 loading="lazy"
                                 alt=""
-                                src="./public/pagination1.svg"
+                                src="./public/icon--chevronright1.svg"
                         />
                     </div>
+
+
                 </div>
+
             </div>
         </div>
     </section>
+
     <section class="content-wrapper-one-wrapper">
         <div class="content-wrapper-one">
             <div class="content-header-one">
@@ -54,10 +77,10 @@
             </div>
             <div class="content-actions-one">
                 <button class="stylesecondary-smallfalse5">
-                    <div class="button18">Дізнатися більше</div>
+                    <div class="button18">Подробиці</div>
                 </button>
                 <div class="stylelink-smallfalse-dark3">
-                    <div class="button19">Зареєструватися</div>
+                    <a class="button19" href="{% url 'register' %}">Зареєструватися</a>
                     <img
                             class="icon-chevron-right3"
                             loading="lazy"
@@ -88,6 +111,7 @@
             </div>
         </div>
     </section>
+
     <section class="content-wrapper-three-wrapper">
         <div class="content-wrapper-three">
             <div class="content26">
@@ -165,17 +189,20 @@
             </div>
         </div>
     </section>
+
     <section class="content-header-four-wrapper">
         <div class="content-header-four">
             <div class="subheading5">Розширення можливостей</div>
             <h1 class="heading31">Приєднуйтеся до нас і змінюйте життя вже сьогодні</h1>
         </div>
     </section>
+
     <section class="text-wrapper3">
         <div class="text50">
             Реєструючись та беручи участь у програмах Unite Together, ви стаєте частиною спільноти, яка присвячена підтримці та розвитку українців, які постраждали від війни. Разом ми можемо створити стійкі системні зміни в їхньому житті та суспільстві.
         </div>
     </section>
+
     <section class="content-actions-four">
         <div class="action-buttons-four">
             <button class="stylesecondary-smallfalse8">
@@ -198,6 +225,7 @@
             />
         </div>
     </section>
+
     <section class="cta-27-container">
         <div class="cta-271">
             <div class="content31">
