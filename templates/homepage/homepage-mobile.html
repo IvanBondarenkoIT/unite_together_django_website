@@ -2,222 +2,213 @@
 
 <div class="home-mobile1 mobile-navbar">
     {#1 Секція каруселі#}
-    <div class="col-md-12">
-        {% include 'homepage/mobile-carousel.html' %}
-    </div>
-    {#2 Секція Про нас#}
     <section class="registration-form-wrapper">
         <div class="registration-form">
 
             <div class="form-content">
-                <h4 class="subheading3">{{ sec_about_us.subtitle }}</h4>
-                <h2 class="title25">
-                    {{ sec_about_us.title }}
-                </h2>
-                <div class="subtitle4">
-                    {{ sec_about_us.text }}
+                <div class="col-md-12">
+                    {% include 'homepage/mobile-carousel.html' %}
                 </div>
-
-                <div class="content-actions-one">
-                    <button class="stylesecondary-smallfalse5">
-                        <a class="button18" href="{% url 'who_we_are' %}">Подробиці</a>
+                <div class="registration-buttons">
+                    <button class="register1">
+                        <div class="button16">Registration</div>
                     </button>
 
-                    <div class="stylelink-smallfalse-dark3">
-                        <a class="button19" href="{% url 'register' %}" style="font-size: medium">Зареєструватися</a>
+                    <div class="donation-button-wrapper-parent">
+                        <div class="donation-button-wrapper">
+                            <button class="donate13">
+                                <div class="button17">Donate</div>
+                            </button>
+                        </div>
                         <img
-                                class="icon-chevron-right2"
+                                class="pagination-icon1"
+                                loading="lazy"
                                 alt=""
-                                src="{% static 'img/icon--chevronright.svg' %}"
+                                src="./public/pagination1.svg"
                         />
                     </div>
-
-                    <img
-                            class="placeholder-image-icon14"
-                            loading="lazy"
-                            alt=""
-                            src="
-                        {% if sec_about_us.image %}
-                            {{ sec_about_us.image.url }}
-                        {% else %}
-                            {% static 'img/placeholder-image1@2x.png' %}
-                        {% endif %}
-                        "
-                    />
-
                 </div>
-
             </div>
         </div>
-    </section>
-    {#3 СТА-1 Зареєструватися#}
+      </section>
+    {#2 Секція Про нас#}
     <section class="content-wrapper-one-wrapper">
         <div class="content-wrapper-one">
             <div class="content-header-one">
-                <div class="subheading3"> Підтримка</div>
-                <h1 class="heading28">Надання можливостей українцям, які постраждали від війни</h1>
+                <div class="subheading3">{{ sec_about_us.subtitle }}</div>
+                <h2 class="heading28">{{ sec_about_us.title }}</h2>
             </div>
             <div class="text45">
-                Основна мета Unite Together – підтримка та розвиток українців, які постраждали від війни. Ми прагнемо досягти сталих системних змін у їхньому житті та суспільстві.
+                {{ sec_about_us.text }}
             </div>
             <div class="content-actions-one">
                 <button class="stylesecondary-smallfalse5">
-                    <div class="button18">Подробиці</div>
+                    <a class="button18" href="{% url 'who_we_are' %}">Подробиці</a>
                 </button>
                 <div class="stylelink-smallfalse-dark3">
-                    <a class="button19" href="{% url 'register' %}">Зареєструватися</a>
+                    <a class="button19" href="{% url 'register' %}" style="font-size: medium">Зареєструватися</a>
                     <img
-                            class="icon-chevron-right3"
-                            loading="lazy"
+                            class="icon-chevron-right2"
                             alt=""
-                            src="./public/icon--chevronright1.svg"
+                            src="{% static 'img/icon--chevronright.svg' %}"
                     />
                 </div>
                 <img
                         class="placeholder-image-icon14"
                         loading="lazy"
                         alt=""
-                        src="./public/placeholder-image2@2x.png"
-                />
+                        src="
+                        {% if sec_about_us.image %}
+                            {{ sec_about_us.image.url }}
+                        {% else %}
+                            {% static 'img/placeholder-image1@2x.png' %}
+                        {% endif %}
+                        ">
             </div>
         </div>
     </section>
-
-    <section class="content-wrapper-two-wrapper">
-        <div class="content-wrapper-two">
-            <div class="content-header-two">
-                <div class="subheading4">Надання можливостей</div>
-                <h1 class="heading30">
-                    Створення тривалих змін для українців, які постраждали від війни
-                </h1>
-            </div>
-            <div class="text47">
-                Unite Together присвячено підтримці та розвитку українців, які постраждали від війни. Через наші проєкти та ініціативи ми прагнемо створити стійкі системні зміни в їхньому житті та суспільстві.
+    {#3 СТА-1 Зареєструватися#}
+    <section class="cta-27-wrapper">
+        <div class="cta-27" class="cta-1"
+            {% if sec_cta_first.image %}
+                style="background-image: url({{ sec_cta_first.image.url }});"
+            {% else %}
+                style="background-image: url({% static 'img/cta1@3x.png' %});"
+            {% endif %}>
+{#            <div class="content24">#}
+                <div class="content25">
+                    <h2 class="heading29">{{ sec_cta_first.title }}</h2>
+                    <div class="text46">
+                        {{ sec_cta_first.description }}
+                    </div>
+{#                </div>#}
+                <div class="actions8">
+                    <button class="styleprimary-smallfalse-da2">
+                        <a class="button20" href="{% url 'login' %}">Увійти</a>
+                    </button>
+                    <button class="stylesecondary-smallfalse6">
+                        <a class="button21" href="{% url 'register' %}">Зареєструватися</a>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
+    {#4 Секція Події#}
+    <section class="sec-events-mobile">
+        <section class="content-wrapper-two-wrapper">
+            <div class="content-wrapper-two">
+                <div class="content-header-two">
+                    <div class="subheading4">{{ sec_events.subtitle }}</div>
+                    <h1 class="heading30">
+                        {{ sec_events.title }}
+                    </h1>
+                </div>
+                <div class="text47">
+                    {{ sec_events.text }}
+                </div>
+            </div>
+        </section>
 
-    <section class="content-wrapper-three-wrapper">
-        <div class="content-wrapper-three">
-            <div class="content26">
-                <div class="row18">
-                    <div class="content27">
-                        <div class="card">
-                            <img
-                                    class="placeholder-image-icon15"
-                                    loading="lazy"
-                                    alt=""
-                                    src="./public/placeholder-image-13@2x.png"
-                            />
+        <section class="content-wrapper-three-wrapper">
+            <div class="content-wrapper-three">
+                <div class="content26">
+                    <div class="row18">
+                        <div class="content27">
+                            {% for event in events_objects %}
+                                <div class="card1">
+                                    <a href="{{ event.get_url }}">
+                                        <img class="placeholder-image-icon7" alt=""
+                                             src="{% if event.image %}
+                                                                   {{ event.image.url }}
+                                                               {% else %}
+                                                                   {% static 'img/placeholder-image-13@2x.png' %}
+                                                               {% endif %}"/>
+                                    </a>
 
-                            <div class="content28">
-                                <div class="title26">
-                                    <h3 class="name31">Ключові проєкти та ініціативи</h3>
+                                    <div class="content28">
+                                        <div class="title26">
+                                            <h3 class="name31">{{ event.title }}</h3>
+                                        </div>
+                                        <div class="card-description" style="
+                                            max-width: 300px; /* Встановити максимальну ширину div */
+                                            overflow: hidden; /* Сховати будь-який текст, що виходить за межі */
+                                            text-overflow: ellipsis; /* Відобразити многоточие (...) для вказівки перевищення тексту */
+                                            white-space: nowrap; /* Заборонити перенесення тексту */
+                                                ">
+                                            {{ event.text }}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-description">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.
-                                </div>
-                            </div>
+                            {% endfor %}
+
                         </div>
-                        <div class="card1">
-                            <img
-                                    class="placeholder-image-icon16"
-                                    loading="lazy"
-                                    alt=""
-                                    src="./public/placeholder-image-13@2x.png"
-                            />
+                    </div>
+                </div>
+                <div class="content-actions-three">
+                    <button class="stylesecondary-smallfalse7">
+                        <a class="button22" href="{% url 'events' %}">Подробиці</a>
+                    </button>
 
-                            <div class="content29">
-                                <div class="title27">
-                                    <h3 class="name32">Підтримка українських сімей</h3>
-                                </div>
-                                <div class="text48">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card2">
+                    <div class="link-button-wrapper-three">
+                        <div class="stylelink-smallfalse-dark4">
+                            <a class="button19" href="{% url 'register' %}"
+                               style="font-size: medium">Зареєструватися</a>
                             <img
-                                    class="placeholder-image-icon17"
-                                    loading="lazy"
+                                    class="icon-chevron-right2"
                                     alt=""
-                                    src="./public/placeholder-image-13@2x.png"
+                                    src="{% static 'img/icon--chevronright.svg' %}"
                             />
-
-                            <div class="content30">
-                                <div class="title28">
-                                    <h3 class="name33">Повне ім'я</h3>
-                                </div>
-                                <div class="text49">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="content-actions-three">
-                <button class="stylesecondary-smallfalse7">
-                    <div class="button22">Дізнатися більше</div>
+        </section>
+    </section>
+    {#5 Секція Проеєти#}
+    <section class="sec-projects-mobile">
+        <section class="content-header-four-wrapper">
+            <div class="content-header-four">
+                <div class="subheading5">{{ sec_projects.subtitle }}</div>
+                <h1 class="heading31">{{ sec_projects.title }}</h1>
+            </div>
+        </section>
+
+        <section class="text-wrapper3">
+            <div class="text50">
+                {{ sec_projects.text }}
+            </div>
+        </section>
+
+        <section class="content-actions-four">
+            <div class="action-buttons-four">
+                <button class="stylesecondary-smallfalse8">
+                    <a class="button24" href="{% url 'projects' %}">Подробиці</a>
                 </button>
-                <div class="link-button-wrapper-three">
-                    <div class="stylelink-smallfalse-dark4">
-                        <div class="button23">Зареєструватися</div>
-                        <img
-                                class="icon-chevron-right4"
-                                loading="lazy"
-                                alt=""
-                                src="./public/icon--chevronright-11.svg"
-                        />
-                    </div>
+                <div class="stylelink-smallfalse-dark3">
+                    <a class="button19" href="{% url 'register' %}" style="font-size: medium">Зареєструватися</a>
+                    <img
+                            class="icon-chevron-right2"
+                            alt=""
+                            src="{% static 'img/icon--chevronright.svg' %}"
+                    />
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="content-header-four-wrapper">
-        <div class="content-header-four">
-            <div class="subheading5">Розширення можливостей</div>
-            <h1 class="heading31">Приєднуйтеся до нас і змінюйте життя вже сьогодні</h1>
-        </div>
-    </section>
-
-    <section class="text-wrapper3">
-        <div class="text50">
-            Реєструючись та беручи участь у програмах Unite Together, ви стаєте частиною спільноти, яка присвячена підтримці та розвитку українців, які постраждали від війни. Разом ми можемо створити стійкі системні зміни в їхньому житті та суспільстві.
-        </div>
-    </section>
-
-    <section class="content-actions-four">
-        <div class="action-buttons-four">
-            <button class="stylesecondary-smallfalse8">
-                <div class="button24">Дізнатися більше</div>
-            </button>
-            <div class="stylelink-smallfalse-dark5">
-                <div class="button25">Зареєструватися</div>
                 <img
-                        class="icon-chevron-right5"
+                        class="placeholder-image-icon18"
                         loading="lazy"
                         alt=""
-                        src="./public/icon--chevronright-2.svg"
+                        src="{{ sec_projects.image.url }}"
                 />
             </div>
-            <img
-                    class="placeholder-image-icon18"
-                    loading="lazy"
-                    alt=""
-                    src="./public/placeholder-image2@2x.png"
-            />
-        </div>
+        </section>
     </section>
     {#6 СТА-2 Пожертвувати#}
     <section class="cta-27-container">
 
         <div class="cta-271"
-                {% if sec_cta_first.image %}
-                    style="background-image: url({{ sec_cta_first.image.url }});"
+                {% if sec_cta_last.image %}
+             style="background-image: url({{ sec_cta_last.image.url }});"
                 {% else %}
-                    style="background-image: url({% static 'img/cta1@3x.png' %});"
+             style="background-image: url({% static 'img/cta1@3x.png' %});"
                 {% endif %}>
             <div class="content31">
                 <div class="content32">
