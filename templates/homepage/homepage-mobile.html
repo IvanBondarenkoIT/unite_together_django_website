@@ -69,19 +69,20 @@
     </section>
     {#3 СТА-1 Зареєструватися#}
     <section class="cta-27-wrapper">
-        <div class="cta-27" class="cta-1"
+        <div class="cta-27"
             {% if sec_cta_first.image %}
                 style="background-image: url({{ sec_cta_first.image.url }});"
             {% else %}
                 style="background-image: url({% static 'img/cta1@3x.png' %});"
             {% endif %}>
-{#            <div class="content24">#}
-                <div class="content25">
+
+            <div class="content31">
+                <div class="content32">
                     <h2 class="heading29">{{ sec_cta_first.title }}</h2>
                     <div class="text46">
                         {{ sec_cta_first.description }}
                     </div>
-{#                </div>#}
+                </div>
                 <div class="actions8">
                     <button class="styleprimary-smallfalse-da2">
                         <a class="button20" href="{% url 'login' %}">Увійти</a>
@@ -228,6 +229,4 @@
             </div>
         </div>
     </section>
-
-
 </div>
