@@ -1,11 +1,9 @@
 {% extends "base.html" %}
-
 {% load static %}
-
 {% block content %}
     <style>
         /* General mobile adjustments */
-        @media only screen and (max-width: 768px) {
+        @media (max-width: 768px) {
             .page-header4 {
                 text-align: center;
             }
@@ -18,15 +16,13 @@
             }
 
             .left-selector-box {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                padding: 10px 0;
+                display: none; /* Hide the desktop selector on mobile */
             }
 
-            .left-selector-text {
-                padding: 5px 10px;
-                font-size: 1rem;
+            .left-selector-box-mobile {
+                display: block; /* Show the mobile selector */
+                width: 100%;
+                margin-bottom: 20px; /* Add some spacing */
             }
 
             .two-columns-with-selectors {
@@ -87,49 +83,64 @@
             }
         }
 
-        /* Tablet adjustments */
-        @media only screen and (max-width: 1024px) {
-            .two-columns-with-selectors {
-                padding: 0 30px;
+        /* Tablet and above adjustments */
+        @media (min-width: 769px) {
+            {#.two-columns-with-selectors {#}
+            {#    padding: 0 30px;#}
+
+            {##}
+            {#.sec-title4 h2,#}
+            {#.sec-title4 .content4 h1,#}
+            {#.sec-title4 .content4 h2 {#}
+            {#    font-size: 1.75rem;#}
+
+
+            .left-selector-box {
+                display: flex; /* Show the desktop selector */
+                {#width: 100%;#}
+                {#margin-bottom: 20px; /* Add some spacing */#}
             }
 
-            .sec-title4 h2,
-            .sec-title4 .content4 h1,
-            .sec-title4 .content4 h2 {
-                font-size: 1.75rem;
+            .left-selector-box-mobile {
+                display: none; /* Hide the mobile selector */
             }
         }
-
     </style>
 
-
     <div class="about-us-contacts" data-animate-on-scroll>
-      <section class="page-header4">
-        <img class="bg-icon4" loading="lazy" alt="" src="{% static 'img/aboutus/bg@2x-1600px.jpg' %}" />
+        <section class="page-header4">
+            <img class="bg-icon4" loading="lazy" alt="" src="{% static 'img/aboutus/bg@2x-1600px.jpg' %}"/>
 
-        <div class="sec-title4">
-          <h2 class="sublitle4">Підзаголовок</h2>
-          <div class="content4">
-            <h1 class="events16">Про нас</h1>
-            <div class="discover-the-diverse-range-of-wrapper1">
-              <h2 class="discover-the-diverse4">
-                Об'єднаймося для підтримки та розвитку українських громад у Грузії
-                через сталі проєкти та програми.
-              </h2>
+            <div class="sec-title4">
+                <h2 class="sublitle4">Підзаголовок</h2>
+                <div class="content4">
+                    <h1 class="events16">Про нас</h1>
+                    <div class="discover-the-diverse-range-of-wrapper1">
+                        <h2 class="discover-the-diverse4">
+                            Об'єднаймося для підтримки та розвитку українських громад у Грузії
+                            через сталі проєкти та програми.
+                        </h2>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <main class="two-columns-with-selectors">
+        <main class="two-columns-with-selectors">
             <!-- Основна частина -->
 
             <!-- Вибір категорій для сторінок "Про нас" -->
             <div class="left-selector-box">
                 {% for category, link in links.items %}
                     <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
-                       href="{% url  link %}">{{ category }}</a>
+                       href="{% url link %}">{{ category }}</a>
                 {% endfor %}
+            </div>
+
+            <!-- Dropdown Menu for Mobile -->
+            <div class="left-selector-box-mobile">
+                <div class="col-md-12">
+                    {% include 'aboutus/mobile/about-us-sidebar-mobile.html' %}
+                </div>
             </div>
 
             <section class="right-part-of-static-page">
@@ -148,30 +159,36 @@
                         <h1 class="contact-information">Контактна інформація</h1>
                         <div class="frame-parent26">
                             <div class="icon-phone-parent">
-                                <img class="icon-phone5" loading="lazy" alt="" src="{% static 'img/aboutus/iconphone1.svg' %}" />
+                                <img class="icon-phone5" loading="lazy" alt=""
+                                     src="{% static 'img/aboutus/iconphone1.svg' %}"/>
                                 <div class="div9">+995 551 146 364</div>
                             </div>
                             <div class="frame-parent27">
                                 <div class="frame-wrapper3">
                                     <div class="icon-email-parent">
-                                        <img class="icon-email5" loading="lazy" alt="" src="{% static 'img/aboutus/iconemail2.svg' %}" />
-                                        <img class="icon-geo5" loading="lazy" alt="" src="{% static 'img/aboutus/icongeo1.svg' %}" />
+                                        <img class="icon-email5" loading="lazy" alt=""
+                                             src="{% static 'img/aboutus/iconemail2.svg' %}"/>
+                                        <img class="icon-geo5" loading="lazy" alt=""
+                                             src="{% static 'img/aboutus/icongeo1.svg' %}"/>
                                     </div>
                                 </div>
                                 <div class="uniteforukraingmailcom-parent">
                                     <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
                                     <div class="tbilisi-2123-tsotne-dadiani-parent">
                                         <h2 class="tbilisi-2123-tsotne5">Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8</h2>
-                                        <p><a href="https://www.google.com/maps?q=21/23+Tsotne+Dadiani+St.,+Tbilisi,+office+8"
-                                              class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Дивитися на мапі</a></p>
+                                        <p>
+                                            <a href="https://www.google.com/maps?q=21/23+Tsotne+Dadiani+St.,+Tbilisi,+office+8"
+                                               class="btn btn-secondary btn-lg active" role="button"
+                                               aria-pressed="true">Дивитися на мапі</a></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="icon-insta-parent">
-                            <img class="icon-insta5" loading="lazy" alt="" src="{% static 'img/aboutus/iconinsta1.svg' %}" />
-                            <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}" />
-                            <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}" />
+                            <img class="icon-insta5" loading="lazy" alt=""
+                                 src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
+                            <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
+                            <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}"/>
                         </div>
                     </div>
                     <div class="have-a-question-just-write-us-parent">
@@ -182,6 +199,7 @@
                         <div class="frame-wrapper4">
                             <form method="post" action="{% url 'contact' %}">
                                 {% csrf_token %}
+                                <```html
                                 <div class="frame-parent28">
                                     <div class="frame-parent29">
                                         <div class="first-name-parent">
@@ -224,7 +242,6 @@
                     </div>
                 </div>
             </section>
-      </main>
+        </main>
     </div>
-
 {% endblock %}
