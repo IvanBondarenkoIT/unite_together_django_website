@@ -1,19 +1,19 @@
-
+{% load static %}
 
 <div class="about-us-history-mobile">
     <main class="desktop-logo">
         <div class="line-active-menu13"></div>
         <section class="desktop-content">
-            <div class="header-50">
+            <div class="header-50" style='background-image: url("{% static 'img/aboutus/bg@2x-1600px.jpg' %}");'>
                 <div class="container3">
+
                     <div class="section-title3">
-                        <div class="tagline">Subtitle</div>
+                        <div class="tagline">Підзаголовок</div>
                         <div class="content33">
-                            <h1 class="short-heading-here">About us</h1>
+                            <h1 class="short-heading-here">Про нас</h1>
                             <div class="lorem-ipsum-dolor">
-                                Unite Together is dedicated to supporting and uplifting
-                                Ukrainian communities in Georgia through sustainable
-                                projects and programs.
+                                Об'єднаймося для підтримки та розвитку українських громад у Грузії
+                                через сталі проєкти та програми.
                             </div>
                         </div>
                     </div>
@@ -22,234 +22,104 @@
             <div class="bg-blue-parent">
                 <div class="bg-blue2"></div>
 
-
                 <!-- Dropdown Menu -->
                 <div class="col-md-12">
                     {% include 'aboutus/mobile/about-us-sidebar-mobile.html' %}
                 </div>
 
-
-
-{#                <div class="text-card">#}
-{#                    <div class="title-and-preview">#}
-{#                        <div class="title29">!!!Who we are</div>#}
-{#                        <img#}
-{#                                class="chevron-down-icon2"#}
-{#                                alt=""#}
-{#                                src="./public/chevron-down.svg"#}
-{#                        />#}
-{#                    </div>#}
-{#                </div>#}
                 <div class="about-us-content">
                     <div class="who-we-are4">
-                        <h1 class="who-we-are5">Who we are</h1>
-                        <div class="unite-together-was-container2">
-                            <p class="unite-together-was2">
-                                "Unite Together" was founded by an initiative group of
-                                Ukrainians who sought to contribute to supporting their
-                                compatriots during the war. The beginning of its history
-                                is connected with the purchase and shipment of necessary
-                                medicines to Ukraine, collected during charity concerts
-                                and events, analysis of the needs and support of
-                                Ukrainians who are in Georgia. Over time, the organization
-                                has evolved from a group of volunteers gathered during a
-                                vacation in Georgia into a structured organization with a
-                                clearly defined mission and strategy to help Ukrainians in
-                                Georgia. In June 2022, the organization conducted an
-                                extensive survey among Ukrainians living in Georgia, which
-                                allowed it to receive its first grant from European
-                                partners. In addition, on September 1, 2022, Unite
-                                Together received legal status as a non-governmental
-                                organization (NGO).
-                            </p>
-                            <p class="blank-line7">&nbsp;</p>
-                        </div>
-                    </div>
-                    <div class="mission-vision">
-                        <div class="mission-vision-container">
-                            <h2 class="mission2">Mission:</h2>
-                            <div class="our-organization-unite17">
-                                Our organization "Unite Together" is aimed at creating and
-                                implementing projects aimed at supporting and developing
-                                Ukrainians affected by the war. Our main goal is to
-                                achieve sustainable systemic change in their lives and
-                                society.
-                            </div>
-                        </div>
-                        <div class="mission-vision-container1">
-                            <h2 class="vision2">Vision:</h2>
-                            <div class="we-see-a2">
-                                We see a future in which Ukrainians who survived the
-                                tragedy of war have successfully integrated into society.
-                                They are motivated to constantly develop and actively
-                                participate in the formation of civil society and
-                                sustainable social change. Our vision is a society in
-                                which every person has equal opportunities for
-                                self-realization and contribution to the well-being of
-                                society.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="values-group">
-                        <h2 class="values2">Values:</h2>
-                        <div class="tabs-menu">
-                            <div class="tab-horizontal">
-                                <div class="border"></div>
-                                <div class="tab-content">
-                                    <h3 class="short-heading-goes">
-                                        Sustainability and responsibility:
-                                    </h3>
-                                    <div class="text52">
-                                        Discover a range of programs designed to support and
-                                        empower Ukrainians affected by the war.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-horizontal1">
-                                <div class="border1"></div>
-                                <div class="short-heading-goes-here-parent">
-                                    <h3 class="short-heading-goes1">
-                                        Cooperation and partnership:
-                                    </h3>
-                                    <div class="text53">
-                                        Gain valuable skills and knowledge through our
-                                        education and training programs, equipping you for a
-                                        brighter future.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-horizontal2">
-                                <div class="border2"></div>
-                                <div class="short-heading-goes-here-group">
-                                    <h3 class="short-heading-goes2">
-                                        Compassion and Empathy:
-                                    </h3>
-                                    <div class="text54">
-                                        Prioritize your physical and mental well-being with
-                                        our comprehensive health programs and services.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="image-carousel">
-                        <div class="active-indicator"></div>
+                        <h2 class="who-we-are5">{{ history.title }}</h2>
+                        <p class="unite-together-was2">
+                            {{ history.content }}
+                        </p>
+                        <p class="blank-line7">&nbsp;</p>
                         <img
                                 class="inactive-indicator-icon"
                                 loading="lazy"
                                 alt=""
-                                src="./public/rectangle-3501@2x.png"
+                                src="
+                                        {% if history.image %}{{ history.image.url }}{% else %}{% static 'img/placeholder-image1%402x.png' %}{% endif %}"
                         />
-
-                        <img
-                                class="placeholder-image-icon19"
-                                loading="lazy"
-                                alt=""
-                                src="./public/placeholder-image3@2x.png"
-                        />
-
-                        <div class="image-carousel-child"></div>
-                        <div class="image-carousel-item"></div>
-                        <div class="image-carousel-inner"></div>
-                        <div class="image-carousel-child1"></div>
-                        <div class="image-carousel-child2"></div>
-                        <div class="image-carousel-child3"></div>
-                        <div class="image-carousel-child4"></div>
-                    </div>
-                    <div class="changes-content-parent">
-                        <div class="changes-content">
-                            <h2 class="changes-are-created2">
-                                Changes are created here:
-                            </h2>
-                            <div class="at-the-initial2">
-                                At the initial stage of Unite Together's activities, the
-                                organization focused on meeting the humanitarian needs of
-                                Ukrainians in Georgia. However, over time, the goals of
-                                the organization expanded, and in addition to the
-                                humanitarian mission, the task of developing and
-                                integrating Ukrainians into Georgian society was added.
+                        <div class="mission-vision">
+                            <div class="mission-vision-container">
+                                <h2 class="mission2">{{ mission.title }}:</h2>
+                                <div class="our-organization-unite17">
+                                    {{ mission.content }}
+                                </div>
+                            </div>
+                            <div class="mission-vision-container1">
+                                <h2 class="vision2">{{ vision.title }}:</h2>
+                                <div class="we-see-a2">
+                                    {{ vision.content }}
+                                </div>
                             </div>
                         </div>
-                        <div class="support-content-wrapper">
-                            <div class="support-content">
-                                <div class="support-content-child"></div>
-                                <div class="support-types">
-                                    <div class="financial-support">
-                                        <div class="financial-support-for2">
-                                            Financial support for Ukrainians:
-                                        </div>
-                                        <div class="support-description-wrapper">
-                                            <div class="support-description">
-                                                the #UkrCash program, supported by ASB, provided
-                                                monthly financial aid to over 3,000 Ukrainians,
-                                                totaling more than 2 million euros this year.
+                        <div class="values-group">
+                            <img
+                                    class="inactive-indicator-icon"
+                                    loading="lazy"
+                                    alt=""
+                                    src="{% static 'img/aboutus/group-7301-temporary.jpg' %}"
+                            />
+                            <h2 class="values2">Цінності:</h2>
+                            <div class="tabs-menu">
+                                {% for value in values %}
+                                    <div class="tab-horizontal">
+                                        <div class="border"></div>
+                                        <div class="tab-content">
+                                            <h3 class="short-heading-goes">
+                                                {{ value.title }}:
+                                            </h3>
+                                            <div class="text52">
+                                                {{ value.content }}
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="utility-support">
-                                        <div class="utility-support-content">
-                                            <div class="help-with-utility2">
-                                                Help with utility bills:
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="changes-content-parent">
+                            <div class="changes-content">
+                                <h2 class="changes-are-created2">Програми:</h2>
+                            </div>
+                            <button id="toggle-button" onclick="toggleContent()" class="btn btn-light">
+                                БІЛЬШЕ ТЕКСТУ
+                            </button>
+                            <div class="support-content-wrapper">
+
+                                <br>
+                                <div id="support-content" class="support-content" style="display: none;">
+                                    {% for program in programs %}
+                                        <div class="financial-support">
+                                            <div class="financial-support-for2">
+                                                {{ program.category }}:
                                             </div>
-                                            <div class="text55">
-                                                launch of the #Winterization program with the
-                                                support of ASB and PIN, aimed at covering utility
-                                                costs for 670 families.
-                                            </div>
-                                        </div>
-                                        <div class="communities-support">
-                                            <div class="support-for-ukrainian2">
-                                                Support for Ukrainian communities:
-                                            </div>
-                                            <div class="text56">
-                                                reimbursement of 50% of housing costs for 90
-                                                Ukrainian families with PIN support.
-                                            </div>
-                                        </div>
-                                        <div class="programs-support">
-                                            <div class="educational-and-cultural2">
-                                                Educational and cultural programs:
-                                            </div>
-                                            <div class="text57">
-                                                implementation of programs for children and the
-                                                elderly in Tbilisi, Batumi, and Kutaisi, including
-                                                educational events, sports, entertainment,
-                                                language lessons, and master classes.
-                                            </div>
-                                        </div>
-                                        <div class="sports-support">
-                                            <div class="sports-initiatives2">
-                                                Sports initiatives:
-                                            </div>
-                                            <div class="text58">
-                                                the #UniteForActiveSports program, supported by
-                                                PIN in Tbilisi and Batumi, includes sports
-                                                activities like rock climbing, dancing, SUP
-                                                surfing, and camping.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="older-support">
-                                        <div class="older-support-content">
-                                            <div class="support-for-older2">
-                                                Support for older people:
-                                            </div>
-                                            <div class="text59">
-                                                implementation of the #HandMade program with
-                                                support from CARE, including workshops, excursions
-                                                and visits to cultural events such as ballet.
+                                            <div class="support-description-wrapper">
+                                                <div class="support-description">
+                                                    {{ program.description }}
+                                                    {% if program.support_partner %}
+                                                        <p><strong>Партнер з
+                                                            підтримки:</strong> {{ program.support_partner }}</p>
+                                                    {% endif %}
+                                                    {% if program.beneficiaries_count %}
+                                                        <p>
+                                                            <strong>Бенефіціарії:</strong> {{ program.beneficiaries_count }}
+                                                        </p>
+                                                    {% endif %}
+                                                    {% if program.funding_amount %}
+                                                        <p><strong>Сума фінансування:</strong>
+                                                            €{{ program.funding_amount }}</p>
+                                                    {% endif %}
+                                                    {% if program.additional_info %}
+                                                        <p><strong>Додаткова
+                                                            інформація:</strong> {{ program.additional_info }}</p>
+                                                    {% endif %}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="medical-support">
-                                            <div class="medical-provision2">
-                                                Medical provision:
-                                            </div>
-                                            <div class="text60">
-                                                of drugs for the treatment of thyroid diseases in
-                                                Ukraine and Georgia (1260 beneficiaries)
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -260,3 +130,18 @@
     </main>
 </div>
 
+
+<script>
+    function toggleContent() {
+        var content = document.getElementById("support-content");
+        var button = document.getElementById("toggle-button");
+
+        if (content.style.display === "none" || content.style.display === "") {
+            content.style.display = "block";  // Show the content
+            button.textContent = "МЕНШЕ ТЕКСТУ";  // Change button text to "МЕНШЕ ТЕКСТУ"
+        } else {
+            content.style.display = "none";   // Hide the content
+            button.textContent = "БІЛЬШЕ ТЕКСТУ"; // Change button text back to "БІЛЬШЕ ТЕКСТУ"
+        }
+    }
+</script>
