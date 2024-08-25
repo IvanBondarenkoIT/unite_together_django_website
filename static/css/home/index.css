@@ -1375,7 +1375,7 @@
   left: 0;
 }
 .main {
-  top: 142px;
+  /*top: 142px;*/
   background-color: var(--color-ghostwhite);
   height: 721.1px;
   max-width: 100%;
