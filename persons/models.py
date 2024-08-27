@@ -34,6 +34,16 @@ class Person(models.Model):
         UKRAINIAN = "Українське", "Українське"
         OTHER = "Інше", "Інше"
 
+    class Criteria(models.TextChoices):
+        A = (
+            "A",
+            "Тяжко хворі, з інвалідністю чи обмеженими можливостями (з наявними в документами)",
+        )
+        B = "B", "Старше 60 років (за датою народження)"
+        C = "C", "Багатодітна родина (3 та більше дитини до 18 років)"
+        D = "D", "Одинока мати/ батько, що самостійно виховує неповнолітніх дітей"
+        E = "E", "Жоден з вищеперечислених критеріїв не підходить"
+
     user_owner = models.ForeignKey(
         Account,
         on_delete=models.CASCADE,
@@ -109,6 +119,14 @@ class Person(models.Model):
         default=True, verbose_name="Дозвіл на редагування"
     )
     is_approved = models.BooleanField(default=True, verbose_name="Схвалено")
+
+    criteria = models.CharField(
+        max_length=1,
+        choices=Criteria.choices,
+        blank=True,
+        null=True,
+        verbose_name="Критерій",
+    )
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

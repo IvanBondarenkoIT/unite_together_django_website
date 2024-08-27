@@ -1,0 +1,188 @@
+{% load static %}
+{#<style>#}
+{#    /* Mobile-specific adjustments */#}
+{#    @media (max-width: 768px) {#}
+{#        .container7, .info-container {#}
+{#            padding: 0 15px;#}
+{#        }#}
+{##}
+{#        .contact-parent1 {#}
+{#            padding: 20px 15px;#}
+{#        }#}
+{##}
+{#        .icon-container img, .social-icons4 img {#}
+{#            width: 30px;#}
+{#            height: 30px;#}
+{#        }#}
+{##}
+{#        .email-container .email-info2, .uniteforukraingmailcom19, .address18 {#}
+{#            font-size: 14px;#}
+{#        }#}
+{##}
+{#        .have-a-question1 {#}
+{#            text-align: center;#}
+{#            font-size: 18px;#}
+{#        }#}
+{##}
+{#        .form-control {#}
+{#            width: 100%;#}
+{#            padding: 10px;#}
+{#            margin: 10px 0;#}
+{#        }#}
+{##}
+{#        .button-parent {#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        .button28 {#}
+{#            width: 100%;#}
+{#            padding: 15px;#}
+{#            font-size: 18px;#}
+{#        }#}
+{#    }#}
+{##}
+{#    /* Tablet and above adjustments */#}
+{#    @media (min-width: 769px) {#}
+{#        /* Adjust as needed for larger screens */#}
+{#    }#}
+{##}
+{#</style>#}
+
+<div class="about-us-contacts-mobile">
+    <main class="main-content">
+        <section class="content-header">
+            <div class="actions11"></div>
+            <div class="header-501" style='background-image: url("{% static 'img/aboutus/bg@2x-1600px.jpg' %}");'>
+                <div class="container4">
+                    <div class="section-title4">
+                        <div class="tagline1">Підзаголовок</div>
+                        <div class="content34">
+                            <h1 class="short-heading-here1">Про нас</h1>
+                            <div class="lorem-ipsum-dolor1">
+                                Об'єднаймося для підтримки та розвитку українських громад у Грузії
+                                через сталі проєкти та програми.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-parent-wrapper">
+            <div class="contact-parent1">
+                <div class="bg-blue7"></div>
+                <div class="text-card5">
+                    <div class="title-and-preview5">
+                        <div class="title40">Contacts</div>
+                        <img class="chevron-down-icon9" alt="" src="{% static 'img/aboutus/chevron-down.svg' %}"/>
+                    </div>
+                </div>
+                <div class="info-parent">
+                    <div class="info-parent-child"></div>
+                    <div class="info-container">
+                        <div class="contact-info4">
+                            <h1 class="contacts6">Contacts</h1>
+                            <h2 class="unite-together-is1">
+                                Unite Together is a non-profit Ukrainian organization that
+                                aims to unite people to create and implement projects that
+                                support and develop Ukrainians affected by the war for
+                                sustainable systemic changes in their lives and society.
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="contact-details8">
+                        <div class="left">
+                            <div class="bg-contacts1"></div>
+                            <h1 class="contact-information1">Contact information</h1>
+                            <div class="icon-container">
+                                <div class="contact-icons3">
+                                    <img class="icon-phone21" loading="lazy" alt=""
+                                         src="{% static 'img/aboutus/iconphone1.svg' %}"/>
+                                    <img class="icon-email21" loading="lazy" alt=""
+                                         src="{% static 'img/aboutus/iconemail2.svg' %}"/>
+                                    <img class="icon-geo21" loading="lazy" alt=""
+                                         src="{% static 'img/aboutus/icongeo1.svg' %}"/>
+                                </div>
+                                <div class="email-container">
+                                    <div class="email-info2">+995 551 146 364</div>
+                                    <div class="uniteforukraingmailcom19">
+                                        uniteforukrain@gmail.com
+                                    </div>
+                                    <div class="address18">
+                                        <div class="tbilisi-2123-tsotne21">
+                                            Tbilisi, 21/23 Tsotne Dadiani St., office 8
+                                        </div>
+                                        <div class="see-on-the1"><a href="#">See on the map</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="social-icons4">
+                                <img class="icon-insta21" loading="lazy" alt=""
+                                     src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
+                                <img class="icon-fb21" loading="lazy" alt=""
+                                     src="{% static 'img/aboutus/iconfb1.svg' %}"/>
+                                <img class="icon-tg21" loading="lazy" alt=""
+                                     src="{% static 'img/aboutus/icontg1.svg' %}"/>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <h1 class="have-a-question-container1">
+                                <p class="have-a-question1">Have a question?</p>
+                                <p class="have-a-question1">Just write us a message!</p>
+                            </h1>
+                        </div>
+                        <div class="form-parent">
+                            <form method="post" action="{% url 'contact' %}">
+                                {% csrf_token %}
+                                <div class="content38">
+                                    <div class="first-name-input">
+                                        <label for="id_first_name" class="first-name9">First Name</label>
+                                        <input id="id_first_name" name="first_name" type="text" class="form-control"
+                                               required/>
+                                    </div>
+                                    <div class="name-inputs">
+                                        <label for="id_last_name" class="last-name1">Last Name</label>
+                                        <input id="id_last_name" name="last_name" type="text" class="form-control"
+                                               required/>
+                                    </div>
+                                    <div class="name-inputs">
+                                        <label for="id_email" class="email2">Email</label>
+                                        <input id="id_email" name="email" type="email" class="form-control" required/>
+                                    </div>
+                                    <div class="name-inputs2">
+                                        <label for="id_phone_number" class="phone-number4">Phone Number</label>
+                                        <input id="id_phone_number" name="phone_number" type="text" class="form-control"
+                                               required/>
+                                    </div>
+                                    <div class="subject-input">
+                                        <label for="id_subject" class="select-subject1">Select Subject</label>
+                                        <select id="id_subject" name="subject" class="form-control" required>
+                                            <option value="">Choose...</option>
+                                            <option value="I need help">I need help</option>
+                                            <option value="I want to help">I want to help</option>
+                                            <option value="Apply for job">Apply for job</option>
+                                            <option value="Complaints and suggestions">Complaints and suggestions
+                                            </option>
+                                            <option value="Partnership and collaboration">Partnership and collaboration
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="message1">
+                                        <label for="id_message" class="message2">Message</label>
+                                        <textarea id="id_message" name="message" class="form-control"
+                                                  placeholder="Write your message.." required></textarea>
+                                    </div>
+                                </div>
+                                <div class="button-parent">
+                                    <button class="button28" type="submit">
+                                        <div class="send-message1">Send Message</div>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
