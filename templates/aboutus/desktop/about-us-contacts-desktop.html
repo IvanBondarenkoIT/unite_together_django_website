@@ -1,0 +1,247 @@
+
+{% load static %}
+
+    <style>
+        /* General mobile adjustments */
+        @media (max-width: 768px) {
+            .page-header4 {
+                text-align: center;
+            }
+
+            .sec-title4 h2,
+            .sec-title4 .content4 h1,
+            .sec-title4 .content4 h2 {
+                font-size: 1.5rem;
+                padding: 0 15px;
+            }
+
+            .left-selector-box {
+                display: none; /* Hide the desktop selector on mobile */
+            }
+
+            .left-selector-box-mobile {
+                display: block; /* Show the mobile selector */
+                width: 100%;
+                margin-bottom: 20px; /* Add some spacing */
+            }
+
+            .two-columns-with-selectors {
+                display: block;
+                padding: 0 15px;
+            }
+
+            .right-part-of-static-page {
+                margin-top: 20px;
+            }
+
+            .frame-parent25 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .icon-phone-parent,
+            .frame-parent27,
+            .icon-insta-parent {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .icon-phone5, .icon-email5, .icon-geo5, .icon-insta5, .icon-fb5, .icon-tg5 {
+                margin: 10px auto;
+            }
+
+            .have-a-question-container {
+                text-align: center;
+            }
+
+            .frame-parent28 {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .first-name-parent,
+            .last-name-parent,
+            .select-subject-parent {
+                width: 100%;
+            }
+
+            .message-parent {
+                width: 100%;
+            }
+
+            .button-wrapper {
+                display: flex;
+                justify-content: center;
+            }
+
+            .button {
+                width: 100%;
+                max-width: 300px;
+                padding: 10px;
+            }
+        }
+
+        /* Tablet and above adjustments */
+        @media (min-width: 769px) {
+            {#.two-columns-with-selectors {#}
+            {#    padding: 0 30px;#}
+
+            {##}
+            {#.sec-title4 h2,#}
+            {#.sec-title4 .content4 h1,#}
+            {#.sec-title4 .content4 h2 {#}
+            {#    font-size: 1.75rem;#}
+
+
+            .left-selector-box {
+                display: flex; /* Show the desktop selector */
+                {#width: 100%;#}
+                {#margin-bottom: 20px; /* Add some spacing */#}
+            }
+
+            .left-selector-box-mobile {
+                display: none; /* Hide the mobile selector */
+            }
+        }
+    </style>
+
+    <div class="about-us-contacts" data-animate-on-scroll>
+        <section class="page-header4">
+            <img class="bg-icon4" loading="lazy" alt="" src="{% static 'img/aboutus/bg@2x-1600px.jpg' %}"/>
+
+            <div class="sec-title4">
+                <h2 class="sublitle4">Підзаголовок</h2>
+                <div class="content4">
+                    <h1 class="events16">Про нас</h1>
+                    <div class="discover-the-diverse-range-of-wrapper1">
+                        <h2 class="discover-the-diverse4">
+                            Об'єднаймося для підтримки та розвитку українських громад у Грузії
+                            через сталі проєкти та програми.
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main class="two-columns-with-selectors">
+            <!-- Основна частина -->
+
+            <!-- Вибір категорій для сторінок "Про нас" -->
+            <div class="left-selector-box">
+                {% for category, link in links.items %}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
+                       href="{% url link %}">{{ category }}</a>
+                {% endfor %}
+            </div>
+
+            <!-- Dropdown Menu for Mobile -->
+            <div class="left-selector-box-mobile">
+                <div class="col-md-12">
+                    {% include 'aboutus/mobile/about-us-sidebar-mobile.html' %}
+                </div>
+            </div>
+
+            <section class="right-part-of-static-page">
+                <div class="contacts-parent">
+                    <h1 class="contacts4">Контакти</h1>
+                    <h2 class="unite-together-is">
+                        Об'єднаймося - це українська неприбуткова організація, що має
+                        на меті об'єднати людей для створення та реалізації проєктів, які
+                        підтримують та розвивають українців, постраждалих від війни, для
+                        сталих системних змін у їхньому житті та суспільстві.
+                    </h2>
+                </div>
+                <div class="frame-parent25">
+                    <div class="bg-contacts-parent">
+                        <div class="bg-contacts"></div>
+                        <h1 class="contact-information">Контактна інформація</h1>
+                        <div class="frame-parent26">
+                            <div class="icon-phone-parent">
+                                <img class="icon-phone5" loading="lazy" alt=""
+                                     src="{% static 'img/aboutus/iconphone1.svg' %}"/>
+                                <div class="div9">+995 551 146 364</div>
+                            </div>
+                            <div class="frame-parent27">
+                                <div class="frame-wrapper3">
+                                    <div class="icon-email-parent">
+                                        <img class="icon-email5" loading="lazy" alt=""
+                                             src="{% static 'img/aboutus/iconemail2.svg' %}"/>
+                                        <img class="icon-geo5" loading="lazy" alt=""
+                                             src="{% static 'img/aboutus/icongeo1.svg' %}"/>
+                                    </div>
+                                </div>
+                                <div class="uniteforukraingmailcom-parent">
+                                    <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
+                                    <div class="tbilisi-2123-tsotne-dadiani-parent">
+                                        <h2 class="tbilisi-2123-tsotne5">Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8</h2>
+                                        <p>
+                                            <a href="https://www.google.com/maps?q=21/23+Tsotne+Dadiani+St.,+Tbilisi,+office+8"
+                                               class="btn btn-secondary btn-lg active" role="button"
+                                               aria-pressed="true">Дивитися на мапі</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon-insta-parent">
+                            <img class="icon-insta5" loading="lazy" alt=""
+                                 src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
+                            <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
+                            <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}"/>
+                        </div>
+                    </div>
+                    <div class="have-a-question-just-write-us-parent">
+                        <h1 class="have-a-question-container">
+                            <p class="have-a-question">Маєте запитання?</p>
+                            <p class="just-write-us">Просто напишіть нам повідомлення!</p>
+                        </h1>
+                        <div class="frame-wrapper4">
+                            <form method="post" action="{% url 'contact' %}">
+                                {% csrf_token %}
+                                <```html
+                                <div class="frame-parent28">
+                                    <div class="frame-parent29">
+                                        <div class="first-name-parent">
+                                            {{ form.first_name.label_tag }}
+                                            {{ form.first_name }}
+                                        </div>
+                                        <div class="vector-parent">
+                                            <div class="email-parent">
+                                                {{ form.email.label_tag }}
+                                                {{ form.email }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="last-name-parent">
+                                        {{ form.last_name.label_tag }}
+                                        {{ form.last_name }}
+                                        <div class="vector-group">
+                                            <div class="phone-number-parent">
+                                                {{ form.phone_number.label_tag }}
+                                                {{ form.phone_number }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="select-subject-parent">
+                                    {{ form.subject.label_tag }}
+                                    {{ form.subject }}
+                                    <div class="message-parent">
+                                        {{ form.message.label_tag }}
+                                        {{ form.message }}
+                                    </div>
+                                </div>
+                                <div class="button-wrapper">
+                                    <button class="button" type="submit">
+                                        <div class="send-message">Надіслати повідомлення</div>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
