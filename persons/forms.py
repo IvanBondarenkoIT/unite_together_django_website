@@ -15,35 +15,10 @@ class AssociatedPersonAdminForm(forms.ModelForm):
         #     'date_of_arrival': forms.DateInput(attrs={'type': 'date'}),
         # }
 
-    CRITERIA_CHOICES = [
-        (
-            "A",
-            "Тяжко хворі, з інвалідністю чи обмеженими можливостями (з наявними в документами)",
-        ),
-        ("B", "Старше 60 років (за датою народження)"),
-        ("C", "Багатодітна родина (3 та більше дитини до 18 років)"),
-        ("D", "Одинока мати/батько, що самостійно виховує неповнолітніх дітей"),
-        ("E", "Жоден з вищеперечислених критеріїв не підходить"),
-    ]
-
-    user_selected_criteria = forms.ChoiceField(
-        choices=CRITERIA_CHOICES, required=False, label="Критерій (Виберіть вручну)"
-    )
-
 
 class AssociatedPersonForm(forms.ModelForm):
 
     class Meta:
-        CRITERIA_CHOICES = [
-            (
-                "A",
-                "Тяжко хворі, з інвалідністю чи обмеженими можливостями (з наявними в документами)",
-            ),
-            ("B", "Старше 60 років (за датою народження)"),
-            ("C", "Багатодітна родина (3 та більше дитини до 18 років)"),
-            ("D", "Одинока мати/батько, що самостійно виховує неповнолітніх дітей"),
-            ("E", "Жоден з вищеперечислених критеріїв не підходить"),
-        ]
         model = AssociatedPerson
         fields = [
             "first_name",
@@ -60,6 +35,7 @@ class AssociatedPersonForm(forms.ModelForm):
             "chosen_city",
             "address_line",
             "is_active",
+            "criteria",
         ]
         widgets = {
             "date_of_birth": forms.DateInput(
@@ -107,18 +83,14 @@ class AssociatedPersonForm(forms.ModelForm):
             "address_line": forms.TextInput(
                 attrs={"placeholder": "Адреса", "required": True}
             ),
-            # add criteria
-            "user_selected_criteria": forms.ChoiceField(
-                choices=CRITERIA_CHOICES,
-                required=False,
-                label="Критерій (Виберіть вручну)",
+            "criteria": forms.Select(
+                attrs={
+                    "placeholder": "Крітерій вразливості",
+                    "class": "form-control",
+                    "required": True,
+                }
             ),
-            #
         }
-
-        # user_selected_criteria = forms.ChoiceField(
-        #     choices=CRITERIA_CHOICES, required=False, label="Критерій (Виберіть вручну)"
-        # )
 
     def __init__(self, *args, **kwargs):
         default_ge_phone = kwargs.pop("default_ge_phone", None)
