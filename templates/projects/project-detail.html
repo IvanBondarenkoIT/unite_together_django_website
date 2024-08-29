@@ -3,178 +3,29 @@
 {% load static %}
 
 {% block content %}
-
-    <div class="project-detail" data-animate-on-scroll>
-        <main class="sec-project-detail">
-            <div class="bg-detail1"></div>
-            <div class="aside-box-wrapper">
-                <div class="aside-box">
-                    <div class="iterative-processor">
-
-                        <div class="database-connection">
-                            <div class="error-handler">
-                                <a class="sport1{% if request.path == '/projects/' %}-active{% endif %}"
-                                   href="{% url 'projects' %}">Усі</a>
-                                {% for category in links %}
-                                    <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
-                                       href="{{ category.get_url }}">{{ category.name }}</a>
-                                {% endfor %}
-                                <div class="variable-holder">
-
-                                    <div class="function-caller">
-                                        <img
-                                                class="dec-line-1-icon"
-                                                loading="lazy"
-                                                alt=""
-                                                src="{% static 'img/decline1.svg' %}"
-                                        />
-                                    </div>
-
-                                    <div class="function-caller1">
-                                        <img
-                                                class="dec-line-2-icon"
-                                                loading="lazy"
-                                                alt=""
-                                                src="{% static 'img/decline2.svg' %}"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <section class="content19">
-                <div class="bg6"></div>
-                <div class="content-inner">
-                    <div class="baner-image-group mainImage">
-                        <img
-                                class="baner-image-icon1"
-                                loading="lazy"
-                                alt=""
-                                src="
-                        {% if single_project.image %} {{ single_project.image.url }}
-                        {% else %} {% static '/img/placeholder-image1%402x.png' %}
-                        {% endif %}"
-                        />
-
-                        <div class="error-handler3">
-                            <img
-                                    class="dec-line-3-icon1"
-                                    alt=""
-                                    src="./public/decline31.svg"
-                            />
-                        </div>
-
-                    </div>
-                    <div class="frame-wrapper11">
-                        <div class="frame-parent58">
-                            <ul class="frame-parent59">
-                                <li>
-                                    <div class="ongoing-project">{% if single_project.is_active %}Поточний
-                                        проект{% else %}
-                                        Завершений{% endif %}
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="financial-assistance2">
-                                        {{ single_project.group.name }}
-                                    </div>
-                                </li>
-                                <li>
-                                    {% if single_project.start_date %}
-                                        {{ single_project.get_start_date_month }}
-                                        {{ single_project.get_start_date_year }}
-                                    {% endif %}
-                                    {% if single_project.end_date %}
-                                        - {{ single_project.get_end_date_month }}
-                                        {{ single_project.get_end_date_year }}
-                                    {% endif %}
-                                </li>
-                                <li>
-                                    <div class="georgia">{{ single_project.selected_city }}</div>
-                                </li>
-                            </ul>
-                            {% if single_project.extra_details %}
-                                <div id="extra-details" class="event-extra-details">
-                                    <span id="extra-details-short">{{ single_project.extra_details|truncatewords:20 }}</span>
-                                    <span id="extra-details-full"
-                                          style="display:none;">{{ single_project.extra_details }}</span>
-                                    <a href="#" id="toggle-details"
-                                       onclick="toggleDetails(); return false;">більше</a>
-                                </div>
-                            {% endif %}
-
-                            <a class="button-registration1"
-                               href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
-                               style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
-                                <div class="registration1">Реєстрація</div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                {% if project_gallery %}
-                    <article class="gallery-wrap">
-                        <ul class="thumb">
-                            <li>
-                                <a href="{{ single_project.image.url }}" target="mainImage"><img
-                                        src="{{ single_project.image.url }}" alt="Зображення продукту"></a>
-                                {% for i in project_gallery %}
-                                    <a href="{{ i.image.url }}" target="mainImage"><img src="{{ i.image.url }}"
-                                                                                        alt="Зображення продукту"></a>
-                                {% endfor %}
-                            </li>
-                        </ul>
-                    </article> <!-- gallery-wrap .end// -->
-                {% endif %}
-                </div>
-                <div class="content-child">
-                    <div class="winterization-parent">
-                        <h1 class="winterization">{{ single_project.name }}</h1>
-                        <div class="free-classes-of-container1">
-                            <p class="free-classes-of1">
-                                {{ single_project.text|safe }}
-                            </p>
-                            <p class="blank-line6"> </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('.thumb a').click(function (e) {
-                e.preventDefault();
-                $('.mainImage img').attr('src', $(this).attr("href"))
-            })
-        })
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $('#participants-table').DataTable();
-        });
-
-        function toggleDetails() {
-            var shortText = document.getElementById("extra-details-short");
-            var fullText = document.getElementById("extra-details-full");
-            var toggleLink = document.getElementById("toggle-details");
-
-            if (shortText.style.display === "none") {
-                shortText.style.display = "inline";
-                fullText.style.display = "none";
-                toggleLink.innerText = "більше";
-            } else {
-                shortText.style.display = "none";
-                fullText.style.display = "inline";
-                toggleLink.innerText = "менше";
-            }
+    <style>
+        /* Hide mobile navbar by default */
+        .mobile-section {
+            display: none;
         }
-    </script>
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .desktop-section {
+                display: none;
+            }
+
+            .mobile-section {
+                display: flex;
+            }
+
+        }
+    </style>
+    <section class="desktop-section">
+        {% include 'projects/desktop/projects-detail-desktop.html' %}
+    </section>
+    <section class="mobile-section">
+        {% include 'projects/mobile/projects-detail-mobile.html' %}
+    </section>
 
 {% endblock %}
+
