@@ -632,8 +632,9 @@ body {
   left: 0;
   border-radius: 0 4.25px 0 4.25px;
   background-color: var(--color-silver-300);
-  border: 1px solid var(--color-whitesmoke-200);
+  border: 1px solid black;
   box-sizing: border-box;
+  z-index: 101;
 }
 .icon10 {
   height: 16.694rem;
@@ -1034,7 +1035,9 @@ body {
   z-index: 2;
 }
 .item-213 {
-  border-radius: 0 var(--br-8xs) 0 0;
+  border-radius: 0 4.25px 0 4.25px;
+  border: 10px black;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -1267,7 +1270,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 2.125rem;
+  /*gap: 2.125rem;*/
 }
 .event-details {
   border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
@@ -1687,13 +1690,13 @@ body {
 }
 .events-mobile {
   width: 100%;
-  height: 222.063rem;
+  height: 100%;
   position: relative;
   background-color: var(--neutral-background);
   overflow: hidden;
   flex-direction: column;
   padding: var(--padding-3xl) 0 3.987rem;
-  gap: var(--gap-17xl);
+  /*gap: var(--gap-17xl);*/
   line-height: normal;
   letter-spacing: normal;
   text-align: left;

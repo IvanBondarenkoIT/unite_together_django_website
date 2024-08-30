@@ -1,0 +1,78 @@
+<style>
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px; /* Reduce margin to bring menu closer */
+}
+
+.dropdown-toggle {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    width: 300px; /* Set a width to the button */
+    text-align: left;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 320px; /* Make menu wider */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    border-radius: 4px;
+    left: 0; /* Align the menu with the button */
+    top: 100%; /* Position the menu right under the button */
+}
+
+.dropdown-menu .dropdown-item {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 4px;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+
+</style>
+
+<div class="dropdown">
+    <a class="sport1{% if request.path == '/events/' %}-active{% endif %}"
+                           href="{% url 'events' %}">Усі</a>
+    <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
+        {% for category in links %}
+
+            {% if category.slug in request.path %}
+                {{ category.name }}
+            {% endif %}
+
+        {% endfor %}
+{#        <!-- Default option if no current link matches -->#}
+{#        {% if not request.path in links.values %}#}
+{#            All#}
+{#        {% endif %}#}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {% for category in links %}
+            <a class="dropdown-item{% if link in request.path %} active{% endif %}"
+               href="{{ category.pre_computed_url }}">{{ category.name }}</a>
+        {% endfor %}
+    </div>
+</div>
