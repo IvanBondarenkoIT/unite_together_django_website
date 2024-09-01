@@ -264,8 +264,10 @@
   line-height: 1rem;
   display: inline-block;
   min-width: 3.375rem;
+  color: var(--accent-blue);
+  z-index: 101;
 }
-.badge {
+.badge-ongoing {
   border-radius: var(--br-8xs);
   background-color: var(--color-aliceblue);
   display: flex;
@@ -273,6 +275,8 @@
   align-items: flex-start;
   justify-content: flex-start;
   padding: var(--padding-11xs) var(--padding-smi);
+  color: var(--accent-blue);
+  z-index: 100;
 }
 .placeholder-image-icon20 {
   width: 17.556rem;
@@ -313,10 +317,15 @@
 }
 .tag-one21 {
   position: relative;
-  line-height: 1.063rem;
-  font-weight: 600;
-  display: inline-block;
-  min-width: 2.313rem;
+  line-height: 1.063rem; /* This controls the height of the text line */
+  font-weight: 600; /* This controls the thickness (boldness) of the text */
+  box-sizing: border-box;
+  display: inline-block; /* Change block to inline-block to allow width adjustment based on content */
+  min-width: 2.313rem; /* Minimum width, can be adjusted based on your needs */
+  padding: 0.2rem 0.5rem; /* Optional: Add padding to give the text some spacing */
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  width: auto; /* Ensure the width is automatically determined by the content */
+  height: auto; /* Allow height to adjust based on line-height and content */
 }
 .frame-parent124,
 .tag9 {
@@ -325,7 +334,7 @@
   justify-content: flex-start;
 }
 .tag9 {
-  width: 2.894rem;
+  width: auto;
   border-radius: var(--br-8xs);
   background-color: var(--color-gold-200);
   overflow: hidden;
@@ -414,8 +423,8 @@
 .form8,
 .frame-parent122 {
   border-radius: 0 4.25px 0 4.25px;
-  background-color: var(--color-silver-300);
-  border: 1px solid var(--color-whitesmoke-200);
+  background-color: var(--background-light-primary);
+  border: 1px solid var(--color-silver-300);
 }
 .form8 {
   width: 19.775rem;
@@ -586,6 +595,7 @@
   font-size: var(--font-size-xs);
   color: var(--accent-blue);
 }
+.project-card,
 .bg-blue-group,
 .frame-parent121,
 .rectangle-parent8 {
@@ -593,6 +603,17 @@
   flex-direction: column;
   justify-content: flex-start;
   max-width: 100%;
+}
+.project-card {
+  align-self: stretch;
+  background-color: var(--color-ghostwhite);
+  align-items: flex-end;
+  padding: var(--padding-76xl) var(--padding-xs) 5.237rem;
+  box-sizing: border-box;
+  gap: var(--gap-9xl);
+  margin-top: -1.938rem;
+  font-size: var(--font-size-xl);
+  color: var(--primary-text);
 }
 .bg-blue-group {
   align-self: stretch;
@@ -1043,7 +1064,7 @@
 }
 .projects-mobile {
   width: 100%;
-  height: 222.063rem;
+  height: 100%;
   position: relative;
   background-color: var(--background-light-primary);
   overflow: hidden;
