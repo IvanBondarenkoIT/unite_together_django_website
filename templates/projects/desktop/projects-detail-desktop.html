@@ -51,9 +51,12 @@
                                 loading="lazy"
                                 alt=""
                                 src="
-                        {% if single_project.image %} {{ single_project.image.url }}
-                        {% else %} {% static '/img/placeholder-image1%402x.png' %}
-                        {% endif %}"
+                                    {% if single_project.image %}
+                                        {{ single_project.image.url }}
+                                    {% else %}
+                                        {% static '/img/placeholder-image1%402x.png' %}
+                                    {% endif %}
+                                    "
                         />
 
                         <div class="error-handler3">
