@@ -641,7 +641,7 @@
   font-size: var(--text-regular-normal-size);
   color: var(--primary-text);
 }
-.project-card {
+.project-card-details {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -649,8 +649,10 @@
   justify-content: flex-start;
   gap: var(--gap-8xl);
   max-width: 100%;
+  background-color: var(--color-ghostwhite);
+  padding: var(--padding-6xl) var(--padding-xs) 2.237rem;
 }
-.project-card-wrapper {
+.project-card-details-wrapper {
   align-self: stretch;
   display: flex;
   flex-direction: row;
