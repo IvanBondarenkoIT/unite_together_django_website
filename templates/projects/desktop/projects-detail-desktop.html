@@ -1,211 +1,182 @@
 {% load static %}
 
-    <section class="page-header6">
-        <img class="bg-icon6" loading="lazy" alt="" src="{% static 'img/bg@2x.png' %}"/>
+    <div class="project-detail" data-animate-on-scroll>
+        <main class="sec-project-detail">
+            <div class="bg-detail1"></div>
+            <div class="aside-box-wrapper">
+                <div class="aside-box">
+                    <div class="iterative-processor">
 
-        <div class="sec-title6">
-            <div class="sublitle6">Підзаголовок</div>
-            <div class="content18">
-                <h1 class="events24">Проекти</h1>
-                <div class="discover-the-diverse-range-of-wrapper3">
-                    <div class="discover-the-diverse6">
-                        Відкрийте різноманітний спектр подій та активностей, які ми пропонуємо для підтримки української громади в Грузії.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="rectangle-group">
-        <div class="rectangle-div"></div>
-        <div class="aside-box">
-            <div class="iterative-processor">
+                        <div class="database-connection">
+                            <div class="error-handler">
+                                <a class="sport1{% if request.path == '/projects/' %}-active{% endif %}"
+                                   href="{% url 'projects' %}">All</a>
+                                {% for category in links %}
+                                    <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
+                                       href="{{ category.get_url }}">{{ category.name }}</a>
+                                {% endfor %}
+                                <div class="variable-holder">
 
-                <div class="database-connection">
-                    <div class="error-handler">
-                        <a class="sport1{% if request.path == '/projects/' %}-active{% endif %}"
-                           href="{% url 'projects' %}">Усі</a>
-                        {% for category in links %}
-                            <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
-                               href="{{ category.pre_computed_url }}">{{ category.name }}</a>
-                        {% endfor %}
-                        <div class="variable-holder">
+                                    <div class="function-caller">
+                                        <img
+                                                class="dec-line-1-icon"
+                                                loading="lazy"
+                                                alt=""
+                                                src="{% static 'img/decline1.svg' %}"
+                                        />
+                                    </div>
 
-                            <div class="function-caller">
-                                <img
-                                        class="dec-line-1-icon"
-                                        loading="lazy"
-                                        alt=""
-                                        src="{% static 'img/decline1.svg' %}"
-                                />
-                            </div>
-
-                            <div class="function-caller1">
-                                <img
-                                        class="dec-line-2-icon"
-                                        loading="lazy"
-                                        alt=""
-                                        src="{% static 'img/decline2.svg' %}"
-                                />
+                                    <div class="function-caller1">
+                                        <img
+                                                class="dec-line-2-icon"
+                                                loading="lazy"
+                                                alt=""
+                                                src="{% static 'img/decline2.svg' %}"
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="audio-processor">
-                <div class="availability">
-                    <div class="availability1"></div>
+            <section class="content19">
+                <div class="bg6"></div>
+                <div class="content-inner">
+                    <div class="baner-image-group mainImage">
 
-                    <form id="filterForm" action="{% url 'projects' %}" method="POST">
-                        {% csrf_token %}
-                        <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox"
-                               {% if free_spots == True %}checked="{true}{% endif %}">
 
-                        <label for="activeCheckbox">Тільки поточні</label>
-                    </form>
+                        <img
+                                class="baner-image-icon1"
+                                loading="lazy"
+                                alt=""
+                                src="
+                        {% if single_project.image %} {{ single_project.image.url }}
+                        {% else %} {% static '/img/placeholder-image1%402x.png' %}
+                        {% endif %}"
+                        />
 
-                </div>
-            </div>
-        </div>
-        <div class="stroke-manager">
-            <div class="bg5"></div>
-            <div class="blend-mode-adapter">
-                {% for object in all_objects %}
-                    <div class="opacity-controller2">
-                        <div class="placeholder-image-container">
+                        <div class="error-handler3">
                             <img
-                                    class="placeholder-image-icon8"
+                                    class="dec-line-3-icon1"
                                     alt=""
-                                    src="{% if object.image %}
-                                            {{ object.image.url }}
-                                         {% else %}
-                                            {% static '/img/placeholder-image1%402x.png' %}
-                                         {% endif %}"
+                                    src="./public/decline31.svg"
                             />
-
-                            <div class="vector-wrapper13">
-                                <img
-                                        class="frame-child14"
-                                        alt=""
-                                        src="{% static 'img/vector-35.svg' %}"
-                                />
-                            </div>
-                            <div class="decoration18"></div>
                         </div>
-                        <div class="frame-parent54">
-                            <div class="heading-parent4">
-                                <b class="heading20">{{ object.title }}</b>
-                                <div class="text-parent">
-                                    <div class="lorem-ipsum-is-simply5">
-                                        {{ object.text|safe }}
 
-                                    </div>
-                                    <div class="tag2">
-                                        <div class="tag-one5">{{ object.group }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="vector-wrapper14">
-                                <img
-                                        class="frame-child15"
-                                        alt=""
-                                        src="{% static 'img/variant-handler.svg' %}"
-                                />
-                            </div>
-                            <div class="tag-one-container">
-                                <div class="tag-one6">{% if object.is_active %}Поточний{% else %}
-                                    Завершений{% endif %}</div>
-                            </div>
-                        </div>
-                        <div class="opacity-controller-inner">
-                            <div class="vector-parent2">
-                                <img
-                                        class="frame-child16"
-                                        alt=""
-                                        src="{% static 'img/variant-handler.svg' %}"
-                                />
 
-                                <div class="button-delails-container">
-                                    <button class="button-delails2">
-                                        <a href="{{ object.get_url }}" class="details2">деталі</a>
-                                        <div class="vector-wrapper15">
-                                            <img
-                                                    class="vector-icon13"
-                                                    alt=""
-                                                    src="{% static 'img/vector-11.svg' %}"
-                                            />
-                                        </div>
-                                    </button>
+                    </div>
+                    <div class="frame-wrapper11">
+                        <div class="frame-parent58">
+                            <ul class="frame-parent59">
+                                <li>
+                                    <div class="ongoing-project">{% if single_project.is_active %}Ongoing
+                                        project{% else %}
+                                        Complited{% endif %}
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="financial-assistance2">
+                                        {{ single_project.group.name }}
+                                    </div>
+                                </li>
+                                <li>
+
+                                    {% if single_project.start_date %}
+                                        {{ single_project.get_start_date_month }}
+                                        {{ single_project.get_start_date_year }}
+                                    {% endif %}
+                                    {% if single_project.end_date %}
+                                        - {{ single_project.get_end_date_month }}
+                                        {{ single_project.get_end_date_year }}
+                                    {% endif %}
+
+                                </li>
+                                <li>
+                                    <div class="georgia">{{ single_project.selected_city }}</div>
+                                </li>
+                            </ul>
+                            {% if single_project.extra_details %}
+                                <div id="extra-details" class="event-extra-details">
+                                    <span id="extra-details-short">{{ single_project.extra_details|truncatewords:20 }}</span>
+                                    <span id="extra-details-full"
+                                          style="display:none;">{{ single_project.extra_details }}</span>
+                                    <a href="#" id="toggle-details"
+                                       onclick="toggleDetails(); return false;">більше</a>
                                 </div>
-                            </div>
+                            {% endif %}
+
+                            <a class="button-registration1"
+                               href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
+                               style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
+                                <div class="registration1">Registration</div>
+                            </a>
                         </div>
                     </div>
-                    <img
-                            class="opacity-controller-icon1"
-                            alt=""
-                            src="{% static 'img/vector-33.svg' %}"
-                    />
-                {% endfor %}
-            </div>
-
-        <div class="data-visualizer">
-          <nav class="mt-4" aria-label="Навігація по сторінках">
-                {% if all_objects.has_other_pages %}
-                <ul class="pagination">
-                    {% if all_objects.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page={{ all_objects.previous_page_number }}">Попередня</a></li>
-                    {% else %}
-                        <li class="page-item disabled"><a class="page-link" href="#">Попередня</a></li>
-                    {% endif %}
-
-                    {% for page_number in all_objects.paginator.page_range %}
-                        {% if all_objects.number == page_number %}
-                            <li class="page-item active"><a class="page-link" href="#">{{ page_number }}</a></li>
-                        {% else %}
-                            <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-
-
-                    {% if all_objects.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{ all_objects.next_page_number }}">Наступна</a></li>
-                    {% else %}
-                        <li class="page-item disabled"><a class="page-link" href="#">Наступна</a></li>
-                    {% endif %}
-                </ul>
+                </div>
+                <div>
+                {% if project_gallery %}
+                    <article class="gallery-wrap">
+                        <ul class="thumb">
+                            <li>
+                                <a href="{{ single_project.image.url }}" target="mainImage"><img
+                                        src="{{ single_project.image.url }}" alt="Product Image"></a>
+                                {% for i in project_gallery %}
+                                    <a href="{{ i.image.url }}" target="mainImage"><img src="{{ i.image.url }}"
+                                                                                        alt="Product Image"></a>
+                                {% endfor %}
+                            </li>
+                        </ul>
+                    </article> <!-- gallery-wrap .end// -->
                 {% endif %}
-            </nav>
-        </div>
-    </section>
+                </div>
+                <div class="content-child">
+                    <div class="winterization-parent">
+                        <h1 class="winterization">{{ single_project.name }}</h1>
+                        <div class="free-classes-of-container1">
+                            <p class="free-classes-of1">
+                                {{ single_project.text|safe }}
+                            </p>
+                            <p class="blank-line6">&nbsp;</p>
+                            <p class="blank-line6"> </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-    <div class="tag5">
-        <div class="tag-one11">Інше</div>
-    </div>
-    <div class="decoration22"></div>
-    <div class="button-delails5">
-        <div class="details5">деталі</div>
-        <img class="vector-icon16" alt="" src="{% static 'img/vector-11.svg' %}"/>
-    </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{% static 'js/script.js' %}"></script>
     <script>
-        document.getElementById('cities').addEventListener('change', function() {
-            document.getElementById('cityForm').submit();
+        $(document).ready(function () {
+            $('.thumb a').click(function (e) {
+                e.preventDefault();
+                $('.mainImage img').attr('src', $(this).attr("href"))
+            })
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#participants-table').DataTable();
         });
-    </script>
 
-    <script>
-        // Зберегти позицію прокрутки перед переходом
-        window.onbeforeunload = function() {
-            sessionStorage.setItem('scrollPosition', window.scrollY);
-        };
+        function toggleDetails() {
+            var shortText = document.getElementById("extra-details-short");
+            var fullText = document.getElementById("extra-details-full");
+            var toggleLink = document.getElementById("toggle-details");
 
-        // Відновити позицію прокрутки при завантаженні сторінки
-        window.onload = function() {
-            var scrollPosition = sessionStorage.getItem('scrollPosition');
-            if (scrollPosition !== null) {
-                window.scrollTo(0, parseInt(scrollPosition));
+            if (shortText.style.display === "none") {
+                shortText.style.display = "inline";
+                fullText.style.display = "none";
+                toggleLink.innerText = "більше";
+            } else {
+                shortText.style.display = "none";
+                fullText.style.display = "inline";
+                toggleLink.innerText = "меньше";
             }
-        };
+        }
     </script>
+
+
