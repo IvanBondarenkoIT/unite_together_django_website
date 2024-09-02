@@ -809,10 +809,10 @@ body {
 }
 .free-classes-of-container2 {
   align-self: stretch;
-  height: 32rem;
+  height: 100%;
   position: relative;
   line-height: 170%;
-  display: inline-block;
+  display: flex;
   flex-shrink: 0;
   z-index: 3;
 }
@@ -847,7 +847,7 @@ body {
   background-color: var(--background-light-primary);
   flex-direction: column;
   align-items: flex-start;
-  padding: var(--padding-7xl) var(--padding-2xs) 4.131rem;
+  /*padding: var(--padding-7xl) var(--padding-2xs) 4.131rem;*/
   position: relative;
   gap: 2.1rem;
   z-index: 2;
