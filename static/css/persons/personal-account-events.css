@@ -1108,7 +1108,7 @@
   align-self: stretch;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: var(--gap-xl-5);
   max-width: 100%;
   text-align: left;
