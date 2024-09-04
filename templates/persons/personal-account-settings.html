@@ -45,6 +45,7 @@
 
     .input-fields {
         margin-top: 20px;
+        min-width: 100px;
     }
 
     .input-group {
@@ -60,10 +61,11 @@
 
     .input-group input {
         width: 100%;
-        padding: 10px;
+        padding: 12px 15px; /* Increased padding for a taller input field */
         border-radius: 4px;
         border: 1px solid #ccc;
-        font-size: 1rem;
+        font-size: 1rem; /* Adjust font size if necessary */
+        box-sizing: border-box; /* Ensures padding is included in width/height */
     }
 
     .update-button-container {
@@ -117,6 +119,10 @@
         .update-button-container {
             text-align: left;
         }
+
+        .mob-form-control {
+            min-width: 100%;
+        }
     }
 
     @media (max-width: 768px) {
@@ -139,15 +145,17 @@
 
         .input-group input {
             font-size: 0.9rem;
-            padding: 8px;
+            padding: 10px 12px; /* Increased padding for mobile as well */
         }
 
         .btn-primary {
             padding: 8px 15px;
             font-size: 0.9rem;
         }
+
     }
 </style>
+
 
 <section class="main-container">
     <div class="sidebar-container">
@@ -164,17 +172,17 @@
 
                 <div class="input-group">
                     <label for="current_password">Поточний пароль</label>
-                    <input type="password" id="current_password" name="current_password" placeholder="Введіть свій поточний пароль" class="form-control" required>
+                    <input type="password" id="current_password" name="current_password" placeholder="Введіть свій поточний пароль" class="mob-form-control" required>
                 </div>
 
                 <div class="input-group">
                     <label for="new_password">Новий пароль</label>
-                    <input type="password" id="new_password" name="new_password" placeholder="Введіть новий пароль" class="form-control" required>
+                    <input type="password" id="new_password" name="new_password" placeholder="Введіть новий пароль" class="mob-form-control" required>
                 </div>
 
                 <div class="input-group">
                     <label for="confirm_password">Підтвердження пароля</label>
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Введіть новий пароль ще раз" class="form-control" required>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Введіть новий пароль ще раз" class="mob-form-control" required>
                 </div>
 
                 <div class="update-button-container">
