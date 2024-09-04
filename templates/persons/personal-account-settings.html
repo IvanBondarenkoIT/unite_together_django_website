@@ -4,72 +4,193 @@
 
 {% block content %}
 
-    <div class="personal-account-settings" data-animate-on-scroll>
-      <section class="aside">
-        <div class="bg-personal-account"></div>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-decoration-color: var(--color-darkslategray-300);
+        color: var(--color-darkslategray-300);
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-container {
+        display: flex;
+        flex-direction: column; /* Default to column layout for mobile */
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .sidebar-container {
+        flex: 0 0 250px;
+        margin-bottom: 20px;
+    }
+
+    .table-container {
+        flex: 1;
+        width: 100%;
+        max-width: 100%;
+        margin: 0; /* Remove margin for mobile */
+        background-color: var(--neutral-background);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        overflow-x: auto; /* Enables horizontal scrolling */
+    }
+
+    .profile-info h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .input-fields {
+        margin-top: 20px;
+        min-width: 100px;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .input-group label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 12px 15px; /* Increased padding for a taller input field */
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 1rem; /* Adjust font size if necessary */
+        box-sizing: border-box; /* Ensures padding is included in width/height */
+    }
+
+    .update-button-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+        font-size: 1rem;
+        color: white;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    @media (min-width: 769px) {
+        .main-container {
+            flex-direction: row; /* Row layout for larger screens */
+        }
+
+        .sidebar-container {
+            margin-bottom: 0;
+        }
+
+        .table-container {
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .input-group {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .input-group label {
+            flex: 0 0 200px;
+            margin-bottom: 0;
+            margin-right: 20px;
+        }
+
+        .input-group input {
+            flex: 1;
+        }
+
+        .update-button-container {
+            text-align: left;
+        }
+
+        .mob-form-control {
+            min-width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .main-container {
+            padding: 10px;
+        }
+
+        .table-container {
+            padding: 15px;
+        }
+
+        .profile-info h2 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            font-size: 0.9rem;
+            padding: 10px 12px; /* Increased padding for mobile as well */
+        }
+
+        .btn-primary {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+    }
+</style>
+
+
+<section class="main-container">
+    <div class="sidebar-container">
         {% include 'includes/dashboard_sidebar.html' %}
-        <div class="bg-group">
-          <div class="bg6"></div>
-          <div class="profile-info">
+    </div>
+    <div class="table-container">
+        <div class="profile-info">
             <h2 class="edit-profile">Змінити пароль</h2>
-          </div>
-          <div class="input-fields">
-            <div class="password-email">
-
-
-              <div class="password-email-labels1">
-                <div class="current-password">Поточний пароль</div>
-                <div class="enter-your-current">
-                  Введіть свій поточний пароль тут
-                </div>
-              </div>
-              <div class="password-email-labels2">
-                <div class="new-password">Новий пароль</div>
-                <div class="enter-your-new1">Введіть новий пароль тут</div>
-              </div>
-              <div class="password-email-labels2">
-                <div class="new-password">Підтвердження пароля</div>
-                <div class="enter-your-new1">Введіть новий пароль тут</div>
-              </div>
-
-
-            </div>
+        </div>
+        <br>
+        <div class="input-fields">
             <form class="inputs-container" method="POST">
                 {% csrf_token %}
-              <div class="inputs">
-                <div class="input-items1">
-                  <div class="input8">
-                      <div class="placeholder8">
-                        <input type="password" name="current_password" placeholder="Поточний пароль" class="form-control" required>
-                      </div>
-                  </div>
-                  <img class="black-icon7" alt="" src="./public/black-1.svg" />
-                </div>
-                <div class="input-items2">
-                  <div class="input9">
-                      <div class="placeholder10">
-                        <input type="password" name="new_password" placeholder="Створити новий пароль" class="form-control" required>
-                      </div>
-                  </div>
-                  <img class="black-icon8" alt="" src="./public/black-2.svg" />
-                </div>
-                <div class="input-items2">
-                  <div class="input9">
-                      <div class="placeholder10">
-                        <input type="password" name="confirm_password" placeholder="Підтвердити новий пароль" class="form-control" required>
-                      </div>
-                  </div>
-                  <img class="black-icon8" alt="" src="./public/black-2.svg" />
-                </div>
-              </div>
-              <div class="update-button-container">
-                <input type="submit" value="Надіслати" class="btn btn-primary">
-              </div>
-            </form>
-          </div>
-        </div>
-      </section>
 
+                <div class="input-group">
+                    <label for="current_password">Поточний пароль</label>
+                    <input type="password" id="current_password" name="current_password" placeholder="Введіть свій поточний пароль" class="mob-form-control" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="new_password">Новий пароль</label>
+                    <input type="password" id="new_password" name="new_password" placeholder="Введіть новий пароль" class="mob-form-control" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm_password">Підтвердження пароля</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Введіть новий пароль ще раз" class="mob-form-control" required>
+                </div>
+
+                <div class="update-button-container">
+                    <input type="submit" value="Надіслати" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
     </div>
+</section>
 
 {% endblock %}
