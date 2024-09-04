@@ -4,68 +4,164 @@
 
 {% block content %}
 
-    <div class="personal-account-events" data-animate-on-scroll>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-decoration-color: var(--color-darkslategray-300);
+            color: var(--color-darkslategray-300);
+            background-color: #f5f5f5;
+        }
 
-      <main class="bg-personal-account-parent">
+        .main-container {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+        }
 
-        <section class="frame-section">
-        {% include "includes/dashboard_sidebar.html" %}
-        <section class="group-section">
+        .sidebar-container {
+            flex: 0 0 250px;
+        }
 
-                    <div class="frame-parent68" style="margin-left: 0px">
+        .table-container {
+            flex: 1;
+            max-width: 100%;
+            margin: 20px;
+            background-color: var(--neutral-background);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Enables horizontal scrolling */
+        }
 
-                        {% for participant in participants %}
-                            <div class="frame-parent69">
-                                <div class="frame-parent70">
-                                    <div class="placeholder-image-wrapper">
-                                        <img
-                                                class="placeholder-image-icon11"
-                                                loading="lazy"
-                                                alt=""
-                                                src="{{ participant.registered_on.image.url }}"
-                                        />
-                                    </div>
-                                    <div class="vector-wrapper26">
-                                        <img
-                                                class="frame-child26"
-                                                loading="lazy"
-                                                alt=""
-                                                src="./public/vector-351.svg"
-                                        />
-                                    </div>
-                                    <div class="decoration24"></div>
-                                    <div class="frame-wrapper13">
-                                        <div class="frame-parent71">
-                                            <div class="heading-parent7">
-                                                <b class="heading25">{{ participant.registered_on.name }}</b>
-                                                <div class="text-parent2">
-                                                    <div class="event-registered-on-text">
-                                                        {{ participant.registered_on.text }}
-                                                    </div>
-                                                    <div class="tag6">
-                                                        <b class="tag-one12">{{ participant.registered_on.group.name }}</b>
-                                                    </div>
-                                                </div>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .main-person {
+            background-color: #ffc107;
+        }
+
+        .button {
+            padding: 8px 12px;
+            font-size: 14px;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+            display: inline-block;
+        }
+
+        .button.active {
+            background-color: #4CAF50;
+        }
+
+        .button.inactive {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+
+        .button.add-person {
+            display: inline-block;
+            margin-bottom: 15px;
+            background-color: #007BFF;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .button.inactive:hover {
+            background-color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar-container, .table-container {
+                max-width: 100%;
+                margin: 0;
+                padding: 10px;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .button {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
+
+    {#    <div class="personal-account-events" data-animate-on-scroll>#}
+    {##}
+    {#        <main class="bg-personal-account-parent">#}
+
+
+    <section class="main-container">
+        <div class="sidebar-container">
+            {% include 'includes/dashboard_sidebar.html' %}
+        </div>
+        <section class="table-container">
+
+            <div class="frame-parent68" style="margin-left: 0px">
+
+                {% for participant in participants %}
+                    <div class="frame-parent69">
+                        <div class="frame-parent70">
+                            <div class="placeholder-image-wrapper">
+                                <img
+                                        class="placeholder-image-icon11"
+                                        loading="lazy"
+                                        alt=""
+                                        src="{{ participant.registered_on.image.url }}"
+                                />
+                            </div>
+                            <div class="vector-wrapper26">
+                                <img
+                                        class="frame-child26"
+                                        loading="lazy"
+                                        alt=""
+                                        src="./public/vector-351.svg"
+                                />
+                            </div>
+                            <div class="decoration24"></div>
+                            <div class="frame-wrapper13">
+                                <div class="frame-parent71">
+                                    <div class="heading-parent7">
+                                        <b class="heading25">{{ participant.registered_on.name }}</b>
+                                        <div class="text-parent2">
+                                            <div class="event-registered-on-text">
+                                                {{ participant.registered_on.text }}
                                             </div>
-                                            <div class="vector-wrapper27">
-                                                <img
-                                                        class="frame-child27"
-                                                        loading="lazy"
-                                                        alt=""
-                                                        src="./public/vector-36.svg"
-                                                />
+                                            <div class="tag6">
+                                                <b class="tag-one12">{{ participant.registered_on.group.name }}</b>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="frame-wrapper14">
-                                    <div class="frame-parent72">
-                                        <div class="tag-one-wrapper2">
-                                            <b class="tag-one13">{{ participant.first_name }} {{ participant.last_name }} {{ participant.status }}</b>
-
-                                        </div>
+                                    <div class="vector-wrapper27">
                                         <img
-                                                class="frame-child28"
+                                                class="frame-child27"
                                                 loading="lazy"
                                                 alt=""
                                                 src="./public/vector-36.svg"
@@ -73,46 +169,70 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="frame-wrapper14">
+                            <div class="frame-parent72">
+                                <div class="tag-one-wrapper2">
+                                    <b class="tag-one13">{{ participant.first_name }} {{ participant.last_name }} {{ participant.status }}</b>
 
-                        {% endfor %}
-
+                                </div>
+                                <img
+                                        class="frame-child28"
+                                        loading="lazy"
+                                        alt=""
+                                        src="./public/vector-36.svg"
+                                />
+                            </div>
+                        </div>
                     </div>
 
-            </section>
-{#      paginator #}
+                {% endfor %}
+
+            </div>
+                {#      paginator #}
         <div class="data-visualizer">
-          <nav class="mt-4" aria-label="Page navigation sample">
+            <nav class="mt-4" aria-label="Page navigation sample">
                 {% if participants.has_other_pages %}
-                <ul class="pagination">
-                    {% if participants.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page={{ participants.previous_page_number }}">Попередня</a></li>
-                    {% else %}
-                        <li class="page-item disabled"><a class="page-link" href="#">Попередня</a></li>
-                    {% endif %}
-
-                    {% for page_number in participants.paginator.page_range %}
-                        {% if participants.number == page_number %}
-                            <li class="page-item active"><a class="page-link" href="#">{{ page_number }}</a></li>
+                    <ul class="pagination">
+                        {% if participants.has_previous %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ participants.previous_page_number }}">Попередня</a>
+                            </li>
                         {% else %}
-                            <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+                            <li class="page-item disabled"><a class="page-link" href="#">Попередня</a></li>
                         {% endif %}
-                    {% endfor %}
 
-                    {% if participants.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{ participants.next_page_number }}">Далі</a></li>
-                    {% else %}
-                        <li class="page-item disabled"><a class="page-link" href="#">Далі</a></li>
-                    {% endif %}
-                </ul>
+                        {% for page_number in participants.paginator.page_range %}
+                            {% if participants.number == page_number %}
+                                <li class="page-item active"><a class="page-link" href="#">{{ page_number }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link"
+                                                         href="?page={{ page_number }}">{{ page_number }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if participants.has_next %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ participants.next_page_number }}">Далі</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#">Далі</a></li>
+                        {% endif %}
+                    </ul>
                 {% endif %}
             </nav>
         </div>
-{#      end new paginator#}
+        {#      end new paginator#}
 
         </section>
 
-      </main>
 
-    </div>
+    </section>
+
+    {#        </main>#}
+    {##}
+    {#    </div>#}
 
 {% endblock %}
