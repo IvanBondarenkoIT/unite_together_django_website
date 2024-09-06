@@ -1,47 +1,84 @@
 {% load static %}
 
+<style>
+    /* General table styling */
+    table.dataTable {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: Arial, sans-serif;
+    }
+
+    table.dataTable thead th, table.dataTable tfoot th {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    table.dataTable tbody td {
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    table.dataTable tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    table.dataTable tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .checkbox-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .checkbox-item {
+        margin-bottom: 10px;
+    }
+</style>
+
 <div class="events-mobile">
     <div class="description-liststext-link-fo2">
         <div class="text72">Filters</div>
     </div>
     <div class="actions14"></div>
     <section class="logout-wrapper2">
-{#        <header class="contact-address">#}
-{#            <div class="logo-ut-parent2">#}
-{#                <div class="logo-ut26">#}
-{#                    <img#}
-{#                            class="logo-flag-ut-icon40"#}
-{#                            loading="lazy"#}
-{#                            alt=""#}
-{#                            src="./public/logoflagut10.svg"#}
-{#                    />#}
-{##}
-{#                    <div class="logo-text-ut40">#}
-{#                        <div class="group120">#}
-{#                            <div class="group121">#}
-{#                                <a class="unite40">UNITE</a>#}
-{#                            </div>#}
-{#                            <div class="group122">#}
-{#                                <a class="together40">TOGETHER</a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="frame-wrapper34">#}
-{#                    <div class="line-parent6">#}
-{#                        <div class="frame-child75"></div>#}
-{#                        <div class="frame-child76"></div>#}
-{#                        <div class="frame-child77"></div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </header>#}
+        {#        <header class="contact-address">#}
+        {#            <div class="logo-ut-parent2">#}
+        {#                <div class="logo-ut26">#}
+        {#                    <img#}
+        {#                            class="logo-flag-ut-icon40"#}
+        {#                            loading="lazy"#}
+        {#                            alt=""#}
+        {#                            src="./public/logoflagut10.svg"#}
+        {#                    />#}
+        {##}
+        {#                    <div class="logo-text-ut40">#}
+        {#                        <div class="group120">#}
+        {#                            <div class="group121">#}
+        {#                                <a class="unite40">UNITE</a>#}
+        {#                            </div>#}
+        {#                            <div class="group122">#}
+        {#                                <a class="together40">TOGETHER</a>#}
+        {#                            </div>#}
+        {#                        </div>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#                <div class="frame-wrapper34">#}
+        {#                    <div class="line-parent6">#}
+        {#                        <div class="frame-child75"></div>#}
+        {#                        <div class="frame-child76"></div>#}
+        {#                        <div class="frame-child77"></div>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </header>#}
         <div class="menu20">
             <div class="bg-blue6"></div>
             <div class="active-menu-indicator-containe">
                 <div class="line-active-menu17"></div>
             </div>
-{#            Actions #}
+            {#            Actions #}
             <div class="event-footer">
                 <div class="card-container">
                     <!-- Dropdown Menu -->
@@ -74,66 +111,133 @@
                     <div class="details-content-wrapper">
                         <div class="details-content">
                             <div class="location-details">
-                            {% if single_event.extra_details %}
-                                <div id="extra-details">
-                                    <span id="extra-details-short">{{ single_event.extra_details|truncatewords:20|safe }}</span>
-                                    <span id="extra-details-full" style="display:none;">{{ single_event.extra_details|safe }}</span>
-                                    {% if single_event.extra_details|length > 100 %}
-                                        <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">далі</a>
-                                    {% endif %}
-                                </div>
-                            {% endif %}
-{#                                <div class="location-icons">#}
-{#                                    <div class="location-icon-wrapper">#}
-{#                                        <img#}
-{#                                                class="location-icon-wrapper-child"#}
-{#                                                loading="lazy"#}
-{#                                                alt=""#}
-{#                                                src="./public/group-6792.svg"#}
-{#                                        />#}
-{#                                    </div>#}
-{#                                    <div class="weekly-at-14001">Weekly at 14:00</div>#}
-{#                                </div>#}
-{#                                <div class="location-icons1">#}
-{#                                    <div class="vector-wrapper38">#}
-{#                                        <img#}
-{#                                                class="vector-icon30"#}
-{#                                                loading="lazy"#}
-{#                                                alt=""#}
-{#                                                src="./public/vector31.svg"#}
-{#                                        />#}
-{#                                    </div>#}
-{#                                    <div class="batumi-127-luka3">#}
-{#                                        Batumi, 127 Luka Asatiani str.#}
-{#                                    </div>#}
-                                </div>
-                            </div>
-                            <div class="fgdfgdfgdfbdfbdfbdfbdfbdfbdfbd1">
-                                fgdfgdfgdfbdfbdfbdfbdfbdfbdfbdfbdfbfdbfdbdfbbfddfbdfbdfbdfbdfbdfbdfbvcxvxcvxcvcxvcxvcxvcxvxcvxcvx
-                            </div>
-                        </div>
-                    </div>
-                    <div class="registration-content-wrapper">
-                        <div class="registration-content">
-                            <div class="attendee-picker">
-                                <div class="pick-a-person">Pick a person to go</div>
-                                <div class="select-person-input">
-                                    <div class="select-person">Select person...</div>
-                                    <div class="dropdown-icon-container">
-                                        <img
-                                                class="bicaret-down-fill-icon"
-                                                alt=""
-                                                src="./public/bicaretdownfill.svg"
-                                        />
+                                {% if single_event.extra_details %}
+                                    <div id="extra-details">
+                                        <span id="extra-details-short">{{ single_event.extra_details|truncatewords:20|safe }}</span>
+                                        <span id="extra-details-full"
+                                              style="display:none;">{{ single_event.extra_details|safe }}</span>
+                                        {% if single_event.extra_details|length > 100 %}
+                                            <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">далі</a>
+                                        {% endif %}
                                     </div>
+                                {% endif %}
+                                {#                                <div class="location-icons">#}
+                                {#                                    <div class="location-icon-wrapper">#}
+                                {#                                        <img#}
+                                {#                                                class="location-icon-wrapper-child"#}
+                                {#                                                loading="lazy"#}
+                                {#                                                alt=""#}
+                                {#                                                src="./public/group-6792.svg"#}
+                                {#                                        />#}
+                                {#                                    </div>#}
+                                {#                                    <div class="weekly-at-14001">Weekly at 14:00</div>#}
+                                {#                                </div>#}
+                                {#                                <div class="location-icons1">#}
+                                {#                                    <div class="vector-wrapper38">#}
+                                {#                                        <img#}
+                                {#                                                class="vector-icon30"#}
+                                {#                                                loading="lazy"#}
+                                {#                                                alt=""#}
+                                {#                                                src="./public/vector31.svg"#}
+                                {#                                        />#}
+                                {#                                    </div>#}
+                                {#                                    <div class="batumi-127-luka3">#}
+                                {#                                        Batumi, 127 Luka Asatiani str.#}
+                                {#                                    </div>#}
+                            </div>
+                        </div>
+
+                    </div>
+                    {% if single_event.is_active %}
+                        <form id="personForm" method="POST">
+                            {% csrf_token %}
+                            {% if request.user.is_authenticated %}
+                                {% if persons %}
+                                    <h5>Оберіть осіб для реєстрації:</h5>
+                                    <br>
+                                    <div class="checkbox-list">
+                                        {% for person in persons %}
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" name="selected-persons"
+                                                       value="{{ person.id }}" id="person-{{ person.id }}">
+                                                <label for="person-{{ person.id }}">{{ person }}</label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <br>
+                                    <h6>(Щоб бути включеними до цього списку, особи повинні бути перевірені
+                                        оператором)</h6>
+                                    <br>
+                                    <br>
+                                    <button type="submit" class="button-registration">
+                                        <div class="registration">Реєстрація</div>
+                                        <div class="vector-container">
+                                            <img class="vector-icon1" alt=""
+                                                 src="{% static 'img/vector-1.svg' %}"/>
+                                        </div>
+                                    </button>
+                                {% else %}
+                                    <h5>У вас немає жодної підтвердженої особи.</h5>
+                                    <br>
+                                    <h6>(Щоб бути включеними до цього списку, особи повинні бути перевірені
+                                        оператором)</h6>
+                                {% endif %}
+
+                                <br>
+                                <h6>Якщо у вас є члени сім'ї, які не вказані вище - будь ласка, додайте їх до вашого
+                                    профілю.</h6>
+
+                                <a href="{% url "associated_person_list" %}">Список осіб</a>
+                            {% else %}
+                                <a class="button-registration" href="{% url 'login' %}">
+                                    <div class="registration">Реєстрація</div>
+                                    <div class="vector-container">
+                                        <img class="vector-icon1" alt="" src="{% static 'img/vector-1.svg' %}"/>
+                                    </div>
+                                </a>
+                            {% endif %}
+                        </form>
+                    {% else %}
+                        <button class="button-join">
+                            <div class="join-parent">
+                                <div class="join">Закрито</div>
+                                <div class="vector-container">
+                                    <img class="vector-icon1" alt="" src="{% static 'img/vector-1.svg' %}"/>
                                 </div>
                             </div>
-                            <button class="button-registration2">
-                                <div class="registration2">Registration</div>
-                                <img class="vector-icon31" alt=""/>
-                            </button>
-                        </div>
-                    </div>
+                        </button>
+                    {% endif %}
+                    {#                    </div>#}
+                    {#                    <div class="registration-content-wrapper">#}
+                    {#                        <div class="registration-content">#}
+                    {#                            <div class="attendee-picker">#}
+                    {#                                <div class="pick-a-person">Pick a person to go</div>#}
+                    {#                                <div class="select-person-input">#}
+                    {#                                    <div class="checkbox-list">#}
+                    {#                                        {% for person in persons %}#}
+                    {#                                            <div class="checkbox-item">#}
+                    {#                                                <input type="checkbox" name="selected-persons"#}
+                    {#                                                       value="{{ person.id }}" id="person-{{ person.id }}">#}
+                    {#                                                <label for="person-{{ person.id }}">{{ person }}</label>#}
+                    {#                                            </div>#}
+                    {#                                        {% endfor %}#}
+                    {#                                    </div>#}
+                    {#                                    <div class="select-person">Select person...</div>#}
+                    {#                                    <div class="dropdown-icon-container">#}
+                    {#                                        <img#}
+                    {#                                                class="bicaret-down-fill-icon"#}
+                    {#                                                alt=""#}
+                    {#                                                src="./public/bicaretdownfill.svg"#}
+                    {#                                        />#}
+                    {#                                    </div>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <button class="button-registration2">#}
+                    {#                                <div class="registration2">Registration</div>#}
+                    {#                                <img class="vector-icon31" alt=""/>#}
+                    {#                            </button>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
                     <div class="event-description-container">
                         <div class="description-content">
                             <h1 class="autism-speaks-to1">
@@ -144,19 +248,19 @@
                                     <b>Вік</b>
                                     <span class="span">:
                                         {% if single_event.start_age %}
-                                        	{{ single_event.start_age }}
+                                            {{ single_event.start_age }}
                                         {% endif %}
                                         {% if single_event.end_age %}
-                                        	-{{ single_event.end_age }}
+                                            -{{ single_event.end_age }}
                                         {% endif %}  </span>
                                 </div>
                             {% endif %}
 
-{#                            <div class="free-classes-of-container2">#}
-                                <div class="free-classes-of2">
-                                    {{ single_event.text|safe }}
-                                </div>
-{#                            </div>#}
+                            {#                            <div class="free-classes-of-container2">#}
+                            <div class="free-classes-of2">
+                                {{ single_event.text|safe }}
+                            </div>
+                            {#                            </div>#}
                         </div>
                     </div>
                 </div>
