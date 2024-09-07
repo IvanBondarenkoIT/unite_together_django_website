@@ -7,7 +7,7 @@
             <div class="social-media-description-inner">
                 <div class="frame-parent121">
 
-{#                    Banner#}
+                    {#                    Banner#}
                     <div class="actions-parent">
                         <div class="actions13"></div>
                         <div class="header-503" style='background-image: url("{% static 'img/bg@2x.png' %}");'>
@@ -17,7 +17,8 @@
                                     <div class="content36">
                                         <h1 class="short-heading-here3">Проєкти</h1>
                                         <div class="lorem-ipsum-dolor3">
-                                            Відкрийте різноманітний спектр подій та активностей, які ми пропонуємо для підтримки української громади в Грузії.
+                                            Відкрийте різноманітний спектр подій та активностей, які ми пропонуємо для
+                                            підтримки української громади в Грузії.
                                         </div>
                                     </div>
                                 </div>
@@ -25,19 +26,20 @@
                         </div>
                     </div>
                     <div class="project-card">
-{#                    <div class="bg-blue-group">#}
-{#                        <div class="bg-blue5"></div>#}
-{#                        <div class="text-card3">#}
-{##}
-{##}
-{#                        </div>#}
-                        <div class="description-liststext-link-fo">
-                            <div class="text66">Filters</div>
-                        </div>
+                        {#                    <div class="bg-blue-group">#}
+                        {#                        <div class="bg-blue5"></div>#}
+                        {#                        <div class="text-card3">#}
+                        {##}
+                        {##}
+                        {#                        </div>#}
                         <!-- Dropdown Menu -->
                         <div class="col-md-12">
                             {% include 'projects/mobile/projects-sidebar-mobile.html' %}
                         </div>
+                        <div class="description-liststext-link-fo">
+                            <div class="text66">Filters</div>
+                        </div>
+
                         <div class="rectangle-parent8">
                             <div class="frame-child74"></div>
                             {% for object in all_objects %}
