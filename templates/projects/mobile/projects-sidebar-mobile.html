@@ -54,7 +54,7 @@
 </style>
 
 <div class="dropdown">
-    <a class="sport1{% if request.path == '/events/' %}-active{% endif %}"
+    <a class="sport1{% if request.path == '/projects/' %}-active{% endif %}"
                            href="{% url 'projects' %}">Усі</a>
     <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
         {% for category in links %}
