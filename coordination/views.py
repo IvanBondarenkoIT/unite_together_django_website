@@ -24,11 +24,10 @@ def event_create(request):
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, "Event Created")
             return redirect("event_list")
     else:
         form = EventForm()
-
-    messages.success(request, "Event Created")
 
     return render(request, "coordination/event_form.html", {"form": form})
 
