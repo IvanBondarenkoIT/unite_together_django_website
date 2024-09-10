@@ -86,15 +86,17 @@
                                 </div>
                                 <div class="age7">
                                     <div class="age8">
-                                        <span>Вік: </span>
-                                        <span class="span">
-                                            {% if object.start_age %}
+                                        {% if object.start_age %}
+                                            <span>Вік: </span>
+                                            <span class="span">
+
                                             	{{ object.start_age }}
                                                 {% if object.end_age %}
-                                                	-{{ object.end_age }}
+                                                    -{{ object.end_age }}
                                                 {% endif %}
-                                            {% endif %}
+
                                             </span>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
