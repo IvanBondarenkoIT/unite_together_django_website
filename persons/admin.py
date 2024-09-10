@@ -19,37 +19,6 @@ class TypeOfDocumentAdmin(admin.ModelAdmin):
     list_display = ("pk", "name", "hint", "regex")
 
 
-# class PersonAdmin(admin.ModelAdmin):
-#     list_display = (
-#         'first_name', 'last_name', 'date_of_birth', 'citizenship', 'date_of_arrival',
-#         'type_of_document', 'document_number', 'gender', 'georgian_phone_number',
-#         'ukrainian_phone_number', 'country', 'chosen_city', 'address_line', 'created_at',
-#         'updated_at', 'is_active', 'edit_permission', 'is_approved', 'user_owner'
-#     )
-#     list_filter = (
-#         'gender', 'country', 'is_active', 'is_approved', 'citizenship', 'type_of_document',
-#         'chosen_city', 'created_at', 'updated_at'
-#     )
-#     search_fields = ('first_name', 'last_name', 'document_number', 'georgian_phone_number', 'ukrainian_phone_number')
-#     ordering = ('-created_at',)
-#
-#     fieldsets = (
-#         (None, {
-#             'fields': ('user_owner', 'first_name', 'last_name', 'date_of_birth', 'gender')
-#         }),
-#         ('Contact Info', {
-#             'fields': ('georgian_phone_number', 'ukrainian_phone_number', 'address_line', 'chosen_city', 'country')
-#         }),
-#         ('Document Info', {
-#             'fields': ('type_of_document', 'document_number', 'citizenship', 'date_of_arrival')
-#         }),
-#         ('Status', {
-#             'fields': ('is_active', 'edit_permission', 'is_approved')
-#         }),
-#         ('Timestamps', {
-#             'fields': ('created_at', 'updated_at')
-#         }),
-#     )
 def export_associated_persons(modeladmin, request, queryset):
     # Create a workbook and add a worksheet
     workbook = openpyxl.Workbook()
