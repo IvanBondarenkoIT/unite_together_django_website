@@ -185,6 +185,7 @@ class Participant(Person):
         CANCELED = "Скасовано", "Скасовано"
         VISITED = "Відвідали", "Відвідали"
 
+    # на какой Евент зарегистрирован участник
     registered_on = models.ForeignKey(
         Events,
         on_delete=models.CASCADE,
@@ -192,6 +193,7 @@ class Participant(Person):
         null=True,
         verbose_name="Зареєстровано на",
     )
+    # Статус регистрации От
     status = models.CharField(
         max_length=14,
         choices=Status.choices,

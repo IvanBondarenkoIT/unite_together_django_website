@@ -155,7 +155,7 @@ def export_participants(modeladmin, request, queryset):
         "Country",
         "City",
         "Address Line",
-        "Created At",
+        "Registered At",
         "Updated At",
         "Is Active",
         "Edit Permission",
@@ -291,13 +291,13 @@ class ParticipantAdmin(admin.ModelAdmin):
         "copy_of_unique_identifier",
         "registered_on",
         "registered_date",
+        "status",
         "first_name",
         "last_name",
         "date_of_birth",
         "date_of_arrival",
         "document_number",
         "created_at",
-        "is_active",
     )
 
     def registered_date(self, obj):
