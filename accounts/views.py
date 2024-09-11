@@ -49,6 +49,7 @@ def register(request):
                         first_name=first_name,
                         last_name=last_name,
                         type_of_document=default_document_type,
+                        is_approved=False
                     )
                     new_person.save()
 
