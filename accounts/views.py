@@ -37,7 +37,6 @@ def register(request):
                         email=email,
                         username=username,
                         password=password,
-
                     )
                     user.save()
 
@@ -49,7 +48,7 @@ def register(request):
                         first_name=first_name,
                         last_name=last_name,
                         type_of_document=default_document_type,
-                        is_approved=False
+                        is_approved=False,
                     )
                     new_person.save()
 
@@ -61,7 +60,6 @@ def register(request):
                     profile = UserProfile.objects.create(
                         user=user,
                         person=new_person,
-
                     )
                     profile.save()
 
@@ -70,18 +68,23 @@ def register(request):
                     # USER ACTIVATION
                     current_site = get_current_site(request)
                     mail_subject = "Please activate your account"
-                    message = render_to_string('accounts/account_verification_email.html', {
-                        'user': user,
-                        'domain': current_site.domain,
-                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                        'token': default_token_generator.make_token(user)
-                    })
+                    message = render_to_string(
+                        "accounts/account_verification_email.html",
+                        {
+                            "user": user,
+                            "domain": current_site.domain,
+                            "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                            "token": default_token_generator.make_token(user),
+                        },
+                    )
                     to_email = email
                     send_email = EmailMessage(mail_subject, message, to=[to_email])
                     send_email.send()
 
                     # messages.success(request, "Registration Successful")
-                    return redirect(f"/accounts/login/?command=verification&email={email}")
+                    return redirect(
+                        f"/accounts/login/?command=verification&email={email}"
+                    )
 
             except Exception as e:
                 messages.error(request, e)

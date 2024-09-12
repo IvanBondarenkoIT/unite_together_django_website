@@ -34,6 +34,7 @@ def associated_person_create(request):
             associated_person = form.save(commit=False)
             associated_person.user_owner = request.user
             associated_person.is_active = True
+            associated_person.is_approved = True  # later may bee changed to manual approving
             associated_person.save()
             messages.success(request, 'Особа успішно створена!')
             return redirect("associated_person_list")
@@ -54,6 +55,8 @@ def associated_person_edit(request, pk):
         # person_form = AssociatedPersonForm(request.POST, request.FILES, instance=edited_person)
         person_form = AssociatedPersonForm(request.POST, instance=edited_person)
         if person_form.is_valid():
+            associated_person = person_form.save(commit=False)
+            associated_person.is_approved = True  # later may bee changed to manual approving
             person_form.save()
             messages.success(request, "Ваш профіль було оновлено")
             return redirect("associated_person_list")
