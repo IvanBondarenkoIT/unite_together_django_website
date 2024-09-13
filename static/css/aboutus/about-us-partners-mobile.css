@@ -1,215 +1,236 @@
 .tagline2 {
-  position: relative;
-  line-height: 150%;
-  font-weight: 600;
-  display: inline-block;
-  min-width: 4.063rem;
+    position: relative;
+    line-height: 150%;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 4.063rem;
 }
+
 .short-heading-here2 {
-  margin: 0;
-  align-self: stretch;
-  position: relative;
-  font-size: inherit;
-  line-height: 120%;
-  font-weight: 700;
-  font-family: inherit;
+    margin: 0;
+    align-self: stretch;
+    position: relative;
+    font-size: inherit;
+    line-height: 120%;
+    font-weight: 700;
+    font-family: inherit;
 }
+
 .lorem-ipsum-dolor2 {
-  align-self: stretch;
-  position: relative;
-  font-size: var(--body-regular-size);
-  line-height: 150%;
+    align-self: stretch;
+    position: relative;
+    font-size: var(--body-regular-size);
+    line-height: 150%;
 }
+
 .content35,
 .section-title5 {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
+
 .content35 {
-  align-self: stretch;
-  align-items: flex-start;
-  gap: var(--gap-xl);
-  font-size: var(--font-size-21xl);
+    align-self: stretch;
+    align-items: flex-start;
+    gap: var(--gap-xl);
+    font-size: var(--font-size-21xl);
 }
+
 .section-title5 {
-  gap: var(--gap-xs);
+    gap: var(--gap-xs);
 }
+
 .container5,
 .section-title5 {
-  align-self: stretch;
-  align-items: flex-start;
+    align-self: stretch;
+    align-items: flex-start;
 }
 
 .header-502 {
-  align-self: stretch;
-  overflow: hidden;
-  align-items: flex-start;
-  padding: var(--padding-45xl) var(--padding-xs);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
-  z-index: 1;
+    align-self: stretch;
+    overflow: hidden;
+    align-items: flex-start;
+    padding: var(--padding-45xl) var(--padding-xs);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    z-index: 1;
 }
 
 .bg-blue4 {
-  width: 22.506rem;
-  height: 108.438rem;
-  position: relative;
-  background-color: var(--color-ghostwhite);
-  display: none;
-  max-width: 100%;
+    width: 22.506rem;
+    height: 108.438rem;
+    position: relative;
+    background-color: var(--color-ghostwhite);
+    display: none;
+    max-width: 100%;
 }
 
 .partner-info-child {
-  width: 21rem;
-  height: 95.45rem;
-  position: relative;
-  background-color: var(--neutral-background);
-  display: none;
-  max-width: 100%;
+    width: 21rem;
+    height: 95.45rem;
+    position: relative;
+    background-color: var(--neutral-background);
+    display: none;
+    max-width: 100%;
 }
+
 .partners-and-collaboration5 {
-  margin: 0;
-  align-self: stretch;
-  position: relative;
-  font-size: inherit;
-  line-height: 120%;
-  font-weight: 700;
-  font-family: inherit;
-  z-index: 2;
+    margin: 0;
+    align-self: stretch;
+    position: relative;
+    font-size: inherit;
+    line-height: 120%;
+    font-weight: 700;
+    font-family: inherit;
+    z-index: 2;
 }
+
 .this-page-features1 {
-  align-self: stretch;
-  position: relative;
-  font-size: var(--body-regular-size);
-  line-height: 150%;
-  z-index: 2;
+    align-self: stretch;
+    position: relative;
+    font-size: var(--body-regular-size);
+    line-height: 150%;
+    z-index: 2;
 }
+
 .partner-description {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 0 0 var(--padding-30xl);
-  gap: var(--gap-xl);
-  font-size: var(--heading-h2-size);
-  color: var(--primary-text);
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 0 var(--padding-30xl);
+    gap: var(--gap-xl);
+    font-size: var(--heading-h2-size);
+    color: var(--primary-text);
 }
 
 .aktion-deutschland-hilft1,
 .in-2001-aktion1 {
-  align-self: stretch;
-  position: relative;
-  z-index: 2;
+    align-self: stretch;
+    position: relative;
+    z-index: 2;
 }
+
 .aktion-deutschland-hilft1 {
-  margin: 0;
-  font-size: inherit;
-  font-weight: 700;
-  font-family: inherit;
+    margin: 0;
+    font-size: inherit;
+    font-weight: 700;
+    font-family: inherit;
 }
+
 .in-2001-aktion1 {
-  height: 9.731rem;
-  font-size: var(--body-small-size);
-  line-height: 170%;
-  color: var(--primary-text);
-  display: inline-block;
-  flex-shrink: 0;
+    height: 9.731rem;
+    font-size: var(--body-small-size);
+    line-height: 170%;
+    color: var(--primary-text);
+    display: inline-block;
+    flex-shrink: 0;
 }
+
 .b2 {
-  flex: 1;
-  position: relative;
-  line-height: 1.469rem;
+    flex: 1;
+    position: relative;
+    line-height: 1.469rem;
 }
+
 .navigationicon2 {
-  width: 1.469rem;
-  overflow: hidden;
-  flex-shrink: 0;
-  justify-content: flex-start;
+    width: 1.469rem;
+    overflow: hidden;
+    flex-shrink: 0;
+    justify-content: flex-start;
 }
+
 .navigationicon2,
 .partner-navigation,
 .surface3 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
 }
+
 .surface3 {
-  width: 2.45rem;
-  border-radius: 27.44px;
-  background-color: var(--accent-blue);
-  justify-content: flex-start;
-  padding: 0.487rem var(--padding-6xs) var(--padding-5xs-9);
-  box-sizing: border-box;
-  z-index: 2;
+    width: 2.45rem;
+    border-radius: 27.44px;
+    background-color: var(--accent-blue);
+    justify-content: flex-start;
+    padding: 0.487rem var(--padding-6xs) var(--padding-5xs-9);
+    box-sizing: border-box;
+    z-index: 2;
 }
+
 .partner-navigation {
-  align-self: stretch;
-  justify-content: flex-end;
-  text-align: center;
-  font-size: 1.225rem;
-  color: var(--neutral-background);
-  font-family: var(--font-inter);
+    align-self: stretch;
+    justify-content: flex-end;
+    text-align: center;
+    font-size: 1.225rem;
+    color: var(--neutral-background);
+    font-family: var(--font-inter);
 }
+
 .partner-aktion,
 .partner-info {
-  align-self: stretch;
-  flex-direction: column;
+    align-self: stretch;
+    flex-direction: column;
 }
+
 .partner-aktion {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: var(--gap-mini);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-mini);
 }
+
 .partner-info {
-  border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
-  background-color: var(--neutral-background);
-  padding: var(--padding-45xl) var(--padding-2xs) 3.268rem var(--padding-xs);
-  gap: var(--gap-16xl);
-  z-index: 1;
-  color: var(--accent-blue);
+    border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
+    background-color: var(--neutral-background);
+    padding: var(--padding-45xl) var(--padding-2xs) 3.268rem var(--padding-xs);
+    gap: var(--gap-16xl);
+    z-index: 1;
+    color: var(--accent-blue);
 }
+
 .partner-container,
 .partner-container-wrapper,
 .partner-info {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  box-sizing: border-box;
-  max-width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    max-width: 100%;
 }
+
 .partner-container {
-  flex: 1;
-  background-color: var(--color-ghostwhite);
-  flex-direction: column;
-  padding: var(--padding-45xl) var(--padding-2xs) var(--padding-45xl-6)
-    var(--padding-xs);
-  gap: var(--gap-12xl-2);
+    flex: 1;
+    background-color: var(--color-ghostwhite);
+    flex-direction: column;
+    padding: var(--padding-45xl) var(--padding-2xs) var(--padding-45xl-6) var(--padding-xs);
+    gap: var(--gap-12xl-2);
 }
+
 .partner-container-wrapper {
-  align-self: stretch;
-  flex-direction: row;
-  padding: 0 0 3.837rem;
-  text-align: left;
-  font-size: var(--font-size-xl);
-  color: var(--neutral-background);
-  font-family: var(--font-montserrat);
+    align-self: stretch;
+    flex-direction: row;
+    padding: 0 0 3.837rem;
+    text-align: left;
+    font-size: var(--font-size-xl);
+    color: var(--neutral-background);
+    font-family: var(--font-montserrat);
 }
 
 .about-us-partners-mobile {
-  width: 100%;
-  position: relative;
-  background-color: var(--neutral-background);
-  overflow: hidden;
-  align-items: flex-end;
-  padding: var(--padding-3xl) 0 var(--padding-45xl-4);
-  box-sizing: border-box;
-  gap: 0.162rem;
-  line-height: normal;
-  letter-spacing: normal;
-  font-size: var(--body-regular-size);
-  color: var(--neutral-background);
+    width: 100%;
+    position: relative;
+    background-color: var(--neutral-background);
+    overflow: hidden;
+    align-items: flex-end;
+    padding: var(--padding-3xl) 0 var(--padding-45xl-4);
+    box-sizing: border-box;
+    gap: 0.162rem;
+    line-height: normal;
+    letter-spacing: normal;
+    font-size: var(--body-regular-size);
+    color: var(--neutral-background);
 }

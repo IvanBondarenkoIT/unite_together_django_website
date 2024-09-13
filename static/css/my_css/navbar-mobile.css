@@ -44,11 +44,13 @@
         align-items: center;
     }
 }
+
 /* Media Queries */
 @media (max-width: 768px) {
     .desktop-navbar {
         display: none;
     }
+
     .mobile-navbar {
         display: flex;
     }

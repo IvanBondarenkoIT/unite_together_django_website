@@ -1,18 +1,18 @@
 /* Styles moved from events.css etc */
 
 .main-logo {
-  margin-left: -106.2px;
-  height: 64px;
-  /* width: 96.8px; */
-  position: relative;
-  flex-shrink: 0;
-  debug_commit: f6aba90;
+    margin-left: -106.2px;
+    height: 64px;
+    /* width: 96.8px; */
+    position: relative;
+    flex-shrink: 0;
+    debug_commit: f6aba90;
 }
 
 .main-logo-footer {
-  height: 40px;
-  /* width: 60px; */
-  position: relative;
-  flex-shrink: 0;
-  debug_commit: f6aba90;
+    height: 40px;
+    /* width: 60px; */
+    position: relative;
+    flex-shrink: 0;
+    debug_commit: f6aba90;
 }
