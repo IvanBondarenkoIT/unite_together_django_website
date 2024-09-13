@@ -189,6 +189,7 @@
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+
 /* Desktop Navigation Bar */
 .desktop-navbar {
     display: flex;
@@ -244,7 +245,7 @@
     position: absolute;
     background-color: white;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 100;
     overflow: hidden;
     border-radius: var(--br-3xs);
@@ -306,6 +307,7 @@
     width: 100%;
     text-align: left;
 }
+
 /*!* Media Queries for Mobile Version *!*/
 
 /*@media (max-width: 768px) {*/

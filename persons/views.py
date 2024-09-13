@@ -20,31 +20,44 @@ OBJECTS_ON_PAGE = 4
 @login_required(login_url="login")
 def associated_person_list(request):
     user_profile = get_object_or_404(UserProfile, user=request.user)
-    persons = AssociatedPerson.objects.filter(user_owner=user_profile.user).order_by("unique_identifier")
+    persons = AssociatedPerson.objects.filter(user_owner=user_profile.user).order_by(
+        "unique_identifier"
+    )
     main_person = user_profile.user.associated_person
-    return render(request, 'persons/associated_person_list.html', {'persons': persons, 'main_person': main_person})
+    return render(
+        request,
+        "persons/associated_person_list.html",
+        {"persons": persons, "main_person": main_person},
+    )
 
 
 @login_required(login_url="login")
 def associated_person_create(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         # user_owner = request.user  # Assuming user is the owner
-        form = AssociatedPersonForm(request.POST, default_ge_phone=request.user.associated_person.georgian_phone_number)
+        form = AssociatedPersonForm(
+            request.POST,
+            default_ge_phone=request.user.associated_person.georgian_phone_number,
+        )
         if form.is_valid():
             associated_person = form.save(commit=False)
             associated_person.user_owner = request.user
             associated_person.is_active = True
-            associated_person.is_approved = True  # later may bee changed to manual approving
+            associated_person.is_approved = (
+                True  # later may bee changed to manual approving
+            )
             associated_person.save()
-            messages.success(request, 'Особа успішно створена!')
+            messages.success(request, "Особа успішно створена!")
             return redirect("associated_person_list")
         else:
-            messages.error(request, 'Будь ласка, виправте помилки нижче.')
+            messages.error(request, "Будь ласка, виправте помилки нижче.")
         #     return redirect("associated_person_create")
     else:
-        form = AssociatedPersonForm(default_ge_phone=request.user.associated_person.georgian_phone_number)
+        form = AssociatedPersonForm(
+            default_ge_phone=request.user.associated_person.georgian_phone_number
+        )
 
-    return render(request, 'persons/dashboard.html', {'form': form})
+    return render(request, "persons/dashboard.html", {"form": form})
 
 
 @login_required(login_url="login")
@@ -56,25 +69,31 @@ def associated_person_edit(request, pk):
         person_form = AssociatedPersonForm(request.POST, instance=edited_person)
         if person_form.is_valid():
             associated_person = person_form.save(commit=False)
-            associated_person.is_approved = True  # later may bee changed to manual approving
+            associated_person.is_approved = (
+                True  # later may bee changed to manual approving
+            )
             person_form.save()
             messages.success(request, "Ваш профіль було оновлено")
             return redirect("associated_person_list")
         else:
-            messages.error(request, 'Будь ласка, виправте помилки нижче.')
+            messages.error(request, "Будь ласка, виправте помилки нижче.")
         #     return redirect("associated_person_edit", pk=edited_person.pk)
     else:
         person_form = AssociatedPersonForm(
             instance=edited_person,
-            default_ge_phone=request.user.associated_person.georgian_phone_number
+            default_ge_phone=request.user.associated_person.georgian_phone_number,
         )
 
-    return render(request, "persons/dashboard.html", {'form': person_form})
+    return render(request, "persons/dashboard.html", {"form": person_form})
 
 
 @login_required(login_url="login")
 def registered_events(request):
-    participants = Participant.objects.all().filter(user_owner=request.user).order_by('-created_at')
+    participants = (
+        Participant.objects.all()
+        .filter(user_owner=request.user)
+        .order_by("-created_at")
+    )
 
     # Pagination functional
     paginator = Paginator(participants, OBJECTS_ON_PAGE)
@@ -84,11 +103,8 @@ def registered_events(request):
     # Get count efficiently / faster
     objects_count = paginator.count
 
-    context = {
-        'participants': page_all_objects,
-        'objects_count': objects_count
-    }
-    return render(request, 'persons/personal-account-events.html', context=context)
+    context = {"participants": page_all_objects, "objects_count": objects_count}
+    return render(request, "persons/personal-account-events.html", context=context)
 
 
 @login_required(login_url="login")
@@ -125,10 +141,12 @@ def settings(request):
                         messages.error(request, error)
                     return redirect("settings")
             else:
-                messages.error(request, "Будь ласка, введіть правильний поточний пароль")
+                messages.error(
+                    request, "Будь ласка, введіть правильний поточний пароль"
+                )
                 return redirect("settings")
         else:
             messages.error(request, "Паролі не збігаються")
             return redirect("settings")
     else:
-        return render(request, 'persons/personal-account-settings.html')
+        return render(request, "persons/personal-account-settings.html")
