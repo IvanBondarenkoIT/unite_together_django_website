@@ -23,7 +23,7 @@
                             {{ sec_about_us.title }}
                         </h1>
                         <div class="text40">
-                            {{ sec_about_us.text }}
+                            {{ sec_about_us.text|safe }}
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                 </h1>
             </div>
             <div class="text38">
-                {{ sec_events.text }}
+                {{ sec_events.text|safe }}
             </div>
         </div>
         <div class="content16">
@@ -111,7 +111,7 @@
                                             overflow: hidden; /* Сховати будь-який текст, що виходить за межі */
                                             text-overflow: ellipsis; /* Відобразити многоточие (...) для вказівки перевищення тексту */
                                             white-space: nowrap; /* Заборонити перенесення тексту */
-                                                ">{{ event.text }}</div>
+                                                ">{{ event.text|safe }}</div>
                         </div>
                     </div>
                 {% endfor %}
@@ -137,7 +137,7 @@
                     <div class="content15">
                         <h1 class="heading18">{{ sec_projects.title }}</h1>
                         <div class="button-cluster">
-                            {{ sec_projects.text }}
+                            {{ sec_projects.text|safe }}
                         </div>
                     </div>
                 </div>
@@ -168,7 +168,7 @@
             <div class="content13">
                 <h1 class="heading17">{{ sec_cta_last.title }}</h1>
                 <div class="text37">
-                    {{ sec_cta_last.description }}
+                    {{ sec_cta_last.description|safe }}
                 </div>
             </div>
             <div class="actions2">

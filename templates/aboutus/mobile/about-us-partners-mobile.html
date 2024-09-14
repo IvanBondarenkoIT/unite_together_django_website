@@ -46,7 +46,7 @@
                             {{ partner.title }}
                         </h3>
                         <div class="in-2001-aktion1">
-                            {{ partner.description }}
+                            {{ partner.description|safe }}
                         </div>
                         {% if partner.url_link %}
                             <a class="partner-navigation" href="{{ partner.url_link }}">
