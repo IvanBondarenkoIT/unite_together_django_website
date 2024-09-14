@@ -39,7 +39,7 @@
                 <h2 class="heading28">{{ sec_about_us.title }}</h2>
             </div>
             <div class="text45">
-                {{ sec_about_us.text }}
+                {{ sec_about_us.text|safe }}
             </div>
             <div class="content-actions-one">
                 <button class="stylesecondary-smallfalse5">
@@ -80,7 +80,7 @@
                 <div class="content32">
                     <h2 class="heading29">{{ sec_cta_first.title }}</h2>
                     <div class="text46">
-                        {{ sec_cta_first.description }}
+                        {{ sec_cta_first.description|safe }}
                     </div>
                 </div>
                 <div class="actions8">
@@ -105,7 +105,7 @@
                     </h1>
                 </div>
                 <div class="text47">
-                    {{ sec_events.text }}
+                    {{ sec_events.text|safe }}
                 </div>
             </div>
         </section>
@@ -136,7 +136,7 @@
                                             text-overflow: ellipsis; /* Відобразити многоточие (...) для вказівки перевищення тексту */
                                             white-space: nowrap; /* Заборонити перенесення тексту */
                                                 ">
-                                            {{ event.text }}
+                                            {{ event.text|safe }}
                                         </div>
                                     </div>
                                 </div>
@@ -176,7 +176,7 @@
 
         <section class="text-wrapper3">
             <div class="text50">
-                {{ sec_projects.text }}
+                {{ sec_projects.text|safe }}
             </div>
         </section>
 
@@ -215,7 +215,7 @@
                 <div class="content32">
                     <h2 class="heading32">{{ sec_cta_last.title }}</h2>
                     <div class="text51">
-                        {{ sec_cta_last.description }}
+                        {{ sec_cta_last.description|safe }}
                     </div>
                 </div>
                 <div class="actions9">

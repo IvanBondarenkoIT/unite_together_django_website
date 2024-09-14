@@ -171,7 +171,7 @@
                     </div>
                     <div class="description-part">
                         <h3>{{ partner.title }}</h3>
-                        <p>{{ partner.description }}</p>
+                        <p>{{ partner.description|safe }}</p>
                         {% if partner.url_link %}
                             <a href="{{ partner.url_link }}" target="_blank">Дізнатись більше</a>
                         {% endif %}

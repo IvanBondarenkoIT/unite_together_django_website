@@ -133,7 +133,7 @@
 
                                             <div class="text-wrapper">
                                                 <div class="text7">
-                                                    {{ program.description }}
+                                                    {{ program.description|safe }}
                                                     {% if program.support_partner %}
                                                         <p><strong>Партнер з підтримки:</strong> {{ program.support_partner }}</p>
                                                     {% endif %}
