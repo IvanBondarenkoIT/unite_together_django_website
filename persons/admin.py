@@ -206,10 +206,11 @@ class UserOwnerFilter(admin.SimpleListFilter):
 
 
 class AssociatedPersonAdmin(admin.ModelAdmin):
-    form = AssociatedPersonAdminForm
+    # form = AssociatedPersonAdminForm
     list_display = (
         "unique_identifier",
         "user_owner",
+        "get_associated_person",
         "first_name",
         "last_name",
         "date_of_birth",
@@ -230,6 +231,7 @@ class AssociatedPersonAdmin(admin.ModelAdmin):
     list_display_links = ("unique_identifier",)
     list_filter = (
         "unique_identifier",
+        "user_owner",
         UserOwnerFilter,
         "gender",
         "country",
@@ -248,10 +250,19 @@ class AssociatedPersonAdmin(admin.ModelAdmin):
         "document_number",
         "georgian_phone_number",
         "ukrainian_phone_number",
+        # "user_owner__unique_identifier",
     )
     ordering = ("-created_at",)  # Default sorting by created_at descending
     # formats = [XLS]
     actions = [export_associated_persons]
+
+    def get_associated_person(self, obj):
+        # Assuming user_owner has a related field associated_person
+        return obj.user_owner.associated_person.unique_identifier
+
+    get_associated_person.short_description = (
+        "ID власника аккаунту"  # Set column name in admin
+    )
 
 
 class ParticipantAdmin(admin.ModelAdmin):

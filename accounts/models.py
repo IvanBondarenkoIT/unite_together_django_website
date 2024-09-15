@@ -13,7 +13,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 class MyAccountManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, password=None):
         if not email:
-            raise ValueError('Необхідно вказати адресу електронної пошти')
+            raise ValueError("Необхідно вказати адресу електронної пошти")
         if not username:
             raise ValueError("Необхідно встановити ім'я користувача")
 
@@ -62,15 +62,17 @@ class Account(AbstractBaseUser):
 
     # family_identifier = models.CharField(max_length=10, unique=True, blank=True, null=True, editable=False)
     family_identifier = models.CharField(max_length=10, blank=True, null=True)
-    associated_person = models.OneToOneField('persons.AssociatedPerson', on_delete=models.CASCADE, blank="True", null=True)
+    associated_person = models.OneToOneField(
+        "persons.AssociatedPerson", on_delete=models.CASCADE, blank="True", null=True
+    )
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username", "first_name", "last_name"]
 
     objects = MyAccountManager()
 
     def __str__(self):
-        return self.email
+        return f"{self.first_name} {self.last_name}"
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
@@ -82,13 +84,18 @@ class Account(AbstractBaseUser):
 @receiver(post_save, sender=Account)
 def set_family_identifier(sender, instance, created, **kwargs):
     if created and not instance.family_identifier:
-        last_identifier = Account.objects.exclude(family_identifier__isnull=True).order_by('-family_identifier').first()
+        last_identifier = (
+            Account.objects.exclude(family_identifier__isnull=True)
+            .order_by("-family_identifier")
+            .first()
+        )
         if last_identifier and last_identifier.family_identifier:
             next_id = int(last_identifier.family_identifier) + 1
         else:
             next_id = 1
-        instance.family_identifier = f'{next_id:05d}'
+        instance.family_identifier = f"{next_id:05d}"
         instance.save()
+
 
 # models.py
 
