@@ -45,22 +45,31 @@ def export_associated_persons(modeladmin, request, queryset):
         "Updated At",
         "Is Active",
         "Edit Permission",
-        "Criteria",
         "Is Approved",
+        "Criteria",
         "User Owner Email",
     ]  # Adjust headers as needed
     sheet.append(headers)
 
     # Write data rows
     for person in queryset:
+
         sheet.append(
             [
                 person.unique_identifier,
                 person.first_name,
                 person.last_name,
-                person.date_of_birth.strftime("%d.%m.%Y"),
-                person.citizenship.strftime("%d.%m.%Y"),
-                person.date_of_arrival,
+                (
+                    person.date_of_birth.strftime("%d.%m.%Y")
+                    if person.date_of_birth
+                    else ""
+                ),
+                person.citizenship,
+                (
+                    person.date_of_arrival.strftime("%d.%m.%Y")
+                    if person.date_of_arrival
+                    else ""
+                ),
                 (
                     person.type_of_document.name if person.type_of_document else ""
                 ),  # Assuming TypeOfDocument has a 'name' field
