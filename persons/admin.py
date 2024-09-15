@@ -45,22 +45,31 @@ def export_associated_persons(modeladmin, request, queryset):
         "Updated At",
         "Is Active",
         "Edit Permission",
-        "Criteria",
         "Is Approved",
+        "Criteria",
         "User Owner Email",
     ]  # Adjust headers as needed
     sheet.append(headers)
 
     # Write data rows
     for person in queryset:
+
         sheet.append(
             [
                 person.unique_identifier,
                 person.first_name,
                 person.last_name,
-                person.date_of_birth.strftime("%d.%m.%Y"),
-                person.citizenship.strftime("%d.%m.%Y"),
-                person.date_of_arrival,
+                (
+                    person.date_of_birth.strftime("%d.%m.%Y")
+                    if person.date_of_birth
+                    else ""
+                ),
+                person.citizenship,
+                (
+                    person.date_of_arrival.strftime("%d.%m.%Y")
+                    if person.date_of_arrival
+                    else ""
+                ),
                 (
                     person.type_of_document.name if person.type_of_document else ""
                 ),  # Assuming TypeOfDocument has a 'name' field
@@ -206,10 +215,11 @@ class UserOwnerFilter(admin.SimpleListFilter):
 
 
 class AssociatedPersonAdmin(admin.ModelAdmin):
-    form = AssociatedPersonAdminForm
+    # form = AssociatedPersonAdminForm
     list_display = (
         "unique_identifier",
         "user_owner",
+        "get_associated_person",
         "first_name",
         "last_name",
         "date_of_birth",
@@ -230,6 +240,7 @@ class AssociatedPersonAdmin(admin.ModelAdmin):
     list_display_links = ("unique_identifier",)
     list_filter = (
         "unique_identifier",
+        "user_owner",
         UserOwnerFilter,
         "gender",
         "country",
@@ -248,10 +259,19 @@ class AssociatedPersonAdmin(admin.ModelAdmin):
         "document_number",
         "georgian_phone_number",
         "ukrainian_phone_number",
+        # "user_owner__unique_identifier",
     )
     ordering = ("-created_at",)  # Default sorting by created_at descending
     # formats = [XLS]
     actions = [export_associated_persons]
+
+    def get_associated_person(self, obj):
+        # Assuming user_owner has a related field associated_person
+        return obj.user_owner.associated_person.unique_identifier
+
+    get_associated_person.short_description = (
+        "ID власника аккаунту"  # Set column name in admin
+    )
 
 
 class ParticipantAdmin(admin.ModelAdmin):

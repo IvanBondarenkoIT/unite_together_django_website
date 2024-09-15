@@ -10,10 +10,20 @@ class AssociatedPersonAdminForm(forms.ModelForm):
     class Meta:
         model = AssociatedPerson
         fields = "__all__"
-        # widgets = {
-        #     'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
-        #     'date_of_arrival': forms.DateInput(attrs={'type': 'date'}),
-        # }
+
+        # Add a filter by 'user_owner'
+        list_filter = ("user_owner",)
+
+        # Define a search field for more convenience
+        search_fields = ["first_name", "last_name", "user_owner__unique_identifier"]
+
+        def get_associated_person(self, obj):
+            # Assuming user_owner has a related field associated_person
+            return obj.user_owner.associated_person
+
+        get_associated_person.short_description = (
+            "Associated Person"  # Set column name in admin
+        )
 
 
 class AssociatedPersonForm(forms.ModelForm):

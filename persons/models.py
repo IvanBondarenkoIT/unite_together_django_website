@@ -49,7 +49,7 @@ class Person(models.Model):
         on_delete=models.CASCADE,
         blank=True,
         null=True,
-        verbose_name="Власник акаунту",
+        verbose_name="Ім'я Власника акаунту",
     )
     first_name = models.CharField(
         max_length=50, blank=True, null=True, verbose_name="Ім'я"
