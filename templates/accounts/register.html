@@ -1,98 +1,187 @@
 {% extends 'base.html' %}
 {##}
 {% block content %}
-
-<!-- ========================= SECTION CONTENT ========================= -->
-<section class="product-container align-items-center" style="min-height:40vh">
-
-<!-- ============================ COMPONENT REGISTER   ================================= -->
-
-	<div class="container" style="max-width:520px; margin-top:80px;">
-      <article class="card-body">
-{#        {% include 'includes/alerts.html' %}#}
-		<header class="mb-4"><h4 class="card-title">Зареєструватися</h4></header>
-		<form action="{% url 'register' %}" method="POST">
-            {% csrf_token %}
-{#            {{ form.as_p }}#}
-				<div class="form-row">
-					<div class="col form-group">
-						<label>Ім'я</label>
-                            {{ form.first_name }}
-					</div> <!-- form-group end.// -->
-					<div class="col form-group">
-						<label>Прізвищє</label>
-					  	{{ form.last_name }}
-					</div> <!-- form-group end.// -->
-				</div> <!-- form-row end.// -->
-				            
-				<div class="form-row">
-                   	<div class="form-group col-md-6">
-					  <label>Електронна пошта</label>
-                        {{ form.email }}
-					</div> <!-- form-group end.// -->
-					<div class="form-group col-md-6">
-					  <label>Номер телефону</label>
-                        {{ form.phone_number}}
-					</div> <!-- form-group end.// -->
-				</div> <!-- form-row.// -->
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label>Створіть пароль</label>
-                        {{ form.password }}
-					</div> <!-- form-group end.// -->
-					<div class="form-group col-md-6">
-						<label>Повторіть пароль</label>
-					    {{ form.confirm_password }}
-					</div> <!-- form-group end.// -->
-				</div>
-			    <div class="form-group">
-			        <button type="submit" class="btn btn-primary btn-block"> Зареєструватися  </button>
-			    </div> <!-- form-group// -->
-            {{ form.email.errors }}
-            {{ form.non_field_errors }}
-
-			</form>
-          <p class="text-center mt-4">Є обліковий запис? <a href="{% url 'login' %}">Увійти</a></p>
-		</article><!-- card-body.// -->
-
-
-    </div> <!-- card .// -->
-
     <style>
-        body {
-            padding: 10px;
-            box-sizing: border-box;
+    .container {
+        max-width: 520px;
+        margin-top: 80px;
+        padding-bottom: 30px; /* Add padding at the bottom for error messages */
+        overflow: hidden; /* Prevent content overflow */
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem; /* Space between form elements */
+        position: relative;
+    }
+
+    .form-group .error {
+        color: red;
+        margin-top: 5px; /* Space between field and error message */
+        font-size: 14px;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 1.5rem; /* Space between rows */
+    }
+
+    .form-row .col {
+        width: 48%; /* Ensure fields are side by side with proper width on desktop */
+    }
+
+    /* Full-width form controls for smaller screens */
+    @media (max-width: 768px) {
+        .form-row .col {
+            width: 100%; /* Make fields full width on mobile */
         }
 
-        .product-container {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            height: 60vh;
-
-            display: flex;
-            height: 60vh;
-            justify-content: center;
-            align-items: center;
+        .form-group {
+            width: 100%; /* Ensure form groups are 100% width on mobile */
         }
-        .img {
-            width: 60%;
-            border-radius: 50px;
+    }
+
+    /* Ensure the button does not overlap with error messages */
+    .btn-block {
+        width: 100%;
+        padding: 12px;
+        margin-top: 20px; /* Ensure space between form and button */
+        background-color: dodgerblue;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+
+    /* Ensure form grows dynamically with error messages */
+    .card-body {
+        min-height: 100%; /* Let form take full height dynamically */
+    }
+
+    .form-check-input {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+
+    .form-check-label {
+        font-size: 16px;
+    }
+
+    .form-check {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    /* Mobile-specific styling */
+    @media (max-width: 768px) {
+        .form-row {
+            flex-direction: column; /* Stack all elements vertically */
         }
-        button {
-            padding: 10px;
-            border-radius: 5px;
-            background-color: dodgerblue;
-            color: white;
-            border: none;
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem; /* Space between label and input */
         }
 
-    </style>
-<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+        {#.form-group input,#}
+        .form-group select,
+        .form-group textarea {
+            width: 100%; /* Ensure all inputs are full-width on mobile */
+        }
+
+        .form-check {
+            display: block; /* Make checkbox row stack on mobile */
+        }
+
+        .form-check-input {
+            margin-bottom: 5px; /* Space between checkbox and label */
+        }
+    }
+</style>
 
 
-</section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
+
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section class="product-container align-items-center" style="min-height:40vh">
+
+        <!-- ============================ COMPONENT REGISTER   ================================= -->
+
+        <div class="container" style="max-width:520px; margin-top:80px;">
+            <article class="card-body">
+                {#        {% include 'includes/alerts.html' %}#}
+                <header class="mb-4"><h4 class="card-title">Зареєструватися</h4></header>
+                <form action="{% url 'register' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col form-group">
+                            <label>Ім'я</label>
+                            {{ form.first_name }}
+                        </div> <!-- form-group end.// -->
+                        <div class="col form-group">
+                            <label>Прізвищє</label>
+                            {{ form.last_name }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row end.// -->
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Електронна пошта</label>
+                            {{ form.email }}
+                        </div> <!-- form-group end.// -->
+                        <div class="form-group col-md-6">
+                            <label>Номер телефону</label>
+                            {{ form.phone_number }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Створіть пароль</label>
+                            {{ form.password }}
+                        </div> <!-- form-group end.// -->
+                        <div class="form-group col-md-6">
+                            <label>Повторіть пароль</label>
+                            {{ form.confirm_password }}
+                        </div> <!-- form-group end.// -->
+                    </div> <!-- form-row.// -->
+
+                    <!-- User agreement checkbox -->
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="agree_to_terms" name="agree_to_terms"
+                                   required>
+                            <label class="form-check-label" for="agree_to_terms">
+                                Я погоджуюсь з <a href="#">умовами використання</a>.
+                            </label>
+                        </div>
+                        {% if form.agree_to_terms.errors %}
+                            <div class="error">{{ form.agree_to_terms.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Зареєструватися</button>
+                    </div> <!-- form-group// -->
+
+                    {{ form.email.errors }}
+                    {{ form.non_field_errors }}
+
+                </form>
+                <p class="text-center mt-4">Є обліковий запис? <a href="{% url 'login' %}">Увійти</a></p>
+
+            </article><!-- card-body.// -->
+
+
+        </div> <!-- card .// -->
+
+
+        <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
+
+
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
 
 
 {% endblock %}
