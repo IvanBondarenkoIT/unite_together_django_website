@@ -6,6 +6,10 @@ from .models import Account
 
 
 class RegistrationForm(forms.ModelForm):
+    agree_to_terms = forms.BooleanField(
+        required=True, label="Я погоджуюсь з умовами використання"
+    )
+
     password = forms.CharField(
         label="Password",
         widget=forms.PasswordInput(
@@ -77,3 +81,9 @@ class RegistrationForm(forms.ModelForm):
             return georgian_phone_number
         else:
             raise forms.ValidationError("Грузинський номер телефону є обов'язковим.")
+
+    def clean_agree_to_terms(self):
+        agree = self.cleaned_data.get("agree_to_terms")
+        if not agree:
+            raise forms.ValidationError("Ви повинні погодитися з умовами використання.")
+        return agree
