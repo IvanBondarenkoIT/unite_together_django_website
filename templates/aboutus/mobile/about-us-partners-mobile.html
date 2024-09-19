@@ -36,11 +36,14 @@
                 </div>
                 {% for partner in partners %}
                     <div class="partner-aktion">
-                        <img
-                                loading="lazy"
-                                alt="{{ partner.title }}"
-                                src="{{ partner.image.url }}"
-                        />
+                        {% if partner.image %}
+                            <img
+                                    loading="lazy"
+
+                                    alt="{{ partner.title }}"
+                                    src="{{ partner.image.url }}"
+                            />
+                        {% endif %}
 
                         <h3 class="aktion-deutschland-hilft1">
                             {{ partner.title }}
