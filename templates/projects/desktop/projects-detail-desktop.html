@@ -83,18 +83,16 @@
                                         {{ single_project.group.name }}
                                     </div>
                                 </li>
-                                <li>
-
-                                    {% if single_project.start_date %}
+                                {% if single_project.start_date %}
+                                    <li>
                                         {{ single_project.get_start_date_month }}
                                         {{ single_project.get_start_date_year }}
-                                    {% endif %}
-                                    {% if single_project.end_date %}
-                                        - {{ single_project.get_end_date_month }}
-                                        {{ single_project.get_end_date_year }}
-                                    {% endif %}
-
-                                </li>
+                                        {% if single_project.end_date %}
+                                            - {{ single_project.get_end_date_month }}
+                                            {{ single_project.get_end_date_year }}
+                                        {% endif %}
+                                    </li>
+                                {% endif %}
                                 <li>
                                     <div class="georgia">{{ single_project.selected_city }}</div>
                                 </li>
