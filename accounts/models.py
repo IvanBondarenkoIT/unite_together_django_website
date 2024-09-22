@@ -14,6 +14,7 @@ class MyAccountManager(BaseUserManager):
     """
     Custom user manager.
     """
+
     def create_user(self, first_name, last_name, username, email, password=None):
         """
         Creates a user with the given parameters.
@@ -58,6 +59,7 @@ class Account(AbstractBaseUser):
     """
     Custom user model.
     """
+
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     username = models.CharField(max_length=50, unique=True)
