@@ -11,7 +11,13 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class MyAccountManager(BaseUserManager):
+    """
+    Custom user manager.
+    """
     def create_user(self, first_name, last_name, username, email, password=None):
+        """
+        Creates a user with the given parameters.
+        """
         if not email:
             raise ValueError("Необхідно вказати адресу електронної пошти")
         if not username:
@@ -29,6 +35,9 @@ class MyAccountManager(BaseUserManager):
         return user
 
     def create_superuser(self, first_name, last_name, username, email, password):
+        """
+        Creates a superuser with the given parameters.
+        """
         user = self.create_user(
             email=self.normalize_email(email),
             username=username,
@@ -46,6 +55,9 @@ class MyAccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
+    """
+    Custom user model.
+    """
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     username = models.CharField(max_length=50, unique=True)
@@ -83,6 +95,9 @@ class Account(AbstractBaseUser):
 
 @receiver(post_save, sender=Account)
 def set_family_identifier(sender, instance, created, **kwargs):
+    """
+    Sets the family identifier for newly created users.
+    """
     if created and not instance.family_identifier:
         last_identifier = (
             Account.objects.exclude(family_identifier__isnull=True)
