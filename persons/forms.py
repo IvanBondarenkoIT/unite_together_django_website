@@ -49,10 +49,12 @@ class AssociatedPersonForm(forms.ModelForm):
         ]
         widgets = {
             "date_of_birth": forms.DateInput(
-                attrs={"type": "date", "placeholder": "ДД.ММ.РРРР"}
+                # attrs={"type": "date", "placeholder": "ДД.ММ.РРРР"}
+                attrs={"type": "date"}
             ),
             "date_of_arrival": forms.DateInput(
-                attrs={"type": "date", "placeholder": "ДД.ММ.РРРР"}
+                # attrs={"type": "date", "placeholder": "ДД.ММ.РРРР"}
+                attrs={"type": "date"}
             ),
             "first_name": forms.TextInput(
                 attrs={"placeholder": "Ім'я", "required": True}
@@ -109,15 +111,15 @@ class AssociatedPersonForm(forms.ModelForm):
             self.fields["georgian_phone_number"].initial = default_ge_phone
 
         # Перетворення формату дати для відображення у формі
-        if self.instance.pk:  # Якщо об'єкт вже існує
-            if self.instance.date_of_birth:
-                self.fields["date_of_birth"].initial = (
-                    self.instance.date_of_birth.strftime("%d.%m.%Y")
-                )
-            if self.instance.date_of_arrival:
-                self.fields["date_of_arrival"].initial = (
-                    self.instance.date_of_arrival.strftime("%d.%m.%Y")
-                )
+        # if self.instance.pk:  # Якщо об'єкт вже існує
+        #     if self.instance.date_of_birth:
+        #         self.fields["date_of_birth"].initial = (
+        #             self.instance.date_of_birth.strftime("%d.%m.%Y")
+        #         )
+        #     if self.instance.date_of_arrival:
+        #         self.fields["date_of_arrival"].initial = (
+        #             self.instance.date_of_arrival.strftime("%d.%m.%Y")
+        #         )
 
     def clean_document_number(self):
         type_of_document = self.cleaned_data.get("type_of_document")
