@@ -185,8 +185,8 @@ def reset_password_validate(request, uidb64, token):
 
     if user is not None and default_token_generator.check_token(user, token):
         request.session["uid"] = uid
-        #     user.is_active = True
-        #     user.save()
+        # request.user.is_active = True
+        user.save()
         messages.success(request, "Будь ласка, скиньте свій пароль")
         return redirect("reset_password")
     else:
@@ -214,7 +214,7 @@ def reset_password(request):
                 # Catching multiple error messages and adding them to the messages framework
                 for error in e:
                     messages.error(request, error)
-                return redirect("settings")
+                return redirect("reset_password")
         else:
             messages.error(request, "Паролі не збігаються")
             return redirect("reset_password")
