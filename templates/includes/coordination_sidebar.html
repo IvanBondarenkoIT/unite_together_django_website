@@ -6,8 +6,12 @@
         <ul class="list-group navigation-links">
             <a class="events33{% if 'event-list' in request.path %} active{% endif %}"
                href="{% url 'event_list' %}"> Events </a>
-            <a class="events33{% if 'persons-list' in request.path %} active{% endif %}"
-               href="{% url 'coordination_person_list' %}"> Persons </a>
+            {% if request.user.is_supervisor %}
+                <a class="events33{% if 'persons-list' in request.path %} active{% endif %}"
+                   href="{% url 'coordination_person_list' %}"> Persons </a>
+            {% endif %}
+
+
 {#            <a class="events33{% if 'registered-events' in request.path %} active{% endif %}"#}
 {#               href="{% url 'registered_events' %}"> Events & Projects </a>#}
 {#            <a class="events33{% if 'settings' in request.path %} active{% endif %}"#}

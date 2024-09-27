@@ -148,7 +148,14 @@
                         <img class="frame-child29" alt="" src="{% static 'img/group-1000001845.svg' %}"/>
                         <div class="ellipse-parent2">
                             <div class="frame-child30"></div>
-                            <a class="icon-wrapper50" href="{% url 'event_list' %}">
+
+                            <a class="icon-wrapper50"
+                               {% if request.user.is_staff %}
+                                    href="{% url 'event_list' %}"
+                               {% else %}
+                                    href="{% url 'events' %}"
+                               {% endif %}
+                            >
                                 <div class="width-change-size-here28">
                                     <div class="ignore136"></div>
                                     <div class="ignore137"></div>

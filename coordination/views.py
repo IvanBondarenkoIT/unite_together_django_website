@@ -9,8 +9,32 @@ from web_pages.models import Events
 from persons.models import Participant, AssociatedPerson, UserProfile
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from django.http import HttpResponseForbidden
+from functools import wraps
+
+
+def staff_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        if request.user.is_staff:
+            return view_func(request, *args, **kwargs)
+        return HttpResponseForbidden("You do not have permission to access this page.")
+
+    return _wrapped_view
+
+
+def supervisor_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        if request.user.is_supervisor:
+            return view_func(request, *args, **kwargs)
+        return HttpResponseForbidden("You do not have permission to access this page.")
+
+    return _wrapped_view
+
 
 @login_required
+@staff_required
 # @permission_required('web_pages.view_event', raise_exception=True)
 def event_list(request):
     events = Events.objects.all().order_by("-updated_at")
@@ -18,6 +42,7 @@ def event_list(request):
 
 
 @login_required
+@staff_required
 # @permission_required('web_pages.add_event', raise_exception=True)
 def event_create(request):
     if request.method == "POST":
@@ -33,6 +58,7 @@ def event_create(request):
 
 
 @login_required
+@staff_required
 # @permission_required('web_pages.change_event', raise_exception=True)
 def event_update(request, pk):
     event = get_object_or_404(Events, pk=pk)
@@ -56,6 +82,7 @@ def event_update(request, pk):
 
 
 @login_required
+@staff_required
 # @permission_required('web_pages.delete_event', raise_exception=True)
 def event_delete(request, pk):
     event = get_object_or_404(Events, pk=pk)
@@ -67,6 +94,7 @@ def event_delete(request, pk):
 
 
 @login_required
+@staff_required
 def participant_list(request, pk):
     event = get_object_or_404(Events, pk=pk)
 
@@ -118,6 +146,7 @@ def participant_list(request, pk):
 
 
 @login_required
+@staff_required
 # @permission_required('web_pages.add_participant', raise_exception=True)
 def participant_create(request):
     if request.method == "POST":
@@ -144,6 +173,7 @@ def participant_create(request):
 
 
 @login_required
+@staff_required
 # @permission_required('web_pages.change_participant', raise_exception=True)
 def participant_update(request, pk):
     participant = get_object_or_404(Participant, pk=pk)
@@ -170,6 +200,7 @@ def participant_update(request, pk):
 
 
 @login_required
+@staff_required
 # @permission_required('web_pages.delete_participant', raise_exception=True)
 def participant_delete(request, event_pk, pk):
     participant = get_object_or_404(Participant, pk=pk)
@@ -188,6 +219,7 @@ def participant_delete(request, event_pk, pk):
 
 
 @login_required
+@supervisor_required
 # @permission_required('web_pages.view_person', raise_exception=True)
 def person_list(request):
     persons = AssociatedPerson.objects.all()
@@ -221,8 +253,10 @@ def person_list(request):
                 "document": person.document_number,  # Assuming document is an attribute of AssociatedPerson
                 "citizenship": person.citizenship,  # Assuming citizenship is an attribute of AssociatedPerson
                 "city": person.chosen_city,  # Assuming city is an attribute of AssociatedPerson
-                "ge_phone_number": person.georgian_phone_number,  # Assuming phone_number is an attribute of AssociatedPerson
-                "ua_phone_number": person.ukrainian_phone_number,  # Assuming phone_number is an attribute of AssociatedPerson
+                "ge_phone_number": person.georgian_phone_number,
+                # Assuming phone_number is an attribute of AssociatedPerson
+                "ua_phone_number": person.ukrainian_phone_number,
+                # Assuming phone_number is an attribute of AssociatedPerson
             }
         )
 
@@ -230,6 +264,7 @@ def person_list(request):
 
 
 @login_required
+@supervisor_required
 # @permission_required('web_pages.add_person', raise_exception=True)
 def person_create(request):
     if request.method == "POST":
@@ -245,6 +280,7 @@ def person_create(request):
 
 
 @login_required
+@supervisor_required
 # @permission_required('web_pages.change_person', raise_exception=True)
 def person_update(request, pk):
     person = get_object_or_404(AssociatedPerson, pk=pk)
@@ -268,8 +304,10 @@ def person_update(request, pk):
 
 
 @login_required
+@supervisor_required
 # @permission_required('web_pages.delete_person', raise_exception=True)
 def person_delete(request, pk):
+
     person = get_object_or_404(AssociatedPerson, pk=pk)
     if request.method == "POST":
         person.delete()
@@ -279,56 +317,63 @@ def person_delete(request, pk):
     )
 
 
+@login_required
+@staff_required
 def export_participants(request, pk):
-    # Create a workbook and add a worksheet
-    workbook = openpyxl.Workbook()
-    sheet = workbook.active
-    sheet.title = "Participants"
+    if request.user.is_staff:
+        # Create a workbook and add a worksheet
+        workbook = openpyxl.Workbook()
+        sheet = workbook.active
+        sheet.title = "Participants"
 
-    # Write the headers
-    headers = [
-        "Unic ID",
-        "Participant Name",
-        "Email",
-        "Document",
-        "Status",
-        "Birth Date",
-        "User UID",
-        "User Full Name",
-        "User GE phone №",
-        "User UA phone №",
-    ]  # Adjust headers as needed
-    sheet.append(headers)
+        # Write the headers
+        headers = [
+            "Unic ID",
+            "Participant Name",
+            "Email",
+            "Document",
+            "Status",
+            "Birth Date",
+            "User UID",
+            "User Full Name",
+            "User GE phone №",
+            "User UA phone №",
+        ]  # Adjust headers as needed
+        sheet.append(headers)
 
-    # Write data rows
-    event = get_object_or_404(Events, pk=pk)
-    participants = Participant.objects.all().filter(is_active=True, registered_on=event)
+        # Write data rows
+        event = get_object_or_404(Events, pk=pk)
+        participants = Participant.objects.all().filter(
+            is_active=True, registered_on=event
+        )
 
-    for participant in participants:
-        sheet.append(
-            [
-                participant.copy_of_unique_identifier,
-                f"{participant.first_name} {participant.last_name}",
-                participant.user_owner.email,
-                participant.document_number,
-                participant.status,
-                participant.date_of_birth,
-                participant.user_owner.associated_person.unique_identifier,
-                f"{participant.user_owner.associated_person.first_name} {participant.user_owner.associated_person.last_name}",
-                participant.user_owner.associated_person.georgian_phone_number,
-                participant.user_owner.associated_person.ukrainian_phone_number,
-            ]
-        )  # Adjust fields as needed
-    current_datetime = datetime.datetime.now()
-    date_string = current_datetime.strftime("%d/%m/%Y")
-    # Save the workbook to an HttpResponse
-    response = HttpResponse(
-        content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
-    # response['Content-Disposition'] = f'attachment; filename="participants {event.name} {date_string}.xlsx"'
-    response["Content-Disposition"] = (
-        f'attachment; filename="participants {date_string}.xlsx"'
-    )
-    workbook.save(response)
+        for participant in participants:
+            sheet.append(
+                [
+                    participant.copy_of_unique_identifier,
+                    f"{participant.first_name} {participant.last_name}",
+                    participant.user_owner.email,
+                    participant.document_number,
+                    participant.status,
+                    participant.date_of_birth,
+                    participant.user_owner.associated_person.unique_identifier,
+                    f"{participant.user_owner.associated_person.first_name} {participant.user_owner.associated_person.last_name}",
+                    participant.user_owner.associated_person.georgian_phone_number,
+                    participant.user_owner.associated_person.ukrainian_phone_number,
+                ]
+            )  # Adjust fields as needed
+        current_datetime = datetime.datetime.now()
+        date_string = current_datetime.strftime("%d/%m/%Y")
+        # Save the workbook to an HttpResponse
+        response = HttpResponse(
+            content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+        # response['Content-Disposition'] = f'attachment; filename="participants {event.name} {date_string}.xlsx"'
+        response["Content-Disposition"] = (
+            f'attachment; filename="participants {date_string}.xlsx"'
+        )
+        workbook.save(response)
 
-    return response
+        return response
+    else:
+        return redirect("home")
