@@ -4,6 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import modelformset_factory
 from .models import AssociatedPerson, Participant
+from datetime import date
 
 
 class AssociatedPersonAdminForm(forms.ModelForm):
@@ -105,6 +106,8 @@ class AssociatedPersonForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user", None)  # Accept the user from kwargs
+        # super().__init__(*args, **kwargs)
         default_ge_phone = kwargs.pop("default_ge_phone", None)
         super().__init__(*args, **kwargs)
         if default_ge_phone:
@@ -120,6 +123,31 @@ class AssociatedPersonForm(forms.ModelForm):
         #         self.fields["date_of_arrival"].initial = (
         #             self.instance.date_of_arrival.strftime("%d.%m.%Y")
         #         )
+
+    def clean_date_of_birth(self):
+        # print("clean_date_of_birth method is called")
+        date_of_birth = self.cleaned_data.get("date_of_birth")
+        if not date_of_birth:
+            # print("No date_of_birth provided")  # Debugging
+            raise ValidationError("Дата народження є обов'язковою.")
+
+        # Validate age if the user is editing their own associated person
+        # print(
+        #     f"Instance - {self.instance} User - {self.user} Associated Person - {self.user.associated_person}"
+        # )
+        if self.instance and self.user and self.user.associated_person == self.instance:
+            today = date.today()
+            age = (
+                today.year
+                - date_of_birth.year
+                - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
+            )
+            if age < 18:
+                raise ValidationError(
+                    "У головної особи Вік повинен бути не менше 18 років."
+                )
+        # print(f"Age - {age}")
+        return date_of_birth
 
     def clean_document_number(self):
         type_of_document = self.cleaned_data.get("type_of_document")
@@ -169,13 +197,13 @@ class AssociatedPersonForm(forms.ModelForm):
             return ukrainian_phone_number
         return ukrainian_phone_number  # Відсутня помилка перевірки, якщо поле залишено порожнім
 
-    def clean_date_of_birth(self):
-        date_of_birth = self.cleaned_data.get("date_of_birth")
-        if not date_of_birth:
-            raise ValidationError(
-                "Дата народження є обов'язковою і повинна бути у форматі ДД.ММ.РРРР."
-            )
-        return date_of_birth
+    # def clean_date_of_birth(self):
+    #     date_of_birth = self.cleaned_data.get("date_of_birth")
+    #     if not date_of_birth:
+    #         raise ValidationError(
+    #             "Дата народження є обов'язковою і повинна бути у форматі ДД.ММ.РРРР."
+    #         )
+    #     return date_of_birth
 
     def clean_date_of_arrival(self):
         date_of_arrival = self.cleaned_data.get("date_of_arrival")
