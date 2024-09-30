@@ -38,6 +38,7 @@ def associated_person_create(request):
         form = AssociatedPersonForm(
             request.POST,
             default_ge_phone=request.user.associated_person.georgian_phone_number,
+            user=request.user,
         )
         if form.is_valid():
             associated_person = form.save(commit=False)
@@ -54,7 +55,8 @@ def associated_person_create(request):
         #     return redirect("associated_person_create")
     else:
         form = AssociatedPersonForm(
-            default_ge_phone=request.user.associated_person.georgian_phone_number
+            default_ge_phone=request.user.associated_person.georgian_phone_number,
+            user=request.user,
         )
 
     return render(request, "persons/dashboard.html", {"form": form})
@@ -65,8 +67,12 @@ def associated_person_edit(request, pk):
     edited_person = AssociatedPerson.objects.get(pk=pk)
 
     if request.method == "POST":
-        # person_form = AssociatedPersonForm(request.POST, request.FILES, instance=edited_person)
-        person_form = AssociatedPersonForm(request.POST, instance=edited_person)
+        person_form = AssociatedPersonForm(
+            request.POST,
+            instance=edited_person,
+            default_ge_phone=request.user.associated_person.georgian_phone_number,
+            user=request.user,
+        )
         if person_form.is_valid():
             associated_person = person_form.save(commit=False)
             associated_person.is_approved = (
@@ -82,6 +88,7 @@ def associated_person_edit(request, pk):
         person_form = AssociatedPersonForm(
             instance=edited_person,
             default_ge_phone=request.user.associated_person.georgian_phone_number,
+            user=request.user,
         )
 
     return render(request, "persons/dashboard.html", {"form": person_form})
