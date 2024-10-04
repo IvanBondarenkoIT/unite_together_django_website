@@ -896,7 +896,7 @@
 
 .email-parent {
     align-self: stretch;
-    gap: var(--gap-7xl-1);
+    gap: 0.5px;
 }
 
 .email-parent,
@@ -915,7 +915,7 @@
 
 .first-name-parent {
     flex: 1;
-    gap: var(--gap-7xl);
+    gap: 1px;
     min-width: 151px;
 }
 
@@ -987,7 +987,7 @@
 .last-name-parent {
     flex: 1;
     flex-direction: column;
-    gap: var(--gap-7xl);
+    gap: 1px;
     min-width: 151px;
 }
 
