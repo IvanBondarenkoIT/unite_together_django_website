@@ -176,9 +176,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 # Local staticfiles settings
-STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = ["unite_together_django_website/static"]
+# STATIC_URL = "static/"
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATICFILES_DIRS = ["unite_together_django_website/static"]
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(
+    BASE_DIR, "staticfiles"
+)  # Измените на "staticfiles" для лучшей практики
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "unite_together_django_website/static")]
 
 # AWS S3 Static Files Configuration
 # AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
