@@ -64,6 +64,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "unite_together_django_website.urls"
@@ -186,6 +188,7 @@ STATIC_ROOT = os.path.join(
     BASE_DIR, "staticfiles"
 )  # Измените на "staticfiles" для лучшей практики
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "unite_together_django_website/static")]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # AWS S3 Static Files Configuration
 # AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
