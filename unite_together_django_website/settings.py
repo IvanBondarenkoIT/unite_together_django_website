@@ -28,6 +28,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool, default=True)
 USE_REMOTE_DB_SETTINGS = config("USE_REMOTE_DB_SETTINGS", cast=bool, default=False)
+REMOTE_DB_SERVICE = config("REMOTE_DB_SERVICE", default="AWS")
 
 ALLOWED_HOSTS = [
     "*",
@@ -109,16 +110,29 @@ if "RDS_DB_NAME" in os.environ:
     }
 else:
     if USE_REMOTE_DB_SETTINGS:
-        DATABASES = {
-            "default": {
-                "ENGINE": "django.db.backends.postgresql",
-                "NAME": config("RDS_DB_NAME"),
-                "USER": config("RDS_USERNAME"),
-                "PASSWORD": config("RDS_PASSWORD"),
-                "HOST": config("RDS_HOSTNAME"),
-                "PORT": config("RDS_PORT"),
+        print(REMOTE_DB_SERVICE)
+        if REMOTE_DB_SERVICE == "AWS":
+            DATABASES = {
+                "default": {
+                    "ENGINE": "django.db.backends.postgresql",
+                    "NAME": config("RDS_DB_NAME"),
+                    "USER": config("RDS_USERNAME"),
+                    "PASSWORD": config("RDS_PASSWORD"),
+                    "HOST": config("RDS_HOSTNAME"),
+                    "PORT": config("RDS_PORT"),
+                }
             }
-        }
+        else:
+            DATABASES = {
+                "default": {
+                    "ENGINE": "django.db.backends.postgresql",
+                    "NAME": config("AZURE_RDS_DB_NAME"),
+                    "USER": config("AZURE_RDS_USERNAME"),
+                    "PASSWORD": config("AZURE_RDS_PASSWORD"),
+                    "HOST": config("AZURE_RDS_HOSTNAME"),
+                    "PORT": config("AZURE_RDS_PORT"),
+                }
+            }
     else:
         # Sqlit settings
         DATABASES = {
