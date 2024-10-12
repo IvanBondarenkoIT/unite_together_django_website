@@ -98,16 +98,28 @@ AUTH_USER_MODEL = "accounts.Account"
 
 
 if "RDS_DB_NAME" in os.environ:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.environ["RDS_DB_NAME"],
-            "USER": os.environ["RDS_USERNAME"],
-            "PASSWORD": os.environ["RDS_PASSWORD"],
-            "HOST": os.environ["RDS_HOSTNAME"],
-            "PORT": os.environ["RDS_PORT"],
+    if "REMOTE_DB_SERVICE" in os.environ and os.environ["REMOTE_DB_SERVICE"] == "AZURE":
+        DATABASES = {
+            "default": {
+                "ENGINE": "django.db.backends.postgresql",
+                "NAME": os.environ["AZURE_RDS_DB_NAME"],
+                "USER": os.environ["AZURE_RDS_USERNAME"],
+                "PASSWORD": os.environ["AZURE_RDS_PASSWORD"],
+                "HOST": os.environ["AZURE_RDS_HOSTNAME"],
+                "PORT": os.environ["AZURE_RDS_PORT"],
+            }
         }
-    }
+    else:
+        DATABASES = {
+            "default": {
+                "ENGINE": "django.db.backends.postgresql",
+                "NAME": os.environ["RDS_DB_NAME"],
+                "USER": os.environ["RDS_USERNAME"],
+                "PASSWORD": os.environ["RDS_PASSWORD"],
+                "HOST": os.environ["RDS_HOSTNAME"],
+                "PORT": os.environ["RDS_PORT"],
+            }
+        }
 else:
     if USE_REMOTE_DB_SETTINGS:
         print(REMOTE_DB_SERVICE)
