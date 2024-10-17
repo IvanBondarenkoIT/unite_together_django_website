@@ -873,7 +873,7 @@
 }
 
 .placeholder-image-icon8 {
-    height: 240px;
+    height: 100%;
     max-width: 100%;
     overflow: hidden;
     flex-shrink: 0;
