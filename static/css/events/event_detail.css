@@ -733,7 +733,7 @@
     align-self: stretch;
     height: 186px;
     position: relative;
-    line-height: 170%;
+    line-height: 100%;
     display: inline-block;
     flex-shrink: 0;
     z-index: 1;
