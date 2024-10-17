@@ -18,7 +18,9 @@ class WebPage(models.Model):
         return self.name
 
 
-class ObjectsGroup(models.Model):  # Spotr, non-formal education, Events and master classes, Other
+class ObjectsGroup(
+    models.Model
+):  # Spotr, non-formal education, Events and master classes, Other
     name = models.CharField(max_length=250)
     slug = models.SlugField(max_length=50, blank=True)
     is_active = models.BooleanField(default=True)
@@ -27,10 +29,10 @@ class ObjectsGroup(models.Model):  # Spotr, non-formal education, Events and mas
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
-        ordering = ['order']
+        ordering = ["order"]
 
     def __str__(self):
-        return f'{self.name} {self.page}'
+        return f"{self.name}"
 
     def get_url(self):
         return reverse(f"{self.page.name}_by_group", args=[self.slug])
@@ -41,7 +43,7 @@ class WebContentObject(models.Model):
     name = models.CharField(max_length=250)
     title = models.CharField(max_length=250, blank=True, null=True)
     text = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='img/pages_content', blank=True, null=True)
+    image = models.ImageField(upload_to="img/pages_content", blank=True, null=True)
     extra_details = models.TextField(blank=True, null=True)
 
     slug = models.SlugField(max_length=200, blank=True)
@@ -52,7 +54,9 @@ class WebContentObject(models.Model):
 
     show_in_main_page_carousel = models.BooleanField(default=False)
 
-    group = models.ForeignKey("ObjectsGroup", on_delete=models.CASCADE, blank=True, null=True)
+    group = models.ForeignKey(
+        "ObjectsGroup", on_delete=models.CASCADE, blank=True, null=True
+    )
     # web_page_owner = models.ForeignKey(WebPage, on_delete=models.CASCADE, blank=True)
     order = models.PositiveIntegerField(default=0)
 
@@ -61,13 +65,15 @@ class WebContentObject(models.Model):
 
 
 class Events(WebContentObject):
-    selected_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
+    selected_city = models.ForeignKey(
+        City, on_delete=models.CASCADE, blank=True, null=True
+    )
     # city = models.CharField(max_length=250, blank=True, null=True)
     address = models.CharField(max_length=250, blank=True, null=True)
     start_age = models.IntegerField(blank=True, null=True)
     end_age = models.IntegerField(blank=True, null=True)
-    start_date = models.DateField(blank=True,null=True)
-    end_date = models.DateField(blank=True,null=True)
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
 
     max_participants = models.IntegerField(blank=True, null=True, default=0)
 
@@ -78,26 +84,28 @@ class Events(WebContentObject):
         if self.start_date:
             return self.start_date.strftime("%Y")
         else:
-            return ''
+            return ""
 
     def get_start_date_month(self):
         if self.start_date:
             return self.start_date.strftime("%b")
         else:
-            return ''
+            return ""
 
     def get_start_date_day(self):
         if self.start_date:
             return self.start_date.strftime("%d")
         else:
-            return ''
+            return ""
 
     def get_url(self):
         return reverse("event_detail", args=[self.group.slug, self.slug])
 
 
 class Projects(WebContentObject):
-    selected_city = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True)
+    selected_city = models.ForeignKey(
+        City, on_delete=models.CASCADE, blank=True, null=True
+    )
     # # city = models.CharField(max_length=250, blank=True, null=True)
     address = models.CharField(max_length=250, blank=True, null=True)
     start_age = models.IntegerField(blank=True, null=True)
@@ -113,19 +121,19 @@ class Projects(WebContentObject):
         if self.start_date:
             return self.start_date.strftime("%Y")
         else:
-            return ''
+            return ""
 
     def get_start_date_month(self):
         if self.start_date:
             return self.start_date.strftime("%b")
         else:
-            return ''
+            return ""
 
     def get_start_date_day(self):
         if self.start_date:
             return self.start_date.strftime("%d")
         else:
-            return ''
+            return ""
 
     def get_end_date_year(self):
         return self.end_date.strftime("%Y")
@@ -142,7 +150,7 @@ class Projects(WebContentObject):
 
 class ProjectGallery(models.Model):
     project = models.ForeignKey(Projects, default=None, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='store/products/', max_length=255)
+    image = models.ImageField(upload_to="store/products/", max_length=255)
 
     def __str__(self):
         return self.project.name
@@ -150,9 +158,6 @@ class ProjectGallery(models.Model):
     class Meta:
         verbose_name = "projectgallery"
         verbose_name_plural = "project gallerie"
-
-
-
 
     # class WebContentSubordinateObject(models.Model):
     #     name = models.CharField(max_length=250)
