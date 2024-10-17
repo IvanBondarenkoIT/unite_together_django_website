@@ -74,7 +74,7 @@
         <div class="blend-mode-adapter">
             {% for object in all_objects %}
                 <div class="opacity-controller2">
-                    <div class="placeholder-image-container">
+                    <a href="{{ object.get_url }}" class="placeholder-image-container">
                         <img
                                 class="placeholder-image-icon8"
                                 alt=""
@@ -93,7 +93,7 @@
                             />
                         </div>
                         <div class="decoration18"></div>
-                    </div>
+                    </a>
                     <div class="frame-parent54">
                         <div class="heading-parent4">
                             <b class="heading20">{{ object.title }}</b>
