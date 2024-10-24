@@ -99,6 +99,7 @@ AUTH_USER_MODEL = "accounts.Account"
 
 if "RDS_DB_NAME" in os.environ:
     if "REMOTE_DB_SERVICE" in os.environ and os.environ["REMOTE_DB_SERVICE"] == "AZURE":
+
         DATABASES = {
             "default": {
                 "ENGINE": "django.db.backends.postgresql",
@@ -258,3 +259,21 @@ PAYPAL_RECEIVER_EMAIL = config("PAYPAL_RECEIVER_EMAIL")  # where cash is paid in
 PAYPAL_TEST = config("PAYPAL_TEST", cast=bool)
 PRODUCT_ID = config("PAYPAL_ITEM_NAME")
 PRODUCT_PRICE = config("PAYPAL_SUM")
+
+if USE_REMOTE_DB_SETTINGS:
+    # Налаштування Azure Storage
+    AZURE_ACCOUNT_NAME = config(
+        "AZURE_ACCOUNT_NAME"
+    )  # Ім'я вашого облікового запису Azure
+    AZURE_ACCOUNT_KEY = config(
+        "AZURE_ACCOUNT_KEY"
+    )  # Ключ доступу до вашого облікового запису
+    AZURE_CONTAINER = config("AZURE_CONTAINER")  # Назва вашого контейнера
+
+    # Конфігурація для зберігання медіа-файлів
+    DEFAULT_FILE_STORAGE = "storages.backends.azure_storage.AzureStorage"
+
+    # URL базової папки медіа-файлів
+    AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
+    MEDIA_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/"
+    print(AZURE_ACCOUNT_NAME, AZURE_ACCOUNT_KEY, AZURE_CONTAINER)
