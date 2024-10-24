@@ -261,14 +261,24 @@ PRODUCT_ID = config("PAYPAL_ITEM_NAME")
 PRODUCT_PRICE = config("PAYPAL_SUM")
 
 if USE_REMOTE_DB_SETTINGS:
-    # Налаштування Azure Storage
-    AZURE_ACCOUNT_NAME = config(
-        "AZURE_ACCOUNT_NAME"
-    )  # Ім'я вашого облікового запису Azure
-    AZURE_ACCOUNT_KEY = config(
-        "AZURE_ACCOUNT_KEY"
-    )  # Ключ доступу до вашого облікового запису
-    AZURE_CONTAINER = config("AZURE_CONTAINER")  # Назва вашого контейнера
+    if "REMOTE_DB_SERVICE" in os.environ and os.environ["REMOTE_DB_SERVICE"] == "AZURE":
+        # Налаштування Azure Storage
+        AZURE_ACCOUNT_NAME = os.environ.get(
+            "AZURE_ACCOUNT_NAME"
+        )  # Ім'я вашого облікового запису Azure
+        AZURE_ACCOUNT_KEY = os.environ.get(
+            "AZURE_ACCOUNT_KEY"
+        )  # Ключ доступу до вашого облікового запису
+        AZURE_CONTAINER = os.environ.get("AZURE_CONTAINER")  # Назва вашого контейнера
+    else:
+        # Налаштування Azure Storage
+        AZURE_ACCOUNT_NAME = config(
+            "AZURE_ACCOUNT_NAME"
+        )  # Ім'я вашого облікового запису Azure
+        AZURE_ACCOUNT_KEY = config(
+            "AZURE_ACCOUNT_KEY"
+        )  # Ключ доступу до вашого облікового запису
+        AZURE_CONTAINER = config("AZURE_CONTAINER")  # Назва вашого контейнера
 
     # Конфігурація для зберігання медіа-файлів
     DEFAULT_FILE_STORAGE = "storages.backends.azure_storage.AzureStorage"
