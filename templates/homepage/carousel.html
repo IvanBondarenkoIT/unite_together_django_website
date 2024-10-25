@@ -19,7 +19,12 @@
     .carousel-example .carousel-text {
         flex: 1;
         padding: 20px;
+        max-height: 320px; /* Ограничение по высоте */
+        position: relative;
     }
+
+
+
 
     .carousel-example .carousel-text h5 {
         font-size: 1.5rem;
@@ -27,16 +32,26 @@
         margin-bottom: 10px;
     }
 
-    .carousel-example .carousel-text p {
+    .carousel-example .carousel-text-content {
         font-size: 1rem;
         color: #666;
         overflow-wrap: break-word;
         word-wrap: break-word;
         hyphens: auto;
         white-space: normal;
-        max-height: 200px;
+        max-height: 350px;
         overflow: hidden;
         text-overflow: ellipsis;
+        position: relative;
+    }
+    .carousel-example .carousel-text-content::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 30px; /* Высота градиента */
+        background: linear-gradient(transparent, white); /* Градиент для плавного обрезания */
     }
 
     .carousel-example .carousel-image {
@@ -110,6 +125,11 @@
         width: 20px;
         height: 20px;
     }
+    .carousel-button {
+        text-align: left; /* Выровнять кнопку по левому краю */
+        margin-top: 15px;
+        padding-left: 20px; /* Отступ слева для выравнивания под текстом */
+    }
 </style>
 
 <div class="carousel-container">
@@ -118,14 +138,20 @@
             {% for carousel_object in carousel_objects %}
                 <div class="carousel-item{% if forloop.first %} active{% endif %}">
                     <div class="d-flex">
+
                         <div class="carousel-text">
                             <h5>{{ carousel_object.title }}</h5>
-                            <p>{{ carousel_object.text }}</p>
-                            <a href="{{ carousel_object.get_url }}" class="btn btn-primary">Дізнатися більше</a>
+                            <p class="carousel-text-content">{{ carousel_object.text }}</p>
+                            <div class="carousel-button">
+                                <a href="{{ carousel_object.get_url }}" class="btn btn-primary mt-3">Дізнатися
+                                    більше</a>
+                            </div>
                         </div>
+
+
                         <div class="carousel-image">
                             <a href="{{ carousel_object.get_url }}">
-                                <img src="{% if carousel_object.image_exists %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" class="d-block" alt="">
+                                <img src="{% if carousel_object.image %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" class="d-block" alt="">
                             </a>
                         </div>
                     </div>
@@ -172,4 +198,5 @@
             });
         });
     });
+
 </script>
