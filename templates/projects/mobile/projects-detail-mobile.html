@@ -95,14 +95,11 @@
                     </div>
                     {% endif %}
                 </div>
-                <div class="registration-button">
-                    <div class="button-registration2">
-                        <div class="registration2">Registration</div>
-                        <div class="vector-wrapper36">
-                            <img class="vector-icon31" loading="lazy" alt="" src="{% static 'img/vector-31.svg' %}" />
-                        </div>
-                    </div>
-                </div>
+                <a class="button-registration1"
+                   href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
+                   style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
+                    <div class="registration1">Registration</div>
+                </a>
             </div>
             <div class="winterization-group">
                 <h1 class="winterization1">{{ single_project.name }}</h1>
