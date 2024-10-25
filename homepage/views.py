@@ -32,9 +32,6 @@ def homepage(request):
 
     carousel_objects.sort(key=lambda x: x.order)
 
-    for obj in carousel_objects:
-        obj.image_exists = image_exists(obj.image)
-
     context = {
         "events_objects": events_objects,
         "carousel_objects": carousel_objects,
