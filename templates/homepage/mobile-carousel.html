@@ -88,7 +88,7 @@
 
         .simple-mobile-carousel-text p {
             font-size: 0.85rem; /* Smaller font size for the description */
-            max-height: 2rem; /* Adjusted max height */
+            max-height: 20rem; /* Adjusted max height */
         }
 
         .simple-mobile-carousel-control {
@@ -105,12 +105,12 @@
         <div class="simple-mobile-carousel-item{% if forloop.first %} active{% endif %}">
             <div class="simple-mobile-carousel-image">
                 <a href="{{ carousel_object.get_url }}">
-                    <img src="{% if carousel_object.image_exists %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" alt="{{ carousel_object.title }}">
+                    <img src="{% if carousel_object.image %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" alt="{{ carousel_object.title }}">
                 </a>
             </div>
             <div class="simple-mobile-carousel-text">
                 <h5>{{ carousel_object.title }}</h5>
-                <p>{{ carousel_object.text|safe }}</p>
+                <p>{{ carousel_object.text }}</p>
             </div>
         </div>
         {% endfor %}
