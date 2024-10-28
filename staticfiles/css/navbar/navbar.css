@@ -5,7 +5,8 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    padding: var(--padding-21xl) var(--padding-53xl);
+    /*padding: var(--padding-21xl) var(--padding-53xl);*/
+    padding: 10px;
     box-sizing: border-box;
     position: sticky;
     gap: 20px;

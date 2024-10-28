@@ -180,7 +180,7 @@
   overflow: hidden;
   align-items: flex-start;
   padding: var(--padding-45xl) var(--padding-xs);
-  background-image: url(./public/header--50@3x.png);
+  /*background-image: url(./public/header--50@3x.png);*/
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
