@@ -44,15 +44,15 @@
         text-overflow: ellipsis;
         position: relative;
     }
-    .carousel-example .carousel-text-content::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 30px; /* Высота градиента */
-        background: linear-gradient(transparent, white); /* Градиент для плавного обрезания */
-    }
+    {#.carousel-example .carousel-text-content::after {#}
+    {#    content: '';#}
+    {#    position: absolute;#}
+    {#    bottom: 0;#}
+    {#    left: 0;#}
+    {#    right: 0;#}
+    {#    height: 30px; /* Высота градиента */#}
+    {#    background: linear-gradient(transparent, white); /* Градиент для плавного обрезания */#}
+    {#}#}
 
     .carousel-example .carousel-image {
         flex: 1;
@@ -141,7 +141,7 @@
 
                         <div class="carousel-text">
                             <h5>{{ carousel_object.title }}</h5>
-                            <p class="carousel-text-content">{{ carousel_object.text }}</p>
+                            <p class="carousel-text-content">{{ carousel_object.extra_details }}</p>
                             <div class="carousel-button">
                                 <a href="{{ carousel_object.get_url }}" class="btn btn-primary mt-3">Дізнатися
                                     більше</a>
