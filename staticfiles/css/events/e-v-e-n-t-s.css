@@ -2368,10 +2368,10 @@
 }
 
 .lorem-ipsum-is-simply5 {
-  max-width: 300px; /* Set the maximum width of the div */
-  overflow: hidden; /* Hide any overflowing text */
-  text-overflow: ellipsis; /* Display an ellipsis (...) to indicate text overflow */
-  white-space: nowrap; /* Prevent text from wrapping */
+  max-width: 300px; /* Устанавливает максимальную ширину блока */
+  word-wrap: break-word;
+  overflow-wrap: break-word; /* Переносит текст на новую строку по ширине */
+  white-space: normal; /* Разрешает перенос текста */
   flex: 1;
   position: relative;
   line-height: 125%;
