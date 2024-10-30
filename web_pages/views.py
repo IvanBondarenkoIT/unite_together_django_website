@@ -240,3 +240,11 @@ def projects_detail(request, group_slug=None, project_slug=None):
     single_project = get_object_or_404(
         Projects, group__slug=group_slug, slug=project_slug
     )
+    project_gallery = ProjectGallery.objects.filter(project_id=single_project.id)
+
+    context = {
+        "single_project": single_project,
+        "project_gallery": project_gallery,
+    }
+
+    return render(request, "projects/project-detail.html", context=context)
