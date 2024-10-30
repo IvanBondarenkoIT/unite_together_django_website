@@ -43,6 +43,7 @@ def event_list(request):
 
 @login_required
 @staff_required
+@supervisor_required
 # @permission_required('web_pages.add_event', raise_exception=True)
 def event_create(request):
     if request.method == "POST":
@@ -59,6 +60,7 @@ def event_create(request):
 
 @login_required
 @staff_required
+@supervisor_required
 # @permission_required('web_pages.change_event', raise_exception=True)
 def event_update(request, pk):
     event = get_object_or_404(Events, pk=pk)
@@ -83,6 +85,7 @@ def event_update(request, pk):
 
 @login_required
 @staff_required
+@supervisor_required
 # @permission_required('web_pages.delete_event', raise_exception=True)
 def event_delete(request, pk):
     event = get_object_or_404(Events, pk=pk)
