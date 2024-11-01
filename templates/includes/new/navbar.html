@@ -91,7 +91,7 @@
             </div>
             <div class="dropdown-menu" id="dropdown-menu">
                 <a href="{% url 'who_we_are' %}">Про нас</a>
-                <a href="{% url 'events' %}">Афіша</a>
+{#                <a href="{% url 'events' %}">Афіша</a>#}
                 <a href="{% url 'projects' %}">Проєкти</a>
                 <a href="{% url 'login' %}">Логін/Реєстація</a>
                 <a href="{% url 'donate-paypal' %}">Донат</a>
@@ -120,7 +120,7 @@
                     <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
                        href="{% url 'who_we_are' %}">Про нас</a>
                     <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
-                       href="{% url 'events' %}">Афіша</a>
+{#                       href="{% url 'events' %}">Афіша</a>#}
                     <a class="ut-top-menu-text{% if '/projects/' in request.path %}-active{% endif %}"
                        href="{% url 'projects' %}">Проєкти</a>
                 </div>
@@ -207,7 +207,7 @@
             <div class="dropdown-menu" id="dropdown-menu">
                 <h4 style="margin-left: 15px">{{ user.associated_person.last_name }} {{ user.associated_person.first_name }}</h4>
                 <a href="{% url 'who_we_are' %}">Про нас</a>
-                <a href="{% url 'events' %}">Афіша</a>
+{#                <a href="{% url 'events' %}">Афіша</a>#}
                 <a href="{% url 'projects' %}">Проєкти</a>
                 <br>
 {#                <a href="{% url 'associated_person_list' %}">{{ user.associated_person }}</a>#}
