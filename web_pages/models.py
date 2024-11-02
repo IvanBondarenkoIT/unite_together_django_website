@@ -46,6 +46,11 @@ class WebContentObject(models.Model):
     image = models.ImageField(upload_to="img/pages_content", blank=True, null=True)
     extra_details = models.TextField(blank=True, null=True)
 
+    # Замените это поле
+    selected_cities_list = models.ManyToManyField(
+        City, blank=True, related_name="web_content_objects"
+    )
+
     slug = models.SlugField(max_length=200, blank=True)
 
     is_active = models.BooleanField(default=True)
