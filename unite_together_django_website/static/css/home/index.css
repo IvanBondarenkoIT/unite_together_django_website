@@ -742,6 +742,8 @@
 }
 .heading20 {
   margin: 0;
+  max-width: 300px;
+  min-width: 300px;
   font-size: inherit;
   line-height: 130%;
   font-weight: 700;

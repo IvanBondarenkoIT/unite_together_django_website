@@ -113,6 +113,10 @@ class Person(models.Model):
         max_length=100, blank=True, null=True, verbose_name="Адреса"
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата створення")
+
+    def formatted_created_at(self):
+        return self.created_at.strftime("%d.%m.%Y %H:%M")
+
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата оновлення")
     is_active = models.BooleanField(default=True, verbose_name="Активний")
     edit_permission = models.BooleanField(

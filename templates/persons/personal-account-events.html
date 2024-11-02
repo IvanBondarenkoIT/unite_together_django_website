@@ -154,6 +154,7 @@
                                             <div class="event-registered-on-text">
                                                 {{ participant.registered_on.text }}
                                             </div>
+
                                             <div class="tag6">
                                                 <b class="tag-one12">{{ participant.registered_on.group.name }}</b>
                                             </div>
@@ -174,6 +175,9 @@
                             <div class="frame-parent72">
                                 <div class="tag-one-wrapper2">
                                     <b class="tag-one13">{{ participant.first_name }} {{ participant.last_name }} {{ participant.status }}</b>
+                                    <div>
+                                        <p>Час реєстрації: {{ participant.formatted_created_at }}</p>
+                                    </div>
 
                                 </div>
                                 <img
