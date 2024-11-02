@@ -1259,7 +1259,8 @@
   line-height: 23px;
   font-weight: 600;
   display: inline-block;
-  min-width: 69px;
+  max-width: 104px;
+  min-width: 104px;
   z-index: 2;
 }
 .frame-parent54,
