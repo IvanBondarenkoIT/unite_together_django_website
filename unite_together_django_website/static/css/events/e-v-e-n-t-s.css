@@ -848,6 +848,7 @@
   left: 0;
   border-radius: 0 var(--br-9xs) 0 var(--br-9xs);
   background-color: var(--color-gold-200);
+  z-index: 1;
 }
 .biometric-verification-icon {
   width: 7.1px;
@@ -2627,7 +2628,7 @@
   gap: var(--gap-xl);
 }
 .data-visualizer {
-  width: 992.8px;
+  width: 100%;
   justify-content: center;
   max-width: 100%;
   font-size: var(--font-size-mini);

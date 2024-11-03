@@ -14,6 +14,21 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
+    .frame-parent54 {
+        display: flex; /* Используем Flexbox для выстраивания элементов */
+        flex-direction: column; /* По умолчанию выстраиваем элементы вертикально */
+        gap: 10px; /* Промежуток между элементами */
+    }
+
+    @media (min-width: 768px) {
+        /* Для экранов шире 768px */
+        .frame-parent54 {
+            flex-direction: row; /* Выстраиваем элементы горизонтально */
+            justify-content: space-between; /* Распределяем пространство между элементами */
+            align-items: center; /* Выравниваем элементы по центру по вертикали */
+        }
+    }
 </style>
 
 <section class="page-header6">
@@ -124,13 +139,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="vector-wrapper14">
-                                    <img
-                                            class="frame-child15"
-                                            alt=""
-                                            src="{% static 'img/variant-handler.svg' %}"
-                                    />
-                                </div>
+{#                                <div class="vector-wrapper14">#}
+{#                                    <img#}
+{#                                            class="frame-child15"#}
+{#                                            alt=""#}
+{#                                            src="{% static 'img/variant-handler.svg' %}"#}
+{#                                    />#}
+{#                                </div>#}
                                 <div class="tag-one-container">
                                     <div class="tag-one6">
                                         {% if object.is_active %}Поточний{% else %}
@@ -140,17 +155,17 @@
 
                                 </div>
                                 <div class="button-delails-container">
-                                            <button class="button-delails2">
-                                                <a href="{{ object.get_url }}" class="details2">деталі</a>
-                                                <div class="vector-wrapper15">
-                                                    <img
-                                                            class="vector-icon13"
-                                                            alt=""
-                                                            src="{% static 'img/vector-11.svg' %}"
-                                                    />
-                                                </div>
-                                            </button>
+                                    <button class="button-delails2">
+                                        <a href="{{ object.get_url }}" class="details2">деталі</a>
+                                        <div class="vector-wrapper15">
+                                            <img
+                                                    class="vector-icon13"
+                                                    alt=""
+                                                    src="{% static 'img/vector-11.svg' %}"
+                                            />
                                         </div>
+                                    </button>
+                                </div>
                             </div>
 
                         </div>
