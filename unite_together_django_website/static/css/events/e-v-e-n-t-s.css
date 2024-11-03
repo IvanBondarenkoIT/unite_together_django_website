@@ -848,6 +848,7 @@
   left: 0;
   border-radius: 0 var(--br-9xs) 0 var(--br-9xs);
   background-color: var(--color-gold-200);
+  z-index: 1;
 }
 .biometric-verification-icon {
   width: 7.1px;
