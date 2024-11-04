@@ -216,7 +216,11 @@ def projects(request, group_slug=None):
         kw_args["group"] = group
 
     # Получение всех проектов с указанными фильтрами и применением пагинации
-    all_objects = Projects.objects.filter(**kw_args).select_related("group__page")
+    all_objects = (
+        Projects.objects.filter(**kw_args)
+        .select_related("group__page")
+        .order_by("order")
+    )
 
     paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
     page = request.GET.get("page")

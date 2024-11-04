@@ -233,17 +233,17 @@
     });
 </script>
 
-<script>
-    // Зберегти позицію прокрутки перед переходом
-    window.onbeforeunload = function () {
-        sessionStorage.setItem('scrollPosition', window.scrollY);
-    };
-
-    // Відновити позицію прокрутки при завантаженні сторінки
-    window.onload = function () {
-        var scrollPosition = sessionStorage.getItem('scrollPosition');
-        if (scrollPosition !== null) {
-            window.scrollTo(0, parseInt(scrollPosition));
-        }
-    };
-</script>
+{#<script>#}
+{#    // Зберегти позицію прокрутки перед переходом#}
+{#    window.onbeforeunload = function () {#}
+{#        sessionStorage.setItem('scrollPosition', window.scrollY);#}
+{#    };#}
+{##}
+{#    // Відновити позицію прокрутки при завантаженні сторінки#}
+{#    window.onload = function () {#}
+{#        var scrollPosition = sessionStorage.getItem('scrollPosition');#}
+{#        if (scrollPosition !== null) {#}
+{#            window.scrollTo(0, parseInt(scrollPosition));#}
+{#        }#}
+{#    };#}
+{#</script>#}
