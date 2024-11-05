@@ -1004,7 +1004,7 @@
   box-sizing: border-box;
 }
 .item-1 {
-  width: 306px;
+  width: auto;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
