@@ -242,14 +242,14 @@
         document.getElementById('cityForm').submit();
     });
 
-    window.onbeforeunload = function() {
-        sessionStorage.setItem('scrollPosition', window.scrollY);
-    };
-
-    window.onload = function() {
-        var scrollPosition = sessionStorage.getItem('scrollPosition');
-        if (scrollPosition !== null) {
-            window.scrollTo(0, parseInt(scrollPosition));
-        }
-    };
+    {#window.onbeforeunload = function() {#}
+    {#    sessionStorage.setItem('scrollPosition', window.scrollY);#}
+    {#};#}
+    {##}
+    {#window.onload = function() {#}
+    {#    var scrollPosition = sessionStorage.getItem('scrollPosition');#}
+    {#    if (scrollPosition !== null) {#}
+    {#        window.scrollTo(0, parseInt(scrollPosition));#}
+    {#    }#}
+    {#};#}
 </script>

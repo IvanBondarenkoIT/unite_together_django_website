@@ -1,4 +1,22 @@
 {% load static %}
+<style>
+    .image-container-img {
+        width: 80px; /* Ширина изображения */
+        height: 80px; /* Высота изображения */
+        object-fit: cover; /* Обрезка изображения с сохранением пропорций */
+        object-position: center; /* Центрирование изображения */
+        margin: 5px; /* Отступ между изображениями (по желанию) */
+    }
+
+    .baner-image-icon1 {
+        width: 100%; /* Ширина изображения */
+        max-height: 483.39px; /* Высота изображения */
+        object-fit: cover; /* Обрезка изображения с сохранением пропорций */
+        object-position: center; /* Центрирование изображения */
+        {#margin: 5px; /* Отступ между изображениями (по желанию) */#}
+
+    }
+</style>
 
     <div class="project-detail" data-animate-on-scroll>
         <main class="sec-project-detail">
@@ -110,26 +128,34 @@
                             <a class="button-registration1"
                                href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
                                style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
-                                <div class="registration1">Registration</div>
+                                <div class="registration1">РЕЄСТРАЦІЯ</div>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div>
+{#                <div class="image-container">#}
                 {% if project_gallery %}
                     <article class="gallery-wrap">
                         <ul class="thumb">
                             <li>
-                                <a href="{{ single_project.image.url }}" target="mainImage"><img
-                                        src="{{ single_project.image.url }}" alt="Product Image"></a>
+                                <a href="{{ single_project.image.url }}" target="mainImage">
+
+                                        <img class="image-container-img" src="{{ single_project.image.url }}" alt="Product Image">
+
+                                </a>
                                 {% for i in project_gallery %}
-                                    <a href="{{ i.image.url }}" target="mainImage"><img src="{{ i.image.url }}"
-                                                                                        alt="Product Image"></a>
+                                    <a href="{{ i.image.url }}" target="mainImage">
+{#                                        <div class="image-container">#}
+                                            <img class="image-container-img" src="{{ i.image.url }}" alt="Product Image" style="overflow: hidden; position: relative;">
+{#                                        </div>#}
+                                    </a>
                                 {% endfor %}
                             </li>
                         </ul>
                     </article> <!-- gallery-wrap .end// -->
                 {% endif %}
+{#                </div>#}
                 </div>
                 <div class="content-child">
                     <div class="winterization-parent">
