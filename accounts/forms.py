@@ -60,14 +60,29 @@ class RegistrationForm(forms.ModelForm):
 
     def clean_first_name(self):
         first_name = self.cleaned_data.get("first_name")
+
         if not first_name:
             raise forms.ValidationError("Ім'я є обов'язковим.")
+        else:
+            pattern = r"^[A-Za-z]+$"
+            if not re.match(pattern, first_name):
+                raise forms.ValidationError(
+                    "Ім'я повинне складатися лише з латинських літер."
+                )
+
         return first_name
 
     def clean_last_name(self):
         last_name = self.cleaned_data.get("last_name")
         if not last_name:
             raise forms.ValidationError("Прізвище є обов'язковим.")
+        else:
+            pattern = r"^[A-Za-z]+$"
+            if not re.match(pattern, last_name):
+                raise forms.ValidationError(
+                    "Ім'я повинне складатися лише з латинських літер."
+                )
+
         return last_name
 
     def clean_georgian_phone_number(self):
@@ -81,6 +96,17 @@ class RegistrationForm(forms.ModelForm):
             return georgian_phone_number
         else:
             raise forms.ValidationError("Грузинський номер телефону є обов'язковим.")
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if not email:
+            raise forms.ValidationError("Електронна пошта є обов'язковим.")
+        else:
+            pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            if not re.match(pattern, email):
+                raise forms.ValidationError("Некоректна електронна пошта.")
+
+        return email
 
     def clean_agree_to_terms(self):
         agree = self.cleaned_data.get("agree_to_terms")
