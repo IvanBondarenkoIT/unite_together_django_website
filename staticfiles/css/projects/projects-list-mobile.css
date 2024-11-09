@@ -391,7 +391,7 @@
 .button-delails-wrapper2 {
   align-self: stretch;
   justify-content: flex-end;
-  padding: 0 var(--padding-38xl) 0 var(--padding-45xl);
+  /*padding: 0 var(--padding-38xl) 0 var(--padding-45xl);*/
 }
 .frame-parent123 {
   align-self: stretch;

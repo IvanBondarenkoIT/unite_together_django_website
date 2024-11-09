@@ -695,7 +695,7 @@
 }
 .we-attach-great-container1 {
   align-self: stretch;
-  height: 87.8px;
+  height: 100%;
   position: relative;
   font-size: var(--font-size-sm);
   line-height: 150%;
@@ -1368,7 +1368,7 @@
 .while-loop {
   width: 907.9px;
   flex-direction: column;
-  padding: 71.7px 0 0;
+  /*padding: 71.7px 0 0;*/
   font-size: var(--font-size-5xl);
 }
 .bg-parent {
@@ -1800,7 +1800,7 @@
 }
 @media screen and (max-width: 1350px) {
   .while-loop {
-    padding-top: var(--padding-12xl);
+    /*padding-top: var(--padding-12xl);*/
     box-sizing: border-box;
   }
   .bg-parent {

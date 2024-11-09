@@ -638,7 +638,7 @@
 }
 .free-classes-of-container {
   align-self: stretch;
-  height: 186px;
+  height: 100%;
   position: relative;
   line-height: 100%;
   display: inline-block;
@@ -814,7 +814,7 @@
 .string-op {
   width: 273.8px;
   align-items: flex-start;
-  padding: 115.7px 0 0;
+  padding: 10% 0 0;
   box-sizing: border-box;
   font-size: var(--text-regular-semi-bold-size);
 }

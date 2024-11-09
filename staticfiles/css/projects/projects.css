@@ -1259,7 +1259,8 @@
   line-height: 23px;
   font-weight: 600;
   display: inline-block;
-  min-width: 69px;
+  max-width: 104px;
+  min-width: 104px;
   z-index: 2;
 }
 .frame-parent54,
@@ -1951,7 +1952,7 @@
   border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
   background-color: var(--neutral-background);
   flex-direction: column;
-  padding: var(--padding-43xl) var(--padding-10xl-8) 82px var(--padding-11xl);
+  padding: 2%;
   gap: var(--gap-21xl);
   max-width: 100%;
   z-index: 1;
