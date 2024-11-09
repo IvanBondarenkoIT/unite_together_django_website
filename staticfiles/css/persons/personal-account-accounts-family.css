@@ -1218,6 +1218,7 @@
   gap: var(--gap-xl-4);
 }
 .frame-parent54 {
+  width: 100%;
   align-self: stretch;
   flex-direction: row;
   justify-content: space-between;

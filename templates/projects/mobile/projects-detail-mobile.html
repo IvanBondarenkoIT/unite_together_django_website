@@ -1,5 +1,25 @@
 {% load static %}
 
+<style>
+    .image-container-img {
+        width: 80px; /* Ширина изображения */
+        height: 80px; /* Высота изображения */
+        object-fit: cover; /* Обрезка изображения с сохранением пропорций */
+        object-position: center; /* Центрирование изображения */
+        margin: 5px; /* Отступ между изображениями (по желанию) */
+    }
+
+    .baner-image-icon2 {
+        flex: auto;
+        width: 100%; /* Ширина изображения */
+        height: 357px; /* Высота изображения */
+        object-fit: cover; /* Обрезка изображения с сохранением пропорций */
+        object-position: center; /* Центрирование изображения */
+        {#margin: 5px; /* Отступ между изображениями (по желанию) */#}
+
+    }
+</style>
+
 <div class="projects-mobile">
     <div class="bg-blue8"></div>
     <div class="actions16"></div>
@@ -16,7 +36,7 @@
     </div>
     <div class="project-banner">
         <div class="rectangle-parent20">
-            <div class="frame-child98"></div>
+{#            <div class="frame-child98"></div>#}
             <img
                 class="baner-image-icon2"
                 loading="lazy"
@@ -28,11 +48,11 @@
                 <ul class="thumb">
                     <li>
                         <a href="{{ single_project.image.url }}" target="mainImage">
-                            <img src="{{ single_project.image.url }}" alt="Product Image">
+                            <img class="image-container-img" src="{{ single_project.image.url }}" alt="Product Image">
                         </a>
                         {% for i in project_gallery %}
                         <a href="{{ i.image.url }}" target="mainImage">
-                            <img src="{{ i.image.url }}" alt="Product Image">
+                            <img class="image-container-img" src="{{ i.image.url }}" alt="Product Image">
                         </a>
                         {% endfor %}
                     </li>
@@ -98,7 +118,7 @@
                 <a class="button-registration1"
                    href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
                    style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
-                    <div class="registration1">Registration</div>
+                    <div class="registration1">РЕЄСТРАЦІЯ</div>
                 </a>
             </div>
             <div class="winterization-group">

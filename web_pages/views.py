@@ -13,21 +13,28 @@ from web_pages.models import (
     ProjectGallery,
 )
 
-OBJECTS_ON_PAGE = 6  # Константа для определения количества объектов на каждой странице
+OBJECTS_ON_PAGE = 6  # Constant defining the number of objects per page
 
 
 def events(request, group_slug=None):
     """
-    Обрабатывает запрос на отображение списка событий, с возможностью фильтрации по
-    статусу активности и городу. Поддерживает пагинацию и сохранение фильтров в сессии.
+    Renders a paginated list of events with optional filtering by city and activity status.
+    Saves filter selections in the session for consistent user experience.
+
+    Args:
+        request: The HTTP request object.
+        group_slug (str, optional): Slug of the events group for filtering.
+
+    Returns:
+        HttpResponse: Rendered template for the list of events.
     """
-    # Обработка значений чекбокса и выбранного города в зависимости от метода запроса
+    # Process checkbox and city selection based on the request method
     if request.method == "POST":
-        # Проверка состояния чекбокса и установка значения для фильтра активности
+        # Determine checkbox status for filtering active events
         is_active = request.POST.get("free-spots-checkbox") == "on"
         new_selected_city = request.POST.get("selected-city")
 
-        # Если выбран новый город, сохраняем его в сессии, иначе используем предыдущий выбор
+        # Update session with new city if selected; otherwise, use previous selection
         if new_selected_city:
             selected_city = new_selected_city
             request.session["activeCityFilter"] = selected_city
@@ -35,26 +42,26 @@ def events(request, group_slug=None):
             selected_city = request.session.get("activeCityFilter", "All")
             request.session["activeCheckbox"] = is_active
     else:
-        # Получаем значения фильтров из сессии для GET-запроса
+        # Get filter values from session for GET requests
         is_active = request.session.get("activeCheckbox", False)
         selected_city = request.session.get("activeCityFilter", "All")
 
-    # Создание аргументов фильтрации на основе значения активности
+    # Build filter arguments based on activity status
     kw_args = {"is_active": is_active} if is_active else {}
 
-    # Фильтрация по группе событий, если указан `group_slug`
+    # Filter by event group if specified
     if group_slug:
         group = get_object_or_404(
             ObjectsGroup, slug=group_slug, page__name__iexact="events", **kw_args
         )
         kw_args["group"] = group
 
-    # Добавление фильтрации по выбранному городу, если он указан
+    # Add city filter if a specific city is selected
     if selected_city and selected_city != "All":
         _city = get_object_or_404(City, name=selected_city)
         kw_args["selected_city"] = _city
 
-    # Запрос всех событий с указанными фильтрами и добавление аннотации для предварительной генерации URL
+    # Retrieve events matching filters and annotate with precomputed URLs
     all_objects = (
         Events.objects.filter(**kw_args)
         .select_related("selected_city")
@@ -66,16 +73,16 @@ def events(request, group_slug=None):
         .order_by("-is_active", "start_date")
     )
 
-    # Пагинация событий
+    # Paginate events
     paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
     page = request.GET.get("page")
     page_all_objects = paginator.get_page(page)
     objects_count = paginator.count
 
-    # Получение списка городов для выбора в фильтре
+    # Retrieve list of cities for filter selection
     cities = City.objects.only("id", "name").all()
 
-    # Подготовка данных для шаблона
+    # Prepare context data for the template
     context = {
         "all_objects": page_all_objects,
         "objects_count": objects_count,
@@ -91,14 +98,14 @@ def create_participant(
     selected_associated_person: AssociatedPerson, selected_event: WebContentObject
 ) -> Participant:
     """
-    Создает нового участника мероприятия из данных существующего связанного лица и события.
+    Creates a new event participant based on an existing associated person and links them to the event.
 
     Args:
-        selected_associated_person (AssociatedPerson): Связанное лицо, которое будет скопировано.
-        selected_event (WebContentObject): Мероприятие, с которым будет связан новый участник.
+        selected_associated_person (AssociatedPerson): The associated person data.
+        selected_event (WebContentObject): The event for which the participant is registered.
 
     Returns:
-        Participant: Созданный экземпляр участника.
+        Participant: The created participant instance.
     """
     return Participant.objects.create(
         user_owner=selected_associated_person.user_owner,
@@ -124,8 +131,15 @@ def create_participant(
 
 def event_detail(request, group_slug=None, event_slug=None):
     """
-    Отображает детальную информацию о событии, с возможностью регистрации связанного лица
-    как участника на событие, при условии авторизации пользователя.
+    Displays detailed information for a specific event with registration option for authorized users.
+
+    Args:
+        request: The HTTP request object.
+        group_slug (str, optional): Slug of the event group.
+        event_slug (str, optional): Slug of the event.
+
+    Returns:
+        HttpResponse: Rendered template for the event detail page.
     """
     try:
         single_event = Events.objects.select_related("group").get(
@@ -133,15 +147,15 @@ def event_detail(request, group_slug=None, event_slug=None):
         )
     except Events.DoesNotExist:
         messages.error(request, "Event not found.")
-        return redirect("some_error_page")  # Замените на свою страницу с ошибкой
+        return redirect("some_error_page")  # Replace with your error page
 
-    # Если пользователь аутентифицирован, получаем список доступных для выбора лиц
+    # If user is authenticated, retrieve a list of approved persons
     if request.user.is_authenticated:
         persons = AssociatedPerson.objects.filter(
             user_owner=request.user, is_approved=True
         ).order_by("unique_identifier")
 
-        # Обработка POST-запроса при регистрации лиц на мероприятие
+        # Handle POST request for event registration
         if request.method == "POST":
             selected_person_ids = request.POST.getlist("selected-persons")
             if selected_person_ids:
@@ -153,7 +167,7 @@ def event_detail(request, group_slug=None, event_slug=None):
                         total_participants_in_event = Participant.objects.filter(
                             registered_on=single_event
                         ).count()
-                        # Проверка доступных мест и добавление участника
+                        # Check available spots and add participant
                         if single_event.max_participants > total_participants_in_event:
                             if not Participant.objects.filter(
                                 copy_of_unique_identifier=selected_person.unique_identifier,
@@ -195,27 +209,29 @@ def event_detail(request, group_slug=None, event_slug=None):
 
 def projects(request, group_slug=None):
     """
-    Обрабатывает запрос на отображение списка проектов, с возможностью фильтрации
-    по активности и пагинацией, с сохранением состояния чекбокса в сессии.
+    Renders a paginated list of projects with an option to filter by activity status, saving filter state in session.
+
+    Args:
+        request: The HTTP request object.
+        group_slug (str, optional): Slug of the projects group.
+
+    Returns:
+        HttpResponse: Rendered template for the list of projects.
     """
-    # Обработка значений чекбокса для фильтрации по активности проектов
     if request.method == "POST":
         is_active = request.POST.get("free-spots-checkbox") == "on"
         request.session["activeCheckbox"] = is_active
     else:
         is_active = request.session.get("activeCheckbox", False)
 
-    # Подготовка словаря фильтров
     kw_args = {"is_active": is_active} if is_active else {}
 
-    # Фильтрация по группе проектов, если указан `group_slug`
     if group_slug:
         group = get_object_or_404(
             ObjectsGroup, slug=group_slug, page__name__iexact="projects", **kw_args
         )
         kw_args["group"] = group
 
-    # Получение всех проектов с указанными фильтрами и применением пагинации
     all_objects = (
         Projects.objects.filter(**kw_args)
         .select_related("group__page")
@@ -227,7 +243,6 @@ def projects(request, group_slug=None):
     page_all_objects = paginator.get_page(page)
     objects_count = paginator.count
 
-    # Подготовка данных для шаблона
     context = {
         "all_objects": page_all_objects,
         "objects_count": objects_count,
@@ -239,7 +254,15 @@ def projects(request, group_slug=None):
 
 def projects_detail(request, group_slug=None, project_slug=None):
     """
-    Отображает детальную информацию о проекте, включая галерею, если она имеется.
+    Displays detailed information about a specific project, including a gallery if available.
+
+    Args:
+        request: The HTTP request object.
+        group_slug (str, optional): Slug of the project group.
+        project_slug (str, optional): Slug of the project.
+
+    Returns:
+        HttpResponse: Rendered template for the project detail page.
     """
     single_project = get_object_or_404(
         Projects, group__slug=group_slug, slug=project_slug
