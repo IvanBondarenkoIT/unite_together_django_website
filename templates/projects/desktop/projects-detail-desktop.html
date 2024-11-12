@@ -91,9 +91,12 @@
                         <div class="frame-parent58">
                             <ul class="frame-parent59">
                                 <li>
-                                    <div class="ongoing-project">{% if single_project.is_active %}Ongoing
-                                        project{% else %}
-                                        Complited{% endif %}
+                                    <div class="ongoing-project">
+                                        {% if single_project.is_active %}
+                                            Триває
+                                        {% else %}
+                                            Завершений
+                                        {% endif %}
                                     </div>
                                 </li>
                                 <li>
