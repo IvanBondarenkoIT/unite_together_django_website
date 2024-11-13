@@ -872,7 +872,7 @@
 }
 .free-classes-of-container2 {
   align-self: stretch;
-  height: 28.625rem;
+  height: 100%;
   position: relative;
   font-size: var(--text-regular-normal-size);
   line-height: 170%;
@@ -881,12 +881,12 @@
   z-index: 2;
 }
 .winterization-group {
-  width: 18.706rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 0 0 10.493rem;
+  padding: 0 0 2rem;
   box-sizing: border-box;
   gap: var(--gap-6xl);
   font-size: var(--font-size-11xl);
@@ -1058,7 +1058,7 @@
   background-color: var(--neutral-background);
   overflow: hidden;
   flex-direction: column;
-  padding: var(--padding-3xl) var(--padding-9xs) 4.012rem;
+  /*padding: var(--padding-3xl) var(--padding-9xs) 4.012rem;*/
   gap: var(--gap-mini);
   line-height: normal;
   letter-spacing: normal;

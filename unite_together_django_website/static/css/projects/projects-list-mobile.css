@@ -1069,7 +1069,7 @@
   background-color: var(--background-light-primary);
   overflow: hidden;
   flex-direction: column;
-  padding: var(--padding-3xl) 0 12.243rem;
+  /*padding: var(--padding-3xl) 0 12.243rem;*/
   gap: var(--gap-17xl);
   line-height: normal;
   letter-spacing: normal;
