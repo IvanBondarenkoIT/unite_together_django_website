@@ -12,7 +12,7 @@
     .baner-image-icon2 {
         flex: auto;
         width: 100%; /* Ширина изображения */
-        height: 357px; /* Высота изображения */
+        height: 489px; /* Высота изображения */
         object-fit: cover; /* Обрезка изображения с сохранением пропорций */
         object-position: center; /* Центрирование изображения */
         {#margin: 5px; /* Отступ между изображениями (по желанию) */#}
@@ -84,11 +84,13 @@
                     <img class="dec-line-icon1" loading="lazy" alt="" src="{% static 'img/decline.svg' %}" />
                     <div class="project-type">
                         <div class="frame-parent125">
-                            <div class="icons">
-                                <img class="frame-child99" loading="lazy" alt="" src="{% static 'img/group-6792.svg' %}" />
-                            </div>
+
                             <div class="ongoing-project1">
                                 {% if single_project.start_date %}
+                                    <div class="icons">
+                                        <img class="frame-child99" loading="lazy" alt=""
+                                             src="{% static 'img/group-6792.svg' %}"/>
+                                    </div>
                                     {{ single_project.get_start_date_month }} {{ single_project.get_start_date_year }}
                                 {% endif %}
                                 {% if single_project.end_date %}
