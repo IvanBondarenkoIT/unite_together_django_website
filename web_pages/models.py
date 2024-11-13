@@ -1,4 +1,4 @@
-import locale
+# import locale
 
 from django.db import models
 from django.urls import reverse
@@ -147,7 +147,7 @@ class Projects(WebContentObject):
 
     def get_end_date_month(self):
         # Устанавливаем украинскую локаль
-        locale.setlocale(locale.LC_TIME, "uk_UA.UTF-8")
+        # locale.setlocale(locale.LC_TIME, "uk_UA.UTF-8")
         return self.end_date.strftime("%b")
 
     def get_end_date_day(self):
