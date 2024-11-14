@@ -29,29 +29,31 @@ class CustomPasswordValidator:
         # Check if password has at least 8 characters
         if len(password) < 8:
             raise ValidationError(
-                _("Цей пароль занадто короткий. Він повинен містити щонайменше 8 символів."),
-                code='password_too_short',
+                _(
+                    "Цей пароль занадто короткий. Він повинен містити щонайменше 8 символів."
+                ),
+                code="password_too_short",
             )
 
         # Check if password has at least one uppercase letter
-        if not re.findall(r'[A-Z]', password):
+        if not re.findall(r"[A-Z]", password):
             raise ValidationError(
                 _("Пароль повинен містити щонайменше одну велику літеру."),
-                code='password_no_upper',
+                code="password_no_upper",
             )
 
         # Check if password has at least one lowercase letter
-        if not re.findall(r'[a-z]', password):
+        if not re.findall(r"[a-z]", password):
             raise ValidationError(
                 _("Пароль повинен містити щонайменше одну малу літеру."),
-                code='password_no_lower',
+                code="password_no_lower",
             )
 
         # Check if password has at least one digit
-        if not re.findall(r'\d', password):
+        if not re.findall(r"\d", password):
             raise ValidationError(
                 _("Пароль повинен містити щонайменше одну цифру."),
-                code='password_no_digit',
+                code="password_no_digit",
             )
 
         # Uncomment the following block if you want to require a special character
