@@ -45,9 +45,9 @@ class RegistrationForm(forms.ModelForm):
         делая форму более удобной для пользователя.
         """
         super(RegistrationForm, self).__init__(*args, **kwargs)
-        self.fields["first_name"].widget.attrs["placeholder"] = "Ім'я"
+        self.fields["first_name"].widget.attrs["placeholder"] = "Ім'я (Латиницею)"
         self.fields["first_name"].widget.attrs["required"] = True
-        self.fields["last_name"].widget.attrs["placeholder"] = "Прізвище"
+        self.fields["last_name"].widget.attrs["placeholder"] = "Прізвище (Латиницею)"
         self.fields["last_name"].widget.attrs["required"] = True
         self.fields["phone_number"].widget.attrs["placeholder"] = "Номер телефону"
         self.fields["phone_number"].widget.attrs["required"] = True
@@ -111,20 +111,20 @@ class RegistrationForm(forms.ModelForm):
 
         return last_name
 
-    def clean_georgian_phone_number(self):
+    def clean_phone_number(self):
         """
         Проверка грузинского номера телефона:
         - Поле обязательно для заполнения.
         - Номер должен быть в формате 995XXXXXXXXX.
         """
-        georgian_phone_number = self.cleaned_data.get("georgian_phone_number")
-        if georgian_phone_number:
+        phone_number = self.cleaned_data.get("phone_number")
+        if phone_number:
             pattern = r"^995[0-9]{9}$"
-            if not re.match(pattern, georgian_phone_number):
+            if not re.match(pattern, phone_number):
                 raise forms.ValidationError(
                     "Грузинський номер телефону має бути у форматі: 995XXXXXXXXX."
                 )
-            return georgian_phone_number
+            return phone_number
         else:
             raise forms.ValidationError("Грузинський номер телефону є обов'язковим.")
 
