@@ -131,31 +131,32 @@ def create_participant(
 
 def event_detail(request, group_slug=None, event_slug=None):
     """
-    Displays detailed information for a specific event with registration option for authorized users.
+    Відображає детальну інформацію про конкретну подію з можливістю реєстрації для авторизованих користувачів.
 
-    Args:
-        request: The HTTP request object.
-        group_slug (str, optional): Slug of the event group.
-        event_slug (str, optional): Slug of the event.
+    Аргументи:
+        request: Об'єкт HTTP запиту.
+        group_slug (str, optional): Слаг групи події.
+        event_slug (str, optional): Слаг події.
 
-    Returns:
-        HttpResponse: Rendered template for the event detail page.
+    Повертає:
+        HttpResponse: Відрендерений шаблон для сторінки деталей події.
     """
     try:
         single_event = Events.objects.select_related("group").get(
             group__slug=group_slug, slug=event_slug
         )
     except Events.DoesNotExist:
-        messages.error(request, "Event not found.")
-        return redirect("some_error_page")  # Replace with your error page
+        messages.error(request, "Подію не знайдено.")
+        return redirect("some_error_page")  # Замініть на вашу сторінку помилки
 
-    # If user is authenticated, retrieve a list of approved persons
+    # Якщо користувач авторизований, отримати список затверджених осіб
     if request.user.is_authenticated:
         persons = AssociatedPerson.objects.filter(
-            user_owner=request.user, is_approved=True
+            user_owner=request.user,
+            is_approved=True,
         ).order_by("unique_identifier")
 
-        # Handle POST request for event registration
+        # Обробка POST запиту для реєстрації на подію
         if request.method == "POST":
             selected_person_ids = request.POST.getlist("selected-persons")
             if selected_person_ids:
@@ -164,36 +165,52 @@ def event_detail(request, group_slug=None, event_slug=None):
                         selected_person = AssociatedPerson.objects.get(
                             id=person_id, user_owner=request.user
                         )
-                        total_participants_in_event = Participant.objects.filter(
-                            registered_on=single_event
-                        ).count()
-                        # Check available spots and add participant
-                        if single_event.max_participants > total_participants_in_event:
-                            if not Participant.objects.filter(
-                                copy_of_unique_identifier=selected_person.unique_identifier,
-                                registered_on=single_event,
-                            ).exists():
-                                create_participant(selected_person, single_event)
-                                messages.success(
-                                    request,
-                                    f"Person {selected_person.first_name} {selected_person.last_name} registered for {single_event.name}",
-                                )
+                        # Перевірка віку
+                        if (
+                            single_event.end_age
+                            >= selected_person.get_current_age()
+                            >= single_event.start_age
+                        ):
+
+                            total_participants_in_event = Participant.objects.filter(
+                                registered_on=single_event
+                            ).count()
+                            # Перевірити наявність місць та додати учасника
+                            if (
+                                single_event.max_participants
+                                > total_participants_in_event
+                            ):
+                                if not Participant.objects.filter(
+                                    copy_of_unique_identifier=selected_person.unique_identifier,
+                                    registered_on=single_event,
+                                ).exists():
+                                    create_participant(selected_person, single_event)
+                                    messages.success(
+                                        request,
+                                        f"Особа {selected_person.first_name} {selected_person.last_name} зареєстрована на {single_event.name}",
+                                    )
+                                else:
+                                    messages.warning(
+                                        request,
+                                        f"Особа {selected_person.first_name} {selected_person.last_name} вже зареєстрована на цю подію.",
+                                    )
                             else:
-                                messages.warning(
+                                messages.error(
                                     request,
-                                    f"Person {selected_person.first_name} {selected_person.last_name} is already registered for this event.",
+                                    f"Особа {selected_person.first_name} {selected_person.last_name} не зареєстрована. Досягнуто максимальну кількість учасників!",
                                 )
+                                single_event.is_active = False
+                                single_event.save()
+                                break
                         else:
                             messages.error(
                                 request,
-                                f"Person {selected_person.first_name} {selected_person.last_name} is not registered. Maximum number of participants has been reached!",
+                                f"Особа {selected_person.first_name} {selected_person.last_name} не зареєстрована. Критерії віку не відповідають!",
                             )
-                            single_event.is_active = False
-                            single_event.save()
-                            break
                     except AssociatedPerson.DoesNotExist:
                         messages.error(
-                            request, "Person not found or not owned by the user."
+                            request,
+                            "Особу не знайдено або вона не належить користувачу.",
                         )
                 return redirect("registered_events")
     else:

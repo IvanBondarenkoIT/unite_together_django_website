@@ -3,6 +3,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
 
+import datetime
 import re
 
 from accounts.models import Account
@@ -60,6 +61,28 @@ class Person(models.Model):
     date_of_birth = models.DateField(
         blank=True, null=True, verbose_name="Дата народження"
     )
+
+    def get_current_age(self):
+        """
+        Calculates the current age in full years.
+        """
+        if not self.date_of_birth:
+            return None  # or another default if date_of_birth is not set
+
+        today = (
+            datetime.date.today()
+        )  # Use datetime.date.today() if importing datetime as a whole
+        years_difference = today.year - self.date_of_birth.year
+
+        # Check if the birthday has occurred this year
+        if (today.month, today.day) < (
+            self.date_of_birth.month,
+            self.date_of_birth.day,
+        ):
+            years_difference -= 1
+
+        return years_difference
+
     citizenship = models.CharField(
         max_length=20,
         choices=CitizenshipChoices.choices,

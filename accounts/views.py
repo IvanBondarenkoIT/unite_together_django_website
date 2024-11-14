@@ -1,5 +1,4 @@
 from django.db import transaction
-
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
@@ -17,8 +16,21 @@ from persons.models import UserProfile, AssociatedPerson, TypeOfDocument
 from unite_together_django_website.validators import CustomPasswordValidator
 
 
-# Create your views here.
 def register(request):
+    """
+    Handles user registration.
+
+    - If the request method is POST and the form is valid, it creates a new user and
+      associated profile and sends an activation email.
+    - If registration is successful, redirects to the login page with a verification message.
+    - If GET, it renders the registration form.
+
+    Parameters:
+    - request: The HTTP request object.
+
+    Returns:
+    - HTTPResponse: Redirects or renders the registration page based on request method.
+    """
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -40,14 +52,14 @@ def register(request):
                     )
                     user.save()
 
-                    # Create new Person
+                    # Create new associated person record
                     default_document_type = TypeOfDocument.objects.first()
-
                     new_person = AssociatedPerson.objects.create(
                         user_owner=user,
                         first_name=first_name,
                         last_name=last_name,
                         type_of_document=default_document_type,
+                        georgian_phone_number=phone_number,
                         is_approved=False,
                     )
                     new_person.save()
@@ -56,16 +68,16 @@ def register(request):
                     user.phone_number = phone_number
                     user.save()
 
-                    # Create user Profile
+                    # Create user profile
                     profile = UserProfile.objects.create(
                         user=user,
                         person=new_person,
                     )
                     profile.save()
 
-                    messages.success(request, "Профіль успішно створено ")
+                    messages.success(request, "Профіль успішно створено")
 
-                    # USER ACTIVATION
+                    # Send activation email
                     current_site = get_current_site(request)
                     mail_subject = "Please activate your account"
                     message = render_to_string(
@@ -77,11 +89,9 @@ def register(request):
                             "token": default_token_generator.make_token(user),
                         },
                     )
-                    to_email = email
-                    send_email = EmailMessage(mail_subject, message, to=[to_email])
+                    send_email = EmailMessage(mail_subject, message, to=[email])
                     send_email.send()
 
-                    # messages.success(request, "Registration Successful")
                     return redirect(
                         f"/accounts/login/?command=verification&email={email}"
                     )
@@ -93,14 +103,23 @@ def register(request):
     else:
         form = RegistrationForm()
 
-    context = {
-        "form": form,
-    }
-
+    context = {"form": form}
     return render(request, "accounts/register.html", context=context)
 
 
 def login(request):
+    """
+    Handles user login.
+
+    - If the request method is POST, authenticates user with email and password.
+    - If successful, redirects to the home page; otherwise, returns an error message.
+
+    Parameters:
+    - request: The HTTP request object.
+
+    Returns:
+    - HTTPResponse: Redirects or renders the login page based on success or failure.
+    """
     if request.method == "POST":
         email = request.POST["email"]
         password = request.POST["password"]
@@ -119,13 +138,35 @@ def login(request):
 
 @login_required(login_url="login")
 def logout(request):
+    """
+    Logs out the user and redirects to the login page.
+
+    Parameters:
+    - request: The HTTP request object.
+
+    Returns:
+    - HTTPResponse: Redirects to the login page with a success message.
+    """
     auth.logout(request)
-    messages.success(request, "Успішний вхід")
+    messages.success(request, "Успішний вихід")
     return redirect("login")
 
 
 def activate(request, uidb64, token):
-    # return HttpResponse("OK")
+    """
+    Activates user account via a verification link.
+
+    - Decodes the uid and verifies the token.
+    - If valid, activates the account and redirects to login with a success message.
+
+    Parameters:
+    - request: The HTTP request object.
+    - uidb64 (str): Base64-encoded user ID.
+    - token (str): Token for account verification.
+
+    Returns:
+    - HTTPResponse: Redirects based on activation success or failure.
+    """
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = Account._default_manager.get(pk=uid)
@@ -139,15 +180,26 @@ def activate(request, uidb64, token):
         return redirect("login")
     else:
         messages.error(request, "Недійсне посилання для активації")
-        return redirect("Register")
+        return redirect("register")
 
 
 def forgot_password(request):
+    """
+    Initiates the password reset process.
+
+    - If POST, checks if the user exists and sends a reset email.
+    - If user does not exist, returns an error message.
+
+    Parameters:
+    - request: The HTTP request object.
+
+    Returns:
+    - HTTPResponse: Redirects or renders the forgot password page.
+    """
     if request.method == "POST":
         email = request.POST.get("email")
         if Account.objects.filter(email=email).exists():
             user = Account.objects.get(email__exact=email)
-            # Reset password email
             current_site = get_current_site(request)
             mail_subject = "Будь ласка, скиньте свій пароль"
             message = render_to_string(
@@ -159,14 +211,12 @@ def forgot_password(request):
                     "token": default_token_generator.make_token(user),
                 },
             )
-            to_email = email
-            send_email = EmailMessage(mail_subject, message, to=[to_email])
+            send_email = EmailMessage(mail_subject, message, to=[email])
             send_email.send()
 
             messages.success(
                 request, "Лист для зміни пароля надіслано на вашу електронну адресу"
             )
-
             return redirect("login")
 
         else:
@@ -177,6 +227,20 @@ def forgot_password(request):
 
 
 def reset_password_validate(request, uidb64, token):
+    """
+    Validates the reset password token and allows password reset.
+
+    - Decodes the uid and checks the token.
+    - If valid, redirects to reset password page.
+
+    Parameters:
+    - request: The HTTP request object.
+    - uidb64 (str): Base64-encoded user ID.
+    - token (str): Token for password reset.
+
+    Returns:
+    - HTTPResponse: Redirects based on token validity.
+    """
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = Account._default_manager.get(pk=uid)
@@ -185,8 +249,6 @@ def reset_password_validate(request, uidb64, token):
 
     if user is not None and default_token_generator.check_token(user, token):
         request.session["uid"] = uid
-        # request.user.is_active = True
-        user.save()
         messages.success(request, "Будь ласка, скиньте свій пароль")
         return redirect("reset_password")
     else:
@@ -195,6 +257,18 @@ def reset_password_validate(request, uidb64, token):
 
 
 def reset_password(request):
+    """
+    Handles the password reset form submission.
+
+    - If POST, validates and sets the new password for the user.
+    - If validation fails, returns error messages.
+
+    Parameters:
+    - request: The HTTP request object.
+
+    Returns:
+    - HTTPResponse: Redirects based on success or failure of the password reset.
+    """
     if request.method == "POST":
         password = request.POST["password"]
         confirm_password = request.POST["confirm_password"]
@@ -211,7 +285,6 @@ def reset_password(request):
                 messages.success(request, "Скидання пароля успішне")
                 return redirect("login")
             except ValidationError as e:
-                # Catching multiple error messages and adding them to the messages framework
                 for error in e:
                     messages.error(request, error)
                 return redirect("reset_password")
