@@ -92,7 +92,9 @@ def register(request):
                     send_email = EmailMessage(mail_subject, message, to=[email])
                     send_email.send()
 
-                    return redirect(f"/accounts/login/?command=verification&email={email}")
+                    return redirect(
+                        f"/accounts/login/?command=verification&email={email}"
+                    )
 
             except Exception as e:
                 messages.error(request, e)
@@ -212,7 +214,9 @@ def forgot_password(request):
             send_email = EmailMessage(mail_subject, message, to=[email])
             send_email.send()
 
-            messages.success(request, "Лист для зміни пароля надіслано на вашу електронну адресу")
+            messages.success(
+                request, "Лист для зміни пароля надіслано на вашу електронну адресу"
+            )
             return redirect("login")
 
         else:
