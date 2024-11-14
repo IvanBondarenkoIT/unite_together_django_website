@@ -1,5 +1,4 @@
 import re
-
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import modelformset_factory
@@ -8,26 +7,31 @@ from datetime import date
 
 
 class AssociatedPersonAdminForm(forms.ModelForm):
+    """
+    Form used in the Django admin for managing AssociatedPerson instances.
+    """
+
     class Meta:
         model = AssociatedPerson
         fields = "__all__"
-
-        # Add a filter by 'user_owner'
-        list_filter = ("user_owner",)
-
-        # Define a search field for more convenience
+        list_filter = ("user_owner",)  # Filters by 'user_owner' in admin
         search_fields = ["first_name", "last_name", "user_owner__unique_identifier"]
 
         def get_associated_person(self, obj):
-            # Assuming user_owner has a related field associated_person
+            """
+            Returns the associated person related to the user_owner.
+            """
             return obj.user_owner.associated_person
 
-        get_associated_person.short_description = (
-            "Associated Person"  # Set column name in admin
-        )
+        get_associated_person.short_description = "Associated Person"
 
 
 class AssociatedPersonForm(forms.ModelForm):
+    """
+    Form for collecting detailed information about an associated person.
+    Includes validation for fields like first name, last name, date of birth,
+    and phone numbers.
+    """
 
     class Meta:
         model = AssociatedPerson
@@ -49,19 +53,13 @@ class AssociatedPersonForm(forms.ModelForm):
             "criteria",
         ]
         widgets = {
-            "date_of_birth": forms.DateInput(
-                # attrs={"type": "date", "placeholder": "ДД.ММ.РРРР"}
-                attrs={"type": "date"}
-            ),
-            "date_of_arrival": forms.DateInput(
-                # attrs={"type": "date", "placeholder": "ДД.ММ.РРРР"}
-                attrs={"type": "date"}
-            ),
+            "date_of_birth": forms.DateInput(attrs={"type": "date"}),
+            "date_of_arrival": forms.DateInput(attrs={"type": "date"}),
             "first_name": forms.TextInput(
-                attrs={"placeholder": "Ім'я", "required": True}
+                attrs={"placeholder": "Ім'я(Латиницею)", "required": True}
             ),
             "last_name": forms.TextInput(
-                attrs={"placeholder": "Прізвище", "required": True}
+                attrs={"placeholder": "Прізвище(Латиницею)", "required": True}
             ),
             "citizenship": forms.Select(
                 attrs={
@@ -106,35 +104,23 @@ class AssociatedPersonForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop("user", None)  # Accept the user from kwargs
-        # super().__init__(*args, **kwargs)
+        """
+        Custom initializer to set default values for fields like Georgian phone number.
+        """
+        self.user = kwargs.pop("user", None)
         default_ge_phone = kwargs.pop("default_ge_phone", None)
         super().__init__(*args, **kwargs)
         if default_ge_phone:
             self.fields["georgian_phone_number"].initial = default_ge_phone
 
-        # Перетворення формату дати для відображення у формі
-        # if self.instance.pk:  # Якщо об'єкт вже існує
-        #     if self.instance.date_of_birth:
-        #         self.fields["date_of_birth"].initial = (
-        #             self.instance.date_of_birth.strftime("%d.%m.%Y")
-        #         )
-        #     if self.instance.date_of_arrival:
-        #         self.fields["date_of_arrival"].initial = (
-        #             self.instance.date_of_arrival.strftime("%d.%m.%Y")
-        #         )
-
     def clean_date_of_birth(self):
-        # print("clean_date_of_birth method is called")
+        """
+        Validates that the date of birth is provided and that the user is at least 18 years old.
+        """
         date_of_birth = self.cleaned_data.get("date_of_birth")
         if not date_of_birth:
-            # print("No date_of_birth provided")  # Debugging
             raise ValidationError("Дата народження є обов'язковою.")
 
-        # Validate age if the user is editing their own associated person
-        # print(
-        #     f"Instance - {self.instance} User - {self.user} Associated Person - {self.user.associated_person}"
-        # )
         if self.instance and self.user and self.user.associated_person == self.instance:
             today = date.today()
             age = (
@@ -146,10 +132,12 @@ class AssociatedPersonForm(forms.ModelForm):
                 raise ValidationError(
                     "У головної особи Вік повинен бути не менше 18 років."
                 )
-        # print(f"Age - {age}")
         return date_of_birth
 
     def clean_document_number(self):
+        """
+        Ensures the document number matches the pattern for the specified document type.
+        """
         type_of_document = self.cleaned_data.get("type_of_document")
         if type_of_document:
             document_number = self.cleaned_data.get("document_number")
@@ -163,22 +151,38 @@ class AssociatedPersonForm(forms.ModelForm):
             raise forms.ValidationError("Необхідно вибрати тип документа")
 
     def clean_first_name(self):
+        """
+        Validates that the first name is in Latin characters and is provided.
+        """
         first_name = self.cleaned_data.get("first_name")
         if not first_name:
             raise forms.ValidationError("Ім'я є обов'язковим.")
+        if not re.match(r"^[A-Za-z]+$", first_name):
+            raise forms.ValidationError(
+                "Ім'я повинне складатися лише з латинських літер."
+            )
         return first_name
 
     def clean_last_name(self):
+        """
+        Validates that the last name is in Latin characters and is provided.
+        """
         last_name = self.cleaned_data.get("last_name")
         if not last_name:
             raise forms.ValidationError("Прізвище є обов'язковим.")
+        if not re.match(r"^[A-Za-z]+$", last_name):
+            raise forms.ValidationError(
+                "Прізвище повинне складатися лише з латинських літер."
+            )
         return last_name
 
     def clean_georgian_phone_number(self):
+        """
+        Checks that the Georgian phone number is in the correct format.
+        """
         georgian_phone_number = self.cleaned_data.get("georgian_phone_number")
         if georgian_phone_number:
-            pattern = r"^995[0-9]{9}$"
-            if not re.match(pattern, georgian_phone_number):
+            if not re.match(r"^995[0-9]{9}$", georgian_phone_number):
                 raise forms.ValidationError(
                     "Грузинський номер телефону має бути у форматі: 995XXXXXXXXX."
                 )
@@ -187,25 +191,21 @@ class AssociatedPersonForm(forms.ModelForm):
             raise forms.ValidationError("Грузинський номер телефону є обов'язковим.")
 
     def clean_ukrainian_phone_number(self):
+        """
+        Validates that the Ukrainian phone number is correctly formatted, if provided.
+        """
         ukrainian_phone_number = self.cleaned_data.get("ukrainian_phone_number")
         if ukrainian_phone_number:
-            pattern = r"^380[0-9]{9}$"
-            if not re.match(pattern, ukrainian_phone_number):
+            if not re.match(r"^380[0-9]{9}$", ukrainian_phone_number):
                 raise forms.ValidationError(
                     "Український номер телефону має бути у форматі: 380XXXXXXXXX."
                 )
-            return ukrainian_phone_number
-        return ukrainian_phone_number  # Відсутня помилка перевірки, якщо поле залишено порожнім
-
-    # def clean_date_of_birth(self):
-    #     date_of_birth = self.cleaned_data.get("date_of_birth")
-    #     if not date_of_birth:
-    #         raise ValidationError(
-    #             "Дата народження є обов'язковою і повинна бути у форматі ДД.ММ.РРРР."
-    #         )
-    #     return date_of_birth
+        return ukrainian_phone_number
 
     def clean_date_of_arrival(self):
+        """
+        Validates that the date of arrival is provided.
+        """
         date_of_arrival = self.cleaned_data.get("date_of_arrival")
         if not date_of_arrival:
             raise ValidationError(
@@ -215,6 +215,10 @@ class AssociatedPersonForm(forms.ModelForm):
 
 
 class ParticipantAdminForm(forms.ModelForm):
+    """
+    Form for managing Participant instances within the admin interface.
+    """
+
     class Meta:
         model = Participant
         fields = "__all__"
@@ -224,6 +228,7 @@ class ParticipantAdminForm(forms.ModelForm):
         }
 
 
+# Formset for managing multiple associated persons
 AssociatedPersonFormSet = modelformset_factory(
     AssociatedPerson, form=AssociatedPersonForm, extra=0
 )
