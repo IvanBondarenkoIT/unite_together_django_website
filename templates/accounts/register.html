@@ -118,10 +118,16 @@
                         <div class="col form-group">
                             <label>Ім'я (Латиницею)</label>
                             {{ form.first_name }}
+                            {% if form.first_name.errors %}
+                                <div class="error">{{ form.first_name.errors }}</div>
+                            {% endif %}
                         </div> <!-- form-group end.// -->
                         <div class="col form-group">
                             <label>Прізвищє (Латиницею)</label>
                             {{ form.last_name }}
+                            {% if form.last_name.errors %}
+                                <div class="error">{{ form.last_name.errors }}</div>
+                            {% endif %}
                         </div> <!-- form-group end.// -->
                     </div> <!-- form-row end.// -->
 
@@ -129,10 +135,16 @@
                         <div class="form-group col-md-6">
                             <label>Електронна пошта</label>
                             {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="error">{{ form.email.errors }}</div>
+                            {% endif %}
                         </div> <!-- form-group end.// -->
                         <div class="form-group col-md-6">
-                            <label>Номер телефону</label>
+                            <label>Номер телефону(Грузія)</label>
                             {{ form.phone_number }}
+                            {% if form.phone_number.errors %}
+                                <div class="error">{{ form.phone_number.errors }}</div>
+                            {% endif %}
                         </div> <!-- form-group end.// -->
                     </div> <!-- form-row.// -->
 
@@ -140,11 +152,20 @@
                         <div class="form-group col-md-6">
                             <label>Створіть пароль</label>
                             {{ form.password }}
+                            {% if form.password.errors %}
+                                <div class="error">{{ form.password.errors }}</div>
+                            {% endif %}
                         </div> <!-- form-group end.// -->
                         <div class="form-group col-md-6">
                             <label>Повторіть пароль</label>
                             {{ form.confirm_password }}
                         </div> <!-- form-group end.// -->
+                        <div class="alert alert-info" role="alert">
+                            <p style="font-size: 0.85em;
+                                      color: #666;">
+                                Ваш пароль повинен містити щонайменше 8 (Літери латиницею) символів, включаючи щонайменше одну цифру, одну велику та одну малу літеру
+                            </p>
+                        </div>
                     </div> <!-- form-row.// -->
 
                     <!-- User agreement checkbox -->
@@ -164,6 +185,7 @@
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block"> Зареєструватися</button>
                     </div> <!-- form-group// -->
+
 
                     {{ form.email.errors }}
                     {{ form.non_field_errors }}
