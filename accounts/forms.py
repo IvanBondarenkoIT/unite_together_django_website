@@ -45,13 +45,13 @@ class RegistrationForm(forms.ModelForm):
         делая форму более удобной для пользователя.
         """
         super(RegistrationForm, self).__init__(*args, **kwargs)
-        self.fields["first_name"].widget.attrs["placeholder"] = "Ім'я (Латиницею)"
+        self.fields["first_name"].widget.attrs["placeholder"] = "Hanna"
         self.fields["first_name"].widget.attrs["required"] = True
-        self.fields["last_name"].widget.attrs["placeholder"] = "Прізвище (Латиницею)"
+        self.fields["last_name"].widget.attrs["placeholder"] = "Petrenko"
         self.fields["last_name"].widget.attrs["required"] = True
-        self.fields["phone_number"].widget.attrs["placeholder"] = "Номер телефону"
+        self.fields["phone_number"].widget.attrs["placeholder"] = "995XXXXXXXXX"
         self.fields["phone_number"].widget.attrs["required"] = True
-        self.fields["email"].widget.attrs["placeholder"] = "Електрона адреса"
+        self.fields["email"].widget.attrs["placeholder"] = "john.doe@example.com"
         self.fields["email"].widget.attrs["required"] = True
         for field in self.fields:
             self.fields[field].widget.attrs["class"] = "form-control"

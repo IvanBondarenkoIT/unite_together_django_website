@@ -99,7 +99,8 @@ def register(request):
             except Exception as e:
                 messages.error(request, e)
                 return redirect("register")
-
+        else:
+            messages.error(request, "Помилка реєстрації")
     else:
         form = RegistrationForm()
 
