@@ -5,7 +5,7 @@
         position: relative;
         overflow: hidden;
         width: 100%;
-        max-width: 400px; /* Adjusted max-width to 400px */
+        max-width: 21rem; /* Adjusted max-width to 400px */
         margin: auto;
     }
 
@@ -28,7 +28,10 @@
     .simple-mobile-carousel-text {
         text-align: center;
         padding: 8px; /* Adjusted padding */
-        overflow: hidden;
+        overflow: auto;
+        word-wrap: break-word; /* Позволяет переносить длинные слова */
+        overflow-wrap: break-word; /* Современный аналог */
+        white-space: normal; /* Убедитесь, что текст переносится */
     }
 
     .simple-mobile-carousel-text h5 {
@@ -110,7 +113,13 @@
             </div>
             <div class="simple-mobile-carousel-text">
                 <h5>{{ carousel_object.title }}</h5>
-                <p>{{ carousel_object.text }}</p>
+                <p style="
+                    overflow: auto;
+                    word-wrap: break-word; /* Позволяет переносить длинные слова */
+                    overflow-wrap: break-word; /* Современный аналог */
+                    white-space: normal;">
+                        {{ carousel_object.extra_details }}
+                </p>
             </div>
         </div>
         {% endfor %}
