@@ -89,9 +89,12 @@
                                             <div class="year6">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
                                         </div>
                                     </div>
-                                    <div class="age7">
-                                        <div class="age8">
-                                            {% if object.start_age %}
+
+                                {% endif %}
+                                    {% if object.start_age %}
+                                        <div class="age7">
+                                            <div class="age8">
+
                                                 <span>Вік: </span>
                                                 <span class="span">
 
@@ -101,11 +104,11 @@
                                                     {% endif %}
 
                                             </span>
-                                            {% endif %}
-                                        </div>
 
-                                    </div>
-                                {% endif %}
+                                            </div>
+
+                                        </div>
+                                    {% endif %}
 
                                 </div>
 
