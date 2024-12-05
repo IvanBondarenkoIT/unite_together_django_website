@@ -47,7 +47,7 @@
     /* Add styles here to fix dropdown position */
     .dropdown-menu {
         position: absolute;
-        top: 70px; /* Adjust based on the height of the navbar */
+        top: 70git px; /* Adjust based on the height of the navbar */
         left: 0;
         width: 100%;
         background-color: white;
