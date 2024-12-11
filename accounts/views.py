@@ -15,6 +15,10 @@ from accounts.models import Account
 from persons.models import UserProfile, AssociatedPerson, TypeOfDocument
 from unite_together_django_website.validators import CustomPasswordValidator
 
+from django.core.mail import send_mail
+from decouple import config
+from django.http import HttpResponse
+
 
 def register(request):
     """
@@ -89,8 +93,20 @@ def register(request):
                             "token": default_token_generator.make_token(user),
                         },
                     )
-                    send_email = EmailMessage(mail_subject, message, to=[email])
-                    send_email.send()
+                    # send_email = EmailMessage(mail_subject, message, to=[email])
+                    # send_email.send()
+
+                    # subject = "Тестовое письмо"
+                    # message = "Привет! Это тестовое письмо для проверки SMTP-конфигурации."
+                    from_email = config("EMAIL_ADMIN")
+                    recipient_list = [email]  # Замените на ваш email для тестирования
+
+                    try:
+                        send_mail(mail_subject, message, from_email, recipient_list)
+                        # return HttpResponse("Письмо успешно отправлено!")
+                    except Exception as e:
+                        pass
+                        # return HttpResponse(f"Ошибка при отправке письма: {e}")
 
                     return redirect(
                         f"/accounts/login/?command=verification&email={email}"
