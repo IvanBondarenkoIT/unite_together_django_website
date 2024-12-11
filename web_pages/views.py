@@ -13,6 +13,10 @@ from web_pages.models import (
     ProjectGallery,
 )
 
+
+from django.core.mail import send_mail
+from django.http import HttpResponse
+
 OBJECTS_ON_PAGE = 6  # Constant defining the number of objects per page
 
 
@@ -292,3 +296,16 @@ def projects_detail(request, group_slug=None, project_slug=None):
     }
 
     return render(request, "projects/project-detail.html", context=context)
+
+
+def test_email_view(request):
+    subject = "Тестовое письмо"
+    message = "Привет! Это тестовое письмо для проверки SMTP-конфигурации."
+    from_email = "info@unite-together.org"
+    recipient_list = ["krenkroyt@gmail.com"]  # Замените на ваш email для тестирования
+
+    try:
+        send_mail(subject, message, from_email, recipient_list)
+        return HttpResponse("Письмо успешно отправлено!")
+    except Exception as e:
+        return HttpResponse(f"Ошибка при отправке письма: {e}")
