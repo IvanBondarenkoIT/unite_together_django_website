@@ -104,22 +104,23 @@
                                                             </div>
                                                         </div>
                                                     {% endif %}
-                                                    {% if object.start_age %}
-                                                        <div class="age14">
-                                                            <div class="age13">
-                                                                <span>Age: </span>
-                                                                <span class="span7">
+
+                                                </div>
+                                                {% if object.start_age %}
+                                                    <div class="age14">
+                                                        <div class="age13">
+                                                            <span>Age: </span>
+                                                            <span class="span7">
                                                               {% if object.start_age %}
                                                                   {{ object.start_age }}
                                                                   {% if object.end_age %}
                                                                       -{{ object.end_age }}
                                                                   {% endif %}
-                                                              {% endif %}
-                                                      </span>
-                                                            </div>
+                                                              {% endif %}</span>
+
                                                         </div>
-                                                    {% endif %}
-                                                </div>
+                                                    </div>
+                                                {% endif %}
 
                                             </div>
                                         </div>
