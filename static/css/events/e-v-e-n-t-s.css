@@ -861,7 +861,7 @@
 }
 
 .date7 {
-    position: absolute;
+    /*position: absolute;*/
     height: 74.9%;
     width: 86.74%;
     top: 12.65%;
@@ -3658,7 +3658,7 @@
 
 @media screen and (max-width: 450px) {
     .logo-ut2 {
-        padding-left: var(--padding-xl);
+        /*padding-left: var(--padding-xl);*/
         box-sizing: border-box;
     }
 

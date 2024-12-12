@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </a>
-                <div class="hamburger-menu" onclick="toggleDropdown()">☰</div>
+                <div class="hamburger-menu" onclick="toggleDropdown()" style="font-weight: bold;">МЕНЮ ☰</div>
             </div>
             <div class="dropdown-menu" id="dropdown-menu">
                 <a href="{% url 'who_we_are' %}">Про нас</a>
@@ -202,7 +202,7 @@
                     </div>
                 </a>
 
-                <div class="hamburger-menu" onclick="toggleDropdown()">☰</div>
+                <div class="hamburger-menu" onclick="toggleDropdown()" style="font-weight: bold;">МЕНЮ ☰</div>
             </div>
             <div class="dropdown-menu" id="dropdown-menu">
                 <h4 style="margin-left: 15px">{{ user.associated_person.last_name }} {{ user.associated_person.first_name }}</h4>
