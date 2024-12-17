@@ -228,8 +228,16 @@ def forgot_password(request):
                     "token": default_token_generator.make_token(user),
                 },
             )
-            send_email = EmailMessage(mail_subject, message, to=[email])
-            send_email.send()
+            # send_email = EmailMessage(mail_subject, message, to=[email])
+            # send_email.send()
+            from_email = config("EMAIL_ADMIN")
+            recipient_list = [email]  # Замените на ваш email для тестирования
+
+            try:
+                send_mail(mail_subject, message, from_email, recipient_list)
+                # return HttpResponse("Письмо успешно отправлено!")
+            except Exception as e:
+                messages.error("Не вдалося відправити лист")
 
             messages.success(
                 request, "Лист для зміни пароля надіслано на вашу електронну адресу"
