@@ -3,6 +3,20 @@ from django import forms
 
 from unite_together_django_website.validators import CustomPasswordValidator
 from .models import Account
+from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
+
+
+def validate_latin(value):
+    if not value.isascii():
+        raise ValidationError("Це поле повинне складатися лише з латинських літер.")
+
+
+def validate_georgian_phone(value):
+    if not value.startswith("995") or len(value) != 12 or not value.isdigit():
+        raise ValidationError(
+            "Грузинський номер телефону має бути у форматі: 995XXXXXXXXX."
+        )
 
 
 class RegistrationForm(forms.ModelForm):
@@ -12,12 +26,31 @@ class RegistrationForm(forms.ModelForm):
     для согласия с условиями использования.
     """
 
+    first_name = forms.CharField(
+        max_length=30, label="Ім'я", validators=[validate_latin]
+    )
+
+    last_name = forms.CharField(
+        max_length=30, label="Прізвище", validators=[validate_latin]
+    )
+
+    email = forms.EmailField(
+        label=_("Електронна пошта"),
+        error_messages={
+            "unique": _("Обліковий запис з цією електронною адресою вже існує.")
+        },
+    )
+
+    phone_number = forms.CharField(
+        max_length=15, label="Номер телефону", validators=[validate_georgian_phone]
+    )
+
     agree_to_terms = forms.BooleanField(
         required=True, label="Я погоджуюсь з умовами використання"
     )
 
     password = forms.CharField(
-        label="Password",
+        label="Створіть пароль",
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": "Введіть пароль",
@@ -27,12 +60,13 @@ class RegistrationForm(forms.ModelForm):
     )
 
     confirm_password = forms.CharField(
+        label="Повторіть пароль",
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": "Повторіть пароль",
                 "class": "form-control",
             }
-        )
+        ),
     )
 
     class Meta:

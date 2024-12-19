@@ -2,104 +2,120 @@
 {##}
 {% block content %}
     <style>
-    .container {
-        max-width: 520px;
-        margin-top: 80px;
-        padding-bottom: 30px; /* Add padding at the bottom for error messages */
-        overflow: hidden; /* Prevent content overflow */
-    }
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
 
-    .form-group {
-        margin-bottom: 1.5rem; /* Space between form elements */
-        position: relative;
-    }
+        .alert-danger ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
 
-    .form-group .error {
-        color: red;
-        margin-top: 5px; /* Space between field and error message */
-        font-size: 14px;
-    }
 
-    .form-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin-bottom: 1.5rem; /* Space between rows */
-    }
-
-    .form-row .col {
-        width: 48%; /* Ensure fields are side by side with proper width on desktop */
-    }
-
-    /* Full-width form controls for smaller screens */
-    @media (max-width: 768px) {
-        .form-row .col {
-            width: 100%; /* Make fields full width on mobile */
+        .container {
+            max-width: 520px;
+            margin-top: 80px;
+            padding-bottom: 30px; /* Add padding at the bottom for error messages */
+            overflow: hidden; /* Prevent content overflow */
         }
 
         .form-group {
-            width: 100%; /* Ensure form groups are 100% width on mobile */
+            margin-bottom: 1.5rem; /* Space between form elements */
+            position: relative;
         }
-    }
 
-    /* Ensure the button does not overlap with error messages */
-    .btn-block {
-        width: 100%;
-        padding: 12px;
-        margin-top: 20px; /* Ensure space between form and button */
-        background-color: dodgerblue;
-        color: white;
-        border: none;
-        border-radius: 5px;
-    }
+        .form-group .error {
+            color: red;
+            margin-top: 5px; /* Space between field and error message */
+            font-size: 14px;
+        }
 
-    /* Ensure form grows dynamically with error messages */
-    .card-body {
-        min-height: 100%; /* Let form take full height dynamically */
-    }
-
-    .form-check-input {
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;
-    }
-
-    .form-check-label {
-        font-size: 16px;
-    }
-
-    .form-check {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    /* Mobile-specific styling */
-    @media (max-width: 768px) {
         .form-row {
-            flex-direction: column; /* Stack all elements vertically */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 1.5rem; /* Space between rows */
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem; /* Space between label and input */
+        .form-row .col {
+            width: 48%; /* Ensure fields are side by side with proper width on desktop */
         }
 
-        {#.form-group input,#}
-        .form-group select,
-        .form-group textarea {
-            width: 100%; /* Ensure all inputs are full-width on mobile */
+        /* Full-width form controls for smaller screens */
+        @media (max-width: 768px) {
+            .form-row .col {
+                width: 100%; /* Make fields full width on mobile */
+            }
+
+            .form-group {
+                width: 100%; /* Ensure form groups are 100% width on mobile */
+            }
         }
 
-        .form-check {
-            display: block; /* Make checkbox row stack on mobile */
+        /* Ensure the button does not overlap with error messages */
+        .btn-block {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px; /* Ensure space between form and button */
+            background-color: dodgerblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Ensure form grows dynamically with error messages */
+        .card-body {
+            min-height: 100%; /* Let form take full height dynamically */
         }
 
         .form-check-input {
-            margin-bottom: 5px; /* Space between checkbox and label */
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
         }
-    }
-</style>
+
+        .form-check-label {
+            font-size: 16px;
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        /* Mobile-specific styling */
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column; /* Stack all elements vertically */
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem; /* Space between label and input */
+            }
+
+        {#.form-group input,#}
+            .form-group select,
+            .form-group textarea {
+                width: 100%; /* Ensure all inputs are full-width on mobile */
+            }
+
+            .form-check {
+                display: block; /* Make checkbox row stack on mobile */
+            }
+
+            .form-check-input {
+                margin-bottom: 5px; /* Space between checkbox and label */
+            }
+        }
+    </style>
 
 
 
@@ -114,6 +130,24 @@
                 <header class="mb-4"><h4 class="card-title">Зареєструватися</h4></header>
                 <form action="{% url 'register' %}" method="POST">
                     {% csrf_token %}
+
+                    <!-- Общий блок для всех ошибок -->
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li><strong>{{ field.label }}</strong>: {{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+
                     <div class="form-row">
                         <div class="col form-group">
                             <label>Ім'я (Латиницею)</label>
@@ -140,7 +174,7 @@
                             {% endif %}
                         </div> <!-- form-group end.// -->
                         <div class="form-group col-md-6">
-                            <label>Номер телефону(Грузія)</label>
+                            <label>Номер телефону (Грузія)</label>
                             {{ form.phone_number }}
                             {% if form.phone_number.errors %}
                                 <div class="error">{{ form.phone_number.errors }}</div>
@@ -160,15 +194,8 @@
                             <label>Повторіть пароль</label>
                             {{ form.confirm_password }}
                         </div> <!-- form-group end.// -->
-                        <div class="alert alert-info" role="alert">
-                            <p style="font-size: 0.85em;
-                                      color: #666;">
-                                Ваш пароль повинен містити щонайменше 8 (Літери латиницею) символів, включаючи щонайменше одну цифру, одну велику та одну малу літеру
-                            </p>
-                        </div>
                     </div> <!-- form-row.// -->
 
-                    <!-- User agreement checkbox -->
                     <div class="form-group">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="agree_to_terms" name="agree_to_terms"
@@ -186,12 +213,9 @@
                         <button type="submit" class="btn btn-primary btn-block"> Зареєструватися</button>
                     </div> <!-- form-group// -->
 
-
-                    {{ form.email.errors }}
-                    {{ form.non_field_errors }}
-
+                    <p class="text-center mt-4">Є обліковий запис? <a href="{% url 'login' %}">Увійти</a></p>
                 </form>
-                <p class="text-center mt-4">Є обліковий запис? <a href="{% url 'login' %}">Увійти</a></p>
+
 
             </article><!-- card-body.// -->
 
