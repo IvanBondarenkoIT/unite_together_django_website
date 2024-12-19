@@ -2,6 +2,30 @@
 
 {% load static %}
 
+<style>
+    .right-part-of-static-page {
+        position: relative;
+        padding: 20px;
+        box-sizing: border-box;
+        width: 100%; /* Гарантирует, что дочерние элементы помещаются */
+        max-width: 800px; /* Укажите максимально допустимую ширину */
+        margin: 0 auto;
+        border: 1px solid #ddd; /* Рамка, если необходима */
+        background: #fff; /* Задаем фон */
+    }
+
+    .documents-section {
+        width: 100%; /* Гарантирует, что дочерние элементы помещаются */
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 1px solid #ccc; /* Визуальная граница для отладки */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Добавляем тень для красоты */
+        border-radius: 5px;
+        background: #f9f9f9;
+    }
+
+</style>
+
 
 <div class="about-us-documents" data-animate-on-scroll>
     <section class="page-header2">
