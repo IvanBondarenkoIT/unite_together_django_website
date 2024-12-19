@@ -30,6 +30,18 @@
 
                     <div class="description-liststext-link-fo">
 {#                        <div class="text66">Filters</div>#}
+                        <label class="select-your-city">Оберіть місто</label>
+                            <form id="mobCityForm" method="POST" action="{% url 'events' %}">
+                                {% csrf_token %}
+                                <select id="mobCities" name="selected-city">
+                                    <option value="All"{% if selected_city == "All" %} selected{% endif %}>Усі</option>
+                                    {% for city in cities %}
+                                        <option value="{{ city.name }}" {% if city.name == selected_city %}selected{% endif %} >
+                                            {{ city.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </form>
                         <!-- Filters Dropdown Menu -->
 {#                        <div class="filter-dropdown-container">#}
 {#                            <!-- City Selection Dropdown -->#}
@@ -61,20 +73,24 @@
 {#                                </div>#}
 {#                            </div>#}
 {##}
-{#                            <!-- Availability Checkbox -->#}
-{#                            <div class="audio-processor">#}
-{#                                <div class="availability">#}
+                            <!-- Availability Checkbox -->
+                            <div class="audio-processor">
+                                <div class="availability">
 {#                                    <div class="availability1">Доступність</div>#}
-{#                                    <form id="filterForm" action="{% url 'events' %}" method="POST">#}
-{#                                        {% csrf_token %}#}
-{#                                        <input id="activeCheckbox" class="icon-check1" type="checkbox"#}
-{#                                               name="free-spots-checkbox"#}
-{#                                               onchange="document.getElementById('filterForm').submit();"#}
-{#                                               {% if free_spots %}checked{% endif %}>#}
-{#                                        <label for="activeCheckbox">Вільні місця</label>#}
-{#                                    </form>#}
-{#                                </div>#}
-{#                            </div>#}
+                                    <form id="mobFilterForm" action="{% url 'events' %}" method="POST">
+                                        {% csrf_token %}
+                                        <label for="mobActiveCheckbox" style="position: relative; top: -7px;">Вільні місця</label>
+                                        <input id="mobActiveCheckbox"
+                                               class="icon-check1"
+                                               type="checkbox"
+                                               name="free-spots-checkbox"
+
+
+                                               {% if free_spots %}checked{% endif %}>
+
+                                    </form>
+                                </div>
+                            </div>
 {#                        </div>#}
                     </div>
                     <div class="event-details">
@@ -243,18 +259,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{% static 'js/script.js' %}"></script>
 <script>
-    document.getElementById('cities').addEventListener('change', function() {
-        document.getElementById('cityForm').submit();
+    document.getElementById('mobCities').addEventListener('change', function() {
+        document.getElementById('mobCityForm').submit();
     });
 
-    {#window.onbeforeunload = function() {#}
-    {#    sessionStorage.setItem('scrollPosition', window.scrollY);#}
-    {#};#}
-    {##}
-    {#window.onload = function() {#}
-    {#    var scrollPosition = sessionStorage.getItem('scrollPosition');#}
-    {#    if (scrollPosition !== null) {#}
-    {#        window.scrollTo(0, parseInt(scrollPosition));#}
-    {#    }#}
-    {#};#}
 </script>

@@ -111,7 +111,7 @@
   font-family: inherit;
 }
 .in-2001-aktion1 {
-  height: 9.731rem;
+  height: 100%;
   font-size: var(--body-small-size);
   line-height: 170%;
   color: var(--primary-text);
@@ -163,6 +163,8 @@
   align-items: flex-start;
   justify-content: flex-start;
   gap: var(--gap-mini);
+  padding: 10px;
+  border: var(--accent-blue) solid 1px;
 }
 .partner-info {
   border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
