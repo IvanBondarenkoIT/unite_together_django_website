@@ -50,7 +50,7 @@ class RegistrationForm(forms.ModelForm):
     )
 
     password = forms.CharField(
-        label="Створіть пароль",
+        label="Пароль",
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": "Введіть пароль",
@@ -101,8 +101,8 @@ class RegistrationForm(forms.ModelForm):
         confirm_password = cleaned_data.get("confirm_password")
 
         if password != confirm_password:
-            raise forms.ValidationError(
-                "Пароль не співпадає. Будь ласка спробуйте ще раз"
+            self.add_error(
+                "password", "Пароль не співпадає. Будь ласка спробуйте ще раз"
             )
 
         # Проверка требований к паролю
