@@ -37,12 +37,15 @@
                 {% for partner in partners %}
                     <div class="partner-aktion">
                         {% if partner.image %}
-                            <img
-                                    loading="lazy"
+{#                            <div class="logo" style="max-width: 150px;">#}
+                                <img
+                                        loading="lazy"
 
-                                    alt="{{ partner.title }}"
-                                    src="{{ partner.image.url }}"
-                            />
+                                        alt="{{ partner.title }}"
+                                        src="{{ partner.image.url }}"
+                                        style="max-width: 320px; margin: 0 0 20px; padding: 20px"
+                                />
+{#                            </div>#}
                         {% endif %}
 
                         <h3 class="aktion-deutschland-hilft1">
