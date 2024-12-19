@@ -279,6 +279,8 @@
   line-height: 120%;
   font-weight: 600;
   flex-shrink: 0;
+  padding: 0 0 0 var(--padding-3xs);
+  margin: -0.2rem 0 0 0;
 
 }
 .support-description {
@@ -286,6 +288,7 @@
   position: relative;
   line-height: 150%;
   flex-shrink: 0;
+  padding: 0 var(--padding-3xs) 25px;
 }
 .financial-support,
 .support-description-wrapper {
