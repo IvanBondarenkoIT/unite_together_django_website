@@ -884,6 +884,7 @@
   min-width: 285px;
 }
 .frame-child7 {
+  margin-left: -5px;
   height: 10.8px;
   width: 10.4px;
   position: relative;
@@ -938,6 +939,8 @@
 .frame-parent45 {
   flex-direction: column;
   gap: var(--gap-8xs);
+  border-left: 1px solid var(--accent-blue);
+  right: 0.5rem;
 }
 .frame-child8,
 .help-with-utility1 {

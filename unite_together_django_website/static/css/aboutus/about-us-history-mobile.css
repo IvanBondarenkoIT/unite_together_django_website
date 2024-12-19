@@ -279,6 +279,7 @@
   line-height: 120%;
   font-weight: 600;
   flex-shrink: 0;
+
 }
 .support-description {
   align-self: stretch;
@@ -304,6 +305,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   padding: 0 var(--padding-3xs) 0 0;
+  border-left: 1px solid var(--accent-blue);
   z-index: 2;
 }
 
