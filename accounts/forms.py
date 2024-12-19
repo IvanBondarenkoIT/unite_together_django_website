@@ -105,6 +105,23 @@ class RegistrationForm(forms.ModelForm):
                 "Пароль не співпадає. Будь ласка спробуйте ще раз"
             )
 
+        # Проверка требований к паролю
+        if password:
+            if len(password) < 8:
+                self.add_error(
+                    "password", "Пароль повинен містити щонайменше 8 символів."
+                )
+            if not any(char.isdigit() for char in password):
+                self.add_error("password", "Пароль повинен містити хоча б одну цифру.")
+            if not any(char.islower() for char in password):
+                self.add_error(
+                    "password", "Пароль повинен містити хоча б одну малу літеру."
+                )
+            if not any(char.isupper() for char in password):
+                self.add_error(
+                    "password", "Пароль повинен містити хоча б одну велику літеру."
+                )
+
         # Валидация пароля через кастомный валидатор
         CustomPasswordValidator().validate(password)
 
