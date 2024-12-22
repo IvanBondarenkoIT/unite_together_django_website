@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-{##}
+
+{% load static %}
+
 {% block content %}
     <style>
         .alert-danger {
@@ -17,121 +19,116 @@
             list-style: none;
         }
 
-
         .container {
             max-width: 520px;
-            margin-top: 80px;
-            padding-bottom: 30px; /* Add padding at the bottom for error messages */
-            overflow: hidden; /* Prevent content overflow */
+            margin: 80px auto;
+            padding: 30px 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .form-group {
-            margin-bottom: 1.5rem; /* Space between form elements */
+            margin-bottom: 20px;
             position: relative;
         }
 
         .form-group .error {
             color: red;
-            margin-top: 5px; /* Space between field and error message */
+            margin-top: 5px;
             font-size: 14px;
         }
 
         .form-row {
             display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 1.5rem; /* Space between rows */
         }
 
         .form-row .col {
-            width: 48%; /* Ensure fields are side by side with proper width on desktop */
+            flex: 1;
+            min-width: 45%;
         }
 
-        /* Full-width form controls for smaller screens */
-        @media (max-width: 768px) {
-            .form-row .col {
-                width: 100%; /* Make fields full width on mobile */
-            }
-
-            .form-group {
-                width: 100%; /* Ensure form groups are 100% width on mobile */
-            }
+        .form-control {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
         }
 
-        /* Ensure the button does not overlap with error messages */
+        .form-control:focus {
+            border-color: dodgerblue;
+            outline: none;
+            box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+        }
+
         .btn-block {
             width: 100%;
             padding: 12px;
-            margin-top: 20px; /* Ensure space between form and button */
+            font-size: 16px;
             background-color: dodgerblue;
             color: white;
             border: none;
             border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        /* Ensure form grows dynamically with error messages */
-        .card-body {
-            min-height: 100%; /* Let form take full height dynamically */
-        }
-
-        .form-check-input {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-        }
-
-        .form-check-label {
-            font-size: 16px;
+        .btn-block:hover {
+            background-color: royalblue;
         }
 
         .form-check {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            gap: 10px;
         }
 
-        /* Mobile-specific styling */
+        .form-check-label {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .form-check-label a {
+            color: dodgerblue;
+            text-decoration: none;
+        }
+
+        .form-check-label a:hover {
+            text-decoration: underline;
+        }
+
+        .alert-info {
+            background-color: #e9f7fd;
+            color: #31708f;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
         @media (max-width: 768px) {
             .form-row {
-                flex-direction: column; /* Stack all elements vertically */
+                flex-direction: column;
             }
 
-            .form-group label {
-                display: block;
-                margin-bottom: 0.5rem; /* Space between label and input */
-            }
-
-        {#.form-group input,#}
-            .form-group select,
-            .form-group textarea {
-                width: 100%; /* Ensure all inputs are full-width on mobile */
-            }
-
-            .form-check {
-                display: block; /* Make checkbox row stack on mobile */
-            }
-
-            .form-check-input {
-                margin-bottom: 5px; /* Space between checkbox and label */
+            .form-row .col {
+                min-width: 100%;
             }
         }
     </style>
 
-
-
-    <!-- ========================= SECTION CONTENT ========================= -->
-    <section class="product-container align-items-center" style="min-height:40vh">
-
-        <!-- ============================ COMPONENT REGISTER   ================================= -->
-
-        <div class="container" style="max-width:520px; margin-top:80px;">
+    <section class="product-container align-items-center">
+        <div class="container">
             <article class="card-body">
-                {#        {% include 'includes/alerts.html' %}#}
-                <header class="mb-4"><h4 class="card-title">Зареєструватися</h4></header>
+                <header class="mb-4">
+                    <h4 class="card-title">Зареєструватися</h4>
+                </header>
                 <form action="{% url 'register' %}" method="POST">
                     {% csrf_token %}
 
-                    <!-- Общий блок для всех ошибок -->
                     {% if form.errors %}
                         <div class="alert alert-danger">
                             <ul>
@@ -147,7 +144,6 @@
                         </div>
                     {% endif %}
 
-
                     <div class="form-row">
                         <div class="col form-group">
                             <label>Ім'я (Латиницею)</label>
@@ -155,60 +151,57 @@
                             {% if form.first_name.errors %}
                                 <div class="error">{{ form.first_name.errors }}</div>
                             {% endif %}
-                        </div> <!-- form-group end.// -->
+                        </div>
                         <div class="col form-group">
-                            <label>Прізвищє (Латиницею)</label>
+                            <label>Прізвище (Латиницею)</label>
                             {{ form.last_name }}
                             {% if form.last_name.errors %}
                                 <div class="error">{{ form.last_name.errors }}</div>
                             {% endif %}
-                        </div> <!-- form-group end.// -->
-                    </div> <!-- form-row end.// -->
+                        </div>
+                    </div>
 
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="col form-group">
                             <label>Електронна пошта</label>
                             {{ form.email }}
                             {% if form.email.errors %}
                                 <div class="error">{{ form.email.errors }}</div>
                             {% endif %}
-                        </div> <!-- form-group end.// -->
-                        <div class="form-group col-md-6">
+                        </div>
+                        <div class="col form-group">
                             <label>Номер телефону (Грузія)</label>
                             {{ form.phone_number }}
                             {% if form.phone_number.errors %}
                                 <div class="error">{{ form.phone_number.errors }}</div>
                             {% endif %}
-                        </div> <!-- form-group end.// -->
-                    </div> <!-- form-row.// -->
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info" role="alert">
+                        Ваш пароль повинен містити щонайменше 8 символів, включаючи щонайменше одну цифру, одну велику та одну малу літеру.
+                    </div>
 
                     <div class="form-row">
-                        <div class="alert alert-info" role="alert">
-                            <p style="font-size: 0.85em;
-                                      color: #666;">
-                                Ваш пароль повинен містити щонайменше 8 (Літери латиницею) символів, включаючи
-                                щонайменше одну цифру, одну велику та одну малу літеру
-                            </p>
-                        </div>
-                        <div class="form-group col-md-6">
+                        <div class="col form-group">
                             <label>Створіть пароль</label>
                             {{ form.password }}
                             {% if form.password.errors %}
                                 <div class="error">{{ form.password.errors }}</div>
                             {% endif %}
-                        </div> <!-- form-group end.// -->
-                        <div class="form-group col-md-6">
+                        </div>
+                        <div class="col form-group">
                             <label>Повторіть пароль</label>
                             {{ form.confirm_password }}
-                        </div> <!-- form-group end.// -->
-                    </div> <!-- form-row.// -->
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="agree_to_terms" name="agree_to_terms"
-                                   required>
+                            <input class="form-check-input" type="checkbox" id="agree_to_terms" name="agree_to_terms" required>
                             <label class="form-check-label" for="agree_to_terms">
-                                Я погоджуюсь з <a href="#">умовами використання</a>.
+                                Я погоджуюсь з <a href="{% static 'documents/terms_of_use.pdf'%}" target="_blank">умовами
+                                використання</a>.
                             </label>
                         </div>
                         {% if form.agree_to_terms.errors %}
@@ -217,24 +210,12 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block"> Зареєструватися</button>
-                    </div> <!-- form-group// -->
+                        <button type="submit" class="btn btn-primary btn-block"> Зареєструватися </button>
+                    </div>
 
                     <p class="text-center mt-4">Є обліковий запис? <a href="{% url 'login' %}">Увійти</a></p>
                 </form>
-
-
-            </article><!-- card-body.// -->
-
-
-        </div> <!-- card .// -->
-
-
-        <!-- ============================ COMPONENT REGISTER  END.// ================================= -->
-
-
+            </article>
+        </div>
     </section>
-    <!-- ========================= SECTION CONTENT END// ========================= -->
-
-
 {% endblock %}

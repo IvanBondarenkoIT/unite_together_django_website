@@ -1,77 +1,133 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- ========================= SECTION CONTENT ========================= -->
-<section class="product-container align-items-center" style="min-height:60vh">
-    <main class="sec-accounts1">
-
-<!-- ============================ COMPONENT LOGIN   ================================= -->
-    {% if request.GET.command == 'verification' %}
-        <div class="container mx-auto alert alert-info text-center" role="alert" style="max-width: 1024px; margin-top: 100px;">
-            Дякуємо за реєстрацію. Ми надіслали вам електронний лист для підтвердження на адресу [{{ request.GET.email }}]. Будь ласка, перевірте це.
-            <br><br>
-            Вже перевірено? <a href="{% url 'login' %}">Логін</a>
-        </div>
-    {% else %}
-        <div class="card mx-auto" style="max-width:700px; margin-top:10px;">
-          <div class="card-body">
-          <h4 class="card-title mb-4">Увійдіть в особовий кабінет на сайті або створіть його</h4>
-{#          {% include 'includes/alerts.html' %}#}
-          <form action="{% url 'login' %}" method="POST">
-              {% csrf_token %}
-              <div class="form-group">
-                 <input type="email" class="form-control" placeholder="Електрона адреса" name="email">
-              </div> <!-- form-group// -->
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Пароль" name="password">
-              </div> <!-- form-group// -->
-
-              <div class="form-group">
-                <a href="{% url 'forgot_password' %}" class="float-right">Забули пароль?</a>
-
-              </div> <!-- form-group form-check .// -->
-              <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block"> Логін  </button>
-              </div> <!-- form-group// -->
-          </form>
-          </div> <!-- card-body.// -->
-        <p class="text-center mt-4">Немає облікового запису? <a href="{% url 'register' %}">Зареєструватися</a></p>
-        </div> <!-- card .// -->
-
-
-    {% endif %}
-
-    </main>
     <style>
         body {
-            padding: 10px;
+            padding: 20px;
+            margin: 0;
             box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
         .product-container {
             display: flex;
             flex-direction: row;
             width: 100%;
-            height: 40vh;
-
-            display: flex;
-            height: 40vh;
+            min-height: 60vh;
             justify-content: center;
             align-items: center;
         }
+
         .img {
             width: 60%;
-            border-radius: 50px;
+            border-radius: 20px;
+            margin: 20px;
         }
+
         button {
-            padding: 10px;
+            padding: 12px 20px;
             border-radius: 5px;
             background-color: dodgerblue;
             color: white;
             border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
+        button:hover {
+            background-color: royalblue;
+        }
+
+        .card {
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-control:focus {
+            border-color: dodgerblue;
+            outline: none;
+        }
+
+        .alert {
+            margin-top: 40px;
+            font-size: 18px;
+        }
+
+        .text-center {
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            padding: 12px 20px;
+            font-size: 16px;
+        }
+
+        a {
+            text-decoration: none;
+            color: dodgerblue;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
-<!-- ============================ COMPONENT LOGIN  END.// ================================= -->
-</section>
+
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section class="product-container align-items-center">
+        <main class="sec-accounts1">
+            <!-- ============================ COMPONENT LOGIN   ================================= -->
+            {% if request.GET.command == 'verification' %}
+                <div class="container mx-auto alert alert-info text-center" role="alert" style="max-width: 1024px;">
+                    Дякуємо за реєстрацію. Ми надіслали вам електронний лист для підтвердження на адресу [{{ request.GET.email }}]. Будь ласка, перевірте це.
+                    <br><br>
+                    Вже перевірено? <a href="{% url 'login' %}">Логін</a>
+                </div>
+            {% else %}
+                <div class="card mx-auto" style="max-width:700px;">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Увійдіть в особовий кабінет на сайті або створіть його</h4>
+                        {#          {% include 'includes/alerts.html' %}#}
+                        <form action="{% url 'login' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Електрона адреса" name="email">
+                            </div> <!-- form-group// -->
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Пароль" name="password">
+                            </div> <!-- form-group// -->
+                            <div class="form-group">
+                                <a href="{% url 'forgot_password' %}" class="float-right">Забули пароль?</a>
+                            </div> <!-- form-group form-check .// -->
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block"> Логін </button>
+                            </div> <!-- form-group// -->
+                        </form>
+                    </div> <!-- card-body.// -->
+                    <p class="text-center mt-4">Немає облікового запису? <a href="{% url 'register' %}">Зареєструватися</a></p>
+                </div> <!-- card .// -->
+            {% endif %}
+        </main>
+        <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+    </section>
 {% endblock %}
