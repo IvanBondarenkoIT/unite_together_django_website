@@ -10,7 +10,7 @@
                     {#                    Banner#}
                     <div class="actions-parent">
                         <div class="actions13"></div>
-                        <div class="header-503" style='background-image: url("{% static 'img/desc-projects.png' %}");'>
+                        <div class="header-503" style='background-image: url("{% static 'img/desc-projects.webp' %}");'>
                             <div class="container6">
                                 <div class="section-title6">
                                     <div class="tagline3">Підзаголовок</div>
@@ -37,7 +37,40 @@
                             {% include 'projects/mobile/projects-sidebar-mobile.html' %}
                         </div>
                         <div class="description-liststext-link-fo">
-{#                            <div class="text66">Filters</div>#}
+
+{#                            <label class="select-your-city">Оберіть місто</label>#}
+{#                            <form id="mobCityForm" method="POST" action="{% url 'projects' %}">#}
+{#                                {% csrf_token %}#}
+{#                                <select id="mobCities" name="selected-city">#}
+{#                                    <option value="All"{% if selected_city == "All" %} selected{% endif %}>Усі</option>#}
+{#                                    {% for city in cities %}#}
+{#                                        <option value="{{ city.name }}"#}
+{#                                                {% if city.name == selected_city %}selected{% endif %}>#}
+{#                                            {{ city.name }}#}
+{#                                        </option>#}
+{#                                    {% endfor %}#}
+{#                                </select>#}
+{#                            </form>#}
+                            <!-- Availability Checkbox -->
+                            <div class="audio-processor">
+                                <div class="availability">
+
+                                    <form id="mobFilterForm" action="{% url 'projects' %}" method="POST">
+                                        {% csrf_token %}
+                                        <label for="mobActiveCheckbox" style="position: relative; top: -7px;">Тільки
+                                            поточні</label>
+                                        <input id="mobActiveCheckbox"
+                                               class="icon-check1"
+                                               type="checkbox"
+                                               name="free-spots-checkbox"
+
+
+                                               {% if free_spots %}checked{% endif %}>
+
+                                    </form>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="rectangle-parent8">
@@ -55,18 +88,18 @@
                                             </div>
                                         </div>
                                         <a href="{{ object.get_url }}">
-                                        <img
-                                                class="placeholder-image-icon20"
-                                                loading="lazy"
-                                                alt="'/img/placeholder-image1%402x.png'"
-                                                src="
+                                            <img
+                                                    class="placeholder-image-icon20"
+                                                    loading="lazy"
+                                                    alt="'/img/placeholder-image1%402x.png'"
+                                                    src="
                                                     {% if object.image %}
                                                         {{ object.image.url }}
                                                     {% else %}
                                                         {% static '/img/placeholder-image1%402x.png' %}
                                                     {% endif %}
                                                     "
-                                        />
+                                            />
                                         </a>
                                     </div>
                                     <div class="decoration-group">
@@ -148,5 +181,9 @@
     </section>
 
 </div>
-
+<script>
+    document.getElementById('mobCities').addEventListener('change', function () {
+        document.getElementById('mobCityForm').submit();
+    });
+</script>
 

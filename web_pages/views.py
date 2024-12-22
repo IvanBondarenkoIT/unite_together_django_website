@@ -290,9 +290,12 @@ def projects_detail(request, group_slug=None, project_slug=None):
     )
     project_gallery = ProjectGallery.objects.filter(project_id=single_project.id)
 
+    all_cities = single_project.selected_cities_list.all()
+
     context = {
         "single_project": single_project,
         "project_gallery": project_gallery,
+        "cities": all_cities,
     }
 
     return render(request, "projects/project-detail.html", context=context)

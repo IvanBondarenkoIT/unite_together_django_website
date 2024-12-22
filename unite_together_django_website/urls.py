@@ -23,7 +23,6 @@ from unite_together_django_website import views
 from unite_together_django_website import settings
 
 urlpatterns = [
-
     # ADMIN
     path("secure/", admin.site.urls),
     # Home
@@ -36,9 +35,11 @@ urlpatterns = [
     path("persons/", include("persons.urls")),
     # COORDINATION
     path("coordination/", include("coordination.urls")),
-
     path("", include("web_pages.urls")),
     path("", include("donate.urls")),
     path("", include("paypal.standard.ipn.urls")),
-
+    # POLICIES
+    path("privacy-policy/", views.privacy_policy, name="privacy_policy"),
+    path("terms-conditions/", views.terms_conditions, name="terms_conditions"),
+    path("cookies-policy/", views.cookies_policy, name="cookies_policy"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

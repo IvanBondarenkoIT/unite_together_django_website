@@ -30,9 +30,7 @@
             <div class="col-md-12">
                 {% include 'projects/mobile/projects-sidebar-mobile.html' %}
             </div>
-            <div class="description-liststext-link-fo3">
-                <a class="text69">Filters</a>
-            </div>
+
         </div>
     </div>
     <div class="project-banner">
@@ -104,7 +102,13 @@
                                 <img class="vector-icon30" loading="lazy" alt="" src="{% static 'img/vector-16.svg' %}" />
                             </div>
                             <div class="georgia1">
-                                <div class="georgia">{{ single_project.selected_city }}</div>
+                                <div class="georgia">
+                                    {% for city in cities %}
+                                    	{{ city }}
+                                    {% endfor %}
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
