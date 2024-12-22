@@ -27,7 +27,7 @@
                     <div class="col-md-12">
                         {% include 'events/mobile/events-sidebar-mobile.html' %}
                     </div>
-
+                    <!-- Filters Dropdown Menu -->
                     <div class="description-liststext-link-fo">
 {#                        <div class="text66">Filters</div>#}
                         <label class="select-your-city">Оберіть місто</label>
@@ -42,41 +42,10 @@
                                     {% endfor %}
                                 </select>
                             </form>
-                        <!-- Filters Dropdown Menu -->
-{#                        <div class="filter-dropdown-container">#}
-{#                            <!-- City Selection Dropdown -->#}
-{#                            <div class="variable-holder">#}
-{#                                <div class="function-caller">#}
-{#                                    <img class="dec-line-1-icon" loading="lazy" alt=""#}
-{#                                         src="{% static 'img/decline1.svg' %}"/>#}
-{#                                </div>#}
-{##}
-{#                                <label class="select-your-city">Оберіть місто</label>#}
-{#                                <form id="cityForm" method="POST" action="{% url 'events' %}">#}
-{#                                    {% csrf_token %}#}
-{#                                    <select id="cities" name="selected-city"#}
-{#                                            onchange="document.getElementById('cityForm').submit();">#}
-{#                                        <option value="All"{% if selected_city == "All" %} selected{% endif %}>Усі#}
-{#                                        </option>#}
-{#                                        {% for city in cities %}#}
-{#                                            <option value="{{ city.name }}"#}
-{#                                                    {% if city.name == selected_city %}selected{% endif %}>#}
-{#                                                {{ city.name }}#}
-{#                                            </option>#}
-{#                                        {% endfor %}#}
-{#                                    </select>#}
-{#                                </form>#}
-{##}
-{#                                <div class="function-caller1">#}
-{#                                    <img class="dec-line-2-icon" loading="lazy" alt=""#}
-{#                                         src="{% static 'img/decline2.svg' %}"/>#}
-{#                                </div>#}
-{#                            </div>#}
-{##}
                             <!-- Availability Checkbox -->
                             <div class="audio-processor">
                                 <div class="availability">
-{#                                    <div class="availability1">Доступність</div>#}
+
                                     <form id="mobFilterForm" action="{% url 'events' %}" method="POST">
                                         {% csrf_token %}
                                         <label for="mobActiveCheckbox" style="position: relative; top: -7px;">Вільні місця</label>
@@ -91,7 +60,7 @@
                                     </form>
                                 </div>
                             </div>
-{#                        </div>#}
+
                     </div>
                     <div class="event-details">
                         <div class="event-details-child"></div>

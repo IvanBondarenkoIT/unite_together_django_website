@@ -115,9 +115,15 @@
                                         {% endif %}
                                     </li>
                                 {% endif %}
-                                <li>
-                                    <div class="georgia">{{ single_project.selected_city }}</div>
-                                </li>
+
+                                <div class="georgia">
+                                    <li>
+                                        {% for city in cities %}
+                                            {{ city }}
+                                        {% endfor %}
+                                    </li>
+                                </div>
+
                             </ul>
                             {% if single_project.extra_details %}
                                 <div id="extra-details" class="event-extra-details">
