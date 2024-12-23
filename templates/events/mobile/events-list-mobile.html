@@ -1,5 +1,54 @@
 {% load static %}
 
+{#<style>#}
+{#    .batumi4 {#}
+{#        font-size: 18px; /* Увеличено на 20% (примерно) */#}
+{#        font-weight: bold;#}
+{#        color: #333; /* Тёмный цвет для контрастности */#}
+{#        text-align: center;#}
+{#        margin-top: 10px;#}
+{#    }#}
+{##}
+{#    .date14 {#}
+{#        font-size: 20px; /* Увеличено на 20% */#}
+{#        font-weight: 600;#}
+{#        color: #555;#}
+{#        text-align: center;#}
+{#        padding: 5px;#}
+{#    }#}
+{##}
+{#    .age14 {#}
+{#        font-size: 18px; /* Увеличено на 20% */#}
+{#        font-weight: 500;#}
+{#        color: #666;#}
+{#        margin-top: 8px;#}
+{#    }#}
+{##}
+{#    .age14 .age13 {#}
+{#        display: flex;#}
+{#        align-items: center;#}
+{#        justify-content: center;#}
+{#    }#}
+{##}
+{#    .date-age-content {#}
+{#        display: flex;#}
+{#        flex-direction: column;#}
+{#        align-items: center;#}
+{#    }#}
+{##}
+{#    .date15 {#}
+{#        font-size: 16px; /* Для контраста уменьшено слегка */#}
+{#        color: #777;#}
+{#        text-align: center;#}
+{#    }#}
+{##}
+{#    .map-pin-icon {#}
+{#        width: 24px; /* Пропорциональное увеличение */#}
+{#        height: 24px;#}
+{#        margin-right: 5px;#}
+{#    }#}
+{#</style>#}
+
 <section class="events-container-parent">
     <div class="menu-and-content">
 
@@ -82,10 +131,10 @@
                                                     {% if object.get_start_date_day %}
                                                         <div class="date14">
                                                             <div class="date15">
-                                                                <div class="day">
+                                                                <div class="day" style="font-weight: bold; font-size: 20px; align-self: center">
                                                                     <div class="event-day">{{ object.get_start_date_day }}</div>
                                                                 </div>
-                                                                <div class="year6">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
+                                                                <div class="year6" style="font-weight: bold; font-size: 10px;">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
                                                             </div>
                                                         </div>
                                                     {% endif %}
@@ -95,7 +144,7 @@
                                                     <div class="age14">
                                                         <div class="age13">
                                                             <span>Age: </span>
-                                                            <span class="span7">
+                                                            <span class="span7" style="font-weight: bold; font-size: 12px;">
                                                               {% if object.start_age %}
                                                                   {{ object.start_age }}
                                                                   {% if object.end_age %}
@@ -117,10 +166,10 @@
                                                             class="map-pin-icon"
                                                             loading="lazy"
                                                             alt=""
-                                                            src="./public/vector-21.svg"
+                                                            src="{% static 'img/biometric-verification.svg' %}"
                                                     />
                                                 </div>
-                                                <div class="batumi4">
+                                                <div class="batumi4" style="font-weight: bold; font-size: 18px;">
                                                     {% if object.selected_city %}
                                                         {{ object.selected_city }}
                                                     {% else %}
