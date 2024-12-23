@@ -201,7 +201,7 @@ def documents(request):
 
 
 def partners(request):
-    partners = Partners.objects.all()
+    partners = Partners.objects.all().order_by("ordering_number")
     return render(request, "aboutus/about-us-partners.html", {"partners": partners})
 
 
