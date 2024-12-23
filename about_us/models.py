@@ -49,6 +49,7 @@ class Program(models.Model):
     )
     additional_info = models.TextField(blank=True, null=True)
     ordering_number = models.IntegerField(default=0)
+    image = models.ImageField(upload_to="img/partners", blank=True, null=True)
 
     class Meta:
         ordering = [
@@ -85,6 +86,7 @@ class Partners(models.Model):
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to="img/partners", blank=True, null=True)
     url_link = models.URLField(blank=True, null=True)
+    ordering_number = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title

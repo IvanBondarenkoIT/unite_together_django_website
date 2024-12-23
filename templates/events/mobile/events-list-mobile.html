@@ -10,7 +10,7 @@
                 <div class="header-504" style='background-image: url("{% static 'img/mob-events.webp' %}");'>
                     <div class="container7">
                         <div class="section-title7">
-                            <div class="tagline4">Підзаголовок</div>
+{#                            <div class="tagline4">Підзаголовок</div>#}
                             <div class="content38">
                                 <h1 class="short-heading-here4">Події</h1>
                                 <div class="lorem-ipsum-dolor4">
@@ -82,10 +82,10 @@
                                                     {% if object.get_start_date_day %}
                                                         <div class="date14">
                                                             <div class="date15">
-                                                                <div class="day">
+                                                                <div class="day" style="font-weight: bold; font-size: 20px; align-self: center">
                                                                     <div class="event-day">{{ object.get_start_date_day }}</div>
                                                                 </div>
-                                                                <div class="year6">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
+                                                                <div class="year6" style="font-weight: bold; font-size: 10px;">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
                                                             </div>
                                                         </div>
                                                     {% endif %}
@@ -95,7 +95,7 @@
                                                     <div class="age14">
                                                         <div class="age13">
                                                             <span>Age: </span>
-                                                            <span class="span7">
+                                                            <span class="span7" style="font-weight: bold; font-size: 12px;">
                                                               {% if object.start_age %}
                                                                   {{ object.start_age }}
                                                                   {% if object.end_age %}
@@ -117,10 +117,10 @@
                                                             class="map-pin-icon"
                                                             loading="lazy"
                                                             alt=""
-                                                            src="./public/vector-21.svg"
+                                                            src="{% static 'img/biometric-verification.svg' %}"
                                                     />
                                                 </div>
-                                                <div class="batumi4">
+                                                <div class="batumi4" style="font-weight: bold; font-size: 18px;">
                                                     {% if object.selected_city %}
                                                         {{ object.selected_city }}
                                                     {% else %}

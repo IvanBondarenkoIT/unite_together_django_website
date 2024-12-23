@@ -1,0 +1,56 @@
+<div class="carousel-container">
+    <div class="carousel">
+        {% for program in programs %}
+            {% if program.image %}
+                <img class="carousel-image" src="{{ program.image.url }}" alt="Value Image">
+            {% endif %}
+        {% endfor %}
+        <!-- Дублируем изображения для бесшовной прокрутки -->
+        {% for program in programs %}
+            {% if program.image %}
+                <img class="carousel-image" src="{{ program.image.url }}" alt="Value Image">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* Контейнер для карусели */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        height: 300px; /* Регулируйте высоту по необходимости */
+        overflow: hidden;
+        margin: 20px 0;
+    }
+
+    /* Карусель */
+    .carousel {
+        display: flex;
+        height: 100%;
+        animation: scroll 15s linear infinite; /* Автоматическая прокрутка */
+    }
+
+    /* Изображения */
+    .carousel-image {
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Масштабирование изображения */
+    }
+
+    /* Анимация для плавного прокручивания */
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-100% * {{ values|length }}));
+        }
+    }
+
+    /* Останавливаем анимацию при наведении */
+    .carousel:hover {
+        animation-play-state: paused;
+    }
+</style>
