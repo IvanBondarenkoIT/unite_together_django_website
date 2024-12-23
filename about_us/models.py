@@ -49,6 +49,7 @@ class Program(models.Model):
     )
     additional_info = models.TextField(blank=True, null=True)
     ordering_number = models.IntegerField(default=0)
+    image = models.ImageField(upload_to="img/partners", blank=True, null=True)
 
     class Meta:
         ordering = [

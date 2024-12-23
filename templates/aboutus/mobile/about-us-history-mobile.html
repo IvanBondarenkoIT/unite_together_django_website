@@ -56,12 +56,15 @@
                             </div>
                         </div>
                         <div class="values-group">
-                            <img
-                                    class="inactive-indicator-icon"
-                                    loading="lazy"
-                                    alt=""
-                                    src="{% static 'img/aboutus/group-7301-temporary.jpg' %}"
-                            />
+                            <div class="frame-wrapper9">
+                                {% include 'aboutus/values_carousel.html' %}
+                            </div>
+{#                            <img#}
+{#                                    class="inactive-indicator-icon"#}
+{#                                    loading="lazy"#}
+{#                                    alt=""#}
+{#                                    src="{% static 'img/aboutus/group-7301-temporary.jpg' %}"#}
+{#                            />#}
                             <h2 class="values2">Цінності:</h2>
                             <div class="tabs-menu">
                                 {% for value in values %}
@@ -81,6 +84,9 @@
                         </div>
 
                         <div class="changes-content-parent">
+                            <div class="frame-wrapper9">
+                                {% include 'aboutus/programs_carousel.html' %}
+                            </div>
                             <div class="changes-content">
                                 <h2 class="changes-are-created2">Програми:</h2>
                             </div>
