@@ -182,7 +182,7 @@ def event_detail(request, group_slug=None, event_slug=None):
                             # Перевірити наявність місць та додати учасника
                             if (
                                 single_event.max_participants
-                                > total_participants_in_event
+                                >= total_participants_in_event
                             ):
                                 if not Participant.objects.filter(
                                     copy_of_unique_identifier=selected_person.unique_identifier,
