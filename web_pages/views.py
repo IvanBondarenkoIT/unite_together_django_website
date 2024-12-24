@@ -74,7 +74,7 @@ def events(request, group_slug=None):
                 F("group__slug"), Value("/"), F("slug"), output_field=CharField()
             )
         )
-        .order_by("-is_active", "start_date")
+        .order_by("-is_active", "-start_date")
     )
 
     # Paginate events
