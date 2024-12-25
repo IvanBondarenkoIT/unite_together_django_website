@@ -598,7 +598,7 @@
 }
 .baner-image-icon {
   align-self: stretch;
-  height: 500px;
+  /*height: 500px;*/
   border-radius: 0 var(--br-8xs) 0 0;
   overflow: hidden;
   flex-shrink: 0;
