@@ -304,7 +304,7 @@
   gap: var(--gap-xl);
 }
 .language-picker-parent {
-  align-self: stretch;
+  align-self: flex-end;
   justify-content: space-between;
 }
 .navbaraccount-inner2,
