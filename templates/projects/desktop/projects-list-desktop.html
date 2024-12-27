@@ -32,18 +32,17 @@
 </style>
 
 <section class="page-header6">
-    <img class="bg-icon6" loading="lazy" alt="" src="{% static 'img/desc-projects.webp' %}"/>
+    <img class="bg-icon6" loading="lazy" alt="{% static 'img/desc-projects.webp' %}" src="{{ banner_settings.projects_banner_image.url }}"/>
 
     <div class="sec-title6">
         {#            <h1 class="events24">Проекти</h1>#}
 {#        <div class="sublitle6">Підзаголовок</div>#}
 
         <div class="content18">
-            <h1 class="events6">Проекти</h1>
+            <h1 class="events6">{{ banner_settings.projects_banner_title }}</h1>
             <div class="discover-the-diverse-range-of-wrapper3">
                 <div class="discover-the-diverse6">
-                    Відкрийте різноманітний спектр подій та активностей, які ми пропонуємо для підтримки української
-                    громади в Грузії.
+                    {{ banner_settings.projects_banner_text }}
                 </div>
             </div>
         </div>
