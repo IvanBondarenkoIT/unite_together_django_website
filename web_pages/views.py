@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import F, CharField, Value
 from django.db.models.functions import Concat
 from persons.models import AssociatedPerson, Participant
+
 from web_pages.models import (
     WebContentObject,
     Events,
@@ -11,13 +12,20 @@ from web_pages.models import (
     City,
     Projects,
     ProjectGallery,
+    BannerSettings,
 )
-
 
 from django.core.mail import send_mail
 from django.http import HttpResponse
 
 OBJECTS_ON_PAGE = 6  # Constant defining the number of objects per page
+
+
+def get_banner_settings():
+    settings, created = BannerSettings.objects.get_or_create(
+        id=1
+    )  # id=1 для уникальности
+    return settings
 
 
 def events(request, group_slug=None):
@@ -85,6 +93,7 @@ def events(request, group_slug=None):
 
     # Retrieve list of cities for filter selection
     cities = City.objects.only("id", "name").all()
+    banner_settings = BannerSettings.objects.first()
 
     # Prepare context data for the template
     context = {
@@ -93,6 +102,7 @@ def events(request, group_slug=None):
         "free_spots": is_active,
         "cities": cities,
         "selected_city": selected_city,
+        "banner_settings": banner_settings,
     }
 
     return render(request, "events/events_index.html", context=context)
@@ -264,10 +274,13 @@ def projects(request, group_slug=None):
     page_all_objects = paginator.get_page(page)
     objects_count = paginator.count
 
+    banner_settings = BannerSettings.objects.first()
+
     context = {
         "all_objects": page_all_objects,
         "objects_count": objects_count,
         "free_spots": is_active,
+        "banner_settings": banner_settings,
     }
 
     return render(request, "projects/projects.html", context=context)
@@ -291,11 +304,13 @@ def projects_detail(request, group_slug=None, project_slug=None):
     project_gallery = ProjectGallery.objects.filter(project_id=single_project.id)
 
     all_cities = single_project.selected_cities_list.all()
+    banner_settings = BannerSettings.objects.first()
 
     context = {
         "single_project": single_project,
         "project_gallery": project_gallery,
         "cities": all_cities,
+        "banner_settings": banner_settings,
     }
 
     return render(request, "projects/project-detail.html", context=context)

@@ -4,6 +4,30 @@ from django.db import models
 from django.urls import reverse
 
 
+class BannerSettings(models.Model):
+    about_us_banner_image = models.ImageField(upload_to="img/banners/")
+    about_us_banner_mob_image = models.ImageField(upload_to="img/banners/")
+    about_us_banner_title = models.CharField(max_length=255)
+    about_us_banner_text = models.CharField(max_length=255)
+
+    events_banner_image = models.ImageField(upload_to="img/banners/")
+    events_banner_mob_image = models.ImageField(upload_to="img/banners/")
+    events_banner_title = models.CharField(max_length=255)
+    events_banner_text = models.CharField(max_length=255)
+
+    projects_banner_image = models.ImageField(upload_to="img/banners/")
+    projects_banner_mob_image = models.ImageField(upload_to="img/banners/")
+    projects_banner_title = models.CharField(max_length=255)
+    projects_banner_text = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = "Banner Settings"
+        verbose_name_plural = "Banner Settings"
+
+    def __str__(self):
+        return f"{self.about_us_banner_title} {self.events_banner_title} {self.projects_banner_title}"
+
+
 class City(models.Model):
     name = models.CharField(max_length=250)  # City name
     default_address = models.CharField(max_length=250, blank=True, null=True)

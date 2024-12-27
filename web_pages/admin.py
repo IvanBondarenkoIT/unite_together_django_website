@@ -2,20 +2,36 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 from web_pages.forms import ProjectsForm, EventsForm
-from web_pages.models import WebPage, Events, ObjectsGroup, City, \
-    Projects, ProjectGallery
+from web_pages.models import (
+    WebPage,
+    Events,
+    ObjectsGroup,
+    City,
+    Projects,
+    ProjectGallery,
+    BannerSettings,
+)
 
 import admin_thumbnails
 
 
 # Register your models here.
 
+
+class BannerSettingsAdmin(admin.ModelAdmin):
+    list_display = (
+        "about_us_banner_title",
+        "events_banner_title",
+        "projects_banner_title",
+    )
+
+
 class CityAdmin(admin.ModelAdmin):
-    list_display = ('name', 'default_address')
+    list_display = ("name", "default_address")
 
 
 class WebPageAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ("name",)
 
 
 # @admin_thumbnails.thumbnail('image')
@@ -31,57 +47,72 @@ class WebPageAdmin(admin.ModelAdmin):
 
 # +
 class PageTypeListFilter(admin.SimpleListFilter):
-    title = _('Page Type')
-    parameter_name = 'page_type'
+    title = _("Page Type")
+    parameter_name = "page_type"
 
     def lookups(self, request, model_admin):
         return (
-            ('projects', _('Projects')),
-            ('events', _('Events')),
+            ("projects", _("Projects")),
+            ("events", _("Events")),
         )
 
     def queryset(self, request, queryset):
-        if self.value() == 'projects':
-            return queryset.filter(page__name__iexact='projects')
-        if self.value() == 'events':
-            return queryset.filter(page__name__iexact='events')
+        if self.value() == "projects":
+            return queryset.filter(page__name__iexact="projects")
+        if self.value() == "events":
+            return queryset.filter(page__name__iexact="events")
         return queryset
 
 
 class ObjectsGroupAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}
+    prepopulated_fields = {"slug": ("name",)}
     list_filter = (PageTypeListFilter,)
-    list_display = ('name', 'order')
-    list_editable = ('order',)
-    ordering = ('order',)
+    list_display = ("name", "order")
+    list_editable = ("order",)
+    ordering = ("order",)
 
 
-@admin_thumbnails.thumbnail('image')
+@admin_thumbnails.thumbnail("image")
 class ProjectGalleryInline(admin.TabularInline):
     model = ProjectGallery
     extra = 1
 
 
-@admin_thumbnails.thumbnail('image')
+@admin_thumbnails.thumbnail("image")
 class ProjectsAdmin(admin.ModelAdmin):
     form = ProjectsForm
-    list_display = ('name', 'title', 'text', 'is_active', 'created_at', 'updated_at',)
-    list_editable = ('is_active',)
-    prepopulated_fields = {'slug': ('name', 'group')}
+    list_display = (
+        "name",
+        "title",
+        "text",
+        "is_active",
+        "created_at",
+        "updated_at",
+    )
+    list_editable = ("is_active",)
+    prepopulated_fields = {"slug": ("name", "group")}
     inlines = [ProjectGalleryInline]
 
 
-@admin_thumbnails.thumbnail('image')
+@admin_thumbnails.thumbnail("image")
 class EventsAdmin(admin.ModelAdmin):
     form = EventsForm
-    list_display = ('name', 'title', 'text', 'is_active', 'created_at', 'updated_at',)
-    list_editable = ('is_active',)
-    prepopulated_fields = {'slug': ('name', 'group')}
+    list_display = (
+        "name",
+        "title",
+        "text",
+        "is_active",
+        "created_at",
+        "updated_at",
+    )
+    list_editable = ("is_active",)
+    prepopulated_fields = {"slug": ("name", "group")}
 
+
+admin.site.register(BannerSettings, BannerSettingsAdmin)
 
 admin.site.register(Projects, ProjectsAdmin)
 admin.site.register(Events, EventsAdmin)
-
 
 # -
 
