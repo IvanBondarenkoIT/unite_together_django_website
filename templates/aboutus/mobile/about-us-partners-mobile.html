@@ -1,15 +1,14 @@
 {% load static %}
 
 <div class="about-us-partners-mobile">
-    <div class="header-502" style='background-image: url("{% static 'img/mob-aboutus.webp' %}");'>
+    <div class="header-502" style='background-image: url("{{ banner_settings.about_us_banner_mob_image.url }}");'>
         <div class="container5">
             <div class="section-title5">
 {#                <div class="tagline2">Підзаголовок</div>#}
                 <div class="content35">
-                    <h1 class="short-heading-here2">Про нас</h1>
+                    <h1 class="short-heading-here2">{{ banner_settings.about_us_banner_title }}</h1>
                     <div class="lorem-ipsum-dolor2">
-                        Об'єднаймося для підтримки та розвитку українських громад у Грузії
-                        через сталі проєкти та програми.
+                        {{ banner_settings.about_us_banner_text }}
                     </div>
                 </div>
             </div>

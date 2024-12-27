@@ -7,15 +7,14 @@
     <main class="main-content">
         <section class="content-header">
             <div class="actions11"></div>
-            <div class="header-501" style='background-image: url("{% static 'img/mob-aboutus.webp' %}");'>
+            <div class="header-501" style='background-image: url("{{ banner_settings.about_us_banner_mob_image.url }}");'>
                 <div class="container4">
                     <div class="section-title4">
 {#                        <div class="tagline1">Підзаголовок</div>#}
                         <div class="content34">
-                            <h1 class="short-heading-here1">Про нас</h1>
+                            <h1 class="short-heading-here1">{{ banner_settings.about_us_banner_title }}</h1>
                             <div class="lorem-ipsum-dolor1">
-                                Об'єднаймося для підтримки та розвитку українських громад у Грузії
-                                через сталі проєкти та програми.
+                                {{ banner_settings.about_us_banner_text }}
                             </div>
                         </div>
                     </div>
