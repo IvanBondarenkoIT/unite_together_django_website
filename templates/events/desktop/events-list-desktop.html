@@ -1,15 +1,15 @@
 {% load static %}
 
 <section class="page-header">
-    <img class="bg-icon" loading="lazy" alt="" src="{% static 'img/desc-events.webp' %}" />
+    <img class="bg-icon" loading="lazy" alt="{% static 'img/desc-events.webp' %}" src="{{ banner_settings.events_banner_image.url }}" />
 
     <div class="sec-title1">
 {#        <div class="sublitle1">Підзаголовок</div>#}
         <div class="content9">
-            <h1 class="events6">Події</h1>
+            <h1 class="events6">{{ banner_settings.events_banner_title }}</h1>
             <div class="discover-the-diverse-range-of-wrapper">
                 <div class="discover-the-diverse1">
-                    Відкрийте різноманітні події та активності, які ми пропонуємо для підтримки української спільноти в Грузії.
+                    {{ banner_settings.events_banner_text }}
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                                 <img class="dec-line-1-icon" loading="lazy" alt="" src="{% static 'img/decline1.svg' %}" />
                             </div>
 
-                            <label class="select-your-city">Оберіть місто</label>
+                            <label class="select-your-city">Місто</label>
                             <form id="cityForm" method="POST" action="{% url 'events' %}">
                                 {% csrf_token %}
                                 <select id="cities" name="selected-city">

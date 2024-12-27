@@ -552,6 +552,7 @@
   color: white;
   border-radius: var(--br-3xs); /* Задаем радиус скругления углов */
   padding: 10px; /* Подбираем подходящий внутренний отступ для красивого вида */
+  margin: 10px;
 }
 
 .dec-line-1-icon {

@@ -7,14 +7,14 @@
             <div class="main-content1">
 
 
-                <div class="header-504" style='background-image: url("{% static 'img/mob-events.webp' %}");'>
+                <div class="header-504" style='background-image: url("{{ banner_settings.events_banner_mob_image.url }}");'>
                     <div class="container7">
                         <div class="section-title7">
 {#                            <div class="tagline4">Підзаголовок</div>#}
                             <div class="content38">
-                                <h1 class="short-heading-here4">Події</h1>
+                                <h1 class="short-heading-here4">{{ banner_settings.events_banner_title }}</h1>
                                 <div class="lorem-ipsum-dolor4">
-                                    Відкрийте різноманітні події та активності, які ми пропонуємо для підтримки української спільноти в Грузії.
+                                    {{ banner_settings.events_banner_text }}
                                 </div>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                     <!-- Filters Dropdown Menu -->
                     <div class="description-liststext-link-fo">
 {#                        <div class="text66">Filters</div>#}
-                        <label class="select-your-city">Оберіть місто</label>
+                        <label class="select-your-city">Місто</label>
                             <form id="mobCityForm" method="POST" action="{% url 'events' %}">
                                 {% csrf_token %}
                                 <select id="mobCities" name="selected-city">
