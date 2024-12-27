@@ -5,8 +5,16 @@ from django.shortcuts import render, redirect
 from unite_together_django_website import settings
 from .forms import ContactForm
 from .models import History, Mission, Vision, Value, Program, DocumentCategory, Partners
+from web_pages.models import BannerSettings
 
 TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST = True
+
+
+def get_banner_settings():
+    settings, created = BannerSettings.objects.get_or_create(
+        id=1
+    )  # id=1 для уникальности
+    return settings
 
 
 def first_lunch(request):
@@ -134,6 +142,7 @@ def who_we_are(request):
     vision = Vision.objects.first()
     values = Value.objects.all()
     programs = Program.objects.all()
+    banner_settings = BannerSettings.objects.first()
 
     context = {
         "history": history,
@@ -141,6 +150,7 @@ def who_we_are(request):
         "vision": vision,
         "values": values,
         "programs": programs,
+        "banner_settings": banner_settings,
     }
 
     return render(request, "aboutus/aboutus-index.html", context)
@@ -148,8 +158,10 @@ def who_we_are(request):
 
 def documents_view(request):
     categories = DocumentCategory.objects.prefetch_related("documents").all()
+    banner_settings = BannerSettings.objects.first()
     context = {
         "categories": categories,
+        "banner_settings": banner_settings,
     }
     return render(request, "aboutus/about-us-documents.html", context)
 
@@ -178,7 +190,13 @@ def contact_view(request):
     else:
         form = ContactForm()
 
-    return render(request, "aboutus/about-us-contacts.html", {"form": form})
+    banner_settings = BannerSettings.objects.first()
+
+    return render(
+        request,
+        "aboutus/about-us-contacts.html",
+        {"form": form, "banner_settings": banner_settings},
+    )
 
 
 def contact_success_view(request):
@@ -186,25 +204,31 @@ def contact_success_view(request):
 
 
 def about_us(request):
-    context = {}
+    banner_settings = BannerSettings.objects.first()
+    context = {"banner_settings": banner_settings}
     return render(request, "aboutus/aboutus_index.html", context=context)
 
 
 def history(request):
-    context = {}
+    banner_settings = BannerSettings.objects.first()
+    context = {"banner_settings": banner_settings}
     return render(request, "aboutus/about-us-history.html", context=context)
 
 
 def documents(request):
-    context = {}
+    banner_settings = BannerSettings.objects.first()
+    context = {"banner_settings": banner_settings}
     return render(request, "aboutus/about-us-documents.html", context=context)
 
 
 def partners(request):
     partners = Partners.objects.all().order_by("ordering_number")
-    return render(request, "aboutus/about-us-partners.html", {"partners": partners})
+    banner_settings = BannerSettings.objects.first()
+    context = {"partners": partners, "banner_settings": banner_settings}
+    return render(request, "aboutus/about-us-partners.html", context=context)
 
 
 def contacts(request):
-    context = {}
-    return render(request, "aboutus/about-us-contacts.html")
+    banner_settings = BannerSettings.objects.first()
+    context = {"banner_settings": banner_settings}
+    return render(request, "aboutus/about-us-contacts.html", context=context)

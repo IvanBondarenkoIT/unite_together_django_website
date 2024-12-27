@@ -52,15 +52,14 @@
     <main class="main-content">
         <section class="content-header">
             <div class="actions11"></div>
-            <div class="header-501" style='background-image: url("{% static 'img/mob-aboutus.webp' %}");'>
+            <div class="header-501" style='background-image: url("{{ banner_settings.about_us_banner_mob_image.url }}");'>
                 <div class="container4">
                     <div class="section-title4">
 {#                        <div class="tagline1">Підзаголовок</div>#}
                         <div class="content34">
-                            <h1 class="short-heading-here1">Про нас</h1>
+                            <h1 class="short-heading-here1">{{ banner_settings.about_us_banner_title }}</h1>
                             <div class="lorem-ipsum-dolor1">
-                                Об'єднаймося для підтримки та розвитку українських громад у Грузії
-                                через сталі проєкти та програми.
+                                {{ banner_settings.about_us_banner_text }}
                             </div>
                         </div>
                     </div>
@@ -70,30 +69,28 @@
 
         <section class="contact-parent-wrapper">
             <div class="contact-parent1">
-                <div class="bg-blue7"></div>
-                <div class="text-card5">
-                    <div class="title-and-preview5">
-                        <div class="title40">Contacts</div>
-                        <img class="chevron-down-icon9" alt="" src="{% static 'img/aboutus/chevron-down.svg' %}"/>
-                    </div>
+                <div class="col-md-12">
+                    {% include 'aboutus/mobile/about-us-sidebar-mobile.html' %}
                 </div>
+                <div class="bg-blue7"></div>
+{#                <div class="text-card5">#}
+                <!-- Dropdown Menu -->
+
+{#                </div>#}
                 <div class="info-parent">
                     <div class="info-parent-child"></div>
                     <div class="info-container">
                         <div class="contact-info4">
-                            <h1 class="contacts6">Contacts</h1>
+                            <h1 class="contacts6">Контакти</h1>
                             <h2 class="unite-together-is1">
-                                Unite Together is a non-profit Ukrainian organization that
-                                aims to unite people to create and implement projects that
-                                support and develop Ukrainians affected by the war for
-                                sustainable systemic changes in their lives and society.
+                                Unite Together Об'єднаймося для підтримки та розвитку українських громад у Грузії через сталі проєкти та програми.
                             </h2>
                         </div>
                     </div>
                     <div class="contact-details8">
-                        <div class="left">
+                        <div class="left-part">
                             <div class="bg-contacts1"></div>
-                            <h1 class="contact-information1">Contact information</h1>
+                            <h1 class="contact-information1">Контактна Інформація</h1>
                             <div class="icon-container">
                                 <div class="contact-icons3">
                                     <img class="icon-phone21" loading="lazy" alt=""
@@ -134,7 +131,7 @@
                         <div class="form-parent">
                             <form method="post" action="{% url 'contact' %}">
                                 {% csrf_token %}
-                                <div class="content38">
+                                <div class="content39">
                                     <div class="first-name-input">
                                         <label for="id_first_name" class="first-name9">First Name</label>
                                         <input id="id_first_name" name="first_name" type="text" class="form-control"

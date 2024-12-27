@@ -10,15 +10,14 @@
                     {#                    Banner#}
                     <div class="actions-parent">
                         <div class="actions13"></div>
-                        <div class="header-503" style='background-image: url("{% static 'img/desc-projects.webp' %}");'>
+                        <div class="header-503" style='background-image: url("{{ banner_settings.projects_banner_mob_image.url }}");'>
                             <div class="container6">
                                 <div class="section-title6">
 {#                                    <div class="tagline3">Підзаголовок</div>#}
                                     <div class="content36">
-                                        <h1 class="short-heading-here3">Проєкти</h1>
+                                        <h1 class="short-heading-here3">{{ banner_settings.projects_banner_title }}</h1>
                                         <div class="lorem-ipsum-dolor3">
-                                            Відкрийте різноманітний спектр подій та активностей, які ми пропонуємо для
-                                            підтримки української громади в Грузії.
+                                            {{ banner_settings.projects_banner_text }}
                                         </div>
                                     </div>
                                 </div>
@@ -38,7 +37,7 @@
                         </div>
                         <div class="description-liststext-link-fo">
 
-{#                            <label class="select-your-city">Оберіть місто</label>#}
+{#                            <label class="select-your-city">Місто</label>#}
 {#                            <form id="mobCityForm" method="POST" action="{% url 'projects' %}">#}
 {#                                {% csrf_token %}#}
 {#                                <select id="mobCities" name="selected-city">#}

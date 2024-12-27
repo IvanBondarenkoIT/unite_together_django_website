@@ -388,7 +388,7 @@
 .icon-tg21 {
   width: 1.775rem;
 }
-.left,
+.left-part,
 .social-icons4 {
   display: flex;
   flex-direction: row;
@@ -396,7 +396,7 @@
   justify-content: flex-start;
   gap: 1.156rem;
 }
-.left {
+.left-part {
   align-self: stretch;
   border-radius: 0 4.34px 0 4.34px;
   background-color: var(--accent-blue);
@@ -670,7 +670,7 @@
   max-height: 100%;
   flex-shrink: 0;
 }
-.content38,
+.content39,
 .message1 {
   align-self: stretch;
   display: flex;
@@ -684,7 +684,7 @@
   box-sizing: border-box;
   gap: 0.462rem;
 }
-.content38 {
+.content39 {
   padding: var(--padding-xl) var(--padding-2xs) var(--padding-xl)
     var(--padding-xs);
   gap: 0.943rem;

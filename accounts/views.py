@@ -101,12 +101,21 @@ def register(request):
                     from_email = config("EMAIL_ADMIN")
                     recipient_list = [email]  # Замените на ваш email для тестирования
 
-                    try:
-                        send_mail(mail_subject, message, from_email, recipient_list)
-                        # return HttpResponse("Письмо успешно отправлено!")
-                    except Exception as e:
-                        pass
-                        # return HttpResponse(f"Ошибка при отправке письма: {e}")
+                    mail_sent = False
+                    max_attempts = 5
+                    attempts = 0
+
+                    while not mail_sent and attempts < max_attempts:
+                        try:
+                            send_mail(mail_subject, message, from_email, recipient_list)
+                            mail_sent = True  # Email sent successfully
+                        except Exception as e:
+                            attempts += 1  # Increment the attempt counter
+                            if attempts >= max_attempts:
+                                messages.error(
+                                    request,
+                                    "Не вдалося надіслати лист для активації. Спробуйте ще раз пізніше.",
+                                )
 
                     return redirect(
                         f"/accounts/login/?command=verification&email={email}"

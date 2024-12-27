@@ -459,7 +459,7 @@
     gap: 1.156rem;
 }
 
-.left {
+.left-part {
     align-self: stretch;
     border-radius: 0 4.34px 0 4.34px;
     background-color: var(--accent-blue);
@@ -773,7 +773,7 @@
     flex-shrink: 0;
 }
 
-.content38,
+.content39,
 .message1 {
     align-self: stretch;
     display: flex;
@@ -789,7 +789,7 @@
     gap: 0.462rem;
 }
 
-.content38 {
+.content39 {
     padding: var(--padding-xl) var(--padding-2xs) var(--padding-xl) var(--padding-xs);
     gap: 0.943rem;
     flex-shrink: 0;
