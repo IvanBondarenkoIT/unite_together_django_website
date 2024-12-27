@@ -91,7 +91,7 @@
                 </h1>
             </div>
             <div class="text38">
-                {{ sec_events.text|safe }}
+                {{ sec_events.extra_details }}
             </div>
         </div>
         <div class="content16">
@@ -111,7 +111,7 @@
                                             overflow: hidden; /* Сховати будь-який текст, що виходить за межі */
                                             text-overflow: ellipsis; /* Відобразити многоточие (...) для вказівки перевищення тексту */
                                             white-space: nowrap; /* Заборонити перенесення тексту */
-                                                ">{{ event.text|safe }}</div>
+                                                ">{{ event.extra_details }}</div>
                         </div>
                     </div>
                 {% endfor %}

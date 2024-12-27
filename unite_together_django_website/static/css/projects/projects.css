@@ -945,8 +945,8 @@
   position: relative;
 }
 .placeholder-image-icon7 {
-  height: 150px;
-  width: 150px;
+  /*height: 150px;*/
+  width: 10rem;
   position: relative;
   object-fit: cover;
   z-index: 2;
