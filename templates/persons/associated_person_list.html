@@ -119,6 +119,11 @@
     </div>
 
     <div class="table-container">
+        {% if request.session.last_event_url %}
+            <a href="{{ request.session.last_event_url }}" class="btn btn-primary">Вернуться к последнему событию</a>
+        {% else %}
+            <p>Вы ещё не посещали ни одного события.</p>
+        {% endif %}
         <h2>Родина</h2>
 
         {% if main_person %}

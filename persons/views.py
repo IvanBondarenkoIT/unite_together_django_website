@@ -24,10 +24,16 @@ def associated_person_list(request):
         "unique_identifier"
     )
     main_person = user_profile.user.associated_person
+    context = {
+        "persons": persons,
+        "main_person": main_person,
+        "last_event_url": request.session.get("last_event_url"),
+    }
+
     return render(
         request,
         "persons/associated_person_list.html",
-        {"persons": persons, "main_person": main_person},
+        context=context,
     )
 
 
