@@ -2,168 +2,220 @@
 {% load static %}
 
 {% block content %}
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        text-decoration-color: var(--color-darkslategray-300);
-        color: var(--color-darkslategray-300);
-        background-color: #f5f5f5;
-    }
-
-    .main-container {
-        display: flex;
-        align-items: flex-start;
-        padding: 20px;
-    }
-
-    .sidebar-container {
-        flex: 0 0 250px;
-    }
-
-    .table-container {
-        flex: 1;
-        max-width: 100%;
-        margin: 20px;
-        background-color: var(--neutral-background);
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        overflow-x: auto; /* Enables horizontal scrolling */
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    tr:hover {
-        background-color: #f5f5f5;
-    }
-
-    .main-person {
-        background-color: #ffc107;
-    }
-
-    .button {
-        width: 10rem;
-        padding: 8px 12px;
-        font-size: 14px;
-        color: white;
-        text-decoration: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin: 5px;
-        display: inline-block;
-    }
-
-    .button.active {
-        background-color: #4CAF50;
-    }
-
-    .button.inactive {
-        background-color: #999;
-        cursor: not-allowed;
-    }
-
-    .button.add-person {
-        display: inline-block;
-        margin-bottom: 15px;
-        background-color: #007BFF;
-    }
-
-    .button:hover {
-        background-color: #45a049;
-    }
-
-    .button.inactive:hover {
-        background-color: #999;
-    }
-
-    @media (max-width: 768px) {
-        .main-container {
-            flex-direction: column;
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-decoration-color: var(--color-darkslategray-300);
+            color: var(--color-darkslategray-300);
+            background-color: #f5f5f5;
         }
 
-        .sidebar-container, .table-container {
+        .main-container {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .sidebar-container {
+            flex: 0 0 250px;
+        }
+
+        .table-container {
+            flex: 1;
             max-width: 100%;
-            margin: 0;
-            padding: 10px;
+            margin: 20px;
+            background-color: var(--neutral-background);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto; /* Enables horizontal scrolling */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
         th, td {
-            padding: 8px;
-            font-size: 12px;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .main-person {
+            background-color: #ffc107;
         }
 
         .button {
-            width: 8.5rem;
-            padding: 6px 10px;
-            font-size: 12px;
+            width: 10rem;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            display: inline-block;
         }
-    }
-</style>
 
-<div class="main-container">
-    <div class="sidebar-container">
-        {% include 'includes/dashboard_sidebar.html' %}
-    </div>
+        .button.active {
+            background-color: #4CAF50;
+        }
 
-    <div class="table-container">
-        <h2>Родина</h2>
+        .button.inactive {
+            background-color: #999;
+            cursor: not-allowed;
+        }
 
-        {% if main_person %}
-            <div>
-{#             номер телефона (грузинский, если ввел украинский то и его), адресс. Убираем дату рождения, гражданство и все оставляем по кнопке ПОВНА ІНФОРМАЦІЯ#}
-                <h3>Головна Особа:</h3>
-                <p><strong>{{ main_person.first_name }} {{ main_person.last_name }}</strong></p>
-{#                <p>Дата народження: {{ main_person.date_of_birth|date:"d.m.Y" }}</p>#}
-                <p>e-mail: {{ main_person.user_owner.email }}</p>
-                <p>Грузинський номер телефону: {{ main_person.georgian_phone_number }}</p>
-                {% if main_person.ukrainian_phone_number %}
-                	<p>Український номер телефону: {{ main_person.ukrainian_phone_number }}</p>
-                {% endif %}
-                {% if main_person.address_line %}
-                    <p>Адреса: {{ main_person.address_line }}</p>
-                {% endif %}
+        .button.add-person {
+            display: inline-block;
+            margin-bottom: 15px;
+            background-color: #007BFF;
+        }
 
-                {% if main_person.edit_permission %}
-                    <a href="{% url 'associated_person_edit' main_person.id %}" class="button active">Повна інформація</a>
-                {% else %}
-                    <a href="{% url 'contact' %}">Щоб редагувати особу, відправте запит</a>
-                {% endif %}
-            </div>
-        {% endif %}
+        .button:hover {
+            background-color: #45a049;
+        }
 
-        <a href="{% url 'associated_person_create' %}" class="button add-person">Додати нову особу</a>
+        .button.inactive:hover {
+            background-color: #999;
+        }
 
-        <table>
-            <thead>
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar-container, .table-container {
+                max-width: 100%;
+                margin: 0;
+                padding: 10px;
+            }
+
+            th, td {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .button {
+                width: 8.5rem;
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+        }
+
+        .last-event-block {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .last-event {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .last-event-thumbnail {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .last-event-details {
+            font-size: 14px;
+        }
+
+        .last-event-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .last-event-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <div class="main-container">
+        <div class="sidebar-container">
+            {% include 'includes/dashboard_sidebar.html' %}
+        </div>
+
+        <div class="table-container">
+            {% if last_event %}
+                <h4>Останній відвіданий захід:</h4>
+                <div class="last-event-block">
+                    <div class="last-event-details">
+                                                {% if last_event.thumbnail %}
+                            <a href="{{ last_event.url }}"><img src="{{ last_event.thumbnail }}" alt="{{ last_event.name }}"
+                                 class="last-event-thumbnail">
+                            </a>
+                        {% endif %}
+                        <h5>{{ last_event.name }}</h5>
+                        <a href="{{ last_event.url }}" class="btn btn-primary">Перейти до реєстрації</a>
+                    </div>
+
+                </div>
+
+            {% endif %}
+            <h2>Родина</h2>
+
+            {% if main_person %}
+                <div>
+                    {#             номер телефона (грузинский, если ввел украинский то и его), адресс. Убираем дату рождения, гражданство и все оставляем по кнопке ПОВНА ІНФОРМАЦІЯ#}
+                    <h3>Головна Особа:</h3>
+                    <p><strong>{{ main_person.first_name }} {{ main_person.last_name }}</strong></p>
+                    {#                <p>Дата народження: {{ main_person.date_of_birth|date:"d.m.Y" }}</p>#}
+                    <p>e-mail: {{ main_person.user_owner.email }}</p>
+                    <p>Грузинський номер телефону: {{ main_person.georgian_phone_number }}</p>
+                    {% if main_person.ukrainian_phone_number %}
+                        <p>Український номер телефону: {{ main_person.ukrainian_phone_number }}</p>
+                    {% endif %}
+                    {% if main_person.address_line %}
+                        <p>Адреса: {{ main_person.address_line }}</p>
+                    {% endif %}
+
+                    {% if main_person.edit_permission %}
+                        <a href="{% url 'associated_person_edit' main_person.id %}" class="button active">Повна
+                            інформація</a>
+                    {% else %}
+                        <a href="{% url 'contact' %}">Щоб редагувати особу, відправте запит</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <a href="{% url 'associated_person_create' %}" class="button add-person">Додати нову особу</a>
+
+            <table>
+                <thead>
                 <tr>
                     <th>Дії</th>
                     <th>Ім'я</th>
                     <th>Дата народження</th>
-{#                    <th>Дата прибуття</th>#}
-{#                    <th>Тип документу</th>#}
+                    {#                    <th>Дата прибуття</th>#}
+                    {#                    <th>Тип документу</th>#}
                     <th>Номер документу</th>
                     <th>Стать</th>
-{#                    <th>Грузинський номер телефону</th>#}
-{#                    <th>Український номер телефону</th>#}
-{#                    <th>Країна</th>#}
-{#                    <th>Вибране місто</th>#}
-{#                    <th>Адреса</th>#}
+                    {#                    <th>Грузинський номер телефону</th>#}
+                    {#                    <th>Український номер телефону</th>#}
+                    {#                    <th>Країна</th>#}
+                    {#                    <th>Вибране місто</th>#}
+                    {#                    <th>Адреса</th>#}
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 {% for person in persons %}
                     {% if person == main_person %}
                     {% else %}
@@ -177,20 +229,20 @@
                             </td>
                             <td>{{ person.first_name }} {{ person.last_name }}</td>
                             <td>{{ person.date_of_birth|date:"d.m.Y" }}</td>
-{#                            <td>{{ person.date_of_arrival|date:"d.m.Y" }}</td>#}
-{#                            <td>{{ person.type_of_document.name }}</td>#}
+                            {#                            <td>{{ person.date_of_arrival|date:"d.m.Y" }}</td>#}
+                            {#                            <td>{{ person.type_of_document.name }}</td>#}
                             <td>{{ person.document_number }}</td>
                             <td>{{ person.gender }}</td>
-{#                            <td>{{ person.georgian_phone_number }}</td>#}
-{#                            <td>{{ person.ukrainian_phone_number }}</td>#}
-{#                            <td>{{ person.country }}</td>#}
-{#                            <td>{{ person.chosen_city }}</td>#}
-{#                            <td>{{ person.address_line }}</td>#}
+                            {#                            <td>{{ person.georgian_phone_number }}</td>#}
+                            {#                            <td>{{ person.ukrainian_phone_number }}</td>#}
+                            {#                            <td>{{ person.country }}</td>#}
+                            {#                            <td>{{ person.chosen_city }}</td>#}
+                            {#                            <td>{{ person.address_line }}</td>#}
                         </tr>
                     {% endif %}
                 {% endfor %}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 {% endblock %}

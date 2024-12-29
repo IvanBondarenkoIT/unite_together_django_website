@@ -77,7 +77,9 @@ class WebContentObject(models.Model):
         City, blank=True, related_name="web_content_objects"
     )
 
-    slug = models.SlugField(max_length=200, blank=True)
+    slug = models.SlugField(
+        max_length=200, blank=True
+    )  # slug  нужно сделать уникальным
 
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

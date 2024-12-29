@@ -61,6 +61,7 @@
     button[type="submit"] {
         width: 100%;
         padding: 10px;
+        margin: 10px;
         font-size: 16px;
         background-color: #4CAF50;
         color: white;
@@ -211,7 +212,10 @@
                 {% endif %}
             </div>
 
-            <button type="submit">Зберегти зміни</button>
+            <button type="submit" name="save" class="btn btn-primary">Зберегти зміни</button>
+            <button type="submit" name="save_and_continue" class="btn btn-secondary">
+                Зберегти та додати наступного учасника родини
+            </button>
         </form>
     </div>
 </div>
