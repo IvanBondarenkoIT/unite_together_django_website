@@ -40,7 +40,6 @@ def associated_person_list(request):
 @login_required(login_url="login")
 def associated_person_create(request):
     if request.method == "POST":
-        # user_owner = request.user  # Assuming user is the owner
         form = AssociatedPersonForm(
             request.POST,
             default_ge_phone=request.user.associated_person.georgian_phone_number,
@@ -50,15 +49,20 @@ def associated_person_create(request):
             associated_person = form.save(commit=False)
             associated_person.user_owner = request.user
             associated_person.is_active = True
-            associated_person.is_approved = (
-                True  # later may bee changed to manual approving
-            )
+            associated_person.is_approved = True  # Later can be manual approval
             associated_person.save()
-            messages.success(request, "Особа успішно створена!")
-            return redirect("associated_person_list")
+
+            # Проверяем, какая кнопка была нажата
+            if "save_and_continue" in request.POST:
+                messages.success(
+                    request, "Особа збережена, додайте наступного члена родини."
+                )
+                return redirect("associated_person_create")  # Открыть новую форму
+            else:
+                messages.success(request, "Особа успішно створена!")
+                return redirect("associated_person_list")  # Перейти к списку
         else:
             messages.error(request, "Будь ласка, виправте помилки нижче.")
-        #     return redirect("associated_person_create")
     else:
         form = AssociatedPersonForm(
             default_ge_phone=request.user.associated_person.georgian_phone_number,
@@ -70,34 +74,39 @@ def associated_person_create(request):
 
 @login_required(login_url="login")
 def associated_person_edit(request, pk):
-    edited_person = AssociatedPerson.objects.get(pk=pk)
+    edited_person = get_object_or_404(AssociatedPerson, pk=pk)
 
     if request.method == "POST":
-        person_form = AssociatedPersonForm(
+        form = AssociatedPersonForm(
             request.POST,
             instance=edited_person,
             default_ge_phone=request.user.associated_person.georgian_phone_number,
             user=request.user,
         )
-        if person_form.is_valid():
-            associated_person = person_form.save(commit=False)
-            associated_person.is_approved = (
-                True  # later may bee changed to manual approving
-            )
-            person_form.save()
-            messages.success(request, "Ваш профіль було оновлено")
-            return redirect("associated_person_list")
+        if form.is_valid():
+            associated_person = form.save(commit=False)
+            associated_person.is_approved = True  # Later can be manual approval
+            associated_person.save()
+
+            # Проверяем, какая кнопка была нажата
+            if "save_and_continue" in request.POST:
+                messages.success(
+                    request, "Особа збережена, додайте наступного члена родини."
+                )
+                return redirect("associated_person_create")  # Открыть новую форму
+            else:
+                messages.success(request, "Ваш профіль було оновлено.")
+                return redirect("associated_person_list")  # Перейти к списку
         else:
             messages.error(request, "Будь ласка, виправте помилки нижче.")
-        #     return redirect("associated_person_edit", pk=edited_person.pk)
     else:
-        person_form = AssociatedPersonForm(
+        form = AssociatedPersonForm(
             instance=edited_person,
             default_ge_phone=request.user.associated_person.georgian_phone_number,
             user=request.user,
         )
 
-    return render(request, "persons/dashboard.html", {"form": person_form})
+    return render(request, "persons/dashboard.html", {"form": form})
 
 
 @login_required(login_url="login")
