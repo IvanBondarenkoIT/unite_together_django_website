@@ -20,6 +20,10 @@ OBJECTS_ON_PAGE = 4
 @login_required(login_url="login")
 def associated_person_list(request):
     user_profile = get_object_or_404(UserProfile, user=request.user)
+
+    # Данные о последнем евенте
+    last_event = request.session.get("last_event")
+
     persons = AssociatedPerson.objects.filter(user_owner=user_profile.user).order_by(
         "unique_identifier"
     )
@@ -27,7 +31,7 @@ def associated_person_list(request):
     context = {
         "persons": persons,
         "main_person": main_person,
-        "last_event_url": request.session.get("last_event_url"),
+        "last_event": last_event,
     }
 
     return render(
