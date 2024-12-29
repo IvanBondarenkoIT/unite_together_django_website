@@ -170,6 +170,13 @@ def event_detail(request, group_slug=None, event_slug=None):
             is_approved=True,
         ).order_by("unique_identifier")
 
+        # Сохраняем данные в сессию
+        request.session["last_event"] = {
+            "url": request.path,
+            "name": single_event.name,
+            "thumbnail": (single_event.image.url if single_event.image else None),
+        }
+
         # Обробка POST запиту для реєстрації на подію
         if request.method == "POST":
             selected_person_ids = request.POST.getlist("selected-persons")
