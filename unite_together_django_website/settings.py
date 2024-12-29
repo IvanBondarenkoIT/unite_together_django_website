@@ -67,7 +67,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    "web_pages.middleware.LastEventMiddleware",
+    # "web_pages.middleware.LastEventMiddleware",
 ]
 
 ROOT_URLCONF = "unite_together_django_website.urls"
