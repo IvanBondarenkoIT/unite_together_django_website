@@ -28,7 +28,7 @@ def get_banner_settings():
     return settings
 
 
-def events(request, group_slug=None):
+def events(request, group_slug=None, lang="uk"):
     """
     Renders a paginated list of events with optional filtering by city and activity status.
     Saves filter selections in the session for consistent user experience.
@@ -40,6 +40,7 @@ def events(request, group_slug=None):
     Returns:
         HttpResponse: Rendered template for the list of events.
     """
+    print(f"Lang:{lang}")
     # Process checkbox and city selection based on the request method
     if request.method == "POST":
         # Determine checkbox status for filtering active events
@@ -143,7 +144,7 @@ def create_participant(
     )
 
 
-def event_detail(request, group_slug=None, event_slug=None):
+def event_detail(request, group_slug=None, event_slug=None, lang="uk"):
     """
     Відображає детальну інформацію про конкретну подію з можливістю реєстрації для авторизованих користувачів.
 
@@ -245,7 +246,7 @@ def event_detail(request, group_slug=None, event_slug=None):
     return render(request, "events/event_detail.html", context=context)
 
 
-def projects(request, group_slug=None):
+def projects(request, group_slug=None, lang="uk"):
     """
     Renders a paginated list of projects with an option to filter by activity status, saving filter state in session.
 
@@ -256,6 +257,7 @@ def projects(request, group_slug=None):
     Returns:
         HttpResponse: Rendered template for the list of projects.
     """
+    print(f"Lang:{lang}")
     if request.method == "POST":
         is_active = request.POST.get("free-spots-checkbox") == "on"
         request.session["activeCheckbox"] = is_active
@@ -288,12 +290,13 @@ def projects(request, group_slug=None):
         "objects_count": objects_count,
         "free_spots": is_active,
         "banner_settings": banner_settings,
+        "lang": lang,
     }
 
     return render(request, "projects/projects.html", context=context)
 
 
-def projects_detail(request, group_slug=None, project_slug=None):
+def projects_detail(request, group_slug=None, project_slug=None, lang="uk"):
     """
     Displays detailed information about a specific project, including a gallery if available.
 
@@ -305,6 +308,7 @@ def projects_detail(request, group_slug=None, project_slug=None):
     Returns:
         HttpResponse: Rendered template for the project detail page.
     """
+    print(f"Lang:{lang}")
     single_project = get_object_or_404(
         Projects, group__slug=group_slug, slug=project_slug
     )
@@ -318,6 +322,7 @@ def projects_detail(request, group_slug=None, project_slug=None):
         "project_gallery": project_gallery,
         "cities": all_cities,
         "banner_settings": banner_settings,
+        "lang": lang,
     }
 
     return render(request, "projects/project-detail.html", context=context)

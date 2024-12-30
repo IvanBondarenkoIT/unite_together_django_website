@@ -1,0 +1,167 @@
+{% load static %}
+
+<style>
+    .image-container-img {
+        width: 80px; /* Ширина изображения */
+        height: 80px; /* Высота изображения */
+        object-fit: cover; /* Обрезка изображения с сохранением пропорций */
+        object-position: center; /* Центрирование изображения */
+        margin: 5px; /* Отступ между изображениями (по желанию) */
+    }
+
+    .baner-image-icon2 {
+        flex: auto;
+        width: 100%; /* Ширина изображения */
+        height: 100%; /* Высота изображения */
+        padding: 2%;
+        object-fit: cover; /* Обрезка изображения с сохранением пропорций */
+        object-position: center; /* Центрирование изображения */
+        {#margin: 5px; /* Отступ между изображениями (по желанию) */#}
+
+    }
+</style>
+
+<div class="projects-mobile">
+    <div class="bg-blue8"></div>
+    <div class="actions16"></div>
+    <div class="project-card-details-wrapper">
+        <div class="project-card-details">
+            <!-- Dropdown Menu -->
+            <div class="col-md-12">
+                {% include 'projects/mobile/projects-sidebar-mobile.html' %}
+            </div>
+
+        </div>
+    </div>
+    <div class="project-banner">
+        <div class="rectangle-parent20">
+{#            <div class="frame-child98"></div>#}
+            <img
+                class="baner-image-icon2"
+                loading="lazy"
+                alt=""
+                src="{% if single_project.image %}{{ single_project.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}"
+            />
+            {% if project_gallery %}
+            <article class="gallery-wrap">
+                <ul class="thumb">
+                    <li>
+                        <a href="{{ single_project.image.url }}" target="mainImage">
+                            <img class="image-container-img" src="{{ single_project.image.url }}" alt="Product Image">
+                        </a>
+                        {% for i in project_gallery %}
+                        <a href="{{ i.image.url }}" target="mainImage">
+                            <img class="image-container-img" src="{{ i.image.url }}" alt="Product Image">
+                        </a>
+                        {% endfor %}
+                    </li>
+                </ul>
+            </article>
+            {% endif %}
+            <div class="page-number-content">
+                <div class="project-type-parent">
+                    <div class="project-type">
+                        <div class="type-icons">
+                            <div class="icons">
+                                <img class="ongoing-project-icon" loading="lazy" alt="" src="{% static 'img/vector4.svg' %}" />
+                            </div>
+                            <div class="ongoing-project1">
+                                {% if single_project.is_active %}
+                                    Триває
+                                {% else %}
+                                    Завершений
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="type-icons">
+                            <div class="location-icons">
+                                <img class="financial-assistance-icon" loading="lazy" alt="" src="{% static 'img/vector-16.svg' %}" />
+                            </div>
+                            <div class="ongoing-project1">{{ single_project.group.name }}</div>
+                        </div>
+                    </div>
+                    <img class="dec-line-icon1" loading="lazy" alt="" src="{% static 'img/decline.svg' %}" />
+                    <div class="project-type">
+                        <div class="frame-parent125">
+
+                            <div class="ongoing-project1">
+                                {% if single_project.start_date %}
+                                    <div class="icons">
+                                        <img class="frame-child99" loading="lazy" alt=""
+                                             src="{% static 'img/group-6792.svg' %}"/>
+                                    </div>
+                                    {{ single_project.get_start_date_month }} {{ single_project.get_start_date_year }}
+                                {% endif %}
+                                {% if single_project.end_date %}
+                                    - {{ single_project.get_end_date_month }} {{ single_project.get_end_date_year }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="frame-parent126">
+                            <div class="vector-wrapper35">
+                                <img class="vector-icon30" loading="lazy" alt="" src="{% static 'img/vector-16.svg' %}" />
+                            </div>
+                            <div class="georgia1">
+                                <div class="georgia">
+                                    {% for city in cities %}
+                                    	{{ city }}
+                                    {% endfor %}
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-description-wrapper">
+                    {% if single_project.extra_details %}
+                    <div id="extra-details" class="event-extra-details">
+                        <span id="extra-details-short">{{ single_project.extra_details|truncatewords:20 }}</span>
+                        <span id="extra-details-full" style="display:none;">{{ single_project.extra_details }}</span>
+                        <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">більше</a>
+                    </div>
+                    {% endif %}
+                </div>
+                <a class="button-registration1"
+                   href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
+                   style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
+                    <div class="registration1">РЕЄСТРАЦІЯ</div>
+                </a>
+            </div>
+            <div class="winterization-group">
+                <h1 class="winterization1">{{ single_project.name }}</h1>
+                <div class="free-classes-of-container2">
+                    <p class="free-classes-of2">
+                        {{ single_project.text|safe }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.thumb a').click(function (e) {
+            e.preventDefault();
+            $('.baner-image-icon2').attr('src', $(this).attr("href"));
+        });
+    });
+
+    function toggleDetails() {
+        var shortText = document.getElementById("extra-details-short");
+        var fullText = document.getElementById("extra-details-full");
+        var toggleLink = document.getElementById("toggle-details");
+
+        if (shortText.style.display === "none") {
+            shortText.style.display = "inline";
+            fullText.style.display = "none";
+            toggleLink.innerText = "більше";
+        } else {
+            shortText.style.display = "none";
+            fullText.style.display = "inline";
+            toggleLink.innerText = "менше";
+        }
+    }
+</script>

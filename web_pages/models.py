@@ -48,6 +48,7 @@ class ObjectsGroup(
     models.Model
 ):  # Spotr, non-formal education, Events and master classes, Other
     name = models.CharField(max_length=250)
+    name_en = models.CharField(max_length=250, default="", blank=True, null=True)
     slug = models.SlugField(max_length=50, blank=True)
     is_active = models.BooleanField(default=True)
     page = models.ForeignKey("WebPage", on_delete=models.CASCADE, blank=True, null=True)
@@ -68,9 +69,15 @@ class WebContentObject(models.Model):
 
     name = models.CharField(max_length=250)
     title = models.CharField(max_length=250, blank=True, null=True)
+    title_en = models.CharField(max_length=250, blank=True, null=True, default="")
+
     text = models.TextField(blank=True, null=True)
+    text_en = models.TextField(blank=True, null=True, default="")
+
     image = models.ImageField(upload_to="img/pages_content", blank=True, null=True)
+
     extra_details = models.TextField(blank=True, null=True)
+    extra_details_en = models.TextField(blank=True, null=True, default="")
 
     # Замените это поле
     selected_cities_list = models.ManyToManyField(

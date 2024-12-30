@@ -1,0 +1,204 @@
+{% load static %}
+<style>
+    .image-container-img {
+        width: 80px; /* Image width */
+        height: 80px; /* Image height */
+        object-fit: cover; /* Crop the image while preserving aspect ratio */
+        object-position: center; /* Center the image */
+        margin: 5px; /* Margin between images (optional) */
+    }
+
+    .baner-image-icon1 {
+        width: 100%; /* Image width */
+        height: 100%; /* Image height */
+        object-fit: cover; /* Crop the image while preserving aspect ratio */
+        object-position: center; /* Center the image */
+        padding: 2%;
+    }
+</style>
+
+<div class="project-detail" data-animate-on-scroll>
+    <main class="sec-project-detail">
+        <div class="bg-detail1"></div>
+        <div class="aside-box-wrapper">
+            <div class="aside-box">
+                <div class="iterative-processor">
+
+                    <div class="database-connection">
+                        <div class="error-handler">
+                            <a class="sport1{% if request.path == '/projects/' %}-active{% endif %}"
+                               href="{% url 'projects' %}">All</a>
+                            {% for category in links %}
+                                <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
+                                   href="{{ category.get_url }}">{{ category.name }}</a>
+                            {% endfor %}
+                            <div class="variable-holder">
+
+                                <div class="function-caller">
+                                    <img
+                                            class="dec-line-1-icon"
+                                            loading="lazy"
+                                            alt=""
+                                            src="{% static 'img/decline1.svg' %}"
+                                    />
+                                </div>
+
+                                <div class="function-caller1">
+                                    <img
+                                            class="dec-line-2-icon"
+                                            loading="lazy"
+                                            alt=""
+                                            src="{% static 'img/decline2.svg' %}"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="content19">
+            <div class="bg6"></div>
+            <div class="content-inner">
+                <div class="baner-image-group mainImage">
+                    <img
+                            class="baner-image-icon1"
+                            loading="lazy"
+                            alt="Project Image"
+                            src="
+                                {% if single_project.image %}
+                                    {{ single_project.image.url }}
+                                {% else %}
+                                    {% static '/img/placeholder-image1%402x.png' %}
+                                {% endif %}
+                            "
+                    />
+
+                    <div class="error-handler3">
+                        <img
+                                class="dec-line-3-icon1"
+                                alt="Decoration"
+                                src="./public/decline31.svg"
+                        />
+                    </div>
+                </div>
+                <div class="frame-wrapper11">
+                    <div class="frame-parent58">
+                        <ul class="frame-parent59">
+                            <li>
+                                <div class="ongoing-project">
+                                    {% if single_project.is_active %}
+                                        Ongoing
+                                    {% else %}
+                                        Completed
+                                    {% endif %}
+                                </div>
+                            </li>
+                            <li>
+                                <div class="financial-assistance2">
+                                    {{ single_project.group.name }}
+                                </div>
+                            </li>
+                            {% if single_project.start_date %}
+                                <li>
+                                    {{ single_project.get_start_date_month }}
+                                    {{ single_project.get_start_date_year }}
+                                    {% if single_project.end_date %}
+                                        - {{ single_project.get_end_date_month }}
+                                        {{ single_project.get_end_date_year }}
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+
+                            <div class="georgia">
+                                <li>
+                                    {% for city in cities %}
+                                        {{ city }}
+                                    {% endfor %}
+                                </li>
+                            </div>
+
+                        </ul>
+                        {% if single_project.extra_details %}
+                            <div id="extra-details" class="event-extra-details">
+                                <span id="extra-details-short">{{ single_project.extra_details_en|truncatewords:20 }}</span>
+                                <span id="extra-details-full"
+                                      style="display:none;">{{ single_project.extra_details_en }}</span>
+                                <a href="#" id="toggle-details"
+                                   onclick="toggleDetails(); return false;">more</a>
+                            </div>
+                        {% endif %}
+
+                        <a class="button-registration1"
+                           href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
+                           style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
+                            <div class="registration1">REGISTER</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                {% if project_gallery %}
+                    <article class="gallery-wrap">
+                        <ul class="thumb">
+                            <li>
+                                <a href="{{ single_project.image.url }}" target="mainImage">
+                                    <img class="image-container-img" src="{{ single_project.image.url }}" alt="Product Image">
+                                </a>
+                                {% for i in project_gallery %}
+                                    <a href="{{ i.image.url }}" target="mainImage">
+                                        <img class="image-container-img" src="{{ i.image.url }}" alt="Product Image" style="overflow: hidden; position: relative;">
+                                    </a>
+                                {% endfor %}
+                            </li>
+                        </ul>
+                    </article> <!-- gallery-wrap .end// -->
+                {% endif %}
+            </div>
+            <div class="content-child">
+                <div class="winterization-parent">
+                    <h1 class="winterization">{{ single_project.title_en }}</h1>
+                    <div class="free-classes-of-container1">
+                        <p class="free-classes-of1">
+                            {{ single_project.text_en|safe }}
+                        </p>
+                        <p class="blank-line6">&nbsp;</p>
+                        <p class="blank-line6"> </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.thumb a').click(function (e) {
+            e.preventDefault();
+            $('.mainImage img').attr('src', $(this).attr("href"))
+        })
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#participants-table').DataTable();
+    });
+
+    function toggleDetails() {
+        var shortText = document.getElementById("extra-details-short");
+        var fullText = document.getElementById("extra-details-full");
+        var toggleLink = document.getElementById("toggle-details");
+
+        if (shortText.style.display === "none") {
+            shortText.style.display = "inline";
+            fullText.style.display = "none";
+            toggleLink.innerText = "more";
+        } else {
+            shortText.style.display = "none";
+            fullText.style.display = "inline";
+            toggleLink.innerText = "less";
+        }
+    }
+</script>
