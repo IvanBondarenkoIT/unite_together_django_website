@@ -35,6 +35,41 @@
     .checkbox-item {
         margin-bottom: 10px;
     }
+
+    .button {
+            width: 12rem;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .button.active {
+            background-color: #4CAF50;
+        }
+
+        .button.inactive {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+
+        .button.add-person {
+            display: inline-block;
+            margin-bottom: 15px;
+            background-color: #007BFF;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .button.inactive:hover {
+            background-color: #999;
+        }
 </style>
 
 <div class="events-mobile">
@@ -184,10 +219,10 @@
                                 {% endif %}
 
                                 <br>
-                                <h6>Якщо у вас є члени сім'ї, які не вказані вище - будь ласка, додайте їх до вашого
+                                <h6>Якщо у вас є учасники родини, які не вказані вище - будь ласка, додайте їх до вашого
                                     профілю.</h6>
 
-                                <a href="{% url "associated_person_list" %}">Список осіб</a>
+                                <a href="{% url "associated_person_list" %}" class="button">Додати осіб до списку</a>
                             {% else %}
                                 <a class="button-registration" href="{% url 'login' %}">
                                     <div class="registration">Реєстрація</div>

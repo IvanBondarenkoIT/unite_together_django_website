@@ -1,0 +1,188 @@
+{% load static %}
+
+<div class="projects-mobile">
+    <section class="social-media-parent">
+        <div class="social-media-description2">
+            <div class="line-active-menu16"></div>
+            <div class="social-media-description-inner">
+                <div class="frame-parent121">
+
+                    {#                    Banner#}
+                    <div class="actions-parent">
+                        <div class="actions13"></div>
+                        <div class="header-503" style='background-image: url("{{ banner_settings.projects_banner_mob_image.url }}");'>
+                            <div class="container6">
+                                <div class="section-title6">
+{#                                    <div class="tagline3">Підзаголовок</div>#}
+                                    <div class="content36">
+                                        <h1 class="short-heading-here3">{{ banner_settings.projects_banner_title }}</h1>
+                                        <div class="lorem-ipsum-dolor3">
+                                            {{ banner_settings.projects_banner_text }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        {#                    <div class="bg-blue-group">#}
+                        {#                        <div class="bg-blue5"></div>#}
+                        {#                        <div class="text-card3">#}
+                        {##}
+                        {##}
+                        {#                        </div>#}
+                        <!-- Dropdown Menu -->
+                        <div class="col-md-12">
+                            {% include 'projects/mobile/projects-sidebar-mobile.html' %}
+                        </div>
+                        <div class="description-liststext-link-fo">
+
+{#                            <label class="select-your-city">Місто</label>#}
+{#                            <form id="mobCityForm" method="POST" action="{% url 'projects' %}">#}
+{#                                {% csrf_token %}#}
+{#                                <select id="mobCities" name="selected-city">#}
+{#                                    <option value="All"{% if selected_city == "All" %} selected{% endif %}>Усі</option>#}
+{#                                    {% for city in cities %}#}
+{#                                        <option value="{{ city.name }}"#}
+{#                                                {% if city.name == selected_city %}selected{% endif %}>#}
+{#                                            {{ city.name }}#}
+{#                                        </option>#}
+{#                                    {% endfor %}#}
+{#                                </select>#}
+{#                            </form>#}
+                            <!-- Availability Checkbox -->
+                            <div class="audio-processor">
+                                <div class="availability">
+
+                                    <form id="mobFilterForm" action="{% url 'projects' %}" method="POST">
+                                        {% csrf_token %}
+                                        <label for="mobActiveCheckbox" style="position: relative; top: -7px;">Тільки
+                                            поточні</label>
+                                        <input id="mobActiveCheckbox"
+                                               class="icon-check1"
+                                               type="checkbox"
+                                               name="free-spots-checkbox"
+
+
+                                               {% if free_spots %}checked{% endif %}>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="rectangle-parent8">
+                            <div class="frame-child74"></div>
+                            {% for object in all_objects %}
+                                <div class="frame-parent122">
+                                    <div class="badge-parent">
+                                        <div class="badge-ongoing">
+                                            <div class="text67">
+                                                {% if object.is_active %}
+                                                    Триває
+                                                {% else %}
+                                                    Завершений
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <a href="{{ object.get_url }}">
+                                            <img
+                                                    class="placeholder-image-icon20"
+                                                    loading="lazy"
+                                                    alt="'/img/placeholder-image1%402x.png'"
+                                                    src="
+                                                    {% if object.image %}
+                                                        {{ object.image.url }}
+                                                    {% else %}
+                                                        {% static '/img/placeholder-image1%402x.png' %}
+                                                    {% endif %}
+                                                    "
+                                            />
+                                        </a>
+                                    </div>
+                                    <div class="decoration-group">
+                                        <div class="decoration35"></div>
+                                        <div class="frame-wrapper32">
+                                            <div class="frame-parent123">
+                                                <div class="frame-parent124">
+                                                    <div class="heading-parent15">
+                                                        <b class="heading42">
+                                                            {{ object.title }}
+                                                        </b>
+                                                        <div class="text68">
+                                                            {{ object.extra_details }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="tag9">
+                                                        <div class="tag-one21">{{ object.group }}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="button-delails-wrapper2">
+                                                    <button class="button-delails6">
+                                                        <a href="{{ object.get_url }}" class="details6">деталі</a>
+                                                        <div class="vector-wrapper35">
+                                                            <img
+                                                                    class="vector-icon26"
+                                                                    alt=""
+                                                                    src="./public/vector3.svg"
+                                                            />
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form8"></div>
+                                </div>
+                            {% endfor %}
+                            <nav class="mt-4" aria-label="Навігація по сторінках">
+                                {% if all_objects.has_other_pages %}
+                                    <ul class="pagination">
+                                        {% if all_objects.has_previous %}
+                                            <li class="page-item"><a class="page-link"
+                                                                     href="?page={{ all_objects.previous_page_number }}">Попередня</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled"><a class="page-link" href="#">Попередня</a>
+                                            </li>
+                                        {% endif %}
+
+                                        {% for page_number in all_objects.paginator.page_range %}
+                                            {% if all_objects.number == page_number %}
+                                                <li class="page-item active"><a class="page-link"
+                                                                                href="#">{{ page_number }}</a></li>
+                                            {% else %}
+                                                <li class="page-item"><a class="page-link"
+                                                                         href="?page={{ page_number }}">{{ page_number }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+
+
+                                        {% if all_objects.has_next %}
+                                            <li class="page-item"><a class="page-link"
+                                                                     href="?page={{ all_objects.next_page_number }}">Наступна</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled"><a class="page-link" href="#">Наступна</a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                {% endif %}
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<script>
+    document.getElementById('mobCities').addEventListener('change', function () {
+        document.getElementById('mobCityForm').submit();
+    });
+</script>
+

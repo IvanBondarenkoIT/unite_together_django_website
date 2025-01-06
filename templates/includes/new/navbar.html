@@ -118,11 +118,30 @@
             <div class="navbaraccount-inner1 desktop-navbar">
                 <div class="about-us-parent7">
                     <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
-                       href="{% url 'who_we_are' %}">Про нас</a>
+                       href="{% url 'who_we_are' %}">
+                        {% if lang == 'en' %}
+                            About us
+                        {% else %}
+                            Про нас
+                        {% endif %}
+                    </a>
                     <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
-                       href="{% url 'events' %}">Афіша</a>
+                       href="{% url 'events' %}">
+                        {% if lang == 'en' %}
+                            Events
+                        {% else %}
+                            Афіша
+                        {% endif %}
+                    </a>
                     <a class="ut-top-menu-text{% if '/projects/' in request.path %}-active{% endif %}"
-                       href="{% url 'projects' %}">Проєкти</a>
+                       href="{% url 'projects' %}">
+                        {% if lang == 'en' %}
+                            Projects
+                        {% else %}
+                            Проєкти
+                        {% endif %}
+
+                    </a>
                 </div>
             </div>
             <div class="navbaraccount-inner2 desktop-navbar">

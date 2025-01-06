@@ -1,0 +1,222 @@
+{% load static %}
+
+<style>
+    .three-column-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px; /* spacing between columns */
+    }
+
+    .opacity-controller2 {
+        /* Additional styles for individual blocks if necessary */
+        padding: 10px;
+        background-color: #f5f5f5; /* Example background */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .frame-parent54 {
+        display: flex; /* Use Flexbox to arrange elements */
+        flex-direction: column; /* By default, arrange elements vertically */
+        gap: 10px; /* Space between elements */
+    }
+
+    @media (min-width: 768px) {
+        /* For screens wider than 768px */
+        .frame-parent54 {
+            flex-direction: row; /* Arrange elements horizontally */
+            justify-content: space-between; /* Distribute space between elements */
+            align-items: center; /* Align elements vertically */
+        }
+    }
+</style>
+
+<section class="page-header6">
+    <img class="bg-icon6" loading="lazy" alt="{% static 'img/desc-projects.webp' %}" src="{{ banner_settings.projects_banner_image.url }}"/>
+
+    <div class="sec-title6">
+        <div class="content18">
+            <h1 class="events6">{{ banner_settings.projects_banner_title }}</h1>
+            <div class="discover-the-diverse-range-of-wrapper3">
+                <div class="discover-the-diverse6">
+                    {{ banner_settings.projects_banner_text }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="rectangle-group">
+    <div class="rectangle-div"></div>
+    <div class="aside-box">
+        <div class="iterative-processor">
+
+            <div class="database-connection">
+                <div class="error-handler">
+                    <a class="sport1{% if request.path == '/projects/' %}-active{% endif %}"
+                       href="{% url 'projects' %}">All</a>
+                    {% for category in links %}
+                        <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
+                           href="{{ category.pre_computed_url }}">{{ category.name_en }}</a>
+                    {% endfor %}
+                    <div class="variable-holder">
+
+                        <div class="function-caller">
+                            <img
+                                    class="dec-line-1-icon"
+                                    loading="lazy"
+                                    alt=""
+                                    src="{% static 'img/decline1.svg' %}"
+                            />
+                        </div>
+
+                        <div class="function-caller1">
+                            <img
+                                    class="dec-line-2-icon"
+                                    loading="lazy"
+                                    alt=""
+                                    src="{% static 'img/decline2.svg' %}"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="audio-processor">
+            <div class="availability">
+                <div class="availability1"></div>
+
+                <form id="filterForm" action="{% url 'projects' %}" method="POST">
+                    {% csrf_token %}
+                    <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox"
+                           {% if free_spots == True %}checked="{true}{% endif %}">
+
+                    <label for="activeCheckbox">Only current</label>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="stroke-manager">
+        <div class="three-column-container">
+            <div class="blend-mode-adapter">
+                {% for object in all_objects %}
+                    <div class="opacity-controller2">
+                        <a href="{{ object.get_url }}" class="placeholder-image-container">
+                            <img
+                                    class="placeholder-image-icon8"
+                                    alt=""
+                                    src="{% if object.image %}
+                                                {{ object.image.url }}
+                                             {% else %}
+                                                {% static '/img/placeholder-image1%402x.png' %}
+                                             {% endif %}"
+                            />
+
+                            <div class="vector-wrapper13">
+                                <img
+                                        class="frame-child14"
+                                        alt=""
+                                        src="{% static 'img/vector-35.svg' %}"
+                                />
+                            </div>
+                            <div class="decoration18"></div>
+                        </a>
+                        <div class="frame-parent54">
+                            <div class="heading-parent4">
+                                <b class="heading20">{{ object.title_en }}</b>
+                                <div class="text-parent">
+                                    <div class="lorem-ipsum-is-simply5">
+                                        {{ object.extra_details_en }}
+
+                                    </div>
+                                    <div class="tag2">
+                                        <div class="tag-one5">{{ object.group.name_en }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tag-one-container">
+                                <div class="tag-one6">
+                                    {% if object.is_active %}Ongoing{% else %}
+                                        Completed
+                                    {% endif %}
+                                </div>
+
+                            </div>
+                            <div class="button-delails-container">
+                                <button class="button-delails2">
+                                    <a href="{{ object.get_url }}" class="details2">details</a>
+                                    <div class="vector-wrapper15">
+                                        <img
+                                                class="vector-icon13"
+                                                alt=""
+                                                src="{% static 'img/vector-11.svg' %}"
+                                        />
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <img
+                            class="opacity-controller-icon1"
+                            alt=""
+                            src="{% static 'img/vector-33.svg' %}"
+                    />
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="data-visualizer">
+            <nav class="mt-4" aria-label="Page navigation">
+                {% if all_objects.has_other_pages %}
+                    <ul class="pagination">
+                        {% if all_objects.has_previous %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="?page={{ all_objects.previous_page_number }}">Previous</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                        {% endif %}
+
+                        {% for page_number in all_objects.paginator.page_range %}
+                            {% if all_objects.number == page_number %}
+                                <li class="page-item active"><a class="page-link" href="#">{{ page_number }}</a></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link"
+                                                         href="?page={{ page_number }}">{{ page_number }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+
+                        {% if all_objects.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ all_objects.next_page_number }}">Next</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </nav>
+        </div>
+
+    </div>
+</section>
+
+<div class="tag5">
+    <div class="tag-one11">Other</div>
+</div>
+<div class="decoration22"></div>
+<div class="button-delails5">
+    <div class="details5">details</div>
+    <img class="vector-icon16" alt="" src="{% static 'img/vector-11.svg' %}"/>
+</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+<script>
+    document.getElementById('cities').addEventListener('change', function () {
+        document.getElementById('cityForm').submit();
+    });
+</script>
+
