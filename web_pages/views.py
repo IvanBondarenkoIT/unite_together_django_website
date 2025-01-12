@@ -62,6 +62,9 @@ def events(request, group_slug=None, lang="uk"):
     # Build filter arguments based on activity status
     kw_args = {"is_active": is_active} if is_active else {}
 
+    # Not archived objects
+    kw_args["is_archived"] = False
+
     # Filter by event group if specified
     if group_slug:
         group = get_object_or_404(
@@ -265,6 +268,9 @@ def projects(request, group_slug=None, lang="uk"):
         is_active = request.session.get("activeCheckbox", False)
 
     kw_args = {"is_active": is_active} if is_active else {}
+
+    # Not archived objects
+    kw_args["is_archived"] = False
 
     if group_slug:
         group = get_object_or_404(
