@@ -88,6 +88,7 @@ class ProjectsAdmin(admin.ModelAdmin):
         "is_active",
         "created_at",
         "updated_at",
+        "is_archived",
     )
     list_editable = ("is_active",)
     prepopulated_fields = {"slug": ("name", "group")}
@@ -104,6 +105,7 @@ class EventsAdmin(admin.ModelAdmin):
         "is_active",
         "created_at",
         "updated_at",
+        "is_archived",
     )
     list_editable = ("is_active",)
     prepopulated_fields = {"slug": ("name", "group")}
