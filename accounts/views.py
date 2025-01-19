@@ -304,8 +304,8 @@ def reset_password(request):
     - HTTPResponse: Redirects based on success or failure of the password reset.
     """
     if request.method == "POST":
-        password = request.POST["password"]
-        confirm_password = request.POST["confirm_password"]
+        password = request.POST["new_password"]
+        confirm_password = request.POST["confirm_new_password"]
 
         if password == confirm_password:
             uid = request.session.get("uid", None)
