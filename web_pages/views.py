@@ -281,7 +281,7 @@ def projects(request, group_slug=None, lang="uk"):
     all_objects = (
         Projects.objects.filter(**kw_args)
         .select_related("group__page")
-        .order_by("order")
+        .order_by("-is_active", "-order")
     )
 
     paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
