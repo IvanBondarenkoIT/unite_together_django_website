@@ -85,12 +85,20 @@ class ProjectsAdmin(admin.ModelAdmin):
         "name",
         "title",
         "text",
+        "order",
         "is_active",
         "created_at",
         "updated_at",
         "is_archived",
     )
-    list_editable = ("is_active",)
+    list_editable = (
+        "is_active",
+        "order",
+    )
+    ordering = (
+        "-is_active",
+        "-order",
+    )
     prepopulated_fields = {"slug": ("name", "group")}
     inlines = [ProjectGalleryInline]
 
