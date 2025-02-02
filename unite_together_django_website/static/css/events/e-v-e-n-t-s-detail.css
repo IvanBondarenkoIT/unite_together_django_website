@@ -60,21 +60,7 @@
   flex-shrink: 0;
   debug_commit: 1de1738;
 }
-.logo-text-ut24,
-.logo-ut-wrapper3,
-.logo-ut12 {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-.logo-ut12 {
-  width: 197px;
-  flex-direction: row;
-  padding: 0 0 0 var(--padding-87xl-1);
-  box-sizing: border-box;
-  gap: var(--gap-3xs-4);
-  z-index: 1;
-}
+
 .logo-ut-wrapper3 {
   width: 298px;
   flex-direction: column;
@@ -297,29 +283,7 @@
   gap: var(--gap-6xl);
   z-index: 1;
 }
-.navbar10,
-.right-part-wrapper5 {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 0 0 var(--padding-5xs-5);
-  box-sizing: border-box;
-  max-width: 100%;
-  font-size: var(--text-regular-semi-bold-size);
-}
-.navbar10 {
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: var(--padding-21xl) var(--padding-53xl);
-  position: relative;
-  gap: var(--gap-31xl);
-  text-align: left;
-  font-size: var(--text-medium-normal-size);
-  color: var(--primary-text);
-  font-family: var(--font-montserrat);
-}
+
 .bg-detail1,
 .rectangle-bg11 {
   position: relative;
@@ -547,22 +511,7 @@
   box-sizing: border-box;
   font-size: var(--text-regular-semi-bold-size);
 }
-.aside-box11,
-.bg9 {
-  background-color: var(--neutral-background);
-}
-.aside-box11 {
-  width: 306px;
-  border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 65.4px 0 64.4px;
-  box-sizing: border-box;
-  gap: var(--gap-15xl-8);
-  z-index: 1;
-}
+
 .bg9 {
   align-self: stretch;
   width: 966px;
@@ -621,14 +570,7 @@
   white-space: nowrap;
   z-index: 2;
 }
-.frame-parent63 {
-  align-self: stretch;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: var(--gap-3xs-1);
-}
+
 .vector-icon20 {
   width: 13.3px;
   height: 18.3px;
@@ -1095,39 +1037,19 @@
   flex-direction: column;
   padding: var(--padding-10xs-1) 0 0;
 }
-.address20,
-.contact-info,
-.item-contact10,
-.tbilisi-2123-tsotne-dadiani-wrapper2 {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
+
 .address20 {
   flex-direction: row;
   gap: var(--gap-3xs);
 }
-.contact-info,
-.item-contact10 {
-  flex-direction: column;
-}
+
 .contact-info {
   align-self: stretch;
   gap: var(--gap-mini);
   font-size: var(--body-small-size);
   color: var(--color-darkslategray-200);
 }
-.item-contact10 {
-  width: 21.25%;
-  margin: 0 !important;
-  position: absolute;
-  height: 34.08%;
-  top: 31.78%;
-  right: 30.49%;
-  bottom: 34.13%;
-  left: 48.26%;
-  gap: var(--gap-lgi);
-}
+
 .we-are-on12 {
   align-self: stretch;
   position: relative;
@@ -1231,29 +1153,7 @@
   gap: var(--gap-5xl);
   font-size: var(--body-small-size);
 }
-.events-detail,
-.footer13 {
-  position: relative;
-  background-color: var(--neutral-background);
-  overflow: hidden;
-  display: flex;
-}
-.footer13 {
-  align-self: stretch;
-  height: 426px;
-  flex-shrink: 0;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding: var(--padding-93xl) var(--padding-53xl) var(--padding-xl);
-  box-sizing: border-box;
-  gap: 40px 59.3px;
-  text-align: left;
-  font-size: var(--text-medium-normal-size);
-  color: var(--primary-text);
-  font-family: var(--font-montserrat);
-}
+
 .events-detail {
   width: 100%;
   flex-direction: column;
@@ -1274,10 +1174,7 @@
   }
 }
 @media screen and (max-width: 1050px) {
-  .aside-box11 {
-    display: none;
-  }
-  .autism-speaks-to {
+    .autism-speaks-to {
     font-size: var(--font-size-5xl);
   }
   .frame-parent59 {
@@ -1288,17 +1185,7 @@
   }
 }
 @media screen and (max-width: 750px) {
-  .navbar10 {
-    gap: var(--gap-6xl);
-    padding-left: var(--padding-17xl);
-    padding-right: var(--padding-17xl);
-    box-sizing: border-box;
-  }
-  .aside-box11 {
-    padding-top: var(--padding-24xl);
-    padding-bottom: var(--padding-23xl);
-    box-sizing: border-box;
-  }
+
   .layout-grid {
     gap: var(--gap-5xl);
   }
@@ -1308,24 +1195,14 @@
   }
 }
 @media screen and (max-width: 450px) {
-  .logo-ut12 {
-    padding-left: var(--padding-xl);
-    box-sizing: border-box;
-  }
   .all3,
   .events-and-master3,
   .sport3 {
     font-size: var(--text-regular-semi-bold-size);
     line-height: 21px;
   }
-  .aside-box11 {
-    gap: var(--gap-mid);
-  }
-  .frame-parent63,
-  .frame-parent64 {
-    flex-wrap: wrap;
-  }
-  .frame-parent61 {
+
+    .frame-parent61 {
     gap: var(--gap-base);
   }
   .button-registration1 {
@@ -1353,9 +1230,5 @@
   }
   .e-mail13 {
     flex-wrap: wrap;
-  }
-  .footer13 {
-    height: auto;
-    min-height: 426;
   }
 }

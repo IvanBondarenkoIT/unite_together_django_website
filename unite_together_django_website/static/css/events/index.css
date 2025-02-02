@@ -68,23 +68,7 @@
   display: inline-block;
   min-width: 56.3px;
 }
-.group,
-.group2 {
-  position: absolute;
-  width: 100%;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-.group2 {
-  height: 34.09%;
-  top: 65.91%;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  font-size: var(--font-size-3xs-9);
-}
+
 .group {
   height: 100%;
   top: 0;
@@ -325,19 +309,7 @@
   flex-direction: column;
   min-width: 182px;
 }
-.address,
-.frame-div,
-.geolocation {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-.geolocation {
-  align-self: stretch;
-  flex-direction: row;
-  gap: var(--gap-3xs);
-  z-index: 1;
-}
+
 .frame-div {
   width: 306px;
   flex-direction: column;
@@ -372,17 +344,7 @@
   color: var(--color-darkslategray-300);
   z-index: 1;
 }
-.icon-fb,
-.icon-insta,
-.icon-tg {
-  height: 22px;
-  width: 22px;
-  position: relative;
-  min-height: 22px;
-}
-.icon-tg {
-  width: 23px;
-}
+
 .footer-heading-group,
 .soc-icons-footer {
   display: flex;
@@ -445,17 +407,7 @@
   text-decoration: underline;
   line-height: 150%;
 }
-.privacy-policy {
-  display: inline-block;
-  min-width: 96px;
-}
-.cookies-settings,
-.privacy-policy,
-.terms-of-service {
-  position: relative;
-  text-decoration: underline;
-  line-height: 150%;
-}
+
 .cookies-settings {
   display: inline-block;
   min-width: 94px;
@@ -545,11 +497,7 @@
   }
 }
 @media screen and (max-width: 450px) {
-  .e-mail,
-  .geolocation {
-    flex-wrap: wrap;
-  }
-  .footer {
+    .footer {
     padding-top: var(--padding-54xl);
     padding-bottom: var(--padding-5xl);
     box-sizing: border-box;

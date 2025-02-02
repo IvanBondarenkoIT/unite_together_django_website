@@ -1208,12 +1208,7 @@
   align-items: flex-start;
   white-space: nowrap;
 }
-.row9,
-.texttext1,
-.texttext2 {
-  display: flex;
-  justify-content: center;
-}
+
 .texttext2 {
   width: 100%;
   border: 0;
@@ -1227,12 +1222,7 @@
   font-size: var(--body-regular-size);
   color: var(--hitbox);
 }
-.row9 {
-  flex-direction: row;
-  align-items: center;
-  padding: 0 65px;
-  gap: var(--gap-9xs);
-}
+
 .content8,
 .login {
   display: flex;
@@ -1269,16 +1259,8 @@
     font-size: var(--font-size-lgi);
     line-height: 23px;
   }
-  .row8,
-  .row9 {
-    flex-wrap: wrap;
-  }
-  .row9 {
-    padding-left: var(--padding-xl);
-    padding-right: var(--padding-xl);
-    box-sizing: border-box;
-  }
-  .content8 {
+
+    .content8 {
     gap: var(--gap-base);
   }
 }

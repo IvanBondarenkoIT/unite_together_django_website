@@ -35,32 +35,17 @@
   flex-direction: row;
   font-size: var(--font-size-base-9);
 }
-.group54,
-.group56,
-.logo-text-ut18,
-.logo-ut9 {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
+
 .group54 {
   flex-direction: column;
   gap: var(--gap-9xs-5);
 }
-.logo-text-ut18,
-.logo-ut9 {
-  flex-direction: row;
-}
+
 .logo-text-ut18 {
   flex-shrink: 0;
   debug_commit: 1de1738;
 }
-.logo-ut9 {
-  width: 197px;
-  padding: 0 0 0 var(--padding-87xl-1);
-  box-sizing: border-box;
-  gap: var(--gap-3xs-4);
-}
+
 .about-us19,
 .events26,
 .projects19 {
@@ -79,12 +64,7 @@
 .projects19 {
   min-width: 76px;
 }
-.group-nav,
-.navbaraccount-inner {
-  margin: 0;
-  display: flex;
-  align-items: flex-start;
-}
+
 .group-nav {
   align-self: stretch;
   flex-direction: row;
@@ -95,14 +75,7 @@
   color: var(--primary-text);
   font-family: var(--font-montserrat);
 }
-.navbaraccount-inner {
-  width: 323px;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: var(--padding-xl) 0 0;
-  box-sizing: border-box;
-  max-width: 100%;
-}
+
 .u-a-flag,
 .u-a-flag1 {
   position: absolute;
@@ -631,12 +604,7 @@
   justify-content: space-between;
   gap: var(--gap-xl);
 }
-.navbaraccount,
-.navbaraccount-child {
-  display: flex;
-  align-items: flex-start;
-  box-sizing: border-box;
-}
+
 .navbaraccount-child {
   width: 266px;
   flex-direction: column;
@@ -645,19 +613,7 @@
   font-size: var(--text-regular-semi-bold-size);
   font-family: var(--font-montserrat);
 }
-.navbaraccount {
-  align-self: stretch;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: var(--padding-21xl) var(--padding-53xl);
-  max-width: 100%;
-  gap: var(--gap-xl);
-  z-index: 1;
-  text-align: left;
-  font-size: var(--font-size-8xl-5);
-  color: var(--primary-text);
-  font-family: var(--font-inter);
-}
+
 .bg-personal-account {
   height: 677px;
   width: 1440px;
@@ -743,22 +699,7 @@
   flex-direction: column;
   gap: var(--gap-5xl);
 }
-.aside-box8,
-.bg6 {
-  background-color: var(--neutral-background);
-}
-.aside-box8 {
-  width: 306px;
-  border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: var(--padding-49xl) 0 68.5px;
-  box-sizing: border-box;
-  gap: var(--gap-11xl);
-  z-index: 1;
-}
+
 .bg6 {
   width: 966px;
   height: 452.5px;
@@ -1893,11 +1834,7 @@
   display: inline-block;
   min-width: 94px;
 }
-.footer10,
-.row13 {
-  display: flex;
-  flex-direction: row;
-}
+
 .row13 {
   margin: 0 !important;
   position: absolute;
@@ -1908,21 +1845,7 @@
   gap: var(--gap-5xl);
   font-size: var(--body-small-size);
 }
-.footer10 {
-  height: 426px;
-  flex: 1;
-  background-color: var(--neutral-background);
-  overflow: hidden;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding: var(--padding-93xl) var(--padding-53xl) var(--padding-xl);
-  box-sizing: border-box;
-  position: relative;
-  gap: 40px 59.3px;
-  max-width: 100%;
-  z-index: 1;
-}
+
 .footer9,
 .personal-account-settings {
   display: flex;
@@ -1954,11 +1877,6 @@
   animation: 1s ease 0s 1 normal forwards fade-in;
 }
 @media screen and (max-width: 925px) {
-  .navbaraccount {
-    padding-left: var(--padding-17xl);
-    padding-right: var(--padding-17xl);
-    box-sizing: border-box;
-  }
   .password-email {
     flex: 1;
   }
@@ -1978,9 +1896,6 @@
   }
 }
 @media screen and (max-width: 700px) {
-  .navbaraccount-inner {
-    display: none;
-  }
   .inputs-container {
     gap: var(--gap-mini);
     min-width: 100%;
@@ -1992,11 +1907,7 @@
   }
 }
 @media screen and (max-width: 450px) {
-  .logo-ut9 {
-    padding-left: var(--padding-xl);
-    box-sizing: border-box;
-  }
-  .accounts,
+    .accounts,
   .events27,
   .settings {
     font-size: var(--text-regular-semi-bold-size);
@@ -2016,9 +1927,5 @@
   }
   .e-mail10 {
     flex-wrap: wrap;
-  }
-  .footer10 {
-    height: auto;
-    min-height: 426;
   }
 }

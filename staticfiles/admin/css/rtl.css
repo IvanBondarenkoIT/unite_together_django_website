@@ -19,12 +19,6 @@ th {
     background-position: 100% 1px;
 }
 
-.deletelink {
-    padding-left: 0;
-    padding-right: 16px;
-    background-position: 100% 1px;
-}
-
 .object-tools {
     float: left;
 }
@@ -121,11 +115,6 @@ thead th.sorted .text {
 
 .aligned label {
     padding: 0 0 3px 1em;
-}
-
-.submit-row a.deletelink {
-    margin-left: 0;
-    margin-right: auto;
 }
 
 .vDateField, .vTimeField {
@@ -248,22 +237,6 @@ fieldset .fieldBox {
 
 .active.selector-remove:focus, .active.selector-remove:hover {
   background-position: 0 -112px;
-}
-
-a.selector-chooseall {
-    background: url(../img/selector-icons.svg) right -128px no-repeat;
-}
-
-a.active.selector-chooseall:focus, a.active.selector-chooseall:hover {
-    background-position: 100% -144px;
-}
-
-a.selector-clearall {
-    background: url(../img/selector-icons.svg) 0 -160px no-repeat;
-}
-
-a.active.selector-clearall:focus, a.active.selector-clearall:hover {
-    background-position: 0 -176px;
 }
 
 .inline-deletelink {

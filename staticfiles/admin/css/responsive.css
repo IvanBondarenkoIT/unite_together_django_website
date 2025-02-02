@@ -229,10 +229,6 @@ input[type="submit"], button {
         padding: 8px;
     }
 
-    .submit-row a.deletelink {
-        padding: 10px 7px;
-    }
-
     .button, input[type=submit], input[type=button], .submit-row input, a.button {
         padding: 7px;
     }
@@ -292,10 +288,6 @@ input[type="submit"], button {
 
     .selector-remove {
         background-position: 0 -80px;
-    }
-
-    a.selector-chooseall, a.selector-clearall {
-        align-self: center;
     }
 
     .stacked {
@@ -796,10 +788,6 @@ input[type="submit"], button {
     .submit-row a.closelink {
         padding: 10px 0;
         text-align: center;
-    }
-
-    .submit-row a.deletelink {
-        margin: 0;
     }
 
     /* Messages */
