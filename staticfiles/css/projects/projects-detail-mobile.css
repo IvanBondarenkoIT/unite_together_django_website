@@ -592,31 +592,13 @@
   overflow: hidden;
   flex-shrink: 0;
 }
-.project-content,
-.text-card5,
-.title-and-preview5 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-}
+
 .title-and-preview5 {
   flex: 1;
   justify-content: space-between;
   gap: var(--gap-xl);
 }
-.project-content,
-.text-card5 {
-  box-sizing: border-box;
-  max-width: 100%;
-}
-.text-card5 {
-  flex: 1;
-  border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
-  background-color: var(--accent-blue);
-  justify-content: flex-start;
-  padding: var(--padding-3xs) var(--padding-xs);
-  z-index: 1;
-}
+
 .project-content {
   align-self: stretch;
   justify-content: flex-end;

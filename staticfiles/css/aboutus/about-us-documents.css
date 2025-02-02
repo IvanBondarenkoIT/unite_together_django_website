@@ -310,12 +310,7 @@
   gap: var(--gap-6xl);
   z-index: 1;
 }
-.filter-tree,
-.navbar4 {
-  display: flex;
-  box-sizing: border-box;
-  max-width: 100%;
-}
+
 .filter-tree {
   width: 484px;
   flex-direction: column;
@@ -324,20 +319,7 @@
   padding: 0 0 var(--padding-5xs-5);
   font-size: var(--font-size-base);
 }
-.navbar4 {
-  flex-direction: row;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: var(--padding-21xl) var(--padding-53xl);
-  position: relative;
-  gap: var(--gap-31xl);
-  flex-shrink: 0;
-  debug_commit: 1de1738;
-  text-align: left;
-  font-size: var(--font-size-lg);
-  color: var(--primary-text);
-  font-family: var(--font-montserrat);
-}
+
 .bg-icon2 {
   height: 100%;
   width: 100%;
@@ -1012,24 +994,13 @@
   z-index: 1;
   font-size: var(--font-size-base);
 }
-.right,
-.sec-documents,
-.sequence-controller1,
-.title5 {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  max-width: 100%;
-}
+
 .sequence-controller1 {
   align-self: stretch;
   flex-direction: column;
   gap: var(--gap-xl);
 }
-.right,
-.sec-documents {
-  box-sizing: border-box;
-}
+
 .right {
   flex: 1;
   border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
@@ -1040,20 +1011,7 @@
   min-width: 628px;
   z-index: 1;
 }
-.sec-documents {
-  align-self: stretch;
-  background-color: var(--color-ghostwhite);
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: var(--padding-93xl) var(--padding-53xl);
-  gap: var(--gap-5xl);
-  flex-shrink: 0;
-  debug_commit: 1de1738;
-  text-align: left;
-  font-size: var(--font-size-xl);
-  color: var(--primary-text);
-  font-family: var(--font-montserrat);
-}
+
 .logo-flag-ut-icon7 {
   height: 38.5px;
   width: 60px;
@@ -1478,17 +1436,7 @@
   animation: 1s ease 0s 1 normal forwards fade-in;
 }
 @media screen and (max-width: 1200px) {
-  .right,
-  .sec-documents {
-    padding-top: var(--padding-23xl);
-    padding-bottom: var(--padding-23xl);
-    box-sizing: border-box;
-  }
-  .sec-documents {
-    padding-top: var(--padding-54xl);
-    padding-bottom: var(--padding-54xl);
-  }
-  .about-us-documents {
+    .about-us-documents {
     height: auto;
   }
 }
@@ -1532,22 +1480,9 @@
   }
 }
 @media screen and (max-width: 750px) {
-  .navbar4,
-  .right {
-    box-sizing: border-box;
-  }
-  .navbar4 {
-    gap: var(--gap-6xl);
-    padding-left: var(--padding-17xl);
-    padding-right: var(--padding-17xl);
-  }
-  .right {
+    .right {
     padding-top: var(--padding-8xl);
     padding-bottom: var(--padding-8xl);
-  }
-  .sec-documents {
-    padding: var(--padding-28xl) var(--padding-17xl);
-    box-sizing: border-box;
   }
 }
 @media screen and (max-width: 450px) {

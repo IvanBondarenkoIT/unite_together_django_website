@@ -134,14 +134,6 @@ form .aligned div.help {
     padding-left: 10px;
 }
 
-form .aligned p.date div.help.timezonewarning,
-form .aligned p.datetime div.help.timezonewarning,
-form .aligned p.time div.help.timezonewarning {
-    margin-left: 0;
-    padding-left: 0;
-    font-weight: normal;
-}
-
 form .aligned p.help:last-child,
 form .aligned div.help:last-child {
     margin-bottom: 0;
@@ -283,20 +275,6 @@ body.popup .submit-row {
     text-transform: uppercase;
 }
 
-.submit-row a.deletelink {
-    margin-left: auto;
-}
-
-.submit-row a.deletelink {
-    display: block;
-    background: var(--delete-button-bg);
-    border-radius: 4px;
-    padding: 0.625rem 0.9375rem;
-    height: 0.9375rem;
-    line-height: 0.9375rem;
-    color: var(--button-fg);
-}
-
 .submit-row a.closelink {
     display: inline-block;
     background: var(--close-button-bg);
@@ -305,13 +283,6 @@ body.popup .submit-row {
     height: 0.9375rem;
     line-height: 0.9375rem;
     color: var(--button-fg);
-}
-
-.submit-row a.deletelink:focus,
-.submit-row a.deletelink:hover,
-.submit-row a.deletelink:active {
-    background: var(--delete-button-hover-bg);
-    text-decoration: none;
 }
 
 .submit-row a.closelink:focus,

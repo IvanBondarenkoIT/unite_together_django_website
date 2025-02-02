@@ -229,10 +229,6 @@ input[type="submit"], button {
         padding: 8px;
     }
 
-    .submit-row a.deletelink {
-        padding: 10px 7px;
-    }
-
     .button, input[type=submit], input[type=button], .submit-row input, a.button {
         padding: 7px;
     }
@@ -292,10 +288,6 @@ input[type="submit"], button {
 
     .selector-remove {
         background-position: 0 -80px;
-    }
-
-    a.selector-chooseall, a.selector-clearall {
-        align-self: center;
     }
 
     .stacked {
@@ -373,12 +365,6 @@ input[type="submit"], button {
 
     .datetime span {
         font-size: 0.8125rem;
-    }
-
-    .datetime .timezonewarning {
-        display: block;
-        font-size: 0.6875rem;
-        color: var(--body-quiet-color);
     }
 
     .datetimeshortcuts {
@@ -615,11 +601,6 @@ input[type="submit"], button {
         padding-bottom: 0;
     }
 
-    .aligned .timezonewarning {
-        flex: 1 0 100%;
-        margin-top: 5px;
-    }
-
     form .aligned .form-row div.help {
         width: 100%;
         margin: 5px 0 0;
@@ -796,10 +777,6 @@ input[type="submit"], button {
     .submit-row a.closelink {
         padding: 10px 0;
         text-align: center;
-    }
-
-    .submit-row a.deletelink {
-        margin: 0;
     }
 
     /* Messages */
