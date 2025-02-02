@@ -858,12 +858,7 @@
   align-items: flex-start;
   white-space: nowrap;
 }
-.row10,
-.texttext3,
-.texttext4 {
-  display: flex;
-  justify-content: center;
-}
+
 .texttext4 {
   width: 100%;
   border: 0;
@@ -877,12 +872,7 @@
   font-size: var(--body-regular-size);
   color: var(--hitbox);
 }
-.row10 {
-  flex-direction: row;
-  align-items: center;
-  padding: 0 62.5px;
-  gap: var(--gap-9xs);
-}
+
 .content10,
 .signup {
   display: flex;
@@ -960,12 +950,8 @@
   .input-suffix4 {
     width: 100%;
   }
-  .row10 {
-    padding-left: var(--padding-xl);
-    padding-right: var(--padding-xl);
-    box-sizing: border-box;
-  }
-  .content10 {
+
+    .content10 {
     gap: var(--gap-base);
   }
 }

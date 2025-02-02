@@ -2805,20 +2805,7 @@
   font-weight: 500;
   z-index: 1;
 }
-.data-aggregator {
-  align-self: stretch;
-  flex-direction: column;
-  gap: var(--gap-mini);
-  font-size: var(--font-size-sm);
-  color: var(--color-darkslategray-300);
-}
-.data-aggregator,
-.footer-heading-container,
-.frame-parent11 {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
+
 .footer-heading-container {
   width: 196px;
   flex-direction: column;

@@ -297,18 +297,6 @@
   justify-content: flex-start;
   position: relative;
 }
-.frame-parent61,
-.frame-parent62 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: var(--gap-xl);
-}
-.frame-parent61 {
-  align-self: stretch;
-  justify-content: space-between;
-}
 
 .navbaraccount-child {
   width: 274.2px;
@@ -327,20 +315,7 @@
   display: none;
   max-width: 100%;
 }
-.bg8 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: 0 var(--br-9xs) 0 var(--br-8xs);
-  width: 100%;
-  height: 100%;
-  display: none;
-}
-.bg-container,
-.bg8,
-.rectangle-bg9 {
-  background-color: var(--neutral-background);
-}
+
 .bg-container {
   height: 1115.7px;
   width: 100%;
@@ -420,21 +395,12 @@
   min-width: 85px;
   z-index: 1;
 }
-.frame-parent66,
-.settings-wrapper {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
+
 .settings-wrapper {
   flex-direction: row;
   padding: 0 var(--padding-mini);
 }
-.frame-parent66 {
-  align-self: stretch;
-  flex-direction: column;
-  gap: var(--gap-5xl);
-}
+
 .clip-path-group {
   width: 25px;
   height: 23.2px;
@@ -459,13 +425,7 @@
   min-width: 73px;
   z-index: 1;
 }
-.frame-parent67 {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: var(--gap-3xs);
-}
+
 .aside-box-child {
   flex-direction: row;
   padding: 0 var(--padding-mini);
@@ -762,14 +722,7 @@
   min-width: 242px;
   max-width: 100%;
 }
-.frame-child30 {
-  width: 0;
-  flex: 1;
-  position: relative;
-  max-height: 100%;
-  object-fit: contain;
-  z-index: 2;
-}
+
 .vector-wrapper29 {
   height: 124.5px;
   width: 0;
@@ -878,14 +831,7 @@
   object-fit: cover;
   z-index: 2;
 }
-.frame-child32 {
-  width: 0;
-  flex: 1;
-  position: relative;
-  max-height: 100%;
-  object-fit: contain;
-  z-index: 2;
-}
+
 .vector-wrapper30 {
   height: 142.5px;
   width: 0;
@@ -896,13 +842,7 @@
   padding: var(--padding-3xl-5) 0 0;
   box-sizing: border-box;
 }
-.decoration26 {
-  height: 46px;
-  width: 2px;
-  position: relative;
-  background-color: var(--accent-blue);
-  z-index: 2;
-}
+
 .placeholder-image-parent3 {
   display: flex;
   flex-direction: row;
@@ -954,14 +894,7 @@
   min-width: 242px;
   max-width: 100%;
 }
-.frame-child33 {
-  width: 0;
-  flex: 1;
-  position: relative;
-  max-height: 100%;
-  object-fit: contain;
-  z-index: 2;
-}
+
 .frame-parent78,
 .vector-wrapper31 {
   display: flex;

@@ -715,26 +715,7 @@
 .icon-tg5 {
   width: 32.7px;
 }
-.bg-contacts-parent,
-.icon-insta-parent {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 21.3px;
-}
-.bg-contacts-parent {
-  width: 387px;
-  border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
-  background-color: var(--accent-blue);
-  flex-direction: column;
-  padding: 41.3px 28.8px 41.2px var(--padding-10xl-8);
-  box-sizing: border-box;
-  gap: 81.9px;
-  min-width: 387px;
-  max-width: 100%;
-  z-index: 1;
-}
+
 .have-a-question,
 .just-write-us {
   margin: 0;
@@ -1072,26 +1053,7 @@
   line-height: 16px;
   z-index: 1;
 }
-.arcs-assemblage1,
-.frame-parent31,
-.star-set {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: var(--gap-4xs-4);
-}
-.frame-parent31,
-.star-set {
-  flex-direction: column;
-  gap: var(--gap-2xs-2);
-}
-.frame-parent31 {
-  align-self: stretch;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: var(--gap-xl);
-}
+
 .frame-child5 {
   align-self: stretch;
   position: relative;
@@ -1184,14 +1146,7 @@
   min-width: 324px;
   color: var(--primary-text);
 }
-.frame-parent25,
-.have-a-question-just-write-us-parent,
-.left-contacts,
-.sec-contacts {
-  display: flex;
-  justify-content: flex-start;
-  max-width: 100%;
-}
+
 .frame-parent25 {
   align-self: stretch;
   flex-direction: row;
@@ -1201,11 +1156,7 @@
   color: var(--neutral-background);
   font-family: var(--font-poppins);
 }
-.left-contacts,
-.sec-contacts {
-  align-items: flex-start;
-  box-sizing: border-box;
-}
+
 .left-contacts {
   flex: 1;
   border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
@@ -1217,18 +1168,7 @@
   z-index: 1;
   font-size: var(--font-size-17xl);
 }
-.sec-contacts {
-  align-self: stretch;
-  background-color: var(--color-ghostwhite);
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: var(--padding-93xl) var(--padding-53xl);
-  gap: var(--gap-5xl);
-  text-align: left;
-  font-size: var(--font-size-xl);
-  color: var(--primary-text);
-  font-family: var(--font-montserrat);
-}
+
 .logo-flag-ut-icon11 {
   height: 38.5px;
   width: 60px;
@@ -1692,11 +1632,6 @@
   animation: 1s ease 0s 1 normal forwards fade-in;
 }
 @media screen and (max-width: 1050px) {
-  .sec-contacts {
-    padding-top: var(--padding-54xl);
-    padding-bottom: var(--padding-54xl);
-    box-sizing: border-box;
-  }
 }
 @media screen and (max-width: 1000px) {
   .events16 {
@@ -1712,9 +1647,7 @@
     font-size: var(--font-size-10xl);
     line-height: 35px;
   }
-  .bg-contacts-parent {
-    flex: 1;
-  }
+
   .frame-parent25 {
     flex-wrap: wrap;
   }
@@ -1735,12 +1668,7 @@
     padding-right: var(--padding-17xl);
     box-sizing: border-box;
   }
-  .bg-contacts-parent {
-    padding-top: var(--padding-8xl);
-    padding-bottom: var(--padding-8xl);
-    box-sizing: border-box;
-    min-width: 100%;
-  }
+
   .frame-parent29 {
     flex-wrap: wrap;
     gap: var(--gap-base);
@@ -1748,18 +1676,12 @@
   .frame-parent32 {
     flex: 1;
   }
-  .frame-parent31 {
-    flex-wrap: wrap;
-  }
+
   .have-a-question-just-write-us-parent {
     gap: 29px;
   }
   .left-contacts {
     gap: var(--gap-6xl);
-  }
-  .sec-contacts {
-    padding: var(--padding-28xl) var(--padding-17xl);
-    box-sizing: border-box;
   }
 }
 @media screen and (max-width: 450px) {
@@ -1797,9 +1719,7 @@
   .frame-parent26 {
     gap: var(--gap-6xl);
   }
-  .bg-contacts-parent {
-    gap: 41px;
-  }
+
   .have-a-question-container {
     font-size: var(--font-size-lgi);
   }

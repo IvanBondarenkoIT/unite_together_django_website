@@ -208,18 +208,7 @@
   border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
   background-color: var(--color-cornflowerblue-100);
 }
-.footer-heading-wrapper,
-.footer-heading1 {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-.footer-heading1 {
-  flex: 1;
-  flex-direction: column;
-  gap: var(--gap-xl);
-  z-index: 1;
-}
+
 .footer-heading-wrapper {
   align-self: stretch;
   flex-direction: row;

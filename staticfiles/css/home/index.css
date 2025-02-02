@@ -63,33 +63,14 @@
   right: 2.31%;
   bottom: 40.06%;
 }
-.group48,
-.group50,
-.together16 {
-  position: absolute;
-  width: 100%;
-  left: 0;
-}
+
 .together16 {
   top: 0;
   display: inline-block;
   min-width: 56.3px;
   height: 100%;
 }
-.group48,
-.group50 {
-  right: 0;
-  bottom: 0;
-}
-.group50 {
-  height: 34.09%;
-  top: 65.91%;
-  font-size: var(--font-size-3xs-9);
-}
-.group48 {
-  height: 100%;
-  top: 0;
-}
+
 .logo-text-ut16,
 .logo-ut-footer8 {
   position: absolute;
@@ -267,22 +248,7 @@
   font-size: var(--text-medium-normal-size);
   color: var(--primary-text);
 }
-.item-contact6 {
-  height: 145.2px;
-  width: 306px;
-  position: relative;
-}
-.icon-fb9,
-.icon-insta9,
-.icon-tg9 {
-  height: 22px;
-  width: 22px;
-  position: relative;
-  min-height: 22px;
-}
-.icon-tg9 {
-  width: 23px;
-}
+
 .soc-icons-footer8 {
   position: absolute;
   height: 15.07%;
@@ -351,21 +317,6 @@
   position: relative;
   text-decoration: underline;
   line-height: 150%;
-}
-.privacy-policy8 {
-  display: inline-block;
-  min-width: 96px;
-}
-.cookies-settings8,
-.privacy-policy8,
-.terms-of-service8 {
-  position: relative;
-  text-decoration: underline;
-  line-height: 150%;
-}
-.cookies-settings8 {
-  display: inline-block;
-  min-width: 94px;
 }
 
 .row11 {
@@ -778,29 +729,13 @@
   font-size: var(--body-regular-size);
   line-height: 150%;
 }
-.column3,
-.content19,
-.row12 {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
+
 .content19 {
   align-self: stretch;
   flex-direction: column;
   gap: var(--gap-5xl);
 }
-.column3,
-.row12 {
-  max-width: 100%;
-}
-.column3 {
-  flex: 1;
-  overflow: hidden;
-  flex-direction: column;
-  gap: var(--gap-13xl);
-  min-width: 304px;
-}
+
 .row12 {
   align-self: flex-start;
   flex-direction: row;
@@ -1181,18 +1116,7 @@
   height: 100%;
   display: none;
 }
-.subtitle3,
-.title19 {
-  align-self: stretch;
-  position: relative;
-}
-.title19 {
-  margin: 0;
-  font-size: inherit;
-  line-height: 120%;
-  font-weight: 700;
-  font-family: inherit;
-}
+
 .subtitle3 {
   font-size: var(--text-medium-normal-size);
   line-height: 150%;
@@ -1290,11 +1214,7 @@
   width: 57.9px;
   height: 10.1px;
 }
-.content24,
-.image-icon {
-  position: absolute;
-  max-width: 100%;
-}
+
 .image-icon {
   height: 89.54%;
   width: 51.25%;
@@ -1306,12 +1226,7 @@
   max-height: 100%;
   object-fit: contain;
 }
-.content24 {
-  top: 111.7px;
-  left: 64.5px;
-  width: 1311.1px;
-  height: 554.6px;
-}
+
 .bg-menu8,
 .main {
   position: absolute;
@@ -1433,36 +1348,7 @@
   width: 25px;
   position: relative;
 }
-.button-donate8,
-.right-part8 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-}
-.button-donate8 {
-  cursor: pointer;
-  border: 0;
-  padding: var(--padding-2xs) var(--padding-8xl);
-  background-color: var(--accent-blue);
-  border-radius: var(--br-3xs);
-  overflow: hidden;
-  gap: var(--gap-3xs);
-}
-.button-donate8:hover {
-  background-color: var(--color-cornflowerblue-200);
-}
-.right-part8 {
-  position: absolute;
-  height: 33.1%;
-  width: 33.61%;
-  top: 33.45%;
-  right: 5%;
-  bottom: 33.45%;
-  left: 61.39%;
-  gap: var(--gap-6xl);
-  font-size: var(--body-regular-size);
-}
+
 .events25,
 .projects18 {
   position: absolute;
@@ -1547,17 +1433,6 @@
   font-size: var(--font-size-base-9);
 }
 
-.navbar9 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 142px;
-  text-align: left;
-  font-size: var(--text-medium-normal-size);
-  color: var(--primary-text);
-  font-family: var(--font-montserrat);
-}
 .home {
   width: 100%;
   height: 3475px;
@@ -1603,10 +1478,6 @@
   .heading24 {
     font-size: var(--font-size-19xl);
     line-height: 46px;
-  }
-  .title19 {
-    font-size: var(--font-size-26xl);
-    line-height: 54px;
   }
 }
 @media screen and (max-width: 750px) {
@@ -1697,9 +1568,6 @@
     gap: var(--gap-base);
   }
 
-  .column3 {
-    gap: var(--gap-base);
-  }
   .sec-events {
     gap: var(--gap-xl);
   }
@@ -1718,17 +1586,7 @@
   .sec-about {
     gap: var(--gap-xl);
   }
-  .title19 {
-    font-size: var(--font-size-15xl);
-    line-height: 40px;
-  }
-  .right-part8 {
-    flex-wrap: wrap;
-  }
-  .navbar9 {
-    height: auto;
-    min-height: 142;
-  }
+
 }
 
 /* Hide mobile navbar by default */

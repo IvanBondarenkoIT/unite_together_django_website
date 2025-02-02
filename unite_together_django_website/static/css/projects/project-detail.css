@@ -605,15 +605,7 @@
   debug_commit: 1de1738;
   z-index: 1;
 }
-.frame-parent61 {
-  align-self: stretch;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 0 0 var(--padding-8xs);
-  gap: var(--gap-5xs-2);
-}
+
 .dec-line-icon {
   height: 1px;
   width: 299.5px;
@@ -1398,39 +1390,19 @@
   flex-direction: column;
   padding: var(--padding-10xs-1) 0 0;
 }
-.address9,
-.image-list-items,
-.item-contact6,
-.phone-group {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
+
 .address9 {
   flex-direction: row;
   gap: var(--gap-3xs);
 }
-.item-contact6,
-.phone-group {
-  flex-direction: column;
-}
+
 .phone-group {
   align-self: stretch;
   gap: var(--gap-mini);
   font-size: var(--font-size-sm);
   color: var(--color-darkslategray-200);
 }
-.item-contact6 {
-  width: 21.25%;
-  margin: 0 !important;
-  position: absolute;
-  height: 34.08%;
-  top: 31.78%;
-  right: 30.49%;
-  bottom: 34.13%;
-  left: 48.26%;
-  gap: var(--gap-lgi);
-}
+
 .we-are-on9 {
   align-self: stretch;
   position: relative;
@@ -1522,41 +1494,7 @@
   display: inline-block;
   min-width: 94px;
 }
-.row10 {
-  margin: 0 !important;
-  position: absolute;
-  top: 385px;
-  left: 365.5px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: var(--gap-5xl);
-  font-size: var(--font-size-sm);
-}
-.footer9,
-.project-detail {
-  position: relative;
-  background-color: var(--neutral-background);
-  overflow: hidden;
-  display: flex;
-  box-sizing: border-box;
-}
-.footer9 {
-  align-self: stretch;
-  height: 426px;
-  flex-shrink: 0;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding: var(--padding-93xl) var(--padding-53xl) var(--padding-xl);
-  gap: 40px 59.3px;
-  text-align: left;
-  font-size: var(--text-medium-normal-size);
-  color: var(--primary-text);
-  font-family: var(--font-montserrat);
-}
+
 .project-detail {
   width: 100%;
   flex-direction: column;
@@ -1598,9 +1536,6 @@
     padding-top: var(--padding-28xl);
     padding-bottom: 50px;
     box-sizing: border-box;
-  }
-  .row10 {
-    flex-wrap: wrap;
   }
 }
 @media screen and (max-width: 750px) {
@@ -1671,9 +1606,5 @@
   }
   .e-mail9 {
     flex-wrap: wrap;
-  }
-  .footer9 {
-    height: auto;
-    min-height: 426;
   }
 }

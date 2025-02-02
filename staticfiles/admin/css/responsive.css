@@ -367,12 +367,6 @@ input[type="submit"], button {
         font-size: 0.8125rem;
     }
 
-    .datetime .timezonewarning {
-        display: block;
-        font-size: 0.6875rem;
-        color: var(--body-quiet-color);
-    }
-
     .datetimeshortcuts {
         color: var(--border-color); /* XXX Redundant, .datetime span also sets #ccc */
     }
@@ -605,11 +599,6 @@ input[type="submit"], button {
     span.clearable-file-input label {
         font-size: 0.8125rem;
         padding-bottom: 0;
-    }
-
-    .aligned .timezonewarning {
-        flex: 1 0 100%;
-        margin-top: 5px;
     }
 
     form .aligned .form-row div.help {

@@ -1846,23 +1846,6 @@
   font-size: var(--body-small-size);
 }
 
-.footer9,
-.personal-account-settings {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-.footer9 {
-  align-self: stretch;
-  flex-direction: row;
-  padding: 0 0 0 var(--padding-9xs);
-  box-sizing: border-box;
-  max-width: 100%;
-  text-align: left;
-  font-size: var(--text-medium-normal-size);
-  color: var(--primary-text);
-  font-family: var(--font-montserrat);
-}
 .personal-account-settings {
   width: 100%;
   position: relative;

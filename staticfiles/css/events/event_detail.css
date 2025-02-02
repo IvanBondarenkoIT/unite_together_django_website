@@ -886,27 +886,7 @@
   display: inline-block;
   min-width: 56.3px;
 }
-.group3,
-.group5 {
-  position: absolute;
-  width: 100%;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-.group5 {
-  height: 34.09%;
-  top: 65.91%;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  font-size: var(--font-size-3xs-9);
-}
-.group3 {
-  height: 100%;
-  top: 0;
-}
+
 .logo-text-ut1,
 .logo-ut-footer {
   flex-shrink: 0;
@@ -975,11 +955,7 @@
   border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
   background-color: var(--color-cornflowerblue-100);
 }
-.about-us1,
-.footer-heading {
-  align-self: stretch;
-  z-index: 1;
-}
+
 .footer-heading {
   display: flex;
   flex-direction: column;
@@ -987,20 +963,7 @@
   justify-content: flex-start;
   gap: var(--gap-xl);
 }
-.about-us1 {
-  position: relative;
-  font-weight: 500;
-}
-.events1 {
-  text-decoration: underline;
-}
-.events1,
-.projects1 {
-  align-self: stretch;
-  position: relative;
-  font-weight: 500;
-  z-index: 1;
-}
+
 .about-us-parent {
   align-self: stretch;
   flex-direction: column;
@@ -1042,15 +1005,7 @@
   border-radius: 0 var(--br-8xs) 0 var(--br-8xs);
   background-color: var(--color-cornflowerblue-100);
 }
-.footer-heading1 {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: var(--gap-xl);
-  z-index: 1;
-}
+
 .icon-phone {
   height: 15px;
   width: 15.6px;
