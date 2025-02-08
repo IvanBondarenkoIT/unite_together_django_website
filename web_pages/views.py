@@ -62,9 +62,6 @@ def events(request, group_slug=None, lang="uk"):
     # Build filter arguments based on activity status
     kw_args = {"is_active": is_active} if is_active else {}
 
-    # Not archived objects
-    kw_args["is_archived"] = False
-
     # Filter by event group if specified
     if group_slug:
         group = get_object_or_404(
@@ -76,6 +73,9 @@ def events(request, group_slug=None, lang="uk"):
     if selected_city and selected_city != "All":
         _city = get_object_or_404(City, name=selected_city)
         kw_args["selected_city"] = _city
+
+    # Not archived objects
+    kw_args["is_archived"] = False
 
     # Retrieve events matching filters and annotate with precomputed URLs
     all_objects = (
@@ -269,14 +269,14 @@ def projects(request, group_slug=None, lang="uk"):
 
     kw_args = {"is_active": is_active} if is_active else {}
 
-    # Not archived objects
-    kw_args["is_archived"] = False
-
     if group_slug:
         group = get_object_or_404(
             ObjectsGroup, slug=group_slug, page__name__iexact="projects", **kw_args
         )
         kw_args["group"] = group
+
+    # Not archived objects
+    kw_args["is_archived"] = False
 
     all_objects = (
         Projects.objects.filter(**kw_args)
