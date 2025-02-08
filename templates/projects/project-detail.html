@@ -21,10 +21,19 @@
         }
     </style>
     <section class="desktop-section">
-        {% include 'projects/desktop/projects-detail-desktop.html' %}
+        {% if lang == 'en' %}
+            {% include 'projects/desktop/projects-detail-desktop-en.html' %}
+        {% else %}
+            {% include 'projects/desktop/projects-detail-desktop.html' %}
+        {% endif %}
     </section>
     <section class="mobile-section">
-        {% include 'projects/mobile/projects-detail-mobile.html' %}
+        {% if lang == 'en' %}
+            {% include 'projects/mobile/projects-detail-mobile-en.html' %}
+        {% else %}
+            {% include 'projects/mobile/projects-detail-mobile.html' %}
+        {% endif %}
+
     </section>
 
 {% endblock %}

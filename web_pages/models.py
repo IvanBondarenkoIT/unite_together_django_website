@@ -64,6 +64,9 @@ class ObjectsGroup(
     def get_url(self):
         return reverse(f"{self.page.name}_by_group", args=[self.slug])
 
+    def get_url_en(self):
+        return reverse(f"{self.page.name}_by_group_en", args=["en", self.slug])
+
 
 class WebContentObject(models.Model):
 
@@ -190,6 +193,9 @@ class Projects(WebContentObject):
 
     def get_url(self):
         return reverse("projects_detail", args=[self.group.slug, self.slug])
+
+    def get_url_en(self):
+        return reverse("projects_detail_en", args=["en", self.group.slug, self.slug])
 
 
 class ProjectGallery(models.Model):
