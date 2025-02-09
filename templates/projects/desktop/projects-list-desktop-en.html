@@ -53,10 +53,12 @@
             <div class="database-connection">
                 <div class="error-handler">
                     <a class="sport1{% if request.path == '/projects/' %}-active{% endif %}"
-                       href="{% url 'projects' %}">All</a>
+                       href="{% url 'projects_en' lang='en'%}">All</a>
                     {% for category in links %}
                         <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
-                           href="{{ category.pre_computed_url }}">{{ category.name_en }}</a>
+                                   href="{{ category.get_url_en }}">{{ category.name_en }}</a>
+{#                        <a class="sport1{% if category.slug in request.path %}-active{% endif %}"#}
+{#                           href="{{ category.pre_computed_url }}">{{ category.name_en }}</a>#}
                     {% endfor %}
                     <div class="variable-holder">
 
