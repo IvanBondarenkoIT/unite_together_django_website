@@ -41,7 +41,7 @@ urlpatterns = [
         views.event_detail,
         name="event_detail_en",
     ),
-    path("<str:lang>/projects", views.projects, name="projects_en"),
+    path("<str:lang>/projects/", views.projects, name="projects_en"),
     path(
         "<str:lang>/projects/<slug:group_slug>",
         views.projects,
