@@ -87,7 +87,7 @@
             <div class="availability">
                 <div class="availability1"></div>
 
-                <form id="filterForm" action="{% url 'projects' %}" method="POST">
+                <form id="filterForm" action="{% url 'projects_en' lang='en'%}" method="POST">
                     {% csrf_token %}
                     <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox"
                            {% if free_spots == True %}checked="{true}{% endif %}">
