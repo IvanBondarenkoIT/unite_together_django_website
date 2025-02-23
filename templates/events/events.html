@@ -21,10 +21,20 @@
         }
     </style>
     <section class="desktop-section">
-        {% include 'events/desktop/events-list-desktop.html' %}
+        {% if lang == 'en' %}
+            {% include 'events/desktop/events-list-desktop-en.html' %}
+        {% else %}
+            {% include 'events/desktop/events-list-desktop.html' %}
+        {% endif %}
+{#        {% include 'events/desktop/events-list-desktop.html' %}#}
     </section>
     <section class="mobile-section">
-        {% include 'events/mobile/events-list-mobile.html' %}
+        {% if lang == 'en' %}
+            {% include 'events/mobile/events-list-mobile-en.html' %}
+        {% else %}
+            {% include 'events/mobile/events-list-mobile.html' %}
+        {% endif %}
+{#        {% include 'events/mobile/events-list-mobile.html' %}#}
     </section>
 
 {% endblock %}

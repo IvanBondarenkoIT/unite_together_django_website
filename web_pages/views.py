@@ -107,9 +107,10 @@ def events(request, group_slug=None, lang="uk"):
         "cities": cities,
         "selected_city": selected_city,
         "banner_settings": banner_settings,
+        "lang": lang,
     }
 
-    return render(request, "events/events_index.html", context=context)
+    return render(request, "events/events.html", context=context)
 
 
 def create_participant(
@@ -159,6 +160,9 @@ def event_detail(request, group_slug=None, event_slug=None, lang="uk"):
     Повертає:
         HttpResponse: Відрендерений шаблон для сторінки деталей події.
     """
+
+    print(f"Lang:{lang}")
+
     try:
         single_event = Events.objects.select_related("group").get(
             group__slug=group_slug, slug=event_slug
@@ -244,6 +248,7 @@ def event_detail(request, group_slug=None, event_slug=None, lang="uk"):
     context = {
         "single_event": single_event,
         "persons": persons,
+        "lang": lang,
     }
 
     return render(request, "events/event_detail.html", context=context)

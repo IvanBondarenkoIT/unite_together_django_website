@@ -1,0 +1,230 @@
+{% load static %}
+<style>
+    /* General table styling */
+    table.dataTable {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: Arial, sans-serif;
+    }
+    table.dataTable thead th, table.dataTable tfoot th {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+    table.dataTable tbody td {
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+    }
+    table.dataTable tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    table.dataTable tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .checkbox-list {
+        display: flex;
+        flex-direction: column;
+    }
+    .checkbox-item {
+        margin-bottom: 10px;
+    }
+
+    .button {
+            width: 12rem;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .button.active {
+            background-color: #4CAF50;
+        }
+
+        .button.inactive {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+
+        .button.add-person {
+            display: inline-block;
+            margin-bottom: 15px;
+            background-color: #007BFF;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .button.inactive:hover {
+            background-color: #999;
+        }
+
+</style>
+
+<div class="events-detail" data-animate-on-scroll>
+    <section class="sec-detail">
+        <div class="bg-detail"></div>
+        <div class="aside-box">
+            <div class="iterative-processor">
+                <div class="database-connection">
+                    <div class="error-handler">
+                        <a class="sport1" href="{% url 'events' %}">Усі</a>
+                        {% for category in links %}
+                            <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="while-loop">
+            <img class="baner-image-icon" style="width: 100%;height: auto;object-fit: cover;" loading="lazy" alt="" src="{% if single_event.image %} {{ single_event.image.url }} {% else %} {% static '/img/placeholder-image1%402x.png' %} {% endif %}"/>
+
+            <div class="about-events">
+                <div class="bg"></div>
+                <div class="variable-holder">
+                    <div class="constant-holder">
+                        <h1 class="autism-speaks-to">{{ single_event.title }}</h1>
+                        <div class="age-3-16-parent">
+                            {% if single_event.start_age %}
+                                <div class="age-3-16">
+                                    <b>Вік</b>
+                                    <span class="span">:
+                                        {% if single_event.start_age %}
+                                        	{{ single_event.start_age }}
+                                        {% endif %}
+                                        {% if single_event.end_age %}
+                                        	-{{ single_event.end_age }}
+                                        {% endif %}  </span>
+                                </div>
+
+                            {% endif %}
+
+                            <div class="free-classes-of-container">
+                                <p class="free-classes-of">{{ single_event.text|safe }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img class="dec-line-3-icon" loading="lazy" alt="" src="{% static 'img/decline3.svg' %}" />
+
+                <div class="string-op">
+                    <div class="array-op">
+                        <div class="list-op">
+                            {% if single_event.extra_details %}
+                                <div id="extra-details">
+                                    <span id="extra-details-short">{{ single_event.extra_details|truncatewords:20|safe }}</span>
+                                    <span id="extra-details-full" style="display:none;">{{ single_event.extra_details|safe }}</span>
+                                    {% if single_event.extra_details|length > 100 %}
+                                        <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">далі</a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
+                            {% if single_event.selected_city %}
+                                <div class="frame-div">
+                                    <div class="batumi-127-luka">
+                                        <div class="vector-wrapper">
+                                            <img class="vector-icon" loading="lazy" alt=""
+                                                 src="{% static 'img/vector.svg' %}"/>
+                                            <span>{{ single_event.selected_city }}</span>
+                                            {% if single_event.address %}
+                                                <span>{{ single_event.address }}</span>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% if single_event.is_active %}
+                                <form id="personForm" method="POST">
+                                    {% csrf_token %}
+                                    {% if request.user.is_authenticated %}
+                                        {% if persons %}
+                                            <h5>Оберіть осіб для реєстрації:</h5>
+                                            <br>
+                                            <div class="checkbox-list">
+                                                {% for person in persons %}
+                                                    <div class="checkbox-item">
+                                                        <input type="checkbox" name="selected-persons"
+                                                               value="{{ person.id }}" id="person-{{ person.id }}">
+                                                        <label for="person-{{ person.id }}">{{ person }}</label>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                            <br>
+                                            <h6>(Щоб бути включеними до цього списку, особи повинні бути перевірені оператором)</h6>
+                                            <br>
+                                            <br>
+                                            <button type="submit" class="button-registration">
+                                                <div class="registration">Реєстрація</div>
+                                                <div class="vector-container">
+                                                    <img class="vector-icon1" alt=""
+                                                         src="{% static 'img/vector-1.svg' %}"/>
+                                                </div>
+                                            </button>
+                                        {% else %}
+                                            <h5>У вас немає жодної підтвердженої особи.</h5>
+                                            <br>
+                                            <h6>(Щоб бути включеними до цього списку, особи повинні бути перевірені оператором)</h6>
+                                        {% endif %}
+
+                                        <br>
+                                        <h6>Якщо у вас є учасники родини, які не вказані вище - будь ласка, додайте їх до вашого профілю.</h6>
+
+                                        <a href="{% url "associated_person_list" %}" class="button">Додати осіб до списку</a>
+                                    {% else %}
+                                        <a class="button-registration" href="{% url 'login' %}">
+                                            <div class="registration">Реєстрація</div>
+                                            <div class="vector-container">
+                                                <img class="vector-icon1" alt="" src="{% static 'img/vector-1.svg' %}" />
+                                            </div>
+                                        </a>
+                                    {% endif %}
+                                </form>
+                            {% else %}
+                                <button class="button-join">
+                                    <div class="join-parent">
+                                        <div class="join">Закрито</div>
+                                        <div class="vector-container">
+                                            <img class="vector-icon1" alt="" src="{% static 'img/vector-1.svg' %}" />
+                                        </div>
+                                    </div>
+                                </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#participants-table').DataTable();
+    });
+
+    function toggleDetails() {
+        var shortText = document.getElementById("extra-details-short");
+        var fullText = document.getElementById("extra-details-full");
+        var toggleLink = document.getElementById("toggle-details");
+
+        if (shortText.style.display === "none") {
+            shortText.style.display = "inline";
+            fullText.style.display = "none";
+            toggleLink.innerText = "далі";
+        } else {
+            shortText.style.display = "none";
+            fullText.style.display = "inline";
+            toggleLink.innerText = "менше";
+        }
+    }
+</script>
+
+
