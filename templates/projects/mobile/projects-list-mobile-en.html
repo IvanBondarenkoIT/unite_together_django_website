@@ -56,8 +56,7 @@
 
                                     <form id="mobFilterForm" action="{% url 'projects' %}" method="POST">
                                         {% csrf_token %}
-                                        <label for="mobActiveCheckbox" style="position: relative; top: -7px;">Тільки
-                                            поточні</label>
+                                        <label for="mobActiveCheckbox" style="position: relative; top: -7px;">Only current</label>
                                         <input id="mobActiveCheckbox"
                                                class="icon-check1"
                                                type="checkbox"
@@ -80,13 +79,13 @@
                                         <div class="badge-ongoing">
                                             <div class="text67">
                                                 {% if object.is_active %}
-                                                    Триває
+                                                    Ongoing
                                                 {% else %}
-                                                    Завершений
+                                                    Completed
                                                 {% endif %}
                                             </div>
                                         </div>
-                                        <a href="{{ object.get_url }}">
+                                        <a href="{{ object.get_url_en }}">
                                             <img
                                                     class="placeholder-image-icon20"
                                                     loading="lazy"
@@ -108,19 +107,19 @@
                                                 <div class="frame-parent124">
                                                     <div class="heading-parent15">
                                                         <b class="heading42">
-                                                            {{ object.title }}
+                                                            {{ object.title_en }}
                                                         </b>
                                                         <div class="text68">
-                                                            {{ object.extra_details }}
+                                                            {{ object.extra_details_en }}
                                                         </div>
                                                     </div>
                                                     <div class="tag9">
-                                                        <div class="tag-one21">{{ object.group }}</div>
+                                                        <div class="tag-one21">{{ object.group.name_en }}</div>
                                                     </div>
                                                 </div>
                                                 <div class="button-delails-wrapper2">
                                                     <button class="button-delails6">
-                                                        <a href="{{ object.get_url }}" class="details6">деталі</a>
+                                                        <a href="{{ object.get_url_en }}" class="details6">details</a>
                                                         <div class="vector-wrapper35">
                                                             <img
                                                                     class="vector-icon26"
@@ -136,7 +135,7 @@
                                     <div class="form8"></div>
                                 </div>
                             {% endfor %}
-                            <nav class="mt-4" aria-label="Навігація по сторінках">
+                            <nav class="mt-4" aria-label="Page navigation">
                                 {% if all_objects.has_other_pages %}
                                     <ul class="pagination">
                                         {% if all_objects.has_previous %}
@@ -144,7 +143,7 @@
                                                                      href="?page={{ all_objects.previous_page_number }}">Попередня</a>
                                             </li>
                                         {% else %}
-                                            <li class="page-item disabled"><a class="page-link" href="#">Попередня</a>
+                                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a>
                                             </li>
                                         {% endif %}
 
@@ -165,7 +164,7 @@
                                                                      href="?page={{ all_objects.next_page_number }}">Наступна</a>
                                             </li>
                                         {% else %}
-                                            <li class="page-item disabled"><a class="page-link" href="#">Наступна</a>
+                                            <li class="page-item disabled"><a class="page-link" href="#">Next</a>
                                             </li>
                                         {% endif %}
                                     </ul>
