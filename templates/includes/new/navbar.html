@@ -1,5 +1,6 @@
 {% load static %}
 
+
 {% if user.id is None %}
     {#    NOT LOGIN USER #}
     <nav class="ut-navbar shadow-sm">
@@ -147,20 +148,8 @@
             </div>
             <div class="navbaraccount-inner2 desktop-navbar">
                 <div class="language-picker-parent">
-                    <div class="language-picker">
-                        <div class="languages12">
-                            <div class="u-a-language">
-                                <div class="flag-ua12">
-                                    <div class="u-a-flag-colors"></div>
-                                    <div class="u-a-flag-colors1"></div>
-                                </div>
-                            </div>
-                            <div class="language-ua12">UA</div>
-                            <div class="arrow-wrapper8">
-                                <img class="arrow-icon12" alt="" src="{% static 'img/arrow.svg' %}"/>
-                            </div>
-                        </div>
-                    </div>
+                    {% include 'includes/new/language-picker.html' %}
+
                     <div class="language-divider">
                         <img class="dividing-line-icon12" alt="" src="{% static 'img/dividingline1.svg' %}"/>
                     </div>
@@ -221,10 +210,12 @@
                         </div>
                     </div>
                 </a>
-
+                {% include 'includes/new/language-picker-mobile.html' %}
                 <div class="hamburger-menu" onclick="toggleDropdown()" style="font-weight: bold;">МЕНЮ ☰</div>
             </div>
+
             <div class="dropdown-menu" id="dropdown-menu">
+
                 <h4 style="margin-left: 15px">{{ user.associated_person.last_name }} {{ user.associated_person.first_name }}</h4>
                 <a href="{% url 'who_we_are' %}">Про нас</a>
                 <a href="{% url 'events' %}">Афіша</a>
@@ -235,9 +226,14 @@
                 <a href="{% url 'registered_events' %}">Ваші Події</a>
                 <a href="{% url 'settings' %}">Налаштування</a>
                 <a href="{% url 'logout' %}">Вихід</a>
+
             </div>
+
+
             {#        </header>#}
+
         </div>
+
     </nav>
 {% endif %}
 
@@ -266,4 +262,6 @@
             }
         }
     }
+
+
 </script>
