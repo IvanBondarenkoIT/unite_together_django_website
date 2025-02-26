@@ -1,0 +1,59 @@
+{% load static %}
+
+
+<style>
+    .mobile-language-picker {
+        position: relative;
+        display: contents;
+        width: 40px;
+        padding: 2px;
+    }
+
+</style>
+
+                    <div class="mobile-language-picker">
+
+                        <select id="mobile-lang-switch">
+                            <option value="ua" data-icon="{% static 'img/flag-ua.png' %}">UA</option>
+                            <option value="en" data-icon="{% static 'img/flag-en.png' %}">EN</option>
+                        </select>
+
+
+                        {#                            <div class="languages12">#}
+                        {#                                <div class="u-a-language">#}
+                        {#                                    <div class="flag-ua12">#}
+                        {#                                        <div class="u-a-flag-colors"></div>#}
+                        {#                                        <div class="u-a-flag-colors1"></div>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                                <div class="language-ua12">UA</div>#}
+                        {#                                <div class="arrow-wrapper8">#}
+                        {#                                    <img class="arrow-icon12" alt="" src="{% static 'img/arrow.svg' %}"/>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+
+                    </div>
+<script>
+    document.getElementById("mobile-lang-switch").addEventListener("change", function () {
+        let selectedLang = this.value;
+        let currentUrl = window.location.pathname;
+        let newUrl;
+
+        if (selectedLang === "en") {
+            if (!currentUrl.startsWith("/en/")) {
+                newUrl = "/en" + currentUrl;
+            }
+        } else {
+            newUrl = currentUrl.replace("/en/", "/");
+        }
+
+        window.location.href = newUrl;
+    });
+
+    // Устанавливаем правильный язык в select при загрузке страницы
+    document.addEventListener("DOMContentLoaded", function () {
+        let currentLang = window.location.pathname.startsWith("/en/") ? "en" : "ua";
+        document.getElementById("mobile-lang-switch").value = currentLang;
+    });
+</script>

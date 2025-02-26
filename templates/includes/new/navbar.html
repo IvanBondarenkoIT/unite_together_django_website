@@ -1,20 +1,5 @@
 {% load static %}
 
-<style>
-    .language-picker {
-        position: relative;
-        display: inline-block;
-    }
-
-    #lang-switch {
-        padding: 5px 10px;
-        font-size: 16px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        background: white;
-        cursor: pointer;
-    }
-</style>
 
 {% if user.id is None %}
     {#    NOT LOGIN USER #}
@@ -163,28 +148,8 @@
             </div>
             <div class="navbaraccount-inner2 desktop-navbar">
                 <div class="language-picker-parent">
-                    <div class="language-picker">
-{#                        <div class="language-picker">#}
-                            <select id="lang-switch">
-                                <option value="ua" data-icon="{% static 'img/flag-ua.svg' %}">🇺🇦 UA</option>
-                                <option value="en" data-icon="{% static 'img/flag-en.svg' %}">🇬🇧 EN</option>
-                            </select>
+                    {% include 'includes/new/language-picker.html' %}
 
-{#                            <div class="languages12">#}
-{#                                <div class="u-a-language">#}
-{#                                    <div class="flag-ua12">#}
-{#                                        <div class="u-a-flag-colors"></div>#}
-{#                                        <div class="u-a-flag-colors1"></div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                <div class="language-ua12">UA</div>#}
-{#                                <div class="arrow-wrapper8">#}
-{#                                    <img class="arrow-icon12" alt="" src="{% static 'img/arrow.svg' %}"/>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-
-                    </div>
                     <div class="language-divider">
                         <img class="dividing-line-icon12" alt="" src="{% static 'img/dividingline1.svg' %}"/>
                     </div>
@@ -245,10 +210,12 @@
                         </div>
                     </div>
                 </a>
-
+                {% include 'includes/new/language-picker-mobile.html' %}
                 <div class="hamburger-menu" onclick="toggleDropdown()" style="font-weight: bold;">МЕНЮ ☰</div>
             </div>
+
             <div class="dropdown-menu" id="dropdown-menu">
+
                 <h4 style="margin-left: 15px">{{ user.associated_person.last_name }} {{ user.associated_person.first_name }}</h4>
                 <a href="{% url 'who_we_are' %}">Про нас</a>
                 <a href="{% url 'events' %}">Афіша</a>
@@ -259,9 +226,14 @@
                 <a href="{% url 'registered_events' %}">Ваші Події</a>
                 <a href="{% url 'settings' %}">Налаштування</a>
                 <a href="{% url 'logout' %}">Вихід</a>
+
             </div>
+
+
             {#        </header>#}
+
         </div>
+
     </nav>
 {% endif %}
 
@@ -291,25 +263,5 @@
         }
     }
 
-    document.getElementById("lang-switch").addEventListener("change", function () {
-        let selectedLang = this.value;
-        let currentUrl = window.location.pathname;
-        let newUrl;
 
-        if (selectedLang === "en") {
-            if (!currentUrl.startsWith("/en/")) {
-                newUrl = "/en" + currentUrl;
-            }
-        } else {
-            newUrl = currentUrl.replace("/en/", "/");
-        }
-
-        window.location.href = newUrl;
-    });
-
-    // Устанавливаем правильный язык в select при загрузке страницы
-    document.addEventListener("DOMContentLoaded", function () {
-        let currentLang = window.location.pathname.startsWith("/en/") ? "en" : "ua";
-        document.getElementById("lang-switch").value = currentLang;
-    });
 </script>
