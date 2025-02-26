@@ -8,7 +8,7 @@ urlpatterns = [
     # Украинская версия (по умолчанию)
     path("events/", views.events, name="events"),
     path(
-        "events/<slug:group_slug>/",
+        "events/<slug:group_slug>",
         views.events,
         name="events_by_group",
     ),
@@ -19,12 +19,12 @@ urlpatterns = [
     ),
     path("projects/", views.projects, {"lang": "uk"}, name="projects"),
     path(
-        "projects/<slug:group_slug>/",
+        "projects/<slug:group_slug>",
         views.projects,
         name="projects_by_group",
     ),
     path(
-        "projects/<slug:group_slug>/<slug:project_slug>",
+        "projects/<slug:group_slug>/<slug:project_slug>/",
         views.projects_detail,
         name="projects_detail",
     ),
