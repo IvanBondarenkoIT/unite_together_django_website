@@ -13,7 +13,7 @@ def image_exists(image_field):
     return os.path.isfile(image_path)
 
 
-def homepage(request):
+def homepage(request, lang="uk"):
     sec_about_us = SectionAboutUs.objects.first()
     sec_events = SectionEvents.objects.first()
 
@@ -40,6 +40,7 @@ def homepage(request):
         "sec_projects": sec_projects,
         "sec_cta_first": sec_cta_first,
         "sec_cta_last": sec_cta_last,
+        "lang": lang,
     }
 
     return render(request, "homepage/homepage_index.html", context=context)

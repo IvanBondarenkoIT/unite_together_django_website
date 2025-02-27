@@ -126,17 +126,43 @@
                     <div class="d-flex">
 
                         <div class="carousel-text">
-                            <h1>{{ carousel_object.title }}</h1>
-                            <p class="carousel-text-content">{{ carousel_object.extra_details }}</p>
+                            <h1>
+                                {% if lang == 'en' %}
+                                    {{ carousel_object.title_en }}
+                                {% else %}
+                                    {{ carousel_object.title }}
+                                {% endif %}
+
+                            </h1>
+                            <p class="carousel-text-content">
+                                {% if lang == 'en' %}
+                                    {{ carousel_object.extra_details_en }}
+                                {% else %}
+                                    {{ carousel_object.extra_details }}
+                                {% endif %}
+
+                            </p>
                             <div class="carousel-button">
-                                <a href="{{ carousel_object.get_url }}" class="btn btn-primary mt-3">Дізнатися
-                                    більше</a>
+
+                                {% if lang == 'en' %}
+                                    <a href="{{ carousel_object.get_url_en }}" class="btn btn-primary mt-3">Learn more</a>
+                                {% else %}
+                                    <a href="{{ carousel_object.get_url }}" class="btn btn-primary mt-3">Дізнатися більше</a>
+                                {% endif %}
+
+
                             </div>
                         </div>
 
 
                         <div class="carousel-image">
-                            <a href="{{ carousel_object.get_url }}">
+                            <a
+                            {% if lang == 'en' %}
+                                href="{{ carousel_object.get_url_en }}"
+                            {% else %}
+                                href="{{ carousel_object.get_url }}"
+                            {% endif %}
+                            >
                                 <img src="{% if carousel_object.image %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" class="d-block" alt="">
                             </a>
                         </div>
