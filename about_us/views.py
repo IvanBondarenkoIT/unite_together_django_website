@@ -133,7 +133,7 @@ def first_lunch(request):
         messages.success(request, "Програми - Імпорт виконано!")
 
 
-def who_we_are(request):
+def who_we_are(request, lang="uk"):
     if TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST:
         first_lunch(request)
 
@@ -151,22 +151,24 @@ def who_we_are(request):
         "values": values,
         "programs": programs,
         "banner_settings": banner_settings,
+        "lang": lang,
     }
 
     return render(request, "aboutus/aboutus-index.html", context)
 
 
-def documents_view(request):
+def documents_view(request, lang="uk"):
     categories = DocumentCategory.objects.prefetch_related("documents").all()
     banner_settings = BannerSettings.objects.first()
     context = {
         "categories": categories,
         "banner_settings": banner_settings,
+        "lang": lang,
     }
     return render(request, "aboutus/about-us-documents.html", context)
 
 
-def contact_view(request):
+def contact_view(request, lang="uk"):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -192,43 +194,46 @@ def contact_view(request):
 
     banner_settings = BannerSettings.objects.first()
 
-    return render(
-        request,
-        "aboutus/about-us-contacts.html",
-        {"form": form, "banner_settings": banner_settings},
-    )
+    context = {"form": form, "banner_settings": banner_settings, "lang": lang}
+
+    return render(request, "aboutus/about-us-contacts.html", context)
 
 
-def contact_success_view(request):
-    return render(request, "aboutus/contact_success.html")
+def contact_success_view(request, lang="uk"):
+    context = {"lang": lang}
+    return render(request, "aboutus/contact_success.html", context)
 
 
-def about_us(request):
-    banner_settings = BannerSettings.objects.first()
-    context = {"banner_settings": banner_settings}
-    return render(request, "aboutus/aboutus_index.html", context=context)
-
-
-def history(request):
-    banner_settings = BannerSettings.objects.first()
-    context = {"banner_settings": banner_settings}
-    return render(request, "aboutus/about-us-history.html", context=context)
-
-
-def documents(request):
-    banner_settings = BannerSettings.objects.first()
-    context = {"banner_settings": banner_settings}
-    return render(request, "aboutus/about-us-documents.html", context=context)
-
-
-def partners(request):
+def partners(request, lang="uk"):
     partners = Partners.objects.all().order_by("ordering_number")
     banner_settings = BannerSettings.objects.first()
-    context = {"partners": partners, "banner_settings": banner_settings}
+    context = {
+        "partners": partners,
+        "banner_settings": banner_settings,
+        "lang": lang,
+    }
     return render(request, "aboutus/about-us-partners.html", context=context)
 
 
-def contacts(request):
-    banner_settings = BannerSettings.objects.first()
-    context = {"banner_settings": banner_settings}
-    return render(request, "aboutus/about-us-contacts.html", context=context)
+# def about_us(request):
+#     banner_settings = BannerSettings.objects.first()
+#     context = {"banner_settings": banner_settings}
+#     return render(request, "aboutus/aboutus_index.html", context=context)
+
+
+# def history(request):
+#     banner_settings = BannerSettings.objects.first()
+#     context = {"banner_settings": banner_settings}
+#     return render(request, "aboutus/about-us-history.html", context=context)
+
+
+# def documents(request):
+#     banner_settings = BannerSettings.objects.first()
+#     context = {"banner_settings": banner_settings}
+#     return render(request, "aboutus/about-us-documents.html", context=context)
+
+
+# def contacts(request):
+#     banner_settings = BannerSettings.objects.first()
+#     context = {"banner_settings": banner_settings}
+#     return render(request, "aboutus/about-us-contacts.html", context=context)

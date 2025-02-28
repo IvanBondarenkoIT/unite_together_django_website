@@ -6,7 +6,13 @@
     <nav class="ut-navbar shadow-sm">
         <div class="ut-navbar-wrapper">
             <div class="ut-navbar-logo-wrapper  desktop-navbar">
-                <a class="logo-ut2" href="{% url 'home' %}">
+                <a class="logo-ut2"
+                        {% if lang == 'en' %}
+                   href="{% url 'home_en' lang='en' %}"
+                        {% else %}
+                   href="{% url 'home' %}"
+                        {% endif %}
+                >
                     <div class="logo-container">
                         <img class="main-logo" loading="lazy" alt="Logo"
                              src="{% static 'img/new-unite-together.jpg' %}"/>
@@ -78,7 +84,13 @@
             <!-- Mobile Navbar -->
 
             <div class="mobile-navbar">
-                <a class="logo-ut2" href="{% url 'home' %}">
+                <a class="logo-ut2"
+                        {% if lang == 'en' %}
+                   href="{% url 'home_en' lang='en' %}"
+                        {% else %}
+                   href="{% url 'home' %}"
+                        {% endif %}
+                >
                     <div class="logo-container">
                         <img class="main-logo" loading="lazy" alt="Logo"
                              src="{% static 'img/new-unite-together.jpg' %}"/>
@@ -105,7 +117,13 @@
         <div class="ut-navbar-wrapper">
 
             <div class="ut-navbar-logo-wrapper desktop-navbar">
-                <a class="logo-ut2" href="{% url 'home' %}">
+                <a class="logo-ut2"
+                        {% if lang == 'en' %}
+                            href="{% url 'home_en' lang='en' %}"
+                        {% else %}
+                            href="{% url 'home' %}"
+                        {% endif %}
+                >
                     <div class="logo-container">
                         <img class="main-logo" loading="lazy" alt="Logo"
                              src="{% static 'img/new-unite-together.jpg' %}"/>
@@ -126,16 +144,23 @@
                             Про нас
                         {% endif %}
                     </a>
-                    <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
-                       href="{% url 'events' %}">
+
                         {% if lang == 'en' %}
+                            <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
+                       href="{% url 'events_en' lang='en' %}">
+
                             Events
+                            </a>
                         {% else %}
+                            <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
+                       href="{% url 'events' %}">
                             Афіша
+                            </a>
                         {% endif %}
-                    </a>
+
+
                     {% if lang == 'en' %}
-                        <a class="ut-top-menu-text{% if '/projects/' in request.path %}-active{% endif %}" href="{% url 'projects_en' lang="en"%}">
+                        <a class="ut-top-menu-text{% if '/projects/' in request.path %}-active{% endif %}" href="{% url 'projects_en' lang='en' %}">
                             Projects
                         </a>
                     {% else %}
@@ -200,7 +225,14 @@
             <!-- Mobile Navbar -->
 
             <div class="mobile-navbar">
-                <a class="logo-ut2" href="{% url 'home' %}">
+                <a class="logo-ut2"
+                        {% if lang == 'en' %}
+                           href="{% url 'home_en' lang='en' %}"
+                        {% else %}
+                           href="{% url 'home' %}"
+                        {% endif %}
+                >
+
                     <div class="logo-container">
                         <img class="main-logo" loading="lazy" alt="Logo"
                              src="{% static 'img/new-unite-together.jpg' %}"/>
