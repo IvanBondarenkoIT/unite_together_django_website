@@ -5,6 +5,11 @@ class Section(models.Model):
     subtitle = models.CharField(max_length=200, blank=True, null=True)
     title = models.CharField(max_length=200, blank=True, null=True)
     text = models.TextField(blank=True, null=True)
+
+    subtitle_en = models.CharField(max_length=200, blank=True, null=True, default="")
+    title_en = models.CharField(max_length=200, blank=True, null=True, default="")
+    text_en = models.TextField(blank=True, null=True, default="")
+
     link = models.URLField(blank=True, null=True)
 
     def __str__(self):
