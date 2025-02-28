@@ -9,16 +9,22 @@ class BannerSettings(models.Model):
     about_us_banner_mob_image = models.ImageField(upload_to="img/banners/")
     about_us_banner_title = models.CharField(max_length=255)
     about_us_banner_text = models.CharField(max_length=255)
+    about_us_banner_title_en = models.CharField(max_length=255, default="")
+    about_us_banner_text_en = models.CharField(max_length=255, default="")
 
     events_banner_image = models.ImageField(upload_to="img/banners/")
     events_banner_mob_image = models.ImageField(upload_to="img/banners/")
     events_banner_title = models.CharField(max_length=255)
     events_banner_text = models.CharField(max_length=255)
+    events_banner_title_en = models.CharField(max_length=255, default="")
+    events_banner_text_en = models.CharField(max_length=255, default="")
 
     projects_banner_image = models.ImageField(upload_to="img/banners/")
     projects_banner_mob_image = models.ImageField(upload_to="img/banners/")
     projects_banner_title = models.CharField(max_length=255)
     projects_banner_text = models.CharField(max_length=255)
+    projects_banner_title_en = models.CharField(max_length=255, default="")
+    projects_banner_text_en = models.CharField(max_length=255, default="")
 
     class Meta:
         verbose_name = "Banner Settings"
@@ -30,6 +36,7 @@ class BannerSettings(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=250)  # City name
+    name_en = models.CharField(max_length=250, default="")  # City name english
     default_address = models.CharField(max_length=250, blank=True, null=True)
 
     def __str__(self):
