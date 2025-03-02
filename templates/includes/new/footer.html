@@ -207,25 +207,65 @@
                         </div>
                     </a>
                 </div>
-                <b>Стисло про нас</b>
-                <p>Наша організація "Unite Together" спрямована на створення та реалізацію проектів, які підтримують і розвивають українців, постраждалих від війни. Наша головна мета — досягти стійких системних змін у їхньому житті та суспільстві.</p>
-            </div>
+                {% if lang == 'en' %}
+                    <b>About Us</b>
+                    <p>Our organization "Unite Together" is focused on creating and implementing projects that support and develop Ukrainians affected by the war. Our main goal is to achieve sustainable systemic changes in their lives and society.</p>
+                {% else %}
+                    <b>Стисло про нас</b>
+                    <p>Наша організація "Unite Together" спрямована на створення та реалізацію проектів, які підтримують і розвивають українців, постраждалих від війни. Наша головна мета — досягти стійких системних змін у їхньому житті та суспільстві.</p>
+                {% endif %}
 
-            <div class="foot-col foot-2-menu" style="max-width: 130px; min-width: 100px; "><b>Меню</b>
-                <div class="line-decoration2"></div>
-                <ul class="footer-menu-links">
-                    <li class="footer-menu-links"><a href="{% url 'who_we_are' %}"
-                                                     {% if '/about-us/' in request.path %}style="text-decoration: underline"{% endif %}>Про нас</a></li>
-                    <li class="footer-menu-links"><a href="{% url 'events' %}"
-                                                     {% if '/events/' in request.path %}style="text-decoration: underline"{% endif %}>Події</a></li>
-                    <li class="footer-menu-links"><a href="{% url 'projects' %}"
-                                                     {% if '/projects/' in request.path %}style="text-decoration: underline"{% endif %}>Проєкти</a></li>
-                </ul>
             </div>
+            {% if lang == 'en' %}
+                <div class="foot-col foot-2-menu" style="max-width: 130px; min-width: 100px; "><b>Menu</b>
+                    <div class="line-decoration2"></div>
+                    <ul class="footer-menu-links">
+                        <li class="footer-menu-links">
+                            <a href="{% url 'who_we_are_en' lang='en' %}"
+                               {% if '/about-us/' in request.path %}style="text-decoration: underline"{% endif %}>
+                                About Us
+                            </a>
+                        </li>
+                        <li class="footer-menu-links">
+                            <a href="{% url 'events_en'  lang='en' %}"
+                               {% if '/events/' in request.path %}style="text-decoration: underline"{% endif %}>
+                                Events
+                            </a>
+                        </li>
+                        <li class="footer-menu-links">
+                            <a href="{% url 'projects_en'  lang='en' %}"
+                               {% if '/projects/' in request.path %}style="text-decoration: underline"{% endif %}>
+                                Projects
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="foot-col foot-2-menu" style="max-width: 130px; min-width: 100px; "><b>Меню</b>
+                    <div class="line-decoration2"></div>
+                    <ul class="footer-menu-links">
+                        <li class="footer-menu-links"><a href="{% url 'who_we_are' %}"
+                                                         {% if '/about-us/' in request.path %}style="text-decoration: underline"{% endif %}>Про
+                            нас</a></li>
+                        <li class="footer-menu-links"><a href="{% url 'events' %}"
+                                                         {% if '/events/' in request.path %}style="text-decoration: underline"{% endif %}>Події</a>
+                        </li>
+                        <li class="footer-menu-links"><a href="{% url 'projects' %}"
+                                                         {% if '/projects/' in request.path %}style="text-decoration: underline"{% endif %}>Проєкти</a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+
 
             <!-- CONTACT -->
             <div class="foot-col foot-3-address" style="min-width: 330px;">
-                <b>Контакти</b>
+                {% if lang == 'en' %}
+                    <b>Contacts</b>
+                {% else %}
+                	<b>Контакти</b>
+                {% endif %}
+
                 <div class="line-decoration2"></div>
                 <ul class="footer-menu-address">
                     <li class="footer-menu-address-phone">
@@ -237,7 +277,14 @@
 
                     <li class="footer-menu-address-location">
                         <a style="white-space: nowrap;" href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8"
-                                          aria-pressed="true">Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8</a>
+                                          aria-pressed="true">
+                            {% if lang == 'en' %}
+                                Tbilisi, Tsotne Dadiani St. 21/23, Office 8
+                            {% else %}
+                                Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8
+                            {% endif %}
+
+                        </a>
                     </li>
                         <br>
 
@@ -246,35 +293,48 @@
 
             <!-- WE'RE SOCIAL -->
             <div class="foot-col foot-4-social">
-                <b>Ми в соціальних мережах</b>
-                <div class="decoration7"></div>
-                <div>
-                    Підписуйтесь на нас у соціальних мережах, щоб не пропустити вихід нових видатних подій.
-                </div>
+
+                {% if lang == 'en' %}
+                    <b>We're in social networks</b>
+                    <div class="decoration7"></div>
+                    <div>
+                        Subscribe to us in social networks to not miss upcoming events.
+                    </div>
+                {% else %}
+                    <b>Ми в соціальних мережах</b>
+                    <div class="decoration7"></div>
+                    <div>
+                        Підписуйтесь на нас у соціальних мережах, щоб не пропустити вихід нових видатних подій.
+                    </div>
+                {% endif %}
+
 
                 <div class="soc-icons-footer1">
 
 {#                    <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5```html#}
-                    <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5cmlibXVydGRz"><img
+                    <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5cmlibXVydGRz">
+                        <img
                             class="icon-insta1"
                             loading="lazy"
                             alt="Instagram"
-                            src="{% static 'img/iconinsta.svg' %}"
-                    /></a>
+                            src="{% static 'img/iconinsta.svg' %}"/>
+                    </a>
 
-                    <a href="https://www.facebook.com/UniteTogetherForUkraine?mibextid=LQQJ4d"><img
+                    <a href="https://www.facebook.com/UniteTogetherForUkraine?mibextid=LQQJ4d">
+                        <img
                             class="icon-fb2"
                             loading="lazy"
                             alt="Facebook"
-                            src="{% static 'img/iconfb.svg' %}"
-                    /></a>
+                            src="{% static 'img/iconfb.svg' %}"/>
+                    </a>
 
-                    <a href="https://t.me/Unite_T"><img
+                    <a href="https://t.me/Unite_T">
+                        <img
                             class="icon-tg2"
                             loading="lazy"
                             alt="Telegram"
-                            src="{% static 'img/icontg.svg' %}"
-                    /></a>
+                            src="{% static 'img/icontg.svg' %}"/>
+                    </a>
                 </div>
 
             </div>
@@ -285,14 +345,50 @@
         <div class="not-equal-comparison">
             <div class="divider2"></div>
             <div class="or-comparison">
-                <div class="row2">
-                    <div>
-                        © 2024 Unite Together. Всі права захищені.
+                {% if lang == 'en' %}
+                    <div class="row2">
+                        <div>
+                            © 2024 Unite Together. All rights reserved.
+                        </div>
+                        <div>
+                            <a href="{% url 'privacy_policy' %}">
+                                Privacy Policy
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{% url 'terms_conditions' %}">
+                                Terms and Conditions
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{% url 'cookies_policy' %}">
+                                Cookies Policy
+                            </a>
+                        </div>
                     </div>
-                    <div><a href="{% url 'privacy_policy' %}">Політика конфіденційності</a></div>
-                    <div><a href="{% url 'terms_conditions' %}">Умови та положення</a></div>
-                    <div><a href="{% url 'cookies_policy' %}">Політика щодо cookies</a></div>
-                </div>
+                {% else %}
+                    <div class="row2">
+                        <div>
+                            © 2024 Unite Together. Всі права захищені.
+                        </div>
+                        <div>
+                            <a href="{% url 'privacy_policy' %}">
+                                Політика конфіденційності
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{% url 'terms_conditions' %}">
+                                Умови та положення
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{% url 'cookies_policy' %}">
+                                Політика щодо cookies
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+
             </div>
         </div>
     </div>
