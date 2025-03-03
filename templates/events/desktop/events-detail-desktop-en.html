@@ -73,9 +73,9 @@
             <div class="iterative-processor">
                 <div class="database-connection">
                     <div class="error-handler">
-                        <a class="sport1" href="{% url 'events' %}">Усі</a>
+                        <a class="sport1" href="{% url 'events' %}">All</a>
                         {% for category in links %}
-                            <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
+                            <a class="sport1" href="{{ category.get_url_en }}">{{ category.name_en }}</a>
                         {% endfor %}
                     </div>
                 </div>

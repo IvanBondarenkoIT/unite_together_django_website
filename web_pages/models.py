@@ -153,6 +153,9 @@ class Events(WebContentObject):
     def get_url(self):
         return reverse("event_detail", args=[self.group.slug, self.slug])
 
+    def get_url_en(self):
+        return reverse("event_detail_en", args=["en", self.group.slug, self.slug])
+
 
 class Projects(WebContentObject):
     selected_city = models.ForeignKey(
