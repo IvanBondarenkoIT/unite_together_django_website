@@ -50,8 +50,17 @@
         <!-- Вибір категорій для сторінок "Про нас" -->
         <div class="left-selector-box">
             {% for category, link in links.items %}
-                <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
-                   href="{% url  link %}">{{ category }}</a>
+{#                {% if lang == 'en' %}#}
+{#                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}"#}
+{#                       href="{% url  link lang='en' %}">#}
+{#                        {{ category }}#}
+{#                    </a>#}
+{#                {% else %}#}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}" href="{% url  link %}">
+                        {{ category }}
+                    </a>
+{#                {% endif %}#}
+
             {% endfor %}
         </div>
 
