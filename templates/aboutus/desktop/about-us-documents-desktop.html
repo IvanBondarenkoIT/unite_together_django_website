@@ -59,7 +59,18 @@
         <section class="right-part-of-static-page">
             <div class="bg-white-documents"></div>
             <div class="variable-remover">
-                <h1 class="documents2">Документи</h1>
+            {% if lang == 'en' %}
+                <h1 class="documents2">Documents</h1>
+                <div class="on-this-page-container">
+                    <p class="on-this-page">
+                        On this page you will find official documents that regulate the activity of
+                        our organization, as well as information materials that will help you better
+                        understand the principles and objectives of our charitable activity.
+                    </p>
+                    <p class="blank-line3">&nbsp;</p>
+                </div>
+            {% else %}
+            	<h1 class="documents2">Документи</h1>
                 <div class="on-this-page-container">
                     <p class="on-this-page">
                         На цій сторінці ви знайдете офіційні документи, що регулюють діяльність
@@ -68,10 +79,32 @@
                     </p>
                     <p class="blank-line3">&nbsp;</p>
                 </div>
+            {% endif %}
+
             </div>
             {% for category in categories %}
                 <div class="documents-section">
-                    <h3 onclick="toggleDocuments({{ category.id }})">{{ category.name }}</h3>
+                {% if lang == 'en' %}
+                    <h3 onclick="toggleDocuments({{ category.id }})">{{ category.name_en }}</h3>
+                    <div class="documents-list" id="documents-{{ category.id }}">
+                        {% for document in category.documents.all %}
+                            <div class="document-item">
+                                <div class="title">
+                                    <div class="black-wrapper">
+                                        <img class="black-icon" loading="lazy" alt=""
+                                             src="{% static 'img/aboutus/black.svg' %}"/>
+                                    </div>
+                                    <div class="heading-parent">
+                                        <b class="heading1">{{ document.title_en }}</b>
+                                        <div class="variable-updater">{{ document.subtitle_en }}</div>
+                                        <a href="{{ document.upload.url }}">Download</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                	<h3 onclick="toggleDocuments({{ category.id }})">{{ category.name }}</h3>
                     <div class="documents-list" id="documents-{{ category.id }}">
                         {% for document in category.documents.all %}
                             <div class="document-item">
@@ -89,6 +122,8 @@
                             </div>
                         {% endfor %}
                     </div>
+                {% endif %}
+
                 </div>
             {% endfor %}
         </section>
