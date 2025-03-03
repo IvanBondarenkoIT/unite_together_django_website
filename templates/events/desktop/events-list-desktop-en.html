@@ -6,10 +6,10 @@
     <div class="sec-title1">
 {#        <div class="sublitle1">Підзаголовок</div>#}
         <div class="content9">
-            <h1 class="events6">{{ banner_settings.events_banner_title }}</h1>
+            <h1 class="events6">{{ banner_settings.events_banner_title_en }}</h1>
             <div class="discover-the-diverse-range-of-wrapper">
                 <div class="discover-the-diverse1">
-                    {{ banner_settings.events_banner_text }}
+                    {{ banner_settings.events_banner_text_en }}
                 </div>
             </div>
         </div>
@@ -24,11 +24,11 @@
                 <div class="database-connection">
                     <div class="error-handler">
                         <a class="sport1{% if request.path == '/events/' %}-active{% endif %}"
-                           href="{% url 'events' %}">Усі</a>
+                           href="{% url 'events_en' lang='en' %}">All</a>
 
                         {% for category in links %}
                             <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
-                               href="{{ category.pre_computed_url }}">{{ category.name }}</a>
+                               href="{{ category.get_url_en }}">{{ category.name_en }}</a>
                         {% endfor %}
 
                         <div class="variable-holder">
@@ -36,14 +36,14 @@
                                 <img class="dec-line-1-icon" loading="lazy" alt="" src="{% static 'img/decline1.svg' %}" />
                             </div>
 
-                            <label class="select-your-city">Місто</label>
+                            <label class="select-your-city">City</label>
                             <form id="cityForm" method="POST" action="{% url 'events' %}">
                                 {% csrf_token %}
                                 <select id="cities" name="selected-city">
-                                    <option value="All"{% if selected_city == "All" %} selected{% endif %}>Усі</option>
+                                    <option value="All"{% if selected_city == "All" %} selected{% endif %}>All</option>
                                     {% for city in cities %}
                                         <option value="{{ city.name }}" {% if city.name == selected_city %}selected{% endif %}>
-                                            {{ city.name }}
+                                            {{ city.name_en }}
                                         </option>
                                     {% endfor %}
                                 </select>
@@ -59,12 +59,12 @@
 
             <div class="audio-processor">
                 <div class="availability">
-                    <div class="availability1">Доступність</div>
+                    <div class="availability1">Availability</div>
                     <form id="filterForm" action="{% url 'events' %}" method="POST">
                         {% csrf_token %}
                         <input id="activeCheckbox" class="icon-check1" type="checkbox" name="free-spots-checkbox"
                                {% if free_spots %}checked{% endif %}>
-                        <label for="activeCheckbox" style="position: relative; top: -8px;">Вільні місця</label>
+                        <label for="activeCheckbox" style="position: relative; top: -8px;">Free spots</label>
                     </form>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                                         <div class="age7">
                                             <div class="age8">
 
-                                                <span>Вік: </span>
+                                                <span>Age: </span>
                                                 <span class="span">
 
                                             	{{ object.start_age }}
@@ -118,7 +118,7 @@
                         <div class="gyroscope">
                             <div class="magnetometer">
                                 <button class="city1">
-                                    <a href="{{ object.get_url }}" style="position: static;">
+                                    <a href="{{ object.get_url_en }}" style="position: static;">
                                         <img class="icon" alt="" src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}"/>
                                     </a>
                                     <div class="bg-enrollment"></div>
@@ -127,12 +127,12 @@
                                     </div>
                                     <div class="batumi">
                                         {% if object.selected_city %}
-                                            {{ object.selected_city }}
+                                            {{ object.selected_city.name_en }}
                                         {% else %}
-                                            <span>Грузія</span>
+                                            <span>Georgia</span>
                                             {% if object.selected_cities_list.all %}
                                                 {% for city in object.selected_cities_list.all %}
-                                            	    <span>, {{ city }}</span>
+                                            	    <span>, {{ city.name_en }}</span>
                                                 {% endfor %}
                                             {% endif %}
 
@@ -143,23 +143,23 @@
                                 <div class="condition-splitter">
                                     <div class="header-item">
                                         <div class="decoration1"></div>
-                                        <b class="crafts-for-children">{{ object.title }}</b>
+                                        <b class="crafts-for-children">{{ object.title_en }}</b>
                                     </div>
                                     <div class="iteration-loop">
-                                        <div class="lorem-ipsum-is-simply5">{{ object.extra_details }}</div>
+                                        <div class="lorem-ipsum-is-simply5">{{ object.extra_details_en }}</div>
                                     </div>
                                 </div>
                             </div>
                             {% if object.is_active %}
-                                <a class="button-join5" href="{{ object.get_url }}">
+                                <a class="button-join5" href="{{ object.get_url_en }}">
                                     <div class="join-parent3">
-                                        <div class="join5">РЕЄСТРАЦІЯ</div>
+                                        <div class="join5">Registration</div>
                                     </div>
                                 </a>
                             {% else %}
                                 <button class="button-join">
                                     <div class="join-parent">
-                                        <div class="join">Закрито</div>
+                                        <div class="join">Closed</div>
 {#                                        <div class="vector-wrapper">#}
 {#                                            <img class="vector-icon" alt="" src="{% static 'img/vector-11.svg' %}" />#}
 {#                                        </div>#}

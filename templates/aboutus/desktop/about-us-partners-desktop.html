@@ -113,30 +113,59 @@
 
         <section class="right-part-of-static-page">
             <div class="partners-and-collaboration-parent" style="gap: 10px; padding-bottom: 10px;">
-                <h1 class="partners-and-collaboration2">
-                    Партнери та співпраця
-                </h1>
-                <div class="this-page-features">
-                    Ця сторінка висвітлює організації та компанії, які підтримують нас у нашій місії допомоги
-                    тим, хто потребує, і роблять значний внесок у розвиток наших проєктів.
-                </div>
+                {% if lang == 'en' %}
+                    <h1 class="partners-and-collaboration2">
+                        Partners and Collaboration
+                    </h1>
+                    <div class="this-page-features">
+                        This page highlights organizations and companies that support us in our mission to help those
+                        who need it, and make a significant contribution to the development of our projects.
+                    </div>
+                {% else %}
+                    <h1 class="partners-and-collaboration2">
+                        Партнери та співпраця
+                    </h1>
+                    <div class="this-page-features">
+                        Ця сторінка висвітлює організації та компанії, які підтримують нас у нашій місії допомоги
+                        тим, хто потребує, і роблять значний внесок у розвиток наших проєктів.
+                    </div>
+                {% endif %}
+
             </div>
 
             {% for partner in partners %}
-                <div class="partner-item">
-                    <div class="logo">
-                        {% if partner.image %}
-                            <img src="{{ partner.image.url }}" alt="{{ partner.title }}">
-                        {% endif %}
+                {% if lang == 'en' %}
+                    <div class="partner-item">
+                        <div class="logo">
+                            {% if partner.image %}
+                                <img src="{{ partner.image.url }}" alt="{{ partner.title_en }}">
+                            {% endif %}
+                        </div>
+                        <div class="description-part">
+                            <h3>{{ partner.title_en }}</h3>
+                            <p>{{ partner.description_en|safe }}</p>
+                            {% if partner.url_link %}
+                                <a href="{{ partner.url_link }}" target="_blank">Learn more</a>
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="description-part">
-                        <h3>{{ partner.title }}</h3>
-                        <p>{{ partner.description|safe }}</p>
-                        {% if partner.url_link %}
-                            <a href="{{ partner.url_link }}" target="_blank">Дізнатись більше</a>
-                        {% endif %}
+                {% else %}
+                    <div class="partner-item">
+                        <div class="logo">
+                            {% if partner.image %}
+                                <img src="{{ partner.image.url }}" alt="{{ partner.title }}">
+                            {% endif %}
+                        </div>
+                        <div class="description-part">
+                            <h3>{{ partner.title }}</h3>
+                            <p>{{ partner.description|safe }}</p>
+                            {% if partner.url_link %}
+                                <a href="{{ partner.url_link }}" target="_blank">Дізнатись більше</a>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
+
             {% endfor %}
         </section>
     </main>

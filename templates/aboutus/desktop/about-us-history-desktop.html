@@ -19,13 +19,27 @@
         <div class="sec-title5">
             {#            <div class="sublitle5">Підзаголовок</div>#}
             <div class="content5">
-                <h1 class="events19">Про нас</h1>
-                <div class="discover-the-diverse-range-of-wrapper2">
-                    <div class="discover-the-diverse5">
-                        Об'єднаймося для підтримки та розвитку українських громад у Грузії
-                        через сталі проєкти та програми.
+                {% if lang == 'en' %}
+                    <h1 class="events19">
+                        {{ banner_settings.projects_banner_title_en }}
+                    </h1>
+                    <div class="discover-the-diverse-range-of-wrapper2">
+                        <div class="discover-the-diverse5">
+                            {{ banner_settings.projects_banner_text_en }}
+                        </div>
                     </div>
-                </div>
+                {% else %}
+                    <h1 class="events19">
+                        {{ banner_settings.projects_banner_title }}
+                    </h1>
+                    <div class="discover-the-diverse-range-of-wrapper2">
+                        <div class="discover-the-diverse5">
+                            {{ banner_settings.projects_banner_text }}
+                        </div>
+                    </div>
+
+                {% endif %}
+
             </div>
         </div>
     </div>
@@ -36,19 +50,37 @@
         <!-- Вибір категорій для сторінок "Про нас" -->
         <div class="left-selector-box">
             {% for category, link in links.items %}
-                <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
-                   href="{% url  link %}">{{ category }}</a>
+{#                {% if lang == 'en' %}#}
+{#                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}"#}
+{#                       href="{% url  link lang='en' %}">#}
+{#                        {{ category }}#}
+{#                    </a>#}
+{#                {% else %}#}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}" href="{% url  link %}">
+                        {{ category }}
+                    </a>
+{#                {% endif %}#}
+
             {% endfor %}
         </div>
 
         <section class="right-part-of-static-page">
             <div class="variable-store">
-                <h1 class="history-of-unite2">{{ history.title }}</h1>
-                <div class="unite-together-was-container1">
-                    <p class="unite-together-was1">
-                        {{ history.content }}
-                    </p>
-                </div>
+                {% if lang == 'en' %}
+                	<h1 class="history-of-unite2">{{ history.title_en }}</h1>
+                    <div class="unite-together-was-container1">
+                        <p class="unite-together-was1">
+                            {{ history.content_en }}
+                        </p>
+                    </div>
+                {% else %}
+                    <h1 class="history-of-unite2">{{ history.title }}</h1>
+                    <div class="unite-together-was-container1">
+                        <p class="unite-together-was1">
+                            {{ history.content }}
+                        </p>
+                    </div>
+                {% endif %}
             </div>
             <div class="frame-parent39">
                 <div class="frame-parent40">
@@ -65,30 +97,65 @@
                     />
                 </div>
                 <div class="mission-parent">
-                    <h2 class="mission1">{{ mission.title }}:</h2>
-                    <div class="our-organization-unite-togeth-group">
-                        <div class="our-organization-unite7">
-                            {{ mission.content }}
-                        </div>
-                        <div class="error-handler2">
-                            <h2 class="vision1">{{ vision.title }}:</h2>
-                            <div class="we-see-a1">
-                                {{ vision.content }}
+                    {% if lang == 'en' %}
+                        <h2 class="mission1">{{ mission.title_en }}:</h2>
+                        <div class="our-organization-unite-togeth-group">
+                            <div class="our-organization-unite7">
+                                {{ mission.content_en }}
+                            </div>
+                            <div class="error-handler2">
+                                <h2 class="vision1">{{ vision.title_en }}:</h2>
+                                <div class="we-see-a1">
+                                    {{ vision.content_en }}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <h2 class="mission1">{{ mission.title }}:</h2>
+                        <div class="our-organization-unite-togeth-group">
+                            <div class="our-organization-unite7">
+                                {{ mission.content }}
+                            </div>
+                            <div class="error-handler2">
+                                <h2 class="vision1">{{ vision.title }}:</h2>
+                                <div class="we-see-a1">
+                                    {{ vision.content }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
                 </div>
             </div>
             <div class="switch-statement">
                 <div class="values-parent">
-                    <h2 class="values1">Цінності:</h2>
+                    {% if lang == 'en' %}
+                        <h2 class="values1">Values:</h2>
+                    {% else %}
+                        <h2 class="values1">Цінності:</h2>
+
+                    {% endif %}
+
                     <div class="frame-parent41">
                         <div class="decoration-parent">
                             <div class="frame-wrapper6">
                                 <div class="frame-parent42">
                                     {% for value in values %}
                                         <div class="frame-wrapper7">
+                                        {% if lang == 'en' %}
                                             <div class="sustainability-and-responsibil-parent">
+                                                <h3 class="sustainability-and-responsibil1">
+                                                    {{ value.title_en }}:
+                                                </h3>
+                                                <div class="we-attach-great-container1">
+                                                    <p class="we-attach-great1">
+                                                        {{ value.content_en }}
+                                                    </p>
+                                                    <p class="blank-line5">&nbsp;</p>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                        	<div class="sustainability-and-responsibil-parent">
                                                 <h3 class="sustainability-and-responsibil1">
                                                     {{ value.title }}:
                                                 </h3>
@@ -99,6 +166,8 @@
                                                     <p class="blank-line5">&nbsp;</p>
                                                 </div>
                                             </div>
+                                        {% endif %}
+
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -121,6 +190,46 @@
                     </div>
                     <div class="frame-parent43">
                         <div class="frame-parent44">
+                        {% if lang == 'en' %}
+                            <h2>Програми:</h2>
+                            <span id="more-content" class="more-content">
+                                <div class="graph-builder"></div>
+                                {% for program in programs %}
+                                    <div class="frame-parent45">
+                                            <div class="ellipse-parent">
+                                                <div class="frame-child7"></div>
+                                                <h3 class="financial-support-for1">
+                                                    {{ program.category_en }}:
+                                                </h3>
+                                            </div>
+
+                                            <div class="text-wrapper">
+                                                <div class="text7">
+                                                    {{ program.description_en|safe }}
+                                                    {% if program.support_partner_en %}
+                                                        <p><strong>Partner of support</strong> {{ program.support_partner_en }}</p>
+                                                    {% endif %}
+                                                    {% if program.beneficiaries_count %}
+                                                        <p><strong>Beneficiaries:</strong> {{ program.beneficiaries_count }}</p>
+                                                    {% endif %}
+                                                    {% if program.funding_amount %}
+                                                        <p><strong>Funding amount:</strong> €{{ program.funding_amount }}</p>
+                                                    {% endif %}
+                                                    {% if program.additional_info %}
+                                                        <p><strong>Additional information:</strong> {{ program.additional_info }}</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                {% endfor %}
+                                </span>
+
+                            <div class="listener-registry">
+                                <button id="toggle-button" onclick="toggleText()" class="btn btn-light">
+                                    ShowMore
+                                </button>
+                            </div>
+                        {% else %}
                             <h2>Програми:</h2>
                             <span id="more-content" class="more-content">
                                 <div class="graph-builder"></div>
@@ -155,9 +264,12 @@
                                 </span>
 
                             <div class="listener-registry">
-                                <button id="toggle-button" onclick="toggleText()" class="btn btn-light">БІЛЬШЕ ТЕКСТУ
+                                <button id="toggle-button" onclick="toggleText()" class="btn btn-light">
+                                    БІЛЬШЕ ТЕКСТУ
                                 </button>
                             </div>
+                        {% endif %}
+
                         </div>
                     </div>
                 </div>
@@ -172,7 +284,7 @@
         var button = document.getElementById("toggle-button");
         if (moreContent.style.display === "none" || moreContent.style.display === "") {
             moreContent.style.display = "inline";
-            button.textContent = "МЕНШЕ ТЕКСТУ";
+            button.textContent = "Sow Less";
         } else {
             moreContent.style.display = "none";
             button.textContent = "БІЛЬШЕ ТЕКСТУ";
