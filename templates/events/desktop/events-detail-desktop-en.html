@@ -88,11 +88,11 @@
                 <div class="bg"></div>
                 <div class="variable-holder">
                     <div class="constant-holder">
-                        <h1 class="autism-speaks-to">{{ single_event.title }}</h1>
+                        <h1 class="autism-speaks-to">{{ single_event.title_en }}</h1>
                         <div class="age-3-16-parent">
                             {% if single_event.start_age %}
                                 <div class="age-3-16">
-                                    <b>Вік</b>
+                                    <b>Age:</b>
                                     <span class="span">:
                                         {% if single_event.start_age %}
                                         	{{ single_event.start_age }}
@@ -105,7 +105,7 @@
                             {% endif %}
 
                             <div class="free-classes-of-container">
-                                <p class="free-classes-of">{{ single_event.text|safe }}</p>
+                                <p class="free-classes-of">{{ single_event.text_en|safe }}</p>
                             </div>
                         </div>
                     </div>
@@ -115,11 +115,11 @@
                 <div class="string-op">
                     <div class="array-op">
                         <div class="list-op">
-                            {% if single_event.extra_details %}
+                            {% if single_event.extra_details_en %}
                                 <div id="extra-details">
-                                    <span id="extra-details-short">{{ single_event.extra_details|truncatewords:20|safe }}</span>
-                                    <span id="extra-details-full" style="display:none;">{{ single_event.extra_details|safe }}</span>
-                                    {% if single_event.extra_details|length > 100 %}
+                                    <span id="extra-details-short">{{ single_event.extra_details_en|truncatewords:20|safe }}</span>
+                                    <span id="extra-details-full" style="display:none;">{{ single_event.extra_details_en|safe }}</span>
+                                    {% if single_event.extra_details_en|length > 100 %}
                                         <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">далі</a>
                                     {% endif %}
                                 </div>
@@ -131,7 +131,7 @@
                                         <div class="vector-wrapper">
                                             <img class="vector-icon" loading="lazy" alt=""
                                                  src="{% static 'img/vector.svg' %}"/>
-                                            <span>{{ single_event.selected_city }}</span>
+                                            <span>{{ single_event.selected_city.name_en }}</span>
                                             {% if single_event.address %}
                                                 <span>{{ single_event.address }}</span>
                                             {% endif %}
