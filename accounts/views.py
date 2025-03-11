@@ -20,7 +20,7 @@ from decouple import config
 from django.http import HttpResponse
 
 
-def register(request):
+def register(request, lang="uk"):
     """
     Handles user registration.
 
@@ -129,11 +129,15 @@ def register(request):
     else:
         form = RegistrationForm()
 
-    context = {"form": form}
+    context = {
+        "form": form,
+        lang: lang,
+    }
+
     return render(request, "accounts/register.html", context=context)
 
 
-def login(request):
+def login(request, lang="uk"):
     """
     Handles user login.
 
@@ -159,11 +163,11 @@ def login(request):
             messages.error(request, "Недійсні облікові дані для входу")
             return redirect("login")
 
-    return render(request, "accounts/login.html")
+    return render(request, "accounts/login.html", context={"lang": lang})
 
 
 @login_required(login_url="login")
-def logout(request):
+def logout(request, lang="uk"):
     """
     Logs out the user and redirects to the login page.
 
@@ -178,7 +182,7 @@ def logout(request):
     return redirect("login")
 
 
-def activate(request, uidb64, token):
+def activate(request, uidb64, token, lang="uk"):
     """
     Activates user account via a verification link.
 
@@ -209,7 +213,7 @@ def activate(request, uidb64, token):
         return redirect("register")
 
 
-def forgot_password(request):
+def forgot_password(request, lang="uk"):
     """
     Initiates the password reset process.
 
@@ -257,10 +261,10 @@ def forgot_password(request):
             messages.error(request, "Обліковий запис не існує")
             return redirect("forgot_password")
 
-    return render(request, "accounts/forgot_password.html")
+    return render(request, "accounts/forgot_password.html", context={"lang": lang})
 
 
-def reset_password_validate(request, uidb64, token):
+def reset_password_validate(request, uidb64, token, lang="uk"):
     """
     Validates the reset password token and allows password reset.
 
@@ -290,7 +294,7 @@ def reset_password_validate(request, uidb64, token):
         return redirect("login")
 
 
-def reset_password(request):
+def reset_password(request, lang="uk"):
     """
     Handles the password reset form submission.
 
@@ -326,4 +330,4 @@ def reset_password(request):
             messages.error(request, "Паролі не збігаються")
             return redirect("reset_password")
     else:
-        return render(request, "accounts/reset_password.html")
+        return render(request, "accounts/reset_password.html", context={"lang": lang})
