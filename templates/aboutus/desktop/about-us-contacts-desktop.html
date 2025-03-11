@@ -159,12 +159,26 @@
         <div class="sec-title4">
 {#            <h2 class="sublitle4">Підзаголовок</h2>#}
             <div class="content4">
-                <h1 class="events16">Про нас</h1>
-                <div class="discover-the-diverse-range-of-wrapper1">
-                    <h2 class="discover-the-diverse4">
-                        Об'єднаймося для підтримки та розвитку українських громад у Грузії через сталі проєкти та програми.
-                    </h2>
-                </div>
+                {% if lang == 'en' %}
+                    <h1 class="events19">
+                        {{ banner_settings.about_us_banner_title_en }}
+                    </h1>
+                    <div class="discover-the-diverse-range-of-wrapper2">
+                        <div class="discover-the-diverse5">
+                            {{ banner_settings.about_us_banner_text_en }}
+                        </div>
+                    </div>
+                {% else %}
+                    <h1 class="events19">
+                        {{ banner_settings.about_us_banner_title }}
+                    </h1>
+                    <div class="discover-the-diverse-range-of-wrapper2">
+                        <div class="discover-the-diverse5">
+                            {{ banner_settings.about_us_banner_text }}
+                        </div>
+                    </div>
+
+                {% endif %}
             </div>
         </div>
     </section>
@@ -175,8 +189,16 @@
         <!-- Вибір категорій для сторінок "Про нас" -->
         <div class="left-selector-box">
             {% for category, link in links.items %}
-                <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
-                   href="{% url link %}">{{ category }}</a>
+                {% if lang == 'en' %}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}" href="{% url link  lang='en' %}">
+                        {{ category }}
+                    </a>
+                {% else %}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}" href="{% url link %}">
+                        {{ category }}
+                    </a>
+                {% endif %}
+
             {% endfor %}
         </div>
 

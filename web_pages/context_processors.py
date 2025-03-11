@@ -10,20 +10,20 @@ def generate_url(group_name, slug):
 
 def menu_links(request):
     if "/about-us/" in request.path:
-        # if "/en/" in request.path:
-        #     links = {
-        #         "Who we are": "who_we_are_en",
-        #         "Documents": "documents_en",
-        #         "Partners&Collaboration": "partners_en",
-        #         "Contact": "contact_en",
-        #     }
-        # else:
-        links = {
-            "Про нас": "who_we_are",
-            "Документи": "documents",
-            "Партнери та співпраця": "partners",
-            "Контакти": "contact",
-        }
+        if "/en/" in request.path:
+            links = {
+                "Who we are": "who_we_are_en",
+                "Documents": "documents_en",
+                "Partners&Collaboration": "partners_en",
+                "Contact": "contact_en",
+            }
+        else:
+            links = {
+                "Про нас": "who_we_are",
+                "Документи": "documents",
+                "Партнери та співпраця": "partners",
+                "Контакти": "contact",
+            }
 
         return {"links": links}
 
