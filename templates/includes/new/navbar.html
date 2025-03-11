@@ -28,20 +28,49 @@
                     <ul class="horizontal-menu">
                         <li class="ut-top-menu-li">
                             <div class="ut-top-menu-div">
-                                <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
-                                   href="{% url 'who_we_are' %}">Про нас</a>
+                                {% if lang == 'en' %}
+                        <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
+                           href="{% url 'who_we_are_en' lang='en' %}">
+                            About us
+                        </a>
+                    {% else %}
+                        <a class="ut-top-menu-text{% if '/about-us/' in request.path %}-active{% endif %}"
+                           href="{% url 'who_we_are' %}">
+                           Про нас
+                        </a>
+
+                    {% endif %}
                             </div>
                         </li>
                         <li class="ut-top-menu-li">
                             <div class="ut-top-menu-div">
-                                <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
-                                   href="{% url 'events' %}">Афіша</a>
+                                {% if lang == 'en' %}
+                        <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
+                           href="{% url 'events_en' lang='en' %}">
+
+                            Events
+                        </a>
+                    {% else %}
+                        <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
+                           href="{% url 'events' %}">
+                            Афіша
+                        </a>
+                    {% endif %}
                             </div>
                         </li>
                         <li class="ut-top-menu-li">
                             <div class="ut-top-menu-div">
-                                <a class="ut-top-menu-text{% if '/projects/' in request.path %}-active{% endif %}"
-                                   href="{% url 'projects' %}">Проєкти</a>
+                                {% if lang == 'en' %}
+                        <a class="ut-top-menu-text{% if '/projects/' in request.path %}-active{% endif %}"
+                           href="{% url 'projects_en' lang='en' %}">
+                            Projects
+                        </a>
+                    {% else %}
+                        <a class="ut-top-menu-text{% if '/projects/' in request.path %}-active{% endif %}"
+                           href="{% url 'projects' %}">
+                            Проєкти
+                        </a>
+                    {% endif %}
                             </div>
                         </li>
                     </ul>
@@ -50,35 +79,44 @@
             <div class="right-part-wrapper-main desktop-navbar">
                 <div class="right-part-main">
                     <div class="languages-wrapper">
-                        <div class="languages1">
-                            <div class="flag-ua-wrapper" style="transform: translateY(2px);">
-                                <div class="flag-ua1">
-                                    <div class="yellow-rectangle1"></div>
-                                    <div class="blue-rectangle1"></div>
+                        {% include 'includes/new/language-picker.html' %}
+                    </div>
+                    {% if lang == 'en' %}
+                        <a class="signup-button" href="{% url 'login_en' lang='en' %}">
+                            <div class="ut-button-w-icon">
+                                <div style="display: flex;">
+                                    <img class="ut-icon" alt="" src="{% static 'img/usericon.svg' %}"/>
+                                </div>
+                                <span class="text">Login/Registration</span>
+                            </div>
+                        </a>
+                        <a class="donate-button" href="{% url 'donate-paypal_en' lang='en' %}">
+                            <div class="ut-button-w-icon">
+                                <div class="ut-text" style="transform: translateY(1px);">Donate</div>
+                                <div style="display: flex;">
+                                    <img class="ut-icon" alt="" src="{% static 'img/donateicon.svg' %}"/>️
                                 </div>
                             </div>
-                            <div class="language-ua1">UA</div>
-                            <div class="arrow-wrapper">
-                                <img class="arrow-icon4" loading="lazy" alt="" src="{% static 'img/arrow1.svg' %}"/>
+                        </a>
+                    {% else %}
+                        <a class="signup-button" href="{% url 'login' %}">
+                            <div class="ut-button-w-icon">
+                                <div style="display: flex;">
+                                    <img class="ut-icon" alt="" src="{% static 'img/usericon.svg' %}"/>
+                                </div>
+                                <span class="text">Логін/Реєстація</span>
                             </div>
-                        </div>
-                    </div>
-                    <a class="signup-button" href="{% url 'login' %}">
-                        <div class="ut-button-w-icon">
-                            <div style="display: flex;">
-                                <img class="ut-icon" alt="" src="{% static 'img/usericon.svg' %}"/>
+                        </a>
+                        <a class="donate-button" href="{% url 'donate-paypal' %}">
+                            <div class="ut-button-w-icon">
+                                <div class="ut-text" style="transform: translateY(1px);">Донат</div>
+                                <div style="display: flex;">
+                                    <img class="ut-icon" alt="" src="{% static 'img/donateicon.svg' %}"/>️
+                                </div>
                             </div>
-                            <span class="text">Логін/Реєстація</span>
-                        </div>
-                    </a>
-                    <a class="donate-button" href="{% url 'donate-paypal' %}">
-                        <div class="ut-button-w-icon">
-                            <div class="ut-text" style="transform: translateY(1px);">Донат</div>
-                            <div style="display: flex;">
-                                <img class="ut-icon" alt="" src="{% static 'img/donateicon.svg' %}"/>️
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    {% endif %}
+
                 </div>
             </div>
             <!-- Mobile Navbar -->

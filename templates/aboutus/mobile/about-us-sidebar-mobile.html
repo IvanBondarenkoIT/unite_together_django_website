@@ -70,8 +70,17 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         {% for category, link in links.items %}
-            <a class="dropdown-item{% if link in request.path %} active{% endif %}"
-               href="{% url link %}">{{ category }}</a>
+            {% if lang == 'en' %}
+                <a class="dropdown-item{% if link in request.path %} active{% endif %}" href="{% url link lang='en' %}">
+                    {{ category }}
+                </a>
+            {% else %}
+                <a class="dropdown-item{% if link in request.path %} active{% endif %}" href="{% url link %}">
+                    {{ category }}
+                </a>
+
+            {% endif %}
+
         {% endfor %}
     </div>
 </div>

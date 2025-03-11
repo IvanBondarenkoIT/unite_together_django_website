@@ -32,15 +32,28 @@
         <img class="bg-icon4" loading="lazy" alt="" src="{% static 'img/desc-aboutus.webp' %}"/>
 
         <div class="sec-title2">
-{#            <div class="sublitle2">Підзаголовок</div>#}
+            {#            <div class="sublitle2">Підзаголовок</div>#}
             <div class="content2">
-                <h1 class="events10">Про нас</h1>
-                <div class="discover-the-diverse-range-of-frame">
-                    <div class="discover-the-diverse2">
-                        Об'єднаймося для підтримки та розвитку українських громад у Грузії
-                        через сталі проєкти та програми.
+                {% if lang == 'en' %}
+                    <h1 class="events19">
+                        {{ banner_settings.about_us_banner_title_en }}
+                    </h1>
+                    <div class="discover-the-diverse-range-of-wrapper2">
+                        <div class="discover-the-diverse5">
+                            {{ banner_settings.about_us_banner_text_en }}
+                        </div>
                     </div>
-                </div>
+                {% else %}
+                    <h1 class="events19">
+                        {{ banner_settings.about_us_banner_title }}
+                    </h1>
+                    <div class="discover-the-diverse-range-of-wrapper2">
+                        <div class="discover-the-diverse5">
+                            {{ banner_settings.about_us_banner_text }}
+                        </div>
+                    </div>
+
+                {% endif %}
             </div>
         </div>
     </section>
@@ -51,78 +64,87 @@
         <!-- Вибір категорій для сторінок "Про нас" -->
         <div class="left-selector-box">
             {% for category, link in links.items %}
-                <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
-                   href="{% url  link %}">{{ category }}</a>
+                {% if lang == 'en' %}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
+                       href="{% url  link lang='en' %}">
+                        {{ category }}
+                    </a>
+                {% else %}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
+                       href="{% url  link %}">
+                        {{ category }}
+                    </a>
+                {% endif %}
             {% endfor %}
         </div>
 
         <section class="right-part-of-static-page">
             <div class="bg-white-documents"></div>
             <div class="variable-remover">
-            {% if lang == 'en' %}
-                <h1 class="documents2">Documents</h1>
-                <div class="on-this-page-container">
-                    <p class="on-this-page">
-                        On this page you will find official documents that regulate the activity of
-                        our organization, as well as information materials that will help you better
-                        understand the principles and objectives of our charitable activity.
-                    </p>
-                    <p class="blank-line3">&nbsp;</p>
-                </div>
-            {% else %}
-            	<h1 class="documents2">Документи</h1>
-                <div class="on-this-page-container">
-                    <p class="on-this-page">
-                        На цій сторінці ви знайдете офіційні документи, що регулюють діяльність
-                        нашої організації, а також інформаційні матеріали, які допоможуть
-                        краще зрозуміти принципи та цілі нашої благодійної роботи.
-                    </p>
-                    <p class="blank-line3">&nbsp;</p>
-                </div>
-            {% endif %}
+                {% if lang == 'en' %}
+                    <h1 class="documents2">Documents</h1>
+                    <div class="on-this-page-container">
+                        <p class="on-this-page">
+                            On this page you will find official documents that regulate the activity of
+                            our organization, as well as information materials that will help you better
+                            understand the principles and objectives of our charitable activity.
+                        </p>
+                        <p class="blank-line3">&nbsp;</p>
+                    </div>
+                {% else %}
+                    <h1 class="documents2">Документи</h1>
+                    <div class="on-this-page-container">
+                        <p class="on-this-page">
+                            На цій сторінці ви знайдете офіційні документи, що регулюють діяльність
+                            нашої організації, а також інформаційні матеріали, які допоможуть
+                            краще зрозуміти принципи та цілі нашої благодійної роботи.
+                        </p>
+                        <p class="blank-line3">&nbsp;</p>
+                    </div>
+                {% endif %}
 
             </div>
             {% for category in categories %}
                 <div class="documents-section">
-                {% if lang == 'en' %}
-                    <h3 onclick="toggleDocuments({{ category.id }})">{{ category.name_en }}</h3>
-                    <div class="documents-list" id="documents-{{ category.id }}">
-                        {% for document in category.documents.all %}
-                            <div class="document-item">
-                                <div class="title">
-                                    <div class="black-wrapper">
-                                        <img class="black-icon" loading="lazy" alt=""
-                                             src="{% static 'img/aboutus/black.svg' %}"/>
-                                    </div>
-                                    <div class="heading-parent">
-                                        <b class="heading1">{{ document.title_en }}</b>
-                                        <div class="variable-updater">{{ document.subtitle_en }}</div>
-                                        <a href="{{ document.upload.url }}">Download</a>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                	<h3 onclick="toggleDocuments({{ category.id }})">{{ category.name }}</h3>
-                    <div class="documents-list" id="documents-{{ category.id }}">
-                        {% for document in category.documents.all %}
-                            <div class="document-item">
-                                <div class="title">
-                                    <div class="black-wrapper">
-                                        <img class="black-icon" loading="lazy" alt=""
-                                             src="{% static 'img/aboutus/black.svg' %}"/>
-                                    </div>
-                                    <div class="heading-parent">
-                                        <b class="heading1">{{ document.title }}</b>
-                                        <div class="variable-updater">{{ document.subtitle }}</div>
-                                        <a href="{{ document.upload.url }}">Завантажити</a>
+                    {% if lang == 'en' %}
+                        <h3 onclick="toggleDocuments({{ category.id }})">{{ category.name_en }}</h3>
+                        <div class="documents-list" id="documents-{{ category.id }}">
+                            {% for document in category.documents.all %}
+                                <div class="document-item">
+                                    <div class="title">
+                                        <div class="black-wrapper">
+                                            <img class="black-icon" loading="lazy" alt=""
+                                                 src="{% static 'img/aboutus/black.svg' %}"/>
+                                        </div>
+                                        <div class="heading-parent">
+                                            <b class="heading1">{{ document.title_en }}</b>
+                                            <div class="variable-updater">{{ document.subtitle_en }}</div>
+                                            <a href="{{ document.upload.url }}">Download</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <h3 onclick="toggleDocuments({{ category.id }})">{{ category.name }}</h3>
+                        <div class="documents-list" id="documents-{{ category.id }}">
+                            {% for document in category.documents.all %}
+                                <div class="document-item">
+                                    <div class="title">
+                                        <div class="black-wrapper">
+                                            <img class="black-icon" loading="lazy" alt=""
+                                                 src="{% static 'img/aboutus/black.svg' %}"/>
+                                        </div>
+                                        <div class="heading-parent">
+                                            <b class="heading1">{{ document.title }}</b>
+                                            <div class="variable-updater">{{ document.subtitle }}</div>
+                                            <a href="{{ document.upload.url }}">Завантажити</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
 
                 </div>
             {% endfor %}
