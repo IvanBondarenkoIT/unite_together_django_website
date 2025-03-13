@@ -133,7 +133,7 @@ def first_lunch(request):
         messages.success(request, "Програми - Імпорт виконано!")
 
 
-def who_we_are(request, lang="uk"):
+def who_we_are(request, lang):
     if TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST:
         first_lunch(request)
 
@@ -169,8 +169,10 @@ def documents_view(request, lang="uk"):
 
 
 def contact_view(request, lang="uk"):
+    print(f"view {lang}")
     if request.method == "POST":
-        form = ContactForm(request.POST)
+
+        form = ContactForm(request.POST, lang=lang)
         if form.is_valid():
             # Обробка даних з form.cleaned_data
             first_name = form.cleaned_data["first_name"]
@@ -190,7 +192,7 @@ def contact_view(request, lang="uk"):
 
             return redirect("contact_success")
     else:
-        form = ContactForm()
+        form = ContactForm(request.POST, lang=lang)
 
     banner_settings = BannerSettings.objects.first()
 

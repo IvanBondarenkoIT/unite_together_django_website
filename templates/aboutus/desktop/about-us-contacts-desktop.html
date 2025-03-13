@@ -211,45 +211,94 @@
 
         <section class="right-part-of-static-page">
             <div class="contacts-parent">
-                <h1 class="contacts4">Контакти</h1>
-                <h2 class="unite-together-is">
-                    Об'єднаймося - це українська неприбуткова організація, що має на меті об'єднати людей для створення та реалізації проєктів, які підтримують та розвивають українців, постраждалих від війни, для сталих системних змін у їхньому житті та суспільстві.
-                </h2>
+                {% if lang == 'en' %}
+                    <h1 class="contacts4">Contacts</h1>
+                    <h2 class="unite-together-is">
+                        Let's Unite is a Ukrainian non-profit organization that aims to unite people to create and implement projects that support and develop Ukrainians affected by the war, for sustainable systemic changes in their lives and society.
+                    </h2>
+                {% else %}
+                    <h1 class="contacts4">Контакти</h1>
+                    <h2 class="unite-together-is">
+                        Об'єднаймося - це українська неприбуткова організація, що має на меті об'єднати людей для створення та реалізації проєктів, які підтримують та розвивають українців, постраждалих від війни, для сталих системних змін у їхньому житті та суспільстві.
+                    </h2>
+                {% endif %}
+
             </div>
             <div class="frame-parent25">
-                <div class="bg-contacts-parent">
-                    <div class="bg-contacts"></div>
-                    <h1 class="contact-information">Контактна інформація</h1>
-                    <div class="frame-parent26">
-                        <div class="icon-phone-parent">
-                            <img class="icon-phone5" loading="lazy" alt="" src="{% static 'img/aboutus/iconphone1.svg' %}"/>
-                            <div class="div9">+995 551 146 364</div>
-                        </div>
-                        <div class="frame-parent27">
-                            <div class="frame-wrapper3">
-                                <div class="icon-email-parent">
-                                    <img class="icon-email5" loading="lazy" alt="" src="{% static 'img/aboutus/iconemail2.svg' %}"/>
-                                    <img class="icon-geo5" loading="lazy" alt="" src="{% static 'img/aboutus/icongeo1.svg' %}"/>
+                {% if lang == 'en' %}
+                    <div class="bg-contacts-parent">
+                        <div class="bg-contacts"></div>
+                        <h1 class="contact-information">Contact information</h1>
+                        <div class="frame-parent26">
+                            <div class="icon-phone-parent">
+                                <img class="icon-phone5" loading="lazy" alt="" src="{% static 'img/aboutus/iconphone1.svg' %}"/>
+                                <div class="div9">+995 551 146 364</div>
+                            </div>
+                            <div class="frame-parent27">
+                                <div class="frame-wrapper3">
+                                    <div class="icon-email-parent">
+                                        <img class="icon-email5" loading="lazy" alt="" src="{% static 'img/aboutus/iconemail2.svg' %}"/>
+                                        <img class="icon-geo5" loading="lazy" alt="" src="{% static 'img/aboutus/icongeo1.svg' %}"/>
+                                    </div>
+                                </div>
+                                <div class="uniteforukraingmailcom-parent">
+                                    <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
+                                    <h2 class="tbilisi-2123-tsotne5">Tbilisi, Tsotne Dadiani St. 21/23, Office 8</h2>
+
+                                    <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">See on map</a></p>
                                 </div>
                             </div>
-                            <div class="uniteforukraingmailcom-parent">
-                                <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
-                                <h2 class="tbilisi-2123-tsotne5">Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8</h2>
-                                <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Дивитися на мапі</a></p>
-                            </div>
+                        </div>
+                        <div class="icon-insta-parent">
+                            <img class="icon-insta5" loading="lazy" alt="" src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
+                            <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
+                            <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}"/>
                         </div>
                     </div>
-                    <div class="icon-insta-parent">
-                        <img class="icon-insta5" loading="lazy" alt="" src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
-                        <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
-                        <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}"/>
+                {% else %}
+                	<div class="bg-contacts-parent">
+                        <div class="bg-contacts"></div>
+                        <h1 class="contact-information">Контактна інформація</h1>
+                        <div class="frame-parent26">
+                            <div class="icon-phone-parent">
+                                <img class="icon-phone5" loading="lazy" alt="" src="{% static 'img/aboutus/iconphone1.svg' %}"/>
+                                <div class="div9">+995 551 146 364</div>
+                            </div>
+                            <div class="frame-parent27">
+                                <div class="frame-wrapper3">
+                                    <div class="icon-email-parent">
+                                        <img class="icon-email5" loading="lazy" alt="" src="{% static 'img/aboutus/iconemail2.svg' %}"/>
+                                        <img class="icon-geo5" loading="lazy" alt="" src="{% static 'img/aboutus/icongeo1.svg' %}"/>
+                                    </div>
+                                </div>
+                                <div class="uniteforukraingmailcom-parent">
+                                    <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
+                                    <h2 class="tbilisi-2123-tsotne5">Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8</h2>
+                                    <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Дивитися на мапі</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon-insta-parent">
+                            <img class="icon-insta5" loading="lazy" alt="" src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
+                            <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
+                            <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}"/>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
+
                 <div class="have-a-question-just-write-us-parent">
-                    <h1 class="have-a-question-container">
-                        <p class="have-a-question">Маєте запитання?</p>
-                        <p class="just-write-us">Просто напишіть нам повідомлення!</p>
-                    </h1>
+                    {% if lang == 'en' %}
+                        <h1 class="have-a-question-container">
+                            <p class="have-a-question">Have a questions?</p>
+                            <p class="just-write-us">Just send us a message!</p>
+                        </h1>
+                    {% else %}
+                        <h1 class="have-a-question-container">
+                            <p class="have-a-question">Маєте запитання?</p>
+                            <p class="just-write-us">Просто напишіть нам повідомлення!</p>
+                        </h1>
+                    {% endif %}
+
                     <div class="frame-wrapper4">
                         <form method="post" action="{% url 'contact' %}">
                             {% csrf_token %}
@@ -277,7 +326,16 @@
                             </div>
                             <div class="button-wrapper">
                                 <button class="button" type="submit">
-                                    <div class="send-message">Надіслати повідомлення</div>
+                                    {% if lang == 'en' %}
+                                        <div class="send-message">
+                                            Send message
+                                        </div>
+                                    {% else %}
+                                        <div class="send-message">
+                                            Надіслати повідомлення
+                                        </div>
+                                    {% endif %}
+
                                 </button>
                             </div>
                         </form>
