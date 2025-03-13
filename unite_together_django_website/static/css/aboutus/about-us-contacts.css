@@ -1150,7 +1150,7 @@
 .frame-parent25 {
   align-self: stretch;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 21.1px;
   font-size: var(--font-size-5xl);
   color: var(--neutral-background);
