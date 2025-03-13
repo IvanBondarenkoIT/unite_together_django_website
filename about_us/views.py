@@ -133,7 +133,7 @@ def first_lunch(request):
         messages.success(request, "Програми - Імпорт виконано!")
 
 
-def who_we_are(request, lang):
+def who_we_are(request, lang="uk"):
     if TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST:
         first_lunch(request)
 
