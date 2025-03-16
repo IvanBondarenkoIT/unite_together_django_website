@@ -131,7 +131,7 @@ def register(request, lang="uk"):
 
     context = {
         "form": form,
-        lang: lang,
+        "lang": lang,
     }
 
     return render(request, "accounts/register.html", context=context)
