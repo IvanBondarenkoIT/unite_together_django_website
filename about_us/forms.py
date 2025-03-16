@@ -41,7 +41,7 @@ class ContactForm(forms.Form):
     }
 
     def __init__(self, *args, lang="uk", **kwargs):
-        print(f"form created {lang}")
+        # print(f"form created {lang}")
         super().__init__(*args, **kwargs)
         self.lang = lang
         translation = self.TRANSLATIONS.get(lang, self.TRANSLATIONS["uk"])
