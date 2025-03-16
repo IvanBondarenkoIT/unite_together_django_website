@@ -99,32 +99,58 @@
             <!-- ============================ COMPONENT LOGIN   ================================= -->
             {% if request.GET.command == 'verification' %}
                 <div class="container mx-auto alert alert-info text-center" role="alert" style="max-width: 1024px;">
-                    Дякуємо за реєстрацію. Ми надіслали вам електронний лист для підтвердження на адресу [{{ request.GET.email }}]. Будь ласка, перевірте це.
-                    <br><br>
-                    Вже перевірено? <a href="{% url 'login' %}">Логін</a>
+                    {% if lang == 'en' %}
+                        Thank you for registering. We have sent you a confirmation email to [{{ request.GET.email }}]. Please check it.
+                        <br><br>
+                        Already verified? <a href="{% url 'login' %}">Login</a>
+                    {% else %}
+                        Дякуємо за реєстрацію. Ми надіслали вам електронний лист для підтвердження на адресу [{{ request.GET.email }}]. Будь ласка, перевірте це.
+                        <br><br>
+                        Вже перевірено? <a href="{% url 'login' %}">Логін</a>
+                    {% endif %}
                 </div>
             {% else %}
                 <div class="card mx-auto" style="max-width:700px;">
                     <div class="card-body">
-                        <h4 class="card-title mb-4">Увійдіть в особовий кабінет на сайті або створіть його</h4>
-                        {#          {% include 'includes/alerts.html' %}#}
+                        <h4 class="card-title mb-4">
+                            {% if lang == 'en' %}
+                                Log in to your account or create one
+                            {% else %}
+                                Увійдіть в особовий кабінет на сайті або створіть його
+                            {% endif %}
+                        </h4>
+
                         <form action="{% url 'login' %}" method="POST">
                             {% csrf_token %}
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Електрона адреса" name="email">
+                                <input type="email" class="form-control"
+                                       placeholder="{% if lang == 'en' %} Email Address {% else %} Електрона адреса {% endif %}"
+                                       name="email">
                             </div> <!-- form-group// -->
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Пароль" name="password">
+                                <input type="password" class="form-control"
+                                       placeholder="{% if lang == 'en' %} Password {% else %} Пароль {% endif %}"
+                                       name="password">
                             </div> <!-- form-group// -->
                             <div class="form-group">
-                                <a href="{% url 'forgot_password' %}" class="float-right">Забули пароль?</a>
+                                <a href="{% url 'forgot_password' %}" class="float-right">
+                                    {% if lang == 'en' %} Forgot password? {% else %} Забули пароль? {% endif %}
+                                </a>
                             </div> <!-- form-group form-check .// -->
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block"> Логін </button>
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    {% if lang == 'en' %} Login {% else %} Логін {% endif %}
+                                </button>
                             </div> <!-- form-group// -->
                         </form>
                     </div> <!-- card-body.// -->
-                    <p class="text-center mt-4">Немає облікового запису? <a href="{% url 'register' %}">Зареєструватися</a></p>
+                    <p class="text-center mt-4">
+                        {% if lang == 'en' %}
+                            Don't have an account? <a href="{% url 'register' %}">Sign up</a>
+                        {% else %}
+                            Немає облікового запису? <a href="{% url 'register' %}">Зареєструватися</a>
+                        {% endif %}
+                    </p>
                 </div> <!-- card .// -->
             {% endif %}
         </main>

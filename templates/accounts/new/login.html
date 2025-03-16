@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% load static %}
 
 {% block content %}
@@ -8,8 +7,12 @@
       <form class="content8">
         <div class="header1">
           <div class="heading15">
-            <div class="title-login">Увійдіть у свій обліковий запис</div>
-              <div class="subtitle">Ласкаво просимо назад! Будь ласка, введіть свої дані.</div>
+            <div class="title-login">
+              {% if lang == 'en' %} Log in to your account {% else %} Увійдіть у свій обліковий запис {% endif %}
+            </div>
+            <div class="subtitle">
+              {% if lang == 'en' %} Welcome back! Please enter your details. {% else %} Ласкаво просимо назад! Будь ласка, введіть свої дані. {% endif %}
+            </div>
           </div>
         </div>
         <div class="content9">
@@ -17,44 +20,54 @@
             <div class="form-item">
               <div class="label">
                 <div class="title13">
-                  <div class="text16">Електронна пошта</div>
+                  <div class="text16">
+                    {% if lang == 'en' %} Email {% else %} Електронна пошта {% endif %}
+                  </div>
                 </div>
               </div>
               <div class="input">
-                  <div class="form-group" style="min-width: 360px">
-                      <input type="email" class="form-control" placeholder="Email Address" name="email">
-                  </div> <!-- form-group// -->
-                </div>
-              </div>
-            </div>
-            <div class="form-item1">
-              <div class="label1">
-                <div class="title14">
-                  <div class="text20">Пароль</div>
-                </div>
-
-                <div class="required1">
-                  <div class="text22">*</div>
-                </div>
-              </div>
-              <div class="password">
                 <div class="form-group" style="min-width: 360px">
-                  <input type="password" class="form-control" placeholder="Password" name="password">
-                </div> <!-- form-group// -->
+                  <input type="email" class="form-control" placeholder="{% if lang == 'en' %} Email Address {% else %} Введіть email {% endif %}" name="email">
+                </div>
               </div>
             </div>
           </div>
-          <div class="row8">
-            <div class="texttext">
-              <a class="text25" href="{% url 'forgot_password' %}">Забули пароль?</a>
+          <div class="form-item1">
+            <div class="label1">
+              <div class="title14">
+                <div class="text20">
+                  {% if lang == 'en' %} Password {% else %} Пароль {% endif %}
+                </div>
+              </div>
+
+              <div class="required1">
+                <div class="text22">*</div>
+              </div>
+            </div>
+            <div class="password">
+              <div class="form-group" style="min-width: 360px">
+                <input type="password" class="form-control" placeholder="{% if lang == 'en' %} Password {% else %} Введіть пароль {% endif %}" name="password">
+              </div>
             </div>
           </div>
-          <div class="actions">
-              <div class="form-group" >
-                  <button type="submit" class="btn btn-primary btn-block" style="min-width: 360px">Увійдіть</button>
-              </div> <!-- form-group// -->
+        </div>
+        <div class="row8">
+          <div class="texttext">
+            <a class="text25" href="{% url 'forgot_password' %}">
+              {% if lang == 'en' %} Forgot password? {% else %} Забули пароль? {% endif %}
+            </a>
           </div>
-          <a class="texttext2" href="{% url "register" %}">Немає облікового запису? Зареєструватися</a>
+        </div>
+        <div class="actions">
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block" style="min-width: 360px">
+              {% if lang == 'en' %} Log In {% else %} Увійдіть {% endif %}
+            </button>
+          </div>
+        </div>
+        <a class="texttext2" href="{% url 'register' %}">
+          {% if lang == 'en' %} Don't have an account? Sign up {% else %} Немає облікового запису? Зареєструватися {% endif %}
+        </a>
       </form>
     </div>
 
