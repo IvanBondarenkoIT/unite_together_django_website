@@ -3130,10 +3130,10 @@
 .events4.animate {
   animation: 1s ease 0s 1 normal forwards fade-in;
 }
-@media screen and (max-width: 1250px) {
-  .frame-parent1 {
-    display: none;
-  }
+@media screen and (max-width: 769px) {
+  /*.frame-parent1 {*/
+  /*  display: none;*/
+  /*}*/
   .connecter-inner {
     width: 0;
   }

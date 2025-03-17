@@ -178,8 +178,8 @@ def logout(request, lang="uk"):
     - HTTPResponse: Redirects to the login page with a success message.
     """
     auth.logout(request)
-    messages.success(request, "Успішний вихід")
-    return redirect("login")
+    messages.success(request, "Успішний вихід" if lang == "uk" else "Logout")
+    return redirect("login" if lang == "uk" else "login_en")
 
 
 def activate(request, uidb64, token, lang="uk"):
@@ -206,11 +206,25 @@ def activate(request, uidb64, token, lang="uk"):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        messages.success(request, "Щиро вітаю! Ваш обліковий запис активовано!")
-        return redirect("login")
+        messages.success(
+            request,
+            (
+                "Щиро вітаю! Ваш обліковий запис активовано!"
+                if lang == "uk"
+                else "Congratulations! Your account has been activated!"
+            ),
+        )
+        return redirect("login" if lang == "uk" else "login_en")
     else:
-        messages.error(request, "Недійсне посилання для активації")
-        return redirect("register")
+        messages.error(
+            request,
+            (
+                "Недійсне посилання для активації"
+                if lang == "uk"
+                else "Invalid activation link"
+            ),
+        )
+        return redirect("register" if lang == "uk" else "register_en")
 
 
 def forgot_password(request, lang="uk"):
@@ -231,7 +245,11 @@ def forgot_password(request, lang="uk"):
         if Account.objects.filter(email=email).exists():
             user = Account.objects.get(email__exact=email)
             current_site = get_current_site(request)
-            mail_subject = "Будь ласка, скиньте свій пароль"
+            mail_subject = (
+                "Будь ласка, скиньте свій пароль"
+                if lang == "uk"
+                else "Please reset your password"
+            )
             message = render_to_string(
                 "accounts/reset_password_email.html",
                 {
@@ -250,16 +268,32 @@ def forgot_password(request, lang="uk"):
                 send_mail(mail_subject, message, from_email, recipient_list)
                 # return HttpResponse("Письмо успешно отправлено!")
             except Exception as e:
-                messages.error("Не вдалося відправити лист")
+                messages.error(
+                    "Не вдалося відправити лист"
+                    if lang == "uk"
+                    else "Failed to send email"
+                )
 
             messages.success(
-                request, "Лист для зміни пароля надіслано на вашу електронну адресу"
+                request,
+                (
+                    "Лист для зміни пароля надіслано на вашу електронну адресу"
+                    if lang == "uk"
+                    else "Password reset email has been sent to your email address"
+                ),
             )
-            return redirect("login")
+            return redirect("login" if lang == "uk" else "login_en")
 
         else:
-            messages.error(request, "Обліковий запис не існує")
-            return redirect("forgot_password")
+            messages.error(
+                request,
+                (
+                    "Обліковий запис не існує"
+                    if lang == "uk"
+                    else "Account does not exist"
+                ),
+            )
+            return redirect("forgot_password" if lang == "uk" else "forgot_password_en")
 
     return render(request, "accounts/forgot_password.html", context={"lang": lang})
 
@@ -287,11 +321,25 @@ def reset_password_validate(request, uidb64, token, lang="uk"):
 
     if user is not None and default_token_generator.check_token(user, token):
         request.session["uid"] = uid
-        messages.success(request, "Будь ласка, скиньте свій пароль")
-        return redirect("reset_password")
+        messages.success(
+            request,
+            (
+                "Будь ласка, скиньте свій пароль"
+                if lang == "uk"
+                else "Please reset your password"
+            ),
+        )
+        return redirect("reset_password" if lang == "uk" else "reset_password_en")
     else:
-        messages.error(request, "Термін дії цього посилання закінчився")
-        return redirect("login")
+        messages.error(
+            request,
+            (
+                "Термін дії цього посилання закінчився"
+                if lang == "uk"
+                else "This link has expired"
+            ),
+        )
+        return redirect("login" if lang == "uk" else "login_en")
 
 
 def reset_password(request, lang="uk"):
@@ -320,14 +368,26 @@ def reset_password(request, lang="uk"):
                 password_validator.validate(password)
                 user.set_password(password)
                 user.save()
-                messages.success(request, "Скидання пароля успішне")
-                return redirect("login")
+                messages.success(
+                    request,
+                    (
+                        "Скидання пароля успішне"
+                        if lang == "uk"
+                        else "Password reset successful"
+                    ),
+                )
+                return redirect("login" if lang == "uk" else "login_en")
             except ValidationError as e:
                 for error in e:
                     messages.error(request, error)
-                return redirect("reset_password")
+                return redirect(
+                    "reset_password" if lang == "uk" else "reset_password_en"
+                )
         else:
-            messages.error(request, "Паролі не збігаються")
-            return redirect("reset_password")
+            messages.error(
+                request,
+                "Паролі не збігаються" if lang == "uk" else "Passwords do not match",
+            )
+            return redirect("reset_password" if lang == "uk" else "reset_password_en")
     else:
         return render(request, "accounts/reset_password.html", context={"lang": lang})

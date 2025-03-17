@@ -102,7 +102,7 @@
                     {% if lang == 'en' %}
                         Thank you for registering. We have sent you a confirmation email to [{{ request.GET.email }}]. Please check it.
                         <br><br>
-                        Already verified? <a href="{% url 'login' %}">Login</a>
+                        Already verified? <a href="{% url 'login_en' %}">Login</a>
                     {% else %}
                         Дякуємо за реєстрацію. Ми надіслали вам електронний лист для підтвердження на адресу [{{ request.GET.email }}]. Будь ласка, перевірте це.
                         <br><br>
@@ -120,7 +120,7 @@
                             {% endif %}
                         </h4>
 
-                        <form action="{% url 'login' %}" method="POST">
+                        <form action="{%if lang == 'en' %}{% url 'login_en' %}{% else %}{% url 'login' %}{% endif %}" method="POST">
                             {% csrf_token %}
                             <div class="form-group">
                                 <input type="email" class="form-control"
@@ -133,7 +133,7 @@
                                        name="password">
                             </div> <!-- form-group// -->
                             <div class="form-group">
-                                <a href="{% url 'forgot_password' %}" class="float-right">
+                                <a href="{% if lang == 'en' %}{% url 'forgot_password_en' %}{% else %}{% url 'forgot_password' %}{% endif %}" class="float-right">
                                     {% if lang == 'en' %} Forgot password? {% else %} Забули пароль? {% endif %}
                                 </a>
                             </div> <!-- form-group form-check .// -->
@@ -146,7 +146,7 @@
                     </div> <!-- card-body.// -->
                     <p class="text-center mt-4">
                         {% if lang == 'en' %}
-                            Don't have an account? <a href="{% url 'register' %}">Sign up</a>
+                            Don't have an account? <a href="{% url 'register_en' %}">Sign up</a>
                         {% else %}
                             Немає облікового запису? <a href="{% url 'register' %}">Зареєструватися</a>
                         {% endif %}
