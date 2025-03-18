@@ -329,7 +329,9 @@ def reset_password_validate(request, uidb64, token, lang="uk"):
                 else "Please reset your password"
             ),
         )
-        return redirect("reset_password" if lang == "uk" else "reset_password_en")
+        return redirect(
+            "reset_password" if lang == "uk" else "reset_password_en" + "?lang=" + lang
+        )
     else:
         messages.error(
             request,
