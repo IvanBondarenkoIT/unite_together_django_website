@@ -257,10 +257,10 @@
                                 <h4 style="margin-left: 15px">{{ user.associated_person.last_name }} {{ user.associated_person.first_name }}</h4>
 {#                                <a href="{% url 'dashboard' %}">{{ user.associated_person }}</a>#}
 
-                                <a href="{% url 'associated_person_list' %}">Мій акаунт</a>
-                                <a href="{% url 'registered_events' %}">Ваші Події</a>
-                                <a href="{% url 'settings' %}">Налаштування</a>
-                                <a href="{% url 'logout' %}">Вихід</a>
+                                <a href="{% url 'associated_person_list' %}">{% if lang == 'en' %}MY ACOUNT{% else %}Мій акаунт{% endif %}</a>
+                                <a href="{% url 'registered_events' %}">{% if lang == 'en' %}YOUR EVENTS{% else %}Ваші Події{% endif %}</a>
+                                <a href="{% url 'settings' %}">{% if lang == 'en' %}SETTINGS{% else %}Налаштування{% endif %}</a>
+                                <a href="{% url 'logout' %}">{% if lang == 'en' %}EXIT{% else %}Вихід{% endif %}</a>
                             </div>
                         </div>
                     </div>
@@ -293,15 +293,21 @@
             <div class="dropdown-menu" id="dropdown-menu">
 
                 <h4 style="margin-left: 15px">{{ user.associated_person.last_name }} {{ user.associated_person.first_name }}</h4>
-                <a href="{% url 'who_we_are' %}">Про нас</a>
-                <a href="{% url 'events' %}">Афіша</a>
-                <a href="{% url 'projects' %}">Проєкти</a>
+                <a href="{% url 'who_we_are' %}">{% if lang == 'en' %}ABOUT US{% else %}Про нас{% endif %}</a>
+                <a href="{% url 'events' %}">{% if lang == 'en' %}EVENTS{% else %}Афіша{% endif %}</a>
+                <a href="{% url 'projects' %}">{% if lang == 'en' %}PROJECTS{% else %}Проєкти{% endif %}</a>
                 <br>
 {#                <a href="{% url 'associated_person_list' %}">{{ user.associated_person }}</a>#}
-                <a href="{% url 'associated_person_list' %}">Мій акаунт</a>
-                <a href="{% url 'registered_events' %}">Ваші Події</a>
-                <a href="{% url 'settings' %}">Налаштування</a>
-                <a href="{% url 'logout' %}">Вихід</a>
+                <a href="{% url 'associated_person_list' %}">{% if lang == 'en' %}MY ACOUNT{% else %}Мій
+                    акаунт{% endif %}</a>
+                <a href="{% url 'registered_events' %}">{% if lang == 'en' %}YOUR EVENTS{% else %}Ваші
+                    Події{% endif %}</a>
+                <a href="{% url 'settings' %}">{% if lang == 'en' %}SETTINGS{% else %}Налаштування{% endif %}</a>
+                <a href="{% url 'logout' %}">{% if lang == 'en' %}EXIT{% else %}Вихід{% endif %}</a>
+{#                <a href="{% url 'associated_person_list' %}">Мій акаунт</a>#}
+{#                <a href="{% url 'registered_events' %}">Ваші Події</a>#}
+{#                <a href="{% url 'settings' %}">Налаштування</a>#}
+{#                <a href="{% url 'logout' %}">Вихід</a>#}
 
             </div>
 
