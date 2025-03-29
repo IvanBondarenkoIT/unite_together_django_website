@@ -79,7 +79,14 @@ def register(request, lang="uk"):
                     )
                     profile.save()
 
-                    messages.success(request, "Профіль успішно створено")
+                    messages.success(
+                        request,
+                        (
+                            "Профіль успішно створено"
+                            if lang == "uk"
+                            else "Profile created successfully!"
+                        ),
+                    )
 
                     # Send activation email
                     current_site = get_current_site(request)
@@ -114,18 +121,26 @@ def register(request, lang="uk"):
                             if attempts >= max_attempts:
                                 messages.error(
                                     request,
-                                    "Не вдалося надіслати лист для активації. Спробуйте ще раз пізніше.",
+                                    (
+                                        "Не вдалося надіслати лист для активації. Спробуйте ще раз пізніше."
+                                        if lang == "uk"
+                                        else "Failed to send activation email. Please try again later."
+                                    ),
                                 )
 
                     return redirect(
                         f"/accounts/login/?command=verification&email={email}"
+                        if lang == "uk"
+                        else f"/accounts/login_en/?command=verification&email={email}"
                     )
 
             except Exception as e:
                 messages.error(request, e)
                 return redirect("register")
         else:
-            messages.error(request, "Помилка реєстрації")
+            messages.error(
+                request, "Помилка реєстрації" if lang == "uk" else "Registration error"
+            )
     else:
         form = RegistrationForm()
 

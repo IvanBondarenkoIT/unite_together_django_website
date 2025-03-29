@@ -1,9 +1,19 @@
 import os
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from web_pages.models import WebContentObject, Events, Projects
 from .models import SectionAboutUs, SectionEvents, SectionProjects, CallToAction
+
+
+from django.views.generic.base import RedirectView
+
+
+class HomeRedirectView(RedirectView):
+    permanent = True  # Если False, то будет 302 вместо 301
+
+    def get_redirect_url(self, *args, **kwargs):
+        return self.request.build_absolute_uri(f"/en/homepage/")  # Тут указываем lang
 
 
 def image_exists(image_field):
@@ -14,6 +24,7 @@ def image_exists(image_field):
 
 
 def homepage(request, lang="uk"):
+
     sec_about_us = SectionAboutUs.objects.first()
     sec_events = SectionEvents.objects.first()
 
