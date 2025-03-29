@@ -85,6 +85,7 @@ class WebContentObject(models.Model):
     text_en = models.TextField(blank=True, null=True, default="")
 
     image = models.ImageField(upload_to="img/pages_content", blank=True, null=True)
+    video_link = models.URLField(blank=True, null=True)
 
     extra_details = models.TextField(blank=True, null=True)
     extra_details_en = models.TextField(blank=True, null=True, default="")
