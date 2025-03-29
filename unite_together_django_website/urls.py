@@ -16,6 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.http import HttpResponse
 from django.urls import path, include
 
 from django.conf.urls.static import static
@@ -23,7 +24,7 @@ from unite_together_django_website import views
 from unite_together_django_website import settings
 
 urlpatterns = [
-    # ADMIN
+    # # ADMIN
     path("secure/", admin.site.urls),
     # Home
     path("", include("homepage.urls")),
