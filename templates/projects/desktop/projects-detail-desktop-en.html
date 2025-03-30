@@ -134,6 +134,16 @@
                            style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
                             <div class="registration1">REGISTER</div>
                         </a>
+                        {% if single_project.video_link %}
+                            <iframe width="340" height="200" src="{{ single_project.video_link }}"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            {#                                                                <iframe width="340" height="200" src="https://www.youtube.com/embed/b7UU2K-T2ZE?si=vjhgCeaSktijacmr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>#}
+                        {% else %}
+                            <br>
+
+                        {% endif %}
                     </div>
                 </div>
             </div>
