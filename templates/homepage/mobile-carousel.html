@@ -107,18 +107,22 @@
         {% for carousel_object in carousel_objects %}
         <div class="simple-mobile-carousel-item{% if forloop.first %} active{% endif %}">
             <div class="simple-mobile-carousel-image">
-                <a href="{{ carousel_object.get_url }}">
+                <a href="{% if lang == 'en' %}{{ carousel_object.get_url_en }}{% else %}{{ carousel_object.get_url }}{% endif %}">
                     <img src="{% if carousel_object.image %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" alt="{{ carousel_object.title }}">
                 </a>
             </div>
             <div class="simple-mobile-carousel-text">
-                <h2>{{ carousel_object.title }}</h2>
+                <h2>{% if lang == 'en' %}{{ carousel_object.title_en }}{% else %}{{ carousel_object.title }}{% endif %}</h2>
                 <p style="
                     overflow: auto;
                     word-wrap: break-word; /* Позволяет переносить длинные слова */
                     overflow-wrap: break-word; /* Современный аналог */
                     white-space: normal;">
+                    {% if lang == 'en' %}
+                    	{{ carousel_object.extra_details_en }}
+                    {% else %}
                         {{ carousel_object.extra_details }}
+                    {% endif %}
                 </p>
             </div>
         </div>

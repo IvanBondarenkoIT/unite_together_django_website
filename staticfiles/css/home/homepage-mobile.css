@@ -418,6 +418,8 @@
   min-width: 2.75rem;
 }
 .styleprimary-smallfalse-da2 {
+  width: 150px;
+  margin: 5px;
   cursor: pointer;
   border: 0;
   padding: var(--padding-xs) var(--padding-5xl);
@@ -439,6 +441,8 @@
   min-width: 3.313rem;
 }
 .stylesecondary-smallfalse6 {
+  width: 150px;
+  margin: 5px;
   cursor: pointer;
   border: 1px solid var(--accent-blue);
   padding: var(--padding-3xs) var(--padding-4xl);

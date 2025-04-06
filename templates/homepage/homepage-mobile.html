@@ -11,59 +11,51 @@
                 </div>
                 <div class="registration-buttons">
                     <button class="register1">
-                        <div class="button16">Registration</div>
+                        <div class="button16">{% if lang == 'en' %}Registration{% else %}Реєстрація{% endif %}</div>
                     </button>
 
                     <div class="donation-button-wrapper-parent">
                         <div class="donation-button-wrapper">
                             <button class="donate13">
-                                <div class="button17">Donate</div>
+                                <div class="button17">{% if lang == 'en' %}Donate{% else %}Підтримати{% endif %}</div>
                             </button>
                         </div>
-                        <img
-                                class="pagination-icon1"
-                                loading="lazy"
-                                alt=""
-                                src="./public/pagination1.svg"
-                        />
+                        <img class="pagination-icon1" loading="lazy" alt="" src="./public/pagination1.svg" />
                     </div>
                 </div>
             </div>
         </div>
-      </section>
+    </section>
     {#2 Секція Про нас#}
     <section class="content-wrapper-one-wrapper">
         <div class="content-wrapper-one">
-            <div class="content-header-one">
-                <div class="subheading3">{{ sec_about_us.subtitle }}</div>
-                <h2>{{ sec_about_us.title }}</h2>
-            </div>
-            <div class="text45">
-                {{ sec_about_us.text|safe }}
-            </div>
+            {% if lang == 'en' %}
+                <div class="content-header-one">
+                    <div class="subheading3">{{ sec_about_us.subtitle_en }}</div>
+                    <h2>{{ sec_about_us.title_en }}</h2>
+                </div>
+                <div class="text45">
+                    {{ sec_about_us.text_en|safe }}
+                </div>
+            {% else %}
+                <div class="content-header-one">
+                    <div class="subheading3">{{ sec_about_us.subtitle }}</div>
+                    <h2>{{ sec_about_us.title }}</h2>
+                </div>
+                <div class="text45">
+                    {{ sec_about_us.text|safe }}
+                </div>
+            {% endif %}
             <div class="content-actions-one">
                 <button class="stylesecondary-smallfalse5">
-                    <a class="button18" href="{% url 'who_we_are' %}">Подробиці</a>
+                    <a class="button18" href="{% if lang == 'en' %}{% url 'who_we_are_en' lang='en' %}{% else %}{% url 'who_we_are' %}{% endif %}">{% if lang == 'en' %}Details{% else %}Подробиці{% endif %}</a>
                 </button>
                 <div class="stylelink-smallfalse-dark3">
-                    <a class="button19" href="{% url 'register' %}" style="font-size: medium">Зареєструватися</a>
-                    <img
-                            class="icon-chevron-right2"
-                            alt=""
-                            src="{% static 'img/icon--chevronright.svg' %}"
-                    />
+                    <a class="button19" href="{% if lang == 'en' %}{% url 'register_en' lang='en' %}{% else %}{% url 'register' %}{% endif %}" style="font-size: medium">{% if lang == 'en' %}Register{% else %}Зареєструватися{% endif %}</a>
+                    <img class="icon-chevron-right2" alt="" src="{% static 'img/icon--chevronright.svg' %}" />
                 </div>
-                <img
-                        class="placeholder-image-icon14"
-                        loading="lazy"
-                        alt=""
-                        src="
-                        {% if sec_about_us.image %}
-                            {{ sec_about_us.image.url }}
-                        {% else %}
-                            {% static 'img/placeholder-image1@2x.png' %}
-                        {% endif %}
-                        ">
+                <img class="placeholder-image-icon14" loading="lazy" alt=""
+                     src="{% if sec_about_us.image %}{{ sec_about_us.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" />
             </div>
         </div>
     </section>
@@ -78,17 +70,24 @@
 
             <div class="content31">
                 <div class="content32">
-                    <h2>{{ sec_cta_first.title }}</h2>
-                    <div class="text46">
-                        {{ sec_cta_first.description|safe }}
-                    </div>
+                    {% if lang == 'en' %}
+                        <h2>{{ sec_cta_first.title_en }}</h2>
+                        <div class="text46">
+                            {{ sec_cta_first.description_en|safe }}
+                        </div>
+                    {% else %}
+                        <h2>{{ sec_cta_first.title }}</h2>
+                        <div class="text46">
+                            {{ sec_cta_first.description|safe }}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="actions8">
                     <button class="styleprimary-smallfalse-da2">
-                        <a class="button20" href="{% url 'login' %}">Увійти</a>
+                        <a class="button20" href="{% if lang == 'en' %}{% url 'login_en' lang='en' %}{% else %}{% url 'login' %}{% endif %}">{% if lang == 'en' %}Login{% else %}Увійти{% endif %}</a>
                     </button>
                     <button class="stylesecondary-smallfalse6">
-                        <a class="button21" href="{% url 'register' %}">Зареєструватися</a>
+                        <a class="button21" href="{% if lang == 'en' %}{% url 'register_en' lang='en' %}{% else %}{% url 'register' %}{% endif %}">{% if lang == 'en' %}Register{% else %}Зареєструватися{% endif %}</a>
                     </button>
                 </div>
             </div>
@@ -97,17 +96,28 @@
     {#4 Секція Події#}
     <section class="sec-events-mobile">
         <section class="content-wrapper-two-wrapper">
-            <div class="content-wrapper-two">
+            {% if lang == 'en' %}
+                <div class="content-wrapper-two">
+                <div class="content-header-two">
+                    <div class="subheading4">{{ sec_events.subtitle_en }}</div>
+                    <h2>{{ sec_events.title_en }}</h2>
+                </div>
+                <div class="text47">
+                    {{ sec_events.text_en|safe }}
+                </div>
+            </div>
+            {% else %}
+                <div class="content-wrapper-two">
                 <div class="content-header-two">
                     <div class="subheading4">{{ sec_events.subtitle }}</div>
-                    <h2>
-                        {{ sec_events.title }}
-                    </h2>
+                    <h2>{{ sec_events.title }}</h2>
                 </div>
                 <div class="text47">
                     {{ sec_events.text|safe }}
                 </div>
             </div>
+            {% endif %}
+
         </section>
 
         <section class="content-wrapper-three-wrapper">
@@ -119,46 +129,30 @@
                                 <div class="card1">
                                     <a href="{{ event.get_url }}">
                                         <img class="placeholder-image-icon7" alt=""
-                                             src="{% if event.image %}
-                                                                   {{ event.image.url }}
-                                                               {% else %}
-                                                                   {% static 'img/placeholder-image-13@2x.png' %}
-                                                               {% endif %}"/>
+                                             src="{% if event.image %}{{ event.image.url }}{% else %}{% static 'img/placeholder-image-13@2x.png' %}{% endif %}" />
                                     </a>
 
                                     <div class="content28">
                                         <div class="title26">
                                             <h3 class="name31">{{ event.title }}</h3>
                                         </div>
-                                        <div class="card-description" style="
-                                            max-width: 300px; /* Встановити максимальну ширину div */
-                                            overflow: hidden; /* Сховати будь-який текст, що виходить за межі */
-                                            text-overflow: ellipsis; /* Відобразити многоточие (...) для вказівки перевищення тексту */
-                                            white-space: nowrap; /* Заборонити перенесення тексту */
-                                                ">
+                                        <div class="card-description" style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                             {{ event.extra_details }}
                                         </div>
                                     </div>
                                 </div>
                             {% endfor %}
-
                         </div>
                     </div>
                 </div>
                 <div class="content-actions-three">
                     <button class="stylesecondary-smallfalse7">
-                        <a class="button22" href="{% url 'events' %}">Подробиці</a>
+                        <a class="button22" href="{% if lang == 'en' %}{% url 'events_en' lang='en' %}{% else %}{% url 'events' %}{% endif %}">{% if lang == 'en' %}Details{% else %}Подробиці{% endif %}</a>
                     </button>
-
                     <div class="link-button-wrapper-three">
                         <div class="stylelink-smallfalse-dark4">
-                            <a class="button19" href="{% url 'register' %}"
-                               style="font-size: medium">Зареєструватися</a>
-                            <img
-                                    class="icon-chevron-right2"
-                                    alt=""
-                                    src="{% static 'img/icon--chevronright.svg' %}"
-                            />
+                            <a class="button19" href="{% if lang == 'en' %}{% url 'register_en' lang='en' %}{% else %}{% url 'register' %}{% endif %}" style="font-size: medium">{% if lang == 'en' %}Register{% else %}Зареєструватися{% endif %}</a>
+                            <img class="icon-chevron-right2" alt="" src="{% static 'img/icon--chevronright.svg' %}" />
                         </div>
                     </div>
                 </div>
@@ -169,61 +163,65 @@
     <section class="sec-projects-mobile">
         <section class="content-header-four-wrapper">
             <div class="content-header-four">
-                <div class="subheading5">{{ sec_projects.subtitle }}</div>
-                <h2>{{ sec_projects.title }}</h2>
+                <div class="subheading5">
+                    {% if lang == 'en' %}{{ sec_projects.subtitle_en }}{% else %}{{ sec_projects.subtitle }}{% endif %}
+                </div>
+                <h2>
+                    {% if lang == 'en' %}{{ sec_projects.title_en }}{% else %}{{ sec_projects.title }}{% endif %}
+                </h2>
             </div>
         </section>
 
         <section class="text-wrapper3">
             <div class="text50">
-                {{ sec_projects.text|safe }}
+                {% if lang == 'en' %}{{ sec_projects.text_en|safe }}{% else %}{{ sec_projects.text|safe }}{% endif %}
             </div>
         </section>
 
         <section class="content-actions-four">
             <div class="action-buttons-four">
                 <button class="stylesecondary-smallfalse8">
-                    <a class="button24" href="{% url 'projects' %}">Подробиці</a>
+                    <a class="button24" href="{% if lang == 'en' %}{% url 'projects_en' lang='en' %}{% else %}{% url 'projects' %}{% endif %}">{% if lang == 'en' %}Details{% else %}Подробиці{% endif %}</a>
                 </button>
                 <div class="stylelink-smallfalse-dark3">
-                    <a class="button19" href="{% url 'register' %}" style="font-size: medium">Зареєструватися</a>
-                    <img
-                            class="icon-chevron-right2"
-                            alt=""
-                            src="{% static 'img/icon--chevronright.svg' %}"
-                    />
+                    <a class="button19" href="{% if lang == 'en' %}{% url 'register_en' lang='en' %}{% else %}{% url 'register' %}{% endif %}" style="font-size: medium">{% if lang == 'en' %}Register{% else %}Зареєструватися{% endif %}</a>
+                    <img class="icon-chevron-right2" alt="" src="{% static 'img/icon--chevronright.svg' %}" />
                 </div>
-                <img
-                        class="placeholder-image-icon18"
-                        loading="lazy"
-                        alt=""
-                        src="{{ sec_projects.image.url }}"
-                />
+                <img class="placeholder-image-icon18" loading="lazy" alt="" src="{{ sec_projects.image.url }}" />
             </div>
         </section>
     </section>
     {#6 СТА-2 Пожертвувати#}
     <section class="cta-27-container">
-
         <div class="cta-271"
-                {% if sec_cta_last.image %}
+            {% if sec_cta_last.image %}
              style="background-image: url({{ sec_cta_last.image.url }});"
-                {% else %}
+            {% else %}
              style="background-image: url({% static 'img/cta1@3x.png' %});"
-                {% endif %}>
+            {% endif %}>
             <div class="content31">
-                <div class="content32">
-                    <h2>{{ sec_cta_last.title }}</h2>
-                    <div class="text51">
-                        {{ sec_cta_last.description|safe }}
+                {% if lang == 'en' %}
+                    <div class="content32">
+                        <h2>{{ sec_cta_last.title_en }}</h2>
+                        <div class="text51">
+                            {{ sec_cta_last.description_en|safe }}
+                        </div>
                     </div>
-                </div>
+                {% else %}
+                    <div class="content32">
+                        <h2>{{ sec_cta_last.title }}</h2>
+                        <div class="text51">
+                            {{ sec_cta_last.description|safe }}
+                        </div>
+                    </div>
+                {% endif %}
+
                 <div class="actions9">
                     <button class="styleprimary-smallfalse-da3">
-                        <a class="button26" href="{% url 'donate-paypal' %}">ПІДТРИМАТИ</a>
+                        <a class="button26" href="{% if lang == 'en' %}{% url 'donate-paypal_en' lang='en' %}{% else %}{% url 'donate-paypal' %}{% endif %}">{% if lang == 'en' %}SUPPORT{% else %}ПІДТРИМАТИ{% endif %}</a>
                     </button>
                     <button class="stylesecondary-smallfalse9">
-                        <a class="button27" href="{{ sec_cta_last.link }}">Дізнатися більше</a>
+                        <a class="button27" href="{{ sec_cta_last.link }}">{% if lang == 'en' %}Learn more{% else %}Дізнатися більше{% endif %}</a>
                     </button>
                 </div>
             </div>
