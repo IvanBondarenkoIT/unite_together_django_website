@@ -1,20 +1,34 @@
 {% load static %}
 
-
 <div class="about-us-documents-mobile">
     <div class="line-active-menu14"></div>
-    <div class="sublitle8">Subtitle</div>
+    <div class="sublitle8">
+        {% if lang == 'en' %}
+            Subtitle
+        {% else %}
+            Підзаголовок
+        {% endif %}
+    </div>
     <main class="main-content">
         <section class="content-header">
             <div class="actions11"></div>
             <div class="header-501" style='background-image: url("{{ banner_settings.about_us_banner_mob_image.url }}");'>
                 <div class="container4">
                     <div class="section-title4">
-{#                        <div class="tagline1">Підзаголовок</div>#}
                         <div class="content34">
-                            <h1 class="short-heading-here1">{{ banner_settings.about_us_banner_title }}</h1>
+                            <h1 class="short-heading-here1">
+                                {% if lang == 'en' %}
+                                    {{ banner_settings.about_us_banner_title_en }}
+                                {% else %}
+                                    {{ banner_settings.about_us_banner_title }}
+                                {% endif %}
+                            </h1>
                             <div class="lorem-ipsum-dolor1">
-                                {{ banner_settings.about_us_banner_text }}
+                                {% if lang == 'en' %}
+                                    {{ banner_settings.about_us_banner_text_en }}
+                                {% else %}
+                                    {{ banner_settings.about_us_banner_text }}
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -22,9 +36,6 @@
             </div>
         </section>
         <section class="content-body">
-            <!-- ПОЧАТОК ОСНОВНОЇ ЧАСТИНИ -->
-
-            <!-- Вибір категорій для сторінок "Про нас" -->
             <div class="top-content">
                 <div class="bg-blue3"></div>
                 <!-- Dropdown Menu -->
@@ -34,20 +45,37 @@
                 <div class="rectangle-parent7">
                     <div class="frame-child67"></div>
                     <div class="documents-group">
-                        <h1 class="documents6">Документи</h1>
+                        <h1 class="documents6">
+                            {% if lang == 'en' %}
+                                Documents
+                            {% else %}
+                                Документи
+                            {% endif %}
+                        </h1>
                         <div class="on-this-page-container1">
                             <p class="on-this-page1">
-                                На цій сторінці ви знайдете офіційні документи, що регулюють діяльність
-                                нашої організації, а також інформаційні матеріали, які допоможуть
-                                краще зрозуміти принципи та цілі нашої благодійної роботи.
+                                {% if lang == 'en' %}
+                                    On this page, you will find official documents governing the activities of our organization, as well as informational materials that will help you better understand the principles and goals of our charitable work.
+                                {% else %}
+                                    На цій сторінці ви знайдете офіційні документи, що регулюють діяльність
+                                    нашої організації, а також інформаційні матеріали, які допоможуть
+                                    краще зрозуміти принципи та цілі нашої благодійної роботи.
+                                {% endif %}
                             </p>
                             <p class="blank-line8">&nbsp;</p>
                         </div>
                     </div>
+
                     <!-- Documents Sections -->
                     {% for category in categories %}
                         <div class="documents-section">
-                            <h3 class="heading33">{{ category.name }}</h3>
+                            <h3 class="heading33">
+                                {% if lang == 'en' %}
+                                    {{ category.name_en }}
+                                {% else %}
+                                    {{ category.name }}
+                                {% endif %}
+                            </h3>
                             <div class="documents-list" id="documents-{{ category.id }}">
                                 {% for document in category.documents.all %}
                                     <div class="document-item">
@@ -57,9 +85,23 @@
                                                      src="{% static 'img/aboutus/black.svg' %}"/>
                                             </div>
                                             <div class="heading-parent11">
-                                                <b class="heading34">{{ document.title }}</b>
-                                                <div class="text62">{{ document.subtitle }}</div>
-                                                <a href="{{ document.upload.url }}">Завантажити</a>
+                                                <b class="heading34">
+                                                    {% if lang == 'en' %}
+                                                        {{ document.title_en }}
+                                                    {% else %}
+                                                        {{ document.title }}
+                                                    {% endif %}
+                                                </b>
+                                                <div class="text62">
+                                                    {% if lang == 'en' %}
+                                                        {{ document.subtitle_en }}
+                                                    {% else %}
+                                                        {{ document.subtitle }}
+                                                    {% endif %}
+                                                </div>
+                                                <a href="{{ document.upload.url }}">
+                                                    {% if lang == 'en' %}Download{% else %}Завантажити{% endif %}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
