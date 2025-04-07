@@ -1,52 +1,4 @@
 {% load static %}
-{#<style>#}
-{#    /* Mobile-specific adjustments */#}
-{#    @media (max-width: 768px) {#}
-{#        .container7, .info-container {#}
-{#            padding: 0 15px;#}
-{#        }#}
-{##}
-{#        .contact-parent1 {#}
-{#            padding: 20px 15px;#}
-{#        }#}
-{##}
-{#        .icon-container img, .social-icons4 img {#}
-{#            width: 30px;#}
-{#            height: 30px;#}
-{#        }#}
-{##}
-{#        .email-container .email-info2, .uniteforukraingmailcom19, .address18 {#}
-{#            font-size: 14px;#}
-{#        }#}
-{##}
-{#        .have-a-question1 {#}
-{#            text-align: center;#}
-{#            font-size: 18px;#}
-{#        }#}
-{##}
-{#        .form-control {#}
-{#            width: 100%;#}
-{#            padding: 10px;#}
-{#            margin: 10px 0;#}
-{#        }#}
-{##}
-{#        .button-parent {#}
-{#            text-align: center;#}
-{#        }#}
-{##}
-{#        .button28 {#}
-{#            width: 100%;#}
-{#            padding: 15px;#}
-{#            font-size: 18px;#}
-{#        }#}
-{#    }#}
-{##}
-{#    /* Tablet and above adjustments */#}
-{#    @media (min-width: 769px) {#}
-{#        /* Adjust as needed for larger screens */#}
-{#    }#}
-{##}
-{#</style>#}
 
 <div class="about-us-contacts-mobile">
     <main class="main-content">
@@ -55,11 +7,20 @@
             <div class="header-501" style='background-image: url("{{ banner_settings.about_us_banner_mob_image.url }}");'>
                 <div class="container4">
                     <div class="section-title4">
-{#                        <div class="tagline1">Підзаголовок</div>#}
                         <div class="content34">
-                            <h1 class="short-heading-here1">{{ banner_settings.about_us_banner_title }}</h1>
+                            <h1 class="short-heading-here1">
+                                {% if lang == 'en' %}
+                                    {{ banner_settings.about_us_banner_title_en }}
+                                {% else %}
+                                    {{ banner_settings.about_us_banner_title }}
+                                {% endif %}
+                            </h1>
                             <div class="lorem-ipsum-dolor1">
-                                {{ banner_settings.about_us_banner_text }}
+                                {% if lang == 'en' %}
+                                    {{ banner_settings.about_us_banner_text_en }}
+                                {% else %}
+                                    {{ banner_settings.about_us_banner_text }}
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -73,24 +34,29 @@
                     {% include 'aboutus/mobile/about-us-sidebar-mobile.html' %}
                 </div>
                 <div class="bg-blue7"></div>
-{#                <div class="text-card5">#}
-                <!-- Dropdown Menu -->
 
-{#                </div>#}
                 <div class="info-parent">
                     <div class="info-parent-child"></div>
                     <div class="info-container">
                         <div class="contact-info4">
-                            <h1 class="contacts6">Контакти</h1>
+                            <h1 class="contacts6">
+                                {% if lang == 'en' %}Contacts{% else %}Контакти{% endif %}
+                            </h1>
                             <h2 class="unite-together-is1">
-                                Unite Together Об'єднаймося для підтримки та розвитку українських громад у Грузії через сталі проєкти та програми.
+                                {% if lang == 'en' %}
+                                    Unite Together – uniting to support and develop Ukrainian communities in Georgia through sustainable projects and programs.
+                                {% else %}
+                                    Unite Together Об'єднаймося для підтримки та розвитку українських громад у Грузії через сталі проєкти та програми.
+                                {% endif %}
                             </h2>
                         </div>
                     </div>
                     <div class="contact-details8">
                         <div class="left-part">
                             <div class="bg-contacts1"></div>
-                            <h1 class="contact-information1">Контактна Інформація</h1>
+                            <h1 class="contact-information1">
+                                {% if lang == 'en' %}Contact Information{% else %}Контактна Інформація{% endif %}
+                            </h1>
                             <div class="icon-container">
                                 <div class="contact-icons3">
                                     <img class="icon-phone21" loading="lazy" alt=""
@@ -109,7 +75,12 @@
                                         <div class="tbilisi-2123-tsotne21">
                                             Tbilisi, 21/23 Tsotne Dadiani St., office 8
                                         </div>
-                                        <div class="see-on-the1"><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Дивитися на мапі</a></div>
+                                        <div class="see-on-the1">
+                                            <a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8"
+                                               class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">
+                                                {% if lang == 'en' %}See on the map{% else %}Дивитися на мапі{% endif %}
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -124,8 +95,12 @@
                         </div>
                         <div class="question">
                             <h1 class="have-a-question-container1">
-                                <p class="have-a-question1">Have a question?</p>
-                                <p class="have-a-question1">Just write us a message!</p>
+                                <p class="have-a-question1">
+                                    {% if lang == 'en' %}Have a question?{% else %}Є питання?{% endif %}
+                                </p>
+                                <p class="have-a-question1">
+                                    {% if lang == 'en' %}Just write us a message!{% else %}Просто напишіть нам повідомлення!{% endif %}
+                                </p>
                             </h1>
                         </div>
                         <div class="form-parent">
@@ -133,46 +108,63 @@
                                 {% csrf_token %}
                                 <div class="content39">
                                     <div class="first-name-input">
-                                        <label for="id_first_name" class="first-name9">First Name</label>
-                                        <input id="id_first_name" name="first_name" type="text" class="form-control"
-                                               required/>
+                                        <label for="id_first_name" class="first-name9">
+                                            {% if lang == 'en' %}First Name{% else %}Ім’я{% endif %}
+                                        </label>
+                                        <input id="id_first_name" name="first_name" type="text" class="form-control" required/>
                                     </div>
                                     <div class="name-inputs">
-                                        <label for="id_last_name" class="last-name1">Last Name</label>
-                                        <input id="id_last_name" name="last_name" type="text" class="form-control"
-                                               required/>
+                                        <label for="id_last_name" class="last-name1">
+                                            {% if lang == 'en' %}Last Name{% else %}Прізвище{% endif %}
+                                        </label>
+                                        <input id="id_last_name" name="last_name" type="text" class="form-control" required/>
                                     </div>
                                     <div class="name-inputs">
                                         <label for="id_email" class="email2">Email</label>
                                         <input id="id_email" name="email" type="email" class="form-control" required/>
                                     </div>
                                     <div class="name-inputs2">
-                                        <label for="id_phone_number" class="phone-number4">Phone Number</label>
-                                        <input id="id_phone_number" name="phone_number" type="text" class="form-control"
-                                               required/>
+                                        <label for="id_phone_number" class="phone-number4">
+                                            {% if lang == 'en' %}Phone Number{% else %}Номер телефону{% endif %}
+                                        </label>
+                                        <input id="id_phone_number" name="phone_number" type="text" class="form-control" required/>
                                     </div>
                                     <div class="subject-input">
-                                        <label for="id_subject" class="select-subject1">Select Subject</label>
+                                        <label for="id_subject" class="select-subject1">
+                                            {% if lang == 'en' %}Select Subject{% else %}Оберіть тему{% endif %}
+                                        </label>
                                         <select id="id_subject" name="subject" class="form-control" required>
-                                            <option value="">Choose...</option>
-                                            <option value="I need help">I need help</option>
-                                            <option value="I want to help">I want to help</option>
-                                            <option value="Apply for job">Apply for job</option>
-                                            <option value="Complaints and suggestions">Complaints and suggestions
-                                            </option>
-                                            <option value="Partnership and collaboration">Partnership and collaboration
-                                            </option>
+                                            {% if lang == 'en' %}
+                                                <option value="">Choose...</option>
+                                                <option value="I need help">I need help</option>
+                                                <option value="I want to help">I want to help</option>
+                                                <option value="Apply for job">Apply for job</option>
+                                                <option value="Complaints and suggestions">Complaints and suggestions</option>
+                                                <option value="Partnership and collaboration">Partnership and collaboration</option>
+                                            {% else %}
+                                                <option value="">Оберіть...</option>
+                                                <option value="I need help">Мені потрібна допомога</option>
+                                                <option value="I want to help">Я хочу допомогти</option>
+                                                <option value="Apply for job">Подати заявку на роботу</option>
+                                                <option value="Complaints and suggestions">Скарги та пропозиції</option>
+                                                <option value="Partnership and collaboration">Партнерство та співпраця</option>
+                                            {% endif %}
                                         </select>
                                     </div>
                                     <div class="message1">
-                                        <label for="id_message" class="message2">Message</label>
+                                        <label for="id_message" class="message2">
+                                            {% if lang == 'en' %}Message{% else %}Повідомлення{% endif %}
+                                        </label>
                                         <textarea id="id_message" name="message" class="form-control"
-                                                  placeholder="Write your message.." required></textarea>
+                                                  placeholder="{% if lang == 'en' %}Write your message..{% else %}Напишіть ваше повідомлення..{% endif %}"
+                                                  required></textarea>
                                     </div>
                                 </div>
                                 <div class="button-parent">
                                     <button class="button28" type="submit">
-                                        <div class="send-message1">Send Message</div>
+                                        <div class="send-message1">
+                                            {% if lang == 'en' %}Send Message{% else %}Надіслати повідомлення{% endif %}
+                                        </div>
                                     </button>
                                 </div>
                             </form>
