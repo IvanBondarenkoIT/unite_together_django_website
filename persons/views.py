@@ -18,7 +18,7 @@ OBJECTS_ON_PAGE = 4
 
 
 @login_required(login_url="login")
-def associated_person_list(request):
+def associated_person_list(request, lang="uk"):
     user_profile = get_object_or_404(UserProfile, user=request.user)
 
     # Данные о последнем евенте
@@ -42,7 +42,7 @@ def associated_person_list(request):
 
 
 @login_required(login_url="login")
-def associated_person_create(request):
+def associated_person_create(request, lang="uk"):
     if request.method == "POST":
         form = AssociatedPersonForm(
             request.POST,
@@ -77,7 +77,7 @@ def associated_person_create(request):
 
 
 @login_required(login_url="login")
-def associated_person_edit(request, pk):
+def associated_person_edit(request, pk, lang="uk"):
     edited_person = get_object_or_404(AssociatedPerson, pk=pk)
 
     if request.method == "POST":
@@ -114,7 +114,7 @@ def associated_person_edit(request, pk):
 
 
 @login_required(login_url="login")
-def registered_events(request):
+def registered_events(request, lang="uk"):
     participants = (
         Participant.objects.all()
         .filter(user_owner=request.user)
@@ -134,7 +134,7 @@ def registered_events(request):
 
 
 @login_required(login_url="login")
-def settings(request):
+def settings(request, lang="uk"):
     if request.method == "POST":
         current_password = request.POST.get("current_password")
         new_password = request.POST.get("new_password")

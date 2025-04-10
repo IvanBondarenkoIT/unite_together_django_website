@@ -33,7 +33,7 @@ urlpatterns = [
     # ACCOUNTS
     path("", include("accounts.urls")),
     # PERSONS
-    path("persons/", include("persons.urls")),
+    path("", include("persons.urls")),
     # COORDINATION
     path("coordination/", include("coordination.urls")),
     path("", include("web_pages.urls")),

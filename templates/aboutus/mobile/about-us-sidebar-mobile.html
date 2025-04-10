@@ -58,8 +58,14 @@
     <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
         {% for category, link in links.items %}
 
-            {% if link in request.path %}
-                {{ category }}
+            {% if lang == 'en' %}
+                {% if link|slice:":-3" in request.path %}
+                    {{ category }}
+                {% endif %}
+            {% else %}
+                {% if link in request.path %}
+                    {{ category }}
+                {% endif %}
             {% endif %}
 
         {% endfor %}
@@ -71,7 +77,7 @@
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         {% for category, link in links.items %}
             {% if lang == 'en' %}
-                <a class="dropdown-item{% if link in request.path %} active{% endif %}" href="{% url link lang='en' %}">
+                <a class="dropdown-item{% if link|slice:":-3" in request.path %} active{% endif %}" href="{% url link lang='en' %}">
                     {{ category }}
                 </a>
             {% else %}
