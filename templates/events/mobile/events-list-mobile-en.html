@@ -12,9 +12,9 @@
                         <div class="section-title7">
 {#                            <div class="tagline4">Підзаголовок</div>#}
                             <div class="content38">
-                                <h1 class="short-heading-here4">{{ banner_settings.events_banner_title }}</h1>
+                                <h1 class="short-heading-here4">{{ banner_settings.events_banner_title_en }}</h1>
                                 <div class="lorem-ipsum-dolor4">
-                                    {{ banner_settings.events_banner_text }}
+                                    {{ banner_settings.events_banner_text_en }}
                                 </div>
                             </div>
                         </div>
@@ -30,14 +30,15 @@
                     <!-- Filters Dropdown Menu -->
                     <div class="description-liststext-link-fo">
 {#                        <div class="text66">Filters</div>#}
-                        <label class="select-your-city">Місто</label>
+                        <label class="select-your-city">City</label>
                             <form id="mobCityForm" method="POST" action="{% url 'events' %}">
                                 {% csrf_token %}
+
                                 <select id="mobCities" name="selected-city">
-                                    <option value="All"{% if selected_city == "All" %} selected{% endif %}>Усі</option>
+                                    <option value="All"{% if selected_city == "All" %} selected{% endif %}>All</option>
                                     {% for city in cities %}
                                         <option value="{{ city.name }}" {% if city.name == selected_city %}selected{% endif %} >
-                                            {{ city.name }}
+                                            {{ city.name_en }}
                                         </option>
                                     {% endfor %}
                                 </select>
@@ -48,7 +49,7 @@
 
                                     <form id="mobFilterForm" action="{% url 'events' %}" method="POST">
                                         {% csrf_token %}
-                                        <label for="mobActiveCheckbox" style="position: relative; top: -7px;">Вільні місця</label>
+                                        <label for="mobActiveCheckbox" style="position: relative; top: -7px;">Free spots</label>
                                         <input id="mobActiveCheckbox"
                                                class="icon-check1"
                                                type="checkbox"
@@ -122,9 +123,9 @@
                                                 </div>
                                                 <div class="batumi4" style="font-weight: bold; font-size: 18px;">
                                                     {% if object.selected_city %}
-                                                        {{ object.selected_city }}
+                                                        {{ object.selected_city.name_en }}
                                                     {% else %}
-                                                        <span>Грузія</span>
+                                                        <span>Georgia</span>
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -133,21 +134,21 @@
                                                     <div class="header-item7">
                                                         <div class="decoration36"></div>
                                                         <b class="crafts-for-children4">
-                                                            {{ object.title }}
+                                                            {{ object.title_en }}
                                                         </b>
                                                     </div>
                                                     <div
                                                             class="lorem-ipsum-is-simply-dummy-te-wrapper2"
                                                     >
                                                         <div class="lorem-ipsum-is-simply7">
-                                                            {{ object.extra_details }}
+                                                            {{ object.extra_details_en }}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 {% if object.is_active %}
                                                     <a class="button-join7" href="{{ object.get_url }}">
                                                         <div class="join-parent4">
-                                                            <div class="join6">РЕЄСТРАЦІЯ</div>
+                                                            <div class="join6">REGISTRATION</div>
 {#                                                            <div class="join-icon">#}
 {#                                                                <img#}
 {#                                                                        class="vector-icon26"#}
@@ -160,7 +161,7 @@
                                                 {% else %}
                                                     <button class="button-join6">
                                                         <div class="join-parent4">
-                                                            <div class="join6">Закрито</div>
+                                                            <div class="join6">CLOSED</div>
 {#                                                            <div class="join-icon">#}
 {#                                                                <img#}
 {#                                                                        class="vector-icon26"#}
@@ -181,11 +182,11 @@
                                         <ul class="pagination">
                                             {% if all_objects.has_previous %}
                                                 <li class="page-item"><a class="page-link"
-                                                                         href="?page={{ all_objects.previous_page_number }}">Попередня</a>
+                                                                         href="?page={{ all_objects.previous_page_number }}">Previous</a>
                                                 </li>
                                             {% else %}
                                                 <li class="page-item disabled"><a class="page-link"
-                                                                                  href="#">Попередня</a>
+                                                                                  href="#">Previous</a>
                                                 </li>
                                             {% endif %}
 
@@ -203,11 +204,11 @@
 
                                             {% if all_objects.has_next %}
                                                 <li class="page-item"><a class="page-link"
-                                                                         href="?page={{ all_objects.next_page_number }}">Наступна</a>
+                                                                         href="?page={{ all_objects.next_page_number }}">Next</a>
                                                 </li>
                                             {% else %}
                                                 <li class="page-item disabled"><a class="page-link"
-                                                                                  href="#">Наступна</a>
+                                                                                  href="#">Next</a>
                                                 </li>
                                             {% endif %}
                                         </ul>
