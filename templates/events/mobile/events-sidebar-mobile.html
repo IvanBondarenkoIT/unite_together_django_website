@@ -55,13 +55,23 @@
 </style>
 
 <div class="dropdown">
-    <a class="sport1{% if request.path == '/events/' %}-active{% endif %}"
-                           href="{% url 'events' %}">Усі</a>
+    {% if lang == 'en' %}
+        <a class="sport1{% if request.path == '/events/' %}-active{% endif %}"
+                               href="{% url 'events_en' lang='en' %}">All</a>
+    {% else %}
+        <a class="sport1{% if request.path == '/events/' %}-active{% endif %}"
+           href="{% url 'events_en' lang='en' %}">Усі</a>
+    {% endif %}
+
     <button class="dropdown-toggle" type="button" id="dropdownMenuButton">
         {% for category in links %}
 
             {% if category.slug in request.path %}
-                {{ category.name }}
+                {% if lang == 'en' %}
+                    {{ category.name_en }}
+                {% else %}
+                    {{ category.name }}
+                {% endif %}
             {% endif %}
 
         {% endfor %}
@@ -72,8 +82,13 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         {% for category in links %}
-            <a class="dropdown-item{% if link in request.path %} active{% endif %}"
-               href="{{ category.pre_computed_url }}">{{ category.name }}</a>
+            {% if lang == 'en' %}
+                <a class="dropdown-item{% if link|slice:":-3" in request.path %} active{% endif %}"
+                   href="{{ category.get_url_en }}">{{ category.name_en }}</a>
+            {% else %}
+                <a class="dropdown-item{% if link in request.path %} active{% endif %}"
+                   href="{{ category.pre_computed_url }}">{{ category.name }}</a>
+            {% endif %}
         {% endfor %}
     </div>
 </div>
