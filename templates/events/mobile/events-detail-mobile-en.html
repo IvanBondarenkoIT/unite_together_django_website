@@ -146,13 +146,13 @@
                     <div class="details-content-wrapper">
                         <div class="details-content">
                             <div class="location-details">
-                                {% if single_event.extra_details %}
+                                {% if single_event.extra_details_en %}
                                     <div id="extra-details">
-                                        <span id="extra-details-short">{{ single_event.extra_details|truncatewords:20|safe }}</span>
+                                        <span id="extra-details-short">{{ single_event.extra_details_en|truncatewords:20|safe }}</span>
                                         <span id="extra-details-full"
-                                              style="display:none;">{{ single_event.extra_details|safe }}</span>
-                                        {% if single_event.extra_details|length > 100 %}
-                                            <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">далі</a>
+                                              style="display:none;">{{ single_event.extra_details_en|safe }}</span>
+                                        {% if single_event.extra_details_en|length > 100 %}
+                                            <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">details</a>
                                         {% endif %}
                                     </div>
                                 {% endif %}
@@ -188,7 +188,7 @@
                             {% csrf_token %}
                             {% if request.user.is_authenticated %}
                                 {% if persons %}
-                                    <h5>Оберіть осіб для реєстрації:</h5>
+                                    <h5>Choose a person to register:</h5>
                                     <br>
                                     <div class="checkbox-list">
                                         {% for person in persons %}
@@ -200,32 +200,29 @@
                                         {% endfor %}
                                     </div>
                                     <br>
-                                    <h6>(Щоб бути включеними до цього списку, особи повинні бути перевірені
-                                        оператором)</h6>
+                                    <h6>(You will be included in this list if you are verified by an operator)</h6>
                                     <br>
                                     <br>
                                     <button type="submit" class="button-registration">
-                                        <div class="registration">Реєстрація</div>
+                                        <div class="registration">Registration</div>
                                         <div class="vector-container">
                                             <img class="vector-icon1" alt=""
                                                  src="{% static 'img/vector-1.svg' %}"/>
                                         </div>
                                     </button>
                                 {% else %}
-                                    <h5>У вас немає жодної підтвердженої особи.</h5>
+                                    <h5>You have no confirmed person.</h5>
                                     <br>
-                                    <h6>(Щоб бути включеними до цього списку, особи повинні бути перевірені
-                                        оператором)</h6>
+                                    <h6>(To be included in this list, persons must be verified by an operator)</h6>
                                 {% endif %}
 
                                 <br>
-                                <h6>Якщо у вас є учасники родини, які не вказані вище - будь ласка, додайте їх до вашого
-                                    профілю.</h6>
+                                <h6>If you have family members who are not listed above, please add them to your profile.</h6>
 
-                                <a href="{% url "associated_person_list" %}" class="button">Додати осіб до списку</a>
+                                <a href="{% url "associated_person_list" %}" class="button">Add people</a>
                             {% else %}
                                 <a class="button-registration" href="{% url 'login' %}">
-                                    <div class="registration">Реєстрація</div>
+                                    <div class="registration">Registration</div>
                                     <div class="vector-container">
                                         <img class="vector-icon1" alt="" src="{% static 'img/vector-1.svg' %}"/>
                                     </div>
@@ -235,7 +232,7 @@
                     {% else %}
                         <button class="button-join">
                             <div class="join-parent">
-                                <div class="join">Закрито</div>
+                                <div class="join">Closed</div>
                                 <div class="vector-container">
                                     <img class="vector-icon1" alt="" src="{% static 'img/vector-1.svg' %}"/>
                                 </div>
@@ -276,11 +273,11 @@
                     <div class="event-description-container">
                         <div class="description-content">
                             <h1 class="autism-speaks-to1">
-                                {{ single_event.title }}
+                                {{ single_event.title_en }}
                             </h1>
                             {% if single_event.start_age %}
                                 <div class="age-3-161">
-                                    <b>Вік</b>
+                                    <b>Age</b>
                                     <span class="span">:
                                         {% if single_event.start_age %}
                                             {{ single_event.start_age }}
@@ -293,7 +290,7 @@
 
                             {#                            <div class="free-classes-of-container2">#}
                             <div class="free-classes-of2">
-                                {{ single_event.text|safe }}
+                                {{ single_event.text_en|safe }}
                             </div>
                             {#                            </div>#}
                         </div>
