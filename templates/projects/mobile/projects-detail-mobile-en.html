@@ -67,9 +67,9 @@
                             </div>
                             <div class="ongoing-project1">
                                 {% if single_project.is_active %}
-                                    Триває
+                                    Ongoing
                                 {% else %}
-                                    Завершений
+                                    Completed
                                 {% endif %}
                             </div>
                         </div>
@@ -77,7 +77,7 @@
                             <div class="location-icons">
                                 <img class="financial-assistance-icon" loading="lazy" alt="" src="{% static 'img/vector-16.svg' %}" />
                             </div>
-                            <div class="ongoing-project1">{{ single_project.group.name }}</div>
+                            <div class="ongoing-project1">{{ single_project.group.name_en }}</div>
                         </div>
                     </div>
                     <img class="dec-line-icon1" loading="lazy" alt="" src="{% static 'img/decline.svg' %}" />
@@ -104,7 +104,7 @@
                             <div class="georgia1">
                                 <div class="georgia">
                                     {% for city in cities %}
-                                    	{{ city }}
+                                    	{{ city.name_en }}
                                     {% endfor %}
 
 
@@ -114,25 +114,25 @@
                     </div>
                 </div>
                 <div class="project-description-wrapper">
-                    {% if single_project.extra_details %}
+                    {% if single_project.extra_details_en %}
                     <div id="extra-details" class="event-extra-details">
-                        <span id="extra-details-short">{{ single_project.extra_details|truncatewords:20 }}</span>
-                        <span id="extra-details-full" style="display:none;">{{ single_project.extra_details }}</span>
-                        <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">більше</a>
+                        <span id="extra-details-short">{{ single_project.extra_details_en|truncatewords:20 }}</span>
+                        <span id="extra-details-full" style="display:none;">{{ single_project.extra_details_en }}</span>
+                        <a href="#" id="toggle-details" onclick="toggleDetails(); return false;">more</a>
                     </div>
                     {% endif %}
                 </div>
                 <a class="button-registration1"
                    href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
                    style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
-                    <div class="registration1">РЕЄСТРАЦІЯ</div>
+                    <div class="registration1">REGISTRATION</div>
                 </a>
             </div>
             <div class="winterization-group">
-                <h1 class="winterization1">{{ single_project.name }}</h1>
+                <h1 class="winterization1">{{ single_project.name_en }}</h1>
                 <div class="free-classes-of-container2">
                     <p class="free-classes-of2">
-                        {{ single_project.text|safe }}
+                        {{ single_project.text_en|safe }}
                     </p>
                 </div>
             </div>
@@ -157,11 +157,11 @@
         if (shortText.style.display === "none") {
             shortText.style.display = "inline";
             fullText.style.display = "none";
-            toggleLink.innerText = "більше";
+            toggleLink.innerText = "more";
         } else {
             shortText.style.display = "none";
             fullText.style.display = "inline";
-            toggleLink.innerText = "менше";
+            toggleLink.innerText = "less";
         }
     }
 </script>
