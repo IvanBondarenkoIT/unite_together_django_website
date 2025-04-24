@@ -32,6 +32,7 @@ def associated_person_list(request, lang="uk"):
         "persons": persons,
         "main_person": main_person,
         "last_event": last_event,
+        "lang": lang,
     }
 
     return render(
@@ -73,7 +74,7 @@ def associated_person_create(request, lang="uk"):
             user=request.user,
         )
 
-    return render(request, "persons/dashboard.html", {"form": form})
+    return render(request, "persons/dashboard.html", {"form": form, "lang": lang})
 
 
 @login_required(login_url="login")
@@ -110,7 +111,7 @@ def associated_person_edit(request, pk, lang="uk"):
             user=request.user,
         )
 
-    return render(request, "persons/dashboard.html", {"form": form})
+    return render(request, "persons/dashboard.html", {"form": form, "lang": lang})
 
 
 @login_required(login_url="login")
@@ -129,7 +130,11 @@ def registered_events(request, lang="uk"):
     # Get count efficiently / faster
     objects_count = paginator.count
 
-    context = {"participants": page_all_objects, "objects_count": objects_count}
+    context = {
+        "participants": page_all_objects,
+        "objects_count": objects_count,
+        "lang": lang,
+    }
     return render(request, "persons/personal-account-events.html", context=context)
 
 
@@ -175,4 +180,6 @@ def settings(request, lang="uk"):
             messages.error(request, "Паролі не збігаються")
             return redirect("settings")
     else:
-        return render(request, "persons/personal-account-settings.html")
+        return render(
+            request, "persons/personal-account-settings.html", context={"lang": lang}
+        )
