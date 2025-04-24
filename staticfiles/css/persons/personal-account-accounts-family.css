@@ -661,6 +661,21 @@
   min-width: 69px;
   z-index: 1;
 }
+
+.ut-top-menu-text-active {
+    position: relative;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 84px;
+    white-space: nowrap;
+    z-index: 1;
+    text-decoration: none;
+    background-color: var(--color-royalblue);
+    color: white;
+    border-radius: var(--br-3xs);
+    padding: 10px 20px;
+}
+
 .inactive-item,
 .navigation-links {
   display: flex;
