@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load trans_lang %}
 
 {% block content %}
     <style>
@@ -155,106 +156,99 @@
 
         <div class="table-container">
             {% if last_event %}
-                {% if lang == 'en' %}
-                    <h4>Last visited event:</h4>
-                    <div class="last-event-block">
-                        <div class="last-event-details">
-                            {% if last_event.thumbnail %}
-                                <a href="{{ last_event.url_en }}"><img src="{{ last_event.thumbnail }}"
-                                                                    alt="{{ last_event.name_en }}"
-                                                                    class="last-event-thumbnail">
-                                </a>
-                            {% endif %}
+                <h4>{% trans_lang 'last_event' lang %}</h4>
+                <div class="last-event-block">
+                    <div class="last-event-details">
+                        {% if lang == 'en' %}
+                            <a href="{{ last_event.url_en }}">
+                                {% if last_event.thumbnail %}
+                                    <img src="{{ last_event.thumbnail }}" alt="{{ last_event.name_en }}"
+                                         class="last-event-thumbnail">
+                                {% endif %}
+                            </a>
                             <h5>{{ last_event.name_en }}</h5>
-                            <a href="{{ last_event.url_en }}" class="btn btn-primary">Go to registration</a>
-                        </div>
-                    </div>
-
-                {% else %}
-                    <h4>Останній відвіданий захід:</h4>
-                    <div class="last-event-block">
-                        <div class="last-event-details">
+                            <a href="{{ last_event.url_en }}" class="btn btn-primary">
+                                {% trans_lang 'go_to_registration' lang %}
+                            </a>
+                        {% else %}
                             {% if last_event.thumbnail %}
-                                <a href="{{ last_event.url }}"><img src="{{ last_event.thumbnail }}"
-                                                                    alt="{{ last_event.name }}"
-                                                                    class="last-event-thumbnail">
+                                <a href="{{ last_event.url }}">
+                                    <img src="{{ last_event.thumbnail }}" alt="{{ last_event.name }}"
+                                         class="last-event-thumbnail">
                                 </a>
                             {% endif %}
                             <h5>{{ last_event.name }}</h5>
-                            <a href="{{ last_event.url }}" class="btn btn-primary">Перейти до реєстрації</a>
-                        </div>
-                    </div>
-                {% endif %}
+                            <a href="{{ last_event.url }}" class="btn btn-primary">
+                                {% trans_lang 'go_to_registration' lang %}
+                            </a>
+                        {% endif %}
 
+                    </div>
+                </div>
             {% endif %}
-            <h2>Родина</h2>
+
+            <h2>{% trans_lang 'family_tree' lang %}</h2>
 
             {% if main_person %}
                 <div>
-                    {#             номер телефона (грузинский, если ввел украинский то и его), адресс. Убираем дату рождения, гражданство и все оставляем по кнопке ПОВНА ІНФОРМАЦІЯ#}
-                    <h3>Головна Особа:</h3>
+                    <h3>{% trans_lang 'main_person' lang %}</h3>
                     <p><strong>{{ main_person.first_name }} {{ main_person.last_name }}</strong></p>
-                    {#                <p>Дата народження: {{ main_person.date_of_birth|date:"d.m.Y" }}</p>#}
                     <p>e-mail: {{ main_person.user_owner.email }}</p>
-                    <p>Грузинський номер телефону: {{ main_person.georgian_phone_number }}</p>
+
+                    <p><strong>{% trans_lang 'georgian_phone' lang %}</strong> {{ main_person.georgian_phone_number }}
+                    </p>
+
                     {% if main_person.ukrainian_phone_number %}
-                        <p>Український номер телефону: {{ main_person.ukrainian_phone_number }}</p>
+                        <p>
+                            <strong>{% trans_lang 'ukrainian_phone' lang %}</strong> {{ main_person.ukrainian_phone_number }}
+                        </p>
                     {% endif %}
+
                     {% if main_person.address_line %}
-                        <p>Адреса: {{ main_person.address_line }}</p>
+                        <p><strong>{% trans_lang 'address' lang %}</strong> {{ main_person.address_line }}</p>
                     {% endif %}
 
                     {% if main_person.edit_permission %}
-                        <a href="{% url 'associated_person_edit' main_person.id %}" class="button active">Повна
-                            інформація</a>
+                        <a href="{% url 'associated_person_edit' main_person.id %}" class="button active">
+                            {% trans_lang 'full_info' lang %}
+                        </a>
                     {% else %}
-                        <a href="{% url 'contact' %}">Щоб редагувати особу, відправте запит</a>
+                        <a href="{% url 'contact' %}">{% trans_lang 'edit_request' lang %}</a>
                     {% endif %}
                 </div>
             {% endif %}
 
-            <a href="{% url 'associated_person_create' %}" class="button add-person">Додати нову особу</a>
+            <a href="{% url 'associated_person_create' %}" class="button add-person">
+                {% trans_lang 'add_person' lang %}
+            </a>
 
             <table>
                 <thead>
                 <tr>
-                    <th>Дії</th>
-                    <th>Ім'я</th>
-                    <th>Дата народження</th>
-                    {#                    <th>Дата прибуття</th>#}
-                    {#                    <th>Тип документу</th>#}
-                    <th>Номер документу</th>
-                    <th>Стать</th>
-                    {#                    <th>Грузинський номер телефону</th>#}
-                    {#                    <th>Український номер телефону</th>#}
-                    {#                    <th>Країна</th>#}
-                    {#                    <th>Вибране місто</th>#}
-                    {#                    <th>Адреса</th>#}
+                    <th>{% trans_lang 'actions' lang %}</th>
+                    <th>{% trans_lang 'name' lang %}</th>
+                    <th>{% trans_lang 'birthdate' lang %}</th>
+                    <th>{% trans_lang 'document_number' lang %}</th>
+                    <th>{% trans_lang 'gender' lang %}</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for person in persons %}
-                    {% if person == main_person %}
-                    {% else %}
+                    {% if person != main_person %}
                         <tr class="{% if person.is_main %}main-person{% endif %}">
                             <td>
                                 {% if person.edit_permission %}
-                                    <a href="{% url 'associated_person_edit' person.id %}" class="button active">Редагувати</a>
+                                    <a href="{% url 'associated_person_edit' person.id %}" class="button active">
+                                        {% trans_lang 'edit' lang %}
+                                    </a>
                                 {% else %}
-                                    <span class="button inactive">Редагувати</span>
+                                    <span class="button inactive">{% trans_lang 'edit' lang %}</span>
                                 {% endif %}
                             </td>
                             <td>{{ person.first_name }} {{ person.last_name }}</td>
                             <td>{{ person.date_of_birth|date:"d.m.Y" }}</td>
-                            {#                            <td>{{ person.date_of_arrival|date:"d.m.Y" }}</td>#}
-                            {#                            <td>{{ person.type_of_document.name }}</td>#}
                             <td>{{ person.document_number }}</td>
                             <td>{{ person.gender }}</td>
-                            {#                            <td>{{ person.georgian_phone_number }}</td>#}
-                            {#                            <td>{{ person.ukrainian_phone_number }}</td>#}
-                            {#                            <td>{{ person.country }}</td>#}
-                            {#                            <td>{{ person.chosen_city }}</td>#}
-                            {#                            <td>{{ person.address_line }}</td>#}
                         </tr>
                     {% endif %}
                 {% endfor %}
