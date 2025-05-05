@@ -155,19 +155,36 @@
 
         <div class="table-container">
             {% if last_event %}
-                <h4>Останній відвіданий захід:</h4>
-                <div class="last-event-block">
-                    <div class="last-event-details">
-                                                {% if last_event.thumbnail %}
-                            <a href="{{ last_event.url }}"><img src="{{ last_event.thumbnail }}" alt="{{ last_event.name }}"
-                                 class="last-event-thumbnail">
-                            </a>
-                        {% endif %}
-                        <h5>{{ last_event.name }}</h5>
-                        <a href="{{ last_event.url }}" class="btn btn-primary">Перейти до реєстрації</a>
+                {% if lang == 'en' %}
+                    <h4>Last visited event:</h4>
+                    <div class="last-event-block">
+                        <div class="last-event-details">
+                            {% if last_event.thumbnail %}
+                                <a href="{{ last_event.url_en }}"><img src="{{ last_event.thumbnail }}"
+                                                                    alt="{{ last_event.name_en }}"
+                                                                    class="last-event-thumbnail">
+                                </a>
+                            {% endif %}
+                            <h5>{{ last_event.name_en }}</h5>
+                            <a href="{{ last_event.url_en }}" class="btn btn-primary">Go to registration</a>
+                        </div>
                     </div>
 
-                </div>
+                {% else %}
+                    <h4>Останній відвіданий захід:</h4>
+                    <div class="last-event-block">
+                        <div class="last-event-details">
+                            {% if last_event.thumbnail %}
+                                <a href="{{ last_event.url }}"><img src="{{ last_event.thumbnail }}"
+                                                                    alt="{{ last_event.name }}"
+                                                                    class="last-event-thumbnail">
+                                </a>
+                            {% endif %}
+                            <h5>{{ last_event.name }}</h5>
+                            <a href="{{ last_event.url }}" class="btn btn-primary">Перейти до реєстрації</a>
+                        </div>
+                    </div>
+                {% endif %}
 
             {% endif %}
             <h2>Родина</h2>

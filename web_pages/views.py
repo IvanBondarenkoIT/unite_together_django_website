@@ -179,11 +179,14 @@ def event_detail(request, group_slug=None, event_slug=None, lang="uk"):
         ).order_by("unique_identifier")
 
         # Сохраняем данные в сессию
-        request.session["last_event"] = {
-            "url": request.path,
-            "name": single_event.name,
-            "thumbnail": (single_event.image.url if single_event.image else None),
-        }
+        if single_event:
+            request.session["last_event"] = {
+                "url": single_event.get_url(),
+                "url_en": single_event.get_url_en(),
+                "name": single_event.title,
+                "name_en": single_event.title_en,
+                "thumbnail": (single_event.image.url if single_event.image else None),
+            }
 
         # Обробка POST запиту для реєстрації на подію
         if request.method == "POST":
