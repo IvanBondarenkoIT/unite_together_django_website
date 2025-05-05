@@ -3,16 +3,34 @@
 
     <div class="container">
         <!--   SIDEBAR   -->
-        <ul class="list-group navigation-links">
-            <a class="events33{% if 'associated-persons' in request.path %} active{% endif %}"
-               href="{% url 'associated_person_list' %}"> Учасники </a>
-            <a class="events33{% if 'registered-events' in request.path %} active{% endif %}"
-               href="{% url 'registered_events' %}"> Події та Проекти </a>
-            <a class="events33{% if 'settings' in request.path %} active{% endif %}"
-               href="{% url 'settings' %}"> Змінити пароль </a>
-            <br>
-            <br>
-            <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Вийти</span></a>
-        </ul>
+
+        {% if lang == 'en' %}
+            <ul class="list-group navigation-links">
+                <a class="events33{% if 'associated-persons' in request.path %}-active{% endif %}"
+                   href="{% url 'associated_person_list_en' lang=lang %}"> Your Persons </a>
+                <a class="events33{% if 'registered-events' in request.path %}-active{% endif %}"
+                   href="{% url 'registered_events_en' lang='en' %}"> Yours Events </a>
+                <a class="events33{% if 'settings' in request.path %}-active{% endif %}"
+                   href="{% url 'settings_en' lang='en' %}"> Change Password </a>
+                <br>
+                <br>
+                <a class="btn btn-light btn-block" href="{% url 'logout_en' lang='en' %}"> <i class="fa fa-power-off"></i> <span
+                        class="text">Logout</span></a>
+            </ul>
+        {% else %}
+            <ul class="list-group navigation-links">
+                <a class="events33{% if 'associated-persons' in request.path %}-active{% endif %}"
+                   href="{% url 'associated_person_list' %}"> Учасники </a>
+                <a class="events33{% if 'registered-events' in request.path %}-active{% endif %}"
+                   href="{% url 'registered_events' %}"> Події та Проекти </a>
+                <a class="events33{% if 'settings' in request.path %}-active{% endif %}"
+                   href="{% url 'settings' %}"> Змінити пароль </a>
+                <br>
+                <br>
+                <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span
+                        class="text">Вийти</span></a>
+            </ul>
+        {% endif %}
+
     </div>
 </div>

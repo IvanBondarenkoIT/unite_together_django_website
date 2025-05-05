@@ -49,5 +49,5 @@ urlpatterns = [
         views.registered_events,
         name="registered_events_en",
     ),
-    path("<str:lang>//persons/settings/", views.settings, name="settings_en"),
+    path("<str:lang>/persons/settings/", views.settings, name="settings_en"),
 ]
