@@ -209,7 +209,7 @@
                     {% endif %}
 
                     {% if main_person.edit_permission %}
-                        <a href="{% url 'associated_person_edit' main_person.id %}" class="button active">
+                        <a href="{% url 'associated_person_edit_en' lang='en' pk=main_person.id %}" class="button active">
                             {% trans_lang 'full_info' lang %}
                         </a>
                     {% else %}

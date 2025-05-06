@@ -269,26 +269,28 @@ def person_list(request):
 @login_required
 @supervisor_required
 # @permission_required('web_pages.add_person', raise_exception=True)
-def person_create(request):
+def person_create(request, lang="uk"):
     if request.method == "POST":
-        form = AssociatedPersonForm(request.POST, request.FILES)
+        form = AssociatedPersonForm(request.POST, request.FILES, lang=lang)
         if form.is_valid():
             form.save()
             messages.success(request, "Person created successfully!")
             return redirect("person_list")
 
     else:
-        form = AssociatedPersonForm()
+        form = AssociatedPersonForm(lang=lang)
     return render(request, "coordination/person_form.html", {"form": form})
 
 
 @login_required
 @supervisor_required
 # @permission_required('web_pages.change_person', raise_exception=True)
-def person_update(request, pk):
+def person_update(request, pk, lang="uk"):
     person = get_object_or_404(AssociatedPerson, pk=pk)
     if request.method == "POST":
-        form = AssociatedPersonForm(request.POST, request.FILES, instance=person)
+        form = AssociatedPersonForm(
+            request.POST, request.FILES, instance=person, lang=lang
+        )
         if form.is_valid():
             messages.success(request, "Person updated successfully!")
             form.save()
@@ -302,7 +304,7 @@ def person_update(request, pk):
             formatted_errors = " ".join(error_messages)
             messages.error(request, f"Person update failed!\n {formatted_errors}")
     else:
-        form = AssociatedPersonForm(instance=person)
+        form = AssociatedPersonForm(instance=person, lang=lang)
     return render(request, "coordination/person_form.html", {"form": form})
 
 
