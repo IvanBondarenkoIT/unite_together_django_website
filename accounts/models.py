@@ -15,7 +15,7 @@ class MyAccountManager(BaseUserManager):
     Custom user manager.
     """
 
-    def create_user(self, first_name, last_name, username, email, password=None):
+    def create_user(self, username, email, first_name="", last_name="", password=None):
         """
         Creates a user with the given parameters.
         """

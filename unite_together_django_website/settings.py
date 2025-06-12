@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "persons",
     "about_us",
     "coordination",
+    "social_django",
 ]
 
 MIDDLEWARE = [
@@ -67,6 +68,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "social_django.middleware.SocialAuthExceptionMiddleware",
     # "web_pages.middleware.LastEventMiddleware",
 ]
 
@@ -84,6 +86,8 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "web_pages.context_processors.menu_links",
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
@@ -288,3 +292,17 @@ if USE_REMOTE_DB_SETTINGS:
     AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
     MEDIA_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/"
     print(AZURE_ACCOUNT_NAME, AZURE_ACCOUNT_KEY, AZURE_CONTAINER)
+
+    # GOOGLE auth
+    # LOGIN_URL = 'login'
+    # LOGOUT_URL = 'logout'
+    LOGIN_REDIRECT_URL = "login"
+    # LOGOUT_REDIRECT_URL = '/'
+
+    AUTHENTICATION_BACKENDS = (
+        "social_core.backends.google.GoogleOAuth2",
+        "django.contrib.auth.backends.ModelBackend",
+    )
+
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")

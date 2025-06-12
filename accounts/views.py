@@ -194,7 +194,10 @@ def logout(request, lang="uk"):
     """
     auth.logout(request)
     messages.success(request, "Успішний вихід" if lang == "uk" else "Logout")
-    return redirect("login" if lang == "uk" else "login_en")
+    if lang == "uk":
+        return redirect("login")
+    else:
+        return redirect("login_en", lang=lang)
 
 
 def activate(request, uidb64, token, lang="uk"):
