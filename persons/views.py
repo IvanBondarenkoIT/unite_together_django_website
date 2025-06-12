@@ -49,6 +49,7 @@ def associated_person_create(request, lang="uk"):
             request.POST,
             default_ge_phone=request.user.associated_person.georgian_phone_number,
             user=request.user,
+            lang=lang,
         )
         if form.is_valid():
             associated_person = form.save(commit=False)
@@ -72,6 +73,7 @@ def associated_person_create(request, lang="uk"):
         form = AssociatedPersonForm(
             default_ge_phone=request.user.associated_person.georgian_phone_number,
             user=request.user,
+            lang=lang,
         )
 
     return render(request, "persons/dashboard.html", {"form": form, "lang": lang})
@@ -87,6 +89,7 @@ def associated_person_edit(request, pk, lang="uk"):
             instance=edited_person,
             default_ge_phone=request.user.associated_person.georgian_phone_number,
             user=request.user,
+            lang=lang,
         )
         if form.is_valid():
             associated_person = form.save(commit=False)
@@ -109,6 +112,7 @@ def associated_person_edit(request, pk, lang="uk"):
             instance=edited_person,
             default_ge_phone=request.user.associated_person.georgian_phone_number,
             user=request.user,
+            lang=lang,
         )
 
     return render(request, "persons/dashboard.html", {"form": form, "lang": lang})
