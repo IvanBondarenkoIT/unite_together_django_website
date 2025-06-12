@@ -24,6 +24,8 @@ from unite_together_django_website import views
 from unite_together_django_website import settings
 
 urlpatterns = [
+    # Social auth URLs
+    path("auth/", include("social_django.urls", namespace="social")),
     # # ADMIN
     path("secure/", admin.site.urls),
     # Home
