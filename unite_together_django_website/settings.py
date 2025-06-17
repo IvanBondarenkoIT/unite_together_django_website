@@ -294,10 +294,11 @@ if USE_REMOTE_DB_SETTINGS:
     print(AZURE_ACCOUNT_NAME, AZURE_ACCOUNT_KEY, AZURE_CONTAINER)
 
     # GOOGLE auth
-    # LOGIN_URL = 'login'
-    # LOGOUT_URL = 'logout'
-    LOGIN_REDIRECT_URL = "login"
-    # LOGOUT_REDIRECT_URL = '/'
+
+    LOGIN_URL = "login"
+    LOGOUT_URL = "logout"
+    LOGIN_REDIRECT_URL = "associated_person_list"
+    LOGOUT_REDIRECT_URL = "/"
 
     AUTHENTICATION_BACKENDS = (
         "social_core.backends.google.GoogleOAuth2",
@@ -306,3 +307,16 @@ if USE_REMOTE_DB_SETTINGS:
 
     SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
     SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
+
+SOCIAL_AUTH_PIPELINE = (
+    "social_core.pipeline.social_auth.social_details",
+    "social_core.pipeline.social_auth.social_uid",
+    "social_core.pipeline.social_auth.auth_allowed",
+    "social_core.pipeline.social_auth.social_user",
+    "accounts.social_pipeline.create_account_user",
+    "social_core.pipeline.user.get_username",
+    "social_core.pipeline.user.create_user",
+    "social_core.pipeline.social_auth.associate_user",
+    "social_core.pipeline.social_auth.load_extra_data",
+    "social_core.pipeline.user.user_details",
+)
