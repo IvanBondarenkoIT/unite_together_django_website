@@ -118,30 +118,30 @@ class AssociatedPersonForm(forms.ModelForm):
             raise ValidationError(self.translations["ge_phone_invalid"])
         return ge_phone
 
-    def clean_ukrainian_phone_number(self):
-        ua_phone = self.cleaned_data.get("ukrainian_phone_number")
-        if ua_phone and not re.match(r"^380[0-9]{9}$", ua_phone):
-            raise ValidationError(self.translations["ua_phone_invalid"])
-        return ua_phone
-
-    def clean_date_of_arrival(self):
-        date_of_arrival = self.cleaned_data.get("date_of_arrival")
-        if not date_of_arrival:
-            raise ValidationError(self.translations["arrival_required"])
-        return date_of_arrival
-
-    def clean_document_number(self):
-        doc_type = self.cleaned_data.get("type_of_document")
-        doc_number = self.cleaned_data.get("document_number")
-        if not doc_type:
-            raise ValidationError(self.translations["doc_type_required"])
-        if doc_number and not re.match(doc_type.regex, doc_number):
-            raise ValidationError(
-                self.translations["doc_invalid"].format(
-                    name=doc_type.name, hint=doc_type.hint
-                )
-            )
-        return doc_number
+    # def clean_ukrainian_phone_number(self):
+    #     ua_phone = self.cleaned_data.get("ukrainian_phone_number")
+    #     if ua_phone and not re.match(r"^380[0-9]{9}$", ua_phone):
+    #         raise ValidationError(self.translations["ua_phone_invalid"])
+    #     return ua_phone
+    #
+    # def clean_date_of_arrival(self):
+    #     date_of_arrival = self.cleaned_data.get("date_of_arrival")
+    #     if not date_of_arrival:
+    #         raise ValidationError(self.translations["arrival_required"])
+    #     return date_of_arrival
+    #
+    # def clean_document_number(self):
+    #     doc_type = self.cleaned_data.get("type_of_document")
+    #     doc_number = self.cleaned_data.get("document_number")
+    #     if not doc_type:
+    #         raise ValidationError(self.translations["doc_type_required"])
+    #     if doc_number and not re.match(doc_type.regex, doc_number):
+    #         raise ValidationError(
+    #             self.translations["doc_invalid"].format(
+    #                 name=doc_type.name, hint=doc_type.hint
+    #             )
+    #         )
+    #     return doc_number
 
 
 class ParticipantAdminForm(forms.ModelForm):
