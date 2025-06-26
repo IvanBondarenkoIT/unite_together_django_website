@@ -25,7 +25,8 @@ class Person(models.Model):
     class Gender(models.TextChoices):
         MALE = "Чоловік", "Чоловік"
         FEMALE = "Жінка", "Жінка"
-        OTHER = "Інше", "Інше"
+        # Prohibited choice, as prohibited by Georgian legislation
+        # OTHER = "Інше", "Інше"
 
     class Country(models.TextChoices):
         Georgia = "Грузія", "Грузія"
@@ -53,10 +54,10 @@ class Person(models.Model):
         verbose_name="Ім'я Власника акаунту",
     )
     first_name = models.CharField(
-        max_length=50, blank=True, null=True, verbose_name="Ім'я"
+        max_length=50, blank=True, null=True, verbose_name="Ім'я (Латиниця)"
     )
     last_name = models.CharField(
-        max_length=50, blank=True, null=True, verbose_name="Прізвище"
+        max_length=50, blank=True, null=True, verbose_name="Прізвище (Латиниця)"
     )
     date_of_birth = models.DateField(
         blank=True, null=True, verbose_name="Дата народження"
