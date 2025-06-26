@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
-from accounts.forms import RegistrationForm
+from accounts.forms import RegistrationForm, PhoneForm
 from accounts.models import Account
 from persons.models import UserProfile, AssociatedPerson, TypeOfDocument
 from unite_together_django_website.validators import CustomPasswordValidator
@@ -194,6 +194,7 @@ def logout(request, lang="uk"):
     """
     auth.logout(request)
     messages.success(request, "Успішний вихід" if lang == "uk" else "Logout")
+    # Do: Create the same if stance for all accounts views
     if lang == "uk":
         return redirect("login")
     else:
@@ -411,3 +412,20 @@ def reset_password(request, lang="uk"):
             return redirect("reset_password" if lang == "uk" else "reset_password_en")
     else:
         return render(request, "accounts/reset_password.html", context={"lang": lang})
+
+
+@login_required
+def require_phone_view(request):
+    if request.method == "POST":
+        form = PhoneForm(request.POST)
+        if form.is_valid():
+            phone_number = form.cleaned_data["phone_number"]
+            user_profile = get_object_or_404(UserProfile, user=request.user)
+            user_profile.person.georgian_phone_number = phone_number
+            user_profile.person.save()
+
+            request.user.save()
+            return redirect("associated_person_list")
+    else:
+        form = PhoneForm()
+    return render(request, "accounts/require_phone.html", {"form": form})

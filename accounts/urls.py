@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from .views import require_phone_view
 
 urlpatterns = [
     path("accounts/register/", views.register, name="register"),
@@ -39,4 +40,5 @@ urlpatterns = [
         views.reset_password,
         name="reset_password_en",
     ),
+    path("accounts/require-phone/", require_phone_view, name="require_phone"),
 ]

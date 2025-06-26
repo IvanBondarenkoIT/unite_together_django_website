@@ -204,3 +204,24 @@ class RegistrationForm(forms.ModelForm):
         if not agree:
             raise forms.ValidationError("Ви повинні погодитися з умовами використання.")
         return agree
+
+
+class PhoneForm(forms.Form):
+    phone_number = forms.CharField(label="Phone Number", max_length=20)
+
+    def clean_phone_number(self):
+        """
+        Проверка грузинского номера телефона:
+        - Поле обязательно для заполнения.
+        - Номер должен быть в формате 995XXXXXXXXX.
+        """
+        phone_number = self.cleaned_data.get("phone_number")
+        if phone_number:
+            pattern = r"^995[0-9]{9}$"
+            if not re.match(pattern, phone_number):
+                raise forms.ValidationError(
+                    "Грузинський номер телефону має бути у форматі: 995XXXXXXXXX."
+                )
+            return phone_number
+        else:
+            raise forms.ValidationError("Грузинський номер телефону є обов'язковим.")
