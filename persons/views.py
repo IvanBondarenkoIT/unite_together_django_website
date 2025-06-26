@@ -21,6 +21,16 @@ OBJECTS_ON_PAGE = 4
 def associated_person_list(request, lang="uk"):
     user_profile = get_object_or_404(UserProfile, user=request.user)
 
+    # Проверка на наличие телефона
+    if not user_profile.person.georgian_phone_number:
+        if not request.user.associated_person.georgian_phone_number:
+            return redirect("require_phone")
+        else:
+            user_profile.person.georgian_phone_number = (
+                request.user.associated_person.georgian_phone_number
+            )
+            user_profile.person.save()
+
     # Данные о последнем евенте
     last_event = request.session.get("last_event")
 
