@@ -197,6 +197,13 @@ def event_detail(request, group_slug=None, event_slug=None, lang="uk"):
                         selected_person = AssociatedPerson.objects.get(
                             id=person_id, user_owner=request.user
                         )
+
+                        if not selected_person.georgian_phone_number:
+                            messages.warning(
+                                request,
+                                f"Перевірте номер телефону особи {selected_person.first_name} {selected_person.last_name}",
+                            )
+                            return redirect("require_phone")
                         # Перевірка віку
                         if (
                             single_event.end_age
