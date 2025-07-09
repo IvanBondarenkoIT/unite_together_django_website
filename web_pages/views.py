@@ -206,9 +206,9 @@ def event_detail(request, group_slug=None, event_slug=None, lang="uk"):
                             return redirect("require_phone")
                         # Перевірка віку
                         if (
-                            single_event.end_age
-                            >= selected_person.get_current_age()
-                            >= single_event.start_age
+                            int(single_event.end_age)
+                            >= int(selected_person.get_current_age())
+                            >= int(single_event.start_age)
                         ):
 
                             total_participants_in_event = Participant.objects.filter(
