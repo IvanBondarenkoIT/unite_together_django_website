@@ -29,6 +29,7 @@ class MyAccountManager(BaseUserManager):
             username=username,
             first_name=first_name,
             last_name=last_name,
+            is_active=True,  # Set user as active by default
         )
 
         user.set_password(password)
