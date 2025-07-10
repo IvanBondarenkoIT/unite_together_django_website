@@ -47,7 +47,7 @@
     /* Add styles here to fix dropdown position */
     .dropdown-menu {
         position: absolute;
-        top: 70git px; /* Adjust based on the height of the navbar */
+        top: 70px; /* Adjust based on the height of the navbar */
         left: 0;
         width: 100%;
         background-color: white;
@@ -62,6 +62,7 @@
 
     .mobile-navbar .hamburger-menu {
         cursor: pointer;
+        font-weight: normal !important;
     }
     /*LOGO part*/
     .logo-container {
@@ -83,12 +84,14 @@
     .logo-title {
         font-size: 24px; /* Larger size for "UNITE" */
         margin: 0;
+        color: var(--color-darkslategray-100);
     }
 
     .logo-subtitle {
         font-size: 14px; /* Smaller size for "TOGETHER" */
         margin: 0;
         line-height: 1; /* Adjust for better alignment */
+        color: var(--color-darkslategray-100);
     }
 
     /* Optional: Ensuring the text occupies the same width */
