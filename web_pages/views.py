@@ -207,9 +207,10 @@ def event_detail(request, group_slug=None, event_slug=None, lang="uk"):
                         # Перевірка віку
                         if (
                             int(single_event.end_age)
-                            >= int(selected_person.get_current_age())
+                            >= selected_person.get_current_age()
                             >= int(single_event.start_age)
-                        ):
+                        ) or not selected_person.date_of_birth:
+                            # Перевірка наявності місць
 
                             total_participants_in_event = Participant.objects.filter(
                                 registered_on=single_event

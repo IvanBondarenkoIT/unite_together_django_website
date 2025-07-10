@@ -68,7 +68,7 @@ class Person(models.Model):
         Calculates the current age in full years.
         """
         if not self.date_of_birth:
-            return None  # or another default if date_of_birth is not set
+            return 0  # or another default if date_of_birth is not set
 
         today = (
             datetime.date.today()
