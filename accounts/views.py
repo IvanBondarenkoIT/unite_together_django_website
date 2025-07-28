@@ -141,7 +141,10 @@ def register(request, lang="uk"):
                     )
                     
                     # Redirect to associated person's edit page
-                    return redirect(f'/{lang}/persons/associated-persons/{new_person.id}/edit/')
+                    if lang == "uk":
+                        return redirect(f'/persons/associated-persons/{new_person.id}/edit/')
+                    else:
+                        return redirect(f'/{lang}/persons/associated-persons/{new_person.id}/edit/')
 
             except Exception as e:
                 messages.error(request, e)
