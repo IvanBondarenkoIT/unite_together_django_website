@@ -140,8 +140,8 @@ def register(request, lang="uk"):
                          else "You have successfully registered and logged in!")
                     )
                     
-                    # Redirect to home page
-                    return redirect('home')
+                    # Redirect to associated person's edit page
+                    return redirect(f'/{lang}/persons/associated-persons/{new_person.id}/edit/')
 
             except Exception as e:
                 messages.error(request, e)
