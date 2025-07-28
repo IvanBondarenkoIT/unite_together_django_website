@@ -438,11 +438,21 @@ def require_phone_view(request):
         form = PhoneForm(request.POST)
         if form.is_valid():
             phone_number = form.cleaned_data["phone_number"]
+            date_of_birth = form.cleaned_data["date_of_birth"]
+            
             user_profile = get_object_or_404(UserProfile, user=request.user)
-            user_profile.person.georgian_phone_number = phone_number
-            user_profile.person.save()
+            person = user_profile.person
+            
+            # Update phone number and date of birth
+            person.georgian_phone_number = phone_number
+            person.date_of_birth = date_of_birth
+            person.save()
 
+            # Update user's phone number
+            request.user.phone_number = phone_number
             request.user.save()
+            
+            messages.success(request, "Дані успішно оновлено")
             return redirect("associated_person_list")
     else:
         form = PhoneForm()
