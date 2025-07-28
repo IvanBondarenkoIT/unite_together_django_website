@@ -131,20 +131,26 @@ def register(request, lang="uk"):
 
                     # Log the user in after successful registration
                     auth_login(request, user)
-                    
+
                     # Show success message
                     messages.success(
                         request,
-                        ("Ви успішно зареєструвалися та увійшли в систему!"
-                         if lang == "uk"
-                         else "You have successfully registered and logged in!")
+                        (
+                            "Ви успішно зареєструвалися та увійшли в систему!"
+                            if lang == "uk"
+                            else "You have successfully registered and logged in!"
+                        ),
                     )
-                    
+
                     # Redirect to associated person's edit page
                     if lang == "uk":
-                        return redirect(f'/persons/associated-persons/{new_person.id}/edit/')
+                        return redirect(
+                            f"/persons/associated-persons/{new_person.id}/edit/"
+                        )
                     else:
-                        return redirect(f'/{lang}/persons/associated-persons/{new_person.id}/edit/')
+                        return redirect(
+                            f"/{lang}/persons/associated-persons/{new_person.id}/edit/"
+                        )
 
             except Exception as e:
                 messages.error(request, e)
