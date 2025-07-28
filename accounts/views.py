@@ -1,6 +1,7 @@
 from django.db import transaction
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
@@ -128,11 +129,19 @@ def register(request, lang="uk"):
                                     ),
                                 )
 
-                    return redirect(
-                        f"/accounts/login/?command=verification&email={email}"
-                        if lang == "uk"
-                        else f"/accounts/login_en/?command=verification&email={email}"
+                    # Log the user in after successful registration
+                    auth_login(request, user)
+                    
+                    # Show success message
+                    messages.success(
+                        request,
+                        ("Ви успішно зареєструвалися та увійшли в систему!"
+                         if lang == "uk"
+                         else "You have successfully registered and logged in!")
                     )
+                    
+                    # Redirect to home page
+                    return redirect('home')
 
             except Exception as e:
                 messages.error(request, e)
