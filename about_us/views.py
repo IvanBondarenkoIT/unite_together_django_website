@@ -4,7 +4,16 @@ from django.shortcuts import render, redirect
 
 from unite_together_django_website import settings
 from .forms import ContactForm
-from .models import History, Mission, Vision, Value, Program, DocumentCategory, Partners
+from .models import (
+    History,
+    Mission,
+    Vision,
+    Value,
+    Program,
+    DocumentCategory,
+    Partners,
+    Contacts,
+)
 from web_pages.models import BannerSettings
 
 TRY_TO_CREATE_NEW_OBJECTS_IF_NOT_EXIST = True
@@ -195,8 +204,14 @@ def contact_view(request, lang="uk"):
         form = ContactForm(request.POST, lang=lang)
 
     banner_settings = BannerSettings.objects.first()
+    contacts = Contacts.objects.filter(status=True).first()
 
-    context = {"form": form, "banner_settings": banner_settings, "lang": lang}
+    context = {
+        "form": form,
+        "banner_settings": banner_settings,
+        "contacts": contacts,
+        "lang": lang,
+    }
 
     return render(request, "aboutus/about-us-contacts.html", context)
 

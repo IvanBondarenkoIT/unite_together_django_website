@@ -67,19 +67,41 @@
                                          src="{% static 'img/aboutus/icongeo1.svg' %}"/>
                                 </div>
                                 <div class="email-container">
-                                    <div class="email-info2">+995 551 146 364</div>
-                                    <div class="uniteforukraingmailcom19">
-                                        uniteforukrain@gmail.com
-                                    </div>
+                                    {% if contacts.phone_number %}
+                                        <div class="email-info2">{{ contacts.phone_number }}</div>
+                                    {% else %}
+                                        <div class="email-info2">+995 551 146 364</div>
+                                    {% endif %}
+
+                                    {% if contacts.email %}
+                                        <div class="uniteforukraingmailcom19">{{ contacts.email }}</div>
+                                    {% else %}
+                                        <div class="uniteforukraingmailcom19">uniteforukrain@gmail.com</div>
+                                    {% endif %}
+
+
                                     <div class="address18">
-                                        <div class="tbilisi-2123-tsotne21">
-                                            Tbilisi, 21/23 Tsotne Dadiani St., office 8
-                                        </div>
+                                        {% if contacts.address %}
+                                            <div class="tbilisi-2123-tsotne21">
+                                                {{ contacts.address }}
+                                            </div>
+                                        {% else %}
+                                            <div class="tbilisi-2123-tsotne21">
+                                                Tbilisi, 21/23 Tsotne Dadiani St., office 8
+                                            </div>
+                                        {% endif %}
                                         <div class="see-on-the1">
-                                            <a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8"
-                                               class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">
-                                                {% if lang == 'en' %}See on the map{% else %}Дивитися на мапі{% endif %}
-                                            </a>
+                                            {% if contacts.geolocation %}
+                                                <a href="{{ contacts.geolocation }}"
+                                                   class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">
+                                                    {% if lang == 'en' %}See on the map{% else %}Дивитися на мапі{% endif %}
+                                                </a>
+                                            {% else %}
+                                                <a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8"
+                                                   class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">
+                                                    {% if lang == 'en' %}See on the map{% else %}Дивитися на мапі{% endif %}
+                                                </a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

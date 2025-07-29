@@ -236,7 +236,11 @@
                         <div class="frame-parent26">
                             <div class="icon-phone-parent">
                                 <img class="icon-phone5" loading="lazy" alt="" src="{% static 'img/aboutus/iconphone1.svg' %}"/>
-                                <div class="div9">+995 551 146 364</div>
+                                {% if contacts.phone_number %}
+                                    <div class="div9">+{{ contacts.phone_number }}</div>
+                                {% else %}
+                                    <div class="div9">1 +995 551 146 364</div>
+                                {% endif %}
                             </div>
                             <div class="frame-parent27">
                                 <div class="frame-wrapper3">
@@ -246,10 +250,23 @@
                                     </div>
                                 </div>
                                 <div class="uniteforukraingmailcom-parent">
-                                    <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
-                                    <h2 class="tbilisi-2123-tsotne5">Tbilisi, Tsotne Dadiani St. 21/23, Office 8</h2>
+                                    {% if contacts.email %}
+                                        <h2 class="uniteforukraingmailcom2">{{ contacts.email }}</h2>
+                                    {% else %}
+                                        <h2 class="uniteforukraingmailcom2">1uniteforukrain@gmail.com</h2>
+                                    {% endif %}
 
-                                    <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">See on map</a></p>
+                                    {% if contacts.address %}
+                                        <h2 class="tbilisi-2123-tsotne5">{{ contacts.address_en }}</h2>
+                                    {% else %}
+                                        <h2 class="tbilisi-2123-tsotne5">1Tbilisi, Tsotne Dadiani St. 21/23, Office 8</h2>
+                                    {% endif %}
+
+                                    {% if contacts.geolocation %}
+                                        <p><a href="{{ contacts.geolocation }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">See on map</a></p>
+                                    {% else %}
+                                        <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">See on map</a></p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -272,7 +289,12 @@
                         <div class="frame-parent26">
                             <div class="icon-phone-parent">
                                 <img class="icon-phone5" loading="lazy" alt="" src="{% static 'img/aboutus/iconphone1.svg' %}"/>
-                                <div class="div9">+995 551 146 364</div>
+                                {% if contacts.phone_number %}
+                                    <div class="div9">+{{ contacts.phone_number }}</div>
+                                {% else %}
+                                    <div class="div9">1 +995 551 146 364</div>
+                                {% endif %}
+
                             </div>
                             <div class="frame-parent27">
                                 <div class="frame-wrapper3">
@@ -282,22 +304,56 @@
                                     </div>
                                 </div>
                                 <div class="uniteforukraingmailcom-parent">
-                                    <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
-                                    <h2 class="tbilisi-2123-tsotne5">Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8</h2>
-                                    <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Дивитися на мапі</a></p>
+                                    {% if contacts.email %}
+                                        <h2 class="uniteforukraingmailcom2">{{ contacts.email }}</h2>
+                                    {% else %}
+                                        <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
+                                    {% endif %}
+                                    {% if contacts.address %}
+                                        <h2 class="tbilisi-2123-tsotne5">{{ contacts.address }}</h2>
+                                    {% else %}
+                                        <h2 class="tbilisi-2123-tsotne5">Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8</h2>
+                                    {% endif %}
+
+                                    {% if contacts.geolocation %}
+                                        <p><a href="{{ contacts.geolocation }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Дивитися на мапі</a></p>
+                                    {% else %}
+                                        <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Дивитися на мапі</a></p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                         <div class="icon-insta-parent">
-                            <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5cmlibXVydGRz">
-                                <img class="icon-insta5" loading="lazy" alt="" src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
-                            </a>
-                            <a href="https://www.facebook.com/UniteTogetherForUkraine?mibextid=LQQJ4d">
-                                <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
-                            </a>
-                            <a href="https://t.me/Unite_T">
-                                <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}"/>
-                            </a>
+                            {% if contacts.instagram %}
+                                <a href="{{ contacts.instagram }}">
+                                    <img class="icon-insta5" loading="lazy" alt="" src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
+                                </a>
+                            {% else %}
+                                <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5cmlibXVydGRz">
+                                    <img class="icon-insta5" loading="lazy" alt="" src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
+                                </a>
+                            {% endif %}
+
+                            {% if contacts.facebook %}
+                                <a href="{{ contacts.facebook }}">
+                                    <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
+                                </a>
+                            {% else %}
+                                <a href="https://www.facebook.com/UniteTogetherForUkraine?mibextid=LQQJ4d">
+                                    <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
+                                </a>
+                            {% endif %}
+
+                            {% if contacts.telegram %}
+                                <a href="{{ contacts.telegram }}">
+                                    <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}"/>
+                                </a>
+                            {% else %}
+                                <a href="https://t.me/Unite_T">
+                                    <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}"/>
+                                </a>
+                            {% endif %}
+
                         </div>
                     </div>
                 {% endif %}

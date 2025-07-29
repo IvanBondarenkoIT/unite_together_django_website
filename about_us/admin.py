@@ -10,7 +10,7 @@ class ContactsAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             "Contact Information",
-            {"fields": ("status", "email", "phone_number", "address")},
+            {"fields": ("status", "email", "phone_number", "address", "address_en")},
         ),
         (
             "Social Media",

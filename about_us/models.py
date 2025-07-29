@@ -129,6 +129,7 @@ class Contacts(models.Model):
     email = models.EmailField()
     # address
     address = models.CharField(max_length=255)
+    address_en = models.CharField(max_length=255, default="")
     # geolocation
     geolocation = models.CharField(max_length=255)
     # social media lincs
