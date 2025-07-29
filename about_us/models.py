@@ -118,3 +118,23 @@ class Partners(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Contacts(models.Model):
+    # status
+    status = models.BooleanField(default=True)
+    # phone number
+    phone_number = models.CharField(max_length=50)
+    # email address
+    email = models.EmailField()
+    # address
+    address = models.CharField(max_length=255)
+    # geolocation
+    geolocation = models.CharField(max_length=255)
+    # social media lincs
+    instagram = models.URLField()
+    facebook = models.URLField()
+    telegram = models.URLField()
+
+    def __str__(self):
+        return self.email
