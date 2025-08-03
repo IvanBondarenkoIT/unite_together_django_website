@@ -207,7 +207,17 @@ class RegistrationForm(forms.ModelForm):
 
 
 class PhoneForm(forms.Form):
-    phone_number = forms.CharField(label="Phone Number", max_length=20)
+    phone_number = forms.CharField(label="Номер телефону", max_length=20)
+    date_of_birth = forms.DateField(
+        label="Дата народження",
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=True
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set the date format to display in the input field
+        self.fields['date_of_birth'].widget.format = '%d-%m-%Y'
 
     def clean_phone_number(self):
         """

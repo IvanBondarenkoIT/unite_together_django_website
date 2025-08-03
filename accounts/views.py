@@ -1,6 +1,7 @@
 from django.db import transaction
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
@@ -128,11 +129,28 @@ def register(request, lang="uk"):
                                     ),
                                 )
 
-                    return redirect(
-                        f"/accounts/login/?command=verification&email={email}"
-                        if lang == "uk"
-                        else f"/accounts/login_en/?command=verification&email={email}"
+                    # Log the user in after successful registration
+                    auth_login(request, user)
+
+                    # Show success message
+                    messages.success(
+                        request,
+                        (
+                            "Ви успішно зареєструвалися та увійшли в систему!"
+                            if lang == "uk"
+                            else "You have successfully registered and logged in!"
+                        ),
                     )
+
+                    # Redirect to associated person's edit page
+                    if lang == "uk":
+                        return redirect(
+                            f"/persons/associated-persons/{new_person.id}/edit/"
+                        )
+                    else:
+                        return redirect(
+                            f"/{lang}/persons/associated-persons/{new_person.id}/edit/"
+                        )
 
             except Exception as e:
                 messages.error(request, e)
@@ -420,11 +438,21 @@ def require_phone_view(request):
         form = PhoneForm(request.POST)
         if form.is_valid():
             phone_number = form.cleaned_data["phone_number"]
+            date_of_birth = form.cleaned_data["date_of_birth"]
+            
             user_profile = get_object_or_404(UserProfile, user=request.user)
-            user_profile.person.georgian_phone_number = phone_number
-            user_profile.person.save()
+            person = user_profile.person
+            
+            # Update phone number and date of birth
+            person.georgian_phone_number = phone_number
+            person.date_of_birth = date_of_birth
+            person.save()
 
+            # Update user's phone number
+            request.user.phone_number = phone_number
             request.user.save()
+            
+            messages.success(request, "Дані успішно оновлено")
             return redirect("associated_person_list")
     else:
         form = PhoneForm()

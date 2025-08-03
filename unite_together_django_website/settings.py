@@ -86,6 +86,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "web_pages.context_processors.menu_links",
+                "about_us.context_processors.contacts_processor",
                 "social_django.context_processors.backends",
                 "social_django.context_processors.login_redirect",
             ],

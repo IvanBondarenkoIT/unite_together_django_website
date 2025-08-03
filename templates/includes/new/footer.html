@@ -263,80 +263,78 @@
                 {% if lang == 'en' %}
                     <b>Contacts</b>
                 {% else %}
-                	<b>Контакти</b>
+                    <b>Контакти</b>
                 {% endif %}
 
                 <div class="line-decoration2"></div>
+                {% if contacts %}
                 <ul class="footer-menu-address">
+                    {% if contacts.phone_number %}
                     <li class="footer-menu-address-phone">
-                        <a href="tel:+995551146364">+995 551 146 364</a>
+                        <a href="tel:{{ contacts.phone_number }}">{{ contacts.phone_number }}</a>
                     </li>
+                    {% endif %}
+                    
+                    {% if contacts.email %}
                     <li class="footer-menu-address-email">
-                        <a href="mailto:uniteforukraine@gmail.com">uniteforukrain@gmail.com</a>
+                        <a href="mailto:{{ contacts.email }}">{{ contacts.email }}</a>
                     </li>
+                    {% endif %}
 
+                    {% if contacts.address or contacts.geolocation %}
                     <li class="footer-menu-address-location">
-                        <a style="white-space: nowrap;" href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8"
-                                          aria-pressed="true">
+                        {% if contacts.geolocation %}
+                        <a style="white-space: nowrap;" href="{{ contacts.geolocation }}" target="_blank" rel="noopener noreferrer" aria-pressed="true">
                             {% if lang == 'en' %}
-                                Tbilisi, Tsotne Dadiani St. 21/23, Office 8
+                                {{ contacts.address_en|default:contacts.address|safe }}
                             {% else %}
-                                Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8
+                                {{ contacts.address|safe }}
                             {% endif %}
-
                         </a>
+                        {% else %}
+                            {% if lang == 'en' %}
+                                {{ contacts.address_en|default:contacts.address|safe }}
+                            {% else %}
+                                {{ contacts.address|safe }}
+                            {% endif %}
+                        {% endif %}
                     </li>
-                        <br>
-
+                    {% endif %}
                 </ul>
+                {% endif %}
             </div>
 
             <!-- WE'RE SOCIAL -->
             <div class="foot-col foot-4-social">
-
                 {% if lang == 'en' %}
                     <b>We're in social networks</b>
-                    <div class="decoration7"></div>
-                    <div>
-                        Subscribe to us in social networks to not miss upcoming events.
-                    </div>
+                    <div class="line-decoration2"></div>
+                    <p>Subscribe to us in social networks to not miss upcoming events.</p>
                 {% else %}
-                    <b>Ми в соціальних мережах</b>
-                    <div class="decoration7"></div>
-                    <div>
-                        Підписуйтесь на нас у соціальних мережах, щоб не пропустити вихід нових видатних подій.
-                    </div>
+                    <b>Ми у соцмережах</b>
+                    <div class="line-decoration2"></div>
+                    <p>Підписуйтесь на нас у соціальних мережах, щоб не пропустити майбутні події.</p>
                 {% endif %}
-
-
+                
                 <div class="soc-icons-footer1">
-
-{#                    <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5```html#}
-                    <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5cmlibXVydGRz">
-                        <img
-                            class="icon-insta1"
-                            loading="lazy"
-                            alt="Instagram"
-                            src="{% static 'img/iconinsta.svg' %}"/>
-                    </a>
-
-                    <a href="https://www.facebook.com/UniteTogetherForUkraine?mibextid=LQQJ4d">
-                        <img
-                            class="icon-fb2"
-                            loading="lazy"
-                            alt="Facebook"
-                            src="{% static 'img/iconfb.svg' %}"/>
-                    </a>
-
-                    <a href="https://t.me/Unite_T">
-                        <img
-                            class="icon-tg2"
-                            loading="lazy"
-                            alt="Telegram"
-                            src="{% static 'img/icontg.svg' %}"/>
-                    </a>
+                    {% if contacts %}
+                        {% if contacts.instagram %}
+                            <a href="{{ contacts.instagram }}" target="_blank" rel="noopener noreferrer">
+                                <img class="icon-insta1" loading="lazy" alt="Instagram" src="{% static 'img/iconinsta.svg' %}"/>
+                            </a>
+                        {% endif %}
+                        {% if contacts.facebook %}
+                            <a href="{{ contacts.facebook }}" target="_blank" rel="noopener noreferrer">
+                                <img class="icon-fb2" loading="lazy" alt="Facebook" src="{% static 'img/iconfb.svg' %}"/>
+                            </a>
+                        {% endif %}
+                        {% if contacts.telegram %}
+                            <a href="{{ contacts.telegram }}" target="_blank" rel="noopener noreferrer">
+                                <img class="icon-tg2" loading="lazy" alt="Telegram" src="{% static 'img/icontg.svg' %}"/>
+                            </a>
+                        {% endif %}
+                    {% endif %}
                 </div>
-
             </div>
         </div>
     </div>
