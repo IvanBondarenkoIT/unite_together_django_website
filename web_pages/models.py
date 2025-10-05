@@ -209,6 +209,36 @@ class Projects(WebContentObject):
         return reverse("projects_detail_en", args=["en", self.group.slug, self.slug])
 
 
+class News(WebContentObject):
+    selected_city = models.ForeignKey(
+        City, on_delete=models.CASCADE, blank=True, null=True
+    )
+    address = models.CharField(max_length=250, blank=True, null=True)
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return f"News - {self.name}"
+
+    def get_start_date_year(self):
+        if self.start_date:
+            return self.start_date.strftime("%Y")
+        else:
+            return ""
+
+    def get_start_date_month(self):
+        if self.start_date:
+            return self.start_date.strftime("%b")
+        else:
+            return ""
+
+    def get_url(self):
+        return reverse("news_detail", args=[self.group.slug, self.slug])
+
+    def get_url_en(self):
+        return reverse("news_detail_en", args=["en", self.group.slug, self.slug])
+
+
 class ProjectGallery(models.Model):
     project = models.ForeignKey(Projects, default=None, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="store/products/", max_length=255)

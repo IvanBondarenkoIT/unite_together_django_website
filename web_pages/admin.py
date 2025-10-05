@@ -10,6 +10,7 @@ from web_pages.models import (
     Projects,
     ProjectGallery,
     BannerSettings,
+    News,
 )
 
 import admin_thumbnails
@@ -119,10 +120,26 @@ class EventsAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name", "group")}
 
 
+@admin_thumbnails.thumbnail("image")
+class NewsAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "title",
+        "text",
+        "is_active",
+        "created_at",
+        "updated_at",
+        "is_archived",
+    )
+    list_editable = ("is_active",)
+    prepopulated_fields = {"slug": ("name", "group")}
+
+
 admin.site.register(BannerSettings, BannerSettingsAdmin)
 
 admin.site.register(Projects, ProjectsAdmin)
 admin.site.register(Events, EventsAdmin)
+admin.site.register(News, NewsAdmin)
 
 # -
 
