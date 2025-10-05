@@ -1,0 +1,183 @@
+{% load static %}
+
+<section class="events-container-parent">
+    <div class="menu-and-content">
+        <div class="content-container">
+            <div class="main-content1">
+                <div class="header-504" style='background-image: url("{{ banner_settings.events_banner_mob_image.url }}");'>
+                    <div class="container7">
+                        <div class="section-title7">
+                            <div class="content38">
+                                <h1 class="short-heading-here4">News</h1>
+                                <div class="lorem-ipsum-dolor4">
+                                    Latest news and organization events
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <!-- Dropdown Menu -->
+                    <div class="col-md-12">
+                        <!-- Remove filters for News -->
+                    </div>
+                    
+                    <!-- News List -->
+                    <div class="description-liststext-link-fo">
+                        {% for object in all_objects %}
+                            <div class="event-item">
+                                <div class="event-image">
+                                    <a href="{{ object.get_url_en }}">
+                                        <img src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" alt="{{ object.title }}" />
+                                    </a>
+                                </div>
+                                
+                                <div class="event-info">
+                                    <div class="event-meta">
+                                        <!-- Show only month and year for News -->
+                                        {% if object.get_start_date_month and object.get_start_date_year %}
+                                            <span class="event-date">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</span>
+                                        {% endif %}
+                                        <!-- Remove age for News -->
+                                    </div>
+                                    
+                                    <h3 class="event-title">
+                                        <a href="{{ object.get_url_en }}">{{ object.title_en|default:object.title }}</a>
+                                    </h3>
+                                    
+                                    <p class="event-description">{{ object.extra_details_en|default:object.extra_details|truncatewords:20 }}</p>
+                                    
+                                    <a href="{{ object.get_url_en }}" class="read-more-btn">READ MORE</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Pagination -->
+                    {% if all_objects.has_other_pages %}
+                        <div class="mobile-pagination">
+                            {% if all_objects.has_previous %}
+                                <a href="?page={{ all_objects.previous_page_number }}" class="pagination-btn">‹ Previous</a>
+                            {% endif %}
+                            
+                            <span class="pagination-info">
+                                {{ all_objects.number }} / {{ all_objects.paginator.num_pages }}
+                            </span>
+                            
+                            {% if all_objects.has_next %}
+                                <a href="?page={{ all_objects.next_page_number }}" class="pagination-btn">Next ›</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.event-item {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+}
+
+.event-image {
+    width: 120px;
+    height: 80px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.event-info {
+    flex: 1;
+}
+
+.event-meta {
+    margin-bottom: 8px;
+}
+
+.event-date {
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #666;
+}
+
+.event-title {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    line-height: 1.3;
+}
+
+.event-title a {
+    color: #333;
+    text-decoration: none;
+}
+
+.event-title a:hover {
+    color: #007BFF;
+}
+
+.event-description {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.read-more-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.read-more-btn:hover {
+    background: #0056b3;
+    color: white;
+}
+
+.mobile-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.pagination-btn {
+    padding: 8px 16px;
+    background: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.pagination-btn:hover {
+    background: #0056b3;
+    color: white;
+}
+
+.pagination-info {
+    font-size: 14px;
+    color: #666;
+}
+</style>

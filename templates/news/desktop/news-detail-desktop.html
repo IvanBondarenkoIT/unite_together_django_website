@@ -1,0 +1,130 @@
+{% load static %}
+<style>
+    /* General styling */
+    .news-detail {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+    }
+    
+    .news-content {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .news-text {
+        font-size: 16px;
+        margin-bottom: 30px;
+        text-align: justify;
+    }
+    
+    .next-news {
+        margin-top: 40px;
+        text-align: center;
+    }
+    
+    .next-news-button {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    
+    .next-news-button:hover {
+        background-color: #0056b3;
+        color: white;
+    }
+    
+    .news-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .back-link {
+        color: #007BFF;
+        text-decoration: none;
+    }
+    
+    .back-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="news-detail" data-animate-on-scroll>
+    <section class="sec-detail">
+        <div class="bg-detail"></div>
+        <div class="aside-box">
+            <div class="iterative-processor">
+                <div class="database-connection">
+                    <div class="error-handler">
+                        <a class="sport1" href="{% url 'news' %}">Усі</a>
+                        {% for category in links %}
+                            <a class="sport1" href="{{ category.get_url }}">{{ category.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="while-loop">
+            <img class="baner-image-icon" style="width: 100%;height: auto;object-fit: cover;" loading="lazy" alt="" src="{% if single_news.image %} {{ single_news.image.url }} {% else %} {% static '/img/placeholder-image1%402x.png' %} {% endif %}"/>
+
+            <div class="about-events">
+                <div class="bg"></div>
+                <div class="variable-holder">
+                    <div class="constant-holder">
+                        <h1 class="autism-speaks-to">{{ single_news.title }}</h1>
+                        <div class="age-3-16-parent">
+                            <!-- Убираем блок возраста для News -->
+                            
+                            <!-- Показываем только дату (месяц и год) -->
+                            {% if single_news.get_start_date_month and single_news.get_start_date_year %}
+                                <div class="news-date">
+                                    <b>Дата</b>: {{ single_news.get_start_date_month }} {{ single_news.get_start_date_year }}
+                                </div>
+                            {% endif %}
+
+                            <!-- Растягиваем текст на всю ширину -->
+                            <div class="news-content">
+                                <div class="news-text">
+                                    {{ single_news.text|safe }}
+                                </div>
+                                
+                                {% if single_news.extra_details %}
+                                    <div class="news-text">
+                                        {{ single_news.extra_details|safe }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img class="dec-line-3-icon" loading="lazy" alt="" src="{% static 'img/decline3.svg' %}" />
+
+                <div class="string-op">
+                    <div class="array-op">
+                        <div class="list-op">
+                            <!-- Убираем блок с городом для News -->
+                            <!-- Убираем блок регистрации для News -->
+                            
+                            <!-- Добавляем навигацию "следующая новость" -->
+                            {% if next_news %}
+                                <div class="next-news">
+                                    <a href="{{ next_news.get_url }}" class="next-news-button">
+                                        Слідуюча новина: {{ next_news.title }}
+                                        <span style="margin-left: 10px;">→</span>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
