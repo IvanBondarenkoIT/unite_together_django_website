@@ -227,9 +227,9 @@
                             </a>
                         </li>
                         <li class="footer-menu-links">
-                            <a href="{% url 'events_en'  lang='en' %}"
-                               {% if '/events/' in request.path %}style="text-decoration: underline"{% endif %}>
-                                Events
+                            <a href="{% url 'news_en'  lang='en' %}"
+                               {% if '/news/' in request.path %}style="text-decoration: underline"{% endif %}>
+                                News
                             </a>
                         </li>
                         <li class="footer-menu-links">
@@ -247,8 +247,8 @@
                         <li class="footer-menu-links"><a href="{% url 'who_we_are' %}"
                                                          {% if '/about-us/' in request.path %}style="text-decoration: underline"{% endif %}>Про
                             нас</a></li>
-                        <li class="footer-menu-links"><a href="{% url 'events' %}"
-                                                         {% if '/events/' in request.path %}style="text-decoration: underline"{% endif %}>Події</a>
+                        <li class="footer-menu-links"><a href="{% url 'news' %}"
+                                                         {% if '/news/' in request.path %}style="text-decoration: underline"{% endif %}>Новини</a>
                         </li>
                         <li class="footer-menu-links"><a href="{% url 'projects' %}"
                                                          {% if '/projects/' in request.path %}style="text-decoration: underline"{% endif %}>Проєкти</a>

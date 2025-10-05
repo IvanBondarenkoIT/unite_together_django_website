@@ -45,15 +45,15 @@
                         <li class="ut-top-menu-li">
                             <div class="ut-top-menu-div">
                                 {% if lang == 'en' %}
-                        <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
-                           href="{% url 'events_en' lang='en' %}">
+                        <a class="ut-top-menu-text{% if '/news/' in request.path %}-active{% endif %}"
+                           href="{% url 'news_en' lang='en' %}">
 
-                            Events
+                            News
                         </a>
                     {% else %}
-                        <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
-                           href="{% url 'events' %}">
-                            Афіша
+                        <a class="ut-top-menu-text{% if '/news/' in request.path %}-active{% endif %}"
+                           href="{% url 'news' %}">
+                            Новини
                         </a>
                     {% endif %}
                             </div>
@@ -204,15 +204,15 @@
                     {% endif %}
 
                     {% if lang == 'en' %}
-                        <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
-                           href="{% url 'events_en' lang='en' %}">
+                        <a class="ut-top-menu-text{% if '/news/' in request.path %}-active{% endif %}"
+                           href="{% url 'news_en' lang='en' %}">
 
-                            Events
+                            News
                         </a>
                     {% else %}
-                        <a class="ut-top-menu-text{% if '/events/' in request.path %}-active{% endif %}"
-                           href="{% url 'events' %}">
-                            Афіша
+                        <a class="ut-top-menu-text{% if '/news/' in request.path %}-active{% endif %}"
+                           href="{% url 'news' %}">
+                            Новини
                         </a>
                     {% endif %}
 
