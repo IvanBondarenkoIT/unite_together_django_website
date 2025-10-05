@@ -1,110 +1,99 @@
 {% load static %}
 
-<section class="page-header">
-    <img class="bg-icon" loading="lazy" alt="{% static 'img/desc-news.webp' %}" src="{{ banner_settings.events_banner_image.url }}" />
-
-    <div class="sec-title1">
-        <div class="content9">
-            <h1 class="events6">Новини</h1>
-            <div class="discover-the-diverse-range-of-wrapper">
-                <div class="discover-the-diverse1">
-                    Останні новини та події організації
-                </div>
-            </div>
-        </div>
+<section class="news-page-header">
+    <div class="container">
+        <h1 class="news-page-title">Новини</h1>
+        <p class="news-page-subtitle">
+            Останні новини та події організації
+        </p>
     </div>
 </section>
 
-<section class="sect-events">
-    <div class="sect-events-child"></div>
-    <div class="aside-box-parent">
-        <div class="aside-box">
-            <div class="iterative-processor">
-                <div class="database-connection">
-                    <div class="error-handler">
-                        <a class="sport1{% if request.path == '/news/' %}-active{% endif %}"
-                           href="{% url 'news' %}">Усі</a>
-
+<section class="news-list-container">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="news-sidebar">
+                    <h3>Категорії</h3>
+                    <ul class="news-category-list">
                         {% for category in links %}
-                            <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
-                               href="{{ category.pre_computed_url }}">{{ category.name }}</a>
+                            <li>
+                                <a href="{{ category.pre_computed_url }}" 
+                                   class="news-category-link{% if category.slug in request.path %} active{% endif %}">
+                                    {{ category.name }}
+                                </a>
+                            </li>
                         {% endfor %}
-
-                        <!-- Убираем фильтр по городам для News -->
-                    </div>
+                    </ul>
                 </div>
             </div>
-
-            <!-- Убираем блок доступности для News -->
-        </div>
-
-        <div class="stroke-manager">
-            <div class="items2">
-                {% for object in all_objects %}
-                    <div class="item-1">
-                        <div class="touch-input to-front">
-                            <div class="gesture-recognizer">
-                                <!-- Показываем только месяц и год для News -->
+            
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="news-grid">
+                    {% for object in all_objects %}
+                        <div class="news-card">
+                            <div class="news-image-container">
+                                <a href="{{ object.get_url }}">
+                                    <img class="news-image" 
+                                         alt="{{ object.title }}"
+                                         src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}"/>
+                                </a>
+                                
+                                <!-- Date Badge -->
                                 {% if object.get_start_date_month and object.get_start_date_year %}
-                                    <div class="date6">
-                                        <div class="date7">
-                                            <div class="year6">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
-                                        </div>
+                                    <div class="news-date-badge">
+                                        {{ object.get_start_date_month }} {{ object.get_start_date_year }}
                                     </div>
                                 {% endif %}
-                                <!-- Убираем блок возраста для News -->
+                            </div>
+                            
+                            <div class="news-content">
+                                <h3 class="news-title">
+                                    <a href="{{ object.get_url }}">{{ object.title }}</a>
+                                </h3>
+                                
+                                <p class="news-description">
+                                    {{ object.extra_details|truncatewords:25 }}
+                                </p>
+                                
+                                <a href="{{ object.get_url }}" class="news-read-more">
+                                    Читати далі
+                                </a>
                             </div>
                         </div>
-
-                        <div class="gyroscope">
-                            <div class="magnetometer">
-                                <button class="city1">
-                                    <a href="{{ object.get_url }}" style="position: static;">
-                                        <img class="icon" alt="" src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}"/>
-                                    </a>
-                                    <div class="bg-enrollment"></div>
-                                    <div class="facial-expression">
-                                        <img class="biometric-verification-icon" alt="" src="{% static 'img/biometric-verification.svg' %}" />
-                                    </div>
-                                    <!-- Убираем плашку Batumi для News -->
-                                </button>
-                                <div class="condition-splitter">
-                                    <div class="header-item">
-                                        <div class="decoration1"></div>
-                                        <b class="crafts-for-children">{{ object.title }}</b>
-                                    </div>
-                                    <div class="iteration-loop">
-                                        <div class="lorem-ipsum-is-simply5">{{ object.extra_details }}</div>
-                                    </div>
-                                </div>
+                    {% empty %}
+                        <div class="col-12">
+                            <div class="text-center py-5">
+                                <h3>Новин поки немає</h3>
+                                <p>Перевірте пізніше для отримання останніх новин.</p>
                             </div>
-                            <!-- Убираем кнопку регистрации для News, заменяем на "Читати далі" -->
-                            <a class="button-join5" href="{{ object.get_url }}">
-                                <div class="join-parent3">
-                                    <div class="join5">ЧИТАТИ ДАЛІ</div>
-                                </div>
-                            </a>
                         </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Pagination -->
+                {% if all_objects.has_other_pages %}
+                    <div class="news-pagination">
+                        {% if all_objects.has_previous %}
+                            <a href="?page={{ all_objects.previous_page_number }}">&laquo; Попередня</a>
+                        {% endif %}
+                        
+                        <span class="current">
+                            Сторінка {{ all_objects.number }} з {{ all_objects.paginator.num_pages }}
+                        </span>
+                        
+                        {% if all_objects.has_next %}
+                            <a href="?page={{ all_objects.next_page_number }}">Наступна &raquo;</a>
+                        {% endif %}
                     </div>
-                {% endfor %}
+                {% endif %}
             </div>
         </div>
-
-        <!-- Пагинация -->
-        {% if all_objects.has_other_pages %}
-            <div class="pagination">
-                {% if all_objects.has_previous %}
-                    <a href="?page={{ all_objects.previous_page_number }}">&laquo; Попередня</a>
-                {% endif %}
-                
-                <span class="current">
-                    Сторінка {{ all_objects.number }} з {{ all_objects.paginator.num_pages }}
-                </span>
-                
-                {% if all_objects.has_next %}
-                    <a href="?page={{ all_objects.next_page_number }}">Наступна &raquo;</a>
-                {% endif %}
-            </div>
-        {% endif %}
     </div>
 </section>
+
+<style>
+    @import url('{% static "css/news/news.css" %}');
+</style>

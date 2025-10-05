@@ -1,106 +1,99 @@
 {% load static %}
 
-<section class="page-header">
-    <img class="bg-icon" loading="lazy" alt="{% static 'img/desc-news.webp' %}" src="{{ banner_settings.events_banner_image.url }}" />
-
-    <div class="sec-title1">
-        <div class="content9">
-            <h1 class="events6">News</h1>
-            <div class="discover-the-diverse-range-of-wrapper">
-                <div class="discover-the-diverse1">
-                    Latest news and organization events
-                </div>
-            </div>
-        </div>
+<section class="news-page-header">
+    <div class="container">
+        <h1 class="news-page-title">News</h1>
+        <p class="news-page-subtitle">
+            Latest news and organization events
+        </p>
     </div>
 </section>
 
-<section class="sect-events">
-    <div class="sect-events-child"></div>
-    <div class="aside-box-parent">
-        <div class="aside-box">
-            <div class="iterative-processor">
-                <div class="database-connection">
-                    <div class="error-handler">
-                        <a class="sport1{% if request.path == '/en/news/' %}-active{% endif %}"
-                           href="{% url 'news_en' lang='en' %}">All</a>
-
+<section class="news-list-container">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="news-sidebar">
+                    <h3>Categories</h3>
+                    <ul class="news-category-list">
                         {% for category in links %}
-                            <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
-                               href="{{ category.pre_computed_url }}">{{ category.name_en|default:category.name }}</a>
+                            <li>
+                                <a href="{{ category.pre_computed_url }}" 
+                                   class="news-category-link{% if category.slug in request.path %} active{% endif %}">
+                                    {{ category.name_en|default:category.name }}
+                                </a>
+                            </li>
                         {% endfor %}
-                    </div>
+                    </ul>
                 </div>
             </div>
-        </div>
-
-        <div class="stroke-manager">
-            <div class="items2">
-                {% for object in all_objects %}
-                    <div class="item-1">
-                        <div class="touch-input to-front">
-                            <div class="gesture-recognizer">
-                                <!-- Show only month and year for News -->
+            
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="news-grid">
+                    {% for object in all_objects %}
+                        <div class="news-card">
+                            <div class="news-image-container">
+                                <a href="{{ object.get_url_en }}">
+                                    <img class="news-image" 
+                                         alt="{{ object.title_en|default:object.title }}"
+                                         src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}"/>
+                                </a>
+                                
+                                <!-- Date Badge -->
                                 {% if object.get_start_date_month and object.get_start_date_year %}
-                                    <div class="date6">
-                                        <div class="date7">
-                                            <div class="year6">{{ object.get_start_date_month }} {{ object.get_start_date_year }}</div>
-                                        </div>
+                                    <div class="news-date-badge">
+                                        {{ object.get_start_date_month }} {{ object.get_start_date_year }}
                                     </div>
                                 {% endif %}
-                                <!-- Remove age block for News -->
+                            </div>
+                            
+                            <div class="news-content">
+                                <h3 class="news-title">
+                                    <a href="{{ object.get_url_en }}">{{ object.title_en|default:object.title }}</a>
+                                </h3>
+                                
+                                <p class="news-description">
+                                    {{ object.extra_details_en|default:object.extra_details|truncatewords:25 }}
+                                </p>
+                                
+                                <a href="{{ object.get_url_en }}" class="news-read-more">
+                                    Read more
+                                </a>
                             </div>
                         </div>
-
-                        <div class="gyroscope">
-                            <div class="magnetometer">
-                                <button class="city1">
-                                    <a href="{{ object.get_url_en }}" style="position: static;">
-                                        <img class="icon" alt="" src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}"/>
-                                    </a>
-                                    <div class="bg-enrollment"></div>
-                                    <div class="facial-expression">
-                                        <img class="biometric-verification-icon" alt="" src="{% static 'img/biometric-verification.svg' %}" />
-                                    </div>
-                                    <!-- Remove Batumi badge for News -->
-                                </button>
-                                <div class="condition-splitter">
-                                    <div class="header-item">
-                                        <div class="decoration1"></div>
-                                        <b class="crafts-for-children">{{ object.title_en|default:object.title }}</b>
-                                    </div>
-                                    <div class="iteration-loop">
-                                        <div class="lorem-ipsum-is-simply5">{{ object.extra_details_en|default:object.extra_details }}</div>
-                                    </div>
-                                </div>
+                    {% empty %}
+                        <div class="col-12">
+                            <div class="text-center py-5">
+                                <h3>No news yet</h3>
+                                <p>Check back later for the latest news updates.</p>
                             </div>
-                            <!-- Remove registration button for News, replace with "Read more" -->
-                            <a class="button-join5" href="{{ object.get_url_en }}">
-                                <div class="join-parent3">
-                                    <div class="join5">READ MORE</div>
-                                </div>
-                            </a>
                         </div>
+                    {% endfor %}
+                </div>
+                
+                <!-- Pagination -->
+                {% if all_objects.has_other_pages %}
+                    <div class="news-pagination">
+                        {% if all_objects.has_previous %}
+                            <a href="?page={{ all_objects.previous_page_number }}">&laquo; Previous</a>
+                        {% endif %}
+                        
+                        <span class="current">
+                            Page {{ all_objects.number }} of {{ all_objects.paginator.num_pages }}
+                        </span>
+                        
+                        {% if all_objects.has_next %}
+                            <a href="?page={{ all_objects.next_page_number }}">Next &raquo;</a>
+                        {% endif %}
                     </div>
-                {% endfor %}
+                {% endif %}
             </div>
         </div>
-
-        <!-- Pagination -->
-        {% if all_objects.has_other_pages %}
-            <div class="pagination">
-                {% if all_objects.has_previous %}
-                    <a href="?page={{ all_objects.previous_page_number }}">&laquo; Previous</a>
-                {% endif %}
-                
-                <span class="current">
-                    Page {{ all_objects.number }} of {{ all_objects.paginator.num_pages }}
-                </span>
-                
-                {% if all_objects.has_next %}
-                    <a href="?page={{ all_objects.next_page_number }}">Next &raquo;</a>
-                {% endif %}
-            </div>
-        {% endif %}
     </div>
 </section>
+
+<style>
+    @import url('{% static "css/news/news.css" %}');
+</style>

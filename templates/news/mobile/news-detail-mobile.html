@@ -1,148 +1,39 @@
 {% load static %}
 
-<section class="events-container-parent">
-    <div class="menu-and-content">
-        <div class="content-container">
-            <div class="main-content1">
-                <div class="news-detail-mobile">
-                    <div class="news-header">
-                        <h1>{{ single_news.title }}</h1>
-                        
-                        <!-- Показываем только дату (месяц и год) -->
-                        {% if single_news.get_start_date_month and single_news.get_start_date_year %}
-                            <div class="news-date">
-                                <span class="date-label">Дата:</span>
-                                <span class="date-value">{{ single_news.get_start_date_month }} {{ single_news.get_start_date_year }}</span>
-                            </div>
-                        {% endif %}
-                    </div>
-                    
-                    <div class="news-image">
-                        <img src="{% if single_news.image %}{{ single_news.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" alt="{{ single_news.title }}" />
-                    </div>
-                    
-                    <div class="news-content">
-                        <div class="news-text">
-                            {{ single_news.text|safe }}
-                        </div>
-                        
-                        {% if single_news.extra_details %}
-                            <div class="news-text">
-                                {{ single_news.extra_details|safe }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    
-                    <!-- Навигация "следующая новость" -->
-                    {% if next_news %}
-                        <div class="next-news-mobile">
-                            <a href="{{ next_news.get_url }}" class="next-news-btn">
-                                Слідуюча новина
-                                <span class="arrow">→</span>
-                            </a>
-                            <div class="next-news-title">{{ next_news.title }}</div>
-                        </div>
-                    {% endif %}
+<section class="news-detail-container">
+    <div class="news-detail-header">
+        <h1 class="news-detail-title">{{ object.title }}</h1>
+        
+        <div class="news-detail-meta">
+            {% if object.get_start_date_month and object.get_start_date_year %}
+                <div class="news-detail-date">
+                    {{ object.get_start_date_month }} {{ object.get_start_date_year }}
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
+    
+    {% if object.image %}
+        <img src="{{ object.image.url }}" alt="{{ object.title }}" class="news-detail-image">
+    {% endif %}
+    
+    <div class="news-detail-content">
+        {{ object.text|linebreaks }}
+    </div>
+    
+    <!-- Next News Navigation -->
+    {% if next_news %}
+        <div class="next-news-navigation">
+            <a href="{{ next_news.get_url }}" class="next-news-link">
+                <div class="next-news-title">
+                    Слідуюча новина: {{ next_news.title }}
+                </div>
+                <div class="next-news-arrow">→</div>
+            </a>
+        </div>
+    {% endif %}
 </section>
 
 <style>
-.news-detail-mobile {
-    padding: 20px;
-    max-width: 100%;
-}
-
-.news-header {
-    margin-bottom: 20px;
-}
-
-.news-header h1 {
-    font-size: 24px;
-    line-height: 1.3;
-    margin: 0 0 15px 0;
-    color: #333;
-}
-
-.news-date {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.date-label {
-    font-weight: bold;
-    margin-right: 8px;
-    color: #666;
-}
-
-.date-value {
-    background: #f0f0f0;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #333;
-}
-
-.news-image {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.news-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.news-content {
-    margin-bottom: 30px;
-}
-
-.news-text {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: justify;
-}
-
-.next-news-mobile {
-    text-align: center;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    margin-top: 30px;
-}
-
-.next-news-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background: #007BFF;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    transition: background-color 0.3s;
-}
-
-.next-news-btn:hover {
-    background: #0056b3;
-    color: white;
-}
-
-.arrow {
-    margin-left: 8px;
-    font-size: 18px;
-}
-
-.next-news-title {
-    font-size: 14px;
-    color: #666;
-    font-style: italic;
-}
+    @import url('{% static "css/news/news.css" %}');
 </style>
