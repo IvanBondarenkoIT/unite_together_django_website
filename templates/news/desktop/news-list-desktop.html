@@ -1,12 +1,18 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/news/news.css' %}">
 
-<section class="news-page-header" style="background: linear-gradient(135deg, #2c3e50, #34495e) !important; color: white !important; padding: 60px 0 !important; text-align: center !important; margin-bottom: 40px !important;">
-    <div class="container">
-        <h1 class="news-page-title" style="font-size: 48px !important; font-weight: 700 !important; margin-bottom: 15px !important; color: white !important;">Новини</h1>
-        <p class="news-page-subtitle" style="font-size: 18px !important; opacity: 0.9 !important; max-width: 600px !important; margin: 0 auto !important; line-height: 1.6 !important; color: white !important;">
-            Останні новини та події організації
-        </p>
+<section class="page-header news-page-header">
+    <img class="bg-icon" loading="lazy" alt="{% static 'img/desc-news.webp' %}" src="{{ banner_settings.events_banner_image.url }}"/>
+    
+    <div class="sec-title1">
+        <div class="content9">
+            <h1 class="events6">Новини</h1>
+            <div class="discover-the-diverse-range-of-wrapper">
+                <div class="discover-the-diverse1">
+                    Останні новини та події організації
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

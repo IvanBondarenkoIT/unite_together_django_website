@@ -1,12 +1,18 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/news/news.css' %}">
 
-<section class="news-page-header">
-    <div class="container">
-        <h1 class="news-page-title">News</h1>
-        <p class="news-page-subtitle">
-            Latest news and organization events
-        </p>
+<section class="page-header news-page-header">
+    <img class="bg-icon" loading="lazy" alt="{% static 'img/desc-news.webp' %}" src="{{ banner_settings.events_banner_image.url }}"/>
+    
+    <div class="sec-title1">
+        <div class="content9">
+            <h1 class="events6">News</h1>
+            <div class="discover-the-diverse-range-of-wrapper">
+                <div class="discover-the-diverse1">
+                    Latest news and organization events
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
