@@ -27,7 +27,7 @@
 
                         {% for category in links %}
                             <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
-                               href="{{ category.pre_computed_url }}">{{ category.name }}</a>
+                               href="{{ category.pre_computed_url }}">{{ category.name_en|default:category.name }}</a>
                         {% endfor %}
                     </div>
                 </div>
