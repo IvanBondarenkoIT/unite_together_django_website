@@ -1,0 +1,71 @@
+{% load static %}
+
+<div class="about-us-partners-mobile">
+    <div class="header-502" style='background-image: url("{{ banner_settings.about_us_banner_mob_image.url }}");'>
+        <div class="container5">
+            <div class="section-title5">
+{#                <div class="tagline2">Підзаголовок</div>#}
+                <div class="content35">
+                    <h1 class="short-heading-here2">{{ banner_settings.about_us_banner_title }}</h1>
+                    <div class="lorem-ipsum-dolor2">
+                        {{ banner_settings.about_us_banner_text }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="partner-container-wrapper">
+        <div class="partner-container">
+            <div class="bg-blue4"></div>
+            <!-- Dropdown Menu -->
+            <div class="col-md-12">
+                {% include 'aboutus/mobile/about-us-sidebar-mobile.html' %}
+            </div>
+            <div class="partner-info">
+                <div class="partner-info-child"></div>
+                <div class="partner-description">
+                    <h1 class="partners-and-collaboration5">
+                        Партнери та співпраця
+                    </h1>
+                    <div class="this-page-features1">
+                        Ця сторінка висвітлює організації та компанії, які підтримують нас у нашій місії допомоги
+                        тим, хто потребує, і роблять значний внесок у розвиток наших проєктів.
+                    </div>
+                </div>
+                {% for partner in partners %}
+                    <div class="partner-aktion">
+                        {% if partner.image %}
+{#                            <div class="logo" style="max-width: 150px;">#}
+                                <img
+                                        loading="lazy"
+
+                                        alt="{{ partner.title }}"
+                                        src="{{ partner.image.url }}"
+                                        style="max-width: 320px; margin: 0 0 20px; padding: 20px"
+                                />
+{#                            </div>#}
+                        {% endif %}
+
+                        <h3 class="aktion-deutschland-hilft1">
+                            {{ partner.title }}
+                        </h3>
+                        <div class="in-2001-aktion1">
+                            {{ partner.description|safe }}
+                        </div>
+                        {% if partner.url_link %}
+                            <a class="partner-navigation" href="{{ partner.url_link }}">
+                                <div class="surface3">
+                                    <div class="navigationicon2">
+                                        <b class="b2">→</b>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+
