@@ -17,6 +17,18 @@ urlpatterns = [
         views.event_detail,
         name="event_detail",
     ),
+    # News URLs (Ukrainian version)
+    path("news/", views.news, name="news"),
+    path(
+        "news/<slug:group_slug>",
+        views.news,
+        name="news_by_group",
+    ),
+    path(
+        "news/<slug:group_slug>/<slug:news_slug>",
+        views.news_detail,
+        name="news_detail",
+    ),
     path("projects/", views.projects, {"lang": "uk"}, name="projects"),
     path(
         "projects/<slug:group_slug>",
@@ -40,6 +52,18 @@ urlpatterns = [
         "<str:lang>/events/<slug:group_slug>/<slug:event_slug>",
         views.event_detail,
         name="event_detail_en",
+    ),
+    # News URLs (English version)
+    path("<str:lang>/news/", views.news, name="news_en"),
+    path(
+        "<str:lang>/news/<slug:group_slug>",
+        views.news,
+        name="news_by_group_en",
+    ),
+    path(
+        "<str:lang>/news/<slug:group_slug>/<slug:news_slug>",
+        views.news_detail,
+        name="news_detail_en",
     ),
     path("<str:lang>/projects/", views.projects, name="projects_en"),
     path(

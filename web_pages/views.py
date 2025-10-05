@@ -13,6 +13,7 @@ from web_pages.models import (
     Projects,
     ProjectGallery,
     BannerSettings,
+    News,
 )
 
 from django.core.mail import send_mail
@@ -361,3 +362,136 @@ def test_email_view(request):
         return HttpResponse("Письмо успешно отправлено!")
     except Exception as e:
         return HttpResponse(f"Ошибка при отправке письма: {e}")
+
+
+def news(request, group_slug=None, lang="uk"):
+    """
+    Renders a paginated list of news with optional filtering by city and activity status.
+    
+    Args:
+        request: The HTTP request object.
+        group_slug (str, optional): Slug of the news group for filtering.
+        lang (str): Language code (uk/en).
+        
+    Returns:
+        HttpResponse: Rendered template for the list of news.
+    """
+    print(f"Lang:{lang}")
+    
+    # Process checkbox and city selection based on the request method
+    if request.method == "POST":
+        is_active = request.POST.get("free-spots-checkbox") == "on"
+        new_selected_city = request.POST.get("selected-city")
+        
+        if new_selected_city:
+            selected_city = new_selected_city
+            request.session["activeCityFilter"] = selected_city
+        else:
+            selected_city = request.session.get("activeCityFilter", "All")
+            request.session["activeCheckbox"] = is_active
+    else:
+        is_active = request.session.get("activeCheckbox", False)
+        selected_city = request.session.get("activeCityFilter", "All")
+
+    # Build filter arguments based on activity status
+    kw_args = {"is_active": is_active} if is_active else {}
+
+    # Filter by news group if specified
+    if group_slug:
+        group = get_object_or_404(
+            ObjectsGroup, slug=group_slug, page__name__iexact="news", **kw_args
+        )
+        kw_args["group"] = group
+
+    # Add city filter if a specific city is selected
+    if selected_city and selected_city != "All":
+        _city = get_object_or_404(City, name=selected_city)
+        kw_args["selected_city"] = _city
+
+    # Not archived objects
+    kw_args["is_archived"] = False
+
+    # Retrieve news matching filters and annotate with precomputed URLs
+    all_objects = (
+        News.objects.filter(**kw_args)
+        .select_related("selected_city")
+        .annotate(
+            pre_computed_url=Concat(
+                F("group__slug"), Value("/"), F("slug"), output_field=CharField()
+            )
+        )
+        .order_by("-is_active", "-start_date")
+    )
+
+    # Paginate news
+    paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
+    page = request.GET.get("page")
+    page_all_objects = paginator.get_page(page)
+    objects_count = paginator.count
+
+    # Retrieve list of cities for filter selection
+    cities = City.objects.only("id", "name").all()
+    banner_settings = BannerSettings.objects.first()
+
+    # Prepare context data for the template
+    context = {
+        "all_objects": page_all_objects,
+        "objects_count": objects_count,
+        "free_spots": is_active,
+        "cities": cities,
+        "selected_city": selected_city,
+        "banner_settings": banner_settings,
+        "lang": lang,
+    }
+
+    return render(request, "news/news.html", context=context)
+
+
+def news_detail(request, group_slug=None, news_slug=None, lang="uk"):
+    """
+    Displays detailed information about a specific news item.
+    
+    Args:
+        request: The HTTP request object.
+        group_slug (str, optional): Slug of the news group.
+        news_slug (str, optional): Slug of the news item.
+        lang (str): Language code (uk/en).
+        
+    Returns:
+        HttpResponse: Rendered template for the news detail page.
+    """
+    print(f"Lang:{lang}")
+
+    try:
+        single_news = News.objects.select_related("group").get(
+            group__slug=group_slug, slug=news_slug
+        )
+    except News.DoesNotExist:
+        messages.error(request, "Новость не найдена.")
+        return redirect("news")  # Redirect to news list
+
+    # Get next news for navigation
+    try:
+        next_news = (
+            News.objects.filter(
+                group=single_news.group,
+                is_active=True,
+                is_archived=False,
+                start_date__gt=single_news.start_date
+            )
+            .order_by("start_date")
+            .first()
+        )
+    except:
+        next_news = None
+
+    banner_settings = BannerSettings.objects.first()
+
+    context = {
+        "single_news": single_news,
+        "next_news": next_news,
+        "banner_settings": banner_settings,
+        "lang": lang,
+    }
+
+    return render(request, "news/news-detail.html", context=context)
