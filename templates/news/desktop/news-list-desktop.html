@@ -1,9 +1,10 @@
 {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/news/news.css' %}">
 
-<section class="news-page-header">
+<section class="news-page-header" style="background: linear-gradient(135deg, #2c3e50, #34495e) !important; color: white !important; padding: 60px 0 !important; text-align: center !important; margin-bottom: 40px !important;">
     <div class="container">
-        <h1 class="news-page-title">Новини</h1>
-        <p class="news-page-subtitle">
+        <h1 class="news-page-title" style="font-size: 48px !important; font-weight: 700 !important; margin-bottom: 15px !important; color: white !important;">Новини</h1>
+        <p class="news-page-subtitle" style="font-size: 18px !important; opacity: 0.9 !important; max-width: 600px !important; margin: 0 auto !important; line-height: 1.6 !important; color: white !important;">
             Останні новини та події організації
         </p>
     </div>
@@ -31,9 +32,10 @@
             
             <!-- Main Content -->
             <div class="col-md-9">
-                <div class="news-grid">
+                <div class="news-main-content">
+                    <div class="news-grid" style="display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 30px !important; margin-bottom: 40px !important;">
                     {% for object in all_objects %}
-                        <div class="news-card">
+                        <div class="news-card" style="background: #fff !important; border-radius: 12px !important; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important; overflow: hidden !important; height: 100% !important; display: flex !important; flex-direction: column !important;">
                             <div class="news-image-container">
                                 <a href="{{ object.get_url }}">
                                     <img class="news-image" 
@@ -73,27 +75,25 @@
                     {% endfor %}
                 </div>
                 
-                <!-- Pagination -->
-                {% if all_objects.has_other_pages %}
-                    <div class="news-pagination">
-                        {% if all_objects.has_previous %}
-                            <a href="?page={{ all_objects.previous_page_number }}">&laquo; Попередня</a>
-                        {% endif %}
-                        
-                        <span class="current">
-                            Сторінка {{ all_objects.number }} з {{ all_objects.paginator.num_pages }}
-                        </span>
-                        
-                        {% if all_objects.has_next %}
-                            <a href="?page={{ all_objects.next_page_number }}">Наступна &raquo;</a>
-                        {% endif %}
+                    <!-- Pagination -->
+                    {% if all_objects.has_other_pages %}
+                        <div class="news-pagination">
+                            {% if all_objects.has_previous %}
+                                <a href="?page={{ all_objects.previous_page_number }}">&laquo; Попередня</a>
+                            {% endif %}
+                            
+                            <span class="current">
+                                Сторінка {{ all_objects.number }} з {{ all_objects.paginator.num_pages }}
+                            </span>
+                            
+                            {% if all_objects.has_next %}
+                                <a href="?page={{ all_objects.next_page_number }}">Наступна &raquo;</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
                     </div>
-                {% endif %}
+                </div>
             </div>
         </div>
     </div>
 </section>
-
-<style>
-    @import url('{% static "css/news/news.css" %}');
-</style>

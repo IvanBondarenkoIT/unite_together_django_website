@@ -1,4 +1,5 @@
 {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/news/news.css' %}">
 
 <section class="news-page-header">
     <div class="container">
@@ -31,7 +32,8 @@
             
             <!-- Main Content -->
             <div class="col-md-9">
-                <div class="news-grid">
+                <div class="news-main-content">
+                    <div class="news-grid">
                     {% for object in all_objects %}
                         <div class="news-card">
                             <div class="news-image-container">
@@ -73,27 +75,25 @@
                     {% endfor %}
                 </div>
                 
-                <!-- Pagination -->
-                {% if all_objects.has_other_pages %}
-                    <div class="news-pagination">
-                        {% if all_objects.has_previous %}
-                            <a href="?page={{ all_objects.previous_page_number }}">&laquo; Previous</a>
-                        {% endif %}
-                        
-                        <span class="current">
-                            Page {{ all_objects.number }} of {{ all_objects.paginator.num_pages }}
-                        </span>
-                        
-                        {% if all_objects.has_next %}
-                            <a href="?page={{ all_objects.next_page_number }}">Next &raquo;</a>
-                        {% endif %}
+                    <!-- Pagination -->
+                    {% if all_objects.has_other_pages %}
+                        <div class="news-pagination">
+                            {% if all_objects.has_previous %}
+                                <a href="?page={{ all_objects.previous_page_number }}">&laquo; Previous</a>
+                            {% endif %}
+                            
+                            <span class="current">
+                                Page {{ all_objects.number }} of {{ all_objects.paginator.num_pages }}
+                            </span>
+                            
+                            {% if all_objects.has_next %}
+                                <a href="?page={{ all_objects.next_page_number }}">Next &raquo;</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
                     </div>
-                {% endif %}
+                </div>
             </div>
         </div>
     </div>
 </section>
-
-<style>
-    @import url('{% static "css/news/news.css" %}');
-</style>
