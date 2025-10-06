@@ -16,42 +16,38 @@
     </div>
 </section>
 
-<section class="news-list-container">
-    <div class="container">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3">
-                <div class="news-sidebar">
-                    <h3>Categories</h3>
-                    <ul class="news-category-list">
+<section class="sect-events">
+    <div class="sect-events-child"></div>
+    <div class="aside-box-parent">
+        <div class="aside-box">
+            <div class="iterative-processor">
+                <div class="database-connection">
+                    <div class="error-handler">
                         {% for category in links %}
-                            <li>
-                                <a href="{{ category.pre_computed_url }}" 
-                                   class="news-category-link{% if category.slug in request.path %} active{% endif %}">
-                                    {{ category.name_en|default:category.name }}
-                                </a>
-                            </li>
+                            <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
+                               href="{{ category.pre_computed_url }}">{{ category.name_en|default:category.name }}</a>
                         {% endfor %}
-                    </ul>
+                    </div>
                 </div>
             </div>
-            
-            <!-- Main Content -->
-            <div class="col-md-9">
-                <div class="news-main-content">
-                    <div class="news-grid">
+        </div>
+        
+        <div class="stroke-manager">
+            <div class="items2">
+                <div class="news-grid" style="display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 30px !important; margin-bottom: 40px !important;">
                     {% for object in all_objects %}
-                        <div class="news-card">
-                            <div class="news-image-container">
+                        <div class="news-card" style="background: #fff !important; border-radius: 12px !important; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important; overflow: hidden !important; height: 100% !important; display: flex !important; flex-direction: column !important;">
+                            <div class="news-image-container" style="position: relative !important; width: 100% !important; height: 440px !important; overflow: hidden !important; display: block !important;">
                                 <a href="{{ object.get_url_en }}">
                                     <img class="news-image" 
                                          alt="{{ object.title_en|default:object.title }}"
-                                         src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}"/>
+                                         src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}"
+                                         style="width: 100% !important; height: 100% !important; object-fit: contain !important; display: block !important; max-width: 100% !important; max-height: 100% !important; background-color: #f8f9fa !important;"/>
                                 </a>
                                 
                                 <!-- Date Badge -->
                                 {% if object.get_start_date_month and object.get_start_date_year %}
-                                    <div class="news-date-badge">
+                                    <div class="news-date-badge" style="position: absolute !important; top: 15px !important; right: 15px !important; background: #FED920 !important; padding: 8px 12px !important; border-radius: 8px !important; font-size: 14px !important; font-weight: 600 !important; color: #333 !important; z-index: 10 !important;">
                                         {{ object.get_start_date_month }} {{ object.get_start_date_year }}
                                     </div>
                                 {% endif %}
@@ -97,7 +93,6 @@
                             {% endif %}
                         </div>
                     {% endif %}
-                    </div>
                 </div>
             </div>
         </div>

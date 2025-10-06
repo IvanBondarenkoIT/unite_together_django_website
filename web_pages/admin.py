@@ -126,12 +126,13 @@ class NewsAdmin(admin.ModelAdmin):
         "name",
         "title",
         "text",
+        "add_to_news_carousel",
         "is_active",
         "created_at",
         "updated_at",
         "is_archived",
     )
-    list_editable = ("is_active",)
+    list_editable = ("is_active", "add_to_news_carousel",)
     prepopulated_fields = {"slug": ("name", "group")}
 
 

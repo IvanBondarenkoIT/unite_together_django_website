@@ -93,71 +93,43 @@
             </div>
         </div>
     </section>
-    {#4 Секція Події#}
-    <section class="sec-events-mobile">
+    {#4 Секція Новини (карусель)#}
+    <section class="sec-news-mobile">
         <section class="content-wrapper-two-wrapper">
             {% if lang == 'en' %}
                 <div class="content-wrapper-two">
                 <div class="content-header-two">
-                    <div class="subheading4">{{ sec_events.subtitle_en }}</div>
-                    <h2>{{ sec_events.title_en }}</h2>
+                    <div class="subheading4">Latest News</div>
+                    <h2>Stay Updated</h2>
                 </div>
                 <div class="text47">
-                    {{ sec_events.text_en|safe }}
+                    Discover our latest news and updates about our activities and initiatives.
                 </div>
             </div>
             {% else %}
                 <div class="content-wrapper-two">
                 <div class="content-header-two">
-                    <div class="subheading4">{{ sec_events.subtitle }}</div>
-                    <h2>{{ sec_events.title }}</h2>
+                    <div class="subheading4">Останні новини</div>
+                    <h2>Будьте в курсі</h2>
                 </div>
                 <div class="text47">
-                    {{ sec_events.text|safe }}
+                    Дізнайтеся про наші останні новини та оновлення про нашу діяльність та ініціативи.
                 </div>
             </div>
             {% endif %}
-
         </section>
 
-        <section class="content-wrapper-three-wrapper">
-            <div class="content-wrapper-three">
-                <div class="content26">
-                    <div class="row18">
-                        <div class="content27">
-                            {% for event in events_objects %}
-                                <div class="card1">
-                                    <a href="{{ event.get_url }}">
-                                        <img class="placeholder-image-icon7" alt=""
-                                             src="{% if event.image %}{{ event.image.url }}{% else %}{% static 'img/placeholder-image-13@2x.png' %}{% endif %}" />
-                                    </a>
-
-                                    <div class="content28">
-                                        <div class="title26">
-                                            <h3 class="name31">{{ event.title }}</h3>
-                                        </div>
-                                        <div class="card-description" style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                            {{ event.extra_details }}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                <div class="content-actions-three">
-                    <button class="stylesecondary-smallfalse7">
-                        <a class="button22" href="{% if lang == 'en' %}{% url 'news_en' lang='en' %}{% else %}{% url 'news' %}{% endif %}">{% if lang == 'en' %}Details{% else %}Подробиці{% endif %}</a>
-                    </button>
-                    <div class="link-button-wrapper-three">
-                        <div class="stylelink-smallfalse-dark4">
-                            <a class="button19" href="{% if lang == 'en' %}{% url 'register_en' lang='en' %}{% else %}{% url 'register' %}{% endif %}" style="font-size: medium">{% if lang == 'en' %}Register{% else %}Зареєструватися{% endif %}</a>
-                            <img class="icon-chevron-right2" alt="" src="{% static 'img/icon--chevronright.svg' %}" />
-                        </div>
-                    </div>
-                </div>
+        {% if news_objects %}
+            {% include 'homepage/news_carousel.html' %}
+        {% else %}
+            <div class="no-news-message">
+                {% if lang == 'en' %}
+                    <p>No news available at the moment.</p>
+                {% else %}
+                    <p>Наразі новин немає.</p>
+                {% endif %}
             </div>
-        </section>
+        {% endif %}
     </section>
     {#5 Секція Проеєти#}
     <section class="sec-projects-mobile">

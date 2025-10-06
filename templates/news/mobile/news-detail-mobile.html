@@ -2,23 +2,23 @@
 
 <section class="news-detail-container">
     <div class="news-detail-header">
-        <h1 class="news-detail-title">{{ object.title }}</h1>
+        <h1 class="news-detail-title">{{ single_news.title }}</h1>
         
         <div class="news-detail-meta">
-            {% if object.get_start_date_month and object.get_start_date_year %}
+            {% if single_news.get_start_date_month and single_news.get_start_date_year %}
                 <div class="news-detail-date">
-                    {{ object.get_start_date_month }} {{ object.get_start_date_year }}
+                    {{ single_news.get_start_date_month }} {{ single_news.get_start_date_year }}
                 </div>
             {% endif %}
         </div>
     </div>
     
-    {% if object.image %}
-        <img src="{{ object.image.url }}" alt="{{ object.title }}" class="news-detail-image">
+    {% if single_news.image %}
+        <img src="{{ single_news.image.url }}" alt="{{ single_news.title }}" class="news-detail-image" style="width: 100% !important; max-height: 250px !important; object-fit: contain !important; border-radius: 12px !important; margin-bottom: 30px !important; background-color: #f8f9fa !important;">
     {% endif %}
     
     <div class="news-detail-content">
-        {{ object.text|linebreaks }}
+        {{ single_news.text|linebreaks }}
     </div>
     
     <!-- Next News Navigation -->

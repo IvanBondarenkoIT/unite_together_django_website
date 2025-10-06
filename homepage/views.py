@@ -2,7 +2,7 @@ import os
 from django.conf import settings
 from django.shortcuts import render, redirect
 
-from web_pages.models import WebContentObject, Events, Projects
+from web_pages.models import WebContentObject, Events, Projects, News
 from .models import SectionAboutUs, SectionEvents, SectionProjects, CallToAction
 
 
@@ -38,13 +38,22 @@ def homepage(request, lang="uk"):
     projects_objects = list(
         Projects.objects.filter(show_in_main_page_carousel=True).order_by("order")
     )
+    news_objects = list(
+        News.objects.filter(add_to_news_carousel=True).order_by("order")
+    )
+    
+    # Для верхней карусели берем только новости с show_in_main_page_carousel=True
+    news_for_main_carousel = list(
+        News.objects.filter(show_in_main_page_carousel=True).order_by("order")
+    )
 
-    carousel_objects = events_objects + projects_objects
+    carousel_objects = events_objects + projects_objects + news_for_main_carousel
 
     carousel_objects.sort(key=lambda x: x.order)
 
     context = {
         "events_objects": events_objects,
+        "news_objects": news_objects,
         "carousel_objects": carousel_objects,
         "sec_about_us": sec_about_us,
         "sec_events": sec_events,

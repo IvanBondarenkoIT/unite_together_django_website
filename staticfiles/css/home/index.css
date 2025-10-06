@@ -430,7 +430,7 @@
 }
 .cta-2 {
   position: absolute;
-  top: 3000px;
+  top: 3400px;
   left: 0;
   width: 100%;
   overflow: hidden;
@@ -584,7 +584,7 @@
 }
 .sec-projects {
   position: absolute;
-  top: 2160px;
+  top: 2600px;
   left: 0;
   background-color: var(--neutral-background);
   width: 100%;
@@ -821,7 +821,7 @@
 }
 .sec-events {
   position: absolute;
-  top: 1910px;
+  top: 2350px;
   left: 0;
   background-color: var(--color-ghostwhite);
   width: 100%;
@@ -1435,7 +1435,7 @@
 
 .home {
   width: 100%;
-  height: 3475px;
+  height: 4000px;
   position: relative;
   background-color: var(--neutral-background);
   overflow: hidden;
