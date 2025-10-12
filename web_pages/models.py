@@ -252,6 +252,18 @@ class ProjectGallery(models.Model):
         verbose_name = "projectgallery"
         verbose_name_plural = "project gallerie"
 
+
+class NewsGallery(models.Model):
+    news = models.ForeignKey(News, default=None, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="store/news/", max_length=255)
+
+    def __str__(self):
+        return self.news.name
+
+    class Meta:
+        verbose_name = "newsgallery"
+        verbose_name_plural = "news galleries"
+
     # class WebContentSubordinateObject(models.Model):
     #     name = models.CharField(max_length=250)
     #     title = models.CharField(max_length=250) #  must be max=27

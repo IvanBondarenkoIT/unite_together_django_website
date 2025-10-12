@@ -11,6 +11,7 @@ from web_pages.models import (
     ProjectGallery,
     BannerSettings,
     News,
+    NewsGallery,
 )
 
 import admin_thumbnails
@@ -80,6 +81,12 @@ class ProjectGalleryInline(admin.TabularInline):
 
 
 @admin_thumbnails.thumbnail("image")
+class NewsGalleryInline(admin.TabularInline):
+    model = NewsGallery
+    extra = 1
+
+
+@admin_thumbnails.thumbnail("image")
 class ProjectsAdmin(admin.ModelAdmin):
     form = ProjectsForm
     list_display = (
@@ -134,6 +141,7 @@ class NewsAdmin(admin.ModelAdmin):
     )
     list_editable = ("is_active", "add_to_news_carousel",)
     prepopulated_fields = {"slug": ("name", "group")}
+    inlines = [NewsGalleryInline]
 
 
 admin.site.register(BannerSettings, BannerSettingsAdmin)
@@ -150,3 +158,4 @@ admin.site.register(WebPage, WebPageAdmin)
 # admin.site.register(WebContentSubordinateObject, WebContentSubordinateObjectAdmin)
 admin.site.register(ObjectsGroup, ObjectsGroupAdmin)
 admin.site.register(ProjectGallery)
+admin.site.register(NewsGallery)
