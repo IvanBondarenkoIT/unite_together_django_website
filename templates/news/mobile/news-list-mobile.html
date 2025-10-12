@@ -111,15 +111,18 @@
         width: 100%;
     }
 
-    /* Image styling */
+    /* Image styling - square format */
     .news-carousel-image-list-mobile {
         width: 100%;
-        height: 200px;
+        padding-top: 100%; /* Creates square aspect ratio */
         overflow: hidden;
         position: relative;
     }
 
     .news-carousel-image-list-mobile img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;

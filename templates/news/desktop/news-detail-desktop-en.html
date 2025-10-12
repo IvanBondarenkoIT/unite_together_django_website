@@ -17,6 +17,24 @@
         <img src="{{ single_news.image.url }}" alt="{{ single_news.title_en|default:single_news.title }}" class="news-detail-image" style="width: 100% !important; max-height: 400px !important; object-fit: contain !important; border-radius: 12px !important; margin-bottom: 30px !important; background-color: #f8f9fa !important;">
     {% endif %}
     
+    <!-- News Gallery -->
+    {% if news_gallery %}
+        <article class="gallery-wrap">
+            <ul class="thumb">
+                <li>
+                    <a href="{{ single_news.image.url }}" target="mainImage">
+                        <img class="image-container-img" src="{{ single_news.image.url }}" alt="News Image">
+                    </a>
+                    {% for i in news_gallery %}
+                        <a href="{{ i.image.url }}" target="mainImage">
+                            <img class="image-container-img" src="{{ i.image.url }}" alt="News Image" style="overflow: hidden; position: relative;">
+                        </a>
+                    {% endfor %}
+                </li>
+            </ul>
+        </article>
+    {% endif %}
+    
     <div class="news-detail-content">
         {{ single_news.text_en|default:single_news.text|linebreaks }}
     </div>
@@ -36,4 +54,54 @@
 
 <style>
     @import url('{% static "css/news/news.css" %}');
+    
+    /* Gallery styles */
+    .gallery-wrap {
+        margin: 30px 0;
+    }
+    
+    .gallery-wrap .thumb {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .gallery-wrap .thumb li {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .gallery-wrap .thumb a {
+        display: block;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .gallery-wrap .thumb a:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .image-container-img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        display: block;
+    }
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.thumb a').click(function (e) {
+            e.preventDefault();
+            $('.news-detail-image').attr('src', $(this).attr("href"))
+        })
+    })
+</script>

@@ -14,6 +14,7 @@ from web_pages.models import (
     ProjectGallery,
     BannerSettings,
     News,
+    NewsGallery,
 )
 
 from django.core.mail import send_mail
@@ -486,10 +487,12 @@ def news_detail(request, group_slug=None, news_slug=None, lang="uk"):
         next_news = None
 
     banner_settings = BannerSettings.objects.first()
+    news_gallery = NewsGallery.objects.filter(news_id=single_news.id)
 
     context = {
         "single_news": single_news,
         "next_news": next_news,
+        "news_gallery": news_gallery,
         "banner_settings": banner_settings,
         "lang": lang,
     }
