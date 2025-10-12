@@ -18,83 +18,268 @@
 
 <section class="sect-events">
     <div class="sect-events-child"></div>
-    <div class="aside-box-parent">
-        <div class="aside-box">
-            <div class="iterative-processor">
-                <div class="database-connection">
-                    <div class="error-handler">
-                        {% for category in links %}
-                            <a class="sport1{% if category.slug in request.path %}-active{% endif %}"
-                               href="{{ category.pre_computed_url }}">{{ category.name }}</a>
-                        {% endfor %}
+    <div class="news-list-full-width">
+        <div class="news-list-container-carousel-style">
+            {% for object in all_objects %}
+                <div class="news-list-item-carousel">
+                    <div class="news-carousel-content-list">
+                        <div class="news-carousel-image-list">
+                            <a href="{{ object.get_url }}">
+                                <img src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" 
+                                     alt="{{ object.title }}">
+                            </a>
+                        </div>
+                        <div class="news-carousel-text-list">
+                            {% if object.get_start_date_month and object.get_start_date_year %}
+                                <div class="news-carousel-date-list">
+                                    {{ object.get_start_date_month }} {{ object.get_start_date_year }}
+                                </div>
+                            {% endif %}
+                            
+                            <h3 class="news-carousel-title-list">
+                                <a href="{{ object.get_url }}">{{ object.title }}</a>
+                            </h3>
+                            
+                            <p class="news-carousel-description-list">
+                                {{ object.extra_details|truncatewords:25 }}
+                            </p>
+                            
+                            <a href="{{ object.get_url }}" class="news-carousel-button-list">
+                                ЧИТАТИ ДАЛІ
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% empty %}
+                <div class="text-center py-5">
+                    <h3>Новин поки немає</h3>
+                    <p>Перевірте пізніше для отримання останніх новин.</p>
+                </div>
+            {% endfor %}
         </div>
         
-        <div class="stroke-manager">
-            <div class="items2">
-                <div class="news-grid" style="display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 30px !important; margin-bottom: 40px !important;">
-                    {% for object in all_objects %}
-                        <div class="news-card" style="background: #fff !important; border-radius: 12px !important; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important; overflow: hidden !important; height: 100% !important; display: flex !important; flex-direction: column !important;">
-                            <div class="news-image-container" style="position: relative !important; width: 100% !important; height: 440px !important; overflow: hidden !important; display: block !important;">
-                                <a href="{{ object.get_url }}">
-                                    <img class="news-image" 
-                                         alt="{{ object.title }}"
-                                         src="{% if object.image %}{{ object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}"
-                                         style="width: 100% !important; height: 100% !important; object-fit: contain !important; display: block !important; max-width: 100% !important; max-height: 100% !important; background-color: #f8f9fa !important;"/>
-                                </a>
-                                
-                                <!-- Date Badge -->
-                                {% if object.get_start_date_month and object.get_start_date_year %}
-                                    <div class="news-date-badge" style="position: absolute !important; top: 15px !important; right: 15px !important; background: #FED920 !important; padding: 8px 12px !important; border-radius: 8px !important; font-size: 14px !important; font-weight: 600 !important; color: #333 !important; z-index: 10 !important;">
-                                        {{ object.get_start_date_month }} {{ object.get_start_date_year }}
-                                    </div>
-                                {% endif %}
-                            </div>
-                            
-                            <div class="news-content">
-                                <h3 class="news-title">
-                                    <a href="{{ object.get_url }}">{{ object.title }}</a>
-                                </h3>
-                                
-                                <p class="news-description">
-                                    {{ object.extra_details|truncatewords:25 }}
-                                </p>
-                                
-                                <a href="{{ object.get_url }}" class="news-read-more">
-                                    Читати далі
-                                </a>
-                            </div>
-                        </div>
-                    {% empty %}
-                        <div class="col-12">
-                            <div class="text-center py-5">
-                                <h3>Новин поки немає</h3>
-                                <p>Перевірте пізніше для отримання останніх новин.</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+        <!-- Pagination -->
+        {% if all_objects.has_other_pages %}
+            <div class="news-pagination">
+                {% if all_objects.has_previous %}
+                    <a href="?page={{ all_objects.previous_page_number }}">&laquo; Попередня</a>
+                {% endif %}
                 
-                    <!-- Pagination -->
-                    {% if all_objects.has_other_pages %}
-                        <div class="news-pagination">
-                            {% if all_objects.has_previous %}
-                                <a href="?page={{ all_objects.previous_page_number }}">&laquo; Попередня</a>
-                            {% endif %}
-                            
-                            <span class="current">
-                                Сторінка {{ all_objects.number }} з {{ all_objects.paginator.num_pages }}
-                            </span>
-                            
-                            {% if all_objects.has_next %}
-                                <a href="?page={{ all_objects.next_page_number }}">Наступна &raquo;</a>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                </div>
+                <span class="current">
+                    Сторінка {{ all_objects.number }} з {{ all_objects.paginator.num_pages }}
+                </span>
+                
+                {% if all_objects.has_next %}
+                    <a href="?page={{ all_objects.next_page_number }}">Наступна &raquo;</a>
+                {% endif %}
             </div>
-        </div>
+        {% endif %}
     </div>
 </section>
+
+<style>
+    /* Container for full width without sidebar */
+    .news-list-full-width {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    /* Container for news items */
+    .news-list-container-carousel-style {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    /* Individual news item styled like carousel */
+    .news-list-item-carousel {
+        background: linear-gradient(135deg, #ffffff, #f8f9fa);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .news-list-item-carousel:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Content layout: image left, text right */
+    .news-carousel-content-list {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 40px;
+        padding: 40px;
+    }
+
+    /* Image styling */
+    .news-carousel-image-list {
+        flex: 0 0 350px;
+        height: 350px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .news-carousel-image-list img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .news-carousel-image-list:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Text content */
+    .news-carousel-text-list {
+        flex: 1;
+        padding: 20px 0;
+    }
+
+    /* Date badge */
+    .news-carousel-date-list {
+        display: inline-block;
+        background: #FED920;
+        color: #333;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    /* Title */
+    .news-carousel-title-list {
+        font-size: 28px;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        line-height: 1.3;
+    }
+
+    .news-carousel-title-list a {
+        color: #2c3e50;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .news-carousel-title-list a:hover {
+        color: #007bff;
+    }
+
+    /* Description */
+    .news-carousel-description-list {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Button */
+    .news-carousel-button-list {
+        display: inline-block;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    .news-carousel-button-list:hover {
+        background: linear-gradient(135deg, #0056b3, #004085);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Pagination styles */
+    .news-pagination {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 15px !important;
+        margin-top: 40px !important;
+        padding: 20px !important;
+    }
+
+    .news-pagination a {
+        color: #007bff !important;
+        text-decoration: none !important;
+        padding: 10px 20px !important;
+        border: 2px solid #007bff !important;
+        border-radius: 25px !important;
+        transition: all 0.3s ease !important;
+        font-weight: 600 !important;
+    }
+
+    .news-pagination a:hover {
+        background: #007bff !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3) !important;
+    }
+
+    .news-pagination .current {
+        color: #333 !important;
+        font-weight: 600 !important;
+        padding: 10px 20px !important;
+    }
+
+    /* Responsive for tablets */
+    @media (max-width: 992px) {
+        .news-carousel-content-list {
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .news-carousel-image-list {
+            flex: 0 0 300px;
+            height: 200px;
+        }
+
+        .news-carousel-title-list {
+            font-size: 24px;
+        }
+
+        .news-carousel-description-list {
+            font-size: 14px;
+        }
+    }
+
+    /* Responsive for mobile */
+    @media (max-width: 768px) {
+        .news-carousel-content-list {
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .news-carousel-image-list {
+            flex: none;
+            width: 100%;
+            height: 200px;
+        }
+
+        .news-carousel-title-list {
+            font-size: 22px;
+        }
+
+        .news-carousel-description-list {
+            font-size: 14px;
+        }
+    }
+</style>
