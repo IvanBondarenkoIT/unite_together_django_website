@@ -1,0 +1,39 @@
+{% load static %}
+
+<section class="news-detail-container">
+    <div class="news-detail-header">
+        <h1 class="news-detail-title">{{ single_news.title }}</h1>
+        
+        <div class="news-detail-meta">
+            {% if single_news.get_start_date_month and single_news.get_start_date_year %}
+                <div class="news-detail-date">
+                    {{ single_news.get_start_date_month }} {{ single_news.get_start_date_year }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% if single_news.image %}
+        <img src="{{ single_news.image.url }}" alt="{{ single_news.title }}" class="news-detail-image" style="width: 100% !important; max-height: 400px !important; object-fit: contain !important; border-radius: 12px !important; margin-bottom: 30px !important; background-color: #f8f9fa !important;">
+    {% endif %}
+    
+    <div class="news-detail-content">
+        {{ single_news.text|linebreaks }}
+    </div>
+    
+    <!-- Next News Navigation -->
+    {% if next_news %}
+        <div class="next-news-navigation">
+            <a href="{{ next_news.get_url }}" class="next-news-link">
+                <div class="next-news-title">
+                    Слідуюча новина: {{ next_news.title }}
+                </div>
+                <div class="next-news-arrow">→</div>
+            </a>
+        </div>
+    {% endif %}
+</section>
+
+<style>
+    @import url('{% static "css/news/news.css" %}');
+</style>

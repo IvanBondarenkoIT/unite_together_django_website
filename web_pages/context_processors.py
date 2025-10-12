@@ -33,6 +33,8 @@ def menu_links(request):
         page_name = "events"
     elif "/projects/" in request.path:
         page_name = "projects"
+    elif "/news/" in request.path:
+        page_name = "news"
 
     if page_name:
         links = (
