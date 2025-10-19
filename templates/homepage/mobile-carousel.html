@@ -4,10 +4,9 @@
     /* Modern Mobile Carousel - Best Practices */
     .simple-mobile-carousel-container {
         position: relative;
-        width: calc(100% - 30px);
         max-width: 18rem;
         margin: 0 auto;
-        padding: 0;
+        padding: 0 15px;
         box-sizing: border-box;
         overflow: hidden;
     }
@@ -127,10 +126,10 @@
     }
 
     /* Responsive adjustments */
-    @media (max-width: 375px) {
+    @media (max-width: 360px) {
         .simple-mobile-carousel-container {
-            width: calc(100% - 20px);
             max-width: 16rem;
+            padding: 0 10px;
         }
         
         .simple-mobile-carousel-text h2 {
@@ -148,16 +147,17 @@
         }
     }
     
-    @media (min-width: 376px) and (max-width: 500px) {
+    @media (min-width: 361px) and (max-width: 480px) {
         .simple-mobile-carousel-container {
-            width: calc(100% - 30px);
             max-width: 18rem;
+            padding: 0 15px;
         }
     }
     
-    @media (min-width: 501px) {
+    @media (min-width: 481px) {
         .simple-mobile-carousel-container {
             max-width: 21rem;
+            padding: 0 20px;
         }
     }
 </style>
