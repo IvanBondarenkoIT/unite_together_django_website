@@ -434,7 +434,7 @@ body .next-news-title {
     
     /* Mobile Detail Styles */
     body .news-detail-container {
-        padding: 15px !important;
+        padding: 20px !important;
     }
     
     body .news-detail-title {
@@ -452,7 +452,7 @@ body .next-news-title {
     }
     
     body .news-detail-content {
-        padding: 25px 20px !important;
+        padding: 30px 25px !important;
         font-size: 15px !important;
     }
     

@@ -14,26 +14,39 @@
         </div>
     </div>
     
-    {% if single_news.image %}
-        <img src="{{ single_news.image.url }}" alt="{{ single_news.title_en|default:single_news.title }}" class="news-detail-image" style="width: 100% !important; max-height: 400px !important; object-fit: contain !important; border-radius: 12px !important; margin-bottom: 30px !important; background-color: #f8f9fa !important;">
-    {% endif %}
-    
-    <!-- News Gallery -->
+    <!-- Gallery with Perspective Carousel (Desktop) -->
     {% if news_gallery %}
-        <article class="gallery-wrap">
-            <ul class="thumb">
-                <li>
-                    <a href="{{ single_news.image.url }}" target="mainImage">
-                        <img class="image-container-img" src="{{ single_news.image.url }}" alt="News Image">
-                    </a>
+        <div class="news-gallery-perspective">
+            <div class="perspective-carousel-container">
+                <button class="carousel-nav carousel-prev" onclick="moveGallery(-1)">‹</button>
+                
+                <div class="perspective-carousel">
+                    {% if single_news.image %}
+                        <div class="carousel-slide active" data-index="0">
+                            <img src="{{ single_news.image.url }}" alt="{{ single_news.title_en|default:single_news.title }}">
+                        </div>
+                    {% endif %}
                     {% for i in news_gallery %}
-                        <a href="{{ i.image.url }}" target="mainImage">
-                            <img class="image-container-img" src="{{ i.image.url }}" alt="News Image" style="overflow: hidden; position: relative;">
-                        </a>
+                        <div class="carousel-slide" data-index="{{ forloop.counter }}">
+                            <img src="{{ i.image.url }}" alt="{{ single_news.title_en|default:single_news.title }}">
+                        </div>
                     {% endfor %}
-                </li>
-            </ul>
-        </article>
+                </div>
+                
+                <button class="carousel-nav carousel-next" onclick="moveGallery(1)">›</button>
+            </div>
+            
+            <div class="carousel-indicators">
+                {% if single_news.image %}
+                    <span class="indicator active" onclick="goToSlide(0)"></span>
+                {% endif %}
+                {% for i in news_gallery %}
+                    <span class="indicator" onclick="goToSlide({{ forloop.counter }})"></span>
+                {% endfor %}
+            </div>
+        </div>
+    {% elif single_news.image %}
+        <img src="{{ single_news.image.url }}" alt="{{ single_news.title_en|default:single_news.title }}" class="news-detail-image" style="width: 100% !important; max-height: 400px !important; object-fit: contain !important; border-radius: 12px !important; margin-bottom: 30px !important; background-color: #f8f9fa !important;">
     {% endif %}
     
     <div class="news-detail-content">
@@ -56,53 +69,176 @@
 <style>
     @import url('{% static "css/news/news.css" %}');
     
-    /* Gallery styles */
-    .gallery-wrap {
-        margin: 30px 0;
+    /* Perspective Carousel Desktop */
+    .news-gallery-perspective {
+        margin: 40px 0;
     }
     
-    .gallery-wrap .thumb {
-        list-style: none;
-        padding: 0;
+    .perspective-carousel-container {
+        position: relative;
         display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        padding: 60px 0;
     }
     
-    .gallery-wrap .thumb li {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
+    .perspective-carousel {
+        position: relative;
         width: 100%;
+        max-width: 600px;
+        height: 400px;
+        margin: 0 auto;
+        perspective: 1000px;
     }
     
-    .gallery-wrap .thumb a {
-        display: block;
-        border-radius: 8px;
+    .carousel-slide {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) scale(0.7) translateZ(-100px);
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+        border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .carousel-slide.active {
+        transform: translate(-50%, -50%) scale(1) translateZ(0);
+        opacity: 1;
+        z-index: 3;
+        pointer-events: auto;
+    }
+    
+    .carousel-slide.prev {
+        transform: translate(-120%, -50%) scale(0.75) rotateY(15deg);
+        opacity: 0.6;
+        z-index: 2;
+        left: 35%;
+    }
+    
+    .carousel-slide.next {
+        transform: translate(20%, -50%) scale(0.75) rotateY(-15deg);
+        opacity: 0.6;
+        z-index: 2;
+        left: 65%;
+    }
+    
+    .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background-color: #f8f9fa;
+        display: block;
+    }
+    
+    .carousel-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 28px;
+        color: #333;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 10;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .carousel-nav:hover {
+        background: #FED920;
+        transform: translateY(-50%) scale(1.1);
+    }
+    
+    .carousel-prev {
+        left: 20px;
+    }
+    
+    .carousel-next {
+        right: 20px;
+    }
+    
+    .carousel-indicators {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ddd;
+        cursor: pointer;
         transition: all 0.3s ease;
     }
     
-    .gallery-wrap .thumb a:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    .indicator:hover {
+        background: #bbb;
+        transform: scale(1.2);
     }
     
-    .image-container-img {
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-        display: block;
+    .indicator.active {
+        background: #FED920;
+        width: 30px;
+        border-radius: 6px;
     }
 </style>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('.thumb a').click(function (e) {
-            e.preventDefault();
-            $('.news-detail-image').attr('src', $(this).attr("href"))
-        })
-    })
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    const totalSlides = slides.length;
+    
+    function updateCarousel() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active', 'prev', 'next');
+            
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            } else if (index === (currentSlide - 1 + totalSlides) % totalSlides) {
+                slide.classList.add('prev');
+            } else if (index === (currentSlide + 1) % totalSlides) {
+                slide.classList.add('next');
+            }
+        });
+        
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentSlide);
+        });
+    }
+    
+    function moveGallery(direction) {
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+    
+    function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
+    
+    // Initialize
+    if (slides.length > 0) {
+        updateCarousel();
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') moveGallery(-1);
+        if (e.key === 'ArrowRight') moveGallery(1);
+    });
 </script>
