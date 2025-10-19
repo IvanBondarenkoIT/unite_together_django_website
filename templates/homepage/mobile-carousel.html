@@ -1,107 +1,159 @@
 {% load static %}
 
 <style>
+    /* Modern Mobile Carousel - Best Practices */
     .simple-mobile-carousel-container {
         position: relative;
-        overflow: hidden;
         width: 100%;
         max-width: 21rem;
         margin: 0 auto;
+        padding: 0;
         box-sizing: border-box;
+        overflow: hidden;
     }
 
     .simple-mobile-carousel-inner {
         display: flex;
-        transition: transform 0.5s ease-in-out;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
     }
 
     .simple-mobile-carousel-item {
+        flex: 0 0 100%;
         min-width: 100%;
+        max-width: 100%;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .simple-mobile-carousel-image {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .simple-mobile-carousel-image a {
+        display: block;
+        width: 100%;
+        max-width: 100%;
     }
 
     .simple-mobile-carousel-image img {
         width: 100%;
+        max-width: 100%;
         height: auto;
+        display: block;
         border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
     .simple-mobile-carousel-text {
+        width: 100%;
         text-align: center;
-        padding: 8px; /* Adjusted padding */
-        overflow: auto;
-        word-wrap: break-word; /* Позволяет переносить длинные слова */
-        overflow-wrap: break-word; /* Современный аналог */
-        white-space: normal; /* Убедитесь, что текст переносится */
+        padding: 8px;
+        box-sizing: border-box;
     }
 
-    .simple-mobile-carousel-text h5 {
-        font-size: 1.15rem; /* Slightly smaller font size */
+    .simple-mobile-carousel-text h2 {
+        font-size: 1.15rem;
+        margin: 10px 0;
+        color: #333;
     }
 
     .simple-mobile-carousel-text p {
-        font-size: 0.9rem; /* Slightly smaller font size */
+        font-size: 0.9rem;
         color: #666;
-        max-height: 2.5rem; /* Adjusted height for smaller screens */
+        line-height: 1.4;
+        margin: 0;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
     }
 
     .simple-mobile-carousel-controls {
         display: flex;
         justify-content: center;
-        gap: 8px; /* Adjusted gap */
-        margin-top: 8px; /* Adjusted margin */
+        gap: 8px;
+        margin-top: 12px;
     }
 
     .simple-mobile-carousel-control {
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.6);
         border: none;
         color: white;
-        font-size: 16px; /* Slightly smaller font size */
-        padding: 5px 10px; /* Adjusted padding */
+        font-size: 16px;
+        padding: 6px 12px;
         cursor: pointer;
         border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+
+    .simple-mobile-carousel-control:active {
+        background: rgba(0, 0, 0, 0.8);
     }
 
     .simple-mobile-carousel-indicators {
         display: flex;
         justify-content: center;
-        gap: 4px; /* Adjusted gap */
-        margin-top: 8px; /* Adjusted margin */
+        align-items: center;
+        gap: 6px;
+        margin-top: 12px;
     }
 
     .simple-mobile-carousel-indicator {
-        width: 8px; /* Slightly smaller indicator */
+        width: 8px;
         height: 8px;
         background-color: #ccc;
         border-radius: 50%;
         cursor: pointer;
+        transition: all 0.3s ease;
     }
 
     .simple-mobile-carousel-indicator.active {
-        background-color: #007bff;
+        background-color: #FED920;
+        width: 20px;
+        border-radius: 4px;
     }
 
-    /* Additional media query for screens with a max width of 400px */
+    /* Responsive adjustments */
     @media (max-width: 400px) {
-        .simple-mobile-carousel-text h5 {
-            font-size: 1rem; /* Smaller font size for the title */
+        .simple-mobile-carousel-container {
+            max-width: 100%;
+            padding: 0 10px;
+        }
+        
+        .simple-mobile-carousel-text h2 {
+            font-size: 1rem;
         }
 
         .simple-mobile-carousel-text p {
-            font-size: 0.85rem; /* Smaller font size for the description */
-            max-height: 20rem; /* Adjusted max height */
+            font-size: 0.85rem;
+            -webkit-line-clamp: 2;
         }
 
         .simple-mobile-carousel-control {
-            font-size: 14px; /* Smaller font size for controls */
-            padding: 4px 8px; /* Adjusted padding */
+            font-size: 14px;
+            padding: 4px 8px;
+        }
+    }
+    
+    @media (min-width: 401px) and (max-width: 500px) {
+        .simple-mobile-carousel-container {
+            max-width: 90%;
         }
     }
 </style>
-
 
 <div class="simple-mobile-carousel-container">
     <div class="simple-mobile-carousel-inner">
@@ -109,18 +161,14 @@
         <div class="simple-mobile-carousel-item{% if forloop.first %} active{% endif %}">
             <div class="simple-mobile-carousel-image">
                 <a href="{% if lang == 'en' %}{{ carousel_object.get_url_en }}{% else %}{{ carousel_object.get_url }}{% endif %}">
-                    <img src="{% if carousel_object.image %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" alt="{{ carousel_object.title }}">
+                    <img src="{% if carousel_object.image %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" alt="{% if lang == 'en' %}{{ carousel_object.title_en }}{% else %}{{ carousel_object.title }}{% endif %}">
                 </a>
             </div>
             <div class="simple-mobile-carousel-text">
                 <h2>{% if lang == 'en' %}{{ carousel_object.title_en }}{% else %}{{ carousel_object.title }}{% endif %}</h2>
-                <p style="
-                    overflow: auto;
-                    word-wrap: break-word; /* Позволяет переносить длинные слова */
-                    overflow-wrap: break-word; /* Современный аналог */
-                    white-space: normal;">
+                <p>
                     {% if lang == 'en' %}
-                    	{{ carousel_object.extra_details_en }}
+                        {{ carousel_object.extra_details_en }}
                     {% else %}
                         {{ carousel_object.extra_details }}
                     {% endif %}
@@ -129,11 +177,13 @@
         </div>
         {% endfor %}
     </div>
+    
     <div class="simple-mobile-carousel-indicators">
         {% for carousel_object in carousel_objects %}
         <div class="simple-mobile-carousel-indicator{% if forloop.first %} active{% endif %}" data-slide-to="{{ forloop.counter0 }}"></div>
         {% endfor %}
     </div>
+    
     <div class="simple-mobile-carousel-controls">
         <button class="simple-mobile-carousel-control simple-mobile-carousel-control-prev" aria-label="Previous Slide">&lt;</button>
         <button class="simple-mobile-carousel-control simple-mobile-carousel-control-next" aria-label="Next Slide">&gt;</button>
@@ -141,47 +191,94 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const carouselContainer = document.querySelector('.simple-mobile-carousel-container');
-        const carouselInner = document.querySelector('.simple-mobile-carousel-inner');
-        const carouselItems = document.querySelectorAll('.simple-mobile-carousel-item');
-        const indicators = document.querySelectorAll('.simple-mobile-carousel-indicator');
+    (function() {
+        'use strict';
+        
+        const container = document.querySelector('.simple-mobile-carousel-container');
+        if (!container) return;
+        
+        const inner = container.querySelector('.simple-mobile-carousel-inner');
+        const items = container.querySelectorAll('.simple-mobile-carousel-item');
+        const indicators = container.querySelectorAll('.simple-mobile-carousel-indicator');
+        const prevBtn = container.querySelector('.simple-mobile-carousel-control-prev');
+        const nextBtn = container.querySelector('.simple-mobile-carousel-control-next');
+        
         let currentIndex = 0;
-
-        function updateCarousel() {
-            const width = carouselContainer.clientWidth;
-            carouselInner.style.transform = `translateX(-${currentIndex * width}px)`;
-
+        let autoPlayInterval;
+        const totalSlides = items.length;
+        
+        function updateCarousel(animate = true) {
+            if (!animate) {
+                inner.style.transition = 'none';
+            } else {
+                inner.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            }
+            
+            const offset = -currentIndex * 100;
+            inner.style.transform = `translateX(${offset}%)`;
+            
+            // Update indicators
             indicators.forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === currentIndex);
             });
+            
+            if (!animate) {
+                // Force reflow
+                void inner.offsetWidth;
+                inner.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            }
         }
-
+        
         function nextSlide() {
-            currentIndex = (currentIndex + 1) % carouselItems.length;
+            currentIndex = (currentIndex + 1) % totalSlides;
             updateCarousel();
         }
-
+        
         function prevSlide() {
-            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
             updateCarousel();
         }
-
-        document.querySelector('.simple-mobile-carousel-control-next').addEventListener('click', nextSlide);
-        document.querySelector('.simple-mobile-carousel-control-prev').addEventListener('click', prevSlide);
-
+        
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+        
+        // Event listeners
+        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+        
         indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                currentIndex = index;
-                updateCarousel();
-            });
+            indicator.addEventListener('click', () => goToSlide(index));
         });
-
-        setInterval(nextSlide, 3000);
-
-        window.addEventListener('resize', updateCarousel);
-
-        updateCarousel();
-    });
+        
+        // Auto-play
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 4000);
+        }
+        
+        function stopAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+            }
+        }
+        
+        // Pause on hover/touch
+        container.addEventListener('mouseenter', stopAutoPlay);
+        container.addEventListener('mouseleave', startAutoPlay);
+        container.addEventListener('touchstart', stopAutoPlay);
+        
+        // Handle window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                updateCarousel(false);
+            }, 100);
+        });
+        
+        // Initialize
+        updateCarousel(false);
+        startAutoPlay();
+    })();
 </script>
-
