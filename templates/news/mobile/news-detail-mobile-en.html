@@ -1,4 +1,5 @@
 {% load static %}
+{% load translate_month %}
 
 <section class="news-detail-container">
     <div class="news-detail-header">
@@ -7,7 +8,7 @@
         <div class="news-detail-meta">
             {% if single_news.get_start_date_month and single_news.get_start_date_year %}
                 <div class="news-detail-date">
-                    {{ single_news.get_start_date_month }} {{ single_news.get_start_date_year }}
+                    {{ single_news.get_start_date_month|translate_month:'en' }} {{ single_news.get_start_date_year }}
                 </div>
             {% endif %}
         </div>

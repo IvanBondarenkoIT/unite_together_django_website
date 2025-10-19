@@ -1,4 +1,5 @@
 {% load static %}
+{% load translate_month %}
 
 <style>
     /* Positioning for news section */
@@ -255,7 +256,7 @@
                         <div class="news-carousel-text">
                             {% if news.get_start_date_month and news.get_start_date_year %}
                                 <div class="news-carousel-date">
-                                    {{ news.get_start_date_month }} {{ news.get_start_date_year }}
+                                    {{ news.get_start_date_month|translate_month:lang }} {{ news.get_start_date_year }}
                                 </div>
                             {% endif %}
                             
