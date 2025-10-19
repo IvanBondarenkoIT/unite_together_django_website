@@ -57,7 +57,7 @@
         position: absolute;
         bottom: -12px; /* Позиція під вмістом каруселі */
         left: 50%;
-        transform: translateX(-125%);
+        transform: translateX(-50%);
         z-index: 15;
         display: flex;
         justify-content: center;
@@ -114,6 +114,61 @@
         text-align: left; /* Выровнять кнопку по левому краю */
         margin-top: 15px;
         padding-left: 20px; /* Отступ слева для выравнивания под текстом */
+    }
+
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+        .carousel-container {
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        
+        .carousel-example .carousel-item.active {
+            flex-direction: column;
+        }
+        
+        .carousel-example .carousel-text {
+            padding: 15px;
+            max-width: 100%;
+            text-align: center;
+        }
+        
+        .carousel-example .carousel-text h1 {
+            font-size: 1.5rem;
+        }
+        
+        .carousel-example .carousel-image {
+            width: 100%;
+            max-width: 100%;
+            margin: 15px auto 0;
+        }
+        
+        .carousel-example img {
+            max-height: 250px;
+            object-fit: contain;
+        }
+        
+        .carousel-button {
+            text-align: center;
+            padding-left: 0;
+        }
+        
+        .carousel-control-prev,
+        .carousel-control-next {
+            bottom: 50px;
+        }
+        
+        .carousel-control-prev {
+            left: 10px;
+        }
+        
+        .carousel-control-next {
+            right: 10px;
+        }
+        
+        .carousel-indicators {
+            bottom: 10px;
+        }
     }
 
 </style>
