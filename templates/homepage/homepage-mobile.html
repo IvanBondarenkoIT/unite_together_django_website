@@ -14,15 +14,16 @@
                         <div class="button16">{% if lang == 'en' %}Registration{% else %}Реєстрація{% endif %}</div>
                     </button>
 
-                    {# Donate button hidden #}
-                    {# <div class="donation-button-wrapper-parent">
+                    {% comment %}
+                    <div class="donation-button-wrapper-parent">
                         <div class="donation-button-wrapper">
                             <button class="donate13">
                                 <div class="button17">{% if lang == 'en' %}Donate{% else %}Підтримати{% endif %}</div>
                             </button>
                         </div>
                         <img class="pagination-icon1" loading="lazy" alt="" src="./public/pagination1.svg" />
-                    </div> #}
+                    </div>
+                    {% endcomment %}
                 </div>
             </div>
         </div>
@@ -190,10 +191,11 @@
                 {% endif %}
 
                 <div class="actions9">
-                    {# Donate button hidden #}
-                    {# <button class="styleprimary-smallfalse-da3">
+                    {% comment %}
+                    <button class="styleprimary-smallfalse-da3">
                         <a class="button26" href="{% if lang == 'en' %}{% url 'donate-paypal_en' lang='en' %}{% else %}{% url 'donate-paypal' %}{% endif %}">{% if lang == 'en' %}SUPPORT{% else %}ПІДТРИМАТИ{% endif %}</a>
-                    </button> #}
+                    </button>
+                    {% endcomment %}
                     <button class="stylesecondary-smallfalse9">
                         <a class="button27" href="{{ sec_cta_last.link }}">{% if lang == 'en' %}Learn more{% else %}Дізнатися більше{% endif %}</a>
                     </button>
