@@ -1,4 +1,5 @@
 {% load static %}
+{% load news_tags %}
 
 <section class="news-detail-container">
     <div class="news-detail-header">
@@ -6,33 +7,42 @@
         
         <div class="news-detail-meta">
             {% if single_news.get_start_date_month and single_news.get_start_date_year %}
-                <div class="news-detail-date">
-                    {{ single_news.get_start_date_month }} {{ single_news.get_start_date_year }}
+                <div class="news-detail-date" style="display: inline-block !important; background: #FED920 !important; color: #333 !important; padding: 8px 16px !important; border-radius: 20px !important; font-weight: 600 !important; font-size: 14px !important; margin-bottom: 20px !important;">
+                    {{ single_news.get_start_date_month|translate_month:'en' }} {{ single_news.get_start_date_year }}
                 </div>
             {% endif %}
         </div>
     </div>
     
-    {% if single_news.image %}
-        <img src="{{ single_news.image.url }}" alt="{{ single_news.title_en|default:single_news.title }}" class="news-detail-image" style="width: 100% !important; max-height: 250px !important; object-fit: contain !important; border-radius: 12px !important; margin-bottom: 30px !important; background-color: #f8f9fa !important;">
-    {% endif %}
-    
-    <!-- News Gallery -->
+    <!-- Mobile Simple Gallery -->
     {% if news_gallery %}
-        <article class="gallery-wrap">
-            <ul class="thumb">
-                <li>
-                    <a href="{{ single_news.image.url }}" target="mainImage">
-                        <img class="image-container-img" src="{{ single_news.image.url }}" alt="News Image">
-                    </a>
+        <div class="mobile-gallery-simple">
+            <div class="gallery-wrapper">
+                <button class="gallery-arrow gallery-prev" onclick="moveMobileGallery(-1)">‹</button>
+                
+                <div class="gallery-image-container">
+                    {% if single_news.image %}
+                        <img src="{{ single_news.image.url }}" alt="{{ single_news.title_en|default:single_news.title }}" class="gallery-image active" data-index="0">
+                    {% endif %}
                     {% for i in news_gallery %}
-                        <a href="{{ i.image.url }}" target="mainImage">
-                            <img class="image-container-img" src="{{ i.image.url }}" alt="News Image">
-                        </a>
+                        <img src="{{ i.image.url }}" alt="{{ single_news.title_en|default:single_news.title }}" class="gallery-image" data-index="{{ forloop.counter }}">
                     {% endfor %}
-                </li>
-            </ul>
-        </article>
+                </div>
+                
+                <button class="gallery-arrow gallery-next" onclick="moveMobileGallery(1)">›</button>
+            </div>
+            
+            <div class="gallery-dots">
+                {% if single_news.image %}
+                    <span class="dot active" onclick="goToMobileSlide(0)"></span>
+                {% endif %}
+                {% for i in news_gallery %}
+                    <span class="dot" onclick="goToMobileSlide({{ forloop.counter }})"></span>
+                {% endfor %}
+            </div>
+        </div>
+    {% elif single_news.image %}
+        <img src="{{ single_news.image.url }}" alt="{{ single_news.title_en|default:single_news.title }}" class="news-detail-image" style="width: 100% !important; max-height: 250px !important; object-fit: contain !important; border-radius: 12px !important; margin-bottom: 30px !important; background-color: #f8f9fa !important;">
     {% endif %}
     
     <div class="news-detail-content">
@@ -55,53 +65,144 @@
 <style>
     @import url('{% static "css/news/news.css" %}');
     
-    /* Gallery styles for mobile */
-    .gallery-wrap {
-        margin: 20px 0;
+    /* Override news-detail-content styles */
+    .news-detail-content {
+        background: #fff !important;
+        padding: 2px !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+        margin: 2px !important;
+        line-height: 1.8 !important;
+        font-size: 15px !important;
+        color: #444 !important;
     }
     
-    .gallery-wrap .thumb {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    
-    .gallery-wrap .thumb li {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
+    /* Mobile Simple Gallery */
+    .mobile-gallery-simple {
+        margin: 20px 0 30px 0;
         width: 100%;
+        max-width: 100%;
+        overflow: hidden;
     }
     
-    .gallery-wrap .thumb a {
-        display: block;
-        border-radius: 8px;
+    .gallery-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        overflow: visible;
+    }
+    
+    .gallery-image-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        height: 250px;
+        background: #f8f9fa;
+        border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .gallery-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: none;
+    }
+    
+    .gallery-image.active {
+        opacity: 1;
+        display: block;
+    }
+    
+    .gallery-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 24px;
+        color: #333;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    .gallery-arrow:active {
+        background: #FED920;
+    }
+    
+    .gallery-prev {
+        left: 10px;
+    }
+    
+    .gallery-next {
+        right: 10px;
+    }
+    
+    .gallery-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 15px;
+        padding: 10px 0;
+    }
+    
+    .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #ddd;
+        cursor: pointer;
         transition: all 0.3s ease;
     }
     
-    .gallery-wrap .thumb a:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    }
-    
-    .image-container-img {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        display: block;
+    .dot.active {
+        background: #FED920;
+        width: 24px;
+        border-radius: 4px;
     }
 </style>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('.thumb a').click(function (e) {
-            e.preventDefault();
-            $('.news-detail-image').attr('src', $(this).attr("href"))
-        })
-    })
+    let mobileCurrentSlide = 0;
+    const mobileImages = document.querySelectorAll('.gallery-image');
+    const mobileDots = document.querySelectorAll('.dot');
+    const mobileTotalSlides = mobileImages.length;
+    
+    function updateMobileGallery() {
+        mobileImages.forEach((img, index) => {
+            img.classList.toggle('active', index === mobileCurrentSlide);
+        });
+        
+        mobileDots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === mobileCurrentSlide);
+        });
+    }
+    
+    function moveMobileGallery(direction) {
+        mobileCurrentSlide = (mobileCurrentSlide + direction + mobileTotalSlides) % mobileTotalSlides;
+        updateMobileGallery();
+    }
+    
+    function goToMobileSlide(index) {
+        mobileCurrentSlide = index;
+        updateMobileGallery();
+    }
+    
+    // Initialize
+    if (mobileImages.length > 0) {
+        updateMobileGallery();
+    }
 </script>

@@ -6,9 +6,9 @@
         <div class="registration-form">
 
             <div class="form-content">
-                <div class="col-md-12">
+                
                     {% include 'homepage/mobile-carousel.html' %}
-                </div>
+                
                 <div class="registration-buttons">
                     <button class="register1">
                         <div class="button16">{% if lang == 'en' %}Registration{% else %}Реєстрація{% endif %}</div>
@@ -200,3 +200,43 @@
         </div>
     </section>
 </div>
+
+<style>
+    /* Fix centering for mobile images */
+    .content-wrapper-one-wrapper {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 10px !important;
+        box-sizing: border-box !important;
+    }
+    
+    .content-wrapper-one {
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .content-actions-one {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+    
+    .placeholder-image-icon14,
+    .placeholder-image-icon18 {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 21rem !important;
+        max-width: calc(100% - 40px) !important;
+    }
+    
+    @media (max-width: 400px) {
+        .placeholder-image-icon14,
+        .placeholder-image-icon18 {
+            max-width: calc(100% - 20px) !important;
+        }
+    }
+</style>

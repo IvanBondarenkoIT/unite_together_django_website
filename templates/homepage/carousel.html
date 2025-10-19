@@ -1,214 +1,514 @@
 {% load static %}
+
 <style>
-    .carousel-container {
-        position: relative;
-        overflow: hidden;
-        max-width: 100%;
-    }
-
-    .carousel-example .carousel-item.active {
-        display: flex;
-    }
-
-    .carousel-example .carousel-text {
-        flex: 1;
+    /* ============================================
+       MODERN DESKTOP CAROUSEL 2024 - COMPLETELY NEW
+       ============================================ */
+    
+    /* Main Container */
+    .modern-desktop-carousel {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
         padding: 20px;
-        max-height: 320px; /* Ограничение по высоте */
+        box-sizing: border-box;
         position: relative;
     }
-
-
-
-
-    .carousel-example .carousel-text h5 {
-        font-size: 1.5rem;
-        color: #333;
-        margin-bottom: 10px;
+    
+    /* Carousel wrapper */
+    .desktop-carousel-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     }
-
-    .carousel-example .carousel-text-content {
+    
+    /* Slides track */
+    .desktop-carousel-track {
+        display: flex;
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    /* Individual slide */
+    .desktop-carousel-slide {
+        flex: 0 0 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        padding: 30px;
+        box-sizing: border-box;
+    }
+    
+    /* Text content */
+    .desktop-carousel-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+        max-width: 50%;
+    }
+    
+    .desktop-carousel-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin: 0;
+        line-height: 1.2;
+        text-align: left;
+    }
+    
+    .desktop-carousel-description {
         font-size: 1rem;
-        color: #666;
-        overflow-wrap: break-word;
-        word-wrap: break-word;
-        hyphens: auto;
-        white-space: normal;
-        max-height: 350px;
+        color: #5a6c7d;
+        line-height: 1.5;
+        margin: 0;
         overflow: hidden;
         text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+    
+    .desktop-carousel-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 32px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        align-self: flex-start;
+    }
+    
+    .desktop-carousel-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        color: white;
+    }
+    
+    .desktop-carousel-btn:active {
+        transform: translateY(0);
+    }
+    
+    /* Image container */
+    .desktop-carousel-image {
+        flex: 1;
+        max-width: 50%;
         position: relative;
     }
-
-    .carousel-example .carousel-image {
-        flex: 1;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .carousel-example img {
+    
+    .desktop-carousel-image-wrapper {
+        position: relative;
         width: 100%;
-        height: auto;
+        padding-top: 100%; /* 1:1 aspect ratio - SQUARE */
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    
+    .desktop-carousel-image-wrapper img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        border-radius: 10px;
+        transition: transform 0.5s ease;
     }
-
-    .carousel-indicators {
+    
+    .desktop-carousel-image-wrapper:hover img {
+        transform: scale(1.05);
+    }
+    
+    /* Navigation arrows */
+    .desktop-carousel-arrow {
         position: absolute;
-        bottom: -12px; /* Позиція під вмістом каруселі */
-        left: 50%;
-        transform: translateX(-125%);
-        z-index: 15;
-        display: flex;
-        justify-content: center;
-        gap: 5px;
-        width: auto;
-    }
-
-    .carousel-indicators .indicator {
-        width: 10px;
-        height: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(44, 62, 80, 0.1);
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
-        background-color: #ccc;
-        transition: background-color 0.3s ease;
-        cursor: pointer;
-    }
-
-    .carousel-indicators .active {
-        background-color: #007bff;
-    }
-
-    .carousel-control-prev,
-    .carousel-control-next {
-        position: absolute;
-        bottom: 0px; /* Позиція під вмістом каруселі */
-        top: auto; /* Вимкнути вертикальне центрування */
-        transform: translateY(0); /* Вимкнути вертикальне центрування */
-        background-color: rgba(0, 0, 0, 0.5); /* Сірий колір фону */
-        color: white;
-        font-size: 2rem;
-        z-index: 20;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
+        z-index: 30;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        color: #2c3e50;
+        font-size: 28px;
+        font-weight: bold;
+        border: none;
     }
-
-    .carousel-control-prev {
-        left: 30%;
+    
+    .desktop-carousel-arrow:hover {
+        background: #FED920;
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 8px 25px rgba(254, 217, 32, 0.4);
     }
-
-    .carousel-control-next {
-        right: 30%;
+    
+    .desktop-carousel-arrow:active {
+        transform: translateY(-50%) scale(1.05);
     }
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        width: 20px;
-        height: 20px;
+    
+    .desktop-carousel-arrow-prev {
+        left: 20px;
     }
-    .carousel-button {
-        text-align: left; /* Выровнять кнопку по левому краю */
-        margin-top: 15px;
-        padding-left: 20px; /* Отступ слева для выравнивания под текстом */
+    
+    .desktop-carousel-arrow-next {
+        right: 20px;
     }
-
+    
+    /* Dots navigation */
+    .desktop-carousel-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 30px;
+    }
+    
+    .desktop-carousel-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #cbd5e0;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .desktop-carousel-dot:hover {
+        background: #a0aec0;
+        transform: scale(1.2);
+    }
+    
+    .desktop-carousel-dot.active {
+        background: #FED920;
+        width: 36px;
+        border-radius: 6px;
+        box-shadow: 0 3px 10px rgba(254, 217, 32, 0.5);
+    }
+    
+    /* Responsive for tablets and small desktops */
+    @media (max-width: 992px) {
+        .desktop-carousel-slide {
+            gap: 30px;
+            padding: 40px 30px;
+        }
+        
+        .desktop-carousel-title {
+            font-size: 2rem;
+        }
+        
+        .desktop-carousel-description {
+            font-size: 1rem;
+            -webkit-line-clamp: 3;
+        }
+        
+        .desktop-carousel-btn {
+            padding: 12px 28px;
+            font-size: 0.95rem;
+        }
+    }
+    
+    /* Mobile version - stack vertically */
+    @media (max-width: 768px) {
+        .modern-desktop-carousel {
+            padding: 20px 10px;
+        }
+        
+        .desktop-carousel-slide {
+            flex-direction: column;
+            gap: 25px;
+            padding: 30px 20px;
+        }
+        
+        .desktop-carousel-text,
+        .desktop-carousel-image {
+            max-width: 100%;
+            width: 100%;
+        }
+        
+        .desktop-carousel-text {
+            text-align: center;
+        }
+        
+        .desktop-carousel-title {
+            font-size: 1.75rem;
+        }
+        
+        .desktop-carousel-description {
+            font-size: 0.95rem;
+            -webkit-line-clamp: 3;
+        }
+        
+        .desktop-carousel-btn {
+            align-self: center;
+            padding: 12px 24px;
+        }
+        
+        .desktop-carousel-arrow {
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+        }
+        
+        .desktop-carousel-arrow-prev {
+            left: 10px;
+        }
+        
+        .desktop-carousel-arrow-next {
+            right: 10px;
+        }
+        
+        .desktop-carousel-image-wrapper {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .desktop-carousel-title {
+            font-size: 1.5rem;
+        }
+        
+        .desktop-carousel-description {
+            font-size: 0.9rem;
+            -webkit-line-clamp: 2;
+        }
+        
+        .desktop-carousel-slide {
+            padding: 20px 15px;
+        }
+        
+        .desktop-carousel-arrow {
+            width: 44px;
+            height: 44px;
+            font-size: 22px;
+        }
+        
+        .desktop-carousel-image-wrapper {
+            max-width: 100%;
+        }
+    }
 </style>
 
-<div class="carousel-container">
-    <div id="carouselExample" class="carousel slide carousel-example" data-bs-ride="carousel">
-        <div class="carousel-inner">
+<div class="modern-desktop-carousel">
+    <div class="desktop-carousel-container">
+        <div class="desktop-carousel-track" id="desktopCarouselTrack">
             {% for carousel_object in carousel_objects %}
-                <div class="carousel-item{% if forloop.first %} active{% endif %}">
-                    <div class="d-flex">
-
-                        <div class="carousel-text">
-                            <h1>
-                                {% if lang == 'en' %}
-                                    {{ carousel_object.title_en }}
-                                {% else %}
-                                    {{ carousel_object.title }}
-                                {% endif %}
-
-                            </h1>
-                            <p class="carousel-text-content">
-                                {% if lang == 'en' %}
-                                    {{ carousel_object.extra_details_en }}
-                                {% else %}
-                                    {{ carousel_object.extra_details }}
-                                {% endif %}
-
-                            </p>
-                            <div class="carousel-button">
-
-                                {% if lang == 'en' %}
-                                    <a href="{{ carousel_object.get_url_en }}" class="btn btn-primary mt-3">Learn more</a>
-                                {% else %}
-                                    <a href="{{ carousel_object.get_url }}" class="btn btn-primary mt-3">Дізнатися більше</a>
-                                {% endif %}
-
-
-                            </div>
-                        </div>
-
-
-                        <div class="carousel-image">
-                            <a
-                            {% if lang == 'en' %}
-                                href="{{ carousel_object.get_url_en }}"
-                            {% else %}
-                                href="{{ carousel_object.get_url }}"
-                            {% endif %}
-                            >
-                                <img src="{% if carousel_object.image %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" class="d-block" alt="">
-                            </a>
-                        </div>
+            <div class="desktop-carousel-slide">
+                <!-- Text Content -->
+                <div class="desktop-carousel-text">
+                    <h1 class="desktop-carousel-title">
+                        {% if lang == 'en' %}
+                            {{ carousel_object.title_en }}
+                        {% else %}
+                            {{ carousel_object.title }}
+                        {% endif %}
+                    </h1>
+                    
+                    <p class="desktop-carousel-description">
+                        {% if lang == 'en' %}
+                            {{ carousel_object.extra_details_en }}
+                        {% else %}
+                            {{ carousel_object.extra_details }}
+                        {% endif %}
+                    </p>
+                    
+                    <a href="{% if lang == 'en' %}{{ carousel_object.get_url_en }}{% else %}{{ carousel_object.get_url }}{% endif %}" 
+                       class="desktop-carousel-btn">
+                        {% if lang == 'en' %}Learn More{% else %}Дізнатися більше{% endif %}
+                        <span>→</span>
+                    </a>
+                </div>
+                
+                <!-- Image -->
+                <div class="desktop-carousel-image">
+                    <div class="desktop-carousel-image-wrapper">
+                        <a href="{% if lang == 'en' %}{{ carousel_object.get_url_en }}{% else %}{{ carousel_object.get_url }}{% endif %}">
+                            <img src="{% if carousel_object.image %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" 
+                                 alt="{% if lang == 'en' %}{{ carousel_object.title_en }}{% else %}{{ carousel_object.title }}{% endif %}"
+                                 loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+                        </a>
                     </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
-        <div class="carousel-indicators">
-            {% for carousel_object in carousel_objects %}
-                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="{{ forloop.counter0 }}" class="indicator{% if forloop.first %} active{% endif %}"></button>
-            {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Попереднє</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Наступне</span>
-        </button>
+        
+        <!-- Navigation Arrows -->
+        <button class="desktop-carousel-arrow desktop-carousel-arrow-prev" 
+                id="desktopCarouselPrev" 
+                aria-label="Previous slide">‹</button>
+        <button class="desktop-carousel-arrow desktop-carousel-arrow-next" 
+                id="desktopCarouselNext" 
+                aria-label="Next slide">›</button>
+    </div>
+    
+    <!-- Dots Navigation -->
+    <div class="desktop-carousel-dots" id="desktopCarouselDots">
+        {% for carousel_object in carousel_objects %}
+        <button class="desktop-carousel-dot{% if forloop.first %} active{% endif %}" 
+                data-index="{{ forloop.counter0 }}"
+                aria-label="Go to slide {{ forloop.counter }}"></button>
+        {% endfor %}
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const carousel = new bootstrap.Carousel(document.getElementById('carouselExample'), {
-            interval: 2000,
-            wrap: true
-        });
-
-        const indicators = document.querySelectorAll('.indicator');
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                carousel.to(index);
+    (function() {
+        'use strict';
+        
+        // Elements
+        const track = document.getElementById('desktopCarouselTrack');
+        const prevBtn = document.getElementById('desktopCarouselPrev');
+        const nextBtn = document.getElementById('desktopCarouselNext');
+        const dotsContainer = document.getElementById('desktopCarouselDots');
+        const dots = dotsContainer ? dotsContainer.querySelectorAll('.desktop-carousel-dot') : [];
+        
+        if (!track) return;
+        
+        // State
+        let currentIndex = 0;
+        let isAnimating = false;
+        let autoPlayTimer = null;
+        const totalSlides = dots.length;
+        
+        // Update carousel position
+        function updateCarousel(instant = false) {
+            if (isAnimating && !instant) return;
+            
+            isAnimating = true;
+            
+            // Update track position
+            track.style.transition = instant ? 'none' : 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+            
+            // Reset animation lock
+            setTimeout(() => {
+                isAnimating = false;
+            }, instant ? 0 : 500);
+        }
+        
+        // Navigation functions
+        function goToSlide(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            currentIndex = index;
+            updateCarousel();
+            resetAutoPlay();
+        }
+        
+        function nextSlide() {
+            goToSlide(currentIndex + 1);
+        }
+        
+        function prevSlide() {
+            goToSlide(currentIndex - 1);
+        }
+        
+        // Auto-play functionality
+        function startAutoPlay() {
+            stopAutoPlay();
+            autoPlayTimer = setInterval(nextSlide, 5000);
+        }
+        
+        function stopAutoPlay() {
+            if (autoPlayTimer) {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+        }
+        
+        function resetAutoPlay() {
+            stopAutoPlay();
+            startAutoPlay();
+        }
+        
+        // Event listeners
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                prevSlide();
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                nextSlide();
+            });
+        }
+        
+        dots.forEach((dot) => {
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                const index = parseInt(dot.getAttribute('data-index'));
+                goToSlide(index);
             });
         });
-
-        carousel._element.addEventListener('slide.bs.carousel', function (event) {
-            const indicators = document.querySelectorAll('.indicator');
-            indicators.forEach((indicator, index) => {
-                indicator.classList.remove('active');
-                if (index === event.to) {
-                    indicator.classList.add('active');
-                }
-            });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
         });
-    });
-
+        
+        // Pause on visibility change
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAutoPlay();
+            } else {
+                startAutoPlay();
+            }
+        });
+        
+        // Pause on hover
+        const container = document.querySelector('.desktop-carousel-container');
+        if (container) {
+            container.addEventListener('mouseenter', stopAutoPlay);
+            container.addEventListener('mouseleave', startAutoPlay);
+        }
+        
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                updateCarousel(true);
+            }, 150);
+        });
+        
+        // Initialize
+        updateCarousel(true);
+        startAutoPlay();
+        
+        // Cleanup
+        window.addEventListener('beforeunload', stopAutoPlay);
+        
+    })();
 </script>

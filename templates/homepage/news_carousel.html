@@ -1,10 +1,11 @@
 {% load static %}
+{% load news_tags %}
 
 <style>
     /* Positioning for news section */
     .sec-news {
         position: absolute;
-        top: 1910px;
+        top: 2010px;
         left: 0;
         background-color: var(--color-ghostwhite);
         width: 100%;
@@ -255,7 +256,7 @@
                         <div class="news-carousel-text">
                             {% if news.get_start_date_month and news.get_start_date_year %}
                                 <div class="news-carousel-date">
-                                    {{ news.get_start_date_month }} {{ news.get_start_date_year }}
+                                    {{ news.get_start_date_month|translate_month:lang }} {{ news.get_start_date_year }}
                                 </div>
                             {% endif %}
                             

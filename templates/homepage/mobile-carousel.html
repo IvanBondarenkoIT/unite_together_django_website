@@ -1,186 +1,454 @@
 {% load static %}
 
 <style>
-    .simple-mobile-carousel-container {
-        position: relative;
-        overflow: hidden;
+    /* ============================================
+       MODERN MOBILE CAROUSEL 2024 - COMPLETELY NEW
+       ============================================ */
+    
+    /* Main Container - Perfect Centering */
+    .modern-mobile-carousel {
         width: 100%;
-        max-width: 21rem; /* Adjusted max-width to 400px */
-        margin: auto;
-    }
-
-    .simple-mobile-carousel-inner {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-    }
-
-    .simple-mobile-carousel-item {
-        min-width: 100%;
+        max-width: 100%;
+        padding: 20px 0;
+        margin: 0;
+        overflow: hidden;
         box-sizing: border-box;
     }
-
-    .simple-mobile-carousel-image img {
+    
+    /* Inner wrapper - constrains content width */
+    .modern-carousel-wrapper {
+        width: 90%;
+        max-width: 340px;
+        margin: 0 auto;
+        position: relative;
+        box-sizing: border-box;
+    }
+    
+    /* Slides container */
+    .modern-carousel-track {
+        display: flex;
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        will-change: transform;
+    }
+    
+    /* Individual slide */
+    .modern-carousel-slide {
+        flex: 0 0 100%;
         width: 100%;
-        height: auto;
-        border-radius: 10px;
+        box-sizing: border-box;
     }
-
-    .simple-mobile-carousel-text {
+    
+    /* Image container with aspect ratio */
+    .modern-carousel-image-wrapper {
+        position: relative;
+        width: 100%;
+        padding-top: 100%; /* 1:1 aspect ratio - SQUARE */
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        margin-bottom: 20px;
+    }
+    
+    .modern-carousel-image-wrapper img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    .modern-carousel-image-wrapper:active img {
+        transform: scale(0.98);
+    }
+    
+    /* Content area */
+    .modern-carousel-content {
         text-align: center;
-        padding: 8px; /* Adjusted padding */
-        overflow: auto;
-        word-wrap: break-word; /* Позволяет переносить длинные слова */
-        overflow-wrap: break-word; /* Современный аналог */
-        white-space: normal; /* Убедитесь, что текст переносится */
+        padding: 0 10px;
     }
-
-    .simple-mobile-carousel-text h5 {
-        font-size: 1.15rem; /* Slightly smaller font size */
-    }
-
-    .simple-mobile-carousel-text p {
-        font-size: 0.9rem; /* Slightly smaller font size */
-        color: #666;
-        max-height: 2.5rem; /* Adjusted height for smaller screens */
+    
+    .modern-carousel-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin: 0 0 12px 0;
+        line-height: 1.3;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
-
-    .simple-mobile-carousel-controls {
-        display: flex;
-        justify-content: center;
-        gap: 8px; /* Adjusted gap */
-        margin-top: 8px; /* Adjusted margin */
+    
+    .modern-carousel-description {
+        font-size: 0.9rem;
+        color: #5a6c7d;
+        line-height: 1.5;
+        margin: 0 0 15px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
-
-    .simple-mobile-carousel-control {
-        background: rgba(0, 0, 0, 0.5);
-        border: none;
+    
+    .modern-carousel-button {
+        display: inline-block;
+        padding: 10px 24px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        font-size: 16px; /* Slightly smaller font size */
-        padding: 5px 10px; /* Adjusted padding */
-        cursor: pointer;
-        border-radius: 5px;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
     }
-
-    .simple-mobile-carousel-indicators {
+    
+    .modern-carousel-button:active {
+        transform: translateY(2px);
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Navigation dots */
+    .modern-carousel-dots {
         display: flex;
         justify-content: center;
-        gap: 4px; /* Adjusted gap */
-        margin-top: 8px; /* Adjusted margin */
+        align-items: center;
+        gap: 8px;
+        margin-top: 20px;
+        padding: 10px 0;
     }
-
-    .simple-mobile-carousel-indicator {
-        width: 8px; /* Slightly smaller indicator */
+    
+    .modern-carousel-dot {
+        width: 8px;
         height: 8px;
-        background-color: #ccc;
         border-radius: 50%;
+        background: #cbd5e0;
+        border: none;
+        padding: 0;
         cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-
-    .simple-mobile-carousel-indicator.active {
-        background-color: #007bff;
+    
+    .modern-carousel-dot.active {
+        background: #FED920;
+        width: 28px;
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(254, 217, 32, 0.4);
     }
-
-    /* Additional media query for screens with a max width of 400px */
-    @media (max-width: 400px) {
-        .simple-mobile-carousel-text h5 {
-            font-size: 1rem; /* Smaller font size for the title */
+    
+    /* Navigation arrows */
+    .modern-carousel-nav {
+        position: absolute;
+        top: 35%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border: 2px solid rgba(44, 62, 80, 0.1);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        color: #2c3e50;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    
+    .modern-carousel-nav:active {
+        background: #FED920;
+        transform: translateY(-50%) scale(0.95);
+    }
+    
+    .modern-carousel-nav-prev {
+        left: -18px;
+    }
+    
+    .modern-carousel-nav-next {
+        right: -18px;
+    }
+    
+    /* Responsive breakpoints */
+    @media (max-width: 360px) {
+        .modern-carousel-wrapper {
+            width: 92%;
+            max-width: 300px;
         }
-
-        .simple-mobile-carousel-text p {
-            font-size: 0.85rem; /* Smaller font size for the description */
-            max-height: 20rem; /* Adjusted max height */
+        
+        .modern-carousel-title {
+            font-size: 1.1rem;
         }
-
-        .simple-mobile-carousel-control {
-            font-size: 14px; /* Smaller font size for controls */
-            padding: 4px 8px; /* Adjusted padding */
+        
+        .modern-carousel-description {
+            font-size: 0.85rem;
+            -webkit-line-clamp: 2;
+        }
+        
+        .modern-carousel-button {
+            padding: 8px 20px;
+            font-size: 0.85rem;
+        }
+        
+        .modern-carousel-nav {
+            width: 38px;
+            height: 38px;
+            font-size: 18px;
+        }
+        
+        .modern-carousel-nav-prev {
+            left: -15px;
+        }
+        
+        .modern-carousel-nav-next {
+            right: -15px;
+        }
+    }
+    
+    @media (min-width: 361px) and (max-width: 420px) {
+        .modern-carousel-wrapper {
+            width: 88%;
+            max-width: 330px;
+        }
+    }
+    
+    @media (min-width: 421px) and (max-width: 480px) {
+        .modern-carousel-wrapper {
+            width: 85%;
+            max-width: 360px;
+        }
+    }
+    
+    @media (min-width: 481px) {
+        .modern-carousel-wrapper {
+            max-width: 400px;
+        }
+        
+        .modern-carousel-title {
+            font-size: 1.4rem;
         }
     }
 </style>
 
-
-<div class="simple-mobile-carousel-container">
-    <div class="simple-mobile-carousel-inner">
-        {% for carousel_object in carousel_objects %}
-        <div class="simple-mobile-carousel-item{% if forloop.first %} active{% endif %}">
-            <div class="simple-mobile-carousel-image">
-                <a href="{% if lang == 'en' %}{{ carousel_object.get_url_en }}{% else %}{{ carousel_object.get_url }}{% endif %}">
-                    <img src="{% if carousel_object.image %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" alt="{{ carousel_object.title }}">
-                </a>
+<div class="modern-mobile-carousel">
+    <div class="modern-carousel-wrapper">
+        <!-- Carousel Track -->
+        <div class="modern-carousel-track" id="modernCarouselTrack">
+            {% for carousel_object in carousel_objects %}
+            <div class="modern-carousel-slide">
+                <!-- Image -->
+                <div class="modern-carousel-image-wrapper">
+                    <a href="{% if lang == 'en' %}{{ carousel_object.get_url_en }}{% else %}{{ carousel_object.get_url }}{% endif %}">
+                        <img src="{% if carousel_object.image %}{{ carousel_object.image.url }}{% else %}{% static 'img/placeholder-image1@2x.png' %}{% endif %}" 
+                             alt="{% if lang == 'en' %}{{ carousel_object.title_en }}{% else %}{{ carousel_object.title }}{% endif %}"
+                             loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+                    </a>
+                </div>
+                
+                <!-- Content -->
+                <div class="modern-carousel-content">
+                    <h2 class="modern-carousel-title">
+                        {% if lang == 'en' %}
+                            {{ carousel_object.title_en }}
+                        {% else %}
+                            {{ carousel_object.title }}
+                        {% endif %}
+                    </h2>
+                    
+                    <p class="modern-carousel-description">
+                        {% if lang == 'en' %}
+                            {{ carousel_object.extra_details_en }}
+                        {% else %}
+                            {{ carousel_object.extra_details }}
+                        {% endif %}
+                    </p>
+                    
+                    <a href="{% if lang == 'en' %}{{ carousel_object.get_url_en }}{% else %}{{ carousel_object.get_url }}{% endif %}" 
+                       class="modern-carousel-button">
+                        {% if lang == 'en' %}Learn More{% else %}Дізнатися більше{% endif %}
+                    </a>
+                </div>
             </div>
-            <div class="simple-mobile-carousel-text">
-                <h2>{% if lang == 'en' %}{{ carousel_object.title_en }}{% else %}{{ carousel_object.title }}{% endif %}</h2>
-                <p style="
-                    overflow: auto;
-                    word-wrap: break-word; /* Позволяет переносить длинные слова */
-                    overflow-wrap: break-word; /* Современный аналог */
-                    white-space: normal;">
-                    {% if lang == 'en' %}
-                    	{{ carousel_object.extra_details_en }}
-                    {% else %}
-                        {{ carousel_object.extra_details }}
-                    {% endif %}
-                </p>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        
+        <!-- Navigation Arrows -->
+        <button class="modern-carousel-nav modern-carousel-nav-prev" 
+                id="modernCarouselPrev" 
+                aria-label="Previous slide">‹</button>
+        <button class="modern-carousel-nav modern-carousel-nav-next" 
+                id="modernCarouselNext" 
+                aria-label="Next slide">›</button>
     </div>
-    <div class="simple-mobile-carousel-indicators">
+    
+    <!-- Dots Navigation -->
+    <div class="modern-carousel-dots" id="modernCarouselDots">
         {% for carousel_object in carousel_objects %}
-        <div class="simple-mobile-carousel-indicator{% if forloop.first %} active{% endif %}" data-slide-to="{{ forloop.counter0 }}"></div>
+        <button class="modern-carousel-dot{% if forloop.first %} active{% endif %}" 
+                data-index="{{ forloop.counter0 }}"
+                aria-label="Go to slide {{ forloop.counter }}"></button>
         {% endfor %}
-    </div>
-    <div class="simple-mobile-carousel-controls">
-        <button class="simple-mobile-carousel-control simple-mobile-carousel-control-prev" aria-label="Previous Slide">&lt;</button>
-        <button class="simple-mobile-carousel-control simple-mobile-carousel-control-next" aria-label="Next Slide">&gt;</button>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const carouselContainer = document.querySelector('.simple-mobile-carousel-container');
-        const carouselInner = document.querySelector('.simple-mobile-carousel-inner');
-        const carouselItems = document.querySelectorAll('.simple-mobile-carousel-item');
-        const indicators = document.querySelectorAll('.simple-mobile-carousel-indicator');
+    (function() {
+        'use strict';
+        
+        // Elements
+        const track = document.getElementById('modernCarouselTrack');
+        const prevBtn = document.getElementById('modernCarouselPrev');
+        const nextBtn = document.getElementById('modernCarouselNext');
+        const dotsContainer = document.getElementById('modernCarouselDots');
+        const dots = dotsContainer ? dotsContainer.querySelectorAll('.modern-carousel-dot') : [];
+        
+        if (!track) return;
+        
+        // State
         let currentIndex = 0;
-
-        function updateCarousel() {
-            const width = carouselContainer.clientWidth;
-            carouselInner.style.transform = `translateX(-${currentIndex * width}px)`;
-
-            indicators.forEach((indicator, index) => {
-                indicator.classList.toggle('active', index === currentIndex);
+        let isAnimating = false;
+        let autoPlayTimer = null;
+        const totalSlides = dots.length;
+        
+        // Update carousel position
+        function updateCarousel(instant = false) {
+            if (isAnimating && !instant) return;
+            
+            isAnimating = true;
+            
+            // Update track position
+            track.style.transition = instant ? 'none' : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+            
+            // Reset animation lock
+            setTimeout(() => {
+                isAnimating = false;
+            }, instant ? 0 : 400);
+        }
+        
+        // Navigation functions
+        function goToSlide(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            currentIndex = index;
+            updateCarousel();
+            resetAutoPlay();
+        }
+        
+        function nextSlide() {
+            goToSlide(currentIndex + 1);
+        }
+        
+        function prevSlide() {
+            goToSlide(currentIndex - 1);
+        }
+        
+        // Auto-play functionality
+        function startAutoPlay() {
+            stopAutoPlay();
+            autoPlayTimer = setInterval(nextSlide, 5000);
+        }
+        
+        function stopAutoPlay() {
+            if (autoPlayTimer) {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+        }
+        
+        function resetAutoPlay() {
+            stopAutoPlay();
+            startAutoPlay();
+        }
+        
+        // Event listeners
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                prevSlide();
             });
         }
-
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % carouselItems.length;
-            updateCarousel();
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                nextSlide();
+            });
         }
-
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-            updateCarousel();
-        }
-
-        document.querySelector('.simple-mobile-carousel-control-next').addEventListener('click', nextSlide);
-        document.querySelector('.simple-mobile-carousel-control-prev').addEventListener('click', prevSlide);
-
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => {
-                currentIndex = index;
-                updateCarousel();
+        
+        dots.forEach((dot) => {
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                const index = parseInt(dot.getAttribute('data-index'));
+                goToSlide(index);
             });
         });
-
-        setInterval(nextSlide, 3000);
-
-        window.addEventListener('resize', updateCarousel);
-
-        updateCarousel();
-    });
+        
+        // Touch/Swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoPlay();
+        }, { passive: true });
+        
+        track.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startAutoPlay();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide(); // Swipe left
+                } else {
+                    prevSlide(); // Swipe right
+                }
+            }
+        }
+        
+        // Pause on visibility change
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAutoPlay();
+            } else {
+                startAutoPlay();
+            }
+        });
+        
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                updateCarousel(true);
+            }, 150);
+        });
+        
+        // Initialize
+        updateCarousel(true);
+        startAutoPlay();
+        
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', stopAutoPlay);
+        
+    })();
 </script>
-
