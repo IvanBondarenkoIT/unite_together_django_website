@@ -5,8 +5,7 @@
         position: relative;
         overflow: hidden;
         width: 100%;
-        max-width: 100%;
-        padding: 0 15px;
+        max-width: 21rem;
         margin: 0 auto;
         box-sizing: border-box;
     }
@@ -19,23 +18,12 @@
     .simple-mobile-carousel-item {
         min-width: 100%;
         box-sizing: border-box;
-        padding: 0 10px;
-    }
-
-    .simple-mobile-carousel-image {
-        width: 100%;
-        max-width: 100%;
-        margin: 0 auto;
-        display: block;
     }
 
     .simple-mobile-carousel-image img {
         width: 100%;
-        max-width: 100%;
         height: auto;
         border-radius: 10px;
-        display: block;
-        margin: 0 auto;
     }
 
     .simple-mobile-carousel-text {
@@ -98,14 +86,6 @@
 
     /* Additional media query for screens with a max width of 400px */
     @media (max-width: 400px) {
-        .simple-mobile-carousel-container {
-            padding: 0 10px;
-        }
-        
-        .simple-mobile-carousel-item {
-            padding: 0 5px;
-        }
-        
         .simple-mobile-carousel-text h5 {
             font-size: 1rem; /* Smaller font size for the title */
         }
@@ -118,17 +98,6 @@
         .simple-mobile-carousel-control {
             font-size: 14px; /* Smaller font size for controls */
             padding: 4px 8px; /* Adjusted padding */
-        }
-    }
-    
-    /* Responsive adjustments for medium mobile screens */
-    @media (min-width: 401px) and (max-width: 768px) {
-        .simple-mobile-carousel-container {
-            padding: 0 20px;
-        }
-        
-        .simple-mobile-carousel-item {
-            padding: 0 15px;
         }
     }
 </style>
