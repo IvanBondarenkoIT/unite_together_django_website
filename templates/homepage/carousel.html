@@ -41,14 +41,26 @@
 
     .carousel-example .carousel-image {
         flex: 1;
+        position: relative;
         overflow: hidden;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+    
+    .carousel-example .carousel-image a {
+        display: block;
+        position: relative;
+        width: 100%;
+        padding-top: 100%; /* 1:1 aspect ratio - SQUARE */
+        overflow: hidden;
+    }
 
     .carousel-example img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: auto;
+        height: 100%;
         object-fit: cover;
         border-radius: 10px;
     }
@@ -143,9 +155,12 @@
             margin: 15px auto 0;
         }
         
+        .carousel-example .carousel-image a {
+            padding-top: 100%; /* 1:1 aspect ratio - SQUARE for mobile too */
+        }
+        
         .carousel-example img {
-            max-height: 250px;
-            object-fit: contain;
+            object-fit: cover;
         }
         
         .carousel-button {
