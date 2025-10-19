@@ -322,11 +322,10 @@ body .news-detail-image {
 
 body .news-detail-content {
     background: #fff !important;
-    padding: 40px !important;
+    padding: 2px !important;
     border-radius: 12px !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
-    margin-top: 30px !important;
-    margin-bottom: 40px !important;
+    margin: 2px !important;
     line-height: 1.8 !important;
     font-size: 16px !important;
     color: #444 !important;
@@ -461,8 +460,8 @@ body .next-news-title {
     }
     
     body .news-detail-content {
-        padding: 30px 25px !important;
-        margin-top: 20px !important;
+        padding: 2px !important;
+        margin: 2px !important;
         font-size: 15px !important;
     }
     
