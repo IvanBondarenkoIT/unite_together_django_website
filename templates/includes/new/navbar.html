@@ -90,15 +90,16 @@
                                 <span class="text">Login/Registration</span>
                             </div>
                         </a>
-                        {# Donate button hidden #}
-                        {# <a class="donate-button" href="{% url 'donate-paypal_en' lang='en' %}">
+                        {% comment %}
+                        <a class="donate-button" href="{% url 'donate-paypal_en' lang='en' %}">
                             <div class="ut-button-w-icon">
                                 <div class="ut-text" style="transform: translateY(1px);">Donate</div>
                                 <div style="display: flex;">
                                     <img class="ut-icon" alt="" src="{% static 'img/donateicon.svg' %}"/>️
                                 </div>
                             </div>
-                        </a> #}
+                        </a>
+                        {% endcomment %}
                     {% else %}
                         <a class="signup-button" href="{% url 'login' %}">
                             <div class="ut-button-w-icon">
@@ -108,15 +109,16 @@
                                 <span class="text">Логін/Реєстація</span>
                             </div>
                         </a>
-                        {# Donate button hidden #}
-                        {# <a class="donate-button" href="{% url 'donate-paypal' %}">
+                        {% comment %}
+                        <a class="donate-button" href="{% url 'donate-paypal' %}">
                             <div class="ut-button-w-icon">
                                 <div class="ut-text" style="transform: translateY(1px);">Донат</div>
                                 <div style="display: flex;">
                                     <img class="ut-icon" alt="" src="{% static 'img/donateicon.svg' %}"/>️
                                 </div>
                             </div>
-                        </a> #}
+                        </a>
+                        {% endcomment %}
                     {% endif %}
 
                 </div>
@@ -155,13 +157,13 @@
                     <a href="{% url 'news_en' lang='en' %}">News</a>
                     <a href="{% url 'projects_en' lang='en' %}">Projects</a>
                     <a href="{% url 'login_en' lang='en' %}">Login/Registration</a>
-                    {# <a href="{% url 'donate-paypal_en' lang='en' %}">Donate</a> #}
+                    {% comment %}<a href="{% url 'donate-paypal_en' lang='en' %}">Donate</a>{% endcomment %}
                 {% else %}
                     <a href="{% url 'who_we_are' %}">Про нас</a>
                     <a href="{% url 'news' %}">Афіша</a>
                     <a href="{% url 'projects' %}">Проєкти</a>
                     <a href="{% url 'login' %}">Логін/Реєстація</a>
-                    {# <a href="{% url 'donate-paypal' %}">Донат</a> #}
+                    {% comment %}<a href="{% url 'donate-paypal' %}">Донат</a>{% endcomment %}
                 {% endif %}
 
             </div>
