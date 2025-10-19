@@ -271,6 +271,11 @@ body .news-detail-container {
     max-width: 800px !important;
     margin: 0 auto !important;
     padding: 20px !important;
+    box-sizing: border-box !important;
+}
+
+body .news-detail-container * {
+    box-sizing: border-box !important;
 }
 
 body .news-detail-header {
@@ -436,6 +441,9 @@ body .next-news-title {
     /* Mobile Detail Styles */
     body .news-detail-container {
         padding: 20px !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
     }
     
     body .news-detail-title {
