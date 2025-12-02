@@ -49,6 +49,16 @@
         {{ single_news.text|linebreaks }}
     </div>
     
+    <!-- External Link Button -->
+    {% if single_news.url_link %}
+        <a class="news-external-button"
+           href="{{ single_news.url_link }}"
+           target="_blank"
+           rel="noopener noreferrer">
+            ДЕТАЛЬНІШЕ
+        </a>
+    {% endif %}
+    
     <!-- Next News Navigation -->
     {% if next_news %}
         <div class="next-news-navigation">
