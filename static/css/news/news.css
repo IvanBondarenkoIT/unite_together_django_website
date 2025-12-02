@@ -393,6 +393,105 @@ body .next-news-title {
     margin-right: 15px !important;
 }
 
+/* ============================================
+   News External Link Button - Mobile First
+   Fully isolated with maximum specificity
+   ============================================ */
+
+/* Mobile First - Base Styles */
+body .news-detail-container .news-external-button,
+body section.news-detail-container .news-external-button,
+.news-detail-container a.news-external-button,
+a.news-external-button {
+    /* Reset all inherited styles */
+    all: unset;
+    display: inline-block !important;
+    box-sizing: border-box !important;
+    
+    /* Layout */
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 25px 0 !important;
+    padding: 16px 24px !important;
+    
+    /* Visual */
+    background: #007bff !important;
+    background-color: #007bff !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25) !important;
+    
+    /* Typography */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 1.5 !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+    letter-spacing: 0.3px !important;
+    
+    /* Interaction */
+    cursor: pointer !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    
+    /* Prevent text selection */
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+}
+
+/* Hover State */
+body .news-detail-container .news-external-button:hover,
+body section.news-detail-container .news-external-button:hover,
+.news-detail-container a.news-external-button:hover,
+a.news-external-button:hover {
+    background: #0056b3 !important;
+    background-color: #0056b3 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.35) !important;
+}
+
+/* Active State */
+body .news-detail-container .news-external-button:active,
+body section.news-detail-container .news-external-button:active,
+.news-detail-container a.news-external-button:active,
+a.news-external-button:active {
+    background: #004085 !important;
+    background-color: #004085 !important;
+    color: #ffffff !important;
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3) !important;
+}
+
+/* Focus State (Accessibility) */
+body .news-detail-container .news-external-button:focus,
+body section.news-detail-container .news-external-button:focus,
+.news-detail-container a.news-external-button:focus,
+a.news-external-button:focus {
+    outline: 3px solid rgba(0, 123, 255, 0.5) !important;
+    outline-offset: 2px !important;
+}
+
+/* Desktop Styles - Enhanced for larger screens */
+@media (min-width: 769px) {
+    body .news-detail-container .news-external-button,
+    body section.news-detail-container .news-external-button,
+    .news-detail-container a.news-external-button,
+    a.news-external-button {
+        width: auto !important;
+        min-width: 200px !important;
+        padding: 16px 48px !important;
+        font-size: 16px !important;
+        margin: 30px 0 !important;
+    }
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .news-main-content .news-grid {
@@ -482,6 +581,7 @@ body .next-news-title {
     body .next-news-arrow {
         align-self: flex-end !important;
     }
+    
 }
 
 /* Mobile Categories */

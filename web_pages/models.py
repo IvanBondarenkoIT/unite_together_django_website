@@ -218,6 +218,7 @@ class News(WebContentObject):
     end_date = models.DateField(blank=True, null=True)
     # Flag to control inclusion in the homepage news carousel
     add_to_news_carousel = models.BooleanField(default=False)
+    url_link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return f"News - {self.name}"
