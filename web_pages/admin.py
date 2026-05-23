@@ -84,12 +84,14 @@ class ProjectsAdmin(admin.ModelAdmin):
         "text",
         "order",
         "is_active",
+        "show_registration_button",
         "created_at",
         "updated_at",
         "is_archived",
     )
     list_editable = (
         "is_active",
+        "show_registration_button",
         "order",
     )
     ordering = (

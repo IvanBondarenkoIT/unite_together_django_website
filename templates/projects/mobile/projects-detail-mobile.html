@@ -122,11 +122,15 @@
                     </div>
                     {% endif %}
                 </div>
+                {% if single_project.show_registration_button and single_project.url_link %}
                 <a class="button-registration1"
-                   href="{% if single_project.url_link %} {{ single_project.url_link }} {% endif %}"
+                   href="{{ single_project.url_link }}"
+                   target="_blank"
+                   rel="noopener noreferrer"
                    style="{% if single_project.is_active %} background: var(--color-royalblue) {% endif %}">
                     <div class="registration1">РЕЄСТРАЦІЯ</div>
                 </a>
+                {% endif %}
             </div>
             <div class="winterization-group">
                 <h1 class="winterization1">{{ single_project.name }}</h1>

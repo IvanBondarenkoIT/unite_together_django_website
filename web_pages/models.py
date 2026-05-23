@@ -169,6 +169,10 @@ class Projects(WebContentObject):
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     url_link = models.URLField(blank=True, null=True)
+    show_registration_button = models.BooleanField(
+        default=True,
+        help_text="Show the registration button on the project page.",
+    )
 
     def __str__(self):
         return f"Project - {self.name}"
