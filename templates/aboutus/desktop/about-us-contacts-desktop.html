@@ -136,6 +136,18 @@
         display: flex;
         justify-content: center;
         gap: 10px;
+        position: relative;
+        z-index: 3;
+    }
+
+    .icon-insta-parent a {
+        position: relative;
+        z-index: 3;
+        line-height: 0;
+    }
+
+    .contacts-address-block + .contacts-address-block {
+        margin-top: 12px;
     }
 
     /* General form field adjustments */
@@ -237,9 +249,9 @@
                             <div class="icon-phone-parent">
                                 <img class="icon-phone5" loading="lazy" alt="" src="{% static 'img/aboutus/iconphone1.svg' %}"/>
                                 {% if contacts.phone_number %}
-                                    <div class="div9">+{{ contacts.phone_number }}</div>
+                                    <div class="div9">{{ contacts.phone_number }}</div>
                                 {% else %}
-                                    <div class="div9">1 +995 551 146 364</div>
+                                    <div class="div9">+995 551 146 364</div>
                                 {% endif %}
                             </div>
                             <div class="frame-parent27">
@@ -253,34 +265,34 @@
                                     {% if contacts.email %}
                                         <h2 class="uniteforukraingmailcom2">{{ contacts.email }}</h2>
                                     {% else %}
-                                        <h2 class="uniteforukraingmailcom2">1uniteforukrain@gmail.com</h2>
+                                        <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
                                     {% endif %}
 
-                                    {% if contacts.address %}
-                                        <h2 class="tbilisi-2123-tsotne5">{{ contacts.address_en }}</h2>
-                                    {% else %}
-                                        <h2 class="tbilisi-2123-tsotne5">1Tbilisi, Tsotne Dadiani St. 21/23, Office 8</h2>
-                                    {% endif %}
+                                    <div class="contacts-address-block">
+                                        {% if contacts.address %}
+                                            <h2 class="tbilisi-2123-tsotne5">{{ contacts.address_en|default:contacts.address }}</h2>
+                                        {% else %}
+                                            <h2 class="tbilisi-2123-tsotne5">Tbilisi, Tsotne Dadiani St. 21/23, Office 8</h2>
+                                        {% endif %}
+                                        {% if contacts.geolocation %}
+                                            <p><a href="{{ contacts.geolocation }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">See on map</a></p>
+                                        {% else %}
+                                            <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">See on map</a></p>
+                                        {% endif %}
+                                    </div>
 
-                                    {% if contacts.geolocation %}
-                                        <p><a href="{{ contacts.geolocation }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">See on map</a></p>
-                                    {% else %}
-                                        <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">See on map</a></p>
+                                    {% if contacts.address_batumi or contacts.address_batumi_en %}
+                                    <div class="contacts-address-block">
+                                        <h2 class="tbilisi-2123-tsotne5">{{ contacts.address_batumi_en|default:contacts.address_batumi }}</h2>
+                                        {% if contacts.geolocation_batumi %}
+                                            <p><a href="{{ contacts.geolocation_batumi }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">See on map</a></p>
+                                        {% endif %}
+                                    </div>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
-                        <div class="icon-insta-parent">
-                            <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5cmlibXVydGRz">
-                                <img class="icon-insta5" loading="lazy" alt="" src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
-                            </a>
-                            <a href="https://www.facebook.com/UniteTogetherForUkraine?mibextid=LQQJ4d">
-                                <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
-                            </a>
-                            <a href="https://t.me/Unite_T">
-                                <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}"/>
-                            </a>
-                        </div>
+                        {% include 'aboutus/includes/contacts-social-icons.html' %}
                     </div>
                 {% else %}
                 	<div class="bg-contacts-parent">
@@ -290,9 +302,9 @@
                             <div class="icon-phone-parent">
                                 <img class="icon-phone5" loading="lazy" alt="" src="{% static 'img/aboutus/iconphone1.svg' %}"/>
                                 {% if contacts.phone_number %}
-                                    <div class="div9">+{{ contacts.phone_number }}</div>
+                                    <div class="div9">{{ contacts.phone_number }}</div>
                                 {% else %}
-                                    <div class="div9">1 +995 551 146 364</div>
+                                    <div class="div9">+995 551 146 364</div>
                                 {% endif %}
 
                             </div>
@@ -309,52 +321,32 @@
                                     {% else %}
                                         <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
                                     {% endif %}
-                                    {% if contacts.address %}
-                                        <h2 class="tbilisi-2123-tsotne5">{{ contacts.address }}</h2>
-                                    {% else %}
-                                        <h2 class="tbilisi-2123-tsotne5">Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8</h2>
-                                    {% endif %}
 
-                                    {% if contacts.geolocation %}
-                                        <p><a href="{{ contacts.geolocation }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Дивитися на мапі</a></p>
-                                    {% else %}
-                                        <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Дивитися на мапі</a></p>
+                                    <div class="contacts-address-block">
+                                        {% if contacts.address %}
+                                            <h2 class="tbilisi-2123-tsotne5">{{ contacts.address }}</h2>
+                                        {% else %}
+                                            <h2 class="tbilisi-2123-tsotne5">Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8</h2>
+                                        {% endif %}
+                                        {% if contacts.geolocation %}
+                                            <p><a href="{{ contacts.geolocation }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">Дивитися на мапі</a></p>
+                                        {% else %}
+                                            <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">Дивитися на мапі</a></p>
+                                        {% endif %}
+                                    </div>
+
+                                    {% if contacts.address_batumi %}
+                                    <div class="contacts-address-block">
+                                        <h2 class="tbilisi-2123-tsotne5">{{ contacts.address_batumi }}</h2>
+                                        {% if contacts.geolocation_batumi %}
+                                            <p><a href="{{ contacts.geolocation_batumi }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">Дивитися на мапі</a></p>
+                                        {% endif %}
+                                    </div>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
-                        <div class="icon-insta-parent">
-                            {% if contacts.instagram %}
-                                <a href="{{ contacts.instagram }}">
-                                    <img class="icon-insta5" loading="lazy" alt="" src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
-                                </a>
-                            {% else %}
-                                <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5cmlibXVydGRz">
-                                    <img class="icon-insta5" loading="lazy" alt="" src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
-                                </a>
-                            {% endif %}
-
-                            {% if contacts.facebook %}
-                                <a href="{{ contacts.facebook }}">
-                                    <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
-                                </a>
-                            {% else %}
-                                <a href="https://www.facebook.com/UniteTogetherForUkraine?mibextid=LQQJ4d">
-                                    <img class="icon-fb5" loading="lazy" alt="" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
-                                </a>
-                            {% endif %}
-
-                            {% if contacts.telegram %}
-                                <a href="{{ contacts.telegram }}">
-                                    <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}"/>
-                                </a>
-                            {% else %}
-                                <a href="https://t.me/Unite_T">
-                                    <img class="icon-tg5" loading="lazy" alt="" src="{% static 'img/aboutus/icontg1.svg' %}"/>
-                                </a>
-                            {% endif %}
-
-                        </div>
+                        {% include 'aboutus/includes/contacts-social-icons.html' %}
                     </div>
                 {% endif %}
 

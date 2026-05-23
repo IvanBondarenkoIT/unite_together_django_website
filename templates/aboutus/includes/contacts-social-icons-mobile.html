@@ -1,0 +1,32 @@
+{% load static %}
+<div class="social-icons4">
+    {% if contacts.instagram %}
+        <a href="{{ contacts.instagram }}" target="_blank" rel="noopener noreferrer">
+            <img class="icon-insta21" loading="lazy" alt="Instagram" src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
+        </a>
+    {% else %}
+        <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5cmlibXVydGRz" target="_blank" rel="noopener noreferrer">
+            <img class="icon-insta21" loading="lazy" alt="Instagram" src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
+        </a>
+    {% endif %}
+
+    {% if contacts.facebook %}
+        <a href="{{ contacts.facebook }}" target="_blank" rel="noopener noreferrer">
+            <img class="icon-fb21" loading="lazy" alt="Facebook" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
+        </a>
+    {% else %}
+        <a href="https://www.facebook.com/UniteTogetherForUkraine?mibextid=LQQJ4d" target="_blank" rel="noopener noreferrer">
+            <img class="icon-fb21" loading="lazy" alt="Facebook" src="{% static 'img/aboutus/iconfb1.svg' %}"/>
+        </a>
+    {% endif %}
+
+    {% if contacts.telegram %}
+        <a href="{{ contacts.telegram }}" target="_blank" rel="noopener noreferrer">
+            <img class="icon-tg21" loading="lazy" alt="Telegram" src="{% static 'img/aboutus/icontg1.svg' %}"/>
+        </a>
+    {% else %}
+        <a href="https://t.me/Unite_T" target="_blank" rel="noopener noreferrer">
+            <img class="icon-tg21" loading="lazy" alt="Telegram" src="{% static 'img/aboutus/icontg1.svg' %}"/>
+        </a>
+    {% endif %}
+</div>

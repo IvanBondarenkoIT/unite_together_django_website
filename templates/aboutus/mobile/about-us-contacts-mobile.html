@@ -81,39 +81,65 @@
 
 
                                     <div class="address18">
-                                        {% if contacts.address %}
-                                            <div class="tbilisi-2123-tsotne21">
-                                                {{ contacts.address }}
-                                            </div>
-                                        {% else %}
-                                            <div class="tbilisi-2123-tsotne21">
-                                                Tbilisi, 21/23 Tsotne Dadiani St., office 8
-                                            </div>
-                                        {% endif %}
-                                        <div class="see-on-the1">
-                                            {% if contacts.geolocation %}
-                                                <a href="{{ contacts.geolocation }}"
-                                                   class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">
-                                                    {% if lang == 'en' %}See on the map{% else %}Дивитися на мапі{% endif %}
-                                                </a>
+                                        <div class="contacts-address-block">
+                                            {% if contacts.address %}
+                                                <div class="tbilisi-2123-tsotne21">
+                                                    {% if lang == 'en' %}
+                                                        {{ contacts.address_en|default:contacts.address }}
+                                                    {% else %}
+                                                        {{ contacts.address }}
+                                                    {% endif %}
+                                                </div>
                                             {% else %}
-                                                <a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8"
-                                                   class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">
+                                                <div class="tbilisi-2123-tsotne21">
+                                                    {% if lang == 'en' %}
+                                                        Tbilisi, Tsotne Dadiani St. 21/23, Office 8
+                                                    {% else %}
+                                                        Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8
+                                                    {% endif %}
+                                                </div>
+                                            {% endif %}
+                                            <div class="see-on-the1">
+                                                {% if contacts.geolocation %}
+                                                    <a href="{{ contacts.geolocation }}"
+                                                       class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
+                                                       target="_blank" rel="noopener noreferrer">
+                                                        {% if lang == 'en' %}See on the map{% else %}Дивитися на мапі{% endif %}
+                                                    </a>
+                                                {% else %}
+                                                    <a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8"
+                                                       class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
+                                                       target="_blank" rel="noopener noreferrer">
+                                                        {% if lang == 'en' %}See on the map{% else %}Дивитися на мапі{% endif %}
+                                                    </a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        {% if contacts.address_batumi or contacts.address_batumi_en %}
+                                        <div class="contacts-address-block" style="margin-top: 12px;">
+                                            <div class="tbilisi-2123-tsotne21">
+                                                {% if lang == 'en' %}
+                                                    {{ contacts.address_batumi_en|default:contacts.address_batumi }}
+                                                {% else %}
+                                                    {{ contacts.address_batumi }}
+                                                {% endif %}
+                                            </div>
+                                            {% if contacts.geolocation_batumi %}
+                                            <div class="see-on-the1">
+                                                <a href="{{ contacts.geolocation_batumi }}"
+                                                   class="btn btn-secondary btn-lg active" role="button" aria-pressed="true"
+                                                   target="_blank" rel="noopener noreferrer">
                                                     {% if lang == 'en' %}See on the map{% else %}Дивитися на мапі{% endif %}
                                                 </a>
+                                            </div>
                                             {% endif %}
                                         </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
-                            <div class="social-icons4">
-                                <img class="icon-insta21" loading="lazy" alt=""
-                                     src="{% static 'img/aboutus/iconinsta1.svg' %}"/>
-                                <img class="icon-fb21" loading="lazy" alt=""
-                                     src="{% static 'img/aboutus/iconfb1.svg' %}"/>
-                                <img class="icon-tg21" loading="lazy" alt=""
-                                     src="{% static 'img/aboutus/icontg1.svg' %}"/>
-                            </div>
+                            {% include 'aboutus/includes/contacts-social-icons-mobile.html' %}
                         </div>
                         <div class="question">
                             <h1 class="have-a-question-container1">
