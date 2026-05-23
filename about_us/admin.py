@@ -13,10 +13,20 @@ class ContactsAdmin(admin.ModelAdmin):
             {"fields": ("status", "email", "phone_number", "address", "address_en")},
         ),
         (
+            "Batumi office",
+            {
+                "fields": (
+                    "address_batumi",
+                    "address_batumi_en",
+                    "geolocation_batumi",
+                ),
+            },
+        ),
+        (
             "Social Media",
             {"fields": ("instagram", "facebook", "telegram"), "classes": ("collapse",)},
         ),
-        ("Location", {"fields": ("geolocation",)}),
+        ("Location (Tbilisi)", {"fields": ("geolocation",)}),
     )
 
 
