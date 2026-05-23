@@ -231,26 +231,3 @@ def partners(request, lang="uk"):
     }
     return render(request, "aboutus/about-us-partners.html", context=context)
 
-
-# def about_us(request):
-#     banner_settings = BannerSettings.objects.first()
-#     context = {"banner_settings": banner_settings}
-#     return render(request, "aboutus/aboutus_index.html", context=context)
-
-
-# def history(request):
-#     banner_settings = BannerSettings.objects.first()
-#     context = {"banner_settings": banner_settings}
-#     return render(request, "aboutus/about-us-history.html", context=context)
-
-
-# def documents(request):
-#     banner_settings = BannerSettings.objects.first()
-#     context = {"banner_settings": banner_settings}
-#     return render(request, "aboutus/about-us-documents.html", context=context)
-
-
-# def contacts(request):
-#     banner_settings = BannerSettings.objects.first()
-#     context = {"banner_settings": banner_settings}
-#     return render(request, "aboutus/about-us-contacts.html", context=context)

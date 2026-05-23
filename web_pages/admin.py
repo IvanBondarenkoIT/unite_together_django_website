@@ -36,17 +36,6 @@ class WebPageAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
-# @admin_thumbnails.thumbnail('image')
-# class WebContentObjectAdmin(admin.ModelAdmin):
-#     list_display = ('name', 'title', 'text', 'is_active', 'created_at', 'updated_at',)
-#     list_editable = ('is_active', )
-#     prepopulated_fields = {'slug': ('name',)}
-
-
-# class WebContentSubordinateObjectAdmin(admin.ModelAdmin):
-#     list_display = ('name', 'title', 'text',)
-
-
 # +
 class PageTypeListFilter(admin.SimpleListFilter):
     title = _("Page Type")
@@ -95,12 +84,14 @@ class ProjectsAdmin(admin.ModelAdmin):
         "text",
         "order",
         "is_active",
+        "show_registration_button",
         "created_at",
         "updated_at",
         "is_archived",
     )
     list_editable = (
         "is_active",
+        "show_registration_button",
         "order",
     )
     ordering = (

@@ -169,6 +169,10 @@ class Projects(WebContentObject):
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     url_link = models.URLField(blank=True, null=True)
+    show_registration_button = models.BooleanField(
+        default=True,
+        help_text="Show the registration button on the project page.",
+    )
 
     def __str__(self):
         return f"Project - {self.name}"
@@ -264,17 +268,3 @@ class NewsGallery(models.Model):
     class Meta:
         verbose_name = "newsgallery"
         verbose_name_plural = "news galleries"
-
-    # class WebContentSubordinateObject(models.Model):
-    #     name = models.CharField(max_length=250)
-    #     title = models.CharField(max_length=250) #  must be max=27
-    #     text = models.TextField()
-    #     image = models.ImageField(upload_to='img/pages_content_sub', blank=True)
-    #
-    #     content_master_object = models.ForeignKey(WebContentObject, on_delete=models.CASCADE)
-    #     is_active = models.BooleanField(default=True)
-    #
-    #     created_at = models.DateTimeField(auto_now_add=True)
-    #
-    #     def __str__(self):
-    #         return f"{self.name} - {self.title} - {self.text}"

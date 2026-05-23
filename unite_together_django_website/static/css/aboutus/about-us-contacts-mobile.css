@@ -318,6 +318,13 @@
   align-items: flex-start;
   justify-content: flex-start;
   gap: 1.156rem;
+  position: relative;
+  z-index: 3;
+}
+.social-icons4 a {
+  position: relative;
+  z-index: 3;
+  line-height: 0;
 }
 .left-part {
   align-self: stretch;

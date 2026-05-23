@@ -130,8 +130,11 @@ class Contacts(models.Model):
     # address
     address = models.CharField(max_length=255)
     address_en = models.CharField(max_length=255, default="")
+    address_batumi = models.CharField(max_length=255, blank=True, default="")
+    address_batumi_en = models.CharField(max_length=255, blank=True, default="")
     # geolocation
     geolocation = models.CharField(max_length=255)
+    geolocation_batumi = models.CharField(max_length=255, blank=True, default="")
     # social media lincs
     instagram = models.URLField()
     facebook = models.URLField()
