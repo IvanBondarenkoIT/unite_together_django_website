@@ -1,77 +1,224 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- ========================= SECTION CONTENT ========================= -->
-<section class="product-container align-items-center" style="min-height:60vh">
-    <main class="sec-accounts1">
-
-<!-- ============================ COMPONENT LOGIN   ================================= -->
-    {% if request.GET.command == 'verification' %}
-        <div class="container mx-auto alert alert-info text-center" role="alert" style="max-width: 1024px; margin-top: 100px;">
-            Thank you for registration. We have sent you a verification email to [{{ request.GET.email }}]. Please verify it.
-            <br><br>
-            Already verified? <a href="{% url 'login' %}">Login</a>
-        </div>
-    {% else %}
-        <div class="card mx-auto" style="max-width:700px; margin-top:10px;">
-          <div class="card-body">
-          <h4 class="card-title mb-4">Sign in</h4>
-{#          {% include 'includes/alerts.html' %}#}
-          <form action="{% url 'login' %}" method="POST">
-              {% csrf_token %}
-              <div class="form-group">
-                 <input type="email" class="form-control" placeholder="Email Address" name="email">
-              </div> <!-- form-group// -->
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password" name="password">
-              </div> <!-- form-group// -->
-
-              <div class="form-group">
-                <a href="{% url 'forgot_password' %}" class="float-right">Forgot password?</a>
-
-              </div> <!-- form-group form-check .// -->
-              <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block"> Login  </button>
-              </div> <!-- form-group// -->
-          </form>
-          </div> <!-- card-body.// -->
-        <p class="text-center mt-4">Don't have account? <a href="{% url 'register' %}">Sign up</a></p>
-        </div> <!-- card .// -->
-
-
-    {% endif %}
-
-    </main>
     <style>
         body {
-            padding: 10px;
+            padding: 20px;
+            margin: 0;
             box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
         .product-container {
             display: flex;
             flex-direction: row;
             width: 100%;
-            height: 40vh;
-
-            display: flex;
-            height: 40vh;
+            min-height: 60vh;
             justify-content: center;
             align-items: center;
         }
+
         .img {
             width: 60%;
-            border-radius: 50px;
+            border-radius: 20px;
+            margin: 20px;
         }
+
         button {
-            padding: 10px;
+            padding: 12px 20px;
             border-radius: 5px;
             background-color: dodgerblue;
             color: white;
             border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
+        button:hover {
+            background-color: royalblue;
+        }
+
+        .card {
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-control:focus {
+            border-color: dodgerblue;
+            outline: none;
+        }
+
+        .alert {
+            margin-top: 40px;
+            font-size: 18px;
+        }
+
+        .text-center {
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            padding: 12px 20px;
+            font-size: 16px;
+        }
+
+        a {
+            text-decoration: none;
+            color: dodgerblue;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .google-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            color: #444;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-top: 10px;
+            transition: box-shadow 0.2s;
+        }
+
+        .google-btn:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            color: #222;
+        }
+
+        .google-icon-wrapper {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .google-icon {
+            width: 100%;
+            height: auto;
+        }
+
+        .login-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: dodgerblue;
+            color: white;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: Roboto, sans-serif;
+            text-decoration: none;
+            padding: 10px 15px;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background-color: royalblue;
+        }
     </style>
-<!-- ============================ COMPONENT LOGIN  END.// ================================= -->
-</section>
+
+    <!-- ========================= SECTION CONTENT ========================= -->
+    <section class="product-container align-items-center">
+        <main class="sec-accounts1">
+            <!-- ============================ COMPONENT LOGIN   ================================= -->
+            {% if request.GET.command == 'verification' %}
+                <div class="container mx-auto alert alert-info text-center" role="alert" style="max-width: 1024px;">
+                    {% if lang == 'en' %}
+                        Thank you for registering. We have sent you a confirmation email to [{{ request.GET.email }}]. Please check it.
+                        <br><br>
+                        Already verified? <a href="{% url 'login_en' lang='en' %}">Login</a>
+                    {% else %}
+                        Дякуємо за реєстрацію. Ми надіслали вам електронний лист для підтвердження на адресу [{{ request.GET.email }}]. Будь ласка, перевірте це.
+                        <br><br>
+                        Вже перевірено? <a href="{% url 'login' %}">Логін</a>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="card mx-auto" style="max-width:700px;">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">
+                            {% if lang == 'en' %}
+                                Log in to your account or create one
+                            {% else %}
+                                Увійдіть в особовий кабінет на сайті або створіть його
+                            {% endif %}
+                        </h4>
+
+                        <form action="{%if lang == 'en' %}{% url 'login_en' lang='en' %}{% else %}{% url 'login' %}{% endif %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="email" class="form-control"
+                                       placeholder="{% if lang == 'en' %} Email Address {% else %} Електрона адреса {% endif %}"
+                                       name="email">
+                            </div> <!-- form-group// -->
+                            <div class="form-group">
+                                <input type="password" class="form-control"
+                                       placeholder="{% if lang == 'en' %} Password {% else %} Пароль {% endif %}"
+                                       name="password">
+                            </div> <!-- form-group// -->
+                            <div class="form-group">
+                                <a href="{% if lang == 'en' %}{% url 'forgot_password_en' lang='en' %}{% else %}{% url 'forgot_password' %}{% endif %}" class="float-right">
+                                    {% if lang == 'en' %} Forgot password? {% else %} Забули пароль? {% endif %}
+                                </a>
+                            </div> <!-- form-group form-check .// -->
+                            <div class="form-group">
+                                <button type="submit" class="login-btn">
+                                    {% if lang == 'en' %} Login {% else %} Логін {% endif %}
+                                </button>
+                                <a href="{% url 'social:begin' 'google-oauth2' %}" class="google-btn">
+                                    <div class="google-icon-wrapper">
+                                        <img class="google-icon"
+                                             src="https://developers.google.com/identity/images/g-logo.png"
+                                             alt="Google">
+                                    </div>
+                                    <span class="btn-text">Sign in with Google</span>
+                                </a>
+
+                            </div> <!-- form-group// -->
+                        </form>
+                    </div> <!-- card-body.// -->
+                    <p class="text-center mt-4">
+                        {% if lang == 'en' %}
+                            Don't have an account? <a href="{% url 'register_en'  lang='en' %}">Sign up</a>
+                        {% else %}
+                            Немає облікового запису? <a href="{% url 'register' %}">Зареєструватися</a>
+                        {% endif %}
+                    </p>
+                </div> <!-- card .// -->
+            {% endif %}
+        </main>
+        <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+    </section>
 {% endblock %}

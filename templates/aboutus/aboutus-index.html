@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <style>
+        /* Hide mobile navbar by default */
+        .mobile-section {
+            display: none;
+        }
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .desktop-section {
+                display: none;
+            }
+
+            .mobile-section {
+                display: flex;
+            }
+
+        }
+    </style>
+    <section class="desktop-section">
+        {% include 'aboutus/desktop/about-us-history-desktop.html' %}
+    </section>
+    <section class="mobile-section">
+        {% include 'aboutus/mobile/about-us-history-mobile.html' %}
+    </section>
+
+{% endblock %}
+

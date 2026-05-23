@@ -220,11 +220,11 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 20.018rem;
+  /*gap: 20.018rem;*/
 }
 .registration-buttons {
   align-self: stretch;
-  height: 23.775rem;
+  height: 100%;
   position: relative;
 }
 .form-content,
@@ -371,7 +371,7 @@
 .content-wrapper-one {
   flex: 1;
   flex-direction: column;
-  padding: 0 0 25.206rem;
+  /*padding: 0 0 25.206rem;*/
   gap: var(--gap-3xl);
 }
 .content-wrapper-one-wrapper {
@@ -418,6 +418,8 @@
   min-width: 2.75rem;
 }
 .styleprimary-smallfalse-da2 {
+  width: 150px;
+  margin: 5px;
   cursor: pointer;
   border: 0;
   padding: var(--padding-xs) var(--padding-5xl);
@@ -439,6 +441,8 @@
   min-width: 3.313rem;
 }
 .stylesecondary-smallfalse6 {
+  width: 150px;
+  margin: 5px;
   cursor: pointer;
   border: 1px solid var(--accent-blue);
   padding: var(--padding-3xs) var(--padding-4xl);
@@ -454,20 +458,8 @@
   padding: var(--padding-base) var(--padding-xl) 0;
   gap: var(--gap-base);
 }
-.actions8,
-.content24,
-.cta-27,
-.cta-27-wrapper {
-  display: flex;
-  justify-content: flex-start;
-}
-.content24 {
-  align-self: stretch;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--gap-5xs);
-}
-.cta-27,
+
+    .cta-27,
 .cta-27-wrapper {
   box-sizing: border-box;
   max-width: 100%;
@@ -1250,24 +1242,14 @@
   font-weight: 500;
   display: inline-block;
 }
-.contact-details3,
-.contact-item-parent {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.contact-item-parent {
+
+    .contact-item-parent {
   align-self: stretch;
   justify-content: flex-start;
   gap: var(--gap-base-3);
 }
-.contact-details3 {
-  flex: 1;
-  justify-content: flex-end;
-  padding: 0 0 var(--padding-10xs-1);
-  margin-left: -0.025rem;
-}
-.contact-info1 {
+
+    .contact-info1 {
   align-self: stretch;
   display: flex;
   flex-direction: row;

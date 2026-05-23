@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <style>
+        /* Hide mobile navbar by default */
+        .mobile-section {
+            display: none;
+        }
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .desktop-section {
+                display: none;
+            }
+
+            .mobile-section {
+                display: flex;
+            }
+
+        }
+    </style>
+    <section class="desktop-section">
+        {% include 'events/desktop/events-detail-desktop.html' %}
+    </section>
+    <section class="mobile-section">
+        {% include 'events/mobile/events-detail-mobile.html' %}
+    </section>
+
+{% endblock %}
+

@@ -16,6 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.http import HttpResponse
 from django.urls import path, include
 
 from django.conf.urls.static import static
@@ -23,22 +24,25 @@ from unite_together_django_website import views
 from unite_together_django_website import settings
 
 urlpatterns = [
-
-    # ADMIN
+    # Social auth URLs
+    path("auth/", include("social_django.urls", namespace="social")),
+    # # ADMIN
     path("secure/", admin.site.urls),
     # Home
     path("", include("homepage.urls")),
     # ABOUT US
-    path("about-us/", include("about_us.urls")),
+    path("", include("about_us.urls")),
     # ACCOUNTS
-    path("accounts/", include("accounts.urls")),
+    path("", include("accounts.urls")),
     # PERSONS
-    path("persons/", include("persons.urls")),
+    path("", include("persons.urls")),
     # COORDINATION
     path("coordination/", include("coordination.urls")),
-
     path("", include("web_pages.urls")),
     path("", include("donate.urls")),
     path("", include("paypal.standard.ipn.urls")),
-
+    # POLICIES
+    path("privacy-policy/", views.privacy_policy, name="privacy_policy"),
+    path("terms-conditions/", views.terms_conditions, name="terms_conditions"),
+    path("cookies-policy/", views.cookies_policy, name="cookies_policy"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

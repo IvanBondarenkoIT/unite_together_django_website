@@ -13,22 +13,21 @@
         }
 
         .foot-1-about {
-            order: 3;
-        }
-
-        .foot-2-menu {
             order: 1;
         }
 
+        .foot-2-menu {
+            order: 2;
+        }
+
         .foot-3-address {
-            order: 4;
+            order: 3;
         }
 
         .foot-4-social {
-            order: 2;
+            order: 4;
         }
     }
-
 
     @media screen and (max-width: 720px) {
         .footer-container {
@@ -40,22 +39,21 @@
         }
 
         .foot-1-about {
-            order: 2;
-        }
-
-        .foot-2-menu {
             order: 1;
         }
 
+        .foot-2-menu {
+            order: 2;
+        }
+
         .foot-3-address {
-            order: 4;
+            order: 3;
         }
 
         .foot-4-social {
-            order: 3;
+            order: 4;
         }
     }
-
 
     .foot-col {
         flex: 1; /* Make each div flexible and grow equally */
@@ -84,7 +82,6 @@
         font-weight: bolder;
         font-size: var(--font-size-lg);
         color: var(--color-darkslategray-100);
-
     }
 
     .footer-menu-links {
@@ -126,7 +123,6 @@
         position: absolute;
         top: 0;
         left: 0;
-
         background-repeat: no-repeat;
     }
 
@@ -149,12 +145,24 @@
         transform: translateY(10%);
         width: 15.6px;
         height: 21.2px;
-
     }
 
     .footer-menu-address-location {
         line-height: 26px;
         margin-top: 10px;
+    }
+
+    .footer-menu-address-location + .footer-menu-address-location {
+        margin-top: 14px;
+    }
+
+    .footer-menu-address-location a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .footer-menu-address-location a:hover {
+        text-decoration: underline;
     }
 
     /*LOGO part*/
@@ -203,7 +211,7 @@
                 <div class="logo-ut-footer1" style="gap: var(--gap-7xl-6); margin-bottom: 6px;">
                     <a class="logo-ut2" href="{% url 'home' %}">
                         <div class="logo-container">
-                            <img class="main-logo" loading="lazy" alt="Logo"
+                            <img class="main-logo" loading="lazy" alt="Логотип"
                                  src="{% static 'img/new-unite-together.jpg' %}"/>
                             <div class="logo-text">
                                 <h4 class="logo-title">UNITE</h4>
@@ -212,105 +220,210 @@
                         </div>
                     </a>
                 </div>
-                <b>briefly about us</b>
-                <p>Our organization "Unite Together" is aimed at creating and
-                    implementing projects aimed at supporting and developing
-                    Ukrainians affected by the war. Our main goal is to achieve
-                    sustainable systemic change in their lives and society.</p>
-            </div>
+                {% if lang == 'en' %}
+                    <b>About Us</b>
+                    <p>Our organization "Unite Together" is focused on creating and implementing projects that support and develop Ukrainians affected by the war. Our main goal is to achieve sustainable systemic changes in their lives and society.</p>
+                {% else %}
+                    <b>Стисло про нас</b>
+                    <p>Наша організація "Unite Together" спрямована на створення та реалізацію проектів, які підтримують і розвивають українців, постраждалих від війни. Наша головна мета — досягти стійких системних змін у їхньому житті та суспільстві.</p>
+                {% endif %}
 
-            <div class="foot-col foot-2-menu" style="max-width: 130px; min-width: 100px; "><b>Menu</b>
-                <div class="line-decoration2"></div>
-                <ul class="footer-menu-links">
-                    <li class="footer-menu-links"><a href="{% url 'who_we_are' %}"
-                                                     {% if '/about-us/' in request.path %}style="text-decoration: underline"{% endif %}>About Us</a></li>
-                    <li class="footer-menu-links"><a href="{% url 'events' %}"
-                                                     {% if '/events/' in request.path %}style="text-decoration: underline"{% endif %}>Events</a></li>
-                    <li class="footer-menu-links"><a href="{% url 'projects' %}"
-                                                     {% if '/projects/' in request.path %}style="text-decoration: underline"{% endif %}>Projects</a></li>
-                </ul>
             </div>
+            {% if lang == 'en' %}
+                <div class="foot-col foot-2-menu" style="max-width: 130px; min-width: 100px; "><b>Menu</b>
+                    <div class="line-decoration2"></div>
+                    <ul class="footer-menu-links">
+                        <li class="footer-menu-links">
+                            <a href="{% url 'who_we_are_en' lang='en' %}"
+                               {% if '/about-us/' in request.path %}style="text-decoration: underline"{% endif %}>
+                                About Us
+                            </a>
+                        </li>
+                        <li class="footer-menu-links">
+                            <a href="{% url 'news_en'  lang='en' %}"
+                               {% if '/news/' in request.path %}style="text-decoration: underline"{% endif %}>
+                                News
+                            </a>
+                        </li>
+                        <li class="footer-menu-links">
+                            <a href="{% url 'projects_en'  lang='en' %}"
+                               {% if '/projects/' in request.path %}style="text-decoration: underline"{% endif %}>
+                                Projects
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% else %}
+                <div class="foot-col foot-2-menu" style="max-width: 130px; min-width: 100px; "><b>Меню</b>
+                    <div class="line-decoration2"></div>
+                    <ul class="footer-menu-links">
+                        <li class="footer-menu-links"><a href="{% url 'who_we_are' %}"
+                                                         {% if '/about-us/' in request.path %}style="text-decoration: underline"{% endif %}>Про
+                            нас</a></li>
+                        <li class="footer-menu-links"><a href="{% url 'news' %}"
+                                                         {% if '/news/' in request.path %}style="text-decoration: underline"{% endif %}>Новини</a>
+                        </li>
+                        <li class="footer-menu-links"><a href="{% url 'projects' %}"
+                                                         {% if '/projects/' in request.path %}style="text-decoration: underline"{% endif %}>Проєкти</a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+
 
             <!-- CONTACT -->
             <div class="foot-col foot-3-address" style="min-width: 330px;">
-                <b>Contact</b>
+                {% if lang == 'en' %}
+                    <b>Contacts</b>
+                {% else %}
+                    <b>Контакти</b>
+                {% endif %}
+
                 <div class="line-decoration2"></div>
+                {% if contacts %}
                 <ul class="footer-menu-address">
+                    {% if contacts.phone_number %}
                     <li class="footer-menu-address-phone">
-                        <a href="tel:+995595720449">+995 595 720 449</a>
+                        <a href="tel:{{ contacts.phone_number }}">{{ contacts.phone_number }}</a>
                     </li>
+                    {% endif %}
+                    
+                    {% if contacts.email %}
                     <li class="footer-menu-address-email">
-                        <a href="mailto:uniteforukraine@gmail.com">uniteforukraine@gmail.com</a>
+                        <a href="mailto:{{ contacts.email }}">{{ contacts.email }}</a>
                     </li>
+                    {% endif %}
 
+                    {% if contacts.address or contacts.geolocation %}
                     <li class="footer-menu-address-location">
-
-                        <a href="https://www.google.com/maps?q=21/23+Tsotne+Dadiani+St.,+Tbilisi,+office+8"
-                                          aria-pressed="true">Tbilisi, 21/23 Tsotne Dadiani St., office 8</a>
-                        <br>
-{#                        Batumi, 127 Luka Asatiani St.<br>#}
-{#                        Kutaisi, 62 Agmashenebeli St.</div>#}
+                        {% if contacts.geolocation %}
+                        <a href="{{ contacts.geolocation }}" target="_blank" rel="noopener noreferrer">
+                            {% if lang == 'en' %}
+                                {{ contacts.address_en|default:contacts.address|safe }}
+                            {% else %}
+                                {{ contacts.address|safe }}
+                            {% endif %}
+                        </a>
+                        {% else %}
+                            {% if lang == 'en' %}
+                                {{ contacts.address_en|default:contacts.address|safe }}
+                            {% else %}
+                                {{ contacts.address|safe }}
+                            {% endif %}
+                        {% endif %}
                     </li>
+                    {% endif %}
+
+                    {% if contacts.address_batumi or contacts.geolocation_batumi %}
+                    <li class="footer-menu-address-location">
+                        {% if contacts.geolocation_batumi %}
+                        <a href="{{ contacts.geolocation_batumi }}" target="_blank" rel="noopener noreferrer">
+                            {% if lang == 'en' %}
+                                {{ contacts.address_batumi_en|default:contacts.address_batumi|safe }}
+                            {% else %}
+                                {{ contacts.address_batumi|safe }}
+                            {% endif %}
+                        </a>
+                        {% else %}
+                            {% if lang == 'en' %}
+                                {{ contacts.address_batumi_en|default:contacts.address_batumi|safe }}
+                            {% else %}
+                                {{ contacts.address_batumi|safe }}
+                            {% endif %}
+                        {% endif %}
+                    </li>
+                    {% endif %}
                 </ul>
+                {% endif %}
             </div>
 
-
-            <!-- WERE SOCIAL -->
+            <!-- WE'RE SOCIAL -->
             <div class="foot-col foot-4-social">
-
-                <b>We are on social&nbsp;media</b>
-                <div class="decoration7"></div>
-                <div>
-                    Subscribe to us on social media so you don't miss the release
-                    of new outstanding events.
-                </div>
-
+                {% if lang == 'en' %}
+                    <b>We're in social networks</b>
+                    <div class="line-decoration2"></div>
+                    <p>Subscribe to us in social networks to not miss upcoming events.</p>
+                {% else %}
+                    <b>Ми у соцмережах</b>
+                    <div class="line-decoration2"></div>
+                    <p>Підписуйтесь на нас у соціальних мережах, щоб не пропустити майбутні події.</p>
+                {% endif %}
+                
                 <div class="soc-icons-footer1">
-
-                    <a href="https://www.instagram.com/unitetogetherforukraine?igsh=emd5cmlibXVydGRz"><img
-                            class="icon-insta1"
-                            loading="lazy"
-                            alt=""
-                            src="{% static 'img/iconinsta.svg' %}"
-                    /></a>
-
-                    <a href="https://www.facebook.com/UniteTogetherForUkraine?mibextid=LQQJ4d"><img
-                            class="icon-fb2"
-                            loading="lazy"
-                            alt=""
-                            src="{% static 'img/iconfb.svg' %}"
-                    /></a>
-
-                    <a href="https://t.me/Unite_T"><img
-                            class="icon-tg2"
-                            loading="lazy"
-                            alt=""
-                            src="{% static 'img/icontg.svg' %}"
-                    /></a>
+                    {% if contacts %}
+                        {% if contacts.instagram %}
+                            <a href="{{ contacts.instagram }}" target="_blank" rel="noopener noreferrer">
+                                <img class="icon-insta1" loading="lazy" alt="Instagram" src="{% static 'img/iconinsta.svg' %}"/>
+                            </a>
+                        {% endif %}
+                        {% if contacts.facebook %}
+                            <a href="{{ contacts.facebook }}" target="_blank" rel="noopener noreferrer">
+                                <img class="icon-fb2" loading="lazy" alt="Facebook" src="{% static 'img/iconfb.svg' %}"/>
+                            </a>
+                        {% endif %}
+                        {% if contacts.telegram %}
+                            <a href="{{ contacts.telegram }}" target="_blank" rel="noopener noreferrer">
+                                <img class="icon-tg2" loading="lazy" alt="Telegram" src="{% static 'img/icontg.svg' %}"/>
+                            </a>
+                        {% endif %}
+                    {% endif %}
                 </div>
-
-
             </div>
         </div>
     </div>
     <div class="footer2" style="padding-top: 0;">
 
-<div class="not-equal-comparison">
-          <div class="divider2"></div>
-          <div class="or-comparison">
-            <div class="row2">
-              <div>
-                © 2024 Unite Together. All rights reserved.
-              </div>
-              <div><a href="">Privacy Policy</a></div>
-              <div><a href="">Terms and Conditions</a></div>
-              <div><a href="">Cookie Policy</a></div>
-            </div>
-          </div>
-        </div>
-</div>
-</footer>
+        <div class="not-equal-comparison">
+            <div class="divider2"></div>
+            <div class="or-comparison">
+                {% if lang == 'en' %}
+                    <div class="row2">
+                        <div>
+                            © 2024 Unite Together. All rights reserved.
+                        </div>
+                        <div>
+                            <a href="{% url 'privacy_policy' %}">
+                                Privacy Policy
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{% url 'terms_conditions' %}">
+                                Terms and Conditions
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{% url 'cookies_policy' %}">
+                                Cookies Policy
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="row2">
+                        <div>
+                            © 2024 Unite Together. Всі права захищені.
+                        </div>
+                        <div>
+                            <a href="{% url 'privacy_policy' %}">
+                                Політика конфіденційності
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{% url 'terms_conditions' %}">
+                                Умови та положення
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{% url 'cookies_policy' %}">
+                                Політика щодо cookies
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
 
+            </div>
+        </div>
+    </div>
+</footer>
 
 {#    </div>#}
 

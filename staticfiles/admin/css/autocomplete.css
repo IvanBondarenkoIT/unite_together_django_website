@@ -1,0 +1,78 @@
+select.admin-autocomplete {
+    width: 20em;
+}
+
+.select2-container--admin-autocomplete.select2-container {
+    min-height: 30px;
+}
+
+.select2-container--admin-autocomplete.select2-container--focus .select2-selection,
+.select2-container--admin-autocomplete.select2-container--open .select2-selection {
+    border-color: var(--body-quiet-color);
+    min-height: 30px;
+}
+
+.select2-container--admin-autocomplete .select2-selection--single .select2-selection__placeholder {
+    color: var(--body-quiet-color);
+}
+
+.select2-container--admin-autocomplete .select2-selection--single .select2-selection__arrow b {
+    border-color: #888 transparent transparent transparent;
+    border-style: solid;
+    border-width: 5px 4px 0 4px;
+    height: 0;
+    left: 50%;
+    margin-left: -4px;
+    margin-top: -2px;
+    position: absolute;
+    top: 50%;
+    width: 0;
+}
+
+.select2-container--admin-autocomplete.select2-container--open .select2-selection--single .select2-selection__arrow b {
+    border-color: transparent transparent #888 transparent;
+    border-width: 0 4px 5px 4px;
+}
+
+.select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__rendered li {
+    list-style: none;
+}
+
+.select2-container--admin-autocomplete .select2-selection--multiple .select2-selection__placeholder {
+    color: var(--body-quiet-color);
+    margin-top: 5px;
+    float: left;
+}
+
+.select2-container--admin-autocomplete .select2-search--dropdown {
+    background: var(--darkened-bg);
+}
+
+.select2-container--admin-autocomplete .select2-search--dropdown .select2-search__field {
+    background: var(--body-bg);
+    color: var(--body-fg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.select2-container--admin-autocomplete .select2-search--inline .select2-search__field {
+    background: transparent;
+    color: var(--body-fg);
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    -webkit-appearance: textfield;
+}
+
+.select2-container--admin-autocomplete .select2-results > .select2-results__options {
+    max-height: 200px;
+    overflow-y: auto;
+    color: var(--body-fg);
+    background: var(--body-bg);
+}
+
+.select2-container--admin-autocomplete .select2-results__option--highlighted[aria-selected] {
+    background-color: var(--primary);
+    color: var(--primary-fg);
+}
+

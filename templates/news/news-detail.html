@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <style>
+        /* Hide mobile navbar by default */
+        .mobile-section {
+            display: none;
+        }
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .desktop-section {
+                display: none;
+            }
+
+            .mobile-section {
+                display: flex;
+            }
+
+        }
+    </style>
+    <section class="desktop-section">
+        {% if lang == 'en' %}
+            {% include 'news/desktop/news-detail-desktop-en.html' %}
+        {% else %}
+            {% include 'news/desktop/news-detail-desktop.html' %}
+        {% endif %}
+    </section>
+    <section class="mobile-section">
+        {% if lang == 'en' %}
+            {% include 'news/mobile/news-detail-mobile-en.html' %}
+        {% else %}
+            {% include 'news/mobile/news-detail-mobile.html' %}
+        {% endif %}
+    </section>
+
+{% endblock %}

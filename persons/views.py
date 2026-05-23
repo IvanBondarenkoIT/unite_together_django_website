@@ -1,130 +1,140 @@
 from django.core.exceptions import ValidationError
-from django.contrib import messages, auth
 from django.core.paginator import Paginator
+
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, redirect, get_object_or_404
 
-from django.contrib.auth.password_validation import validate_password
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.password_validation import validate_password
 
 from unite_together_django_website.validators import CustomPasswordValidator
 from .models import UserProfile, AssociatedPerson, Participant
 from accounts.models import Account
-from .forms import AssociatedPersonForm, AssociatedPersonFormSet
-
-
+from .forms import AssociatedPersonForm
 
 OBJECTS_ON_PAGE = 4
 
 
-# @login_required(login_url="login")
-# def dashboard(request):
-#     user_profile = get_object_or_404(UserProfile, user=request.user)  # Get UserProfile with user==request.user
-#
-#     if request.method == "POST":
-#         person_form = AssociatedPersonForm(request.POST, request.FILES, instance=user_profile.person)
-#         if person_form.is_valid():
-#             person_form.save()
-#             messages.success(request, "Your profile has been updated")
-#             return redirect("dashboard")
-#     else:
-#         person_form = AssociatedPersonForm(instance=user_profile.person)
-#
-#     return render(request, "persons/dashboard.html", {'form': person_form})
-
-
-# @login_required(login_url="login")
-# def create_person(request):
-#     if request.method == 'POST':
-#         form = AssociatedPersonForm(request.POST)
-#         if form.is_valid():
-#             associated_person = form.save(commit=False)
-#             associated_person.user_owner = request.user
-#             associated_person.is_active = True
-#             associated_person.save()
-#             messages.success(request, 'Person created successfully!')
-#             return redirect("dashboard")
-#         else:
-#             messages.error(request, 'Please correct the errors below.')
-#             return redirect("dashboard")
-#     else:
-#         form = AssociatedPersonForm()
-#
-#     return render(request, 'persons/create_person.html', {'form': form})
-
-
-# @login_required(login_url="login")
-# def person_list(request):
-#     user_profile = get_object_or_404(UserProfile, user=request.user)  # Get UserProfile with user==request.user
-#     if request.method == 'POST':
-#         formset = AssociatedPersonFormSet(request.POST)
-#         if formset.is_valid():
-#             associated_person = formset.save(commit=False)
-#             associated_person.user_owner = request.user
-#             associated_person.is_active = True
-#             associated_person.save()
-#             messages.success(request, 'Person created successfully!')
-#             return redirect('person_list')  # Change to your desired redirect target
-#         else:
-#             messages.error(request, 'Please correct the errors below.')
-#     else:
-#         formset = AssociatedPersonFormSet(queryset=AssociatedPerson.objects.all().filter(is_active=True, user_owner=request.user).order_by("unique_identifier"))
-#
-#     return render(request, 'persons/person_list.html', {'formset': formset})
-
 @login_required(login_url="login")
-def associated_person_list(request):
+def associated_person_list(request, lang="uk"):
     user_profile = get_object_or_404(UserProfile, user=request.user)
-    persons = AssociatedPerson.objects.filter(user_owner=user_profile.user).order_by("unique_identifier")
+
+    # Проверка на наличие телефона
+    if not user_profile.person.georgian_phone_number:
+        if not request.user.associated_person.georgian_phone_number:
+            return redirect("require_phone")
+        else:
+            user_profile.person.georgian_phone_number = (
+                request.user.associated_person.georgian_phone_number
+            )
+            user_profile.person.save()
+
+    # Данные о последнем евенте
+    last_event = request.session.get("last_event")
+
+    persons = AssociatedPerson.objects.filter(user_owner=user_profile.user).order_by(
+        "unique_identifier"
+    )
     main_person = user_profile.user.associated_person
-    return render(request, 'persons/associated_person_list.html', {'persons': persons, 'main_person': main_person})
+    context = {
+        "persons": persons,
+        "main_person": main_person,
+        "last_event": last_event,
+        "lang": lang,
+    }
+
+    return render(
+        request,
+        "persons/associated_person_list.html",
+        context=context,
+    )
+
 
 @login_required(login_url="login")
-def associated_person_create(request):
-    if request.method == 'POST':
-        user_owner = request.user  # Assuming user is the owner
-        form = AssociatedPersonForm(request.POST, user_owner=user_owner)
+def associated_person_create(request, lang="uk"):
+    if request.method == "POST":
+        form = AssociatedPersonForm(
+            request.POST,
+            default_ge_phone=request.user.associated_person.georgian_phone_number,
+            user=request.user,
+            lang=lang,
+        )
         if form.is_valid():
             associated_person = form.save(commit=False)
             associated_person.user_owner = request.user
             associated_person.is_active = True
+            associated_person.is_approved = True  # Later can be manual approval
             associated_person.save()
-            messages.success(request, 'Person created successfully!')
-            return redirect("associated_person_list")
-        else:
-            messages.error(request, 'Please correct the errors below.')
-        #     return redirect("associated_person_create")
-    else:
-        form = AssociatedPersonForm(user_owner=request.user)
 
-    return render(request, 'persons/dashboard.html', {'form': form})
+            # Проверяем, какая кнопка была нажата
+            if "save_and_continue" in request.POST:
+                messages.success(
+                    request, "Особа збережена, додайте наступного члена родини."
+                )
+                return redirect("associated_person_create")  # Открыть новую форму
+            else:
+                messages.success(request, "Особа успішно створена!")
+                return redirect("associated_person_list")  # Перейти к списку
+        else:
+            messages.error(request, "Будь ласка, виправте помилки нижче.")
+    else:
+        form = AssociatedPersonForm(
+            default_ge_phone=request.user.associated_person.georgian_phone_number,
+            user=request.user,
+            lang=lang,
+        )
+
+    return render(request, "persons/dashboard.html", {"form": form, "lang": lang})
+
 
 @login_required(login_url="login")
-def associated_person_edit(request, pk):
-    edited_person = AssociatedPerson.objects.get(pk=pk)
+def associated_person_edit(request, pk, lang="uk"):
+    edited_person = get_object_or_404(AssociatedPerson, pk=pk)
 
     if request.method == "POST":
-        user_owner = request.user  # Assuming user is the owner
-        person_form = AssociatedPersonForm(request.POST, request.FILES, instance=edited_person, user_owner=user_owner)
-        if person_form.is_valid():
-            person_form.save()
-            messages.success(request, "Your profile has been updated")
-            return redirect("associated_person_list")
+        form = AssociatedPersonForm(
+            request.POST,
+            instance=edited_person,
+            default_ge_phone=request.user.associated_person.georgian_phone_number,
+            user=request.user,
+            lang=lang,
+        )
+        if form.is_valid():
+            associated_person = form.save(commit=False)
+            associated_person.is_approved = True  # Later can be manual approval
+            associated_person.save()
 
+            # Проверяем, какая кнопка была нажата
+            if "save_and_continue" in request.POST:
+                messages.success(
+                    request, "Особа збережена, додайте наступного члена родини."
+                )
+                return redirect("associated_person_create")  # Открыть новую форму
+            else:
+                messages.success(request, "Ваш профіль було оновлено.")
+                return redirect("associated_person_list")  # Перейти к списку
         else:
-            messages.error(request, 'Please correct the errors below.')
-        #     return redirect("associated_person_edit", pk=edited_person.pk)
+            messages.error(request, "Будь ласка, виправте помилки нижче.")
     else:
-        person_form = AssociatedPersonForm(instance=edited_person)
+        form = AssociatedPersonForm(
+            instance=edited_person,
+            default_ge_phone=request.user.associated_person.georgian_phone_number,
+            user=request.user,
+            lang=lang,
+        )
 
-    return render(request, "persons/dashboard.html", {'form': person_form})
-
-
-
+    return render(request, "persons/dashboard.html", {"form": form, "lang": lang})
 
 
 @login_required(login_url="login")
-def registered_events(request):
-    participants = Participant.objects.all().filter(user_owner=request.user).order_by('-created_at')
+def registered_events(request, lang="uk"):
+    participants = (
+        Participant.objects.all()
+        .filter(user_owner=request.user)
+        .order_by("-created_at")
+    )
 
     # Pagination functional
     paginator = Paginator(participants, OBJECTS_ON_PAGE)
@@ -135,14 +145,15 @@ def registered_events(request):
     objects_count = paginator.count
 
     context = {
-        'participants': page_all_objects,
-        'objects_count': objects_count
+        "participants": page_all_objects,
+        "objects_count": objects_count,
+        "lang": lang,
     }
-    return render(request, 'persons/personal-account-events.html', context=context)
+    return render(request, "persons/personal-account-events.html", context=context)
 
 
 @login_required(login_url="login")
-def settings(request):
+def settings(request, lang="uk"):
     if request.method == "POST":
         current_password = request.POST.get("current_password")
         new_password = request.POST.get("new_password")
@@ -155,13 +166,19 @@ def settings(request):
                 try:
                     # Validate the new password using Django's built-in validators
                     # validate_password(new_password, user)
-                    # If custom password validator is needed additionally
+
+                    # Custom password validator (if any)
                     password_validator = CustomPasswordValidator()
                     password_validator.validate(new_password)
 
+                    # If no exception is raised, set the new password
                     user.set_password(new_password)
                     user.save()
-                    messages.success(request, "Password updated successfully.")
+
+                    # Update session to prevent logout
+                    update_session_auth_hash(request, user)
+
+                    messages.success(request, "Пароль успішно оновлено.")
                     return redirect("settings")
                 except ValidationError as e:
                     # Catching multiple error messages and adding them to the messages framework
@@ -169,11 +186,14 @@ def settings(request):
                         messages.error(request, error)
                     return redirect("settings")
             else:
-                messages.error(request, "Please enter the correct current password")
+                messages.error(
+                    request, "Будь ласка, введіть правильний поточний пароль"
+                )
                 return redirect("settings")
         else:
-            messages.error(request, "Passwords do not match")
+            messages.error(request, "Паролі не збігаються")
             return redirect("settings")
     else:
-
-        return render(request, 'persons/personal-account-settings.html')
+        return render(
+            request, "persons/personal-account-settings.html", context={"lang": lang}
+        )

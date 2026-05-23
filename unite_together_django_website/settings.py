@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -26,10 +27,12 @@ SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool, default=True)
-USE_REMOTE_DB_SETTINGS = config("USE_REMOTE_DB_SETTINGS",cast=bool, default=False)
+USE_REMOTE_DB_SETTINGS = config("USE_REMOTE_DB_SETTINGS", cast=bool, default=False)
+REMOTE_DB_SERVICE = config("REMOTE_DB_SERVICE", default="AWS")
 
-ALLOWED_HOSTS = ["*",
-                 ]
+ALLOWED_HOSTS = [
+    "*",
+]
 
 # CSRF_TRUSTED_ORIGINS = [""]
 
@@ -42,10 +45,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # "import_export",
     "paypal.standard.ipn",
-
     "web_pages",
     "homepage",
     "accounts",
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
     "persons",
     "about_us",
     "coordination",
+    "social_django",
 ]
 
 MIDDLEWARE = [
@@ -64,6 +66,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "social_django.middleware.SocialAuthExceptionMiddleware",
+    # "web_pages.middleware.LastEventMiddleware",
 ]
 
 ROOT_URLCONF = "unite_together_django_website.urls"
@@ -79,8 +85,10 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-
                 "web_pages.context_processors.menu_links",
+                "about_us.context_processors.contacts_processor",
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
@@ -88,42 +96,68 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "unite_together_django_website.wsgi.application"
 
-AUTH_USER_MODEL = 'accounts.Account'
+AUTH_USER_MODEL = "accounts.Account"
 
 
 # Database Configuration
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-if 'RDS_DB_NAME' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
-        }
-    }
-else:
-    if USE_REMOTE_DB_SETTINGS:
+if "RDS_DB_NAME" in os.environ:
+    if "REMOTE_DB_SERVICE" in os.environ and os.environ["REMOTE_DB_SERVICE"] == "AZURE":
+
         DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.postgresql',
-                'NAME': config('RDS_DB_NAME'),
-                'USER': config('RDS_USERNAME'),
-                'PASSWORD': config('RDS_PASSWORD'),
-                'HOST': config('RDS_HOSTNAME'),
-                'PORT': config('RDS_PORT'),
+            "default": {
+                "ENGINE": "django.db.backends.postgresql",
+                "NAME": os.environ["AZURE_RDS_DB_NAME"],
+                "USER": os.environ["AZURE_RDS_USERNAME"],
+                "PASSWORD": os.environ["AZURE_RDS_PASSWORD"],
+                "HOST": os.environ["AZURE_RDS_HOSTNAME"],
+                "PORT": os.environ["AZURE_RDS_PORT"],
             }
         }
     else:
+        DATABASES = {
+            "default": {
+                "ENGINE": "django.db.backends.postgresql",
+                "NAME": os.environ["RDS_DB_NAME"],
+                "USER": os.environ["RDS_USERNAME"],
+                "PASSWORD": os.environ["RDS_PASSWORD"],
+                "HOST": os.environ["RDS_HOSTNAME"],
+                "PORT": os.environ["RDS_PORT"],
+            }
+        }
+else:
+    if USE_REMOTE_DB_SETTINGS:
+        print(REMOTE_DB_SERVICE)
+        if REMOTE_DB_SERVICE == "AWS":
+            DATABASES = {
+                "default": {
+                    "ENGINE": "django.db.backends.postgresql",
+                    "NAME": config("RDS_DB_NAME"),
+                    "USER": config("RDS_USERNAME"),
+                    "PASSWORD": config("RDS_PASSWORD"),
+                    "HOST": config("RDS_HOSTNAME"),
+                    "PORT": config("RDS_PORT"),
+                }
+            }
+        else:
+            DATABASES = {
+                "default": {
+                    "ENGINE": "django.db.backends.postgresql",
+                    "NAME": config("AZURE_RDS_DB_NAME"),
+                    "USER": config("AZURE_RDS_USERNAME"),
+                    "PASSWORD": config("AZURE_RDS_PASSWORD"),
+                    "HOST": config("AZURE_RDS_HOSTNAME"),
+                    "PORT": config("AZURE_RDS_PORT"),
+                }
+            }
+    else:
         # Sqlit settings
         DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': BASE_DIR / 'db.sqlite3',
+            "default": {
+                "ENGINE": "django.db.backends.sqlite3",
+                "NAME": BASE_DIR / "db.sqlite3",
             }
         }
 
@@ -144,7 +178,7 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
     {
-        'NAME': 'unite_together_django_website.validators.CustomPasswordValidator',
+        "NAME": "unite_together_django_website.validators.CustomPasswordValidator",
     },
 ]
 
@@ -162,27 +196,32 @@ USE_TZ = True
 
 # Date and time formats
 
-DATE_FORMAT = 'd-m-Y'  # Example: 31-12-2024
-DATETIME_FORMAT = 'd-m-Y H:i'  # Example: 31-12-2024 23:59
-TIME_FORMAT = 'H:i'  # Example: 23:59
-
-# Input formats for parsing dates
-
-DATE_INPUT_FORMATS = [
-    '%d-%m-%Y',  # Example: 31-12-2024
-]
-
+# DATE_FORMAT = "d.m.Y"  # Example: 31.12.2024
+# DATETIME_FORMAT = "d.m.Y H:i"  # Example: 31.12.2024 23:59
+# TIME_FORMAT = "H:i"  # Example: 23:59
+#
+# # Input formats for parsing dates
+#
+# DATE_INPUT_FORMATS = [
+#     "%d.%m.%Y",  # Example: 31.12.2024
+# ]
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 # Local staticfiles settings
-STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = [
-    'unite_together_django_website/static'
-]
+# STATIC_URL = "static/"
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATICFILES_DIRS = ["unite_together_django_website/static"]
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(
+    BASE_DIR, "staticfiles"
+)  # Измените на "staticfiles" для лучшей практики
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "unite_together_django_website/static")]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # AWS S3 Static Files Configuration
 # AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
@@ -222,8 +261,64 @@ EMAIL_USE_TLS = True
 
 # PayPal configuration
 
-PAYPAL_RECEIVER_EMAIL = config("PAYPAL_RECEIVER_EMAIL") # where cash is paid into
+PAYPAL_RECEIVER_EMAIL = config("PAYPAL_RECEIVER_EMAIL")  # where cash is paid into
 PAYPAL_TEST = config("PAYPAL_TEST", cast=bool)
 PRODUCT_ID = config("PAYPAL_ITEM_NAME")
 PRODUCT_PRICE = config("PAYPAL_SUM")
 
+if USE_REMOTE_DB_SETTINGS:
+    if "REMOTE_DB_SERVICE" in os.environ and os.environ["REMOTE_DB_SERVICE"] == "AZURE":
+        # Налаштування Azure Storage
+        AZURE_ACCOUNT_NAME = os.environ.get(
+            "AZURE_ACCOUNT_NAME"
+        )  # Ім'я вашого облікового запису Azure
+        AZURE_ACCOUNT_KEY = os.environ.get(
+            "AZURE_ACCOUNT_KEY"
+        )  # Ключ доступу до вашого облікового запису
+        AZURE_CONTAINER = os.environ.get("AZURE_CONTAINER")  # Назва вашого контейнера
+    else:
+        # Налаштування Azure Storage
+        AZURE_ACCOUNT_NAME = config(
+            "AZURE_ACCOUNT_NAME"
+        )  # Ім'я вашого облікового запису Azure
+        AZURE_ACCOUNT_KEY = config(
+            "AZURE_ACCOUNT_KEY"
+        )  # Ключ доступу до вашого облікового запису
+        AZURE_CONTAINER = config("AZURE_CONTAINER")  # Назва вашого контейнера
+
+    # Конфігурація для зберігання медіа-файлів
+    DEFAULT_FILE_STORAGE = "storages.backends.azure_storage.AzureStorage"
+
+    # URL базової папки медіа-файлів
+    AZURE_CUSTOM_DOMAIN = f"{AZURE_ACCOUNT_NAME}.blob.core.windows.net"
+    MEDIA_URL = f"https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/"
+    print(AZURE_ACCOUNT_NAME, AZURE_ACCOUNT_KEY, AZURE_CONTAINER)
+
+    # GOOGLE auth
+
+    LOGIN_URL = "login"
+    LOGOUT_URL = "logout"
+    LOGIN_REDIRECT_URL = "associated_person_list"
+    LOGOUT_REDIRECT_URL = "/"
+
+    AUTHENTICATION_BACKENDS = (
+        "social_core.backends.google.GoogleOAuth2",
+        "django.contrib.auth.backends.ModelBackend",
+    )
+
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
+
+SOCIAL_AUTH_PIPELINE = (
+    "social_core.pipeline.social_auth.social_details",
+    "social_core.pipeline.social_auth.social_uid",
+    "social_core.pipeline.social_auth.auth_allowed",
+    "social_core.pipeline.social_auth.social_user",
+    "accounts.social_pipeline.create_account_user",
+    "social_core.pipeline.user.get_username",
+    "social_core.pipeline.user.create_user",
+    "social_core.pipeline.social_auth.associate_user",
+    "social_core.pipeline.social_auth.load_extra_data",
+    "social_core.pipeline.user.user_details",
+    # "accounts.social_pipeline.require_phone",
+)

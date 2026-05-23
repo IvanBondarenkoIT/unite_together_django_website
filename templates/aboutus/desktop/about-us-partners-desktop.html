@@ -1,0 +1,195 @@
+{% load static %}
+
+<!-- СТИЛІ ТІЛЬКИ ДЛЯ ПАРТНЕРІВ -->
+
+<style>
+
+    /* мобільні стилі не завершені */
+    @media screen and (max-width: 720px) {
+
+        .logo {
+            background-size: 50% !important;
+            margin: 10px 0px;
+        }
+
+        .description-part {
+            width: 100%;
+        }
+    }
+
+    .description-part h3 {
+        margin: 0 0 1px;
+        font-family: var(--font-montserrat);
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 170%;
+        line-height: 1.2;
+        color: var(--accent-blue);
+
+    }
+
+    .description-part p {
+        margin: 0;
+        font-family: var(--font-montserrat);
+        font-size: var(--font-size-sm);
+        line-height: 170%;
+        color: var(--primary-text);
+    }
+
+    .logo {
+        flex-shrink: 0;
+        /* height: 79.5px; */
+        width: 220px;
+        background-repeat: no-repeat; /* запобігти повторенню зображення */
+        background-position: left; /* розмістити логотип ліворуч */
+        /* background-size: 100px ; */
+    }
+
+    .partner-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .partner-item img {
+        max-width: 150px;
+        margin-right: 20px;
+    }
+
+    .partner-item .description-part {
+        flex: 1;
+    }
+
+    .partner-item h3 {
+        margin: 0 0 10px;
+    }
+
+    .description-part {
+        flex-grow: 1;
+        padding-bottom: 1px !important;
+        position: inherit;
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+    }
+
+</style>
+
+
+<div class="about-us-partners" data-animate-on-scroll>
+
+    <div class="page-header3">
+        <img class="bg-icon4" loading="lazy" alt="" src="{% static 'img/desc-aboutus.webp' %}"/>
+
+        <div class="sec-title3">
+            {#            <div class="sublitle3">Підзаголовок</div>#}
+            <div class="content3">
+                {% if lang == 'en' %}
+                    <h1 class="events19">
+                        {{ banner_settings.about_us_banner_title_en }}
+                    </h1>
+                    <div class="discover-the-diverse-range-of-wrapper2">
+                        <div class="discover-the-diverse5">
+                            {{ banner_settings.about_us_banner_text_en }}
+                        </div>
+                    </div>
+                {% else %}
+                    <h1 class="events19">
+                        {{ banner_settings.about_us_banner_title }}
+                    </h1>
+                    <div class="discover-the-diverse-range-of-wrapper2">
+                        <div class="discover-the-diverse5">
+                            {{ banner_settings.about_us_banner_text }}
+                        </div>
+                    </div>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+    <main class="two-columns-with-selectors">
+        <!-- ОСНОВНА ЧАСТИНА -->
+
+        <!-- Вибір категорій для сторінок "Про нас" -->
+        <div class="left-selector-box">
+            {% for category, link in links.items %}
+                {% if lang == 'en' %}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}"
+                       href="{% url  link lang='en' %}">
+                        {{ category }}
+                    </a>
+                {% else %}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}" href="{% url  link %}">
+                        {{ category }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+
+        <section class="right-part-of-static-page">
+            <div class="partners-and-collaboration-parent" style="gap: 10px; padding-bottom: 10px;">
+                {% if lang == 'en' %}
+                    <h1 class="partners-and-collaboration2">
+                        Partners and Collaboration
+                    </h1>
+                    <div class="this-page-features">
+                        This page highlights organizations and companies that support us in our mission to help those
+                        who need it, and make a significant contribution to the development of our projects.
+                    </div>
+                {% else %}
+                    <h1 class="partners-and-collaboration2">
+                        Партнери та співпраця
+                    </h1>
+                    <div class="this-page-features">
+                        Ця сторінка висвітлює організації та компанії, які підтримують нас у нашій місії допомоги
+                        тим, хто потребує, і роблять значний внесок у розвиток наших проєктів.
+                    </div>
+                {% endif %}
+
+            </div>
+
+            {% for partner in partners %}
+                {% if lang == 'en' %}
+                    <div class="partner-item">
+                        <div class="logo">
+                            {% if partner.image %}
+                                <img src="{{ partner.image.url }}" alt="{{ partner.title_en }}">
+                            {% endif %}
+                        </div>
+                        <div class="description-part">
+                            <h3>{{ partner.title_en }}</h3>
+                            <p>{{ partner.description_en|safe }}</p>
+                            {% if partner.url_link %}
+                                <a href="{{ partner.url_link }}" target="_blank">Learn more</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="partner-item">
+                        <div class="logo">
+                            {% if partner.image %}
+                                <img src="{{ partner.image.url }}" alt="{{ partner.title }}">
+                            {% endif %}
+                        </div>
+                        <div class="description-part">
+                            <h3>{{ partner.title }}</h3>
+                            <p>{{ partner.description|safe }}</p>
+                            {% if partner.url_link %}
+                                <a href="{{ partner.url_link }}" target="_blank">Дізнатись більше</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+        </section>
+    </main>
+</div>
+
+

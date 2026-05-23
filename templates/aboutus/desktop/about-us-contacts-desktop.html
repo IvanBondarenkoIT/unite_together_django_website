@@ -1,0 +1,411 @@
+{% load static %}
+
+<style>
+    /* General mobile adjustments */
+    @media (max-width: 768px) {
+        .page-header4 {
+            text-align: center;
+        }
+
+        .sec-title4 h2,
+        .sec-title4 .content4 h1,
+        .sec-title4 .content4 h2 {
+            font-size: 1.5rem;
+            padding: 0 15px;
+        }
+
+        .left-selector-box {
+            display: none; /* Hide the desktop selector on mobile */
+        }
+
+        .left-selector-box-mobile {
+            display: block; /* Show the mobile selector */
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .two-columns-with-selectors {
+            display: block;
+            padding: 0 15px;
+        }
+
+        .right-part-of-static-page {
+            margin-top: 20px;
+        }
+
+        .frame-parent25 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .icon-phone-parent,
+        .frame-parent27,
+        .icon-insta-parent {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .icon-phone5, .icon-email5, .icon-geo5, .icon-insta5, .icon-fb5, .icon-tg5 {
+            margin: 10px auto;
+        }
+
+        .have-a-question-container {
+            text-align: center;
+        }
+
+        .frame-parent28 {
+            display: flex;
+            flex-direction: column;
+            gap: 2px; /* Reduced the gap between form fields */
+        }
+
+        .first-name-parent,
+        .last-name-parent,
+        .email-parent,
+        .select-subject-parent,
+        .message-parent {
+            width: 100%;
+        }
+
+        .button-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+        }
+    }
+
+    /* Tablet and above adjustments */
+    @media (min-width: 769px) {
+        .two-columns-with-selectors {
+            padding: 0 30px;
+        }
+
+        .sec-title4 h2,
+        .sec-title4 .content4 h1,
+        .sec-title4 .content4 h2 {
+            font-size: 1.75rem;
+        }
+
+        .left-selector-box {
+            display: flex; /* Show the desktop selector */
+            flex-direction: column;
+            width: 200px;
+        }
+
+        .left-selector-box-mobile {
+            display: none; /* Hide the mobile selector */
+        }
+
+        .right-part-of-static-page {
+            margin-left: 220px; /* Create space for the left column */
+        }
+
+        .frame-parent25 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            color: white;
+        }
+
+        .have-a-question-container {
+            text-align: left;
+        }
+
+        .button-wrapper {
+            justify-content: flex-start;
+        }
+    }
+
+    .bg-contacts-parent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 50px;
+        margin: 40px;
+        background-color: #0a53be;
+        gap: 10px;
+    }
+
+    .icon-insta-parent {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+        z-index: 3;
+    }
+
+    .icon-insta-parent a {
+        position: relative;
+        z-index: 3;
+        line-height: 0;
+    }
+
+    .contacts-address-block + .contacts-address-block {
+        margin-top: 12px;
+    }
+
+    /* General form field adjustments */
+    .frame-parent28 .form-group {
+        margin-bottom: 8px; /* Reduced margin between form fields */
+    }
+
+    /* Adjust spacing between label and input fields */
+    label {
+        margin-bottom: 4px; /* Reduced the space between label and input field */
+        display: block;
+    }
+
+    /* Remove unnecessary padding from form fields */
+    input, textarea, select {
+        padding: 6px; /* Adjust padding within input fields */
+        margin-top: 4px; /* Reduced space between label and input field */
+    }
+</style>
+
+<div class="about-us-contacts" data-animate-on-scroll>
+    <section class="page-header4">
+{#        <img class="bg-icon4" loading="lazy" alt="" src="{% static 'img/aboutus/bg@2x-1600px.jpg' %}"/>#}
+        <img class="bg-icon4" loading="lazy" alt="" src="{% static 'img/desc-aboutus.webp' %}"/>
+        <div class="sec-title4">
+{#            <h2 class="sublitle4">Підзаголовок</h2>#}
+            <div class="content4">
+                {% if lang == 'en' %}
+                    <h1 class="events19">
+                        {{ banner_settings.about_us_banner_title_en }}
+                    </h1>
+                    <div class="discover-the-diverse-range-of-wrapper2">
+                        <div class="discover-the-diverse5">
+                            {{ banner_settings.about_us_banner_text_en }}
+                        </div>
+                    </div>
+                {% else %}
+                    <h1 class="events19">
+                        {{ banner_settings.about_us_banner_title }}
+                    </h1>
+                    <div class="discover-the-diverse-range-of-wrapper2">
+                        <div class="discover-the-diverse5">
+                            {{ banner_settings.about_us_banner_text }}
+                        </div>
+                    </div>
+
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <main class="two-columns-with-selectors">
+        <!-- Основна частина -->
+
+        <!-- Вибір категорій для сторінок "Про нас" -->
+        <div class="left-selector-box">
+            {% for category, link in links.items %}
+                {% if lang == 'en' %}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}" href="{% url link  lang='en' %}">
+                        {{ category }}
+                    </a>
+                {% else %}
+                    <a class="left-selector-text{% if link in request.path %}-active{% endif %}" href="{% url link %}">
+                        {{ category }}
+                    </a>
+                {% endif %}
+
+            {% endfor %}
+        </div>
+
+        <!-- Dropdown Menu for Mobile -->
+        <div class="left-selector-box-mobile">
+            <div class="col-md-12">
+                {% include 'aboutus/mobile/about-us-sidebar-mobile.html' %}
+            </div>
+        </div>
+
+        <section class="right-part-of-static-page">
+            <div class="contacts-parent">
+                {% if lang == 'en' %}
+                    <h1 class="contacts4">Contacts</h1>
+                    <h2 class="unite-together-is">
+                        Unite Together is a Ukrainian non-profit organization that aims to unite people to create and implement projects that support and develop Ukrainians affected by the war, for sustainable systemic changes in their lives and society.
+                    </h2>
+                {% else %}
+                    <h1 class="contacts4">Контакти</h1>
+                    <h2 class="unite-together-is">
+                        Об'єднаймося - це українська неприбуткова організація, що має на меті об'єднати людей для створення та реалізації проєктів, які підтримують та розвивають українців, постраждалих від війни, для сталих системних змін у їхньому житті та суспільстві.
+                    </h2>
+                {% endif %}
+
+            </div>
+            <div class="frame-parent25">
+                {% if lang == 'en' %}
+                    <div class="bg-contacts-parent">
+                        <div class="bg-contacts"></div>
+                        <h1 class="contact-information">Contact information</h1>
+                        <div class="frame-parent26">
+                            <div class="icon-phone-parent">
+                                <img class="icon-phone5" loading="lazy" alt="" src="{% static 'img/aboutus/iconphone1.svg' %}"/>
+                                {% if contacts.phone_number %}
+                                    <div class="div9">{{ contacts.phone_number }}</div>
+                                {% else %}
+                                    <div class="div9">+995 551 146 364</div>
+                                {% endif %}
+                            </div>
+                            <div class="frame-parent27">
+                                <div class="frame-wrapper3">
+                                    <div class="icon-email-parent">
+                                        <img class="icon-email5" loading="lazy" alt="" src="{% static 'img/aboutus/iconemail2.svg' %}"/>
+                                        <img class="icon-geo5" loading="lazy" alt="" src="{% static 'img/aboutus/icongeo1.svg' %}"/>
+                                    </div>
+                                </div>
+                                <div class="uniteforukraingmailcom-parent">
+                                    {% if contacts.email %}
+                                        <h2 class="uniteforukraingmailcom2">{{ contacts.email }}</h2>
+                                    {% else %}
+                                        <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
+                                    {% endif %}
+
+                                    <div class="contacts-address-block">
+                                        {% if contacts.address %}
+                                            <h2 class="tbilisi-2123-tsotne5">{{ contacts.address_en|default:contacts.address }}</h2>
+                                        {% else %}
+                                            <h2 class="tbilisi-2123-tsotne5">Tbilisi, Tsotne Dadiani St. 21/23, Office 8</h2>
+                                        {% endif %}
+                                        {% if contacts.geolocation %}
+                                            <p><a href="{{ contacts.geolocation }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">See on map</a></p>
+                                        {% else %}
+                                            <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">See on map</a></p>
+                                        {% endif %}
+                                    </div>
+
+                                    {% if contacts.address_batumi or contacts.address_batumi_en %}
+                                    <div class="contacts-address-block">
+                                        <h2 class="tbilisi-2123-tsotne5">{{ contacts.address_batumi_en|default:contacts.address_batumi }}</h2>
+                                        {% if contacts.geolocation_batumi %}
+                                            <p><a href="{{ contacts.geolocation_batumi }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">See on map</a></p>
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% include 'aboutus/includes/contacts-social-icons.html' %}
+                    </div>
+                {% else %}
+                	<div class="bg-contacts-parent">
+                        <div class="bg-contacts"></div>
+                        <h1 class="contact-information">Контактна інформація</h1>
+                        <div class="frame-parent26">
+                            <div class="icon-phone-parent">
+                                <img class="icon-phone5" loading="lazy" alt="" src="{% static 'img/aboutus/iconphone1.svg' %}"/>
+                                {% if contacts.phone_number %}
+                                    <div class="div9">{{ contacts.phone_number }}</div>
+                                {% else %}
+                                    <div class="div9">+995 551 146 364</div>
+                                {% endif %}
+
+                            </div>
+                            <div class="frame-parent27">
+                                <div class="frame-wrapper3">
+                                    <div class="icon-email-parent">
+                                        <img class="icon-email5" loading="lazy" alt="" src="{% static 'img/aboutus/iconemail2.svg' %}"/>
+                                        <img class="icon-geo5" loading="lazy" alt="" src="{% static 'img/aboutus/icongeo1.svg' %}"/>
+                                    </div>
+                                </div>
+                                <div class="uniteforukraingmailcom-parent">
+                                    {% if contacts.email %}
+                                        <h2 class="uniteforukraingmailcom2">{{ contacts.email }}</h2>
+                                    {% else %}
+                                        <h2 class="uniteforukraingmailcom2">uniteforukrain@gmail.com</h2>
+                                    {% endif %}
+
+                                    <div class="contacts-address-block">
+                                        {% if contacts.address %}
+                                            <h2 class="tbilisi-2123-tsotne5">{{ contacts.address }}</h2>
+                                        {% else %}
+                                            <h2 class="tbilisi-2123-tsotne5">Тбілісі, вул. Цотне Дадіані, 21/23, офіс 8</h2>
+                                        {% endif %}
+                                        {% if contacts.geolocation %}
+                                            <p><a href="{{ contacts.geolocation }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">Дивитися на мапі</a></p>
+                                        {% else %}
+                                            <p><a href="https://maps.app.goo.gl/i6k1MGycMqWZ94ge8" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">Дивитися на мапі</a></p>
+                                        {% endif %}
+                                    </div>
+
+                                    {% if contacts.address_batumi %}
+                                    <div class="contacts-address-block">
+                                        <h2 class="tbilisi-2123-tsotne5">{{ contacts.address_batumi }}</h2>
+                                        {% if contacts.geolocation_batumi %}
+                                            <p><a href="{{ contacts.geolocation_batumi }}" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true" target="_blank" rel="noopener noreferrer">Дивитися на мапі</a></p>
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% include 'aboutus/includes/contacts-social-icons.html' %}
+                    </div>
+                {% endif %}
+
+                <div class="have-a-question-just-write-us-parent">
+                    {% if lang == 'en' %}
+                        <h1 class="have-a-question-container">
+                            <p class="have-a-question">Have a questions?</p>
+                            <p class="just-write-us">Just send us a message!</p>
+                        </h1>
+                    {% else %}
+                        <h1 class="have-a-question-container">
+                            <p class="have-a-question">Маєте запитання?</p>
+                            <p class="just-write-us">Просто напишіть нам повідомлення!</p>
+                        </h1>
+                    {% endif %}
+
+                    <div class="frame-wrapper4">
+                        <form method="post" action="{% url 'contact' %}">
+                            {% csrf_token %}
+                            <div class="frame-parent28">
+                                <div class="first-name-parent">
+                                    {{ form.first_name.label_tag }}
+                                    {{ form.first_name }}
+                                </div>
+                                <div class="last-name-parent">
+                                    {{ form.last_name.label_tag }}
+                                    {{ form.last_name }}
+                                </div>
+                                <div class="email-parent">
+                                    {{ form.email.label_tag }}
+                                    {{ form.email }}
+                                </div>
+                                <div class="select-subject-parent">
+                                    {{ form.subject.label_tag }}
+                                    {{ form.subject }}
+                                </div>
+                                <div class="message-parent">
+                                    {{ form.message.label_tag }}
+                                    {{ form.message }}
+                                </div>
+                            </div>
+                            <div class="button-wrapper">
+                                <button class="button" type="submit">
+                                    {% if lang == 'en' %}
+                                        <div class="send-message">
+                                            Send message
+                                        </div>
+                                    {% else %}
+                                        <div class="send-message">
+                                            Надіслати повідомлення
+                                        </div>
+                                    {% endif %}
+
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>

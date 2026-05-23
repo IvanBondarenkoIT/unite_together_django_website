@@ -1,96 +1,134 @@
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
-
 from django.db.models import F, CharField, Value
 from django.db.models.functions import Concat
-
 from persons.models import AssociatedPerson, Participant
-from web_pages.models import WebContentObject, Events, ObjectsGroup, City, Projects, ProjectGallery
 
-OBJECTS_ON_PAGE = 6
+from web_pages.models import (
+    WebContentObject,
+    Events,
+    ObjectsGroup,
+    City,
+    Projects,
+    ProjectGallery,
+    BannerSettings,
+    News,
+    NewsGallery,
+)
+
+from django.core.mail import send_mail
+from django.http import HttpResponse
+
+OBJECTS_ON_PAGE = 6  # Constant defining the number of objects per page
 
 
-def events(request, group_slug=None):
-    if request.method == 'GET':
-        # Get the checkbox state from the session, default to False if not set
-        is_active = request.session.get('activeCheckbox', False)
-        selected_city = request.session.get('activeCityFilter', "All")
+def get_banner_settings():
+    settings, created = BannerSettings.objects.get_or_create(
+        id=1
+    )  # id=1 для уникальности
+    return settings
 
-    elif request.method == 'POST':
-        # Save the selected City state to the session
+
+def events(request, group_slug=None, lang="uk"):
+    """
+    Renders a paginated list of events with optional filtering by city and activity status.
+    Saves filter selections in the session for consistent user experience.
+
+    Args:
+        request: The HTTP request object.
+        group_slug (str, optional): Slug of the events group for filtering.
+
+    Returns:
+        HttpResponse: Rendered template for the list of events.
+    """
+    print(f"Lang:{lang}")
+    # Process checkbox and city selection based on the request method
+    if request.method == "POST":
+        # Determine checkbox status for filtering active events
+        is_active = request.POST.get("free-spots-checkbox") == "on"
         new_selected_city = request.POST.get("selected-city")
 
-        if new_selected_city is None:  # It means that POST not from City selector
-            selected_city = request.session.get('activeCityFilter', "All")  # Get old value from session or default All
-
-            is_active = request.POST.get("free-spots-checkbox") == "on"  # It means checkbox change to True or False
-            request.session['activeCheckbox'] = is_active
-
-        else:
+        # Update session with new city if selected; otherwise, use previous selection
+        if new_selected_city:
             selected_city = new_selected_city
-            request.session['activeCityFilter'] = new_selected_city
-            is_active = request.session.get('activeCheckbox', False)  # Checkbox stay with old value
+            request.session["activeCityFilter"] = selected_city
+        else:
+            selected_city = request.session.get("activeCityFilter", "All")
+            request.session["activeCheckbox"] = is_active
     else:
-        is_active = request.session.get('activeCheckbox', False)
-        selected_city = request.session.get('activeCityFilter', "All")
+        # Get filter values from session for GET requests
+        is_active = request.session.get("activeCheckbox", False)
+        selected_city = request.session.get("activeCityFilter", "All")
 
-    kw_args = {}
+    # Build filter arguments based on activity status
+    kw_args = {"is_active": is_active} if is_active else {}
 
-    if is_active:
-        kw_args = {"is_active": is_active}
-
-    if group_slug:  # If have group_slug - added filter by group
-        group = get_object_or_404(ObjectsGroup, slug=group_slug, page__name__iexact='events', **kw_args)
+    # Filter by event group if specified
+    if group_slug:
+        group = get_object_or_404(
+            ObjectsGroup, slug=group_slug, page__name__iexact="events", **kw_args
+        )
         kw_args["group"] = group
 
-    if selected_city and selected_city != "All":  # If city option selected "All" then no filter by city
+    # Add city filter if a specific city is selected
+    if selected_city and selected_city != "All":
         _city = get_object_or_404(City, name=selected_city)
-        kw_args['selected_city'] = _city
+        kw_args["selected_city"] = _city
 
-    #     all_objects = Events.objects.all().filter(**kw_args).order_by("id")
+    # Not archived objects
+    kw_args["is_archived"] = False
 
-    # Pilippio update
-    all_objects = Events.objects.filter(**kw_args).select_related('selected_city').annotate(
-        pre_computed_url=Concat(F('group__slug'), Value('/'), F('slug'), output_field=CharField())
-    ).order_by("-is_active", "start_date")
-    # all_objects = Events.objects.all().filter(**kw_args).order_by("id").select_related('group__page')
+    # Retrieve events matching filters and annotate with precomputed URLs
+    all_objects = (
+        Events.objects.filter(**kw_args)
+        .select_related("selected_city")
+        .annotate(
+            pre_computed_url=Concat(
+                F("group__slug"), Value("/"), F("slug"), output_field=CharField()
+            )
+        )
+        .order_by("-is_active", "-start_date")
+    )
 
-    # Pagination functional
+    # Paginate events
     paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
     page = request.GET.get("page")
     page_all_objects = paginator.get_page(page)
-
-    # Get count efficiently / faster
     objects_count = paginator.count
 
-    # Optimize fetching cities if related to events
-    cities = City.objects.only('id', 'name').all()
+    # Retrieve list of cities for filter selection
+    cities = City.objects.only("id", "name").all()
+    banner_settings = BannerSettings.objects.first()
 
+    # Prepare context data for the template
     context = {
         "all_objects": page_all_objects,
         "objects_count": objects_count,
         "free_spots": is_active,
         "cities": cities,
         "selected_city": selected_city,
+        "banner_settings": banner_settings,
+        "lang": lang,
     }
 
-    # print(request.path)
-    return render(request, 'events/events_index.html', context=context)
+    return render(request, "events/events.html", context=context)
 
 
-def create_participant(selected_associated_person: AssociatedPerson, selected_event: WebContentObject) -> Participant:
+def create_participant(
+    selected_associated_person: AssociatedPerson, selected_event: WebContentObject
+) -> Participant:
     """
-    Create a new Participant from an AssociatedPerson and a WebContentObject (event).
+    Creates a new event participant based on an existing associated person and links them to the event.
 
     Args:
-        selected_associated_person (AssociatedPerson): The associated person to be copied.
-        selected_event (WebContentObject): The event to associate with the new participant.
+        selected_associated_person (AssociatedPerson): The associated person data.
+        selected_event (WebContentObject): The event for which the participant is registered.
 
     Returns:
-        Participant: The created Participant instance.
+        Participant: The created participant instance.
     """
-    new_participant = Participant.objects.create(
+    return Participant.objects.create(
         user_owner=selected_associated_person.user_owner,
         first_name=selected_associated_person.first_name,
         last_name=selected_associated_person.last_name,
@@ -107,112 +145,356 @@ def create_participant(selected_associated_person: AssociatedPerson, selected_ev
         address_line=selected_associated_person.address_line,
         is_active=selected_associated_person.is_active,
         copy_of_unique_identifier=selected_associated_person.unique_identifier,
-
         status="Registered",
         registered_on=selected_event,
-
     )
-    return new_participant
 
 
-def event_detail(request, group_slug=None, event_slug=None):
+def event_detail(request, group_slug=None, event_slug=None, lang="uk"):
+    """
+    Відображає детальну інформацію про конкретну подію з можливістю реєстрації для авторизованих користувачів.
+
+    Аргументи:
+        request: Об'єкт HTTP запиту.
+        group_slug (str, optional): Слаг групи події.
+        event_slug (str, optional): Слаг події.
+
+    Повертає:
+        HttpResponse: Відрендерений шаблон для сторінки деталей події.
+    """
+
+    print(f"Lang:{lang}")
+
     try:
-        single_event = Events.objects.select_related('group').get(group__slug=group_slug, slug=event_slug)
+        single_event = Events.objects.select_related("group").get(
+            group__slug=group_slug, slug=event_slug
+        )
     except Events.DoesNotExist:
-        messages.error(request, "Event not found.")
-        return redirect('some_error_page')  # Replace with your error handling page
+        messages.error(request, "Подію не знайдено.")
+        return redirect("some_error_page")  # Замініть на вашу сторінку помилки
 
+    # Якщо користувач авторизований, отримати список затверджених осіб
     if request.user.is_authenticated:
-        persons = AssociatedPerson.objects.filter(user_owner=request.user, is_approved=True).order_by('unique_identifier')
+        persons = AssociatedPerson.objects.filter(
+            user_owner=request.user,
+            is_approved=True,
+        ).order_by("unique_identifier")
 
+        # Сохраняем данные в сессию
+        if single_event:
+            request.session["last_event"] = {
+                "url": single_event.get_url(),
+                "url_en": single_event.get_url_en(),
+                "name": single_event.title,
+                "name_en": single_event.title_en,
+                "thumbnail": (single_event.image.url if single_event.image else None),
+            }
+
+        # Обробка POST запиту для реєстрації на подію
         if request.method == "POST":
-            selected_person_ids = request.POST.getlist('selected-persons')
+            selected_person_ids = request.POST.getlist("selected-persons")
             if selected_person_ids:
                 for person_id in selected_person_ids:
                     try:
-                        selected_person = AssociatedPerson.objects.get(id=person_id, user_owner=request.user)
-                        total_participants_in_event = Participant.objects.filter(registered_on=single_event).count()
-                        if single_event.max_participants > total_participants_in_event:
-                            if not Participant.objects.filter(copy_of_unique_identifier=selected_person.unique_identifier, registered_on=single_event).exists():
-                                new_participant = create_participant(selected_person, single_event)
-                                messages.success(request, f"Person {new_participant.first_name} {new_participant.last_name} registered for {single_event.name}")
-                            else:
-                                messages.warning(request, f"Person {selected_person.first_name} {selected_person.last_name} is already registered for this event.")
-                        else:
-                            messages.error(request, f"Person {selected_person.first_name} {selected_person.last_name} is not registered. Maximum number of participants has been reached!")
-                            single_event.is_active = False
-                            single_event.save()
-                            break
-                    except AssociatedPerson.DoesNotExist:
-                        messages.error(request, "Person not found or not owned by the user.")
-                return redirect('registered_events')
+                        selected_person = AssociatedPerson.objects.get(
+                            id=person_id, user_owner=request.user
+                        )
 
+                        if not selected_person.georgian_phone_number:
+                            messages.warning(
+                                request,
+                                f"Перевірте номер телефону особи {selected_person.first_name} {selected_person.last_name}",
+                            )
+                            return redirect("require_phone")
+                        # Перевірка віку
+                        if (
+                            int(single_event.end_age)
+                            >= selected_person.get_current_age()
+                            >= int(single_event.start_age)
+                        ) or not selected_person.date_of_birth:
+                            # Перевірка наявності місць
+
+                            total_participants_in_event = Participant.objects.filter(
+                                registered_on=single_event
+                            ).count()
+                            # Перевірити наявність місць та додати учасника
+                            if (
+                                single_event.max_participants
+                                >= total_participants_in_event
+                            ):
+                                if not Participant.objects.filter(
+                                    copy_of_unique_identifier=selected_person.unique_identifier,
+                                    registered_on=single_event,
+                                ).exists():
+                                    create_participant(selected_person, single_event)
+                                    messages.success(
+                                        request,
+                                        f"Особа {selected_person.first_name} {selected_person.last_name} зареєстрована на {single_event.name}",
+                                    )
+                                else:
+                                    messages.warning(
+                                        request,
+                                        f"Особа {selected_person.first_name} {selected_person.last_name} вже зареєстрована на цю подію.",
+                                    )
+                            else:
+                                messages.error(
+                                    request,
+                                    f"Особа {selected_person.first_name} {selected_person.last_name} не зареєстрована. Досягнуто максимальну кількість учасників!",
+                                )
+                                single_event.is_active = False
+                                single_event.save()
+                                break
+                        else:
+                            messages.error(
+                                request,
+                                f"Особа {selected_person.first_name} {selected_person.last_name} не зареєстрована. Критерії віку не відповідають!",
+                            )
+                    except AssociatedPerson.DoesNotExist:
+                        messages.error(
+                            request,
+                            "Особу не знайдено або вона не належить користувачу.",
+                        )
+                return redirect("registered_events")
     else:
         persons = []
 
     context = {
         "single_event": single_event,
         "persons": persons,
+        "lang": lang,
     }
 
-    return render(request, 'events/event_detail.html', context=context)
+    return render(request, "events/event_detail.html", context=context)
 
 
+def projects(request, group_slug=None, lang="uk"):
+    """
+    Renders a paginated list of projects with an option to filter by activity status, saving filter state in session.
 
-def projects(request, group_slug=None):
+    Args:
+        request: The HTTP request object.
+        group_slug (str, optional): Slug of the projects group.
 
-    if request.method == 'POST':
-        is_active = request.POST.get("free-spots-checkbox") == "on"  # It means checkbox change to True or False
-        request.session['activeCheckbox'] = is_active
+    Returns:
+        HttpResponse: Rendered template for the list of projects.
+    """
+    print(f"Lang:{lang}")
+    if request.method == "POST":
+        is_active = request.POST.get("free-spots-checkbox") == "on"
+        request.session["activeCheckbox"] = is_active
     else:
-        is_active = request.session.get('activeCheckbox', False)
+        is_active = request.session.get("activeCheckbox", False)
 
-    kw_args = {}
+    kw_args = {"is_active": is_active} if is_active else {}
 
-    if is_active:
-        kw_args = {"is_active": is_active}
-
-    if group_slug:  # If have group_slug - added filter by group
-        group = get_object_or_404(ObjectsGroup, slug=group_slug, page__name__iexact='projects', **kw_args)
+    if group_slug:
+        group = get_object_or_404(
+            ObjectsGroup, slug=group_slug, page__name__iexact="projects", **kw_args
+        )
         kw_args["group"] = group
 
-    # this is a sample how to speedify x3 sql query
-    all_objects = Projects.objects.all().filter(**kw_args).select_related('group__page')
+    # Not archived objects
+    kw_args["is_archived"] = False
 
-    # all_objects = Projects.objects.filter(**kw_args).select_related('selected_city').annotate(
-    #     pre_computed_url=Concat(F('group__slug'), Value('/'), F('slug'), output_field=CharField())
-    # ).order_by("id")
+    all_objects = (
+        Projects.objects.filter(**kw_args)
+        .select_related("group__page")
+        .order_by("-is_active", "-order")
+    )
 
-    # Pagination functional
     paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
     page = request.GET.get("page")
     page_all_objects = paginator.get_page(page)
-    # Get count efficiently / faster
     objects_count = paginator.count
+
+    banner_settings = BannerSettings.objects.first()
 
     context = {
         "all_objects": page_all_objects,
         "objects_count": objects_count,
         "free_spots": is_active,
+        "banner_settings": banner_settings,
+        "lang": lang,
     }
 
-    return render(request, 'projects/projects.html', context=context)
+    return render(request, "projects/projects.html", context=context)
 
 
-def projects_detail(request, group_slug=None, project_slug=None):
-    try:
-        single_project = Projects.objects.get(group__slug=group_slug, slug=project_slug)
-    except Exception as error:
-        raise error
+def projects_detail(request, group_slug=None, project_slug=None, lang="uk"):
+    """
+    Displays detailed information about a specific project, including a gallery if available.
 
-        # event = get_object_or_404(Events, slug=event_slug)
+    Args:
+        request: The HTTP request object.
+        group_slug (str, optional): Slug of the project group.
+        project_slug (str, optional): Slug of the project.
 
+    Returns:
+        HttpResponse: Rendered template for the project detail page.
+    """
+    print(f"Lang:{lang}")
+    single_project = get_object_or_404(
+        Projects, group__slug=group_slug, slug=project_slug
+    )
     project_gallery = ProjectGallery.objects.filter(project_id=single_project.id)
+
+    all_cities = single_project.selected_cities_list.all()
+    banner_settings = BannerSettings.objects.first()
 
     context = {
         "single_project": single_project,
         "project_gallery": project_gallery,
+        "cities": all_cities,
+        "banner_settings": banner_settings,
+        "lang": lang,
     }
 
-    return render(request, 'projects/project-detail.html', context=context)
+    return render(request, "projects/project-detail.html", context=context)
 
+
+def test_email_view(request):
+    subject = "Тестовое письмо"
+    message = "Привет! Это тестовое письмо для проверки SMTP-конфигурации."
+    from_email = "info@unite-together.org"
+    recipient_list = ["krenkroyt@gmail.com"]  # Замените на ваш email для тестирования
+
+    try:
+        send_mail(subject, message, from_email, recipient_list)
+        return HttpResponse("Письмо успешно отправлено!")
+    except Exception as e:
+        return HttpResponse(f"Ошибка при отправке письма: {e}")
+
+
+def news(request, group_slug=None, lang="uk"):
+    """
+    Renders a paginated list of news with optional filtering by city and activity status.
+    
+    Args:
+        request: The HTTP request object.
+        group_slug (str, optional): Slug of the news group for filtering.
+        lang (str): Language code (uk/en).
+        
+    Returns:
+        HttpResponse: Rendered template for the list of news.
+    """
+    print(f"Lang:{lang}")
+    
+    # Process checkbox and city selection based on the request method
+    if request.method == "POST":
+        is_active = request.POST.get("free-spots-checkbox") == "on"
+        new_selected_city = request.POST.get("selected-city")
+        
+        if new_selected_city:
+            selected_city = new_selected_city
+            request.session["activeCityFilter"] = selected_city
+        else:
+            selected_city = request.session.get("activeCityFilter", "All")
+            request.session["activeCheckbox"] = is_active
+    else:
+        is_active = request.session.get("activeCheckbox", False)
+        selected_city = request.session.get("activeCityFilter", "All")
+
+    # Build filter arguments based on activity status
+    kw_args = {"is_active": is_active} if is_active else {}
+
+    # Filter by news group if specified
+    if group_slug:
+        group = get_object_or_404(
+            ObjectsGroup, slug=group_slug, page__name__iexact="news", **kw_args
+        )
+        kw_args["group"] = group
+
+    # Add city filter if a specific city is selected
+    if selected_city and selected_city != "All":
+        _city = get_object_or_404(City, name=selected_city)
+        kw_args["selected_city"] = _city
+
+    # Not archived objects
+    kw_args["is_archived"] = False
+
+    # Retrieve news matching filters and annotate with precomputed URLs
+    all_objects = (
+        News.objects.filter(**kw_args)
+        .select_related("selected_city")
+        .annotate(
+            pre_computed_url=Concat(
+                F("group__slug"), Value("/"), F("slug"), output_field=CharField()
+            )
+        )
+        .order_by("-is_active", "-start_date")
+    )
+
+    # Paginate news
+    paginator = Paginator(all_objects, OBJECTS_ON_PAGE)
+    page = request.GET.get("page")
+    page_all_objects = paginator.get_page(page)
+    objects_count = paginator.count
+
+    # Retrieve list of cities for filter selection
+    cities = City.objects.only("id", "name").all()
+    banner_settings = BannerSettings.objects.first()
+
+    # Prepare context data for the template
+    context = {
+        "all_objects": page_all_objects,
+        "objects_count": objects_count,
+        "free_spots": is_active,
+        "cities": cities,
+        "selected_city": selected_city,
+        "banner_settings": banner_settings,
+        "lang": lang,
+    }
+
+    return render(request, "news/news.html", context=context)
+
+
+def news_detail(request, group_slug=None, news_slug=None, lang="uk"):
+    """
+    Displays detailed information about a specific news item.
+    
+    Args:
+        request: The HTTP request object.
+        group_slug (str, optional): Slug of the news group.
+        news_slug (str, optional): Slug of the news item.
+        lang (str): Language code (uk/en).
+        
+    Returns:
+        HttpResponse: Rendered template for the news detail page.
+    """
+    print(f"Lang:{lang}")
+
+    try:
+        single_news = News.objects.select_related("group").get(
+            group__slug=group_slug, slug=news_slug
+        )
+    except News.DoesNotExist:
+        messages.error(request, "Новость не найдена.")
+        return redirect("news")  # Redirect to news list
+
+    # Get next news for navigation
+    try:
+        next_news = (
+            News.objects.filter(
+                group=single_news.group,
+                is_active=True,
+                is_archived=False,
+                start_date__gt=single_news.start_date
+            )
+            .order_by("start_date")
+            .first()
+        )
+    except:
+        next_news = None
+
+    banner_settings = BannerSettings.objects.first()
+    news_gallery = NewsGallery.objects.filter(news_id=single_news.id)
+
+    context = {
+        "single_news": single_news,
+        "next_news": next_news,
+        "news_gallery": news_gallery,
+        "banner_settings": banner_settings,
+        "lang": lang,
+    }
+
+    return render(request, "news/news-detail.html", context=context)

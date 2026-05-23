@@ -1,0 +1,145 @@
+{% load static %}
+
+<div class="about-us-history-mobile">
+    <main class="desktop-logo">
+        <div class="line-active-menu13"></div>
+        <section class="desktop-content">
+            <div class="header-50" style='background-image: url("{{ banner_settings.about_us_banner_mob_image.url }}");'>
+                <div class="container3">
+
+                    <div class="section-title3">
+                        <div class="content33">
+                            <h1 class="short-heading-here">{% if lang == 'en' %}{{ banner_settings.about_us_banner_title_en }}{% else %}{{ banner_settings.about_us_banner_title }}{% endif %}</h1>
+                            <div class="lorem-ipsum-dolor">
+                                {% if lang == 'en' %}{{ banner_settings.about_us_banner_text_en }}{% else %}{{ banner_settings.about_us_banner_text }}{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-blue-parent">
+                <div class="bg-blue2"></div>
+
+                <!-- Dropdown Menu -->
+                <div class="col-md-12">
+                    {% include 'aboutus/mobile/about-us-sidebar-mobile.html' %}
+                </div>
+
+                <div class="about-us-content">
+                    <div class="who-we-are4">
+                        {% if lang == 'en' %}
+                            <h2 class="who-we-are5">{{ history.title_en }}</h2>
+                            <p class="unite-together-was2">
+                                {{ history.content_en }}
+                            </p>
+                        {% else %}
+                            <h2 class="who-we-are5">{{ history.title }}</h2>
+                            <p class="unite-together-was2">
+                                {{ history.content }}
+                            </p>
+                        {% endif %}
+                        <p class="blank-line7">&nbsp;</p>
+                        <img
+                                class="inactive-indicator-icon"
+                                loading="lazy"
+                                alt=""
+                                src="{% if history.image %}{{ history.image.url }}{% else %}{% static 'img/placeholder-image1%402x.png' %}{% endif %}"
+                        />
+                        <div class="mission-vision">
+                            <div class="mission-vision-container">
+                                <h2 class="mission2">{% if lang == 'en' %}{{ mission.title_en }}:{% else %}{{ mission.title }}:{% endif %}</h2>
+                                <div class="our-organization-unite17">
+                                    {% if lang == 'en' %}{{ mission.content_en }}{% else %}{{ mission.content }}{% endif %}
+                                </div>
+                            </div>
+                            <div class="mission-vision-container1">
+                                <h2 class="vision2">{% if lang == 'en' %}{{ vision.title_en }}:{% else %}{{ vision.title }}:{% endif %}</h2>
+                                <div class="we-see-a2">
+                                    {% if lang == 'en' %}{{ vision.content_en }}{% else %}{{ vision.content }}{% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="values-group">
+                            <div class="frame-wrapper9">
+                                {% include 'aboutus/values_carousel.html' %}
+                            </div>
+                            <h2 class="values2">{% if lang == 'en' %}Values:{% else %}Цінності:{% endif %}</h2>
+                            <div class="tabs-menu">
+                                {% for value in values %}
+                                    <div class="tab-horizontal">
+                                        <div class="border"></div>
+                                        <div class="tab-content">
+                                            <h3 class="short-heading-goes">
+                                                {% if lang == 'en' %}{{ value.title_en }}:{% else %}{{ value.title }}:{% endif %}
+                                            </h3>
+                                            <div class="text52">
+                                                {% if lang == 'en' %}{{ value.content_en|safe }}{% else %}{{ value.content|safe }}{% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="changes-content-parent">
+                            <div class="frame-wrapper9">
+                                {% include 'aboutus/programs_carousel.html' %}
+                            </div>
+                            <div class="changes-content">
+                                <h2 class="changes-are-created2">{% if lang == 'en' %}Programs:{% else %}Програми:{% endif %}</h2>
+                            </div>
+                            <button id="toggle-button" onclick="toggleContent()" class="btn btn-light">
+                                {% if lang == 'en' %}MORE TEXT{% else %}БІЛЬШЕ ТЕКСТУ{% endif %}
+                            </button>
+                            <div class="support-content-wrapper">
+                                <br>
+                                <div id="support-content" class="support-content" style="display: none;">
+                                    {% for program in programs %}
+                                        <div class="financial-support">
+                                            <div class="frame-child7"></div>
+                                            <div class="financial-support-for2">
+                                                {% if lang == 'en' %}{{ program.category_en }}:{% else %}{{ program.category }}:{% endif %}
+                                            </div>
+                                            <div class="support-description-wrapper">
+                                                <div class="support-description">
+                                                    {% if lang == 'en' %}{{ program.description_en|safe }}{% else %}{{ program.description|safe }}{% endif %}
+                                                    {% if program.support_partner %}
+                                                        <p><strong>{% if lang == 'en' %}Support partner:{% else %}Партнер з підтримки:{% endif %}</strong> {{ program.support_partner }}</p>
+                                                    {% endif %}
+                                                    {% if program.beneficiaries_count %}
+                                                        <p><strong>{% if lang == 'en' %}Beneficiaries:{% else %}Бенефіціарії:{% endif %}</strong> {{ program.beneficiaries_count }}</p>
+                                                    {% endif %}
+                                                    {% if program.funding_amount %}
+                                                        <p><strong>{% if lang == 'en' %}Funding amount:{% else %}Сума фінансування:{% endif %}</strong> €{{ program.funding_amount }}</p>
+                                                    {% endif %}
+                                                    {% if program.additional_info %}
+                                                        <p><strong>{% if lang == 'en' %}Additional information:{% else %}Додаткова інформація:{% endif %}</strong> {{ program.additional_info }}</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+    function toggleContent() {
+        var content = document.getElementById("support-content");
+        var button = document.getElementById("toggle-button");
+
+        if (content.style.display === "none" || content.style.display === "") {
+            content.style.display = "block";
+            button.textContent = "{% if lang == 'en' %}LESS TEXT{% else %}МЕНШЕ ТЕКСТУ{% endif %}";
+        } else {
+            content.style.display = "none";
+            button.textContent = "{% if lang == 'en' %}MORE TEXT{% else %}БІЛЬШЕ ТЕКСТУ{% endif %}";
+        }
+    }
+</script>
